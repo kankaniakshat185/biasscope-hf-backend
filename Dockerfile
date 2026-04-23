@@ -15,6 +15,7 @@ WORKDIR $HOME/app
 
 COPY --chown=user . $HOME/app
 
-RUN prisma generate || true
+# Install the correct linux Prisma query engine binary natively inside the Docker image before starting
+RUN prisma py fetch
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "7860"]
