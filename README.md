@@ -2,7 +2,7 @@
 title: Biasscope
 emoji: 🦀
 colorFrom: yellow
-colorTo: black
+colorTo: gray
 sdk: docker
 pinned: false
 ---
