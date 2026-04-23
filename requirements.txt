@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+transformers
+torch
+tf-keras
+newspaper3k
+newsapi-python
+rapidfuzz
+prisma
+python-dotenv
+httpx
+pydantic
+lxml_html_clean

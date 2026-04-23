@@ -1,0 +1,133 @@
+generator client_js {
+  provider = "prisma-client-js"
+  output   = "../frontend/node_modules/.prisma/client"
+}
+
+generator client_python {
+  provider             = "prisma-client-py"
+  interface            = "asyncio"
+  recursive_type_depth = 5
+  output               = "../app/prisma_client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// -------------------------------------------------------------
+// Better Auth Core Tables
+// -------------------------------------------------------------
+
+model User {
+  id            String   @id
+  name          String
+  email         String   @unique
+  emailVerified Boolean
+  image         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  sessions Session[]
+  accounts Account[]
+  searches Search[]
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @updatedAt
+
+  @@map("verification")
+}
+
+// -------------------------------------------------------------
+// Application Specific Tables
+// -------------------------------------------------------------
+
+model Search {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  query     String
+  category  String
+  createdAt DateTime @default(now())
+
+  articles Article[]
+  insights Insight[]
+
+  @@map("search")
+}
+
+model Article {
+  id             String    @id @default(uuid())
+  searchId       String
+  search         Search    @relation(fields: [searchId], references: [id], onDelete: Cascade)
+  title          String
+  content        String?
+  source         String
+  url            String
+  publishedAt    DateTime?
+  sentiment      String? // positive, negative, neutral
+  sentimentScore Float?
+  biasLabel      String? // LEFT, CENTER, RIGHT
+  createdAt      DateTime  @default(now())
+
+  @@map("article")
+}
+
+model Insight {
+  id                String   @id @default(uuid())
+  searchId          String
+  search            Search   @relation(fields: [searchId], references: [id], onDelete: Cascade)
+  avgSentiment      Float
+  topKeywords       Json // Array of strings or object
+  biasDistribution  Json // Counts for left/center/right
+  dataQualityScore  Float
+  totalArticles     Int
+  validArticles     Int
+  duplicatesRemoved Int
+  missingContent    Int
+  narrativeSummary  String? // Generated AI narrative
+  createdAt         DateTime @default(now())
+
+  @@map("insight")
+}
