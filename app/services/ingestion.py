@@ -3,18 +3,27 @@ from newspaper import Article as NewspaperArticle
 import os
 import asyncio
 
-newsapi = NewsApiClient(api_key=os.environ.get('NEWS_API_KEY'))
 
-async def ingest_articles(query: str, category: str):
-    # Depending on category, we might append to the query or use domains filter.
-    # For simplicity, we just search all articles matching query
+async def ingest_articles(query: str, category: str, domains: str = None, exclude_domains: str = None, from_date: str = None, to_date: str = None):
+    # Dynamically inject the key in case HF mounts secrets late, check both naming conventions
+    api_key = os.environ.get('NEWS_API_KEY') or os.environ.get('NEWSAPI_KEY')
+    newsapi = NewsApiClient(api_key=api_key)
+
     query_with_category = f"{query} {category}" if category else query
+    
+    # Auto-exclude famous press release / spam sites if none provided
+    anti_spam_domains = exclude_domains or "globenewswire.com,prnewswire.com,businesswire.com,yahoo.com,msn.com"
+
     try:
         response = newsapi.get_everything(
             q=query_with_category,
+            domains=domains,
+            exclude_domains=anti_spam_domains,
+            from_param=from_date,
+            to=to_date,
             language='en',
             sort_by='relevancy',
-            page_size=15
+            page_size=20
         )
     except Exception as e:
         print(f"NewsAPI error: {e}")
@@ -37,9 +46,14 @@ async def scrape_article(article_data):
     
     scraped_content = ""
     try:
-        # newspaper3k operations (can be blocking, wrapped to not halt asyncio totally though best practice is run_in_executor)
-        # Using simple synchronous logic wrapped in an async function for demo purposes
-        paper_art = NewspaperArticle(url, timeout=3)
+        # Heavily configure newspaper3k to bypass scraping defenses
+        import newspaper
+        config = newspaper.Config()
+        config.browser_user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
+        config.request_timeout = 5
+        config.fetch_images = False
+        
+        paper_art = NewspaperArticle(url, config=config)
         paper_art.download()
         paper_art.parse()
         scraped_content = paper_art.text

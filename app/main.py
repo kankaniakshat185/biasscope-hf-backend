@@ -34,11 +34,26 @@ def read_root():
     return {"status": "ok", "service": "Biascope Backend"}
 
 @app.post("/search")
-async def create_search(query: str = Body(...), category: str = Body(...), userId: str = Body(None)):
+async def create_search(
+    query: str = Body(...), 
+    category: str = Body(...), 
+    userId: str = Body(None),
+    domains: str = Body(None),
+    exclude_domains: str = Body(None),
+    fromDate: str = Body(None),
+    toDate: str = Body(None)
+):
     print(f"Starting search for: {query} in {category}")
     
     # 1. Ingestion
-    raw_articles = await ingest_articles(query, category)
+    raw_articles = await ingest_articles(
+        query=query, 
+        category=category, 
+        domains=domains, 
+        exclude_domains=exclude_domains, 
+        from_date=fromDate, 
+        to_date=toDate
+    )
     if not raw_articles:
         raise HTTPException(status_code=404, detail="No articles found.")
 
