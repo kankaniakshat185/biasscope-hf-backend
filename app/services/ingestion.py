@@ -19,9 +19,9 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
         domains = domains.replace("https://", "").replace("http://", "").replace("www.", "").replace(" ", "")
         # If restricting to specific professional domains, strip category mapping to guarantee exact match hits.
         query_final = query
-    else:
-        # If searching the whole internet, append the category into the search string to cast a loosely accurate wide net!
-        query_final = f"{query} {category}" if category else query
+    # We strictly use the raw query to search the headlines (qintitle) to ensure hyper-relevance. 
+    # Attempting to concatenate categories (e.g., "football Sports") into a headline search will drastically reduce results to 0.
+    query_final = query
 
     # NewsAPI strictly forbids using BOTH domains and exclude_domains in the same request.
     # Therefore, if the user explicitly provided 'domains', we must drop all exclude logic.
@@ -31,7 +31,7 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
 
     try:
         response = newsapi.get_everything(
-            q=query_final,
+            qintitle=query_final,
             domains=domains,
             exclude_domains=final_exclude,
             from_param=from_date,
@@ -61,17 +61,29 @@ async def scrape_article(article_data):
     
     scraped_content = ""
     try:
-        # Heavily configure newspaper3k to bypass scraping defenses
-        import newspaper
-        config = newspaper.Config()
-        config.browser_user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
-        config.request_timeout = 5
-        config.fetch_images = False
-        
-        paper_art = NewspaperArticle(url, config=config)
-        paper_art.download()
-        paper_art.parse()
-        scraped_content = paper_art.text
+        url_lower = url.lower()
+        # Aggressive check for Audio/Podcast/Radio UI boilerplate loops
+        if any(audio_path in url_lower for audio_path in ['/sounds/', '/programmes/', '/podcast', '/audio', '/video']):
+            scraped_content = article_data.get('description', '') or article_data.get('title', '')
+        else:
+            # Heavily configure newspaper3k to bypass scraping defenses
+            import newspaper
+            config = newspaper.Config()
+            config.browser_user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
+            config.request_timeout = 5
+            config.fetch_images = False
+            
+            paper_art = NewspaperArticle(url, config=config)
+            paper_art.download()
+            paper_art.parse()
+            scraped_content = paper_art.text
+            
+            # If the web-scraper violently fails and only pulls 2 sentences of UI boilerplate like "Sign in"
+            # we instantly revert to the NewsAPI raw description block to ensure NLP has something to read.
+            if len(scraped_content) < 150:
+                fallback = article_data.get('description', '')
+                if fallback and len(fallback) > len(scraped_content):
+                    scraped_content = fallback
     except Exception as e:
         print(f"Failed to scrape {url}: {e}")
         # Fallback to description
