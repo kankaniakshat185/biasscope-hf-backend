@@ -3,66 +3,11 @@ import re
 from collections import Counter
 from urllib.parse import urlparse
 
-# Load HuggingFace pipeline for sentiment analysis
+# Load HuggingFace pipelines
 sentiment_pipeline = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english", truncation=True, max_length=512)
+bias_pipeline = pipeline("text-classification", model="bucketresearch/politicalBiasBERT", truncation=True, max_length=512)
 
-SOURCE_BIAS_MAP = {
-    # LEFT
-    "cnn.com": "LEFT",
-    "msnbc.com": "LEFT",
-    "huffpost.com": "LEFT",
-    "nytimes.com": "LEFT",
 
-    # RIGHT
-    "foxnews.com": "RIGHT",
-    "nypost.com": "RIGHT",
-    "breitbart.com": "RIGHT",
-
-    # CENTER
-    "wsj.com": "CENTER",
-    "reuters.com": "CENTER",
-    "apnews.com": "CENTER",
-    "bbc.com": "CENTER",
-
-    # tech/media
-    "theverge.com": "CENTER",
-    "gizmodo.com": "CENTER",
-    "wired.com": "CENTER",
-    "techcrunch.com": "CENTER",
-
-    # india specific
-    "thequint.com": "LEFT",
-    "thehindu.com": "LEFT",
-    "scroll.in": "LEFT",
-    "thewire.in": "LEFT",
-
-    "timesofindia.indiatimes.com": "CENTER",
-    "indianexpress.com": "CENTER",
-    "ndtv.com": "CENTER",
-
-    "opindia.com": "RIGHT",
-    "zeenews.india.com": "RIGHT",
-    "republicworld.com": "RIGHT",
-
-    "theweek.in": "CENTER",
-    "businesstoday.in": "CENTER", 
-
-}
-
-def extract_domain(art):
-    # Prefer URL if available
-    url = art.get("url", "")
-    if url:
-        try:
-            domain = urlparse(url).netloc.replace("www.", "")
-            domain = domain.split(":")[0]  # remove ports
-            print("DOMAIN:", domain)
-            return domain
-        except:
-            pass
-    
-    # fallback to source field
-    return art.get("source", "").lower()
 
 
 def analyze_articles(articles):
@@ -100,23 +45,23 @@ def analyze_articles(articles):
             art["sentiment_score"] = compound
             art["confidence"] = score
 
-        # -------- BIAS (IMPROVED BUT SAFE) --------
-        domain = extract_domain(art)
-
-        source_bias = SOURCE_BIAS_MAP.get(domain, "UNKNOWN")
-
-        # Hybrid logic (only modifies UNKNOWN or CENTER safely)
-        if source_bias == "UNKNOWN":
-            score = art["sentiment_score"]
-
-            if score > 0.2:
-                art["bias_label"] = "RIGHT"
-            elif score < -0.2:
-                art["bias_label"] = "LEFT"
-            else:
-                art["bias_label"] = "UNKNOWN"  # keep CENTER or UNKNOWN
+        # -------- DEEP LEARNING BIAS ANALYSIS --------
+        if not text:
+            art["bias_label"] = "UNKNOWN"
         else:
-            art["bias_label"] = source_bias
+            try:
+                # Run PoliticalBiasBERT Inference
+                bias_result = bias_pipeline(text)[0]
+                raw_bias = bias_result['label'].upper() # e.g. "LEFT", "CENTER", "RIGHT"
+                
+                # Ensure it maps safely to Prisma enums
+                if raw_bias in ["LEFT", "CENTER", "RIGHT"]:
+                    art["bias_label"] = raw_bias
+                else:
+                    art["bias_label"] = "UNKNOWN"
+            except Exception as e:
+                print(f"Bias inference error: {e}")
+                art["bias_label"] = "UNKNOWN"
 
         analyzed.append(art)
 
