@@ -188,5 +188,14 @@ async def get_history(userId: str = None):
     )
     return searches
 
+@app.delete("/history/{search_id}")
+async def delete_search(search_id: str):
+    search_record = await prisma.search.find_unique(where={"id": search_id})
+    if not search_record:
+        raise HTTPException(status_code=404, detail="Search not found")
+        
+    await prisma.search.delete(where={"id": search_id})
+    return {"message": "Search and all associated data permanently deleted."}
+
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
