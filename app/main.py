@@ -153,20 +153,23 @@ async def chat_with_article(
     hf_token = os.environ.get("HF_TOKEN")
     model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
     
-    prompt = f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
-You are an expert AI intelligence analyst. Use the following news article to answer the user's question accurately. Do not invent information outside the article.
-Article Context: 
-{context[:2000]}
-<|eot_id|><|start_header_id|>user<|end_header_id|>
-{message}<|eot_id|><|start_header_id|>assistant<|end_header_id|>"""
-
     try:
         from huggingface_hub import InferenceClient
         client = InferenceClient(model=model_id, token=hf_token)
         
-        # Stream or fetch generation
-        generated_text = client.text_generation(prompt, max_new_tokens=250, temperature=0.3)
-        return {"answer": generated_text.strip()}
+        messages = [
+            {
+                "role": "system", 
+                "content": f"You are an expert AI intelligence analyst. Use the following news article to answer the user's question accurately. Do not invent information outside the article. If the user asks something unrelated to the article, politely decline. \n\nArticle Context: \n{context[:2500]}"
+            },
+            {
+                "role": "user", 
+                "content": message
+            }
+        ]
+        
+        response = client.chat_completion(messages=messages, max_tokens=250, temperature=0.3)
+        return {"answer": response.choices[0].message.content.strip()}
     except Exception as e:
         print(f"LLM API Error: {e}")
         return {"answer": f"API Error Details: {str(e)} - Please check your HuggingFace Token! (If you get a 403, you may need to accept the Llama-3 terms at huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct)"}
