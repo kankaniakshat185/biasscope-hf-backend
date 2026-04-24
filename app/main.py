@@ -182,7 +182,11 @@ Article Context:
         return {"answer": answer}
     except Exception as e:
         print(f"LLM API Error: {e}")
-        return {"answer": "I'm sorry, the AI Inference API is currently overwhelmed or unavailable. Please ensure you have added your HF_TOKEN to the Space secrets!"}
+        # If the API returned an HTTP error, we need to extract the raw text (like 'Model is currently loading' or 'Unauthorized')
+        error_details = str(e)
+        if hasattr(e, 'response') and e.response is not None:
+            error_details = e.response.text
+        return {"answer": f"API Error Details: {error_details} - Please check your HuggingFace Token, or the model might be loading. Try asking again in 30 seconds!"}
 
 @app.get("/history")
 async def get_history(userId: str = None):
