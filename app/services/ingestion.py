@@ -29,7 +29,16 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
     if not domains:
         final_exclude = exclude_domains or "globenewswire.com,prnewswire.com,businesswire.com,yahoo.com,msn.com"
 
+    import datetime
+    if not from_date and not to_date:
+        # If no dates are explicitly filtered, default to the last 7 days.
+        # This prevents the backend from pulling 30-day-old articles just because they match string "relevancy"
+        from_date = (datetime.datetime.now() - datetime.timedelta(days=7)).strftime('%Y-%m-%d')
+
+    response = None
     try:
+        # Phase 1: Hyper-Precision (Headline Match) + Popularity Sorting
+        # 'popularity' ensures we get major network trending news (BBC, ESPN) instead of obscure bot-blogs
         response = newsapi.get_everything(
             qintitle=query_final,
             domains=domains,
@@ -37,9 +46,24 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
             from_param=from_date,
             to=to_date,
             language='en',
-            sort_by='relevancy',
+            sort_by='popularity',
             page_size=20
         )
+        
+        # If the headline-only search is too strict, fallback to body text
+        if response.get('totalResults', 0) < 5:
+            print(f"Only {response.get('totalResults')} headline matches found. Intelligently falling back to exact-phrase body search.")
+            response = newsapi.get_everything(
+                q=f'"{query_final}"',
+                domains=domains,
+                exclude_domains=final_exclude,
+                from_param=from_date,
+                to=to_date,
+                language='en',
+                sort_by='popularity',
+                page_size=20
+            )
+            
     except Exception as e:
         print(f"NewsAPI error: {e}")
         return []
