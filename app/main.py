@@ -147,15 +147,11 @@ async def chat_with_article(
         
     context = article.content if article.content else article.title
 
-    import requests
-    import json
+    import os
     
     # We use Hugging Face Serverless Inference API for free
-    # Meta Llama 3 is lightning fast and brilliant for RAG tasks
     hf_token = os.environ.get("HF_TOKEN")
     model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
-    api_url = f"https://api-inference.huggingface.co/models/{model_id}"
-    headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
     
     prompt = f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 You are an expert AI intelligence analyst. Use the following news article to answer the user's question accurately. Do not invent information outside the article.
@@ -164,29 +160,16 @@ Article Context:
 <|eot_id|><|start_header_id|>user<|end_header_id|>
 {message}<|eot_id|><|start_header_id|>assistant<|end_header_id|>"""
 
-    payload = {
-        "inputs": prompt,
-        "parameters": {"max_new_tokens": 250, "temperature": 0.3}
-    }
-
     try:
-        response = requests.post(api_url, headers=headers, json=payload)
-        response.raise_for_status()
-        data = response.json()
+        from huggingface_hub import InferenceClient
+        client = InferenceClient(model=model_id, token=hf_token)
         
-        # Parse Llama-3 output
-        generated_text = data[0]["generated_text"]
-        # Strip the highly-verbose prompt out
-        answer = generated_text.split("<|start_header_id|>assistant<|end_header_id|>")[-1].strip()
-        
-        return {"answer": answer}
+        # Stream or fetch generation
+        generated_text = client.text_generation(prompt, max_new_tokens=250, temperature=0.3)
+        return {"answer": generated_text.strip()}
     except Exception as e:
         print(f"LLM API Error: {e}")
-        # If the API returned an HTTP error, we need to extract the raw text (like 'Model is currently loading' or 'Unauthorized')
-        error_details = str(e)
-        if hasattr(e, 'response') and e.response is not None:
-            error_details = e.response.text
-        return {"answer": f"API Error Details: {error_details} - Please check your HuggingFace Token, or the model might be loading. Try asking again in 30 seconds!"}
+        return {"answer": f"API Error Details: {str(e)} - Please check your HuggingFace Token! (If you get a 403, you may need to accept the Llama-3 terms at huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct)"}
 
 @app.get("/history")
 async def get_history(userId: str = None):
