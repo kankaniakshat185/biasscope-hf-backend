@@ -55,7 +55,10 @@ async def create_search(
         to_date=toDate
     )
     if not raw_articles:
-        raise HTTPException(status_code=404, detail="No articles found.")
+        raise HTTPException(
+            status_code=404, 
+            detail=f"NewsAPI error or No articles found for: query='{query}', domains='{domains}', fromDate='{fromDate}'. Please ensure domains are properly formatted (e.g. 'wsj.com') and dates are within the last 30 days."
+        )
 
     # 2. Cleaning
     cleaned_articles, dupes_removed = clean_and_deduplicate(raw_articles)
@@ -65,6 +68,11 @@ async def create_search(
 
     # 4. Validation
     validation_metrics = validate_articles(analyzed_articles)
+    
+    valid_articles_list = validation_metrics.get("valid_articles_list", [])
+    if not valid_articles_list:
+        raise HTTPException(status_code=404, detail="All scraped articles failed validation or were empty.")
+
     validation_metrics["total_articles"] = len(raw_articles)
     validation_metrics["duplicates_removed"] = dupes_removed
 
@@ -126,6 +134,55 @@ async def get_results(search_id: str):
         raise HTTPException(status_code=404, detail="Search not found")
     
     return search_record
+
+@app.post("/chat-with-article")
+async def chat_with_article(
+    articleId: str = Body(...),
+    message: str = Body(...)
+):
+    # Retrieve the specific article context
+    article = await prisma.article.find_unique(where={"id": articleId})
+    if not article:
+        raise HTTPException(status_code=404, detail="Article not found in database.")
+        
+    context = article.content if article.content else article.title
+
+    import requests
+    import json
+    
+    # We use Hugging Face Serverless Inference API for free
+    # Meta Llama 3 is lightning fast and brilliant for RAG tasks
+    hf_token = os.environ.get("HF_TOKEN")
+    model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
+    api_url = f"https://api-inference.huggingface.co/models/{model_id}"
+    headers = {"Authorization": f"Bearer {hf_token}"} if hf_token else {}
+    
+    prompt = f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are an expert AI intelligence analyst. Use the following news article to answer the user's question accurately. Do not invent information outside the article.
+Article Context: 
+{context[:2000]}
+<|eot_id|><|start_header_id|>user<|end_header_id|>
+{message}<|eot_id|><|start_header_id|>assistant<|end_header_id|>"""
+
+    payload = {
+        "inputs": prompt,
+        "parameters": {"max_new_tokens": 250, "temperature": 0.3}
+    }
+
+    try:
+        response = requests.post(api_url, headers=headers, json=payload)
+        response.raise_for_status()
+        data = response.json()
+        
+        # Parse Llama-3 output
+        generated_text = data[0]["generated_text"]
+        # Strip the highly-verbose prompt out
+        answer = generated_text.split("<|start_header_id|>assistant<|end_header_id|>")[-1].strip()
+        
+        return {"answer": answer}
+    except Exception as e:
+        print(f"LLM API Error: {e}")
+        return {"answer": "I'm sorry, the AI Inference API is currently overwhelmed or unavailable. Please ensure you have added your HF_TOKEN to the Space secrets!"}
 
 @app.get("/history")
 async def get_history(userId: str = None):
