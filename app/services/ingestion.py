@@ -13,15 +13,38 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
     # When users search "Trump" and choose "Politics", searching "Trump Politics" explicitly 
     # yields 0 results on professional sites like WSJ because journalists don't use loose tags 
     # in the article content. We should just search the raw query!
+    query_clean = query.strip() if query else ""
+    cat_clean = category.strip() if category and category.lower() != "all" else ""
     
+    strict_query = query_clean
+    broad_query = query_clean
+    
+    if query_clean and cat_clean:
+        # If both exist, the broad query includes the category for better semantic matching
+        broad_query = f"{query_clean} {cat_clean}"
+    elif cat_clean and not query_clean:
+        strict_query = cat_clean
+        broad_query = cat_clean
+    elif not query_clean and not cat_clean:
+        strict_query = "news"
+        broad_query = "news"
+        
     if domains:
-        # Heavily sanitize the user input
-        domains = domains.replace("https://", "").replace("http://", "").replace("www.", "").replace(" ", "")
-        # If restricting to specific professional domains, strip category mapping to guarantee exact match hits.
-        query_final = query
-    # We strictly use the raw query to search the headlines (qintitle) to ensure hyper-relevance. 
-    # Attempting to concatenate categories (e.g., "football Sports") into a headline search will drastically reduce results to 0.
-    query_final = query
+        from urllib.parse import urlparse
+        domains_list = []
+        for d in domains.split(','):
+            d = d.strip()
+            if not d.startswith('http'):
+                d = 'http://' + d
+            netloc = urlparse(d).netloc.replace("www.", "")
+            parts = netloc.split('.')
+            if len(parts) > 2:
+                if parts[-2] in ['co', 'com', 'org', 'net', 'edu', 'gov', 'ac'] or len(parts[-2]) <= 2:
+                    netloc = '.'.join(parts[-3:])
+                else:
+                    netloc = '.'.join(parts[-2:])
+            domains_list.append(netloc)
+        domains = ','.join(domains_list)
 
     # NewsAPI strictly forbids using BOTH domains and exclude_domains in the same request.
     # Therefore, if the user explicitly provided 'domains', we must drop all exclude logic.
@@ -40,7 +63,7 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
         # Phase 1: Hyper-Precision (Headline Match) + Popularity Sorting
         # 'popularity' ensures we get major network trending news (BBC, ESPN) instead of obscure bot-blogs
         response = newsapi.get_everything(
-            qintitle=query_final,
+            qintitle=strict_query,
             domains=domains,
             exclude_domains=final_exclude,
             from_param=from_date,
@@ -54,7 +77,7 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
         if response.get('totalResults', 0) < 5:
             print(f"Only {response.get('totalResults')} headline matches found. Intelligently falling back to exact-phrase body search.")
             response = newsapi.get_everything(
-                q=f'"{query_final}"',
+                q=broad_query,
                 domains=domains,
                 exclude_domains=final_exclude,
                 from_param=from_date,
