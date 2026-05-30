@@ -101,6 +101,18 @@ def extract_keywords(articles):
             for entity in entities.keys():
                 entity_counter[entity] += 1
     
+    # Fallback if NER found absolutely nothing (e.g., weirdly formatted short text)
+    if not entity_counter:
+        import re
+        stop_words = {"this", "that", "with", "from", "your", "have", "more", "will", "home", "about", "page", "search", "free", "information", "time", "they", "site"}
+        for art in articles:
+            text = art.get("title", "") + " " + art.get("content", "")
+            # Find capitalized words > 3 chars as a naive entity fallback
+            words = re.findall(r'\b[A-Z][a-z]{3,}\b', text)
+            for w in words:
+                if w.lower() not in stop_words:
+                    entity_counter[w] += 1
+
     most_common = entity_counter.most_common(10)
     return [{"word": word, "count": count} for word, count in most_common]
 
