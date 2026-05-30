@@ -273,13 +273,13 @@ async def analyze_url_endpoint(
         }
     )
 
+    # Insert article
+    art = valid_articles_list[0]
+
     # Format date for Prisma
     published_at = art.get("published_at")
     if published_at and len(published_at) == 10:  # e.g., 'YYYY-MM-DD'
         published_at = f"{published_at}T00:00:00Z"
-
-    # Insert article
-    art = valid_articles_list[0]
     await prisma.article.create(
         data={
             "search": {"connect": {"id": search_record.id}},
