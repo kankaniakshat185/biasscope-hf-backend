@@ -13,3 +13,6 @@ pydantic
 lxml_html_clean
 spacy
 trafilatura
+pytesseract
+Pillow
+beautifulsoup4

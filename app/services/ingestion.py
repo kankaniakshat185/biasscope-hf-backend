@@ -147,9 +147,73 @@ async def scrape_article(article_data):
 import trafilatura
 from datetime import datetime
 from urllib.parse import urlparse
+import httpx
+from bs4 import BeautifulSoup
+import pytesseract
+from PIL import Image
+import io
+
+async def extract_text_from_images(html_content: str, base_url: str) -> str:
+    try:
+        soup = BeautifulSoup(html_content, 'html.parser')
+        images = soup.find_all('img')
+        extracted_text = []
+        count = 0
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            for img in images:
+                if count >= 3: # limit to top 3 images to save time
+                    break
+                src = img.get('src')
+                if not src:
+                    continue
+                if src.startswith('/'):
+                    domain = "{0.scheme}://{0.netloc}".format(urlparse(base_url))
+                    src = domain + src
+                elif not src.startswith('http'):
+                    continue
+                
+                try:
+                    resp = await client.get(src)
+                    if resp.status_code == 200:
+                        image_data = io.BytesIO(resp.content)
+                        img_obj = Image.open(image_data)
+                        if img_obj.width > 200 and img_obj.height > 200:
+                            text = pytesseract.image_to_string(img_obj)
+                            if text and len(text.strip()) > 20:
+                                extracted_text.append(text.strip())
+                                count += 1
+                except Exception as e:
+                    print(f"OCR failed for image {src}: {e}")
+        return "\n\n".join(extracted_text)
+    except Exception as e:
+        print(f"OCR processing failed: {e}")
+        return ""
 
 async def scrape_single_url(url: str):
     domain = urlparse(url).netloc.replace("www.", "")
+    
+    # 1. Direct Image URL Handling
+    if url.lower().split('?')[0].endswith(('.png', '.jpg', '.jpeg', '.webp', '.bmp')):
+        try:
+            async with httpx.AsyncClient(timeout=15.0) as client:
+                resp = await client.get(url)
+                if resp.status_code == 200:
+                    image_data = io.BytesIO(resp.content)
+                    img_obj = Image.open(image_data)
+                    text = pytesseract.image_to_string(img_obj)
+                    if not text or len(text.strip()) < 20:
+                        raise Exception("OCR found no meaningful text in the image.")
+                    return {
+                        "title": "Direct Image OCR Upload",
+                        "url": url,
+                        "source": domain,
+                        "content": text.strip(),
+                        "published_at": None
+                    }
+        except Exception as e:
+            raise Exception(f"Failed to process direct image URL: {e}")
+
+    # 2. Standard Web Scraping
     downloaded = trafilatura.fetch_url(url)
     if not downloaded:
         raise Exception("Could not fetch the URL.")
@@ -157,14 +221,20 @@ async def scrape_single_url(url: str):
     metadata = trafilatura.extract_metadata(downloaded)
     text = trafilatura.extract(downloaded)
     
+    # 3. OCR Fallback for Image-Heavy News
     if not text or len(text) < 100:
-        raise Exception("Could not extract enough main article text from the URL.")
+        print("Text extraction insufficient. Attempting OCR on article images...")
+        ocr_text = await extract_text_from_images(downloaded, url)
+        if ocr_text:
+            text = (text or "") + "\n\n" + ocr_text
+            
+    if not text or len(text) < 100:
+        raise Exception("Could not extract enough main article text from the URL, even after OCR fallback.")
         
     title = metadata.title if metadata and metadata.title else "Direct URL Upload"
     
     date_str = None
     if metadata and metadata.date:
-        # metadata.date is a string like "2023-01-01"
         date_str = metadata.date
     
     return {
