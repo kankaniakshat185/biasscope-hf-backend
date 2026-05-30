@@ -213,16 +213,39 @@ async def scrape_single_url(url: str):
         except Exception as e:
             raise Exception(f"Failed to process direct image URL: {e}")
 
-    # 2. Standard Web Scraping
+    # 2. Standard Web Scraping with Fallbacks
     downloaded = trafilatura.fetch_url(url)
-    if not downloaded:
-        raise Exception("Could not fetch the URL.")
+    text = None
+    title = None
+    date_str = None
     
-    metadata = trafilatura.extract_metadata(downloaded)
-    text = trafilatura.extract(downloaded)
-    
-    # 3. OCR Fallback for Image-Heavy News
+    if downloaded:
+        metadata = trafilatura.extract_metadata(downloaded)
+        text = trafilatura.extract(downloaded)
+        if metadata:
+            title = metadata.title
+            if metadata.date:
+                date_str = metadata.date
+
+    # Fallback to newspaper3k if trafilatura failed to get enough text
     if not text or len(text) < 100:
+        from newspaper import Article
+        try:
+            article = Article(url)
+            article.download()
+            article.parse()
+            if article.text and len(article.text) > 100:
+                text = article.text
+                title = title or article.title
+                if article.publish_date:
+                    date_str = date_str or str(article.publish_date)
+                if not downloaded:
+                    downloaded = article.html
+        except Exception as e:
+            print(f"Newspaper3k fallback failed: {e}")
+
+    # 3. OCR Fallback for Image-Heavy News
+    if (not text or len(text) < 100) and downloaded:
         print("Text extraction insufficient. Attempting OCR on article images...")
         ocr_text = await extract_text_from_images(downloaded, url)
         if ocr_text:
@@ -231,11 +254,8 @@ async def scrape_single_url(url: str):
     if not text or len(text) < 100:
         raise Exception("Could not extract enough main article text from the URL, even after OCR fallback.")
         
-    title = metadata.title if metadata and metadata.title else "Direct URL Upload"
-    
-    date_str = None
-    if metadata and metadata.date:
-        date_str = metadata.date
+    if not title:
+        title = "Direct URL Upload"
     
     return {
         "title": title,
