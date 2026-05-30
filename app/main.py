@@ -338,10 +338,30 @@ async def analyze_upload_endpoint(
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Failed to process image OCR: {str(e)}")
 
+    extracted_title = f"Local Upload: {file.filename}"
+    extracted_source = "Local System"
+    
+    try:
+        from huggingface_hub import InferenceClient
+        import os
+        hf_token = os.environ.get("HF_TOKEN")
+        if hf_token:
+            client = InferenceClient(model="meta-llama/Meta-Llama-3-8B-Instruct", token=hf_token)
+            prompt = f"You are a helpful assistant. I have extracted raw OCR text from an image/infographic. Identify the most likely Title of the article/image and the Publisher/Source if it's visible. If not, make a highly concise, educated guess based on the text. Return strictly in this format:\nTitle: <title>\nSource: <source>\n\nOCR Text:\n{text[:1500]}"
+            res = client.chat_completion(messages=[{"role":"user", "content":prompt}], max_tokens=100, temperature=0.2)
+            lines = res.choices[0].message.content.strip().split('\n')
+            for line in lines:
+                if line.lower().startswith("title:"):
+                    extracted_title = line.split(":", 1)[1].strip().replace('"', '')
+                elif line.lower().startswith("source:"):
+                    extracted_source = line.split(":", 1)[1].strip().replace('"', '')
+    except Exception as e:
+        print(f"Failed to dynamically extract OCR metadata: {e}")
+
     raw_article = {
-        "title": f"Local Upload: {file.filename}",
+        "title": extracted_title,
         "url": "local_upload",
-        "source": "Local System",
+        "source": extracted_source,
         "content": text.strip(),
         "published_at": None
     }
