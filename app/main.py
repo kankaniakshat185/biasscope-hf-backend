@@ -4,7 +4,7 @@ from .prisma_client import Prisma, Json
 import uvicorn
 from app.services.ingestion import ingest_articles
 from app.services.cleaning import clean_and_deduplicate
-from app.services.nlp import analyze_articles, generate_narrative
+from app.services.nlp import analyze_articles, generate_narrative, generate_contrastive_summaries, extract_entity_sentiment
 from app.services.validation import validate_articles
 import os
 
@@ -76,8 +76,18 @@ async def create_search(
     validation_metrics["total_articles"] = len(raw_articles)
     validation_metrics["duplicates_removed"] = dupes_removed
 
-    # 5. Narrative Gen
+    # 5. Narrative Gen & Contrastive Echo Chambers & Entity Extraction
     summary = generate_narrative(analyzed_articles)
+    contrastive_summaries = generate_contrastive_summaries(analyzed_articles)
+    entity_sentiment_graph = extract_entity_sentiment(analyzed_articles)
+    
+    # Calculate model drift metrics
+    valid_articles = validation_metrics.get("valid_articles_list", [])
+    if valid_articles:
+        avg_confidence = sum(a.get("bias_confidence", 0.0) for a in valid_articles) / len(valid_articles)
+    else:
+        avg_confidence = 0.0
+    drift_metrics = {"average_bias_confidence": avg_confidence}
 
     # 6. Store to DB
     search_record = await prisma.search.create(
@@ -100,6 +110,7 @@ async def create_search(
             "sentiment": art.get("sentiment", "neutral"),
             "sentimentScore": float(art.get("sentiment_score", 0.0)),
             "biasLabel": art.get("bias_label", "UNKNOWN"),
+            "entities": Json(art.get("entities", {})),
             "publishedAt": art.get("published_at")
         })
     
@@ -118,7 +129,11 @@ async def create_search(
             "validArticles": validation_metrics["valid_articles"],
             "duplicatesRemoved": validation_metrics["duplicates_removed"],
             "missingContent": validation_metrics["missing_content"],
-            "narrativeSummary": summary
+            "narrativeSummary": summary,
+            "leftWingSummary": contrastive_summaries.get("left", ""),
+            "rightWingSummary": contrastive_summaries.get("right", ""),
+            "entitySentiment": Json(entity_sentiment_graph),
+            "driftMetrics": Json(drift_metrics)
         }
     )
 

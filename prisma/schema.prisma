@@ -1,13 +1,11 @@
-generator client_js {
-  provider = "prisma-client-js"
-  output   = "../frontend/node_modules/.prisma/client"
-}
+
 
 generator client_python {
   provider             = "prisma-client-py"
   interface            = "asyncio"
   recursive_type_depth = 5
   output = "../app/prisma_client"
+  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x"]
 }
 
 datasource db {
@@ -109,6 +107,7 @@ model Article {
   sentiment       String?  // positive, negative, neutral
   sentimentScore  Float?
   biasLabel       String?  // LEFT, CENTER, RIGHT
+  entities        Json?    // Extracted NER entities
   createdAt       DateTime @default(now())
 
   @@map("article")
@@ -127,6 +126,10 @@ model Insight {
   duplicatesRemoved   Int
   missingContent      Int
   narrativeSummary    String?  // Generated AI narrative
+  leftWingSummary     String?  // Generated AI narrative for Left-wing articles
+  rightWingSummary    String?  // Generated AI narrative for Right-wing articles
+  entitySentiment     Json?    // Extracted entities and their sentiment
+  driftMetrics        Json?    // Model drift and uncertainty metrics
   createdAt           DateTime @default(now())
 
   @@map("insight")
