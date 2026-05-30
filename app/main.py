@@ -22,6 +22,8 @@ prisma = Prisma()
 
 @app.on_event("startup")
 async def startup():
+    print("Synchronizing database schema...")
+    os.system("python3 -m prisma db push --skip-generate")
     await prisma.connect()
     
 
@@ -188,6 +190,42 @@ async def chat_with_article(
     except Exception as e:
         print(f"LLM API Error: {e}")
         return {"answer": f"API Error Details: {str(e)} - Please check your HuggingFace Token! (If you get a 403, you may need to accept the Llama-3 terms at huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct)"}
+
+@app.post("/chat-with-summary")
+async def chat_with_summary(
+    searchId: str = Body(...),
+    message: str = Body(...)
+):
+    insight = await prisma.insight.find_first(where={"searchId": searchId})
+    if not insight:
+        raise HTTPException(status_code=404, detail="Summary not found in database.")
+        
+    context = insight.narrativeSummary
+
+    import os
+    hf_token = os.environ.get("HF_TOKEN")
+    model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
+    
+    try:
+        from huggingface_hub import InferenceClient
+        client = InferenceClient(model=model_id, token=hf_token)
+        
+        messages = [
+            {
+                "role": "system", 
+                "content": f"You are an expert AI intelligence analyst. Use the following overarching narrative summary to answer the user's question accurately. Do not invent information outside the summary.\n\nSummary Context: \n{context}"
+            },
+            {
+                "role": "user", 
+                "content": message
+            }
+        ]
+        
+        response = client.chat_completion(messages=messages, max_tokens=250, temperature=0.3)
+        return {"answer": response.choices[0].message.content.strip()}
+    except Exception as e:
+        print(f"LLM API Error: {e}")
+        return {"answer": f"API Error Details: {str(e)}"}
 
 @app.get("/history")
 async def get_history(userId: str = None):

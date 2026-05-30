@@ -26,15 +26,27 @@ def validate_articles(articles):
         else:
             bias_counts[label]=0
             
-    # Calculate Data Quality Score
-    total = len(articles)
-    if total == 0:
-        dqs = 0.0
-        avg_sentiment = 0.0
+    # Calculate Polarization Index (Replaces Data Quality Score)
+    # Measures the semantic/emotional divergence between LEFT and RIGHT media
+    left_scores = [a.get("sentiment_score", 0.0) for a in articles if a.get("bias_label") == "LEFT"]
+    right_scores = [a.get("sentiment_score", 0.0) for a in articles if a.get("bias_label") == "RIGHT"]
+    
+    if left_scores and right_scores:
+        avg_left = sum(left_scores) / len(left_scores)
+        avg_right = sum(right_scores) / len(right_scores)
+        polarization = abs(avg_left - avg_right) / 2.0
     else:
-        missing_ratio = missing_content_count / total
-        dqs = max(0.0, 1.0 - missing_ratio)
-        avg_sentiment = sum(sentiment_scores) / total
+        import statistics
+        if len(sentiment_scores) > 1:
+            polarization = min(1.0, statistics.stdev(sentiment_scores))
+        else:
+            polarization = 0.0
+            
+    # We map polarization to the data_quality_score field to avoid DB schema migration
+    dqs = polarization
+
+    total = len(articles)
+    avg_sentiment = sum(sentiment_scores) / total if total > 0 else 0.0
 
     from app.services.nlp import extract_keywords
     top_keywords = extract_keywords(articles)

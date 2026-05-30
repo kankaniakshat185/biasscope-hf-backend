@@ -7686,6 +7686,7 @@ class ArticleOptionalCreateInput(TypedDict, total=False):
     sentiment: Optional[_str]
     sentimentScore: Optional[_float]
     biasLabel: Optional[_str]
+    entities: Optional['fields.Json']
     createdAt: datetime.datetime
 
 
@@ -7708,6 +7709,7 @@ class ArticleOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     sentiment: Optional[_str]
     sentimentScore: Optional[_float]
     biasLabel: Optional[_str]
+    entities: Optional['fields.Json']
     createdAt: datetime.datetime
 
 
@@ -7755,6 +7757,7 @@ class ArticleUpdateInput(TypedDict, total=False):
     sentiment: Optional[_str]
     sentimentScore: Optional[Union[AtomicFloatInput, _float]]
     biasLabel: Optional[_str]
+    entities: Optional['fields.Json']
     createdAt: datetime.datetime
 
 
@@ -7769,6 +7772,7 @@ class ArticleUpdateManyMutationInput(TypedDict, total=False):
     sentiment: Optional[_str]
     sentimentScore: Optional[Union[AtomicFloatInput, _float]]
     biasLabel: Optional[_str]
+    entities: Optional['fields.Json']
     createdAt: datetime.datetime
 
 
@@ -7884,6 +7888,14 @@ _Article_biasLabel_OrderByInput = TypedDict(
     total=True
 )
 
+_Article_entities_OrderByInput = TypedDict(
+    '_Article_entities_OrderByInput',
+    {
+        'entities': 'SortOrder',
+    },
+    total=True
+)
+
 _Article_createdAt_OrderByInput = TypedDict(
     '_Article_createdAt_OrderByInput',
     {
@@ -7921,6 +7933,7 @@ ArticleOrderByInput = Union[
     '_Article_sentiment_OrderByInput',
     '_Article_sentimentScore_OrderByInput',
     '_Article_biasLabel_OrderByInput',
+    '_Article_entities_OrderByInput',
     '_Article_createdAt_OrderByInput',
     '_Article_RelevanceOrderByInput',
 ]
@@ -8724,6 +8737,7 @@ class ArticleWhereInput(TypedDict, total=False):
     sentiment: Union[None, _str, 'types.StringFilter']
     sentimentScore: Union[None, _float, 'types.FloatFilter']
     biasLabel: Union[None, _str, 'types.StringFilter']
+    entities: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
     # should be noted that AND and NOT should be Union['ArticleWhereInputRecursive1', List['ArticleWhereInputRecursive1']]
@@ -8746,6 +8760,7 @@ class ArticleWhereInputRecursive1(TypedDict, total=False):
     sentiment: Union[None, _str, 'types.StringFilter']
     sentimentScore: Union[None, _float, 'types.FloatFilter']
     biasLabel: Union[None, _str, 'types.StringFilter']
+    entities: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
     # should be noted that AND and NOT should be Union['ArticleWhereInputRecursive2', List['ArticleWhereInputRecursive2']]
@@ -8768,6 +8783,7 @@ class ArticleWhereInputRecursive2(TypedDict, total=False):
     sentiment: Union[None, _str, 'types.StringFilter']
     sentimentScore: Union[None, _float, 'types.FloatFilter']
     biasLabel: Union[None, _str, 'types.StringFilter']
+    entities: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
     # should be noted that AND and NOT should be Union['ArticleWhereInputRecursive3', List['ArticleWhereInputRecursive3']]
@@ -8790,6 +8806,7 @@ class ArticleWhereInputRecursive3(TypedDict, total=False):
     sentiment: Union[None, _str, 'types.StringFilter']
     sentimentScore: Union[None, _float, 'types.FloatFilter']
     biasLabel: Union[None, _str, 'types.StringFilter']
+    entities: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
     # should be noted that AND and NOT should be Union['ArticleWhereInputRecursive4', List['ArticleWhereInputRecursive4']]
@@ -8812,6 +8829,7 @@ class ArticleWhereInputRecursive4(TypedDict, total=False):
     sentiment: Union[None, _str, 'types.StringFilter']
     sentimentScore: Union[None, _float, 'types.FloatFilter']
     biasLabel: Union[None, _str, 'types.StringFilter']
+    entities: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
 
@@ -8833,6 +8851,7 @@ class ArticleScalarWhereWithAggregatesInput(TypedDict, total=False):
     sentiment: Union[_str, 'types.StringWithAggregatesFilter']
     sentimentScore: Union[_float, 'types.FloatWithAggregatesFilter']
     biasLabel: Union[_str, 'types.StringWithAggregatesFilter']
+    entities: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
     AND: List['ArticleScalarWhereWithAggregatesInputRecursive1']
@@ -8852,6 +8871,7 @@ class ArticleScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
     sentiment: Union[_str, 'types.StringWithAggregatesFilter']
     sentimentScore: Union[_float, 'types.FloatWithAggregatesFilter']
     biasLabel: Union[_str, 'types.StringWithAggregatesFilter']
+    entities: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
     AND: List['ArticleScalarWhereWithAggregatesInputRecursive2']
@@ -8871,6 +8891,7 @@ class ArticleScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
     sentiment: Union[_str, 'types.StringWithAggregatesFilter']
     sentimentScore: Union[_float, 'types.FloatWithAggregatesFilter']
     biasLabel: Union[_str, 'types.StringWithAggregatesFilter']
+    entities: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
     AND: List['ArticleScalarWhereWithAggregatesInputRecursive3']
@@ -8890,6 +8911,7 @@ class ArticleScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
     sentiment: Union[_str, 'types.StringWithAggregatesFilter']
     sentimentScore: Union[_float, 'types.FloatWithAggregatesFilter']
     biasLabel: Union[_str, 'types.StringWithAggregatesFilter']
+    entities: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
     AND: List['ArticleScalarWhereWithAggregatesInputRecursive4']
@@ -8909,6 +8931,7 @@ class ArticleScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
     sentiment: Union[_str, 'types.StringWithAggregatesFilter']
     sentimentScore: Union[_float, 'types.FloatWithAggregatesFilter']
     biasLabel: Union[_str, 'types.StringWithAggregatesFilter']
+    entities: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
 
@@ -8924,6 +8947,7 @@ class ArticleGroupByOutput(TypedDict, total=False):
     sentiment: _str
     sentimentScore: _float
     biasLabel: _str
+    entities: 'fields.Json'
     createdAt: datetime.datetime
     _sum: 'ArticleSumAggregateOutput'
     _avg: 'ArticleAvgAggregateOutput'
@@ -8954,6 +8978,7 @@ class ArticleScalarAggregateOutput(TypedDict, total=False):
     sentiment: _str
     sentimentScore: _float
     biasLabel: _str
+    entities: 'fields.Json'
     createdAt: datetime.datetime
 
 
@@ -8973,6 +8998,7 @@ class ArticleMaxAggregateInput(TypedDict, total=False):
     sentiment: bool
     sentimentScore: bool
     biasLabel: bool
+    entities: bool
     createdAt: bool
 
 
@@ -8988,6 +9014,7 @@ class ArticleMinAggregateInput(TypedDict, total=False):
     sentiment: bool
     sentimentScore: bool
     biasLabel: bool
+    entities: bool
     createdAt: bool
 
 
@@ -9013,6 +9040,7 @@ ArticleCountAggregateInput = TypedDict(
         'sentiment': bool,
         'sentimentScore': bool,
         'biasLabel': bool,
+        'entities': bool,
         'createdAt': bool,
         '_all': bool,
     },
@@ -9032,6 +9060,7 @@ ArticleCountAggregateOutput = TypedDict(
         'sentiment': int,
         'sentimentScore': int,
         'biasLabel': int,
+        'entities': int,
         'createdAt': int,
         '_all': int,
     },
@@ -9051,6 +9080,7 @@ ArticleKeys = Literal[
     'sentiment',
     'sentimentScore',
     'biasLabel',
+    'entities',
     'createdAt',
 ]
 ArticleScalarFieldKeys = Literal[
@@ -9064,6 +9094,7 @@ ArticleScalarFieldKeys = Literal[
     'sentiment',
     'sentimentScore',
     'biasLabel',
+    'entities',
     'createdAt',
 ]
 ArticleScalarFieldKeysT = TypeVar('ArticleScalarFieldKeysT', bound=ArticleScalarFieldKeys)
@@ -9080,6 +9111,10 @@ class InsightOptionalCreateInput(TypedDict, total=False):
     searchId: _str
     search: 'SearchCreateNestedWithoutRelationsInput'
     narrativeSummary: Optional[_str]
+    leftWingSummary: Optional[_str]
+    rightWingSummary: Optional[_str]
+    entitySentiment: Optional['fields.Json']
+    driftMetrics: Optional['fields.Json']
     createdAt: datetime.datetime
 
 
@@ -9103,6 +9138,10 @@ class InsightOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     id: _str
     searchId: _str
     narrativeSummary: Optional[_str]
+    leftWingSummary: Optional[_str]
+    rightWingSummary: Optional[_str]
+    entitySentiment: Optional['fields.Json']
+    driftMetrics: Optional['fields.Json']
     createdAt: datetime.datetime
 
 
@@ -9156,6 +9195,10 @@ class InsightUpdateInput(TypedDict, total=False):
     duplicatesRemoved: Union[AtomicIntInput, _int]
     missingContent: Union[AtomicIntInput, _int]
     narrativeSummary: Optional[_str]
+    leftWingSummary: Optional[_str]
+    rightWingSummary: Optional[_str]
+    entitySentiment: Optional['fields.Json']
+    driftMetrics: Optional['fields.Json']
     createdAt: datetime.datetime
 
 
@@ -9171,6 +9214,10 @@ class InsightUpdateManyMutationInput(TypedDict, total=False):
     duplicatesRemoved: Union[AtomicIntInput, _int]
     missingContent: Union[AtomicIntInput, _int]
     narrativeSummary: Optional[_str]
+    leftWingSummary: Optional[_str]
+    rightWingSummary: Optional[_str]
+    entitySentiment: Optional['fields.Json']
+    driftMetrics: Optional['fields.Json']
     createdAt: datetime.datetime
 
 
@@ -9294,6 +9341,38 @@ _Insight_narrativeSummary_OrderByInput = TypedDict(
     total=True
 )
 
+_Insight_leftWingSummary_OrderByInput = TypedDict(
+    '_Insight_leftWingSummary_OrderByInput',
+    {
+        'leftWingSummary': 'SortOrder',
+    },
+    total=True
+)
+
+_Insight_rightWingSummary_OrderByInput = TypedDict(
+    '_Insight_rightWingSummary_OrderByInput',
+    {
+        'rightWingSummary': 'SortOrder',
+    },
+    total=True
+)
+
+_Insight_entitySentiment_OrderByInput = TypedDict(
+    '_Insight_entitySentiment_OrderByInput',
+    {
+        'entitySentiment': 'SortOrder',
+    },
+    total=True
+)
+
+_Insight_driftMetrics_OrderByInput = TypedDict(
+    '_Insight_driftMetrics_OrderByInput',
+    {
+        'driftMetrics': 'SortOrder',
+    },
+    total=True
+)
+
 _Insight_createdAt_OrderByInput = TypedDict(
     '_Insight_createdAt_OrderByInput',
     {
@@ -9332,6 +9411,10 @@ InsightOrderByInput = Union[
     '_Insight_duplicatesRemoved_OrderByInput',
     '_Insight_missingContent_OrderByInput',
     '_Insight_narrativeSummary_OrderByInput',
+    '_Insight_leftWingSummary_OrderByInput',
+    '_Insight_rightWingSummary_OrderByInput',
+    '_Insight_entitySentiment_OrderByInput',
+    '_Insight_driftMetrics_OrderByInput',
     '_Insight_createdAt_OrderByInput',
     '_Insight_RelevanceOrderByInput',
 ]
@@ -10136,6 +10219,10 @@ class InsightWhereInput(TypedDict, total=False):
     duplicatesRemoved: Union[_int, 'types.IntFilter']
     missingContent: Union[_int, 'types.IntFilter']
     narrativeSummary: Union[None, _str, 'types.StringFilter']
+    leftWingSummary: Union[None, _str, 'types.StringFilter']
+    rightWingSummary: Union[None, _str, 'types.StringFilter']
+    entitySentiment: Union[None, 'fields.Json', 'types.JsonFilter']
+    driftMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
     # should be noted that AND and NOT should be Union['InsightWhereInputRecursive1', List['InsightWhereInputRecursive1']]
@@ -10159,6 +10246,10 @@ class InsightWhereInputRecursive1(TypedDict, total=False):
     duplicatesRemoved: Union[_int, 'types.IntFilter']
     missingContent: Union[_int, 'types.IntFilter']
     narrativeSummary: Union[None, _str, 'types.StringFilter']
+    leftWingSummary: Union[None, _str, 'types.StringFilter']
+    rightWingSummary: Union[None, _str, 'types.StringFilter']
+    entitySentiment: Union[None, 'fields.Json', 'types.JsonFilter']
+    driftMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
     # should be noted that AND and NOT should be Union['InsightWhereInputRecursive2', List['InsightWhereInputRecursive2']]
@@ -10182,6 +10273,10 @@ class InsightWhereInputRecursive2(TypedDict, total=False):
     duplicatesRemoved: Union[_int, 'types.IntFilter']
     missingContent: Union[_int, 'types.IntFilter']
     narrativeSummary: Union[None, _str, 'types.StringFilter']
+    leftWingSummary: Union[None, _str, 'types.StringFilter']
+    rightWingSummary: Union[None, _str, 'types.StringFilter']
+    entitySentiment: Union[None, 'fields.Json', 'types.JsonFilter']
+    driftMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
     # should be noted that AND and NOT should be Union['InsightWhereInputRecursive3', List['InsightWhereInputRecursive3']]
@@ -10205,6 +10300,10 @@ class InsightWhereInputRecursive3(TypedDict, total=False):
     duplicatesRemoved: Union[_int, 'types.IntFilter']
     missingContent: Union[_int, 'types.IntFilter']
     narrativeSummary: Union[None, _str, 'types.StringFilter']
+    leftWingSummary: Union[None, _str, 'types.StringFilter']
+    rightWingSummary: Union[None, _str, 'types.StringFilter']
+    entitySentiment: Union[None, 'fields.Json', 'types.JsonFilter']
+    driftMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
     # should be noted that AND and NOT should be Union['InsightWhereInputRecursive4', List['InsightWhereInputRecursive4']]
@@ -10228,6 +10327,10 @@ class InsightWhereInputRecursive4(TypedDict, total=False):
     duplicatesRemoved: Union[_int, 'types.IntFilter']
     missingContent: Union[_int, 'types.IntFilter']
     narrativeSummary: Union[None, _str, 'types.StringFilter']
+    leftWingSummary: Union[None, _str, 'types.StringFilter']
+    rightWingSummary: Union[None, _str, 'types.StringFilter']
+    entitySentiment: Union[None, 'fields.Json', 'types.JsonFilter']
+    driftMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
 
@@ -10250,6 +10353,10 @@ class InsightScalarWhereWithAggregatesInput(TypedDict, total=False):
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
     missingContent: Union[_int, 'types.IntWithAggregatesFilter']
     narrativeSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    leftWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    rightWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    entitySentiment: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    driftMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
     AND: List['InsightScalarWhereWithAggregatesInputRecursive1']
@@ -10270,6 +10377,10 @@ class InsightScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
     missingContent: Union[_int, 'types.IntWithAggregatesFilter']
     narrativeSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    leftWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    rightWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    entitySentiment: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    driftMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
     AND: List['InsightScalarWhereWithAggregatesInputRecursive2']
@@ -10290,6 +10401,10 @@ class InsightScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
     missingContent: Union[_int, 'types.IntWithAggregatesFilter']
     narrativeSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    leftWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    rightWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    entitySentiment: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    driftMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
     AND: List['InsightScalarWhereWithAggregatesInputRecursive3']
@@ -10310,6 +10425,10 @@ class InsightScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
     missingContent: Union[_int, 'types.IntWithAggregatesFilter']
     narrativeSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    leftWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    rightWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    entitySentiment: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    driftMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
     AND: List['InsightScalarWhereWithAggregatesInputRecursive4']
@@ -10330,6 +10449,10 @@ class InsightScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
     missingContent: Union[_int, 'types.IntWithAggregatesFilter']
     narrativeSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    leftWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    rightWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
+    entitySentiment: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    driftMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
 
@@ -10346,6 +10469,10 @@ class InsightGroupByOutput(TypedDict, total=False):
     duplicatesRemoved: _int
     missingContent: _int
     narrativeSummary: _str
+    leftWingSummary: _str
+    rightWingSummary: _str
+    entitySentiment: 'fields.Json'
+    driftMetrics: 'fields.Json'
     createdAt: datetime.datetime
     _sum: 'InsightSumAggregateOutput'
     _avg: 'InsightAvgAggregateOutput'
@@ -10387,6 +10514,10 @@ class InsightScalarAggregateOutput(TypedDict, total=False):
     duplicatesRemoved: _int
     missingContent: _int
     narrativeSummary: _str
+    leftWingSummary: _str
+    rightWingSummary: _str
+    entitySentiment: 'fields.Json'
+    driftMetrics: 'fields.Json'
     createdAt: datetime.datetime
 
 
@@ -10407,6 +10538,10 @@ class InsightMaxAggregateInput(TypedDict, total=False):
     duplicatesRemoved: bool
     missingContent: bool
     narrativeSummary: bool
+    leftWingSummary: bool
+    rightWingSummary: bool
+    entitySentiment: bool
+    driftMetrics: bool
     createdAt: bool
 
 
@@ -10423,6 +10558,10 @@ class InsightMinAggregateInput(TypedDict, total=False):
     duplicatesRemoved: bool
     missingContent: bool
     narrativeSummary: bool
+    leftWingSummary: bool
+    rightWingSummary: bool
+    entitySentiment: bool
+    driftMetrics: bool
     createdAt: bool
 
 
@@ -10454,6 +10593,10 @@ InsightCountAggregateInput = TypedDict(
         'duplicatesRemoved': bool,
         'missingContent': bool,
         'narrativeSummary': bool,
+        'leftWingSummary': bool,
+        'rightWingSummary': bool,
+        'entitySentiment': bool,
+        'driftMetrics': bool,
         'createdAt': bool,
         '_all': bool,
     },
@@ -10474,6 +10617,10 @@ InsightCountAggregateOutput = TypedDict(
         'duplicatesRemoved': int,
         'missingContent': int,
         'narrativeSummary': int,
+        'leftWingSummary': int,
+        'rightWingSummary': int,
+        'entitySentiment': int,
+        'driftMetrics': int,
         'createdAt': int,
         '_all': int,
     },
@@ -10494,6 +10641,10 @@ InsightKeys = Literal[
     'duplicatesRemoved',
     'missingContent',
     'narrativeSummary',
+    'leftWingSummary',
+    'rightWingSummary',
+    'entitySentiment',
+    'driftMetrics',
     'createdAt',
 ]
 InsightScalarFieldKeys = Literal[
@@ -10508,6 +10659,10 @@ InsightScalarFieldKeys = Literal[
     'duplicatesRemoved',
     'missingContent',
     'narrativeSummary',
+    'leftWingSummary',
+    'rightWingSummary',
+    'entitySentiment',
+    'driftMetrics',
     'createdAt',
 ]
 InsightScalarFieldKeysT = TypeVar('InsightScalarFieldKeysT', bound=InsightScalarFieldKeys)

@@ -2,13 +2,13 @@ from transformers import pipeline
 import re
 from collections import Counter
 from urllib.parse import urlparse
+import spacy
 
 # Load HuggingFace pipelines
 sentiment_pipeline = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english", truncation=True, max_length=512)
 bias_pipeline = pipeline("text-classification", model="bucketresearch/politicalBiasBERT", truncation=True, max_length=512)
 
 try:
-    import spacy
     spacy_nlp = spacy.load("en_core_web_sm")
 except Exception as e:
     print(f"Spacy failed to load: {e}")
@@ -125,7 +125,7 @@ def generate_narrative(articles):
     # Build a condensed context of headlines and summaries for the LLM
     snippets = []
     for a in articles[:10]: # take top 10 to avoid hitting token limits
-        snippets.append(f"- Headline: {a.get('title', '')} (Bias: {a.get('bias_label', 'UNKNOWN')}, Sentiment: {a.get('sentiment', 'neutral')})")
+        snippets.append(f"- Source: [{a.get('source', 'Unknown')}] | Headline: {a.get('title', '')} (Bias: {a.get('bias_label', 'UNKNOWN')}, Sentiment: {a.get('sentiment', 'neutral')})")
     
     context_str = "\n".join(snippets)
     
@@ -145,11 +145,10 @@ def generate_narrative(articles):
         system_prompt = (
             "You are an expert media analyst and political scientist. "
             "Your task is to write a highly professional, objective, and insightful 3-4 sentence narrative summary "
-            "of the media's current coverage of a topic, based strictly on the provided article headlines, bias labels, and sentiments. "
-            "Highlight the overarching themes, how different political leanings are covering it, and the general sentiment."
+            "of the media's current coverage of a topic, based strictly on the provided article headlines, bias labels, and sentiments."
         )
         
-        user_prompt = f"Media Analysis Data:\nTotal Articles: {total}\nBias Breakdown: {left_count} Left, {center_count} Center, {right_count} Right.\nSentiment: {pos_count} Positive, {neg_count} Negative.\n\nSample Articles:\n{context_str}\n\nPlease generate the executive summary narrative."
+        user_prompt = f"Media Analysis Data:\nTotal Articles: {total}\nBias Breakdown: {left_count} Left, {center_count} Center, {right_count} Right.\nSentiment: {pos_count} Positive, {neg_count} Negative.\n\nSample Articles:\n{context_str}\n\nPlease generate the executive summary narrative. \n\nCRITICAL: You MUST include inline citations for the sources using square brackets (Example: 'The narrative is largely negative [indianexpress.com], though some outlets highlight positive aspects [thehindu.com].'). Do NOT output any preambles like 'Here is a summary', just output the summary paragraph directly."
         
         messages = [
             {"role": "system", "content": system_prompt},
@@ -214,7 +213,7 @@ def generate_contrastive_summaries(articles):
             
             snippets = []
             for a in subset[:7]:
-                snippets.append(f"- Headline: {a.get('title', '')} (Sentiment: {a.get('sentiment', 'neutral')})")
+                snippets.append(f"- Source: [{a.get('source', 'Unknown')}] | Headline: {a.get('title', '')} (Sentiment: {a.get('sentiment', 'neutral')})")
             context_str = "\n".join(snippets)
             
             system_prompt = (
@@ -223,7 +222,7 @@ def generate_contrastive_summaries(articles):
                 "based strictly on the provided headlines. Do not endorse the views, just summarize their narrative framing."
             )
             
-            user_prompt = f"Sample '{wing}' Articles:\n{context_str}\n\nPlease generate the {wing} narrative summary."
+            user_prompt = f"Sample '{wing}' Articles:\n{context_str}\n\nPlease generate the {wing} narrative summary.\n\nCRITICAL: You MUST include inline citations for the sources using square brackets (Example: 'This wing frames the issue negatively [foxnews.com], emphasizing weakness [nypost.com].'). Do NOT output any preambles like 'Here is a summary', just output the summary text directly."
             
             messages = [
                 {"role": "system", "content": system_prompt},

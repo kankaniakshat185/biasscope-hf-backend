@@ -728,6 +728,7 @@ class Article(bases.BaseArticle):
     sentiment: Optional[_str] = None
     sentimentScore: Optional[_float] = None
     biasLabel: Optional[_str] = None
+    entities: Optional['fields.Json'] = None
     createdAt: datetime.datetime
 
     # take *args and **kwargs so that other metaclasses can define arguments
@@ -868,6 +869,10 @@ class Insight(bases.BaseInsight):
     duplicatesRemoved: _int
     missingContent: _int
     narrativeSummary: Optional[_str] = None
+    leftWingSummary: Optional[_str] = None
+    rightWingSummary: Optional[_str] = None
+    entitySentiment: Optional['fields.Json'] = None
+    driftMetrics: Optional['fields.Json'] = None
     createdAt: datetime.datetime
 
     # take *args and **kwargs so that other metaclasses can define arguments
@@ -1505,6 +1510,14 @@ _Article_fields: Dict['types.ArticleKeys', PartialModelField] = OrderedDict(
             'is_relational': False,
             'documentation': None,
         }),
+        ('entities', {
+            'name': 'entities',
+            'is_list': False,
+            'optional': True,
+            'type': 'fields.Json',
+            'is_relational': False,
+            'documentation': None,
+        }),
         ('createdAt', {
             'name': 'createdAt',
             'is_list': False,
@@ -1614,6 +1627,38 @@ _Insight_fields: Dict['types.InsightKeys', PartialModelField] = OrderedDict(
             'is_list': False,
             'optional': True,
             'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('leftWingSummary', {
+            'name': 'leftWingSummary',
+            'is_list': False,
+            'optional': True,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('rightWingSummary', {
+            'name': 'rightWingSummary',
+            'is_list': False,
+            'optional': True,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('entitySentiment', {
+            'name': 'entitySentiment',
+            'is_list': False,
+            'optional': True,
+            'type': 'fields.Json',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('driftMetrics', {
+            'name': 'driftMetrics',
+            'is_list': False,
+            'optional': True,
+            'type': 'fields.Json',
             'is_relational': False,
             'documentation': None,
         }),
