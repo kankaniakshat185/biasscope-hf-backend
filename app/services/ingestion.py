@@ -146,6 +146,7 @@ async def scrape_article(article_data):
 
 import trafilatura
 from datetime import datetime
+from urllib.parse import urlparse
 
 async def scrape_single_url(url: str):
     domain = urlparse(url).netloc.replace("www.", "")
