@@ -273,11 +273,16 @@ async def analyze_url_endpoint(
         }
     )
 
+    # Format date for Prisma
+    published_at = art.get("published_at")
+    if published_at and len(published_at) == 10:  # e.g., 'YYYY-MM-DD'
+        published_at = f"{published_at}T00:00:00Z"
+
     # Insert article
     art = valid_articles_list[0]
     await prisma.article.create(
         data={
-            "searchId": search_record.id,
+            "search": {"connect": {"id": search_record.id}},
             "title": art.get("title", "No Title"),
             "content": art.get("content", ""),
             "source": art.get("source", "Unknown"),
@@ -286,7 +291,7 @@ async def analyze_url_endpoint(
             "sentimentScore": float(art.get("sentiment_score", 0.0)),
             "biasLabel": art.get("bias_label", "UNKNOWN"),
             "entities": Json(art.get("entities", {})),
-            "publishedAt": art.get("published_at")
+            "publishedAt": published_at
         }
     )
     
