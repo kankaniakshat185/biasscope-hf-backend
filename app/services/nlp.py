@@ -94,18 +94,14 @@ def analyze_articles(articles):
 
 
 def extract_keywords(articles):
-    text = " ".join([a.get("content", "") for a in articles if a.get("content")])
+    entity_counter = Counter()
+    for art in articles:
+        entities = art.get("entities", {})
+        if isinstance(entities, dict):
+            for entity in entities.keys():
+                entity_counter[entity] += 1
     
-    words = re.findall(r'\b[a-zA-Z]{5,}\b', text.lower())
-
-    stopwords = {
-        "which", "their", "there", "about", "would", "could",
-        "should", "other", "after", "where"
-    }
-
-    filtered_words = [w for w in words if w not in stopwords]
-    most_common = Counter(filtered_words).most_common(10)
-
+    most_common = entity_counter.most_common(10)
     return [{"word": word, "count": count} for word, count in most_common]
 
 
@@ -148,7 +144,7 @@ def generate_narrative(articles):
             "of the media's current coverage of a topic, based strictly on the provided article headlines, bias labels, and sentiments."
         )
         
-        user_prompt = f"Media Analysis Data:\nTotal Articles: {total}\nBias Breakdown: {left_count} Left, {center_count} Center, {right_count} Right.\nSentiment: {pos_count} Positive, {neg_count} Negative.\n\nSample Articles:\n{context_str}\n\nPlease generate the executive summary narrative. \n\nCRITICAL: You MUST explicitly cite the sources using natural phrasing like 'as reported by [indianexpress.com]' or 'according to [thehindu.com]'. Do not just drop brackets randomly at the end of sentences. Do NOT use numbers like [1] or [2]. Do NOT output any preambles like 'Here is a summary', just output the summary paragraph directly."
+        user_prompt = f"Media Analysis Data:\nTotal Articles: {total}\nBias Breakdown: {left_count} Left, {center_count} Center, {right_count} Right.\nSentiment: {pos_count} Positive, {neg_count} Negative.\n\nSample Articles:\n{context_str}\n\nPlease generate the executive summary narrative. \n\nCRITICAL: You MUST explicitly cite the sources using natural phrasing, and you MUST wrap the source name in square brackets for parsing (Example: 'as reported by [indianexpress.com]' or 'according to [thehindu.com]'). Do not just drop brackets randomly at the end of sentences. Do NOT use numbers like [1]. Do NOT output any preambles."
         
         messages = [
             {"role": "system", "content": system_prompt},
@@ -222,7 +218,7 @@ def generate_contrastive_summaries(articles):
                 "based strictly on the provided headlines. Do not endorse the views, just summarize their narrative framing."
             )
             
-            user_prompt = f"Sample '{wing}' Articles:\n{context_str}\n\nPlease generate the {wing} narrative summary.\n\nCRITICAL: You MUST explicitly cite the sources using natural phrasing like 'as reported by [foxnews.com]' or 'according to [nypost.com]'. Do not just drop brackets randomly at the end of sentences. Do NOT use numbers like [1] or [2]. Do NOT output any preambles like 'Here is a summary', just output the summary text directly."
+            user_prompt = f"Sample '{wing}' Articles:\n{context_str}\n\nPlease generate the {wing} narrative summary.\n\nCRITICAL: You MUST explicitly cite the sources using natural phrasing, and you MUST wrap the source name in square brackets for parsing (Example: 'as reported by [foxnews.com]' or 'according to [nypost.com]'). Do not just drop brackets randomly at the end of sentences. Do NOT use numbers like [1]. Do NOT output any preambles."
             
             messages = [
                 {"role": "system", "content": system_prompt},
