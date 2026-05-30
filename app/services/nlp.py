@@ -106,7 +106,7 @@ def extract_keywords(articles):
     filtered_words = [w for w in words if w not in stopwords]
     most_common = Counter(filtered_words).most_common(10)
 
-    return [word for word, count in most_common]
+    return [{"word": word, "count": count} for word, count in most_common]
 
 
 def generate_narrative(articles):
