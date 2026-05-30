@@ -8,6 +8,7 @@ COPY ./requirements.txt /code/requirements.txt
 RUN apt-get update -y && apt-get install -y libatomic1 openssl tesseract-ocr
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN python -m spacy download en_core_web_sm
 
 # Create non-root user (Hugging Face requirement)
 RUN useradd -m -u 1000 user

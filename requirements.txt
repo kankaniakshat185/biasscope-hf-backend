@@ -16,3 +16,4 @@ trafilatura
 pytesseract
 Pillow
 beautifulsoup4
+python-multipart
