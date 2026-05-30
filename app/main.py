@@ -375,7 +375,6 @@ async def analyze_upload_endpoint(
         data={
             "query": f"Image Upload: {file.filename}",
             "category": "Single URL",
-            "searchType": "OCR",
             "userId": userId,
             "articles": {
                 "create": [
@@ -387,7 +386,6 @@ async def analyze_upload_endpoint(
                         "sentiment": a.get("sentiment", "neutral"),
                         "sentimentScore": float(a.get("sentiment_score", 0.0)),
                         "biasLabel": a.get("bias_label", "UNKNOWN"),
-                        "biasConfidence": float(a.get("bias_confidence", 0.0)),
                         "entities": Json(a.get("entities", {}))
                     } for a in analyzed_articles
                 ]
