@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Body
+from fastapi import FastAPI, HTTPException, Body, File, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
 from .prisma_client import Prisma, Json
 import uvicorn
@@ -7,6 +7,9 @@ from app.services.ingestion import ingest_articles, scrape_single_url
 from app.services.nlp import analyze_articles, generate_narrative, generate_contrastive_summaries, extract_entity_sentiment
 from app.services.validation import validate_articles
 import os
+import io
+from PIL import Image
+import pytesseract
 
 app = FastAPI(title="Biascope API")
 
@@ -316,6 +319,102 @@ async def analyze_url_endpoint(
     )
 
     return {"search_id": search_record.id, "message": "URL processed successfully."}
+
+@app.post("/analyze-upload")
+async def analyze_upload_endpoint(
+    file: UploadFile = File(...),
+    userId: str = Form(None)
+):
+    print(f"Starting single image upload analysis for: {file.filename}")
+    
+    # 1. Image OCR Ingestion
+    content = await file.read()
+    image_data = io.BytesIO(content)
+    try:
+        img_obj = Image.open(image_data)
+        text = pytesseract.image_to_string(img_obj)
+        if not text or len(text.strip()) < 20:
+            raise Exception("OCR found no meaningful text in the uploaded file.")
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Failed to process image OCR: {str(e)}")
+
+    raw_article = {
+        "title": f"Local Upload: {file.filename}",
+        "url": "local_upload",
+        "source": "Local System",
+        "content": text.strip(),
+        "published_at": None
+    }
+
+    # 2. NLP
+    analyzed_articles = analyze_articles([raw_article])
+
+    # 3. Validation
+    validation_metrics = validate_articles(analyzed_articles)
+    
+    valid_articles_list = validation_metrics.get("valid_articles_list", [])
+    if not valid_articles_list:
+        raise HTTPException(status_code=400, detail="The extracted text was too short or invalid for AI analysis.")
+
+    validation_metrics["total_articles"] = 1
+    validation_metrics["duplicates_removed"] = 0
+
+    # 4. Intelligence
+    summary = generate_narrative(analyzed_articles)
+    entity_sentiment_graph = extract_entity_sentiment(analyzed_articles)
+    
+    drift_metrics = {
+        "average_bias_confidence": float(sum(a.get("bias_confidence", 0) for a in analyzed_articles) / len(analyzed_articles)) if analyzed_articles else 0.0
+    }
+
+    # 5. DB Persistence
+    from datetime import datetime
+    iso_date = datetime.utcnow().strftime("%Y-%m-%dT00:00:00Z")
+
+    search_record = await prisma.search.create(
+        data={
+            "query": f"Image Upload: {file.filename}",
+            "category": "Single URL",
+            "searchType": "OCR",
+            "userId": userId,
+            "articles": {
+                "create": [
+                    {
+                        "title": a.get("title", "Unknown"),
+                        "url": a.get("url", "unknown"),
+                        "source": a.get("source", "Unknown"),
+                        "publishedAt": a.get("published_at") or iso_date,
+                        "sentiment": a.get("sentiment", "neutral"),
+                        "sentimentScore": float(a.get("sentiment_score", 0.0)),
+                        "biasLabel": a.get("bias_label", "UNKNOWN"),
+                        "biasConfidence": float(a.get("bias_confidence", 0.0)),
+                        "entities": Json(a.get("entities", {}))
+                    } for a in analyzed_articles
+                ]
+            }
+        }
+    )
+
+    insight_record = await prisma.insight.create(
+        data={
+            "search": {"connect": {"id": search_record.id}},
+            "avgSentiment": float(validation_metrics.get("avg_sentiment", 0.0)),
+            "topKeywords": Json(validation_metrics.get("top_keywords", [])),
+            "biasDistribution": Json(validation_metrics.get("bias_distribution", {"LEFT": 0, "CENTER": 0, "RIGHT": 0, "UNKNOWN": 0})),
+            "dataQualityScore": float(validation_metrics.get("data_quality_score", 0.0)),
+            "totalArticles": 1,
+            "validArticles": 1,
+            "duplicatesRemoved": 0,
+            "missingContent": 0,
+            "narrativeSummary": summary,
+            "leftWingSummary": "",
+            "rightWingSummary": "",
+            "entitySentiment": Json(entity_sentiment_graph),
+            "driftMetrics": Json(drift_metrics)
+        }
+    )
+
+    return {"search_id": search_record.id, "message": "File processed successfully."}
 
 @app.get("/history")
 async def get_history(userId: str = None):
