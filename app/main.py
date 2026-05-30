@@ -2,8 +2,8 @@ from fastapi import FastAPI, HTTPException, Body
 from fastapi.middleware.cors import CORSMiddleware
 from .prisma_client import Prisma, Json
 import uvicorn
-from app.services.ingestion import ingest_articles
 from app.services.cleaning import clean_and_deduplicate
+from app.services.ingestion import ingest_articles, scrape_single_url
 from app.services.nlp import analyze_articles, generate_narrative, generate_contrastive_summaries, extract_entity_sentiment
 from app.services.validation import validate_articles
 import os
@@ -226,6 +226,91 @@ async def chat_with_summary(
     except Exception as e:
         print(f"LLM API Error: {e}")
         return {"answer": f"API Error Details: {str(e)}"}
+
+@app.post("/analyze-url")
+async def analyze_url_endpoint(
+    url: str = Body(...),
+    userId: str = Body(None)
+):
+    print(f"Starting single URL analysis for: {url}")
+    
+    # 1. Ingestion
+    try:
+        raw_article = await scrape_single_url(url)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Failed to extract article from URL: {str(e)}")
+
+    if not raw_article:
+        raise HTTPException(status_code=400, detail="Could not extract content from the provided URL.")
+
+    # 2. NLP (Since it's 1 article, no cleaning needed)
+    analyzed_articles = analyze_articles([raw_article])
+
+    # 3. Validation
+    validation_metrics = validate_articles(analyzed_articles)
+    
+    valid_articles_list = validation_metrics.get("valid_articles_list", [])
+    if not valid_articles_list:
+        raise HTTPException(status_code=400, detail="The extracted text was too short or invalid for AI analysis.")
+
+    validation_metrics["total_articles"] = 1
+    validation_metrics["duplicates_removed"] = 0
+
+    # 4. Intelligence
+    summary = generate_narrative(analyzed_articles)
+    entity_sentiment_graph = extract_entity_sentiment(analyzed_articles)
+    
+    # Calculate model drift metrics
+    avg_confidence = valid_articles_list[0].get("bias_confidence", 0.0)
+    drift_metrics = {"average_bias_confidence": avg_confidence}
+
+    # 5. Store to DB
+    search_record = await prisma.search.create(
+        data={
+            "query": url,
+            "category": "Single URL",
+            "userId": userId
+        }
+    )
+
+    # Insert article
+    art = valid_articles_list[0]
+    await prisma.article.create(
+        data={
+            "searchId": search_record.id,
+            "title": art.get("title", "No Title"),
+            "content": art.get("content", ""),
+            "source": art.get("source", "Unknown"),
+            "url": art.get("url", ""),
+            "sentiment": art.get("sentiment", "neutral"),
+            "sentimentScore": float(art.get("sentiment_score", 0.0)),
+            "biasLabel": art.get("bias_label", "UNKNOWN"),
+            "entities": Json(art.get("entities", {})),
+            "publishedAt": art.get("published_at")
+        }
+    )
+    
+    # Insight logic specifically ignores echo chambers for single URL
+    insight_record = await prisma.insight.create(
+        data={
+            "search": {"connect": {"id": search_record.id}},
+            "avgSentiment": float(validation_metrics.get("avg_sentiment", 0.0)),
+            "topKeywords": Json(validation_metrics.get("top_keywords", [])),
+            "biasDistribution": Json(validation_metrics.get("bias_distribution", {"LEFT": 0, "CENTER": 0, "RIGHT": 0, "UNKNOWN": 0})),
+            "dataQualityScore": float(validation_metrics.get("data_quality_score", 0.0)),
+            "totalArticles": 1,
+            "validArticles": 1,
+            "duplicatesRemoved": 0,
+            "missingContent": 0,
+            "narrativeSummary": summary,
+            "leftWingSummary": "",
+            "rightWingSummary": "",
+            "entitySentiment": Json(entity_sentiment_graph),
+            "driftMetrics": Json(drift_metrics)
+        }
+    )
+
+    return {"search_id": search_record.id, "message": "URL processed successfully."}
 
 @app.get("/history")
 async def get_history(userId: str = None):

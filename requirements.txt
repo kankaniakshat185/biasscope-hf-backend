@@ -12,3 +12,4 @@ httpx
 pydantic
 lxml_html_clean
 spacy
+trafilatura

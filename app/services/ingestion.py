@@ -143,3 +143,33 @@ async def scrape_article(article_data):
         "content": scraped_content,
         "published_at": article_data.get('publishedAt', None)
     }
+
+import trafilatura
+from datetime import datetime
+
+async def scrape_single_url(url: str):
+    domain = urlparse(url).netloc.replace("www.", "")
+    downloaded = trafilatura.fetch_url(url)
+    if not downloaded:
+        raise Exception("Could not fetch the URL.")
+    
+    metadata = trafilatura.extract_metadata(downloaded)
+    text = trafilatura.extract(downloaded)
+    
+    if not text or len(text) < 100:
+        raise Exception("Could not extract enough main article text from the URL.")
+        
+    title = metadata.title if metadata and metadata.title else "Direct URL Upload"
+    
+    date_str = None
+    if metadata and metadata.date:
+        # metadata.date is a string like "2023-01-01"
+        date_str = metadata.date
+    
+    return {
+        "title": title,
+        "url": url,
+        "source": domain,
+        "content": text,
+        "published_at": date_str
+    }
