@@ -22,6 +22,8 @@ SOURCE_BIAS_REGISTRY = {
     "msnbc.com": "LEFT", "theguardian.com": "LEFT", "gizmodo.com": "LEFT", 
     "huffpost.com": "LEFT", "vox.com": "LEFT", "vice.com": "LEFT",
     "commondreams.org": "LEFT", "thewire.in": "LEFT", "ndtv.com": "LEFT",
+    "nbcnews.com": "LEFT", "nymag.com": "LEFT", "vanityfair.com": "LEFT",
+    "propublica.org": "LEFT", "aljazeera.com": "LEFT", "newrepublic.com": "LEFT",
 
     # Center Leaning
     "reuters.com": "CENTER", "apnews.com": "CENTER", "bbc.co.uk": "CENTER",
@@ -31,7 +33,7 @@ SOURCE_BIAS_REGISTRY = {
 
     # Right Leaning
     "foxnews.com": "RIGHT", "nypost.com": "RIGHT", "dailymail.co.uk": "RIGHT",
-    "breitbart.com": "RIGHT", "dailycaller.com": "RIGHT", "theblaze.com": "RIGHT",
+    "dailymail.com": "RIGHT", "breitbart.com": "RIGHT", "dailycaller.com": "RIGHT", "theblaze.com": "RIGHT",
     "wnd.com": "RIGHT", "newsmax.com": "RIGHT", "oann.com": "RIGHT",
     "republicworld.com": "RIGHT", "opindia.com": "RIGHT"
 }

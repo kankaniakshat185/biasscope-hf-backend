@@ -86,13 +86,28 @@ async def create_search(
     contrastive_summaries = generate_contrastive_summaries(analyzed_articles)
     entity_sentiment_graph = extract_entity_sentiment(analyzed_articles)
     
-    # Calculate model drift metrics
+    # Replace softmax average with Source Reliability Confidence
     valid_articles = validation_metrics.get("valid_articles_list", [])
     if valid_articles:
-        avg_confidence = sum(a.get("bias_confidence", 0.0) for a in valid_articles) / len(valid_articles)
+        reliability_scores = []
+        high = ["reuters.com", "apnews.com", "bbc.co.uk", "bbc.com", "npr.org", "thehindu.com", "indianexpress.com", "ft.com", "wsj.com", "bloomberg.com", "theguardian.com", "nytimes.com", "washingtonpost.com"]
+        mixed = ["foxnews.com", "cnn.com", "msnbc.com", "dailymail.co.uk", "dailymail.com", "nypost.com", "vice.com", "gizmodo.com"]
+        low = ["breitbart.com", "infowars.com", "dailycaller.com", "wnd.com", "newsmax.com", "oann.com"]
+        
+        for a in valid_articles:
+            s = a.get("source", "").lower()
+            if any(h in s for h in high):
+                reliability_scores.append(0.95)
+            elif any(m in s for m in mixed):
+                reliability_scores.append(0.60)
+            elif any(l in s for l in low):
+                reliability_scores.append(0.20)
+            else:
+                reliability_scores.append(0.50) # default unknown
+        avg_confidence = sum(reliability_scores) / len(reliability_scores)
     else:
         avg_confidence = 0.0
-    drift_metrics = {"average_bias_confidence": avg_confidence}
+    drift_metrics = {"source_reliability_confidence": avg_confidence}
 
     # 6. Store to DB
     search_record = await prisma.search.create(
@@ -267,8 +282,17 @@ async def analyze_url_endpoint(
     entity_sentiment_graph = extract_entity_sentiment(analyzed_articles)
     
     # Calculate model drift metrics
-    avg_confidence = valid_articles_list[0].get("bias_confidence", 0.0)
-    drift_metrics = {"average_bias_confidence": avg_confidence}
+    s = valid_articles_list[0].get("source", "").lower()
+    high = ["reuters.com", "apnews.com", "bbc.co.uk", "bbc.com", "npr.org", "thehindu.com", "indianexpress.com", "ft.com", "wsj.com", "bloomberg.com", "theguardian.com", "nytimes.com", "washingtonpost.com"]
+    mixed = ["foxnews.com", "cnn.com", "msnbc.com", "dailymail.co.uk", "dailymail.com", "nypost.com", "vice.com", "gizmodo.com"]
+    low = ["breitbart.com", "infowars.com", "dailycaller.com", "wnd.com", "newsmax.com", "oann.com"]
+    
+    if any(h in s for h in high): conf = 0.95
+    elif any(m in s for m in mixed): conf = 0.60
+    elif any(l in s for l in low): conf = 0.20
+    else: conf = 0.50
+    
+    drift_metrics = {"source_reliability_confidence": conf}
 
     # 5. Store to DB
     search_record = await prisma.search.create(
@@ -388,8 +412,23 @@ async def analyze_upload_endpoint(
     summary = generate_narrative(analyzed_articles)
     entity_sentiment_graph = extract_entity_sentiment(analyzed_articles)
     
+    # Model Drift Metrics (Source Reliability Confidence)
+    reliability_scores = []
+    high = ["reuters.com", "apnews.com", "bbc.co.uk", "bbc.com", "npr.org", "thehindu.com", "indianexpress.com", "ft.com", "wsj.com", "bloomberg.com", "theguardian.com", "nytimes.com", "washingtonpost.com"]
+    mixed = ["foxnews.com", "cnn.com", "msnbc.com", "dailymail.co.uk", "dailymail.com", "nypost.com", "vice.com", "gizmodo.com"]
+    low = ["breitbart.com", "infowars.com", "dailycaller.com", "wnd.com", "newsmax.com", "oann.com"]
+    
+    for a in analyzed_articles:
+        s = a.get("source", "").lower()
+        if any(h in s for h in high): reliability_scores.append(0.95)
+        elif any(m in s for m in mixed): reliability_scores.append(0.60)
+        elif any(l in s for l in low): reliability_scores.append(0.20)
+        else: reliability_scores.append(0.50)
+        
+    avg_conf = sum(reliability_scores) / len(reliability_scores) if reliability_scores else 0.0
+    
     drift_metrics = {
-        "average_bias_confidence": float(sum(a.get("bias_confidence", 0) for a in analyzed_articles) / len(analyzed_articles)) if analyzed_articles else 0.0
+        "source_reliability_confidence": avg_conf
     }
 
     # 5. DB Persistence
