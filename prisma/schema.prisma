@@ -107,6 +107,8 @@ model Article {
   sentiment       String?  // positive, negative, neutral
   sentimentScore  Float?
   biasLabel       String?  // LEFT, CENTER, RIGHT
+  sourceBias      String?  // LEFT, CENTER, RIGHT (from static registry)
+  deviationScore  Float?   // anomaly distance between source and article bias
   entities        Json?    // Extracted NER entities
   createdAt       DateTime @default(now())
 
@@ -125,6 +127,7 @@ model Insight {
   validArticles       Int
   duplicatesRemoved   Int
   missingContent      Int
+  datasetMetrics      Json?    // Stores Source Diversity, Geographic Diversity, Coverage Imbalance
   narrativeSummary    String?  // Generated AI narrative
   leftWingSummary     String?  // Generated AI narrative for Left-wing articles
   rightWingSummary    String?  // Generated AI narrative for Right-wing articles

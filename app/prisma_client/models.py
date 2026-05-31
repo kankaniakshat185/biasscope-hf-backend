@@ -728,6 +728,8 @@ class Article(bases.BaseArticle):
     sentiment: Optional[_str] = None
     sentimentScore: Optional[_float] = None
     biasLabel: Optional[_str] = None
+    sourceBias: Optional[_str] = None
+    deviationScore: Optional[_float] = None
     entities: Optional['fields.Json'] = None
     createdAt: datetime.datetime
 
@@ -868,6 +870,7 @@ class Insight(bases.BaseInsight):
     validArticles: _int
     duplicatesRemoved: _int
     missingContent: _int
+    datasetMetrics: Optional['fields.Json'] = None
     narrativeSummary: Optional[_str] = None
     leftWingSummary: Optional[_str] = None
     rightWingSummary: Optional[_str] = None
@@ -1510,6 +1513,22 @@ _Article_fields: Dict['types.ArticleKeys', PartialModelField] = OrderedDict(
             'is_relational': False,
             'documentation': None,
         }),
+        ('sourceBias', {
+            'name': 'sourceBias',
+            'is_list': False,
+            'optional': True,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('deviationScore', {
+            'name': 'deviationScore',
+            'is_list': False,
+            'optional': True,
+            'type': '_float',
+            'is_relational': False,
+            'documentation': None,
+        }),
         ('entities', {
             'name': 'entities',
             'is_list': False,
@@ -1619,6 +1638,14 @@ _Insight_fields: Dict['types.InsightKeys', PartialModelField] = OrderedDict(
             'is_list': False,
             'optional': False,
             'type': '_int',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('datasetMetrics', {
+            'name': 'datasetMetrics',
+            'is_list': False,
+            'optional': True,
+            'type': 'fields.Json',
             'is_relational': False,
             'documentation': None,
         }),

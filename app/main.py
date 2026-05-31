@@ -115,6 +115,8 @@ async def create_search(
             "sentiment": art.get("sentiment", "neutral"),
             "sentimentScore": float(art.get("sentiment_score", 0.0)),
             "biasLabel": art.get("bias_label", "UNKNOWN"),
+            "sourceBias": art.get("source_bias", "UNKNOWN"),
+            "deviationScore": float(art.get("deviation_score", 0.0)),
             "entities": Json(art.get("entities", {})),
             "publishedAt": art.get("published_at")
         })
@@ -134,6 +136,7 @@ async def create_search(
             "validArticles": validation_metrics["valid_articles"],
             "duplicatesRemoved": validation_metrics["duplicates_removed"],
             "missingContent": validation_metrics["missing_content"],
+            "datasetMetrics": Json(validation_metrics.get("dataset_metrics", {})),
             "narrativeSummary": summary,
             "leftWingSummary": contrastive_summaries.get("left", ""),
             "rightWingSummary": contrastive_summaries.get("right", ""),
@@ -293,6 +296,8 @@ async def analyze_url_endpoint(
             "sentiment": art.get("sentiment", "neutral"),
             "sentimentScore": float(art.get("sentiment_score", 0.0)),
             "biasLabel": art.get("bias_label", "UNKNOWN"),
+            "sourceBias": art.get("source_bias", "UNKNOWN"),
+            "deviationScore": float(art.get("deviation_score", 0.0)),
             "entities": Json(art.get("entities", {})),
             "publishedAt": published_at
         }
@@ -406,6 +411,8 @@ async def analyze_upload_endpoint(
                         "sentiment": a.get("sentiment", "neutral"),
                         "sentimentScore": float(a.get("sentiment_score", 0.0)),
                         "biasLabel": a.get("bias_label", "UNKNOWN"),
+                        "sourceBias": a.get("source_bias", "UNKNOWN"),
+                        "deviationScore": float(a.get("deviation_score", 0.0)),
                         "entities": Json(a.get("entities", {}))
                     } for a in analyzed_articles
                 ]
@@ -424,6 +431,7 @@ async def analyze_upload_endpoint(
             "validArticles": 1,
             "duplicatesRemoved": 0,
             "missingContent": 0,
+            "datasetMetrics": Json(validation_metrics.get("dataset_metrics", {})),
             "narrativeSummary": summary,
             "leftWingSummary": "",
             "rightWingSummary": "",

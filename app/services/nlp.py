@@ -3,6 +3,7 @@ import re
 from collections import Counter
 from urllib.parse import urlparse
 import spacy
+from transformers import pipeline
 
 # Load HuggingFace pipelines
 sentiment_pipeline = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english", truncation=True, max_length=512)
@@ -13,6 +14,27 @@ try:
 except Exception as e:
     print(f"Spacy failed to load: {e}")
     spacy_nlp = None
+
+# Static Source Bias Registry (Phase 1)
+SOURCE_BIAS_REGISTRY = {
+    # Left Leaning
+    "nytimes.com": "LEFT", "washingtonpost.com": "LEFT", "cnn.com": "LEFT", 
+    "msnbc.com": "LEFT", "theguardian.com": "LEFT", "gizmodo.com": "LEFT", 
+    "huffpost.com": "LEFT", "vox.com": "LEFT", "vice.com": "LEFT",
+    "commondreams.org": "LEFT", "thewire.in": "LEFT", "ndtv.com": "LEFT",
+
+    # Center Leaning
+    "reuters.com": "CENTER", "apnews.com": "CENTER", "bbc.co.uk": "CENTER",
+    "bbc.com": "CENTER", "npr.org": "CENTER", "wsj.com": "CENTER", 
+    "ft.com": "CENTER", "bloomberg.com": "CENTER", "thehindu.com": "CENTER",
+    "indianexpress.com": "CENTER",
+
+    # Right Leaning
+    "foxnews.com": "RIGHT", "nypost.com": "RIGHT", "dailymail.co.uk": "RIGHT",
+    "breitbart.com": "RIGHT", "dailycaller.com": "RIGHT", "theblaze.com": "RIGHT",
+    "wnd.com": "RIGHT", "newsmax.com": "RIGHT", "oann.com": "RIGHT",
+    "republicworld.com": "RIGHT", "opindia.com": "RIGHT"
+}
 
 def analyze_articles(articles):
     analyzed = []
@@ -88,6 +110,26 @@ def analyze_articles(articles):
                 art["bias_label"] = "UNKNOWN"
                 art["bias_confidence"] = 0.0
 
+        # -------- HYBRID BIAS ASSIGNMENT & ANOMALY DETECTION --------
+        source_domain = art.get("source", "").lower()
+        art["source_bias"] = "UNKNOWN"
+        for domain, bias in SOURCE_BIAS_REGISTRY.items():
+            if domain in source_domain:
+                art["source_bias"] = bias
+                break
+                
+        # Calculate Deviation Score (Narrative Anomaly Detection)
+        # Distance map: LEFT=0, CENTER=1, RIGHT=2
+        bias_map = {"LEFT": 0, "CENTER": 1, "RIGHT": 2, "UNKNOWN": None}
+        s_val = bias_map.get(art["source_bias"])
+        a_val = bias_map.get(art["bias_label"])
+        
+        if s_val is not None and a_val is not None:
+            # 0.0 = Complete agreement, 1.0 = Minor shift (Left to Center), 2.0 = Extreme anomaly (Left to Right)
+            art["deviation_score"] = float(abs(s_val - a_val))
+        else:
+            art["deviation_score"] = 0.0
+
         analyzed.append(art)
 
     return analyzed
@@ -153,7 +195,9 @@ def generate_narrative(articles):
         system_prompt = (
             "You are an expert media analyst and political scientist. "
             "Your task is to write a highly professional, objective, and insightful 3-4 sentence narrative summary "
-            "of the media's current coverage of a topic, based strictly on the provided article headlines, bias labels, and sentiments."
+            "of the media's current coverage of a topic, based strictly on the provided article headlines, bias labels, and sentiments. "
+            "You MUST explicitly bound all claims. Begin your summary with 'Among the analyzed articles...' or 'Within this sample dataset...' "
+            "Do NOT make sweeping claims about the broader media ecosystem outside of this sample."
         )
         
         user_prompt = f"Media Analysis Data:\nTotal Articles: {total}\nBias Breakdown: {left_count} Left, {center_count} Center, {right_count} Right.\nSentiment: {pos_count} Positive, {neg_count} Negative.\n\nSample Articles:\n{context_str}\n\nPlease generate the executive summary narrative. \n\nCRITICAL: You MUST explicitly cite the sources using natural phrasing, and you MUST wrap the source name in square brackets for parsing (Example: 'as reported by [indianexpress.com]' or 'according to [thehindu.com]'). Do not just drop brackets randomly at the end of sentences. Do NOT use numbers like [1]. Do NOT output any preambles."

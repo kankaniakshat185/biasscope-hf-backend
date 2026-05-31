@@ -7686,6 +7686,8 @@ class ArticleOptionalCreateInput(TypedDict, total=False):
     sentiment: Optional[_str]
     sentimentScore: Optional[_float]
     biasLabel: Optional[_str]
+    sourceBias: Optional[_str]
+    deviationScore: Optional[_float]
     entities: Optional['fields.Json']
     createdAt: datetime.datetime
 
@@ -7709,6 +7711,8 @@ class ArticleOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     sentiment: Optional[_str]
     sentimentScore: Optional[_float]
     biasLabel: Optional[_str]
+    sourceBias: Optional[_str]
+    deviationScore: Optional[_float]
     entities: Optional['fields.Json']
     createdAt: datetime.datetime
 
@@ -7757,6 +7761,8 @@ class ArticleUpdateInput(TypedDict, total=False):
     sentiment: Optional[_str]
     sentimentScore: Optional[Union[AtomicFloatInput, _float]]
     biasLabel: Optional[_str]
+    sourceBias: Optional[_str]
+    deviationScore: Optional[Union[AtomicFloatInput, _float]]
     entities: Optional['fields.Json']
     createdAt: datetime.datetime
 
@@ -7772,6 +7778,8 @@ class ArticleUpdateManyMutationInput(TypedDict, total=False):
     sentiment: Optional[_str]
     sentimentScore: Optional[Union[AtomicFloatInput, _float]]
     biasLabel: Optional[_str]
+    sourceBias: Optional[_str]
+    deviationScore: Optional[Union[AtomicFloatInput, _float]]
     entities: Optional['fields.Json']
     createdAt: datetime.datetime
 
@@ -7888,6 +7896,22 @@ _Article_biasLabel_OrderByInput = TypedDict(
     total=True
 )
 
+_Article_sourceBias_OrderByInput = TypedDict(
+    '_Article_sourceBias_OrderByInput',
+    {
+        'sourceBias': 'SortOrder',
+    },
+    total=True
+)
+
+_Article_deviationScore_OrderByInput = TypedDict(
+    '_Article_deviationScore_OrderByInput',
+    {
+        'deviationScore': 'SortOrder',
+    },
+    total=True
+)
+
 _Article_entities_OrderByInput = TypedDict(
     '_Article_entities_OrderByInput',
     {
@@ -7933,6 +7957,8 @@ ArticleOrderByInput = Union[
     '_Article_sentiment_OrderByInput',
     '_Article_sentimentScore_OrderByInput',
     '_Article_biasLabel_OrderByInput',
+    '_Article_sourceBias_OrderByInput',
+    '_Article_deviationScore_OrderByInput',
     '_Article_entities_OrderByInput',
     '_Article_createdAt_OrderByInput',
     '_Article_RelevanceOrderByInput',
@@ -8737,6 +8763,8 @@ class ArticleWhereInput(TypedDict, total=False):
     sentiment: Union[None, _str, 'types.StringFilter']
     sentimentScore: Union[None, _float, 'types.FloatFilter']
     biasLabel: Union[None, _str, 'types.StringFilter']
+    sourceBias: Union[None, _str, 'types.StringFilter']
+    deviationScore: Union[None, _float, 'types.FloatFilter']
     entities: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
@@ -8760,6 +8788,8 @@ class ArticleWhereInputRecursive1(TypedDict, total=False):
     sentiment: Union[None, _str, 'types.StringFilter']
     sentimentScore: Union[None, _float, 'types.FloatFilter']
     biasLabel: Union[None, _str, 'types.StringFilter']
+    sourceBias: Union[None, _str, 'types.StringFilter']
+    deviationScore: Union[None, _float, 'types.FloatFilter']
     entities: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
@@ -8783,6 +8813,8 @@ class ArticleWhereInputRecursive2(TypedDict, total=False):
     sentiment: Union[None, _str, 'types.StringFilter']
     sentimentScore: Union[None, _float, 'types.FloatFilter']
     biasLabel: Union[None, _str, 'types.StringFilter']
+    sourceBias: Union[None, _str, 'types.StringFilter']
+    deviationScore: Union[None, _float, 'types.FloatFilter']
     entities: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
@@ -8806,6 +8838,8 @@ class ArticleWhereInputRecursive3(TypedDict, total=False):
     sentiment: Union[None, _str, 'types.StringFilter']
     sentimentScore: Union[None, _float, 'types.FloatFilter']
     biasLabel: Union[None, _str, 'types.StringFilter']
+    sourceBias: Union[None, _str, 'types.StringFilter']
+    deviationScore: Union[None, _float, 'types.FloatFilter']
     entities: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
@@ -8829,6 +8863,8 @@ class ArticleWhereInputRecursive4(TypedDict, total=False):
     sentiment: Union[None, _str, 'types.StringFilter']
     sentimentScore: Union[None, _float, 'types.FloatFilter']
     biasLabel: Union[None, _str, 'types.StringFilter']
+    sourceBias: Union[None, _str, 'types.StringFilter']
+    deviationScore: Union[None, _float, 'types.FloatFilter']
     entities: Union[None, 'fields.Json', 'types.JsonFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
 
@@ -8851,6 +8887,8 @@ class ArticleScalarWhereWithAggregatesInput(TypedDict, total=False):
     sentiment: Union[_str, 'types.StringWithAggregatesFilter']
     sentimentScore: Union[_float, 'types.FloatWithAggregatesFilter']
     biasLabel: Union[_str, 'types.StringWithAggregatesFilter']
+    sourceBias: Union[_str, 'types.StringWithAggregatesFilter']
+    deviationScore: Union[_float, 'types.FloatWithAggregatesFilter']
     entities: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
@@ -8871,6 +8909,8 @@ class ArticleScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
     sentiment: Union[_str, 'types.StringWithAggregatesFilter']
     sentimentScore: Union[_float, 'types.FloatWithAggregatesFilter']
     biasLabel: Union[_str, 'types.StringWithAggregatesFilter']
+    sourceBias: Union[_str, 'types.StringWithAggregatesFilter']
+    deviationScore: Union[_float, 'types.FloatWithAggregatesFilter']
     entities: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
@@ -8891,6 +8931,8 @@ class ArticleScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
     sentiment: Union[_str, 'types.StringWithAggregatesFilter']
     sentimentScore: Union[_float, 'types.FloatWithAggregatesFilter']
     biasLabel: Union[_str, 'types.StringWithAggregatesFilter']
+    sourceBias: Union[_str, 'types.StringWithAggregatesFilter']
+    deviationScore: Union[_float, 'types.FloatWithAggregatesFilter']
     entities: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
@@ -8911,6 +8953,8 @@ class ArticleScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
     sentiment: Union[_str, 'types.StringWithAggregatesFilter']
     sentimentScore: Union[_float, 'types.FloatWithAggregatesFilter']
     biasLabel: Union[_str, 'types.StringWithAggregatesFilter']
+    sourceBias: Union[_str, 'types.StringWithAggregatesFilter']
+    deviationScore: Union[_float, 'types.FloatWithAggregatesFilter']
     entities: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
@@ -8931,6 +8975,8 @@ class ArticleScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
     sentiment: Union[_str, 'types.StringWithAggregatesFilter']
     sentimentScore: Union[_float, 'types.FloatWithAggregatesFilter']
     biasLabel: Union[_str, 'types.StringWithAggregatesFilter']
+    sourceBias: Union[_str, 'types.StringWithAggregatesFilter']
+    deviationScore: Union[_float, 'types.FloatWithAggregatesFilter']
     entities: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
@@ -8947,6 +8993,8 @@ class ArticleGroupByOutput(TypedDict, total=False):
     sentiment: _str
     sentimentScore: _float
     biasLabel: _str
+    sourceBias: _str
+    deviationScore: _float
     entities: 'fields.Json'
     createdAt: datetime.datetime
     _sum: 'ArticleSumAggregateOutput'
@@ -8959,11 +9007,13 @@ class ArticleGroupByOutput(TypedDict, total=False):
 class ArticleAvgAggregateOutput(TypedDict, total=False):
     """Article output for aggregating averages"""
     sentimentScore: float
+    deviationScore: float
 
 
 class ArticleSumAggregateOutput(TypedDict, total=False):
     """Article output for aggregating sums"""
     sentimentScore: _float
+    deviationScore: _float
 
 
 class ArticleScalarAggregateOutput(TypedDict, total=False):
@@ -8978,6 +9028,8 @@ class ArticleScalarAggregateOutput(TypedDict, total=False):
     sentiment: _str
     sentimentScore: _float
     biasLabel: _str
+    sourceBias: _str
+    deviationScore: _float
     entities: 'fields.Json'
     createdAt: datetime.datetime
 
@@ -8998,6 +9050,8 @@ class ArticleMaxAggregateInput(TypedDict, total=False):
     sentiment: bool
     sentimentScore: bool
     biasLabel: bool
+    sourceBias: bool
+    deviationScore: bool
     entities: bool
     createdAt: bool
 
@@ -9014,6 +9068,8 @@ class ArticleMinAggregateInput(TypedDict, total=False):
     sentiment: bool
     sentimentScore: bool
     biasLabel: bool
+    sourceBias: bool
+    deviationScore: bool
     entities: bool
     createdAt: bool
 
@@ -9021,6 +9077,7 @@ class ArticleMinAggregateInput(TypedDict, total=False):
 class ArticleNumberAggregateInput(TypedDict, total=False):
     """Article input for aggregating numbers"""
     sentimentScore: bool
+    deviationScore: bool
 
 
 ArticleAvgAggregateInput = ArticleNumberAggregateInput
@@ -9040,6 +9097,8 @@ ArticleCountAggregateInput = TypedDict(
         'sentiment': bool,
         'sentimentScore': bool,
         'biasLabel': bool,
+        'sourceBias': bool,
+        'deviationScore': bool,
         'entities': bool,
         'createdAt': bool,
         '_all': bool,
@@ -9060,6 +9119,8 @@ ArticleCountAggregateOutput = TypedDict(
         'sentiment': int,
         'sentimentScore': int,
         'biasLabel': int,
+        'sourceBias': int,
+        'deviationScore': int,
         'entities': int,
         'createdAt': int,
         '_all': int,
@@ -9080,6 +9141,8 @@ ArticleKeys = Literal[
     'sentiment',
     'sentimentScore',
     'biasLabel',
+    'sourceBias',
+    'deviationScore',
     'entities',
     'createdAt',
 ]
@@ -9094,6 +9157,8 @@ ArticleScalarFieldKeys = Literal[
     'sentiment',
     'sentimentScore',
     'biasLabel',
+    'sourceBias',
+    'deviationScore',
     'entities',
     'createdAt',
 ]
@@ -9110,6 +9175,7 @@ class InsightOptionalCreateInput(TypedDict, total=False):
     id: _str
     searchId: _str
     search: 'SearchCreateNestedWithoutRelationsInput'
+    datasetMetrics: Optional['fields.Json']
     narrativeSummary: Optional[_str]
     leftWingSummary: Optional[_str]
     rightWingSummary: Optional[_str]
@@ -9137,6 +9203,7 @@ class InsightOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     """Optional arguments to the Insight create method, without relations"""
     id: _str
     searchId: _str
+    datasetMetrics: Optional['fields.Json']
     narrativeSummary: Optional[_str]
     leftWingSummary: Optional[_str]
     rightWingSummary: Optional[_str]
@@ -9194,6 +9261,7 @@ class InsightUpdateInput(TypedDict, total=False):
     validArticles: Union[AtomicIntInput, _int]
     duplicatesRemoved: Union[AtomicIntInput, _int]
     missingContent: Union[AtomicIntInput, _int]
+    datasetMetrics: Optional['fields.Json']
     narrativeSummary: Optional[_str]
     leftWingSummary: Optional[_str]
     rightWingSummary: Optional[_str]
@@ -9213,6 +9281,7 @@ class InsightUpdateManyMutationInput(TypedDict, total=False):
     validArticles: Union[AtomicIntInput, _int]
     duplicatesRemoved: Union[AtomicIntInput, _int]
     missingContent: Union[AtomicIntInput, _int]
+    datasetMetrics: Optional['fields.Json']
     narrativeSummary: Optional[_str]
     leftWingSummary: Optional[_str]
     rightWingSummary: Optional[_str]
@@ -9333,6 +9402,14 @@ _Insight_missingContent_OrderByInput = TypedDict(
     total=True
 )
 
+_Insight_datasetMetrics_OrderByInput = TypedDict(
+    '_Insight_datasetMetrics_OrderByInput',
+    {
+        'datasetMetrics': 'SortOrder',
+    },
+    total=True
+)
+
 _Insight_narrativeSummary_OrderByInput = TypedDict(
     '_Insight_narrativeSummary_OrderByInput',
     {
@@ -9410,6 +9487,7 @@ InsightOrderByInput = Union[
     '_Insight_validArticles_OrderByInput',
     '_Insight_duplicatesRemoved_OrderByInput',
     '_Insight_missingContent_OrderByInput',
+    '_Insight_datasetMetrics_OrderByInput',
     '_Insight_narrativeSummary_OrderByInput',
     '_Insight_leftWingSummary_OrderByInput',
     '_Insight_rightWingSummary_OrderByInput',
@@ -10218,6 +10296,7 @@ class InsightWhereInput(TypedDict, total=False):
     validArticles: Union[_int, 'types.IntFilter']
     duplicatesRemoved: Union[_int, 'types.IntFilter']
     missingContent: Union[_int, 'types.IntFilter']
+    datasetMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
     narrativeSummary: Union[None, _str, 'types.StringFilter']
     leftWingSummary: Union[None, _str, 'types.StringFilter']
     rightWingSummary: Union[None, _str, 'types.StringFilter']
@@ -10245,6 +10324,7 @@ class InsightWhereInputRecursive1(TypedDict, total=False):
     validArticles: Union[_int, 'types.IntFilter']
     duplicatesRemoved: Union[_int, 'types.IntFilter']
     missingContent: Union[_int, 'types.IntFilter']
+    datasetMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
     narrativeSummary: Union[None, _str, 'types.StringFilter']
     leftWingSummary: Union[None, _str, 'types.StringFilter']
     rightWingSummary: Union[None, _str, 'types.StringFilter']
@@ -10272,6 +10352,7 @@ class InsightWhereInputRecursive2(TypedDict, total=False):
     validArticles: Union[_int, 'types.IntFilter']
     duplicatesRemoved: Union[_int, 'types.IntFilter']
     missingContent: Union[_int, 'types.IntFilter']
+    datasetMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
     narrativeSummary: Union[None, _str, 'types.StringFilter']
     leftWingSummary: Union[None, _str, 'types.StringFilter']
     rightWingSummary: Union[None, _str, 'types.StringFilter']
@@ -10299,6 +10380,7 @@ class InsightWhereInputRecursive3(TypedDict, total=False):
     validArticles: Union[_int, 'types.IntFilter']
     duplicatesRemoved: Union[_int, 'types.IntFilter']
     missingContent: Union[_int, 'types.IntFilter']
+    datasetMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
     narrativeSummary: Union[None, _str, 'types.StringFilter']
     leftWingSummary: Union[None, _str, 'types.StringFilter']
     rightWingSummary: Union[None, _str, 'types.StringFilter']
@@ -10326,6 +10408,7 @@ class InsightWhereInputRecursive4(TypedDict, total=False):
     validArticles: Union[_int, 'types.IntFilter']
     duplicatesRemoved: Union[_int, 'types.IntFilter']
     missingContent: Union[_int, 'types.IntFilter']
+    datasetMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
     narrativeSummary: Union[None, _str, 'types.StringFilter']
     leftWingSummary: Union[None, _str, 'types.StringFilter']
     rightWingSummary: Union[None, _str, 'types.StringFilter']
@@ -10352,6 +10435,7 @@ class InsightScalarWhereWithAggregatesInput(TypedDict, total=False):
     validArticles: Union[_int, 'types.IntWithAggregatesFilter']
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
     missingContent: Union[_int, 'types.IntWithAggregatesFilter']
+    datasetMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     narrativeSummary: Union[_str, 'types.StringWithAggregatesFilter']
     leftWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
     rightWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
@@ -10376,6 +10460,7 @@ class InsightScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
     validArticles: Union[_int, 'types.IntWithAggregatesFilter']
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
     missingContent: Union[_int, 'types.IntWithAggregatesFilter']
+    datasetMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     narrativeSummary: Union[_str, 'types.StringWithAggregatesFilter']
     leftWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
     rightWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
@@ -10400,6 +10485,7 @@ class InsightScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
     validArticles: Union[_int, 'types.IntWithAggregatesFilter']
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
     missingContent: Union[_int, 'types.IntWithAggregatesFilter']
+    datasetMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     narrativeSummary: Union[_str, 'types.StringWithAggregatesFilter']
     leftWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
     rightWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
@@ -10424,6 +10510,7 @@ class InsightScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
     validArticles: Union[_int, 'types.IntWithAggregatesFilter']
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
     missingContent: Union[_int, 'types.IntWithAggregatesFilter']
+    datasetMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     narrativeSummary: Union[_str, 'types.StringWithAggregatesFilter']
     leftWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
     rightWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
@@ -10448,6 +10535,7 @@ class InsightScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
     validArticles: Union[_int, 'types.IntWithAggregatesFilter']
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
     missingContent: Union[_int, 'types.IntWithAggregatesFilter']
+    datasetMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     narrativeSummary: Union[_str, 'types.StringWithAggregatesFilter']
     leftWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
     rightWingSummary: Union[_str, 'types.StringWithAggregatesFilter']
@@ -10468,6 +10556,7 @@ class InsightGroupByOutput(TypedDict, total=False):
     validArticles: _int
     duplicatesRemoved: _int
     missingContent: _int
+    datasetMetrics: 'fields.Json'
     narrativeSummary: _str
     leftWingSummary: _str
     rightWingSummary: _str
@@ -10513,6 +10602,7 @@ class InsightScalarAggregateOutput(TypedDict, total=False):
     validArticles: _int
     duplicatesRemoved: _int
     missingContent: _int
+    datasetMetrics: 'fields.Json'
     narrativeSummary: _str
     leftWingSummary: _str
     rightWingSummary: _str
@@ -10537,6 +10627,7 @@ class InsightMaxAggregateInput(TypedDict, total=False):
     validArticles: bool
     duplicatesRemoved: bool
     missingContent: bool
+    datasetMetrics: bool
     narrativeSummary: bool
     leftWingSummary: bool
     rightWingSummary: bool
@@ -10557,6 +10648,7 @@ class InsightMinAggregateInput(TypedDict, total=False):
     validArticles: bool
     duplicatesRemoved: bool
     missingContent: bool
+    datasetMetrics: bool
     narrativeSummary: bool
     leftWingSummary: bool
     rightWingSummary: bool
@@ -10592,6 +10684,7 @@ InsightCountAggregateInput = TypedDict(
         'validArticles': bool,
         'duplicatesRemoved': bool,
         'missingContent': bool,
+        'datasetMetrics': bool,
         'narrativeSummary': bool,
         'leftWingSummary': bool,
         'rightWingSummary': bool,
@@ -10616,6 +10709,7 @@ InsightCountAggregateOutput = TypedDict(
         'validArticles': int,
         'duplicatesRemoved': int,
         'missingContent': int,
+        'datasetMetrics': int,
         'narrativeSummary': int,
         'leftWingSummary': int,
         'rightWingSummary': int,
@@ -10640,6 +10734,7 @@ InsightKeys = Literal[
     'validArticles',
     'duplicatesRemoved',
     'missingContent',
+    'datasetMetrics',
     'narrativeSummary',
     'leftWingSummary',
     'rightWingSummary',
@@ -10658,6 +10753,7 @@ InsightScalarFieldKeys = Literal[
     'validArticles',
     'duplicatesRemoved',
     'missingContent',
+    'datasetMetrics',
     'narrativeSummary',
     'leftWingSummary',
     'rightWingSummary',
