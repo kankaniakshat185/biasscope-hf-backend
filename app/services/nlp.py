@@ -198,11 +198,15 @@ def generate_narrative(articles):
             "You are an expert media analyst and political scientist. "
             "Your task is to write a highly professional, objective, and insightful 3-4 sentence narrative summary "
             "of the media's current coverage of a topic, based strictly on the provided article headlines, bias labels, and sentiments. "
-            "You MUST explicitly bound all claims. Begin your summary with 'Among the analyzed articles...' or 'Within this sample dataset...' "
-            "Do NOT make sweeping claims about the broader media ecosystem outside of this sample."
+            "You MUST explicitly bound all claims. Begin your summary with 'Among the analyzed articles...' or 'Within this sample dataset...' or 'Based on the retrieved sources...'. "
+            "NEVER use phrases like 'The media believes', 'The media agrees', 'Society believes', or make sweeping claims about the broader media ecosystem outside of this sample."
         )
         
-        user_prompt = f"Media Analysis Data:\nTotal Articles: {total}\nBias Breakdown: {left_count} Left, {center_count} Center, {right_count} Right.\nSentiment: {pos_count} Positive, {neg_count} Negative.\n\nSample Articles:\n{context_str}\n\nPlease generate the executive summary narrative. \n\nCRITICAL: You MUST explicitly cite the sources using natural phrasing, and you MUST wrap the source name in square brackets for parsing (Example: 'as reported by [indianexpress.com]' or 'according to [thehindu.com]'). Do not just drop brackets randomly at the end of sentences. Do NOT use numbers like [1]. Do NOT output any preambles."
+        small_sample_warning = ""
+        if total < 20:
+            small_sample_warning = f"\nWARNING: Only {total} articles were available for analysis. Conclusions MUST be explicitly interpreted as reflective of this small dataset rather than the broader media landscape."
+            
+        user_prompt = f"Media Analysis Data:\nTotal Articles: {total}\nBias Breakdown: {left_count} Left, {center_count} Center, {right_count} Right.\nSentiment: {pos_count} Positive, {neg_count} Negative.{small_sample_warning}\n\nSample Articles:\n{context_str}\n\nPlease generate the executive summary narrative. \n\nCRITICAL: You MUST explicitly cite the sources using natural phrasing, and you MUST wrap the source name in square brackets for parsing (Example: 'as reported by [indianexpress.com]' or 'according to [thehindu.com]'). Do not just drop brackets randomly at the end of sentences. Do NOT use numbers like [1]. Do NOT output any preambles."
         
         messages = [
             {"role": "system", "content": system_prompt},

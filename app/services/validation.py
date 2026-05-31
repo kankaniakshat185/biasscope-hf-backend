@@ -58,15 +58,52 @@ def validate_articles(articles):
     from app.services.nlp import extract_keywords
     top_keywords = extract_keywords(articles)
     
-    # Dataset Metrics
+    # Dataset Metrics (Geographic & Political Diversity)
+    countries = set()
+    us_domains = ["nytimes.com", "washingtonpost.com", "cnn.com", "msnbc.com", "foxnews.com", "nypost.com", "reuters.com", "apnews.com", "npr.org", "wsj.com", "bloomberg.com", "breitbart.com", "newsmax.com"]
+    uk_domains = ["bbc.co.uk", "bbc.com", "theguardian.com", "dailymail.co.uk", "dailymail.com", "ft.com"]
+    in_domains = ["thehindu.com", "indianexpress.com", "thewire.in", "ndtv.com", "republicworld.com", "opindia.com", "timesofindia"]
+    ca_domains = ["cbc.ca", "globalnews.ca"]
+    
+    for s in unique_sources:
+        s_low = s.lower()
+        if any(d in s_low for d in us_domains): countries.add("United States")
+        elif any(d in s_low for d in uk_domains): countries.add("United Kingdom")
+        elif any(d in s_low for d in in_domains): countries.add("India")
+        elif any(d in s_low for d in ca_domains): countries.add("Canada")
+        elif s_low.endswith(".au") or s_low.endswith(".au/"): countries.add("Australia")
+        elif s_low.endswith(".eu") or s_low.endswith(".eu/"): countries.add("European Union")
+        elif "aljazeera.com" in s_low: countries.add("Qatar")
+        else: countries.add("United States") # Default guess for unknown english domains
+        
+    countries_list = list(countries)
+    
+    # Diversity Quality Label
+    # High = >3 sources AND >1 country AND (no single ideology > 70%)
+    imbalance = {
+        "LEFT": round(bias_counts["LEFT"] / total * 100, 1) if total > 0 else 0,
+        "CENTER": round(bias_counts["CENTER"] / total * 100, 1) if total > 0 else 0,
+        "RIGHT": round(bias_counts["RIGHT"] / total * 100, 1) if total > 0 else 0
+    }
+    
+    max_ideology = max(imbalance.values()) if imbalance else 100
+    
+    if len(unique_sources) >= 5 and len(countries) >= 2 and max_ideology <= 60:
+        div_label = "High Diversity"
+    elif len(unique_sources) >= 3 and max_ideology <= 80:
+        div_label = "Moderate Diversity"
+    else:
+        div_label = "Low Diversity"
+
     dataset_metrics = {
         "source_diversity": len(unique_sources),
         "source_diversity_ratio": len(unique_sources) / total if total > 0 else 0,
-        "coverage_imbalance": {
-            "LEFT": round(bias_counts["LEFT"] / total * 100, 1) if total > 0 else 0,
-            "CENTER": round(bias_counts["CENTER"] / total * 100, 1) if total > 0 else 0,
-            "RIGHT": round(bias_counts["RIGHT"] / total * 100, 1) if total > 0 else 0
-        }
+        "coverage_imbalance": imbalance,
+        "geographic_diversity": {
+            "count": len(countries_list),
+            "countries": countries_list
+        },
+        "diversity_quality_label": div_label
     }
 
     return {

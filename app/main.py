@@ -94,20 +94,30 @@ async def create_search(
         mixed = ["foxnews.com", "cnn.com", "msnbc.com", "dailymail.co.uk", "dailymail.com", "nypost.com", "vice.com", "gizmodo.com"]
         low = ["breitbart.com", "infowars.com", "dailycaller.com", "wnd.com", "newsmax.com", "oann.com"]
         
+        cred_counts = {"High": 0, "Medium": 0, "Low": 0, "Unknown": 0}
         for a in valid_articles:
             s = a.get("source", "").lower()
             if any(h in s for h in high):
                 reliability_scores.append(0.95)
+                cred_counts["High"] += 1
             elif any(m in s for m in mixed):
                 reliability_scores.append(0.60)
+                cred_counts["Medium"] += 1
             elif any(l in s for l in low):
                 reliability_scores.append(0.20)
+                cred_counts["Low"] += 1
             else:
                 reliability_scores.append(0.50) # default unknown
+                cred_counts["Unknown"] += 1
         avg_confidence = sum(reliability_scores) / len(reliability_scores)
     else:
         avg_confidence = 0.0
-    drift_metrics = {"source_reliability_confidence": avg_confidence}
+        cred_counts = {"High": 0, "Medium": 0, "Low": 0, "Unknown": 0}
+        
+    drift_metrics = {
+        "source_reliability_confidence": avg_confidence,
+        "credibility_breakdown": cred_counts
+    }
 
     # 6. Store to DB
     search_record = await prisma.search.create(
@@ -287,12 +297,23 @@ async def analyze_url_endpoint(
     mixed = ["foxnews.com", "cnn.com", "msnbc.com", "dailymail.co.uk", "dailymail.com", "nypost.com", "vice.com", "gizmodo.com"]
     low = ["breitbart.com", "infowars.com", "dailycaller.com", "wnd.com", "newsmax.com", "oann.com"]
     
-    if any(h in s for h in high): conf = 0.95
-    elif any(m in s for m in mixed): conf = 0.60
-    elif any(l in s for l in low): conf = 0.20
-    else: conf = 0.50
+    if any(h in s for h in high): 
+        conf = 0.95
+        cat = "High"
+    elif any(m in s for m in mixed): 
+        conf = 0.60
+        cat = "Medium"
+    elif any(l in s for l in low): 
+        conf = 0.20
+        cat = "Low"
+    else: 
+        conf = 0.50
+        cat = "Unknown"
     
-    drift_metrics = {"source_reliability_confidence": conf}
+    drift_metrics = {
+        "source_reliability_confidence": conf,
+        "credibility_breakdown": {"High": int(cat=="High"), "Medium": int(cat=="Medium"), "Low": int(cat=="Low"), "Unknown": int(cat=="Unknown")}
+    }
 
     # 5. Store to DB
     search_record = await prisma.search.create(
@@ -418,17 +439,27 @@ async def analyze_upload_endpoint(
     mixed = ["foxnews.com", "cnn.com", "msnbc.com", "dailymail.co.uk", "dailymail.com", "nypost.com", "vice.com", "gizmodo.com"]
     low = ["breitbart.com", "infowars.com", "dailycaller.com", "wnd.com", "newsmax.com", "oann.com"]
     
+    cred_counts = {"High": 0, "Medium": 0, "Low": 0, "Unknown": 0}
     for a in analyzed_articles:
         s = a.get("source", "").lower()
-        if any(h in s for h in high): reliability_scores.append(0.95)
-        elif any(m in s for m in mixed): reliability_scores.append(0.60)
-        elif any(l in s for l in low): reliability_scores.append(0.20)
-        else: reliability_scores.append(0.50)
+        if any(h in s for h in high): 
+            reliability_scores.append(0.95)
+            cred_counts["High"] += 1
+        elif any(m in s for m in mixed): 
+            reliability_scores.append(0.60)
+            cred_counts["Medium"] += 1
+        elif any(l in s for l in low): 
+            reliability_scores.append(0.20)
+            cred_counts["Low"] += 1
+        else: 
+            reliability_scores.append(0.50)
+            cred_counts["Unknown"] += 1
         
     avg_conf = sum(reliability_scores) / len(reliability_scores) if reliability_scores else 0.0
     
     drift_metrics = {
-        "source_reliability_confidence": avg_conf
+        "source_reliability_confidence": avg_conf,
+        "credibility_breakdown": cred_counts
     }
 
     # 5. DB Persistence
