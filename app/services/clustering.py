@@ -186,16 +186,19 @@ async def run_event_detection(prisma):
         
         system_prompt = (
             "You are an expert news editor. Your job is to transform a cluster of claims into a concise, high-level Event Title and Summary. "
-            "The Title MUST NOT be a full sentence (e.g., 'SpaceX-Anthropic Compute Partnership', NOT 'SpaceX signed a partnership'). "
-            "The Summary should be a 1-sentence overview of the event. "
+            "RULES:\n"
+            "1. The Title MUST be 3-8 words and represent the underlying real-world story (e.g., 'SpaceX-Anthropic Compute Partnership').\n"
+            "2. The Title MUST NOT be a full sentence, and MUST NOT begin with 'Event related to'.\n"
+            "3. The Summary should be a 1-sentence overview of the event.\n"
             "Return ONLY valid JSON matching: "
             '{"event_title": "...", "event_summary": "..."}'
         )
         user_prompt = f"Cluster details:\n{json.dumps(payload)}"
         
         event_resp = call_llm(system_prompt, user_prompt)
-        event_title = f"Event related to: {cluster.claims[0].canonicalClaim[:30]}..."
-        event_summary = "Auto-generated event."
+        # Default fallback if LLM fails
+        event_title = "Unclassified Claim Cluster"
+        event_summary = "Auto-generated event cluster pending naming."
         
         if event_resp:
             try:
