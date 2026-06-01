@@ -101,6 +101,10 @@ class Prisma(AsyncBasePrisma):
     search: 'actions.SearchActions[models.Search]'
     article: 'actions.ArticleActions[models.Article]'
     insight: 'actions.InsightActions[models.Insight]'
+    claim: 'actions.ClaimActions[models.Claim]'
+    evidence: 'actions.EvidenceActions[models.Evidence]'
+    event: 'actions.EventActions[models.Event]'
+    claimcluster: 'actions.ClaimClusterActions[models.ClaimCluster]'
 
     __slots__ = (
         'user',
@@ -110,6 +114,10 @@ class Prisma(AsyncBasePrisma):
         'search',
         'article',
         'insight',
+        'claim',
+        'evidence',
+        'event',
+        'claimcluster',
     )
 
     def __init__(
@@ -135,7 +143,7 @@ class Prisma(AsyncBasePrisma):
             prisma_models=PRISMA_MODELS,
             packaged_schema_path=PACKAGED_SCHEMA_PATH,
             relational_field_mappings=RELATIONAL_FIELD_MAPPINGS,
-            preview_features=set([]),
+            preview_features=set(['postgresqlExtensions']),
             active_provider='postgresql',
             default_datasource_name='db',
         )
@@ -147,6 +155,10 @@ class Prisma(AsyncBasePrisma):
         self.search = actions.SearchActions[models.Search](self, models.Search)
         self.article = actions.ArticleActions[models.Article](self, models.Article)
         self.insight = actions.InsightActions[models.Insight](self, models.Insight)
+        self.claim = actions.ClaimActions[models.Claim](self, models.Claim)
+        self.evidence = actions.EvidenceActions[models.Evidence](self, models.Evidence)
+        self.event = actions.EventActions[models.Event](self, models.Event)
+        self.claimcluster = actions.ClaimClusterActions[models.ClaimCluster](self, models.ClaimCluster)
 
         if auto_register:
             register(self)
@@ -304,6 +316,10 @@ class Batch:
     search: 'SearchBatchActions'
     article: 'ArticleBatchActions'
     insight: 'InsightBatchActions'
+    claim: 'ClaimBatchActions'
+    evidence: 'EvidenceBatchActions'
+    event: 'EventBatchActions'
+    claimcluster: 'ClaimClusterBatchActions'
 
     def __init__(self, client: Prisma) -> None:
         self.__client = client
@@ -316,6 +332,10 @@ class Batch:
         self.search = SearchBatchActions(self)
         self.article = ArticleBatchActions(self)
         self.insight = InsightBatchActions(self)
+        self.claim = ClaimBatchActions(self)
+        self.evidence = EvidenceBatchActions(self)
+        self.event = EventBatchActions(self)
+        self.claimcluster = ClaimClusterBatchActions(self)
 
     def _add(self, **kwargs: Any) -> None:
         builder = QueryBuilder(
@@ -1139,6 +1159,450 @@ class InsightBatchActions:
         self._batcher._add(
             method='delete_many',
             model=models.Insight,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+
+
+
+# NOTE: some arguments are meaningless in this context but are included
+# for completeness sake
+class ClaimBatchActions:
+    def __init__(self, batcher: Batch) -> None:
+        self._batcher = batcher
+
+    def create(
+        self,
+        data: types.ClaimCreateInput,
+        include: Optional[types.ClaimInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='create',
+            model=models.Claim,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+
+    def create_many(
+        self,
+        data: List[types.ClaimCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> None:
+        if skip_duplicates and self._batcher._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._batcher._active_provider, 'create_many_skip_duplicates')
+
+        self._batcher._add(
+            method='create_many',
+            model=models.Claim,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+
+    def delete(
+        self,
+        where: types.ClaimWhereUniqueInput,
+        include: Optional[types.ClaimInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete',
+            model=models.Claim,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def update(
+        self,
+        data: types.ClaimUpdateInput,
+        where: types.ClaimWhereUniqueInput,
+        include: Optional[types.ClaimInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='update',
+            model=models.Claim,
+            arguments={
+                'data': data,
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def upsert(
+        self,
+        where: types.ClaimWhereUniqueInput,
+        data: types.ClaimUpsertInput,
+        include: Optional[types.ClaimInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='upsert',
+            model=models.Claim,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+
+    def update_many(
+        self,
+        data: types.ClaimUpdateManyMutationInput,
+        where: types.ClaimWhereInput,
+    ) -> None:
+        self._batcher._add(
+            method='update_many',
+            model=models.Claim,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+
+    def delete_many(
+        self,
+        where: Optional[types.ClaimWhereInput] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete_many',
+            model=models.Claim,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+
+
+
+# NOTE: some arguments are meaningless in this context but are included
+# for completeness sake
+class EvidenceBatchActions:
+    def __init__(self, batcher: Batch) -> None:
+        self._batcher = batcher
+
+    def create(
+        self,
+        data: types.EvidenceCreateInput,
+        include: Optional[types.EvidenceInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='create',
+            model=models.Evidence,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+
+    def create_many(
+        self,
+        data: List[types.EvidenceCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> None:
+        if skip_duplicates and self._batcher._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._batcher._active_provider, 'create_many_skip_duplicates')
+
+        self._batcher._add(
+            method='create_many',
+            model=models.Evidence,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+
+    def delete(
+        self,
+        where: types.EvidenceWhereUniqueInput,
+        include: Optional[types.EvidenceInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete',
+            model=models.Evidence,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def update(
+        self,
+        data: types.EvidenceUpdateInput,
+        where: types.EvidenceWhereUniqueInput,
+        include: Optional[types.EvidenceInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='update',
+            model=models.Evidence,
+            arguments={
+                'data': data,
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def upsert(
+        self,
+        where: types.EvidenceWhereUniqueInput,
+        data: types.EvidenceUpsertInput,
+        include: Optional[types.EvidenceInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='upsert',
+            model=models.Evidence,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+
+    def update_many(
+        self,
+        data: types.EvidenceUpdateManyMutationInput,
+        where: types.EvidenceWhereInput,
+    ) -> None:
+        self._batcher._add(
+            method='update_many',
+            model=models.Evidence,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+
+    def delete_many(
+        self,
+        where: Optional[types.EvidenceWhereInput] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete_many',
+            model=models.Evidence,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+
+
+
+# NOTE: some arguments are meaningless in this context but are included
+# for completeness sake
+class EventBatchActions:
+    def __init__(self, batcher: Batch) -> None:
+        self._batcher = batcher
+
+    def create(
+        self,
+        data: types.EventCreateInput,
+        include: Optional[types.EventInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='create',
+            model=models.Event,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+
+    def create_many(
+        self,
+        data: List[types.EventCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> None:
+        if skip_duplicates and self._batcher._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._batcher._active_provider, 'create_many_skip_duplicates')
+
+        self._batcher._add(
+            method='create_many',
+            model=models.Event,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+
+    def delete(
+        self,
+        where: types.EventWhereUniqueInput,
+        include: Optional[types.EventInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete',
+            model=models.Event,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def update(
+        self,
+        data: types.EventUpdateInput,
+        where: types.EventWhereUniqueInput,
+        include: Optional[types.EventInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='update',
+            model=models.Event,
+            arguments={
+                'data': data,
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def upsert(
+        self,
+        where: types.EventWhereUniqueInput,
+        data: types.EventUpsertInput,
+        include: Optional[types.EventInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='upsert',
+            model=models.Event,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+
+    def update_many(
+        self,
+        data: types.EventUpdateManyMutationInput,
+        where: types.EventWhereInput,
+    ) -> None:
+        self._batcher._add(
+            method='update_many',
+            model=models.Event,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+
+    def delete_many(
+        self,
+        where: Optional[types.EventWhereInput] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete_many',
+            model=models.Event,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+
+
+
+# NOTE: some arguments are meaningless in this context but are included
+# for completeness sake
+class ClaimClusterBatchActions:
+    def __init__(self, batcher: Batch) -> None:
+        self._batcher = batcher
+
+    def create(
+        self,
+        data: types.ClaimClusterCreateInput,
+        include: Optional[types.ClaimClusterInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='create',
+            model=models.ClaimCluster,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+
+    def create_many(
+        self,
+        data: List[types.ClaimClusterCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> None:
+        if skip_duplicates and self._batcher._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._batcher._active_provider, 'create_many_skip_duplicates')
+
+        self._batcher._add(
+            method='create_many',
+            model=models.ClaimCluster,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+
+    def delete(
+        self,
+        where: types.ClaimClusterWhereUniqueInput,
+        include: Optional[types.ClaimClusterInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete',
+            model=models.ClaimCluster,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def update(
+        self,
+        data: types.ClaimClusterUpdateInput,
+        where: types.ClaimClusterWhereUniqueInput,
+        include: Optional[types.ClaimClusterInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='update',
+            model=models.ClaimCluster,
+            arguments={
+                'data': data,
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def upsert(
+        self,
+        where: types.ClaimClusterWhereUniqueInput,
+        data: types.ClaimClusterUpsertInput,
+        include: Optional[types.ClaimClusterInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='upsert',
+            model=models.ClaimCluster,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+
+    def update_many(
+        self,
+        data: types.ClaimClusterUpdateManyMutationInput,
+        where: types.ClaimClusterWhereInput,
+    ) -> None:
+        self._batcher._add(
+            method='update_many',
+            model=models.ClaimCluster,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+
+    def delete_many(
+        self,
+        where: Optional[types.ClaimClusterWhereInput] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete_many',
+            model=models.ClaimCluster,
             arguments={'where': where},
             root_selection=['count'],
         )

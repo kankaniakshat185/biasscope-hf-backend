@@ -2136,6 +2136,434 @@ class FindManyInsightArgsFromUserRecursive4(TypedDict, total=False):
     cursor: 'InsightWhereUniqueInput'
     distinct: List['InsightScalarFieldKeys']
     
+    
+
+class ClaimIncludeFromUser(TypedDict, total=False):
+    """Relational arguments for User"""
+    cluster: Union[bool, 'ClaimClusterArgsFromUserRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromUserRecursive1']
+
+
+class ClaimIncludeFromUserRecursive1(TypedDict, total=False):
+    """Relational arguments for User"""
+    cluster: Union[bool, 'ClaimClusterArgsFromUserRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromUserRecursive2']
+
+
+class ClaimIncludeFromUserRecursive2(TypedDict, total=False):
+    """Relational arguments for User"""
+    cluster: Union[bool, 'ClaimClusterArgsFromUserRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromUserRecursive3']
+
+
+class ClaimIncludeFromUserRecursive3(TypedDict, total=False):
+    """Relational arguments for User"""
+    cluster: Union[bool, 'ClaimClusterArgsFromUserRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromUserRecursive4']
+
+
+class ClaimIncludeFromUserRecursive4(TypedDict, total=False):
+    """Relational arguments for User"""
+
+    
+
+class ClaimArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    
+    
+
+class FindManyClaimArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromUser(TypedDict, total=False):
+    """Relational arguments for User"""
+    claim: Union[bool, 'ClaimArgsFromUserRecursive1']
+
+
+class EvidenceIncludeFromUserRecursive1(TypedDict, total=False):
+    """Relational arguments for User"""
+    claim: Union[bool, 'ClaimArgsFromUserRecursive2']
+
+
+class EvidenceIncludeFromUserRecursive2(TypedDict, total=False):
+    """Relational arguments for User"""
+    claim: Union[bool, 'ClaimArgsFromUserRecursive3']
+
+
+class EvidenceIncludeFromUserRecursive3(TypedDict, total=False):
+    """Relational arguments for User"""
+    claim: Union[bool, 'ClaimArgsFromUserRecursive4']
+
+
+class EvidenceIncludeFromUserRecursive4(TypedDict, total=False):
+    """Relational arguments for User"""
+
+    
+
+class EvidenceArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    
+    
+
+class FindManyEvidenceArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromUser(TypedDict, total=False):
+    """Relational arguments for User"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromUserRecursive1']
+
+
+class EventIncludeFromUserRecursive1(TypedDict, total=False):
+    """Relational arguments for User"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromUserRecursive2']
+
+
+class EventIncludeFromUserRecursive2(TypedDict, total=False):
+    """Relational arguments for User"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromUserRecursive3']
+
+
+class EventIncludeFromUserRecursive3(TypedDict, total=False):
+    """Relational arguments for User"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromUserRecursive4']
+
+
+class EventIncludeFromUserRecursive4(TypedDict, total=False):
+    """Relational arguments for User"""
+
+    
+
+class EventArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    
+    
+
+class FindManyEventArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromUser(TypedDict, total=False):
+    """Relational arguments for User"""
+    event: Union[bool, 'EventArgsFromUserRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromUserRecursive1']
+
+
+class ClaimClusterIncludeFromUserRecursive1(TypedDict, total=False):
+    """Relational arguments for User"""
+    event: Union[bool, 'EventArgsFromUserRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromUserRecursive2']
+
+
+class ClaimClusterIncludeFromUserRecursive2(TypedDict, total=False):
+    """Relational arguments for User"""
+    event: Union[bool, 'EventArgsFromUserRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromUserRecursive3']
+
+
+class ClaimClusterIncludeFromUserRecursive3(TypedDict, total=False):
+    """Relational arguments for User"""
+    event: Union[bool, 'EventArgsFromUserRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromUserRecursive4']
+
+
+class ClaimClusterIncludeFromUserRecursive4(TypedDict, total=False):
+    """Relational arguments for User"""
+
+    
+
+class ClaimClusterArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    
+    
+
+class FindManyClaimClusterArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
 
 
 FindManyUserArgs = FindManyUserArgsFromUser
@@ -3444,6 +3872,434 @@ class FindManyInsightArgsFromSessionRecursive4(TypedDict, total=False):
     where: 'InsightWhereInput'
     cursor: 'InsightWhereUniqueInput'
     distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromSession(TypedDict, total=False):
+    """Relational arguments for Session"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSessionRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSessionRecursive1']
+
+
+class ClaimIncludeFromSessionRecursive1(TypedDict, total=False):
+    """Relational arguments for Session"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSessionRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSessionRecursive2']
+
+
+class ClaimIncludeFromSessionRecursive2(TypedDict, total=False):
+    """Relational arguments for Session"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSessionRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSessionRecursive3']
+
+
+class ClaimIncludeFromSessionRecursive3(TypedDict, total=False):
+    """Relational arguments for Session"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSessionRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSessionRecursive4']
+
+
+class ClaimIncludeFromSessionRecursive4(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+    
+
+class ClaimArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    
+    
+
+class FindManyClaimArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromSession(TypedDict, total=False):
+    """Relational arguments for Session"""
+    claim: Union[bool, 'ClaimArgsFromSessionRecursive1']
+
+
+class EvidenceIncludeFromSessionRecursive1(TypedDict, total=False):
+    """Relational arguments for Session"""
+    claim: Union[bool, 'ClaimArgsFromSessionRecursive2']
+
+
+class EvidenceIncludeFromSessionRecursive2(TypedDict, total=False):
+    """Relational arguments for Session"""
+    claim: Union[bool, 'ClaimArgsFromSessionRecursive3']
+
+
+class EvidenceIncludeFromSessionRecursive3(TypedDict, total=False):
+    """Relational arguments for Session"""
+    claim: Union[bool, 'ClaimArgsFromSessionRecursive4']
+
+
+class EvidenceIncludeFromSessionRecursive4(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+    
+
+class EvidenceArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    
+    
+
+class FindManyEvidenceArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromSession(TypedDict, total=False):
+    """Relational arguments for Session"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSessionRecursive1']
+
+
+class EventIncludeFromSessionRecursive1(TypedDict, total=False):
+    """Relational arguments for Session"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSessionRecursive2']
+
+
+class EventIncludeFromSessionRecursive2(TypedDict, total=False):
+    """Relational arguments for Session"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSessionRecursive3']
+
+
+class EventIncludeFromSessionRecursive3(TypedDict, total=False):
+    """Relational arguments for Session"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSessionRecursive4']
+
+
+class EventIncludeFromSessionRecursive4(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+    
+
+class EventArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    
+    
+
+class FindManyEventArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromSession(TypedDict, total=False):
+    """Relational arguments for Session"""
+    event: Union[bool, 'EventArgsFromSessionRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromSessionRecursive1']
+
+
+class ClaimClusterIncludeFromSessionRecursive1(TypedDict, total=False):
+    """Relational arguments for Session"""
+    event: Union[bool, 'EventArgsFromSessionRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromSessionRecursive2']
+
+
+class ClaimClusterIncludeFromSessionRecursive2(TypedDict, total=False):
+    """Relational arguments for Session"""
+    event: Union[bool, 'EventArgsFromSessionRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromSessionRecursive3']
+
+
+class ClaimClusterIncludeFromSessionRecursive3(TypedDict, total=False):
+    """Relational arguments for Session"""
+    event: Union[bool, 'EventArgsFromSessionRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromSessionRecursive4']
+
+
+class ClaimClusterIncludeFromSessionRecursive4(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+    
+
+class ClaimClusterArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    
+    
+
+class FindManyClaimClusterArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
     
 
 
@@ -4812,6 +5668,434 @@ class FindManyInsightArgsFromAccountRecursive4(TypedDict, total=False):
     cursor: 'InsightWhereUniqueInput'
     distinct: List['InsightScalarFieldKeys']
     
+    
+
+class ClaimIncludeFromAccount(TypedDict, total=False):
+    """Relational arguments for Account"""
+    cluster: Union[bool, 'ClaimClusterArgsFromAccountRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromAccountRecursive1']
+
+
+class ClaimIncludeFromAccountRecursive1(TypedDict, total=False):
+    """Relational arguments for Account"""
+    cluster: Union[bool, 'ClaimClusterArgsFromAccountRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromAccountRecursive2']
+
+
+class ClaimIncludeFromAccountRecursive2(TypedDict, total=False):
+    """Relational arguments for Account"""
+    cluster: Union[bool, 'ClaimClusterArgsFromAccountRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromAccountRecursive3']
+
+
+class ClaimIncludeFromAccountRecursive3(TypedDict, total=False):
+    """Relational arguments for Account"""
+    cluster: Union[bool, 'ClaimClusterArgsFromAccountRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromAccountRecursive4']
+
+
+class ClaimIncludeFromAccountRecursive4(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+    
+
+class ClaimArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    
+    
+
+class FindManyClaimArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromAccount(TypedDict, total=False):
+    """Relational arguments for Account"""
+    claim: Union[bool, 'ClaimArgsFromAccountRecursive1']
+
+
+class EvidenceIncludeFromAccountRecursive1(TypedDict, total=False):
+    """Relational arguments for Account"""
+    claim: Union[bool, 'ClaimArgsFromAccountRecursive2']
+
+
+class EvidenceIncludeFromAccountRecursive2(TypedDict, total=False):
+    """Relational arguments for Account"""
+    claim: Union[bool, 'ClaimArgsFromAccountRecursive3']
+
+
+class EvidenceIncludeFromAccountRecursive3(TypedDict, total=False):
+    """Relational arguments for Account"""
+    claim: Union[bool, 'ClaimArgsFromAccountRecursive4']
+
+
+class EvidenceIncludeFromAccountRecursive4(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+    
+
+class EvidenceArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    
+    
+
+class FindManyEvidenceArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromAccount(TypedDict, total=False):
+    """Relational arguments for Account"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromAccountRecursive1']
+
+
+class EventIncludeFromAccountRecursive1(TypedDict, total=False):
+    """Relational arguments for Account"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromAccountRecursive2']
+
+
+class EventIncludeFromAccountRecursive2(TypedDict, total=False):
+    """Relational arguments for Account"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromAccountRecursive3']
+
+
+class EventIncludeFromAccountRecursive3(TypedDict, total=False):
+    """Relational arguments for Account"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromAccountRecursive4']
+
+
+class EventIncludeFromAccountRecursive4(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+    
+
+class EventArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    
+    
+
+class FindManyEventArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromAccount(TypedDict, total=False):
+    """Relational arguments for Account"""
+    event: Union[bool, 'EventArgsFromAccountRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromAccountRecursive1']
+
+
+class ClaimClusterIncludeFromAccountRecursive1(TypedDict, total=False):
+    """Relational arguments for Account"""
+    event: Union[bool, 'EventArgsFromAccountRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromAccountRecursive2']
+
+
+class ClaimClusterIncludeFromAccountRecursive2(TypedDict, total=False):
+    """Relational arguments for Account"""
+    event: Union[bool, 'EventArgsFromAccountRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromAccountRecursive3']
+
+
+class ClaimClusterIncludeFromAccountRecursive3(TypedDict, total=False):
+    """Relational arguments for Account"""
+    event: Union[bool, 'EventArgsFromAccountRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromAccountRecursive4']
+
+
+class ClaimClusterIncludeFromAccountRecursive4(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+    
+
+class ClaimClusterArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    
+    
+
+class FindManyClaimClusterArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
 
 
 FindManyAccountArgs = FindManyAccountArgsFromAccount
@@ -6177,6 +7461,434 @@ class FindManyInsightArgsFromVerificationRecursive4(TypedDict, total=False):
     cursor: 'InsightWhereUniqueInput'
     distinct: List['InsightScalarFieldKeys']
     
+    
+
+class ClaimIncludeFromVerification(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    cluster: Union[bool, 'ClaimClusterArgsFromVerificationRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromVerificationRecursive1']
+
+
+class ClaimIncludeFromVerificationRecursive1(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    cluster: Union[bool, 'ClaimClusterArgsFromVerificationRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromVerificationRecursive2']
+
+
+class ClaimIncludeFromVerificationRecursive2(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    cluster: Union[bool, 'ClaimClusterArgsFromVerificationRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromVerificationRecursive3']
+
+
+class ClaimIncludeFromVerificationRecursive3(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    cluster: Union[bool, 'ClaimClusterArgsFromVerificationRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromVerificationRecursive4']
+
+
+class ClaimIncludeFromVerificationRecursive4(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+    
+
+class ClaimArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    
+    
+
+class FindManyClaimArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromVerification(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    claim: Union[bool, 'ClaimArgsFromVerificationRecursive1']
+
+
+class EvidenceIncludeFromVerificationRecursive1(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    claim: Union[bool, 'ClaimArgsFromVerificationRecursive2']
+
+
+class EvidenceIncludeFromVerificationRecursive2(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    claim: Union[bool, 'ClaimArgsFromVerificationRecursive3']
+
+
+class EvidenceIncludeFromVerificationRecursive3(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    claim: Union[bool, 'ClaimArgsFromVerificationRecursive4']
+
+
+class EvidenceIncludeFromVerificationRecursive4(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+    
+
+class EvidenceArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    
+    
+
+class FindManyEvidenceArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromVerification(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromVerificationRecursive1']
+
+
+class EventIncludeFromVerificationRecursive1(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromVerificationRecursive2']
+
+
+class EventIncludeFromVerificationRecursive2(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromVerificationRecursive3']
+
+
+class EventIncludeFromVerificationRecursive3(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromVerificationRecursive4']
+
+
+class EventIncludeFromVerificationRecursive4(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+    
+
+class EventArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    
+    
+
+class FindManyEventArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromVerification(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    event: Union[bool, 'EventArgsFromVerificationRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromVerificationRecursive1']
+
+
+class ClaimClusterIncludeFromVerificationRecursive1(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    event: Union[bool, 'EventArgsFromVerificationRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromVerificationRecursive2']
+
+
+class ClaimClusterIncludeFromVerificationRecursive2(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    event: Union[bool, 'EventArgsFromVerificationRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromVerificationRecursive3']
+
+
+class ClaimClusterIncludeFromVerificationRecursive3(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    event: Union[bool, 'EventArgsFromVerificationRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromVerificationRecursive4']
+
+
+class ClaimClusterIncludeFromVerificationRecursive4(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+    
+
+class ClaimClusterArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    
+    
+
+class FindManyClaimClusterArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
 
 
 FindManyVerificationArgs = FindManyVerificationArgsFromVerification
@@ -7401,6 +9113,434 @@ class FindManyInsightArgsFromSearchRecursive4(TypedDict, total=False):
     where: 'InsightWhereInput'
     cursor: 'InsightWhereUniqueInput'
     distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromSearch(TypedDict, total=False):
+    """Relational arguments for Search"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSearchRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSearchRecursive1']
+
+
+class ClaimIncludeFromSearchRecursive1(TypedDict, total=False):
+    """Relational arguments for Search"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSearchRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSearchRecursive2']
+
+
+class ClaimIncludeFromSearchRecursive2(TypedDict, total=False):
+    """Relational arguments for Search"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSearchRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSearchRecursive3']
+
+
+class ClaimIncludeFromSearchRecursive3(TypedDict, total=False):
+    """Relational arguments for Search"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSearchRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSearchRecursive4']
+
+
+class ClaimIncludeFromSearchRecursive4(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+    
+
+class ClaimArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    
+    
+
+class FindManyClaimArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromSearch(TypedDict, total=False):
+    """Relational arguments for Search"""
+    claim: Union[bool, 'ClaimArgsFromSearchRecursive1']
+
+
+class EvidenceIncludeFromSearchRecursive1(TypedDict, total=False):
+    """Relational arguments for Search"""
+    claim: Union[bool, 'ClaimArgsFromSearchRecursive2']
+
+
+class EvidenceIncludeFromSearchRecursive2(TypedDict, total=False):
+    """Relational arguments for Search"""
+    claim: Union[bool, 'ClaimArgsFromSearchRecursive3']
+
+
+class EvidenceIncludeFromSearchRecursive3(TypedDict, total=False):
+    """Relational arguments for Search"""
+    claim: Union[bool, 'ClaimArgsFromSearchRecursive4']
+
+
+class EvidenceIncludeFromSearchRecursive4(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+    
+
+class EvidenceArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    
+    
+
+class FindManyEvidenceArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromSearch(TypedDict, total=False):
+    """Relational arguments for Search"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSearchRecursive1']
+
+
+class EventIncludeFromSearchRecursive1(TypedDict, total=False):
+    """Relational arguments for Search"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSearchRecursive2']
+
+
+class EventIncludeFromSearchRecursive2(TypedDict, total=False):
+    """Relational arguments for Search"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSearchRecursive3']
+
+
+class EventIncludeFromSearchRecursive3(TypedDict, total=False):
+    """Relational arguments for Search"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSearchRecursive4']
+
+
+class EventIncludeFromSearchRecursive4(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+    
+
+class EventArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    
+    
+
+class FindManyEventArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromSearch(TypedDict, total=False):
+    """Relational arguments for Search"""
+    event: Union[bool, 'EventArgsFromSearchRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromSearchRecursive1']
+
+
+class ClaimClusterIncludeFromSearchRecursive1(TypedDict, total=False):
+    """Relational arguments for Search"""
+    event: Union[bool, 'EventArgsFromSearchRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromSearchRecursive2']
+
+
+class ClaimClusterIncludeFromSearchRecursive2(TypedDict, total=False):
+    """Relational arguments for Search"""
+    event: Union[bool, 'EventArgsFromSearchRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromSearchRecursive3']
+
+
+class ClaimClusterIncludeFromSearchRecursive3(TypedDict, total=False):
+    """Relational arguments for Search"""
+    event: Union[bool, 'EventArgsFromSearchRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromSearchRecursive4']
+
+
+class ClaimClusterIncludeFromSearchRecursive4(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+    
+
+class ClaimClusterArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    
+    
+
+class FindManyClaimClusterArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
     
 
 
@@ -8741,6 +10881,434 @@ class FindManyInsightArgsFromArticleRecursive4(TypedDict, total=False):
     where: 'InsightWhereInput'
     cursor: 'InsightWhereUniqueInput'
     distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromArticle(TypedDict, total=False):
+    """Relational arguments for Article"""
+    cluster: Union[bool, 'ClaimClusterArgsFromArticleRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromArticleRecursive1']
+
+
+class ClaimIncludeFromArticleRecursive1(TypedDict, total=False):
+    """Relational arguments for Article"""
+    cluster: Union[bool, 'ClaimClusterArgsFromArticleRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromArticleRecursive2']
+
+
+class ClaimIncludeFromArticleRecursive2(TypedDict, total=False):
+    """Relational arguments for Article"""
+    cluster: Union[bool, 'ClaimClusterArgsFromArticleRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromArticleRecursive3']
+
+
+class ClaimIncludeFromArticleRecursive3(TypedDict, total=False):
+    """Relational arguments for Article"""
+    cluster: Union[bool, 'ClaimClusterArgsFromArticleRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromArticleRecursive4']
+
+
+class ClaimIncludeFromArticleRecursive4(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+    
+
+class ClaimArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    
+    
+
+class FindManyClaimArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromArticle(TypedDict, total=False):
+    """Relational arguments for Article"""
+    claim: Union[bool, 'ClaimArgsFromArticleRecursive1']
+
+
+class EvidenceIncludeFromArticleRecursive1(TypedDict, total=False):
+    """Relational arguments for Article"""
+    claim: Union[bool, 'ClaimArgsFromArticleRecursive2']
+
+
+class EvidenceIncludeFromArticleRecursive2(TypedDict, total=False):
+    """Relational arguments for Article"""
+    claim: Union[bool, 'ClaimArgsFromArticleRecursive3']
+
+
+class EvidenceIncludeFromArticleRecursive3(TypedDict, total=False):
+    """Relational arguments for Article"""
+    claim: Union[bool, 'ClaimArgsFromArticleRecursive4']
+
+
+class EvidenceIncludeFromArticleRecursive4(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+    
+
+class EvidenceArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    
+    
+
+class FindManyEvidenceArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromArticle(TypedDict, total=False):
+    """Relational arguments for Article"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromArticleRecursive1']
+
+
+class EventIncludeFromArticleRecursive1(TypedDict, total=False):
+    """Relational arguments for Article"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromArticleRecursive2']
+
+
+class EventIncludeFromArticleRecursive2(TypedDict, total=False):
+    """Relational arguments for Article"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromArticleRecursive3']
+
+
+class EventIncludeFromArticleRecursive3(TypedDict, total=False):
+    """Relational arguments for Article"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromArticleRecursive4']
+
+
+class EventIncludeFromArticleRecursive4(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+    
+
+class EventArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    
+    
+
+class FindManyEventArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromArticle(TypedDict, total=False):
+    """Relational arguments for Article"""
+    event: Union[bool, 'EventArgsFromArticleRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromArticleRecursive1']
+
+
+class ClaimClusterIncludeFromArticleRecursive1(TypedDict, total=False):
+    """Relational arguments for Article"""
+    event: Union[bool, 'EventArgsFromArticleRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromArticleRecursive2']
+
+
+class ClaimClusterIncludeFromArticleRecursive2(TypedDict, total=False):
+    """Relational arguments for Article"""
+    event: Union[bool, 'EventArgsFromArticleRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromArticleRecursive3']
+
+
+class ClaimClusterIncludeFromArticleRecursive3(TypedDict, total=False):
+    """Relational arguments for Article"""
+    event: Union[bool, 'EventArgsFromArticleRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromArticleRecursive4']
+
+
+class ClaimClusterIncludeFromArticleRecursive4(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+    
+
+class ClaimClusterArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    
+    
+
+class FindManyClaimClusterArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
     
 
 
@@ -10275,6 +12843,434 @@ class FindManyInsightArgsFromInsightRecursive4(TypedDict, total=False):
     cursor: 'InsightWhereUniqueInput'
     distinct: List['InsightScalarFieldKeys']
     
+    
+
+class ClaimIncludeFromInsight(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    cluster: Union[bool, 'ClaimClusterArgsFromInsightRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromInsightRecursive1']
+
+
+class ClaimIncludeFromInsightRecursive1(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    cluster: Union[bool, 'ClaimClusterArgsFromInsightRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromInsightRecursive2']
+
+
+class ClaimIncludeFromInsightRecursive2(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    cluster: Union[bool, 'ClaimClusterArgsFromInsightRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromInsightRecursive3']
+
+
+class ClaimIncludeFromInsightRecursive3(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    cluster: Union[bool, 'ClaimClusterArgsFromInsightRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromInsightRecursive4']
+
+
+class ClaimIncludeFromInsightRecursive4(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+    
+
+class ClaimArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    
+    
+
+class FindManyClaimArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromInsight(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    claim: Union[bool, 'ClaimArgsFromInsightRecursive1']
+
+
+class EvidenceIncludeFromInsightRecursive1(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    claim: Union[bool, 'ClaimArgsFromInsightRecursive2']
+
+
+class EvidenceIncludeFromInsightRecursive2(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    claim: Union[bool, 'ClaimArgsFromInsightRecursive3']
+
+
+class EvidenceIncludeFromInsightRecursive3(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    claim: Union[bool, 'ClaimArgsFromInsightRecursive4']
+
+
+class EvidenceIncludeFromInsightRecursive4(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+    
+
+class EvidenceArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    
+    
+
+class FindManyEvidenceArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromInsight(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromInsightRecursive1']
+
+
+class EventIncludeFromInsightRecursive1(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromInsightRecursive2']
+
+
+class EventIncludeFromInsightRecursive2(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromInsightRecursive3']
+
+
+class EventIncludeFromInsightRecursive3(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromInsightRecursive4']
+
+
+class EventIncludeFromInsightRecursive4(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+    
+
+class EventArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    
+    
+
+class FindManyEventArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromInsight(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    event: Union[bool, 'EventArgsFromInsightRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromInsightRecursive1']
+
+
+class ClaimClusterIncludeFromInsightRecursive1(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    event: Union[bool, 'EventArgsFromInsightRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromInsightRecursive2']
+
+
+class ClaimClusterIncludeFromInsightRecursive2(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    event: Union[bool, 'EventArgsFromInsightRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromInsightRecursive3']
+
+
+class ClaimClusterIncludeFromInsightRecursive3(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    event: Union[bool, 'EventArgsFromInsightRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromInsightRecursive4']
+
+
+class ClaimClusterIncludeFromInsightRecursive4(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+    
+
+class ClaimClusterArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    
+    
+
+class FindManyClaimClusterArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
 
 
 FindManyInsightArgs = FindManyInsightArgsFromInsight
@@ -10765,6 +13761,6647 @@ InsightScalarFieldKeysT = TypeVar('InsightScalarFieldKeysT', bound=InsightScalar
 
 InsightRelationalFieldKeys = Literal[
         'search',
+    ]
+
+# Claim types
+
+class ClaimOptionalCreateInput(TypedDict, total=False):
+    """Optional arguments to the Claim create method"""
+    id: _str
+    consensusScore: Optional[_float]
+    contradictionScore: Optional[_float]
+    createdAt: datetime.datetime
+    clusterId: Optional[_str]
+    cluster: 'ClaimClusterCreateNestedWithoutRelationsInput'
+    evidence: 'EvidenceCreateManyNestedWithoutRelationsInput'
+
+
+class ClaimCreateInput(ClaimOptionalCreateInput):
+    """Required arguments to the Claim create method"""
+    canonicalClaim: _str
+    confidence: _float
+
+
+# TODO: remove this in favour of without explicit relations
+# e.g. PostCreateWithoutAuthorInput
+
+class ClaimOptionalCreateWithoutRelationsInput(TypedDict, total=False):
+    """Optional arguments to the Claim create method, without relations"""
+    id: _str
+    consensusScore: Optional[_float]
+    contradictionScore: Optional[_float]
+    createdAt: datetime.datetime
+    clusterId: Optional[_str]
+
+
+class ClaimCreateWithoutRelationsInput(ClaimOptionalCreateWithoutRelationsInput):
+    """Required arguments to the Claim create method, without relations"""
+    canonicalClaim: _str
+    confidence: _float
+
+class ClaimConnectOrCreateWithoutRelationsInput(TypedDict):
+    create: 'ClaimCreateWithoutRelationsInput'
+    where: 'ClaimWhereUniqueInput'
+
+class ClaimCreateNestedWithoutRelationsInput(TypedDict, total=False):
+    create: 'ClaimCreateWithoutRelationsInput'
+    connect: 'ClaimWhereUniqueInput'
+    connect_or_create: 'ClaimConnectOrCreateWithoutRelationsInput'
+
+
+class ClaimCreateManyNestedWithoutRelationsInput(TypedDict, total=False):
+    create: Union['ClaimCreateWithoutRelationsInput', List['ClaimCreateWithoutRelationsInput']]
+    connect: Union['ClaimWhereUniqueInput', List['ClaimWhereUniqueInput']]
+    connect_or_create: Union['ClaimConnectOrCreateWithoutRelationsInput', List['ClaimConnectOrCreateWithoutRelationsInput']]
+
+_ClaimWhereUnique_id_Input = TypedDict(
+    '_ClaimWhereUnique_id_Input',
+    {
+        'id': '_str',
+    },
+    total=True
+)
+
+ClaimWhereUniqueInput = _ClaimWhereUnique_id_Input
+
+
+class ClaimUpdateInput(TypedDict, total=False):
+    """Optional arguments for updating a record"""
+    id: _str
+    canonicalClaim: _str
+    confidence: Union[AtomicFloatInput, _float]
+    consensusScore: Optional[Union[AtomicFloatInput, _float]]
+    contradictionScore: Optional[Union[AtomicFloatInput, _float]]
+    createdAt: datetime.datetime
+    cluster: 'ClaimClusterUpdateOneWithoutRelationsInput'
+    evidence: 'EvidenceUpdateManyWithoutRelationsInput'
+
+
+class ClaimUpdateManyMutationInput(TypedDict, total=False):
+    """Arguments for updating many records"""
+    id: _str
+    canonicalClaim: _str
+    confidence: Union[AtomicFloatInput, _float]
+    consensusScore: Optional[Union[AtomicFloatInput, _float]]
+    contradictionScore: Optional[Union[AtomicFloatInput, _float]]
+    createdAt: datetime.datetime
+
+
+class ClaimUpdateManyWithoutRelationsInput(TypedDict, total=False):
+    create: List['ClaimCreateWithoutRelationsInput']
+    connect: List['ClaimWhereUniqueInput']
+    connect_or_create: List['ClaimConnectOrCreateWithoutRelationsInput']
+    set: List['ClaimWhereUniqueInput']
+    disconnect: List['ClaimWhereUniqueInput']
+    delete: List['ClaimWhereUniqueInput']
+
+    # TODO
+    # update: List['ClaimUpdateWithWhereUniqueWithoutRelationsInput']
+    # updateMany: List['ClaimUpdateManyWithWhereUniqueWithoutRelationsInput']
+    # deleteMany: List['ClaimScalarWhereInput']
+    # upsert: List['ClaimUpserteWithWhereUniqueWithoutRelationsInput']
+
+
+class ClaimUpdateOneWithoutRelationsInput(TypedDict, total=False):
+    create: 'ClaimCreateWithoutRelationsInput'
+    connect: 'ClaimWhereUniqueInput'
+    connect_or_create: 'ClaimConnectOrCreateWithoutRelationsInput'
+    disconnect: bool
+    delete: bool
+
+    # TODO
+    # update: 'ClaimUpdateInput'
+    # upsert: 'ClaimUpsertWithoutRelationsInput'
+
+
+class ClaimUpsertInput(TypedDict):
+    create: 'ClaimCreateInput'
+    update: 'ClaimUpdateInput'  # pyright: ignore[reportIncompatibleMethodOverride]
+
+
+_Claim_id_OrderByInput = TypedDict(
+    '_Claim_id_OrderByInput',
+    {
+        'id': 'SortOrder',
+    },
+    total=True
+)
+
+_Claim_canonicalClaim_OrderByInput = TypedDict(
+    '_Claim_canonicalClaim_OrderByInput',
+    {
+        'canonicalClaim': 'SortOrder',
+    },
+    total=True
+)
+
+_Claim_confidence_OrderByInput = TypedDict(
+    '_Claim_confidence_OrderByInput',
+    {
+        'confidence': 'SortOrder',
+    },
+    total=True
+)
+
+_Claim_consensusScore_OrderByInput = TypedDict(
+    '_Claim_consensusScore_OrderByInput',
+    {
+        'consensusScore': 'SortOrder',
+    },
+    total=True
+)
+
+_Claim_contradictionScore_OrderByInput = TypedDict(
+    '_Claim_contradictionScore_OrderByInput',
+    {
+        'contradictionScore': 'SortOrder',
+    },
+    total=True
+)
+
+_Claim_createdAt_OrderByInput = TypedDict(
+    '_Claim_createdAt_OrderByInput',
+    {
+        'createdAt': 'SortOrder',
+    },
+    total=True
+)
+
+_Claim_clusterId_OrderByInput = TypedDict(
+    '_Claim_clusterId_OrderByInput',
+    {
+        'clusterId': 'SortOrder',
+    },
+    total=True
+)
+
+_Claim_RelevanceInner = TypedDict(
+    '_Claim_RelevanceInner',
+    {
+        'fields': 'List[ClaimScalarFieldKeys]',
+        'search': 'str',
+        'sort': 'SortOrder',
+    },
+    total=True
+)
+
+_Claim_RelevanceOrderByInput = TypedDict(
+    '_Claim_RelevanceOrderByInput',
+    {
+        '_relevance': '_Claim_RelevanceInner',
+    },
+    total=True
+)
+
+ClaimOrderByInput = Union[
+    '_Claim_id_OrderByInput',
+    '_Claim_canonicalClaim_OrderByInput',
+    '_Claim_confidence_OrderByInput',
+    '_Claim_consensusScore_OrderByInput',
+    '_Claim_contradictionScore_OrderByInput',
+    '_Claim_createdAt_OrderByInput',
+    '_Claim_clusterId_OrderByInput',
+    '_Claim_RelevanceOrderByInput',
+]
+
+
+
+# recursive Claim types
+# TODO: cleanup these types
+
+
+# Dict[str, Any] is a mypy limitation
+# see https://github.com/RobertCraigie/prisma-client-py/issues/45
+# switch to pyright for improved types, see https://prisma-client-py.readthedocs.io/en/stable/reference/limitations/
+
+ClaimRelationFilter = TypedDict(
+    'ClaimRelationFilter',
+    {
+        'is': 'Dict[str, Any]',
+        'is_not': 'Dict[str, Any]',
+    },
+    total=False,
+)
+
+
+class ClaimListRelationFilter(TypedDict, total=False):
+    some: 'Dict[str, Any]'
+    none: 'Dict[str, Any]'
+    every: 'Dict[str, Any]'
+
+
+class ClaimInclude(TypedDict, total=False):
+    """Claim relational arguments"""
+    cluster: Union[bool, 'ClaimClusterArgsFromClaim']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromClaim']
+
+
+    
+
+class UserIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    sessions: Union[bool, 'FindManySessionArgsFromClaimRecursive1']
+    accounts: Union[bool, 'FindManyAccountArgsFromClaimRecursive1']
+    searches: Union[bool, 'FindManySearchArgsFromClaimRecursive1']
+
+
+class UserIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    sessions: Union[bool, 'FindManySessionArgsFromClaimRecursive2']
+    accounts: Union[bool, 'FindManyAccountArgsFromClaimRecursive2']
+    searches: Union[bool, 'FindManySearchArgsFromClaimRecursive2']
+
+
+class UserIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    sessions: Union[bool, 'FindManySessionArgsFromClaimRecursive3']
+    accounts: Union[bool, 'FindManyAccountArgsFromClaimRecursive3']
+    searches: Union[bool, 'FindManySearchArgsFromClaimRecursive3']
+
+
+class UserIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    sessions: Union[bool, 'FindManySessionArgsFromClaimRecursive4']
+    accounts: Union[bool, 'FindManyAccountArgsFromClaimRecursive4']
+    searches: Union[bool, 'FindManySearchArgsFromClaimRecursive4']
+
+
+class UserIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class UserArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class UserArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class UserArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class UserArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class UserArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyUserArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class FindManyUserArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class FindManyUserArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class FindManyUserArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class FindManyUserArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    
+    
+
+class SessionIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive1']
+
+
+class SessionIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive2']
+
+
+class SessionIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive3']
+
+
+class SessionIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive4']
+
+
+class SessionIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class SessionArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class SessionArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class SessionArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class SessionArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class SessionArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManySessionArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class FindManySessionArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class FindManySessionArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class FindManySessionArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class FindManySessionArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    
+    
+
+class AccountIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive1']
+
+
+class AccountIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive2']
+
+
+class AccountIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive3']
+
+
+class AccountIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive4']
+
+
+class AccountIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class AccountArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class AccountArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class AccountArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class AccountArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class AccountArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyAccountArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class FindManyAccountArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class FindManyAccountArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class FindManyAccountArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class FindManyAccountArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    
+    
+
+class VerificationIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class VerificationIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class VerificationIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class VerificationIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class VerificationIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class VerificationArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class VerificationArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class VerificationArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class VerificationArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class VerificationArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyVerificationArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class FindManyVerificationArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class FindManyVerificationArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class FindManyVerificationArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class FindManyVerificationArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    
+    
+
+class SearchIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive1']
+    articles: Union[bool, 'FindManyArticleArgsFromClaimRecursive1']
+    insights: Union[bool, 'FindManyInsightArgsFromClaimRecursive1']
+
+
+class SearchIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive2']
+    articles: Union[bool, 'FindManyArticleArgsFromClaimRecursive2']
+    insights: Union[bool, 'FindManyInsightArgsFromClaimRecursive2']
+
+
+class SearchIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive3']
+    articles: Union[bool, 'FindManyArticleArgsFromClaimRecursive3']
+    insights: Union[bool, 'FindManyInsightArgsFromClaimRecursive3']
+
+
+class SearchIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive4']
+    articles: Union[bool, 'FindManyArticleArgsFromClaimRecursive4']
+    insights: Union[bool, 'FindManyInsightArgsFromClaimRecursive4']
+
+
+class SearchIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class SearchArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class SearchArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class SearchArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class SearchArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class SearchArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManySearchArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class FindManySearchArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class FindManySearchArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class FindManySearchArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class FindManySearchArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    
+    
+
+class ArticleIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    search: Union[bool, 'SearchArgsFromClaimRecursive1']
+
+
+class ArticleIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    search: Union[bool, 'SearchArgsFromClaimRecursive2']
+
+
+class ArticleIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    search: Union[bool, 'SearchArgsFromClaimRecursive3']
+
+
+class ArticleIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    search: Union[bool, 'SearchArgsFromClaimRecursive4']
+
+
+class ArticleIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class ArticleArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class ArticleArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class ArticleArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class ArticleArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class ArticleArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyArticleArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class FindManyArticleArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class FindManyArticleArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class FindManyArticleArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class FindManyArticleArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    
+    
+
+class InsightIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    search: Union[bool, 'SearchArgsFromClaimRecursive1']
+
+
+class InsightIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    search: Union[bool, 'SearchArgsFromClaimRecursive2']
+
+
+class InsightIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    search: Union[bool, 'SearchArgsFromClaimRecursive3']
+
+
+class InsightIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    search: Union[bool, 'SearchArgsFromClaimRecursive4']
+
+
+class InsightIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class InsightArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class InsightArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class InsightArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class InsightArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class InsightArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyInsightArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class FindManyInsightArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class FindManyInsightArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class FindManyInsightArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class FindManyInsightArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    cluster: Union[bool, 'ClaimClusterArgsFromClaimRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromClaimRecursive1']
+
+
+class ClaimIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    cluster: Union[bool, 'ClaimClusterArgsFromClaimRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromClaimRecursive2']
+
+
+class ClaimIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    cluster: Union[bool, 'ClaimClusterArgsFromClaimRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromClaimRecursive3']
+
+
+class ClaimIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    cluster: Union[bool, 'ClaimClusterArgsFromClaimRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromClaimRecursive4']
+
+
+class ClaimIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class ClaimArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyClaimArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    claim: Union[bool, 'ClaimArgsFromClaimRecursive1']
+
+
+class EvidenceIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    claim: Union[bool, 'ClaimArgsFromClaimRecursive2']
+
+
+class EvidenceIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    claim: Union[bool, 'ClaimArgsFromClaimRecursive3']
+
+
+class EvidenceIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    claim: Union[bool, 'ClaimArgsFromClaimRecursive4']
+
+
+class EvidenceIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class EvidenceArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyEvidenceArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimRecursive1']
+
+
+class EventIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimRecursive2']
+
+
+class EventIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimRecursive3']
+
+
+class EventIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimRecursive4']
+
+
+class EventIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class EventArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyEventArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    event: Union[bool, 'EventArgsFromClaimRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromClaimRecursive1']
+
+
+class ClaimClusterIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    event: Union[bool, 'EventArgsFromClaimRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromClaimRecursive2']
+
+
+class ClaimClusterIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    event: Union[bool, 'EventArgsFromClaimRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromClaimRecursive3']
+
+
+class ClaimClusterIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    event: Union[bool, 'EventArgsFromClaimRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromClaimRecursive4']
+
+
+class ClaimClusterIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class ClaimClusterArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyClaimClusterArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
+
+
+FindManyClaimArgs = FindManyClaimArgsFromClaim
+FindFirstClaimArgs = FindManyClaimArgsFromClaim
+
+
+    
+
+class ClaimWhereInput(TypedDict, total=False):
+    """Claim arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    canonicalClaim: Union[_str, 'types.StringFilter']
+    confidence: Union[_float, 'types.FloatFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
+    contradictionScore: Union[None, _float, 'types.FloatFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    clusterId: Union[None, _str, 'types.StringFilter']
+    cluster: 'ClaimClusterRelationFilter'
+    evidence: 'EvidenceListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['ClaimWhereInputRecursive1', List['ClaimWhereInputRecursive1']]
+    # but this causes mypy to hang :/
+    AND: List['ClaimWhereInputRecursive1']
+    OR: List['ClaimWhereInputRecursive1']
+    NOT: List['ClaimWhereInputRecursive1']
+
+
+class ClaimWhereInputRecursive1(TypedDict, total=False):
+    """Claim arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    canonicalClaim: Union[_str, 'types.StringFilter']
+    confidence: Union[_float, 'types.FloatFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
+    contradictionScore: Union[None, _float, 'types.FloatFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    clusterId: Union[None, _str, 'types.StringFilter']
+    cluster: 'ClaimClusterRelationFilter'
+    evidence: 'EvidenceListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['ClaimWhereInputRecursive2', List['ClaimWhereInputRecursive2']]
+    # but this causes mypy to hang :/
+    AND: List['ClaimWhereInputRecursive2']
+    OR: List['ClaimWhereInputRecursive2']
+    NOT: List['ClaimWhereInputRecursive2']
+
+
+class ClaimWhereInputRecursive2(TypedDict, total=False):
+    """Claim arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    canonicalClaim: Union[_str, 'types.StringFilter']
+    confidence: Union[_float, 'types.FloatFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
+    contradictionScore: Union[None, _float, 'types.FloatFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    clusterId: Union[None, _str, 'types.StringFilter']
+    cluster: 'ClaimClusterRelationFilter'
+    evidence: 'EvidenceListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['ClaimWhereInputRecursive3', List['ClaimWhereInputRecursive3']]
+    # but this causes mypy to hang :/
+    AND: List['ClaimWhereInputRecursive3']
+    OR: List['ClaimWhereInputRecursive3']
+    NOT: List['ClaimWhereInputRecursive3']
+
+
+class ClaimWhereInputRecursive3(TypedDict, total=False):
+    """Claim arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    canonicalClaim: Union[_str, 'types.StringFilter']
+    confidence: Union[_float, 'types.FloatFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
+    contradictionScore: Union[None, _float, 'types.FloatFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    clusterId: Union[None, _str, 'types.StringFilter']
+    cluster: 'ClaimClusterRelationFilter'
+    evidence: 'EvidenceListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['ClaimWhereInputRecursive4', List['ClaimWhereInputRecursive4']]
+    # but this causes mypy to hang :/
+    AND: List['ClaimWhereInputRecursive4']
+    OR: List['ClaimWhereInputRecursive4']
+    NOT: List['ClaimWhereInputRecursive4']
+
+
+class ClaimWhereInputRecursive4(TypedDict, total=False):
+    """Claim arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    canonicalClaim: Union[_str, 'types.StringFilter']
+    confidence: Union[_float, 'types.FloatFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
+    contradictionScore: Union[None, _float, 'types.FloatFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    clusterId: Union[None, _str, 'types.StringFilter']
+    cluster: 'ClaimClusterRelationFilter'
+    evidence: 'EvidenceListRelationFilter'
+
+
+
+# aggregate Claim types
+
+
+    
+
+class ClaimScalarWhereWithAggregatesInput(TypedDict, total=False):
+    """Claim arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    confidence: Union[_float, 'types.FloatWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    contradictionScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    clusterId: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['ClaimScalarWhereWithAggregatesInputRecursive1']
+    OR: List['ClaimScalarWhereWithAggregatesInputRecursive1']
+    NOT: List['ClaimScalarWhereWithAggregatesInputRecursive1']
+
+
+class ClaimScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
+    """Claim arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    confidence: Union[_float, 'types.FloatWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    contradictionScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    clusterId: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['ClaimScalarWhereWithAggregatesInputRecursive2']
+    OR: List['ClaimScalarWhereWithAggregatesInputRecursive2']
+    NOT: List['ClaimScalarWhereWithAggregatesInputRecursive2']
+
+
+class ClaimScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
+    """Claim arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    confidence: Union[_float, 'types.FloatWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    contradictionScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    clusterId: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['ClaimScalarWhereWithAggregatesInputRecursive3']
+    OR: List['ClaimScalarWhereWithAggregatesInputRecursive3']
+    NOT: List['ClaimScalarWhereWithAggregatesInputRecursive3']
+
+
+class ClaimScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
+    """Claim arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    confidence: Union[_float, 'types.FloatWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    contradictionScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    clusterId: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['ClaimScalarWhereWithAggregatesInputRecursive4']
+    OR: List['ClaimScalarWhereWithAggregatesInputRecursive4']
+    NOT: List['ClaimScalarWhereWithAggregatesInputRecursive4']
+
+
+class ClaimScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
+    """Claim arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    confidence: Union[_float, 'types.FloatWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    contradictionScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    clusterId: Union[_str, 'types.StringWithAggregatesFilter']
+
+
+
+class ClaimGroupByOutput(TypedDict, total=False):
+    id: _str
+    canonicalClaim: _str
+    confidence: _float
+    consensusScore: _float
+    contradictionScore: _float
+    createdAt: datetime.datetime
+    clusterId: _str
+    _sum: 'ClaimSumAggregateOutput'
+    _avg: 'ClaimAvgAggregateOutput'
+    _min: 'ClaimMinAggregateOutput'
+    _max: 'ClaimMaxAggregateOutput'
+    _count: 'ClaimCountAggregateOutput'
+
+
+class ClaimAvgAggregateOutput(TypedDict, total=False):
+    """Claim output for aggregating averages"""
+    confidence: float
+    consensusScore: float
+    contradictionScore: float
+
+
+class ClaimSumAggregateOutput(TypedDict, total=False):
+    """Claim output for aggregating sums"""
+    confidence: _float
+    consensusScore: _float
+    contradictionScore: _float
+
+
+class ClaimScalarAggregateOutput(TypedDict, total=False):
+    """Claim output including scalar fields"""
+    id: _str
+    canonicalClaim: _str
+    confidence: _float
+    consensusScore: _float
+    contradictionScore: _float
+    createdAt: datetime.datetime
+    clusterId: _str
+
+
+ClaimMinAggregateOutput = ClaimScalarAggregateOutput
+ClaimMaxAggregateOutput = ClaimScalarAggregateOutput
+
+
+class ClaimMaxAggregateInput(TypedDict, total=False):
+    """Claim input for aggregating by max"""
+    id: bool
+    canonicalClaim: bool
+    confidence: bool
+    consensusScore: bool
+    contradictionScore: bool
+    createdAt: bool
+    clusterId: bool
+
+
+class ClaimMinAggregateInput(TypedDict, total=False):
+    """Claim input for aggregating by min"""
+    id: bool
+    canonicalClaim: bool
+    confidence: bool
+    consensusScore: bool
+    contradictionScore: bool
+    createdAt: bool
+    clusterId: bool
+
+
+class ClaimNumberAggregateInput(TypedDict, total=False):
+    """Claim input for aggregating numbers"""
+    confidence: bool
+    consensusScore: bool
+    contradictionScore: bool
+
+
+ClaimAvgAggregateInput = ClaimNumberAggregateInput
+ClaimSumAggregateInput = ClaimNumberAggregateInput
+
+
+ClaimCountAggregateInput = TypedDict(
+    'ClaimCountAggregateInput',
+    {
+        'id': bool,
+        'canonicalClaim': bool,
+        'confidence': bool,
+        'consensusScore': bool,
+        'contradictionScore': bool,
+        'createdAt': bool,
+        'clusterId': bool,
+        '_all': bool,
+    },
+    total=False,
+)
+
+ClaimCountAggregateOutput = TypedDict(
+    'ClaimCountAggregateOutput',
+    {
+        'id': int,
+        'canonicalClaim': int,
+        'confidence': int,
+        'consensusScore': int,
+        'contradictionScore': int,
+        'createdAt': int,
+        'clusterId': int,
+        '_all': int,
+    },
+    total=False,
+)
+
+
+ClaimKeys = Literal[
+    'id',
+    'canonicalClaim',
+    'confidence',
+    'consensusScore',
+    'contradictionScore',
+    'createdAt',
+    'clusterId',
+    'cluster',
+    'evidence',
+]
+ClaimScalarFieldKeys = Literal[
+    'id',
+    'canonicalClaim',
+    'confidence',
+    'consensusScore',
+    'contradictionScore',
+    'createdAt',
+    'clusterId',
+]
+ClaimScalarFieldKeysT = TypeVar('ClaimScalarFieldKeysT', bound=ClaimScalarFieldKeys)
+
+ClaimRelationalFieldKeys = Literal[
+        'cluster',
+        'evidence',
+    ]
+
+# Evidence types
+
+class EvidenceOptionalCreateInput(TypedDict, total=False):
+    """Optional arguments to the Evidence create method"""
+    id: _str
+    claimId: _str
+    claim: 'ClaimCreateNestedWithoutRelationsInput'
+
+
+class EvidenceCreateInput(EvidenceOptionalCreateInput):
+    """Required arguments to the Evidence create method"""
+    articleId: _str
+    sentence: _str
+    source: _str
+    url: _str
+    publishedAt: datetime.datetime
+    stance: _str
+
+
+# TODO: remove this in favour of without explicit relations
+# e.g. PostCreateWithoutAuthorInput
+
+class EvidenceOptionalCreateWithoutRelationsInput(TypedDict, total=False):
+    """Optional arguments to the Evidence create method, without relations"""
+    id: _str
+    claimId: _str
+
+
+class EvidenceCreateWithoutRelationsInput(EvidenceOptionalCreateWithoutRelationsInput):
+    """Required arguments to the Evidence create method, without relations"""
+    articleId: _str
+    sentence: _str
+    source: _str
+    url: _str
+    publishedAt: datetime.datetime
+    stance: _str
+
+class EvidenceConnectOrCreateWithoutRelationsInput(TypedDict):
+    create: 'EvidenceCreateWithoutRelationsInput'
+    where: 'EvidenceWhereUniqueInput'
+
+class EvidenceCreateNestedWithoutRelationsInput(TypedDict, total=False):
+    create: 'EvidenceCreateWithoutRelationsInput'
+    connect: 'EvidenceWhereUniqueInput'
+    connect_or_create: 'EvidenceConnectOrCreateWithoutRelationsInput'
+
+
+class EvidenceCreateManyNestedWithoutRelationsInput(TypedDict, total=False):
+    create: Union['EvidenceCreateWithoutRelationsInput', List['EvidenceCreateWithoutRelationsInput']]
+    connect: Union['EvidenceWhereUniqueInput', List['EvidenceWhereUniqueInput']]
+    connect_or_create: Union['EvidenceConnectOrCreateWithoutRelationsInput', List['EvidenceConnectOrCreateWithoutRelationsInput']]
+
+_EvidenceWhereUnique_id_Input = TypedDict(
+    '_EvidenceWhereUnique_id_Input',
+    {
+        'id': '_str',
+    },
+    total=True
+)
+
+EvidenceWhereUniqueInput = _EvidenceWhereUnique_id_Input
+
+
+class EvidenceUpdateInput(TypedDict, total=False):
+    """Optional arguments for updating a record"""
+    id: _str
+    articleId: _str
+    sentence: _str
+    source: _str
+    url: _str
+    publishedAt: datetime.datetime
+    stance: _str
+    claim: 'ClaimUpdateOneWithoutRelationsInput'
+
+
+class EvidenceUpdateManyMutationInput(TypedDict, total=False):
+    """Arguments for updating many records"""
+    id: _str
+    articleId: _str
+    sentence: _str
+    source: _str
+    url: _str
+    publishedAt: datetime.datetime
+    stance: _str
+
+
+class EvidenceUpdateManyWithoutRelationsInput(TypedDict, total=False):
+    create: List['EvidenceCreateWithoutRelationsInput']
+    connect: List['EvidenceWhereUniqueInput']
+    connect_or_create: List['EvidenceConnectOrCreateWithoutRelationsInput']
+    set: List['EvidenceWhereUniqueInput']
+    disconnect: List['EvidenceWhereUniqueInput']
+    delete: List['EvidenceWhereUniqueInput']
+
+    # TODO
+    # update: List['EvidenceUpdateWithWhereUniqueWithoutRelationsInput']
+    # updateMany: List['EvidenceUpdateManyWithWhereUniqueWithoutRelationsInput']
+    # deleteMany: List['EvidenceScalarWhereInput']
+    # upsert: List['EvidenceUpserteWithWhereUniqueWithoutRelationsInput']
+
+
+class EvidenceUpdateOneWithoutRelationsInput(TypedDict, total=False):
+    create: 'EvidenceCreateWithoutRelationsInput'
+    connect: 'EvidenceWhereUniqueInput'
+    connect_or_create: 'EvidenceConnectOrCreateWithoutRelationsInput'
+    disconnect: bool
+    delete: bool
+
+    # TODO
+    # update: 'EvidenceUpdateInput'
+    # upsert: 'EvidenceUpsertWithoutRelationsInput'
+
+
+class EvidenceUpsertInput(TypedDict):
+    create: 'EvidenceCreateInput'
+    update: 'EvidenceUpdateInput'  # pyright: ignore[reportIncompatibleMethodOverride]
+
+
+_Evidence_id_OrderByInput = TypedDict(
+    '_Evidence_id_OrderByInput',
+    {
+        'id': 'SortOrder',
+    },
+    total=True
+)
+
+_Evidence_claimId_OrderByInput = TypedDict(
+    '_Evidence_claimId_OrderByInput',
+    {
+        'claimId': 'SortOrder',
+    },
+    total=True
+)
+
+_Evidence_articleId_OrderByInput = TypedDict(
+    '_Evidence_articleId_OrderByInput',
+    {
+        'articleId': 'SortOrder',
+    },
+    total=True
+)
+
+_Evidence_sentence_OrderByInput = TypedDict(
+    '_Evidence_sentence_OrderByInput',
+    {
+        'sentence': 'SortOrder',
+    },
+    total=True
+)
+
+_Evidence_source_OrderByInput = TypedDict(
+    '_Evidence_source_OrderByInput',
+    {
+        'source': 'SortOrder',
+    },
+    total=True
+)
+
+_Evidence_url_OrderByInput = TypedDict(
+    '_Evidence_url_OrderByInput',
+    {
+        'url': 'SortOrder',
+    },
+    total=True
+)
+
+_Evidence_publishedAt_OrderByInput = TypedDict(
+    '_Evidence_publishedAt_OrderByInput',
+    {
+        'publishedAt': 'SortOrder',
+    },
+    total=True
+)
+
+_Evidence_stance_OrderByInput = TypedDict(
+    '_Evidence_stance_OrderByInput',
+    {
+        'stance': 'SortOrder',
+    },
+    total=True
+)
+
+_Evidence_RelevanceInner = TypedDict(
+    '_Evidence_RelevanceInner',
+    {
+        'fields': 'List[EvidenceScalarFieldKeys]',
+        'search': 'str',
+        'sort': 'SortOrder',
+    },
+    total=True
+)
+
+_Evidence_RelevanceOrderByInput = TypedDict(
+    '_Evidence_RelevanceOrderByInput',
+    {
+        '_relevance': '_Evidence_RelevanceInner',
+    },
+    total=True
+)
+
+EvidenceOrderByInput = Union[
+    '_Evidence_id_OrderByInput',
+    '_Evidence_claimId_OrderByInput',
+    '_Evidence_articleId_OrderByInput',
+    '_Evidence_sentence_OrderByInput',
+    '_Evidence_source_OrderByInput',
+    '_Evidence_url_OrderByInput',
+    '_Evidence_publishedAt_OrderByInput',
+    '_Evidence_stance_OrderByInput',
+    '_Evidence_RelevanceOrderByInput',
+]
+
+
+
+# recursive Evidence types
+# TODO: cleanup these types
+
+
+# Dict[str, Any] is a mypy limitation
+# see https://github.com/RobertCraigie/prisma-client-py/issues/45
+# switch to pyright for improved types, see https://prisma-client-py.readthedocs.io/en/stable/reference/limitations/
+
+EvidenceRelationFilter = TypedDict(
+    'EvidenceRelationFilter',
+    {
+        'is': 'Dict[str, Any]',
+        'is_not': 'Dict[str, Any]',
+    },
+    total=False,
+)
+
+
+class EvidenceListRelationFilter(TypedDict, total=False):
+    some: 'Dict[str, Any]'
+    none: 'Dict[str, Any]'
+    every: 'Dict[str, Any]'
+
+
+class EvidenceInclude(TypedDict, total=False):
+    """Evidence relational arguments"""
+    claim: Union[bool, 'ClaimArgsFromEvidence']
+
+
+    
+
+class UserIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    sessions: Union[bool, 'FindManySessionArgsFromEvidenceRecursive1']
+    accounts: Union[bool, 'FindManyAccountArgsFromEvidenceRecursive1']
+    searches: Union[bool, 'FindManySearchArgsFromEvidenceRecursive1']
+
+
+class UserIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    sessions: Union[bool, 'FindManySessionArgsFromEvidenceRecursive2']
+    accounts: Union[bool, 'FindManyAccountArgsFromEvidenceRecursive2']
+    searches: Union[bool, 'FindManySearchArgsFromEvidenceRecursive2']
+
+
+class UserIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    sessions: Union[bool, 'FindManySessionArgsFromEvidenceRecursive3']
+    accounts: Union[bool, 'FindManyAccountArgsFromEvidenceRecursive3']
+    searches: Union[bool, 'FindManySearchArgsFromEvidenceRecursive3']
+
+
+class UserIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    sessions: Union[bool, 'FindManySessionArgsFromEvidenceRecursive4']
+    accounts: Union[bool, 'FindManyAccountArgsFromEvidenceRecursive4']
+    searches: Union[bool, 'FindManySearchArgsFromEvidenceRecursive4']
+
+
+class UserIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class UserArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class UserArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class UserArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class UserArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class UserArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyUserArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class FindManyUserArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class FindManyUserArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class FindManyUserArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class FindManyUserArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    
+    
+
+class SessionIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive1']
+
+
+class SessionIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive2']
+
+
+class SessionIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive3']
+
+
+class SessionIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive4']
+
+
+class SessionIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class SessionArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class SessionArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class SessionArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class SessionArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class SessionArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManySessionArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class FindManySessionArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class FindManySessionArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class FindManySessionArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class FindManySessionArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    
+    
+
+class AccountIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive1']
+
+
+class AccountIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive2']
+
+
+class AccountIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive3']
+
+
+class AccountIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive4']
+
+
+class AccountIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class AccountArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class AccountArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class AccountArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class AccountArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class AccountArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyAccountArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class FindManyAccountArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class FindManyAccountArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class FindManyAccountArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class FindManyAccountArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    
+    
+
+class VerificationIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class VerificationIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class VerificationIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class VerificationIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class VerificationIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class VerificationArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class VerificationArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class VerificationArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class VerificationArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class VerificationArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyVerificationArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class FindManyVerificationArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class FindManyVerificationArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class FindManyVerificationArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class FindManyVerificationArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    
+    
+
+class SearchIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive1']
+    articles: Union[bool, 'FindManyArticleArgsFromEvidenceRecursive1']
+    insights: Union[bool, 'FindManyInsightArgsFromEvidenceRecursive1']
+
+
+class SearchIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive2']
+    articles: Union[bool, 'FindManyArticleArgsFromEvidenceRecursive2']
+    insights: Union[bool, 'FindManyInsightArgsFromEvidenceRecursive2']
+
+
+class SearchIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive3']
+    articles: Union[bool, 'FindManyArticleArgsFromEvidenceRecursive3']
+    insights: Union[bool, 'FindManyInsightArgsFromEvidenceRecursive3']
+
+
+class SearchIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive4']
+    articles: Union[bool, 'FindManyArticleArgsFromEvidenceRecursive4']
+    insights: Union[bool, 'FindManyInsightArgsFromEvidenceRecursive4']
+
+
+class SearchIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class SearchArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class SearchArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class SearchArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class SearchArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class SearchArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManySearchArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class FindManySearchArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class FindManySearchArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class FindManySearchArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class FindManySearchArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    
+    
+
+class ArticleIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    search: Union[bool, 'SearchArgsFromEvidenceRecursive1']
+
+
+class ArticleIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    search: Union[bool, 'SearchArgsFromEvidenceRecursive2']
+
+
+class ArticleIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    search: Union[bool, 'SearchArgsFromEvidenceRecursive3']
+
+
+class ArticleIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    search: Union[bool, 'SearchArgsFromEvidenceRecursive4']
+
+
+class ArticleIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class ArticleArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class ArticleArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class ArticleArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class ArticleArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class ArticleArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyArticleArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class FindManyArticleArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class FindManyArticleArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class FindManyArticleArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class FindManyArticleArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    
+    
+
+class InsightIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    search: Union[bool, 'SearchArgsFromEvidenceRecursive1']
+
+
+class InsightIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    search: Union[bool, 'SearchArgsFromEvidenceRecursive2']
+
+
+class InsightIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    search: Union[bool, 'SearchArgsFromEvidenceRecursive3']
+
+
+class InsightIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    search: Union[bool, 'SearchArgsFromEvidenceRecursive4']
+
+
+class InsightIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class InsightArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class InsightArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class InsightArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class InsightArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class InsightArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyInsightArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class FindManyInsightArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class FindManyInsightArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class FindManyInsightArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class FindManyInsightArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    cluster: Union[bool, 'ClaimClusterArgsFromEvidenceRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromEvidenceRecursive1']
+
+
+class ClaimIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    cluster: Union[bool, 'ClaimClusterArgsFromEvidenceRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromEvidenceRecursive2']
+
+
+class ClaimIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    cluster: Union[bool, 'ClaimClusterArgsFromEvidenceRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromEvidenceRecursive3']
+
+
+class ClaimIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    cluster: Union[bool, 'ClaimClusterArgsFromEvidenceRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromEvidenceRecursive4']
+
+
+class ClaimIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class ClaimArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyClaimArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    claim: Union[bool, 'ClaimArgsFromEvidenceRecursive1']
+
+
+class EvidenceIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    claim: Union[bool, 'ClaimArgsFromEvidenceRecursive2']
+
+
+class EvidenceIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    claim: Union[bool, 'ClaimArgsFromEvidenceRecursive3']
+
+
+class EvidenceIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    claim: Union[bool, 'ClaimArgsFromEvidenceRecursive4']
+
+
+class EvidenceIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class EvidenceArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyEvidenceArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEvidenceRecursive1']
+
+
+class EventIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEvidenceRecursive2']
+
+
+class EventIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEvidenceRecursive3']
+
+
+class EventIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEvidenceRecursive4']
+
+
+class EventIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class EventArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyEventArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    event: Union[bool, 'EventArgsFromEvidenceRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromEvidenceRecursive1']
+
+
+class ClaimClusterIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    event: Union[bool, 'EventArgsFromEvidenceRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromEvidenceRecursive2']
+
+
+class ClaimClusterIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    event: Union[bool, 'EventArgsFromEvidenceRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromEvidenceRecursive3']
+
+
+class ClaimClusterIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    event: Union[bool, 'EventArgsFromEvidenceRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromEvidenceRecursive4']
+
+
+class ClaimClusterIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class ClaimClusterArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyClaimClusterArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
+
+
+FindManyEvidenceArgs = FindManyEvidenceArgsFromEvidence
+FindFirstEvidenceArgs = FindManyEvidenceArgsFromEvidence
+
+
+    
+
+class EvidenceWhereInput(TypedDict, total=False):
+    """Evidence arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    claimId: Union[_str, 'types.StringFilter']
+    articleId: Union[_str, 'types.StringFilter']
+    sentence: Union[_str, 'types.StringFilter']
+    source: Union[_str, 'types.StringFilter']
+    url: Union[_str, 'types.StringFilter']
+    publishedAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    stance: Union[_str, 'types.StringFilter']
+    claim: 'ClaimRelationFilter'
+
+    # should be noted that AND and NOT should be Union['EvidenceWhereInputRecursive1', List['EvidenceWhereInputRecursive1']]
+    # but this causes mypy to hang :/
+    AND: List['EvidenceWhereInputRecursive1']
+    OR: List['EvidenceWhereInputRecursive1']
+    NOT: List['EvidenceWhereInputRecursive1']
+
+
+class EvidenceWhereInputRecursive1(TypedDict, total=False):
+    """Evidence arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    claimId: Union[_str, 'types.StringFilter']
+    articleId: Union[_str, 'types.StringFilter']
+    sentence: Union[_str, 'types.StringFilter']
+    source: Union[_str, 'types.StringFilter']
+    url: Union[_str, 'types.StringFilter']
+    publishedAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    stance: Union[_str, 'types.StringFilter']
+    claim: 'ClaimRelationFilter'
+
+    # should be noted that AND and NOT should be Union['EvidenceWhereInputRecursive2', List['EvidenceWhereInputRecursive2']]
+    # but this causes mypy to hang :/
+    AND: List['EvidenceWhereInputRecursive2']
+    OR: List['EvidenceWhereInputRecursive2']
+    NOT: List['EvidenceWhereInputRecursive2']
+
+
+class EvidenceWhereInputRecursive2(TypedDict, total=False):
+    """Evidence arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    claimId: Union[_str, 'types.StringFilter']
+    articleId: Union[_str, 'types.StringFilter']
+    sentence: Union[_str, 'types.StringFilter']
+    source: Union[_str, 'types.StringFilter']
+    url: Union[_str, 'types.StringFilter']
+    publishedAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    stance: Union[_str, 'types.StringFilter']
+    claim: 'ClaimRelationFilter'
+
+    # should be noted that AND and NOT should be Union['EvidenceWhereInputRecursive3', List['EvidenceWhereInputRecursive3']]
+    # but this causes mypy to hang :/
+    AND: List['EvidenceWhereInputRecursive3']
+    OR: List['EvidenceWhereInputRecursive3']
+    NOT: List['EvidenceWhereInputRecursive3']
+
+
+class EvidenceWhereInputRecursive3(TypedDict, total=False):
+    """Evidence arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    claimId: Union[_str, 'types.StringFilter']
+    articleId: Union[_str, 'types.StringFilter']
+    sentence: Union[_str, 'types.StringFilter']
+    source: Union[_str, 'types.StringFilter']
+    url: Union[_str, 'types.StringFilter']
+    publishedAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    stance: Union[_str, 'types.StringFilter']
+    claim: 'ClaimRelationFilter'
+
+    # should be noted that AND and NOT should be Union['EvidenceWhereInputRecursive4', List['EvidenceWhereInputRecursive4']]
+    # but this causes mypy to hang :/
+    AND: List['EvidenceWhereInputRecursive4']
+    OR: List['EvidenceWhereInputRecursive4']
+    NOT: List['EvidenceWhereInputRecursive4']
+
+
+class EvidenceWhereInputRecursive4(TypedDict, total=False):
+    """Evidence arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    claimId: Union[_str, 'types.StringFilter']
+    articleId: Union[_str, 'types.StringFilter']
+    sentence: Union[_str, 'types.StringFilter']
+    source: Union[_str, 'types.StringFilter']
+    url: Union[_str, 'types.StringFilter']
+    publishedAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    stance: Union[_str, 'types.StringFilter']
+    claim: 'ClaimRelationFilter'
+
+
+
+# aggregate Evidence types
+
+
+    
+
+class EvidenceScalarWhereWithAggregatesInput(TypedDict, total=False):
+    """Evidence arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    claimId: Union[_str, 'types.StringWithAggregatesFilter']
+    articleId: Union[_str, 'types.StringWithAggregatesFilter']
+    sentence: Union[_str, 'types.StringWithAggregatesFilter']
+    source: Union[_str, 'types.StringWithAggregatesFilter']
+    url: Union[_str, 'types.StringWithAggregatesFilter']
+    publishedAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    stance: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['EvidenceScalarWhereWithAggregatesInputRecursive1']
+    OR: List['EvidenceScalarWhereWithAggregatesInputRecursive1']
+    NOT: List['EvidenceScalarWhereWithAggregatesInputRecursive1']
+
+
+class EvidenceScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
+    """Evidence arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    claimId: Union[_str, 'types.StringWithAggregatesFilter']
+    articleId: Union[_str, 'types.StringWithAggregatesFilter']
+    sentence: Union[_str, 'types.StringWithAggregatesFilter']
+    source: Union[_str, 'types.StringWithAggregatesFilter']
+    url: Union[_str, 'types.StringWithAggregatesFilter']
+    publishedAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    stance: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['EvidenceScalarWhereWithAggregatesInputRecursive2']
+    OR: List['EvidenceScalarWhereWithAggregatesInputRecursive2']
+    NOT: List['EvidenceScalarWhereWithAggregatesInputRecursive2']
+
+
+class EvidenceScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
+    """Evidence arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    claimId: Union[_str, 'types.StringWithAggregatesFilter']
+    articleId: Union[_str, 'types.StringWithAggregatesFilter']
+    sentence: Union[_str, 'types.StringWithAggregatesFilter']
+    source: Union[_str, 'types.StringWithAggregatesFilter']
+    url: Union[_str, 'types.StringWithAggregatesFilter']
+    publishedAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    stance: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['EvidenceScalarWhereWithAggregatesInputRecursive3']
+    OR: List['EvidenceScalarWhereWithAggregatesInputRecursive3']
+    NOT: List['EvidenceScalarWhereWithAggregatesInputRecursive3']
+
+
+class EvidenceScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
+    """Evidence arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    claimId: Union[_str, 'types.StringWithAggregatesFilter']
+    articleId: Union[_str, 'types.StringWithAggregatesFilter']
+    sentence: Union[_str, 'types.StringWithAggregatesFilter']
+    source: Union[_str, 'types.StringWithAggregatesFilter']
+    url: Union[_str, 'types.StringWithAggregatesFilter']
+    publishedAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    stance: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['EvidenceScalarWhereWithAggregatesInputRecursive4']
+    OR: List['EvidenceScalarWhereWithAggregatesInputRecursive4']
+    NOT: List['EvidenceScalarWhereWithAggregatesInputRecursive4']
+
+
+class EvidenceScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
+    """Evidence arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    claimId: Union[_str, 'types.StringWithAggregatesFilter']
+    articleId: Union[_str, 'types.StringWithAggregatesFilter']
+    sentence: Union[_str, 'types.StringWithAggregatesFilter']
+    source: Union[_str, 'types.StringWithAggregatesFilter']
+    url: Union[_str, 'types.StringWithAggregatesFilter']
+    publishedAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    stance: Union[_str, 'types.StringWithAggregatesFilter']
+
+
+
+class EvidenceGroupByOutput(TypedDict, total=False):
+    id: _str
+    claimId: _str
+    articleId: _str
+    sentence: _str
+    source: _str
+    url: _str
+    publishedAt: datetime.datetime
+    stance: _str
+    _sum: 'EvidenceSumAggregateOutput'
+    _avg: 'EvidenceAvgAggregateOutput'
+    _min: 'EvidenceMinAggregateOutput'
+    _max: 'EvidenceMaxAggregateOutput'
+    _count: 'EvidenceCountAggregateOutput'
+
+
+class EvidenceAvgAggregateOutput(TypedDict, total=False):
+    """Evidence output for aggregating averages"""
+
+
+class EvidenceSumAggregateOutput(TypedDict, total=False):
+    """Evidence output for aggregating sums"""
+
+
+class EvidenceScalarAggregateOutput(TypedDict, total=False):
+    """Evidence output including scalar fields"""
+    id: _str
+    claimId: _str
+    articleId: _str
+    sentence: _str
+    source: _str
+    url: _str
+    publishedAt: datetime.datetime
+    stance: _str
+
+
+EvidenceMinAggregateOutput = EvidenceScalarAggregateOutput
+EvidenceMaxAggregateOutput = EvidenceScalarAggregateOutput
+
+
+class EvidenceMaxAggregateInput(TypedDict, total=False):
+    """Evidence input for aggregating by max"""
+    id: bool
+    claimId: bool
+    articleId: bool
+    sentence: bool
+    source: bool
+    url: bool
+    publishedAt: bool
+    stance: bool
+
+
+class EvidenceMinAggregateInput(TypedDict, total=False):
+    """Evidence input for aggregating by min"""
+    id: bool
+    claimId: bool
+    articleId: bool
+    sentence: bool
+    source: bool
+    url: bool
+    publishedAt: bool
+    stance: bool
+
+
+class EvidenceNumberAggregateInput(TypedDict, total=False):
+    """Evidence input for aggregating numbers"""
+
+
+EvidenceAvgAggregateInput = EvidenceNumberAggregateInput
+EvidenceSumAggregateInput = EvidenceNumberAggregateInput
+
+
+EvidenceCountAggregateInput = TypedDict(
+    'EvidenceCountAggregateInput',
+    {
+        'id': bool,
+        'claimId': bool,
+        'articleId': bool,
+        'sentence': bool,
+        'source': bool,
+        'url': bool,
+        'publishedAt': bool,
+        'stance': bool,
+        '_all': bool,
+    },
+    total=False,
+)
+
+EvidenceCountAggregateOutput = TypedDict(
+    'EvidenceCountAggregateOutput',
+    {
+        'id': int,
+        'claimId': int,
+        'articleId': int,
+        'sentence': int,
+        'source': int,
+        'url': int,
+        'publishedAt': int,
+        'stance': int,
+        '_all': int,
+    },
+    total=False,
+)
+
+
+EvidenceKeys = Literal[
+    'id',
+    'claimId',
+    'articleId',
+    'sentence',
+    'source',
+    'url',
+    'publishedAt',
+    'stance',
+    'claim',
+]
+EvidenceScalarFieldKeys = Literal[
+    'id',
+    'claimId',
+    'articleId',
+    'sentence',
+    'source',
+    'url',
+    'publishedAt',
+    'stance',
+]
+EvidenceScalarFieldKeysT = TypeVar('EvidenceScalarFieldKeysT', bound=EvidenceScalarFieldKeys)
+
+EvidenceRelationalFieldKeys = Literal[
+        'claim',
+    ]
+
+# Event types
+
+class EventOptionalCreateInput(TypedDict, total=False):
+    """Optional arguments to the Event create method"""
+    id: _str
+    description: Optional[_str]
+    createdAt: datetime.datetime
+    claimClusters: 'ClaimClusterCreateManyNestedWithoutRelationsInput'
+
+
+class EventCreateInput(EventOptionalCreateInput):
+    """Required arguments to the Event create method"""
+    title: _str
+
+
+# TODO: remove this in favour of without explicit relations
+# e.g. PostCreateWithoutAuthorInput
+
+class EventOptionalCreateWithoutRelationsInput(TypedDict, total=False):
+    """Optional arguments to the Event create method, without relations"""
+    id: _str
+    description: Optional[_str]
+    createdAt: datetime.datetime
+
+
+class EventCreateWithoutRelationsInput(EventOptionalCreateWithoutRelationsInput):
+    """Required arguments to the Event create method, without relations"""
+    title: _str
+
+class EventConnectOrCreateWithoutRelationsInput(TypedDict):
+    create: 'EventCreateWithoutRelationsInput'
+    where: 'EventWhereUniqueInput'
+
+class EventCreateNestedWithoutRelationsInput(TypedDict, total=False):
+    create: 'EventCreateWithoutRelationsInput'
+    connect: 'EventWhereUniqueInput'
+    connect_or_create: 'EventConnectOrCreateWithoutRelationsInput'
+
+
+class EventCreateManyNestedWithoutRelationsInput(TypedDict, total=False):
+    create: Union['EventCreateWithoutRelationsInput', List['EventCreateWithoutRelationsInput']]
+    connect: Union['EventWhereUniqueInput', List['EventWhereUniqueInput']]
+    connect_or_create: Union['EventConnectOrCreateWithoutRelationsInput', List['EventConnectOrCreateWithoutRelationsInput']]
+
+_EventWhereUnique_id_Input = TypedDict(
+    '_EventWhereUnique_id_Input',
+    {
+        'id': '_str',
+    },
+    total=True
+)
+
+EventWhereUniqueInput = _EventWhereUnique_id_Input
+
+
+class EventUpdateInput(TypedDict, total=False):
+    """Optional arguments for updating a record"""
+    id: _str
+    title: _str
+    description: Optional[_str]
+    createdAt: datetime.datetime
+    claimClusters: 'ClaimClusterUpdateManyWithoutRelationsInput'
+
+
+class EventUpdateManyMutationInput(TypedDict, total=False):
+    """Arguments for updating many records"""
+    id: _str
+    title: _str
+    description: Optional[_str]
+    createdAt: datetime.datetime
+
+
+class EventUpdateManyWithoutRelationsInput(TypedDict, total=False):
+    create: List['EventCreateWithoutRelationsInput']
+    connect: List['EventWhereUniqueInput']
+    connect_or_create: List['EventConnectOrCreateWithoutRelationsInput']
+    set: List['EventWhereUniqueInput']
+    disconnect: List['EventWhereUniqueInput']
+    delete: List['EventWhereUniqueInput']
+
+    # TODO
+    # update: List['EventUpdateWithWhereUniqueWithoutRelationsInput']
+    # updateMany: List['EventUpdateManyWithWhereUniqueWithoutRelationsInput']
+    # deleteMany: List['EventScalarWhereInput']
+    # upsert: List['EventUpserteWithWhereUniqueWithoutRelationsInput']
+
+
+class EventUpdateOneWithoutRelationsInput(TypedDict, total=False):
+    create: 'EventCreateWithoutRelationsInput'
+    connect: 'EventWhereUniqueInput'
+    connect_or_create: 'EventConnectOrCreateWithoutRelationsInput'
+    disconnect: bool
+    delete: bool
+
+    # TODO
+    # update: 'EventUpdateInput'
+    # upsert: 'EventUpsertWithoutRelationsInput'
+
+
+class EventUpsertInput(TypedDict):
+    create: 'EventCreateInput'
+    update: 'EventUpdateInput'  # pyright: ignore[reportIncompatibleMethodOverride]
+
+
+_Event_id_OrderByInput = TypedDict(
+    '_Event_id_OrderByInput',
+    {
+        'id': 'SortOrder',
+    },
+    total=True
+)
+
+_Event_title_OrderByInput = TypedDict(
+    '_Event_title_OrderByInput',
+    {
+        'title': 'SortOrder',
+    },
+    total=True
+)
+
+_Event_description_OrderByInput = TypedDict(
+    '_Event_description_OrderByInput',
+    {
+        'description': 'SortOrder',
+    },
+    total=True
+)
+
+_Event_createdAt_OrderByInput = TypedDict(
+    '_Event_createdAt_OrderByInput',
+    {
+        'createdAt': 'SortOrder',
+    },
+    total=True
+)
+
+_Event_RelevanceInner = TypedDict(
+    '_Event_RelevanceInner',
+    {
+        'fields': 'List[EventScalarFieldKeys]',
+        'search': 'str',
+        'sort': 'SortOrder',
+    },
+    total=True
+)
+
+_Event_RelevanceOrderByInput = TypedDict(
+    '_Event_RelevanceOrderByInput',
+    {
+        '_relevance': '_Event_RelevanceInner',
+    },
+    total=True
+)
+
+EventOrderByInput = Union[
+    '_Event_id_OrderByInput',
+    '_Event_title_OrderByInput',
+    '_Event_description_OrderByInput',
+    '_Event_createdAt_OrderByInput',
+    '_Event_RelevanceOrderByInput',
+]
+
+
+
+# recursive Event types
+# TODO: cleanup these types
+
+
+# Dict[str, Any] is a mypy limitation
+# see https://github.com/RobertCraigie/prisma-client-py/issues/45
+# switch to pyright for improved types, see https://prisma-client-py.readthedocs.io/en/stable/reference/limitations/
+
+EventRelationFilter = TypedDict(
+    'EventRelationFilter',
+    {
+        'is': 'Dict[str, Any]',
+        'is_not': 'Dict[str, Any]',
+    },
+    total=False,
+)
+
+
+class EventListRelationFilter(TypedDict, total=False):
+    some: 'Dict[str, Any]'
+    none: 'Dict[str, Any]'
+    every: 'Dict[str, Any]'
+
+
+class EventInclude(TypedDict, total=False):
+    """Event relational arguments"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEvent']
+
+
+    
+
+class UserIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+    sessions: Union[bool, 'FindManySessionArgsFromEventRecursive1']
+    accounts: Union[bool, 'FindManyAccountArgsFromEventRecursive1']
+    searches: Union[bool, 'FindManySearchArgsFromEventRecursive1']
+
+
+class UserIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+    sessions: Union[bool, 'FindManySessionArgsFromEventRecursive2']
+    accounts: Union[bool, 'FindManyAccountArgsFromEventRecursive2']
+    searches: Union[bool, 'FindManySearchArgsFromEventRecursive2']
+
+
+class UserIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+    sessions: Union[bool, 'FindManySessionArgsFromEventRecursive3']
+    accounts: Union[bool, 'FindManyAccountArgsFromEventRecursive3']
+    searches: Union[bool, 'FindManySearchArgsFromEventRecursive3']
+
+
+class UserIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+    sessions: Union[bool, 'FindManySessionArgsFromEventRecursive4']
+    accounts: Union[bool, 'FindManyAccountArgsFromEventRecursive4']
+    searches: Union[bool, 'FindManySearchArgsFromEventRecursive4']
+
+
+class UserIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class UserArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class UserArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class UserArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class UserArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class UserArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyUserArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class FindManyUserArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class FindManyUserArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class FindManyUserArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class FindManyUserArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    
+    
+
+class SessionIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive1']
+
+
+class SessionIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive2']
+
+
+class SessionIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive3']
+
+
+class SessionIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive4']
+
+
+class SessionIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class SessionArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class SessionArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class SessionArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class SessionArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class SessionArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManySessionArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class FindManySessionArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class FindManySessionArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class FindManySessionArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class FindManySessionArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    
+    
+
+class AccountIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive1']
+
+
+class AccountIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive2']
+
+
+class AccountIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive3']
+
+
+class AccountIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive4']
+
+
+class AccountIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class AccountArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class AccountArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class AccountArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class AccountArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class AccountArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyAccountArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class FindManyAccountArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class FindManyAccountArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class FindManyAccountArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class FindManyAccountArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    
+    
+
+class VerificationIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class VerificationIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class VerificationIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class VerificationIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class VerificationIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class VerificationArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class VerificationArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class VerificationArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class VerificationArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class VerificationArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyVerificationArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class FindManyVerificationArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class FindManyVerificationArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class FindManyVerificationArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class FindManyVerificationArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    
+    
+
+class SearchIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive1']
+    articles: Union[bool, 'FindManyArticleArgsFromEventRecursive1']
+    insights: Union[bool, 'FindManyInsightArgsFromEventRecursive1']
+
+
+class SearchIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive2']
+    articles: Union[bool, 'FindManyArticleArgsFromEventRecursive2']
+    insights: Union[bool, 'FindManyInsightArgsFromEventRecursive2']
+
+
+class SearchIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive3']
+    articles: Union[bool, 'FindManyArticleArgsFromEventRecursive3']
+    insights: Union[bool, 'FindManyInsightArgsFromEventRecursive3']
+
+
+class SearchIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive4']
+    articles: Union[bool, 'FindManyArticleArgsFromEventRecursive4']
+    insights: Union[bool, 'FindManyInsightArgsFromEventRecursive4']
+
+
+class SearchIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class SearchArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class SearchArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class SearchArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class SearchArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class SearchArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManySearchArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class FindManySearchArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class FindManySearchArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class FindManySearchArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class FindManySearchArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    
+    
+
+class ArticleIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+    search: Union[bool, 'SearchArgsFromEventRecursive1']
+
+
+class ArticleIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+    search: Union[bool, 'SearchArgsFromEventRecursive2']
+
+
+class ArticleIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+    search: Union[bool, 'SearchArgsFromEventRecursive3']
+
+
+class ArticleIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+    search: Union[bool, 'SearchArgsFromEventRecursive4']
+
+
+class ArticleIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class ArticleArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class ArticleArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class ArticleArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class ArticleArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class ArticleArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyArticleArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class FindManyArticleArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class FindManyArticleArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class FindManyArticleArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class FindManyArticleArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    
+    
+
+class InsightIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+    search: Union[bool, 'SearchArgsFromEventRecursive1']
+
+
+class InsightIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+    search: Union[bool, 'SearchArgsFromEventRecursive2']
+
+
+class InsightIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+    search: Union[bool, 'SearchArgsFromEventRecursive3']
+
+
+class InsightIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+    search: Union[bool, 'SearchArgsFromEventRecursive4']
+
+
+class InsightIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class InsightArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class InsightArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class InsightArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class InsightArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class InsightArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyInsightArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class FindManyInsightArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class FindManyInsightArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class FindManyInsightArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class FindManyInsightArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+    cluster: Union[bool, 'ClaimClusterArgsFromEventRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromEventRecursive1']
+
+
+class ClaimIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+    cluster: Union[bool, 'ClaimClusterArgsFromEventRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromEventRecursive2']
+
+
+class ClaimIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+    cluster: Union[bool, 'ClaimClusterArgsFromEventRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromEventRecursive3']
+
+
+class ClaimIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+    cluster: Union[bool, 'ClaimClusterArgsFromEventRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromEventRecursive4']
+
+
+class ClaimIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class ClaimArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyClaimArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+    claim: Union[bool, 'ClaimArgsFromEventRecursive1']
+
+
+class EvidenceIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+    claim: Union[bool, 'ClaimArgsFromEventRecursive2']
+
+
+class EvidenceIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+    claim: Union[bool, 'ClaimArgsFromEventRecursive3']
+
+
+class EvidenceIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+    claim: Union[bool, 'ClaimArgsFromEventRecursive4']
+
+
+class EvidenceIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class EvidenceArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyEvidenceArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEventRecursive1']
+
+
+class EventIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEventRecursive2']
+
+
+class EventIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEventRecursive3']
+
+
+class EventIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEventRecursive4']
+
+
+class EventIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class EventArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyEventArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+    event: Union[bool, 'EventArgsFromEventRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromEventRecursive1']
+
+
+class ClaimClusterIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+    event: Union[bool, 'EventArgsFromEventRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromEventRecursive2']
+
+
+class ClaimClusterIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+    event: Union[bool, 'EventArgsFromEventRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromEventRecursive3']
+
+
+class ClaimClusterIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+    event: Union[bool, 'EventArgsFromEventRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromEventRecursive4']
+
+
+class ClaimClusterIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class ClaimClusterArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyClaimClusterArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
+
+
+FindManyEventArgs = FindManyEventArgsFromEvent
+FindFirstEventArgs = FindManyEventArgsFromEvent
+
+
+    
+
+class EventWhereInput(TypedDict, total=False):
+    """Event arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    title: Union[_str, 'types.StringFilter']
+    description: Union[None, _str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    claimClusters: 'ClaimClusterListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['EventWhereInputRecursive1', List['EventWhereInputRecursive1']]
+    # but this causes mypy to hang :/
+    AND: List['EventWhereInputRecursive1']
+    OR: List['EventWhereInputRecursive1']
+    NOT: List['EventWhereInputRecursive1']
+
+
+class EventWhereInputRecursive1(TypedDict, total=False):
+    """Event arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    title: Union[_str, 'types.StringFilter']
+    description: Union[None, _str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    claimClusters: 'ClaimClusterListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['EventWhereInputRecursive2', List['EventWhereInputRecursive2']]
+    # but this causes mypy to hang :/
+    AND: List['EventWhereInputRecursive2']
+    OR: List['EventWhereInputRecursive2']
+    NOT: List['EventWhereInputRecursive2']
+
+
+class EventWhereInputRecursive2(TypedDict, total=False):
+    """Event arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    title: Union[_str, 'types.StringFilter']
+    description: Union[None, _str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    claimClusters: 'ClaimClusterListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['EventWhereInputRecursive3', List['EventWhereInputRecursive3']]
+    # but this causes mypy to hang :/
+    AND: List['EventWhereInputRecursive3']
+    OR: List['EventWhereInputRecursive3']
+    NOT: List['EventWhereInputRecursive3']
+
+
+class EventWhereInputRecursive3(TypedDict, total=False):
+    """Event arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    title: Union[_str, 'types.StringFilter']
+    description: Union[None, _str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    claimClusters: 'ClaimClusterListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['EventWhereInputRecursive4', List['EventWhereInputRecursive4']]
+    # but this causes mypy to hang :/
+    AND: List['EventWhereInputRecursive4']
+    OR: List['EventWhereInputRecursive4']
+    NOT: List['EventWhereInputRecursive4']
+
+
+class EventWhereInputRecursive4(TypedDict, total=False):
+    """Event arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    title: Union[_str, 'types.StringFilter']
+    description: Union[None, _str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    claimClusters: 'ClaimClusterListRelationFilter'
+
+
+
+# aggregate Event types
+
+
+    
+
+class EventScalarWhereWithAggregatesInput(TypedDict, total=False):
+    """Event arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    title: Union[_str, 'types.StringWithAggregatesFilter']
+    description: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['EventScalarWhereWithAggregatesInputRecursive1']
+    OR: List['EventScalarWhereWithAggregatesInputRecursive1']
+    NOT: List['EventScalarWhereWithAggregatesInputRecursive1']
+
+
+class EventScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
+    """Event arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    title: Union[_str, 'types.StringWithAggregatesFilter']
+    description: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['EventScalarWhereWithAggregatesInputRecursive2']
+    OR: List['EventScalarWhereWithAggregatesInputRecursive2']
+    NOT: List['EventScalarWhereWithAggregatesInputRecursive2']
+
+
+class EventScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
+    """Event arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    title: Union[_str, 'types.StringWithAggregatesFilter']
+    description: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['EventScalarWhereWithAggregatesInputRecursive3']
+    OR: List['EventScalarWhereWithAggregatesInputRecursive3']
+    NOT: List['EventScalarWhereWithAggregatesInputRecursive3']
+
+
+class EventScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
+    """Event arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    title: Union[_str, 'types.StringWithAggregatesFilter']
+    description: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['EventScalarWhereWithAggregatesInputRecursive4']
+    OR: List['EventScalarWhereWithAggregatesInputRecursive4']
+    NOT: List['EventScalarWhereWithAggregatesInputRecursive4']
+
+
+class EventScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
+    """Event arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    title: Union[_str, 'types.StringWithAggregatesFilter']
+    description: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+
+
+class EventGroupByOutput(TypedDict, total=False):
+    id: _str
+    title: _str
+    description: _str
+    createdAt: datetime.datetime
+    _sum: 'EventSumAggregateOutput'
+    _avg: 'EventAvgAggregateOutput'
+    _min: 'EventMinAggregateOutput'
+    _max: 'EventMaxAggregateOutput'
+    _count: 'EventCountAggregateOutput'
+
+
+class EventAvgAggregateOutput(TypedDict, total=False):
+    """Event output for aggregating averages"""
+
+
+class EventSumAggregateOutput(TypedDict, total=False):
+    """Event output for aggregating sums"""
+
+
+class EventScalarAggregateOutput(TypedDict, total=False):
+    """Event output including scalar fields"""
+    id: _str
+    title: _str
+    description: _str
+    createdAt: datetime.datetime
+
+
+EventMinAggregateOutput = EventScalarAggregateOutput
+EventMaxAggregateOutput = EventScalarAggregateOutput
+
+
+class EventMaxAggregateInput(TypedDict, total=False):
+    """Event input for aggregating by max"""
+    id: bool
+    title: bool
+    description: bool
+    createdAt: bool
+
+
+class EventMinAggregateInput(TypedDict, total=False):
+    """Event input for aggregating by min"""
+    id: bool
+    title: bool
+    description: bool
+    createdAt: bool
+
+
+class EventNumberAggregateInput(TypedDict, total=False):
+    """Event input for aggregating numbers"""
+
+
+EventAvgAggregateInput = EventNumberAggregateInput
+EventSumAggregateInput = EventNumberAggregateInput
+
+
+EventCountAggregateInput = TypedDict(
+    'EventCountAggregateInput',
+    {
+        'id': bool,
+        'title': bool,
+        'description': bool,
+        'createdAt': bool,
+        '_all': bool,
+    },
+    total=False,
+)
+
+EventCountAggregateOutput = TypedDict(
+    'EventCountAggregateOutput',
+    {
+        'id': int,
+        'title': int,
+        'description': int,
+        'createdAt': int,
+        '_all': int,
+    },
+    total=False,
+)
+
+
+EventKeys = Literal[
+    'id',
+    'title',
+    'description',
+    'createdAt',
+    'claimClusters',
+]
+EventScalarFieldKeys = Literal[
+    'id',
+    'title',
+    'description',
+    'createdAt',
+]
+EventScalarFieldKeysT = TypeVar('EventScalarFieldKeysT', bound=EventScalarFieldKeys)
+
+EventRelationalFieldKeys = Literal[
+        'claimClusters',
+    ]
+
+# ClaimCluster types
+
+class ClaimClusterOptionalCreateInput(TypedDict, total=False):
+    """Optional arguments to the ClaimCluster create method"""
+    id: _str
+    eventId: Optional[_str]
+    event: 'EventCreateNestedWithoutRelationsInput'
+    claims: 'ClaimCreateManyNestedWithoutRelationsInput'
+
+
+class ClaimClusterCreateInput(ClaimClusterOptionalCreateInput):
+    """Required arguments to the ClaimCluster create method"""
+    title: _str
+
+
+# TODO: remove this in favour of without explicit relations
+# e.g. PostCreateWithoutAuthorInput
+
+class ClaimClusterOptionalCreateWithoutRelationsInput(TypedDict, total=False):
+    """Optional arguments to the ClaimCluster create method, without relations"""
+    id: _str
+    eventId: Optional[_str]
+
+
+class ClaimClusterCreateWithoutRelationsInput(ClaimClusterOptionalCreateWithoutRelationsInput):
+    """Required arguments to the ClaimCluster create method, without relations"""
+    title: _str
+
+class ClaimClusterConnectOrCreateWithoutRelationsInput(TypedDict):
+    create: 'ClaimClusterCreateWithoutRelationsInput'
+    where: 'ClaimClusterWhereUniqueInput'
+
+class ClaimClusterCreateNestedWithoutRelationsInput(TypedDict, total=False):
+    create: 'ClaimClusterCreateWithoutRelationsInput'
+    connect: 'ClaimClusterWhereUniqueInput'
+    connect_or_create: 'ClaimClusterConnectOrCreateWithoutRelationsInput'
+
+
+class ClaimClusterCreateManyNestedWithoutRelationsInput(TypedDict, total=False):
+    create: Union['ClaimClusterCreateWithoutRelationsInput', List['ClaimClusterCreateWithoutRelationsInput']]
+    connect: Union['ClaimClusterWhereUniqueInput', List['ClaimClusterWhereUniqueInput']]
+    connect_or_create: Union['ClaimClusterConnectOrCreateWithoutRelationsInput', List['ClaimClusterConnectOrCreateWithoutRelationsInput']]
+
+_ClaimClusterWhereUnique_id_Input = TypedDict(
+    '_ClaimClusterWhereUnique_id_Input',
+    {
+        'id': '_str',
+    },
+    total=True
+)
+
+ClaimClusterWhereUniqueInput = _ClaimClusterWhereUnique_id_Input
+
+
+class ClaimClusterUpdateInput(TypedDict, total=False):
+    """Optional arguments for updating a record"""
+    id: _str
+    title: _str
+    event: 'EventUpdateOneWithoutRelationsInput'
+    claims: 'ClaimUpdateManyWithoutRelationsInput'
+
+
+class ClaimClusterUpdateManyMutationInput(TypedDict, total=False):
+    """Arguments for updating many records"""
+    id: _str
+    title: _str
+
+
+class ClaimClusterUpdateManyWithoutRelationsInput(TypedDict, total=False):
+    create: List['ClaimClusterCreateWithoutRelationsInput']
+    connect: List['ClaimClusterWhereUniqueInput']
+    connect_or_create: List['ClaimClusterConnectOrCreateWithoutRelationsInput']
+    set: List['ClaimClusterWhereUniqueInput']
+    disconnect: List['ClaimClusterWhereUniqueInput']
+    delete: List['ClaimClusterWhereUniqueInput']
+
+    # TODO
+    # update: List['ClaimClusterUpdateWithWhereUniqueWithoutRelationsInput']
+    # updateMany: List['ClaimClusterUpdateManyWithWhereUniqueWithoutRelationsInput']
+    # deleteMany: List['ClaimClusterScalarWhereInput']
+    # upsert: List['ClaimClusterUpserteWithWhereUniqueWithoutRelationsInput']
+
+
+class ClaimClusterUpdateOneWithoutRelationsInput(TypedDict, total=False):
+    create: 'ClaimClusterCreateWithoutRelationsInput'
+    connect: 'ClaimClusterWhereUniqueInput'
+    connect_or_create: 'ClaimClusterConnectOrCreateWithoutRelationsInput'
+    disconnect: bool
+    delete: bool
+
+    # TODO
+    # update: 'ClaimClusterUpdateInput'
+    # upsert: 'ClaimClusterUpsertWithoutRelationsInput'
+
+
+class ClaimClusterUpsertInput(TypedDict):
+    create: 'ClaimClusterCreateInput'
+    update: 'ClaimClusterUpdateInput'  # pyright: ignore[reportIncompatibleMethodOverride]
+
+
+_ClaimCluster_id_OrderByInput = TypedDict(
+    '_ClaimCluster_id_OrderByInput',
+    {
+        'id': 'SortOrder',
+    },
+    total=True
+)
+
+_ClaimCluster_title_OrderByInput = TypedDict(
+    '_ClaimCluster_title_OrderByInput',
+    {
+        'title': 'SortOrder',
+    },
+    total=True
+)
+
+_ClaimCluster_eventId_OrderByInput = TypedDict(
+    '_ClaimCluster_eventId_OrderByInput',
+    {
+        'eventId': 'SortOrder',
+    },
+    total=True
+)
+
+_ClaimCluster_RelevanceInner = TypedDict(
+    '_ClaimCluster_RelevanceInner',
+    {
+        'fields': 'List[ClaimClusterScalarFieldKeys]',
+        'search': 'str',
+        'sort': 'SortOrder',
+    },
+    total=True
+)
+
+_ClaimCluster_RelevanceOrderByInput = TypedDict(
+    '_ClaimCluster_RelevanceOrderByInput',
+    {
+        '_relevance': '_ClaimCluster_RelevanceInner',
+    },
+    total=True
+)
+
+ClaimClusterOrderByInput = Union[
+    '_ClaimCluster_id_OrderByInput',
+    '_ClaimCluster_title_OrderByInput',
+    '_ClaimCluster_eventId_OrderByInput',
+    '_ClaimCluster_RelevanceOrderByInput',
+]
+
+
+
+# recursive ClaimCluster types
+# TODO: cleanup these types
+
+
+# Dict[str, Any] is a mypy limitation
+# see https://github.com/RobertCraigie/prisma-client-py/issues/45
+# switch to pyright for improved types, see https://prisma-client-py.readthedocs.io/en/stable/reference/limitations/
+
+ClaimClusterRelationFilter = TypedDict(
+    'ClaimClusterRelationFilter',
+    {
+        'is': 'Dict[str, Any]',
+        'is_not': 'Dict[str, Any]',
+    },
+    total=False,
+)
+
+
+class ClaimClusterListRelationFilter(TypedDict, total=False):
+    some: 'Dict[str, Any]'
+    none: 'Dict[str, Any]'
+    every: 'Dict[str, Any]'
+
+
+class ClaimClusterInclude(TypedDict, total=False):
+    """ClaimCluster relational arguments"""
+    event: Union[bool, 'EventArgsFromClaimCluster']
+    claims: Union[bool, 'FindManyClaimArgsFromClaimCluster']
+
+
+    
+
+class UserIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    sessions: Union[bool, 'FindManySessionArgsFromClaimClusterRecursive1']
+    accounts: Union[bool, 'FindManyAccountArgsFromClaimClusterRecursive1']
+    searches: Union[bool, 'FindManySearchArgsFromClaimClusterRecursive1']
+
+
+class UserIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    sessions: Union[bool, 'FindManySessionArgsFromClaimClusterRecursive2']
+    accounts: Union[bool, 'FindManyAccountArgsFromClaimClusterRecursive2']
+    searches: Union[bool, 'FindManySearchArgsFromClaimClusterRecursive2']
+
+
+class UserIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    sessions: Union[bool, 'FindManySessionArgsFromClaimClusterRecursive3']
+    accounts: Union[bool, 'FindManyAccountArgsFromClaimClusterRecursive3']
+    searches: Union[bool, 'FindManySearchArgsFromClaimClusterRecursive3']
+
+
+class UserIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    sessions: Union[bool, 'FindManySessionArgsFromClaimClusterRecursive4']
+    accounts: Union[bool, 'FindManyAccountArgsFromClaimClusterRecursive4']
+    searches: Union[bool, 'FindManySearchArgsFromClaimClusterRecursive4']
+
+
+class UserIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class UserArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class UserArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class UserArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class UserArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class UserArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyUserArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class FindManyUserArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class FindManyUserArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class FindManyUserArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class FindManyUserArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    
+    
+
+class SessionIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive1']
+
+
+class SessionIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive2']
+
+
+class SessionIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive3']
+
+
+class SessionIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive4']
+
+
+class SessionIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class SessionArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class SessionArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class SessionArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class SessionArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class SessionArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManySessionArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class FindManySessionArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class FindManySessionArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class FindManySessionArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class FindManySessionArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    
+    
+
+class AccountIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive1']
+
+
+class AccountIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive2']
+
+
+class AccountIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive3']
+
+
+class AccountIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive4']
+
+
+class AccountIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class AccountArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class AccountArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class AccountArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class AccountArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class AccountArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyAccountArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class FindManyAccountArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class FindManyAccountArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class FindManyAccountArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class FindManyAccountArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    
+    
+
+class VerificationIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class VerificationIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class VerificationIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class VerificationIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class VerificationIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class VerificationArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class VerificationArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class VerificationArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class VerificationArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class VerificationArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyVerificationArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class FindManyVerificationArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class FindManyVerificationArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class FindManyVerificationArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class FindManyVerificationArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    
+    
+
+class SearchIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive1']
+    articles: Union[bool, 'FindManyArticleArgsFromClaimClusterRecursive1']
+    insights: Union[bool, 'FindManyInsightArgsFromClaimClusterRecursive1']
+
+
+class SearchIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive2']
+    articles: Union[bool, 'FindManyArticleArgsFromClaimClusterRecursive2']
+    insights: Union[bool, 'FindManyInsightArgsFromClaimClusterRecursive2']
+
+
+class SearchIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive3']
+    articles: Union[bool, 'FindManyArticleArgsFromClaimClusterRecursive3']
+    insights: Union[bool, 'FindManyInsightArgsFromClaimClusterRecursive3']
+
+
+class SearchIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive4']
+    articles: Union[bool, 'FindManyArticleArgsFromClaimClusterRecursive4']
+    insights: Union[bool, 'FindManyInsightArgsFromClaimClusterRecursive4']
+
+
+class SearchIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class SearchArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class SearchArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class SearchArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class SearchArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class SearchArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManySearchArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class FindManySearchArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class FindManySearchArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class FindManySearchArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class FindManySearchArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    
+    
+
+class ArticleIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    search: Union[bool, 'SearchArgsFromClaimClusterRecursive1']
+
+
+class ArticleIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    search: Union[bool, 'SearchArgsFromClaimClusterRecursive2']
+
+
+class ArticleIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    search: Union[bool, 'SearchArgsFromClaimClusterRecursive3']
+
+
+class ArticleIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    search: Union[bool, 'SearchArgsFromClaimClusterRecursive4']
+
+
+class ArticleIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class ArticleArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class ArticleArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class ArticleArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class ArticleArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class ArticleArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyArticleArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class FindManyArticleArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class FindManyArticleArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class FindManyArticleArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class FindManyArticleArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    
+    
+
+class InsightIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    search: Union[bool, 'SearchArgsFromClaimClusterRecursive1']
+
+
+class InsightIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    search: Union[bool, 'SearchArgsFromClaimClusterRecursive2']
+
+
+class InsightIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    search: Union[bool, 'SearchArgsFromClaimClusterRecursive3']
+
+
+class InsightIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    search: Union[bool, 'SearchArgsFromClaimClusterRecursive4']
+
+
+class InsightIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class InsightArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class InsightArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class InsightArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class InsightArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class InsightArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyInsightArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class FindManyInsightArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class FindManyInsightArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class FindManyInsightArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class FindManyInsightArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    cluster: Union[bool, 'ClaimClusterArgsFromClaimClusterRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromClaimClusterRecursive1']
+
+
+class ClaimIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    cluster: Union[bool, 'ClaimClusterArgsFromClaimClusterRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromClaimClusterRecursive2']
+
+
+class ClaimIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    cluster: Union[bool, 'ClaimClusterArgsFromClaimClusterRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromClaimClusterRecursive3']
+
+
+class ClaimIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    cluster: Union[bool, 'ClaimClusterArgsFromClaimClusterRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromClaimClusterRecursive4']
+
+
+class ClaimIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class ClaimArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyClaimArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    claim: Union[bool, 'ClaimArgsFromClaimClusterRecursive1']
+
+
+class EvidenceIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    claim: Union[bool, 'ClaimArgsFromClaimClusterRecursive2']
+
+
+class EvidenceIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    claim: Union[bool, 'ClaimArgsFromClaimClusterRecursive3']
+
+
+class EvidenceIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    claim: Union[bool, 'ClaimArgsFromClaimClusterRecursive4']
+
+
+class EvidenceIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class EvidenceArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyEvidenceArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimClusterRecursive1']
+
+
+class EventIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimClusterRecursive2']
+
+
+class EventIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimClusterRecursive3']
+
+
+class EventIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimClusterRecursive4']
+
+
+class EventIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class EventArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyEventArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    event: Union[bool, 'EventArgsFromClaimClusterRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromClaimClusterRecursive1']
+
+
+class ClaimClusterIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    event: Union[bool, 'EventArgsFromClaimClusterRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromClaimClusterRecursive2']
+
+
+class ClaimClusterIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    event: Union[bool, 'EventArgsFromClaimClusterRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromClaimClusterRecursive3']
+
+
+class ClaimClusterIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    event: Union[bool, 'EventArgsFromClaimClusterRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromClaimClusterRecursive4']
+
+
+class ClaimClusterIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class ClaimClusterArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyClaimClusterArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
+
+
+FindManyClaimClusterArgs = FindManyClaimClusterArgsFromClaimCluster
+FindFirstClaimClusterArgs = FindManyClaimClusterArgsFromClaimCluster
+
+
+    
+
+class ClaimClusterWhereInput(TypedDict, total=False):
+    """ClaimCluster arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    title: Union[_str, 'types.StringFilter']
+    eventId: Union[None, _str, 'types.StringFilter']
+    event: 'EventRelationFilter'
+    claims: 'ClaimListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['ClaimClusterWhereInputRecursive1', List['ClaimClusterWhereInputRecursive1']]
+    # but this causes mypy to hang :/
+    AND: List['ClaimClusterWhereInputRecursive1']
+    OR: List['ClaimClusterWhereInputRecursive1']
+    NOT: List['ClaimClusterWhereInputRecursive1']
+
+
+class ClaimClusterWhereInputRecursive1(TypedDict, total=False):
+    """ClaimCluster arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    title: Union[_str, 'types.StringFilter']
+    eventId: Union[None, _str, 'types.StringFilter']
+    event: 'EventRelationFilter'
+    claims: 'ClaimListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['ClaimClusterWhereInputRecursive2', List['ClaimClusterWhereInputRecursive2']]
+    # but this causes mypy to hang :/
+    AND: List['ClaimClusterWhereInputRecursive2']
+    OR: List['ClaimClusterWhereInputRecursive2']
+    NOT: List['ClaimClusterWhereInputRecursive2']
+
+
+class ClaimClusterWhereInputRecursive2(TypedDict, total=False):
+    """ClaimCluster arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    title: Union[_str, 'types.StringFilter']
+    eventId: Union[None, _str, 'types.StringFilter']
+    event: 'EventRelationFilter'
+    claims: 'ClaimListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['ClaimClusterWhereInputRecursive3', List['ClaimClusterWhereInputRecursive3']]
+    # but this causes mypy to hang :/
+    AND: List['ClaimClusterWhereInputRecursive3']
+    OR: List['ClaimClusterWhereInputRecursive3']
+    NOT: List['ClaimClusterWhereInputRecursive3']
+
+
+class ClaimClusterWhereInputRecursive3(TypedDict, total=False):
+    """ClaimCluster arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    title: Union[_str, 'types.StringFilter']
+    eventId: Union[None, _str, 'types.StringFilter']
+    event: 'EventRelationFilter'
+    claims: 'ClaimListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['ClaimClusterWhereInputRecursive4', List['ClaimClusterWhereInputRecursive4']]
+    # but this causes mypy to hang :/
+    AND: List['ClaimClusterWhereInputRecursive4']
+    OR: List['ClaimClusterWhereInputRecursive4']
+    NOT: List['ClaimClusterWhereInputRecursive4']
+
+
+class ClaimClusterWhereInputRecursive4(TypedDict, total=False):
+    """ClaimCluster arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    title: Union[_str, 'types.StringFilter']
+    eventId: Union[None, _str, 'types.StringFilter']
+    event: 'EventRelationFilter'
+    claims: 'ClaimListRelationFilter'
+
+
+
+# aggregate ClaimCluster types
+
+
+    
+
+class ClaimClusterScalarWhereWithAggregatesInput(TypedDict, total=False):
+    """ClaimCluster arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    title: Union[_str, 'types.StringWithAggregatesFilter']
+    eventId: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['ClaimClusterScalarWhereWithAggregatesInputRecursive1']
+    OR: List['ClaimClusterScalarWhereWithAggregatesInputRecursive1']
+    NOT: List['ClaimClusterScalarWhereWithAggregatesInputRecursive1']
+
+
+class ClaimClusterScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
+    """ClaimCluster arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    title: Union[_str, 'types.StringWithAggregatesFilter']
+    eventId: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['ClaimClusterScalarWhereWithAggregatesInputRecursive2']
+    OR: List['ClaimClusterScalarWhereWithAggregatesInputRecursive2']
+    NOT: List['ClaimClusterScalarWhereWithAggregatesInputRecursive2']
+
+
+class ClaimClusterScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
+    """ClaimCluster arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    title: Union[_str, 'types.StringWithAggregatesFilter']
+    eventId: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['ClaimClusterScalarWhereWithAggregatesInputRecursive3']
+    OR: List['ClaimClusterScalarWhereWithAggregatesInputRecursive3']
+    NOT: List['ClaimClusterScalarWhereWithAggregatesInputRecursive3']
+
+
+class ClaimClusterScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
+    """ClaimCluster arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    title: Union[_str, 'types.StringWithAggregatesFilter']
+    eventId: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['ClaimClusterScalarWhereWithAggregatesInputRecursive4']
+    OR: List['ClaimClusterScalarWhereWithAggregatesInputRecursive4']
+    NOT: List['ClaimClusterScalarWhereWithAggregatesInputRecursive4']
+
+
+class ClaimClusterScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
+    """ClaimCluster arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    title: Union[_str, 'types.StringWithAggregatesFilter']
+    eventId: Union[_str, 'types.StringWithAggregatesFilter']
+
+
+
+class ClaimClusterGroupByOutput(TypedDict, total=False):
+    id: _str
+    title: _str
+    eventId: _str
+    _sum: 'ClaimClusterSumAggregateOutput'
+    _avg: 'ClaimClusterAvgAggregateOutput'
+    _min: 'ClaimClusterMinAggregateOutput'
+    _max: 'ClaimClusterMaxAggregateOutput'
+    _count: 'ClaimClusterCountAggregateOutput'
+
+
+class ClaimClusterAvgAggregateOutput(TypedDict, total=False):
+    """ClaimCluster output for aggregating averages"""
+
+
+class ClaimClusterSumAggregateOutput(TypedDict, total=False):
+    """ClaimCluster output for aggregating sums"""
+
+
+class ClaimClusterScalarAggregateOutput(TypedDict, total=False):
+    """ClaimCluster output including scalar fields"""
+    id: _str
+    title: _str
+    eventId: _str
+
+
+ClaimClusterMinAggregateOutput = ClaimClusterScalarAggregateOutput
+ClaimClusterMaxAggregateOutput = ClaimClusterScalarAggregateOutput
+
+
+class ClaimClusterMaxAggregateInput(TypedDict, total=False):
+    """ClaimCluster input for aggregating by max"""
+    id: bool
+    title: bool
+    eventId: bool
+
+
+class ClaimClusterMinAggregateInput(TypedDict, total=False):
+    """ClaimCluster input for aggregating by min"""
+    id: bool
+    title: bool
+    eventId: bool
+
+
+class ClaimClusterNumberAggregateInput(TypedDict, total=False):
+    """ClaimCluster input for aggregating numbers"""
+
+
+ClaimClusterAvgAggregateInput = ClaimClusterNumberAggregateInput
+ClaimClusterSumAggregateInput = ClaimClusterNumberAggregateInput
+
+
+ClaimClusterCountAggregateInput = TypedDict(
+    'ClaimClusterCountAggregateInput',
+    {
+        'id': bool,
+        'title': bool,
+        'eventId': bool,
+        '_all': bool,
+    },
+    total=False,
+)
+
+ClaimClusterCountAggregateOutput = TypedDict(
+    'ClaimClusterCountAggregateOutput',
+    {
+        'id': int,
+        'title': int,
+        'eventId': int,
+        '_all': int,
+    },
+    total=False,
+)
+
+
+ClaimClusterKeys = Literal[
+    'id',
+    'title',
+    'eventId',
+    'event',
+    'claims',
+]
+ClaimClusterScalarFieldKeys = Literal[
+    'id',
+    'title',
+    'eventId',
+]
+ClaimClusterScalarFieldKeysT = TypeVar('ClaimClusterScalarFieldKeysT', bound=ClaimClusterScalarFieldKeys)
+
+ClaimClusterRelationalFieldKeys = Literal[
+        'event',
+        'claims',
     ]
 
 

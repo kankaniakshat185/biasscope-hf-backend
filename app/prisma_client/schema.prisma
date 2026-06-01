@@ -4,11 +4,13 @@ generator client_python {
   recursive_type_depth = 5
   output               = "../app/prisma_client"
   binaryTargets        = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x"]
+  previewFeatures      = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
 }
 
 // -------------------------------------------------------------
@@ -134,4 +136,57 @@ model Insight {
   createdAt         DateTime @default(now())
 
   @@map("insight")
+}
+
+// -------------------------------------------------------------
+// Phase 2: Global Claim Database (Evidence-Based Intelligence)
+// -------------------------------------------------------------
+
+model Claim {
+  id                 String                     @id @default(uuid())
+  canonicalClaim     String
+  embedding          Unsupported("vector(384)")
+  confidence         Float
+  consensusScore     Float?                     @default(0)
+  contradictionScore Float?                     @default(0)
+  createdAt          DateTime                   @default(now())
+  clusterId          String?
+  cluster            ClaimCluster?              @relation(fields: [clusterId], references: [id])
+  evidence           Evidence[]
+
+  @@map("claim")
+}
+
+model Evidence {
+  id          String   @id @default(uuid())
+  claimId     String
+  articleId   String
+  sentence    String
+  source      String
+  url         String
+  publishedAt DateTime
+  stance      String
+  claim       Claim    @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  @@map("evidence")
+}
+
+model Event {
+  id            String         @id @default(uuid())
+  title         String
+  description   String?
+  createdAt     DateTime       @default(now())
+  claimClusters ClaimCluster[]
+
+  @@map("event")
+}
+
+model ClaimCluster {
+  id      String  @id @default(uuid())
+  title   String
+  eventId String?
+  event   Event?  @relation(fields: [eventId], references: [id], onDelete: SetNull)
+  claims  Claim[]
+
+  @@map("claim_cluster")
 }

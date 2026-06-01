@@ -13,6 +13,10 @@ PRISMA_MODELS: set[str] = {
     'Search',
     'Article',
     'Insight',
+    'Claim',
+    'Evidence',
+    'Event',
+    'ClaimCluster',
 }
 
 RELATIONAL_FIELD_MAPPINGS: dict[str, dict[str, str]] = {
@@ -39,6 +43,20 @@ RELATIONAL_FIELD_MAPPINGS: dict[str, dict[str, str]] = {
     },
     'Insight': {
         'search': 'Search',
+    },
+    'Claim': {
+        'cluster': 'ClaimCluster',
+        'evidence': 'Evidence',
+    },
+    'Evidence': {
+        'claim': 'Claim',
+    },
+    'Event': {
+        'claimClusters': 'ClaimCluster',
+    },
+    'ClaimCluster': {
+        'event': 'Event',
+        'claims': 'Claim',
     },
 }
 

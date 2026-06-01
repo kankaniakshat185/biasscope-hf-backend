@@ -144,3 +144,43 @@ class BaseInsight(_PrismaModel):
         return actions.InsightActions[_PrismaModelT](client or get_client(), cls)
 
 
+class BaseClaim(_PrismaModel):
+    __prisma_model__: ClassVar[Literal['Claim']] = 'Claim'  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @classmethod
+    def prisma(cls: Type[_PrismaModelT], client: Optional['Prisma'] = None) -> 'actions.ClaimActions[_PrismaModelT]':
+        from .client import get_client
+
+        return actions.ClaimActions[_PrismaModelT](client or get_client(), cls)
+
+
+class BaseEvidence(_PrismaModel):
+    __prisma_model__: ClassVar[Literal['Evidence']] = 'Evidence'  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @classmethod
+    def prisma(cls: Type[_PrismaModelT], client: Optional['Prisma'] = None) -> 'actions.EvidenceActions[_PrismaModelT]':
+        from .client import get_client
+
+        return actions.EvidenceActions[_PrismaModelT](client or get_client(), cls)
+
+
+class BaseEvent(_PrismaModel):
+    __prisma_model__: ClassVar[Literal['Event']] = 'Event'  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @classmethod
+    def prisma(cls: Type[_PrismaModelT], client: Optional['Prisma'] = None) -> 'actions.EventActions[_PrismaModelT]':
+        from .client import get_client
+
+        return actions.EventActions[_PrismaModelT](client or get_client(), cls)
+
+
+class BaseClaimCluster(_PrismaModel):
+    __prisma_model__: ClassVar[Literal['ClaimCluster']] = 'ClaimCluster'  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @classmethod
+    def prisma(cls: Type[_PrismaModelT], client: Optional['Prisma'] = None) -> 'actions.ClaimClusterActions[_PrismaModelT]':
+        from .client import get_client
+
+        return actions.ClaimClusterActions[_PrismaModelT](client or get_client(), cls)
+
+

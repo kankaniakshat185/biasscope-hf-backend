@@ -62,34 +62,45 @@ flowchart TD
 This schema drops the localized `Search` approach. `Claim` and `Evidence` become global, first-class entities.
 
 ```prisma
-// Claims are global intelligence assets, not scoped to individual searches.
 model Claim {
-  id                  String     @id @default(uuid())
-  canonical_statement String     @unique
-  embedding           Unsupported("vector(384)") // Requires pgvector extension
-  createdAt           DateTime   @default(now())
-  lastUpdatedAt       DateTime   @updatedAt
-  
-  // Evolving Intelligence Scores
-  consensusScore      Float      @default(0.0)
-  contradictionScore  Float      @default(0.0)
-
+  id                  String   @id @default(uuid())
+  canonicalClaim      String
+  embedding           Unsupported("vector(384)")
+  confidence          Float
+  consensusScore      Float?   @default(0)
+  contradictionScore  Float?   @default(0)
+  createdAt           DateTime @default(now())
+  clusterId           String?
+  cluster             ClaimCluster? @relation(fields: [clusterId], references: [id])
   evidence            Evidence[]
-  topicSnapshots      TopicSnapshotClaim[]
 }
 
 model Evidence {
   id              String   @id @default(uuid())
   claimId         String
   articleId       String
-  
-  exactSentence   String    // Grounding for RAG/UI
-  sourceBias      String    // The ideological leaning of the source
-  nliRelationship String    // "SUPPORT", "CONTRADICT", "NEUTRAL"
-  timestamp       DateTime  @default(now())
-  
-  claim           Claim     @relation(fields: [claimId], references: [id], onDelete: Cascade)
-  article         Article   @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  sentence        String
+  source          String
+  url             String
+  publishedAt     DateTime
+  stance          String
+  claim           Claim @relation(fields: [claimId], references: [id])
+}
+
+model Event {
+  id              String @id @default(uuid())
+  title           String
+  description     String?
+  createdAt       DateTime @default(now())
+  claimClusters   ClaimCluster[]
+}
+
+model ClaimCluster {
+  id              String @id @default(uuid())
+  title           String
+  eventId         String?
+  event           Event? @relation(fields: [eventId], references: [id])
+  claims          Claim[]
 }
 
 // Longitudinal Intelligence
@@ -154,12 +165,13 @@ model TopicSnapshot {
 6. **Dataset Metrics:** Implement Source Diversity, Geographic Diversity, and Coverage Imbalance metrics.
 
 ### PHASE 2 — CLAIM EXTRACTION FOUNDATION (Tier 1)
-*Goal: Create the global intelligence layer that everything else will depend on.*
+*Goal: Transform BiasScope from an article-centric system into a claim-centric system. The output of this phase is a reusable global intelligence database.*
 * **Dependencies:** Phase 1
-1. **Claim Extraction Engine:** Extract factual assertions from every article.
-2. **Global Evidence Storage System:** Implement the proposed Prisma Schema.
-3. **Claim Clustering:** Use `sentence-transformers` via `pgvector` to group semantically similar claims.
-4. **Event Detection:** Use `BERTopic` / `HDBSCAN` to identify specific events driving the coverage.
+1. **Claim Extraction Engine:** Extract discrete, factual, evidence-backed claims from articles. Store LLM confidence alongside claims. Use lightweight models (Qwen 2.5 / Gemma / Mistral) with strict structured JSON output.
+2. **Global Evidence Storage System:** Implement global `Claim`, `Evidence`, and `ClaimCluster` models in Prisma. Never store a claim without supporting evidence (sentence, source, url, publishedAt).
+3. **Claim Embedding Infrastructure:** Use `sentence-transformers/all-MiniLM-L6-v2` and `pgvector` to store vector embeddings immediately during extraction.
+4. **Claim Clustering Engine:** Merge semantically equivalent claims into a single canonical claim using Cosine Similarity on `pgvector`. Support merging new evidence into existing claims.
+5. **Event Detection System:** Do NOT run BERTopic on raw articles. Run BERTopic / HDBSCAN on claim clusters to generate clean events (e.g. "Trump-WSJ Lawsuit").
 
 ### PHASE 3 — CONSENSUS & CONTRADICTION INTELLIGENCE (Tier 2)
 *Goal: Transform claims into actionable intelligence. This is the flagship differentiator.*

@@ -1001,6 +1001,542 @@ class Insight(bases.BaseInsight):
         _created_partial_types.add(name)
 
 
+class Claim(bases.BaseClaim):
+    """Represents a Claim record"""
+
+    id: _str
+    canonicalClaim: _str
+    confidence: _float
+    consensusScore: Optional[_float] = None
+    contradictionScore: Optional[_float] = None
+    createdAt: datetime.datetime
+    clusterId: Optional[_str] = None
+    cluster: Optional['models.ClaimCluster'] = None
+    evidence: Optional[List['models.Evidence']] = None
+
+    # take *args and **kwargs so that other metaclasses can define arguments
+    def __init_subclass__(
+        cls,
+        *args: Any,
+        warn_subclass: Optional[bool] = None,
+        **kwargs: Any,
+    ) -> None:
+        super().__init_subclass__()
+        if warn_subclass is not None:
+            warnings.warn(
+                'The `warn_subclass` argument is deprecated as it is no longer necessary and will be removed in the next release',
+                DeprecationWarning,
+                stacklevel=3,
+            )
+
+
+    @staticmethod
+    def create_partial(
+        name: str,
+        include: Optional[Iterable['types.ClaimKeys']] = None,
+        exclude: Optional[Iterable['types.ClaimKeys']] = None,
+        required: Optional[Iterable['types.ClaimKeys']] = None,
+        optional: Optional[Iterable['types.ClaimKeys']] = None,
+        relations: Optional[Mapping['types.ClaimRelationalFieldKeys', str]] = None,
+        exclude_relational_fields: bool = False,
+    ) -> None:
+        if not os.environ.get('PRISMA_GENERATOR_INVOCATION'):
+            raise RuntimeError(
+                'Attempted to create a partial type outside of client generation.'
+            )
+
+        if name in _created_partial_types:
+            raise ValueError(f'Partial type "{name}" has already been created.')
+
+        if include is not None:
+            if exclude is not None:
+                raise TypeError('Exclude and include are mutually exclusive.')
+            if exclude_relational_fields is True:
+                raise TypeError('Include and exclude_relational_fields=True are mutually exclusive.')
+
+        if required and optional:
+            shared = set(required) & set(optional)
+            if shared:
+                raise ValueError(f'Cannot make the same field(s) required and optional {shared}')
+
+        if exclude_relational_fields and relations:
+            raise ValueError(
+                'exclude_relational_fields and relations are mutually exclusive'
+            )
+
+        fields: Dict['types.ClaimKeys', PartialModelField] = OrderedDict()
+
+        try:
+            if include:
+                for field in include:
+                    fields[field] = _Claim_fields[field].copy()
+            elif exclude:
+                for field in exclude:
+                    if field not in _Claim_fields:
+                        raise KeyError(field)
+
+                fields = {
+                    key: data.copy()
+                    for key, data in _Claim_fields.items()
+                    if key not in exclude
+                }
+            else:
+                fields = {
+                    key: data.copy()
+                    for key, data in _Claim_fields.items()
+                }
+
+            if required:
+                for field in required:
+                    fields[field]['optional'] = False
+
+            if optional:
+                for field in optional:
+                    fields[field]['optional'] = True
+
+            if exclude_relational_fields:
+                fields = {
+                    key: data
+                    for key, data in fields.items()
+                    if key not in _Claim_relational_fields
+                }
+
+            if relations:
+                for field, type_ in relations.items():
+                    if field not in _Claim_relational_fields:
+                        raise errors.UnknownRelationalFieldError('Claim', field)
+
+                    # TODO: this method of validating types is not ideal
+                    # as it means we cannot two create partial types that
+                    # reference each other
+                    if type_ not in _created_partial_types:
+                        raise ValueError(
+                            f'Unknown partial type: "{type_}". '
+                            f'Did you remember to generate the {type_} type before this one?'
+                        )
+
+                    # TODO: support non prisma.partials models
+                    info = fields[field]
+                    if info['is_list']:
+                        info['type'] = f'List[\'partials.{type_}\']'
+                    else:
+                        info['type'] = f'\'partials.{type_}\''
+        except KeyError as exc:
+            raise ValueError(
+                f'{exc.args[0]} is not a valid Claim / {name} field.'
+            ) from None
+
+        models = partial_models_ctx.get()
+        models.append(
+            {
+                'name': name,
+                'fields': cast(Mapping[str, PartialModelField], fields),
+                'from_model': 'Claim',
+            }
+        )
+        _created_partial_types.add(name)
+
+
+class Evidence(bases.BaseEvidence):
+    """Represents a Evidence record"""
+
+    id: _str
+    claimId: _str
+    articleId: _str
+    sentence: _str
+    source: _str
+    url: _str
+    publishedAt: datetime.datetime
+    stance: _str
+    claim: Optional['models.Claim'] = None
+
+    # take *args and **kwargs so that other metaclasses can define arguments
+    def __init_subclass__(
+        cls,
+        *args: Any,
+        warn_subclass: Optional[bool] = None,
+        **kwargs: Any,
+    ) -> None:
+        super().__init_subclass__()
+        if warn_subclass is not None:
+            warnings.warn(
+                'The `warn_subclass` argument is deprecated as it is no longer necessary and will be removed in the next release',
+                DeprecationWarning,
+                stacklevel=3,
+            )
+
+
+    @staticmethod
+    def create_partial(
+        name: str,
+        include: Optional[Iterable['types.EvidenceKeys']] = None,
+        exclude: Optional[Iterable['types.EvidenceKeys']] = None,
+        required: Optional[Iterable['types.EvidenceKeys']] = None,
+        optional: Optional[Iterable['types.EvidenceKeys']] = None,
+        relations: Optional[Mapping['types.EvidenceRelationalFieldKeys', str]] = None,
+        exclude_relational_fields: bool = False,
+    ) -> None:
+        if not os.environ.get('PRISMA_GENERATOR_INVOCATION'):
+            raise RuntimeError(
+                'Attempted to create a partial type outside of client generation.'
+            )
+
+        if name in _created_partial_types:
+            raise ValueError(f'Partial type "{name}" has already been created.')
+
+        if include is not None:
+            if exclude is not None:
+                raise TypeError('Exclude and include are mutually exclusive.')
+            if exclude_relational_fields is True:
+                raise TypeError('Include and exclude_relational_fields=True are mutually exclusive.')
+
+        if required and optional:
+            shared = set(required) & set(optional)
+            if shared:
+                raise ValueError(f'Cannot make the same field(s) required and optional {shared}')
+
+        if exclude_relational_fields and relations:
+            raise ValueError(
+                'exclude_relational_fields and relations are mutually exclusive'
+            )
+
+        fields: Dict['types.EvidenceKeys', PartialModelField] = OrderedDict()
+
+        try:
+            if include:
+                for field in include:
+                    fields[field] = _Evidence_fields[field].copy()
+            elif exclude:
+                for field in exclude:
+                    if field not in _Evidence_fields:
+                        raise KeyError(field)
+
+                fields = {
+                    key: data.copy()
+                    for key, data in _Evidence_fields.items()
+                    if key not in exclude
+                }
+            else:
+                fields = {
+                    key: data.copy()
+                    for key, data in _Evidence_fields.items()
+                }
+
+            if required:
+                for field in required:
+                    fields[field]['optional'] = False
+
+            if optional:
+                for field in optional:
+                    fields[field]['optional'] = True
+
+            if exclude_relational_fields:
+                fields = {
+                    key: data
+                    for key, data in fields.items()
+                    if key not in _Evidence_relational_fields
+                }
+
+            if relations:
+                for field, type_ in relations.items():
+                    if field not in _Evidence_relational_fields:
+                        raise errors.UnknownRelationalFieldError('Evidence', field)
+
+                    # TODO: this method of validating types is not ideal
+                    # as it means we cannot two create partial types that
+                    # reference each other
+                    if type_ not in _created_partial_types:
+                        raise ValueError(
+                            f'Unknown partial type: "{type_}". '
+                            f'Did you remember to generate the {type_} type before this one?'
+                        )
+
+                    # TODO: support non prisma.partials models
+                    info = fields[field]
+                    if info['is_list']:
+                        info['type'] = f'List[\'partials.{type_}\']'
+                    else:
+                        info['type'] = f'\'partials.{type_}\''
+        except KeyError as exc:
+            raise ValueError(
+                f'{exc.args[0]} is not a valid Evidence / {name} field.'
+            ) from None
+
+        models = partial_models_ctx.get()
+        models.append(
+            {
+                'name': name,
+                'fields': cast(Mapping[str, PartialModelField], fields),
+                'from_model': 'Evidence',
+            }
+        )
+        _created_partial_types.add(name)
+
+
+class Event(bases.BaseEvent):
+    """Represents a Event record"""
+
+    id: _str
+    title: _str
+    description: Optional[_str] = None
+    createdAt: datetime.datetime
+    claimClusters: Optional[List['models.ClaimCluster']] = None
+
+    # take *args and **kwargs so that other metaclasses can define arguments
+    def __init_subclass__(
+        cls,
+        *args: Any,
+        warn_subclass: Optional[bool] = None,
+        **kwargs: Any,
+    ) -> None:
+        super().__init_subclass__()
+        if warn_subclass is not None:
+            warnings.warn(
+                'The `warn_subclass` argument is deprecated as it is no longer necessary and will be removed in the next release',
+                DeprecationWarning,
+                stacklevel=3,
+            )
+
+
+    @staticmethod
+    def create_partial(
+        name: str,
+        include: Optional[Iterable['types.EventKeys']] = None,
+        exclude: Optional[Iterable['types.EventKeys']] = None,
+        required: Optional[Iterable['types.EventKeys']] = None,
+        optional: Optional[Iterable['types.EventKeys']] = None,
+        relations: Optional[Mapping['types.EventRelationalFieldKeys', str]] = None,
+        exclude_relational_fields: bool = False,
+    ) -> None:
+        if not os.environ.get('PRISMA_GENERATOR_INVOCATION'):
+            raise RuntimeError(
+                'Attempted to create a partial type outside of client generation.'
+            )
+
+        if name in _created_partial_types:
+            raise ValueError(f'Partial type "{name}" has already been created.')
+
+        if include is not None:
+            if exclude is not None:
+                raise TypeError('Exclude and include are mutually exclusive.')
+            if exclude_relational_fields is True:
+                raise TypeError('Include and exclude_relational_fields=True are mutually exclusive.')
+
+        if required and optional:
+            shared = set(required) & set(optional)
+            if shared:
+                raise ValueError(f'Cannot make the same field(s) required and optional {shared}')
+
+        if exclude_relational_fields and relations:
+            raise ValueError(
+                'exclude_relational_fields and relations are mutually exclusive'
+            )
+
+        fields: Dict['types.EventKeys', PartialModelField] = OrderedDict()
+
+        try:
+            if include:
+                for field in include:
+                    fields[field] = _Event_fields[field].copy()
+            elif exclude:
+                for field in exclude:
+                    if field not in _Event_fields:
+                        raise KeyError(field)
+
+                fields = {
+                    key: data.copy()
+                    for key, data in _Event_fields.items()
+                    if key not in exclude
+                }
+            else:
+                fields = {
+                    key: data.copy()
+                    for key, data in _Event_fields.items()
+                }
+
+            if required:
+                for field in required:
+                    fields[field]['optional'] = False
+
+            if optional:
+                for field in optional:
+                    fields[field]['optional'] = True
+
+            if exclude_relational_fields:
+                fields = {
+                    key: data
+                    for key, data in fields.items()
+                    if key not in _Event_relational_fields
+                }
+
+            if relations:
+                for field, type_ in relations.items():
+                    if field not in _Event_relational_fields:
+                        raise errors.UnknownRelationalFieldError('Event', field)
+
+                    # TODO: this method of validating types is not ideal
+                    # as it means we cannot two create partial types that
+                    # reference each other
+                    if type_ not in _created_partial_types:
+                        raise ValueError(
+                            f'Unknown partial type: "{type_}". '
+                            f'Did you remember to generate the {type_} type before this one?'
+                        )
+
+                    # TODO: support non prisma.partials models
+                    info = fields[field]
+                    if info['is_list']:
+                        info['type'] = f'List[\'partials.{type_}\']'
+                    else:
+                        info['type'] = f'\'partials.{type_}\''
+        except KeyError as exc:
+            raise ValueError(
+                f'{exc.args[0]} is not a valid Event / {name} field.'
+            ) from None
+
+        models = partial_models_ctx.get()
+        models.append(
+            {
+                'name': name,
+                'fields': cast(Mapping[str, PartialModelField], fields),
+                'from_model': 'Event',
+            }
+        )
+        _created_partial_types.add(name)
+
+
+class ClaimCluster(bases.BaseClaimCluster):
+    """Represents a ClaimCluster record"""
+
+    id: _str
+    title: _str
+    eventId: Optional[_str] = None
+    event: Optional['models.Event'] = None
+    claims: Optional[List['models.Claim']] = None
+
+    # take *args and **kwargs so that other metaclasses can define arguments
+    def __init_subclass__(
+        cls,
+        *args: Any,
+        warn_subclass: Optional[bool] = None,
+        **kwargs: Any,
+    ) -> None:
+        super().__init_subclass__()
+        if warn_subclass is not None:
+            warnings.warn(
+                'The `warn_subclass` argument is deprecated as it is no longer necessary and will be removed in the next release',
+                DeprecationWarning,
+                stacklevel=3,
+            )
+
+
+    @staticmethod
+    def create_partial(
+        name: str,
+        include: Optional[Iterable['types.ClaimClusterKeys']] = None,
+        exclude: Optional[Iterable['types.ClaimClusterKeys']] = None,
+        required: Optional[Iterable['types.ClaimClusterKeys']] = None,
+        optional: Optional[Iterable['types.ClaimClusterKeys']] = None,
+        relations: Optional[Mapping['types.ClaimClusterRelationalFieldKeys', str]] = None,
+        exclude_relational_fields: bool = False,
+    ) -> None:
+        if not os.environ.get('PRISMA_GENERATOR_INVOCATION'):
+            raise RuntimeError(
+                'Attempted to create a partial type outside of client generation.'
+            )
+
+        if name in _created_partial_types:
+            raise ValueError(f'Partial type "{name}" has already been created.')
+
+        if include is not None:
+            if exclude is not None:
+                raise TypeError('Exclude and include are mutually exclusive.')
+            if exclude_relational_fields is True:
+                raise TypeError('Include and exclude_relational_fields=True are mutually exclusive.')
+
+        if required and optional:
+            shared = set(required) & set(optional)
+            if shared:
+                raise ValueError(f'Cannot make the same field(s) required and optional {shared}')
+
+        if exclude_relational_fields and relations:
+            raise ValueError(
+                'exclude_relational_fields and relations are mutually exclusive'
+            )
+
+        fields: Dict['types.ClaimClusterKeys', PartialModelField] = OrderedDict()
+
+        try:
+            if include:
+                for field in include:
+                    fields[field] = _ClaimCluster_fields[field].copy()
+            elif exclude:
+                for field in exclude:
+                    if field not in _ClaimCluster_fields:
+                        raise KeyError(field)
+
+                fields = {
+                    key: data.copy()
+                    for key, data in _ClaimCluster_fields.items()
+                    if key not in exclude
+                }
+            else:
+                fields = {
+                    key: data.copy()
+                    for key, data in _ClaimCluster_fields.items()
+                }
+
+            if required:
+                for field in required:
+                    fields[field]['optional'] = False
+
+            if optional:
+                for field in optional:
+                    fields[field]['optional'] = True
+
+            if exclude_relational_fields:
+                fields = {
+                    key: data
+                    for key, data in fields.items()
+                    if key not in _ClaimCluster_relational_fields
+                }
+
+            if relations:
+                for field, type_ in relations.items():
+                    if field not in _ClaimCluster_relational_fields:
+                        raise errors.UnknownRelationalFieldError('ClaimCluster', field)
+
+                    # TODO: this method of validating types is not ideal
+                    # as it means we cannot two create partial types that
+                    # reference each other
+                    if type_ not in _created_partial_types:
+                        raise ValueError(
+                            f'Unknown partial type: "{type_}". '
+                            f'Did you remember to generate the {type_} type before this one?'
+                        )
+
+                    # TODO: support non prisma.partials models
+                    info = fields[field]
+                    if info['is_list']:
+                        info['type'] = f'List[\'partials.{type_}\']'
+                    else:
+                        info['type'] = f'\'partials.{type_}\''
+        except KeyError as exc:
+            raise ValueError(
+                f'{exc.args[0]} is not a valid ClaimCluster / {name} field.'
+            ) from None
+
+        models = partial_models_ctx.get()
+        models.append(
+            {
+                'name': name,
+                'fields': cast(Mapping[str, PartialModelField], fields),
+                'from_model': 'ClaimCluster',
+            }
+        )
+        _created_partial_types.add(name)
+
+
 
 _User_relational_fields: Set[str] = {
         'sessions',
@@ -1700,6 +2236,264 @@ _Insight_fields: Dict['types.InsightKeys', PartialModelField] = OrderedDict(
     ],
 )
 
+_Claim_relational_fields: Set[str] = {
+        'cluster',
+        'evidence',
+    }
+_Claim_fields: Dict['types.ClaimKeys', PartialModelField] = OrderedDict(
+    [
+        ('id', {
+            'name': 'id',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('canonicalClaim', {
+            'name': 'canonicalClaim',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('confidence', {
+            'name': 'confidence',
+            'is_list': False,
+            'optional': False,
+            'type': '_float',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('consensusScore', {
+            'name': 'consensusScore',
+            'is_list': False,
+            'optional': True,
+            'type': '_float',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('contradictionScore', {
+            'name': 'contradictionScore',
+            'is_list': False,
+            'optional': True,
+            'type': '_float',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('createdAt', {
+            'name': 'createdAt',
+            'is_list': False,
+            'optional': False,
+            'type': 'datetime.datetime',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('clusterId', {
+            'name': 'clusterId',
+            'is_list': False,
+            'optional': True,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('cluster', {
+            'name': 'cluster',
+            'is_list': False,
+            'optional': True,
+            'type': 'models.ClaimCluster',
+            'is_relational': True,
+            'documentation': None,
+        }),
+        ('evidence', {
+            'name': 'evidence',
+            'is_list': True,
+            'optional': True,
+            'type': 'List[\'models.Evidence\']',
+            'is_relational': True,
+            'documentation': None,
+        }),
+    ],
+)
+
+_Evidence_relational_fields: Set[str] = {
+        'claim',
+    }
+_Evidence_fields: Dict['types.EvidenceKeys', PartialModelField] = OrderedDict(
+    [
+        ('id', {
+            'name': 'id',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('claimId', {
+            'name': 'claimId',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('articleId', {
+            'name': 'articleId',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('sentence', {
+            'name': 'sentence',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('source', {
+            'name': 'source',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('url', {
+            'name': 'url',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('publishedAt', {
+            'name': 'publishedAt',
+            'is_list': False,
+            'optional': False,
+            'type': 'datetime.datetime',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('stance', {
+            'name': 'stance',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('claim', {
+            'name': 'claim',
+            'is_list': False,
+            'optional': True,
+            'type': 'models.Claim',
+            'is_relational': True,
+            'documentation': None,
+        }),
+    ],
+)
+
+_Event_relational_fields: Set[str] = {
+        'claimClusters',
+    }
+_Event_fields: Dict['types.EventKeys', PartialModelField] = OrderedDict(
+    [
+        ('id', {
+            'name': 'id',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('title', {
+            'name': 'title',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('description', {
+            'name': 'description',
+            'is_list': False,
+            'optional': True,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('createdAt', {
+            'name': 'createdAt',
+            'is_list': False,
+            'optional': False,
+            'type': 'datetime.datetime',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('claimClusters', {
+            'name': 'claimClusters',
+            'is_list': True,
+            'optional': True,
+            'type': 'List[\'models.ClaimCluster\']',
+            'is_relational': True,
+            'documentation': None,
+        }),
+    ],
+)
+
+_ClaimCluster_relational_fields: Set[str] = {
+        'event',
+        'claims',
+    }
+_ClaimCluster_fields: Dict['types.ClaimClusterKeys', PartialModelField] = OrderedDict(
+    [
+        ('id', {
+            'name': 'id',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('title', {
+            'name': 'title',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('eventId', {
+            'name': 'eventId',
+            'is_list': False,
+            'optional': True,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('event', {
+            'name': 'event',
+            'is_list': False,
+            'optional': True,
+            'type': 'models.Event',
+            'is_relational': True,
+            'documentation': None,
+        }),
+        ('claims', {
+            'name': 'claims',
+            'is_list': True,
+            'optional': True,
+            'type': 'List[\'models.Claim\']',
+            'is_relational': True,
+            'documentation': None,
+        }),
+    ],
+)
+
 
 
 # we have to import ourselves as relation types are namespaced to models
@@ -1714,3 +2508,7 @@ model_rebuild(Verification)
 model_rebuild(Search)
 model_rebuild(Article)
 model_rebuild(Insight)
+model_rebuild(Claim)
+model_rebuild(Evidence)
+model_rebuild(Event)
+model_rebuild(ClaimCluster)
