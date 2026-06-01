@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Body, File, UploadFile, Form
+from fastapi import FastAPI, HTTPException, Body, File, UploadFile, Form, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from .prisma_client import Prisma, Json
 import uvicorn
@@ -6,6 +6,8 @@ from app.services.cleaning import clean_and_deduplicate
 from app.services.ingestion import ingest_articles, scrape_single_url
 from app.services.nlp import analyze_articles, generate_narrative, generate_contrastive_summaries, extract_entity_sentiment
 from app.services.validation import validate_articles
+from app.services.extraction import process_and_canonicalize_claims
+from app.services.clustering import run_claim_clustering, run_event_detection
 import os
 import io
 from PIL import Image
@@ -38,6 +40,28 @@ async def shutdown():
 def read_root():
     return {"status": "ok", "service": "Biascope Backend"}
 
+async def background_phase2_pipeline(search_id: str):
+    print(f"Starting background Phase 2 pipeline for search {search_id}...")
+    try:
+        articles = await prisma.article.find_many(where={"searchId": search_id})
+        for art in articles:
+            if art.content:
+                await process_and_canonicalize_claims(
+                    prisma, 
+                    art.id, 
+                    art.content, 
+                    art.source, 
+                    art.url, 
+                    art.publishedAt
+                )
+        
+        # Run Step 6 & 7 locally
+        await run_claim_clustering(prisma)
+        await run_event_detection(prisma)
+        print("Phase 2 pipeline complete.")
+    except Exception as e:
+        print(f"Phase 2 pipeline error: {e}")
+
 @app.post("/search")
 async def create_search(
     query: str = Body(...), 
@@ -46,7 +70,8 @@ async def create_search(
     domains: str = Body(None),
     exclude_domains: str = Body(None),
     fromDate: str = Body(None),
-    toDate: str = Body(None)
+    toDate: str = Body(None),
+    background_tasks: BackgroundTasks = None
 ):
     print(f"Starting search for: {query} in {category}")
     
@@ -169,6 +194,9 @@ async def create_search(
             "driftMetrics": Json(drift_metrics)
         }
     )
+
+    if background_tasks:
+        background_tasks.add_task(background_phase2_pipeline, search_record.id)
 
     return {"search_id": search_record.id, "message": "Search processed successfully."}
 
