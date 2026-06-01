@@ -211,6 +211,110 @@ async def get_results(search_id: str):
     
     return search_record
 
+@app.get("/results/{search_id}/intelligence")
+async def get_search_intelligence(search_id: str):
+    # Fetch all evidence belonging to articles from this search
+    articles = await prisma.article.find_many(where={"searchId": search_id})
+    article_ids = [a.id for a in articles]
+    
+    if not article_ids:
+        return {"events": [], "clusters": [], "claims": [], "metrics": {}}
+
+    evidence_records = await prisma.evidence.find_many(
+        where={"articleId": {"in": article_ids}},
+        include={"claim": True}
+    )
+    
+    claim_ids = list(set([e.claimId for e in evidence_records if e.claimId]))
+    
+    claims = await prisma.claim.find_many(
+        where={"id": {"in": claim_ids}},
+        include={
+            "evidence": True,
+            "cluster": {
+                "include": {
+                    "event": True
+                }
+            }
+        }
+    )
+    
+    # Process into clean structured output
+    formatted_claims = []
+    clusters_map = {}
+    events_map = {}
+    
+    for c in claims:
+        # Build claim
+        fc = {
+            "id": c.id,
+            "canonicalClaim": c.canonicalClaim,
+            "confidence": c.confidence,
+            "evidenceCount": len(c.evidence),
+            "sources": list(set([e.source for e in c.evidence])),
+            "evidence": [{"sentence": e.sentence, "source": e.source, "publishedAt": e.publishedAt, "url": e.url} for e in c.evidence],
+            "clusterId": c.clusterId
+        }
+        formatted_claims.append(fc)
+        
+        # Build cluster
+        if c.cluster:
+            cid = c.cluster.id
+            if cid not in clusters_map:
+                clusters_map[cid] = {
+                    "id": cid,
+                    "title": c.cluster.title,
+                    "eventId": c.cluster.eventId,
+                    "claims": [],
+                    "evidenceCount": 0,
+                    "sources": set()
+                }
+            clusters_map[cid]["claims"].append(fc["canonicalClaim"])
+            clusters_map[cid]["evidenceCount"] += fc["evidenceCount"]
+            for s in fc["sources"]:
+                clusters_map[cid]["sources"].add(s)
+                
+            # Build event
+            if c.cluster.event:
+                eid = c.cluster.event.id
+                if eid not in events_map:
+                    events_map[eid] = {
+                        "id": eid,
+                        "title": c.cluster.event.title,
+                        "clusters": [],
+                        "evidenceCount": 0,
+                        "sources": set()
+                    }
+                if c.cluster.title not in events_map[eid]["clusters"]:
+                    events_map[eid]["clusters"].append(c.cluster.title)
+                events_map[eid]["evidenceCount"] += fc["evidenceCount"]
+                for s in fc["sources"]:
+                    events_map[eid]["sources"].add(s)
+                    
+    # Format maps to lists
+    formatted_clusters = list(clusters_map.values())
+    for cl in formatted_clusters:
+        cl["sources"] = list(cl["sources"])
+        cl["sourceCount"] = len(cl["sources"])
+        
+    formatted_events = list(events_map.values())
+    for ev in formatted_events:
+        ev["sources"] = list(ev["sources"])
+        ev["sourceCount"] = len(ev["sources"])
+        
+    return {
+        "metrics": {
+            "articlesProcessed": len(article_ids),
+            "claimsExtracted": len(evidence_records),
+            "canonicalClaims": len(formatted_claims),
+            "clusters": len(formatted_clusters),
+            "events": len(formatted_events)
+        },
+        "claims": sorted(formatted_claims, key=lambda x: x["evidenceCount"], reverse=True),
+        "clusters": sorted(formatted_clusters, key=lambda x: x["evidenceCount"], reverse=True),
+        "events": sorted(formatted_events, key=lambda x: x["evidenceCount"], reverse=True)
+    }
+
 @app.post("/chat-with-article")
 async def chat_with_article(
     articleId: str = Body(...),
