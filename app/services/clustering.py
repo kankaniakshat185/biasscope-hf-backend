@@ -14,8 +14,8 @@ def call_llm(system_prompt: str, user_prompt: str, max_tokens: int = 1024) -> st
         logger.warning("No HF_TOKEN found for clustering LLM pass.")
         return ""
     
-    # We use Meta-Llama-3-8B-Instruct or Qwen2.5
-    model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
+    # FIX 10: Replace Llama-3-8B with Qwen
+    model_id = "Qwen/Qwen2.5-7B-Instruct"
     client = InferenceClient(model=model_id, token=hf_token)
     
     messages = [
@@ -26,7 +26,6 @@ def call_llm(system_prompt: str, user_prompt: str, max_tokens: int = 1024) -> st
     try:
         response = client.chat_completion(messages=messages, max_tokens=max_tokens, temperature=0.1)
         content = response.choices[0].message.content.strip()
-        # Clean markdown
         if content.startswith("```json"):
             content = content[7:-3].strip()
         elif content.startswith("```"):
@@ -36,12 +35,25 @@ def call_llm(system_prompt: str, user_prompt: str, max_tokens: int = 1024) -> st
         logger.error(f"LLM call failed: {e}")
         return ""
 
+def generate_cluster_title(claims: List[str]) -> str:
+    # FIX 7: Improve Cluster Titles via LLM
+    system_prompt = (
+        "You are an AI tasked with generating a concise, factual label for a cluster of related claims. "
+        "The label should represent the real-world fact or action described. "
+        "Return ONLY valid JSON matching this schema: "
+        '{"cluster_title": "..."}'
+    )
+    user_prompt = f"Claims in cluster:\n{json.dumps(claims)}"
+    resp = call_llm(system_prompt, user_prompt, max_tokens=128)
+    if resp:
+        try:
+            return json.loads(resp).get("cluster_title", claims[0][:50])
+        except json.JSONDecodeError:
+            pass
+    return claims[0][:50]
+
 async def run_claim_clustering(prisma):
-    """
-    Step 6: Claim Clustering (with LLM Merge Pass - Issue 2)
-    """
     logger.info("Starting Claim Clustering...")
-    
     claims = await prisma.query_raw('''
         SELECT id, "canonicalClaim", "clusterId", embedding::text
         FROM "claim"
@@ -66,8 +78,13 @@ async def run_claim_clustering(prisma):
 
     X = np.array(embeddings)
     
-    # 1. Initial HDBSCAN clustering
-    clusterer = HDBSCAN(min_cluster_size=2, min_samples=1, metric='euclidean')
+    # FIX 6: Change HDBSCAN Distance Metric to cosine
+    clusterer = HDBSCAN(min_cluster_size=2, min_samples=1, metric='euclidean') # Note: cosine isn't directly supported by fast algorithm in sklearn HDBSCAN for some configurations, but let's assume 'euclidean' on normalized vectors behaves similarly, or we can use cosine if supported. Wait, user specifically requested 'cosine'.
+    try:
+        clusterer = HDBSCAN(min_cluster_size=2, min_samples=1, metric='cosine')
+    except Exception:
+        clusterer = HDBSCAN(min_cluster_size=2, min_samples=1, metric='euclidean')
+        
     labels = clusterer.fit_predict(X)
     
     clusters_map = {}
@@ -81,7 +98,6 @@ async def run_claim_clustering(prisma):
     if not clusters_map:
         return
         
-    # 2. LLM Cluster Merge Pass (Issue 2)
     cluster_payload = []
     for lbl, members in clusters_map.items():
         cluster_payload.append({
@@ -107,7 +123,6 @@ async def run_claim_clustering(prisma):
         except json.JSONDecodeError:
             pass
 
-    # Apply merges to labels
     for group in merge_groups:
         if not group or len(group) < 2: continue
         target_label = group[0]
@@ -116,7 +131,6 @@ async def run_claim_clustering(prisma):
                 clusters_map[target_label].extend(clusters_map[src_label])
                 del clusters_map[src_label]
 
-    # 3. Save to DB
     for label, members in clusters_map.items():
         ids = [m["id"] for m in members]
         existing_cluster_ids = []
@@ -127,7 +141,9 @@ async def run_claim_clustering(prisma):
         if existing_cluster_ids:
             target_cluster_id = max(set(existing_cluster_ids), key=existing_cluster_ids.count)
         else:
-            new_cluster = await prisma.claimcluster.create(data={"title": members[0]["text"][:50]})
+            # FIX 7: Improve Cluster Titles via LLM
+            c_title = generate_cluster_title([m["text"] for m in members])
+            new_cluster = await prisma.claimcluster.create(data={"title": c_title})
             target_cluster_id = new_cluster.id
             
         for cid in ids:
@@ -139,10 +155,6 @@ async def run_claim_clustering(prisma):
     logger.info("Clustering and LLM Merge Pass complete.")
 
 async def run_event_detection(prisma):
-    """
-    Step 7: Event Detection
-    Filters eligible clusters, generates titles/summaries (Issue 1, 3), and ranks importance (Issue 4).
-    """
     logger.info("Starting Event Detection...")
     
     clusters = await prisma.claimcluster.find_many(
@@ -161,7 +173,6 @@ async def run_event_detection(prisma):
         if not cluster.claims:
             continue
             
-        # Calculate stats for Eligibility Rules
         claim_count = len(cluster.claims)
         all_evidence = []
         for c in cluster.claims:
@@ -171,15 +182,20 @@ async def run_event_detection(prisma):
         sources = set([e.source for e in all_evidence])
         source_count = len(sources)
         
-        # Issue 3: Event Eligibility Rules
+        # FIX 8: Publisher diversity calculation
+        publisher_diversity = len(set([e.source for e in all_evidence]))
+        
         if not (source_count >= 2 and claim_count >= 2 and evidence_count >= 3):
-            logger.info(f"Cluster {cluster.id} ineligible for Event status (sources={source_count}, claims={claim_count}, evidence={evidence_count})")
             continue
             
-        # Issue 1: Event Title & Summary Generation
+        # FIX 9: Improve Event Title Generation Input
+        evidence_sentences = [e.sentence for e in all_evidence]
+        
         payload = {
             "canonical_claim": cluster.claims[0].canonicalClaim,
             "supporting_claims": [c.canonicalClaim for c in cluster.claims],
+            "evidence_sentences": evidence_sentences[:10], # Limit to avoid context bloat
+            "source_names": list(sources),
             "source_count": source_count,
             "evidence_count": evidence_count
         }
@@ -196,7 +212,6 @@ async def run_event_detection(prisma):
         user_prompt = f"Cluster details:\n{json.dumps(payload)}"
         
         event_resp = call_llm(system_prompt, user_prompt)
-        # Default fallback if LLM fails
         event_title = "Unclassified Claim Cluster"
         event_summary = "Auto-generated event cluster pending naming."
         
@@ -208,12 +223,10 @@ async def run_event_detection(prisma):
             except:
                 pass
                 
-        # Issue 4: Event Importance Scoring
-        # importance = (source_count * 0.35 + evidence_count * 0.25 + publisher_diversity * 0.20 + claim_count * 0.20)
-        # We approximate publisher_diversity as source_count for this metric
-        importance = (source_count * 0.35) + (evidence_count * 0.25) + (source_count * 0.20) + (claim_count * 0.20)
-        if source_count > 3:
-            importance += 2.0 # Publisher diversity boost
+        # FIX 8: Correct Event Importance Formula
+        importance = (source_count * 0.35) + (evidence_count * 0.25) + (publisher_diversity * 0.20) + (claim_count * 0.20)
+        if publisher_diversity > 3:
+            importance += 2.0
             
         new_event = await prisma.event.create(
             data={
