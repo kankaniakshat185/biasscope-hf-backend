@@ -24,6 +24,31 @@ def embed_text(text: str) -> List[float]:
     # model.encode returns a numpy array, we convert to list
     return model.encode(text).tolist()
 
+def get_topic_relevance(query: str, article_text: str, title: str) -> float:
+    """Calculates a relevance score based on headline presence, first paragraph presence, and frequency."""
+    if not query:
+        return 1.0
+        
+    query_lower = query.lower()
+    text_lower = article_text.lower()
+    title_lower = (title or "").lower()
+    
+    score = 0.0
+    if query_lower in title_lower:
+        score += 0.5
+        
+    first_paragraph = text_lower[:500]
+    if query_lower in first_paragraph:
+        score += 0.3
+        
+    freq = text_lower.count(query_lower)
+    if freq >= 3:
+        score += 0.2
+    elif freq > 0:
+        score += 0.1
+        
+    return min(score, 1.0)
+
 def extract_claims(article_text: str) -> List[Dict[str, Any]]:
     """
     Extracts factual, objective claims from the article using Qwen 2.5 or Llama 3.
@@ -72,14 +97,20 @@ def extract_claims(article_text: str) -> List[Dict[str, Any]]:
         logger.error(f"Failed to extract claims: {e}")
         return []
 
-async def process_and_canonicalize_claims(prisma, article_id: str, article_text: str, source: str, url: str, published_at):
+async def process_and_canonicalize_claims(prisma, article_id: str, article_text: str, source: str, url: str, published_at, query: str = "", title: str = ""):
     """
     Executes Phase 2 Pipeline:
-    1. Extract Claims
-    2. Embed
-    3. Canonicalize (Merge if similarity > 0.92)
-    4. Link Evidence
+    1. Topic Relevance Scoring (Skip if < 0.6)
+    2. Extract Claims
+    3. Embed
+    4. Canonicalize (Merge if similarity > 0.92)
+    5. Link Evidence
     """
+    relevance_score = get_topic_relevance(query, article_text, title)
+    if relevance_score < 0.6:
+        logger.info(f"Article has low relevance score: {relevance_score}. Skipping claim extraction.")
+        return []
+
     raw_claims = extract_claims(article_text)
     if not raw_claims:
         return []

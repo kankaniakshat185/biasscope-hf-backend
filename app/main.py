@@ -43,6 +43,9 @@ def read_root():
 async def background_phase2_pipeline(search_id: str):
     print(f"Starting background Phase 2 pipeline for search {search_id}...")
     try:
+        search_record = await prisma.search.find_unique(where={"id": search_id})
+        query = search_record.query if search_record else ""
+        
         articles = await prisma.article.find_many(where={"searchId": search_id})
         for art in articles:
             if art.content:
@@ -52,7 +55,9 @@ async def background_phase2_pipeline(search_id: str):
                     art.content, 
                     art.source, 
                     art.url, 
-                    art.publishedAt
+                    art.publishedAt,
+                    query,
+                    art.title
                 )
         
         # Run Step 6 & 7 locally
@@ -281,6 +286,7 @@ async def get_search_intelligence(search_id: str):
                     events_map[eid] = {
                         "id": eid,
                         "title": c.cluster.event.title,
+                        "importanceScore": getattr(c.cluster.event, 'importanceScore', 0) or 0,
                         "clusters": [],
                         "evidenceCount": 0,
                         "sources": set()
@@ -312,7 +318,7 @@ async def get_search_intelligence(search_id: str):
         },
         "claims": sorted(formatted_claims, key=lambda x: x["evidenceCount"], reverse=True),
         "clusters": sorted(formatted_clusters, key=lambda x: x["evidenceCount"], reverse=True),
-        "events": sorted(formatted_events, key=lambda x: x["evidenceCount"], reverse=True)
+        "events": sorted(formatted_events, key=lambda x: x.get("importanceScore", 0), reverse=True)
     }
 
 @app.post("/chat-with-article")
