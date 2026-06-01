@@ -6,7 +6,7 @@ from app.services.cleaning import clean_and_deduplicate
 from app.services.ingestion import ingest_articles, scrape_single_url
 from app.services.nlp import analyze_articles, generate_narrative, generate_contrastive_summaries, extract_entity_sentiment
 from app.services.validation import validate_articles
-from app.services.extraction import process_and_canonicalize_claims
+from app.services.extraction import process_and_store_claims
 from app.services.clustering import run_claim_clustering, run_event_detection
 import os
 import io
@@ -49,15 +49,14 @@ async def background_phase2_pipeline(search_id: str):
         articles = await prisma.article.find_many(where={"searchId": search_id})
         for art in articles:
             if art.content:
-                await process_and_canonicalize_claims(
-                    prisma, 
-                    art.id, 
-                    art.content, 
-                    art.source, 
-                    art.url, 
+                await process_and_store_claims(
+                    prisma,
+                    art.id,
+                    art.content,
+                    art.source,
+                    art.url,
                     art.publishedAt,
                     query,
-                    art.title
                 )
         
         # Run Step 6 & 7 locally
@@ -269,12 +268,14 @@ async def get_search_intelligence(search_id: str):
                 clusters_map[cid] = {
                     "id": cid,
                     "title": c.cluster.title,
+                    "canonicalClaim": c.canonicalClaim,  # first canonical claim found
                     "eventId": c.cluster.eventId,
                     "claims": [],
                     "evidenceCount": 0,
                     "sources": set()
                 }
-            clusters_map[cid]["claims"].append(fc["canonicalClaim"])
+            if fc["canonicalClaim"] not in clusters_map[cid]["claims"]:
+                clusters_map[cid]["claims"].append(fc["canonicalClaim"])
             clusters_map[cid]["evidenceCount"] += fc["evidenceCount"]
             for s in fc["sources"]:
                 clusters_map[cid]["sources"].add(s)
@@ -286,13 +287,16 @@ async def get_search_intelligence(search_id: str):
                     events_map[eid] = {
                         "id": eid,
                         "title": c.cluster.event.title,
+                        "description": getattr(c.cluster.event, 'description', '') or '',
                         "importanceScore": getattr(c.cluster.event, 'importanceScore', 0) or 0,
                         "clusters": [],
+                        "claimCount": 0,
                         "evidenceCount": 0,
                         "sources": set()
                     }
                 if c.cluster.title not in events_map[eid]["clusters"]:
                     events_map[eid]["clusters"].append(c.cluster.title)
+                events_map[eid]["claimCount"] += 1
                 events_map[eid]["evidenceCount"] += fc["evidenceCount"]
                 for s in fc["sources"]:
                     events_map[eid]["sources"].add(s)

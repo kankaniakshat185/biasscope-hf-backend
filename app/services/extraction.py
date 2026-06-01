@@ -1,194 +1,219 @@
+"""
+Phase 2 — Extraction Layer (DUMB)
+
+This layer does ONLY three things:
+  1. Extract atomic, factual claims from article text via LLM
+  2. Generate embeddings for each claim
+  3. Store claims + evidence into the database
+
+It does NOT:
+  - Canonicalize
+  - Cluster
+  - Merge
+  - Generate events
+
+All intelligence happens in clustering.py AFTER all claims are stored.
+"""
+
 import os
 import json
+import hashlib
 import logging
 from datetime import datetime
 from typing import List, Dict, Any
+
+import numpy as np
 from huggingface_hub import InferenceClient
 from sentence_transformers import SentenceTransformer
 
 logger = logging.getLogger(__name__)
 
+MODEL_ID = "Qwen/Qwen2.5-7B-Instruct"
+
+# ── Embedding Model (singleton) ──────────────────────────────────
+
 _embedding_model = None
+
 def get_embedding_model():
     global _embedding_model
     if _embedding_model is None:
         logger.info("Loading sentence-transformers/all-MiniLM-L6-v2...")
-        _embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+        _embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
     return _embedding_model
 
-import numpy as np
-
 def embed_text(text: str) -> List[float]:
-    model = get_embedding_model()
-    return model.encode(text, normalize_embeddings=True).tolist()
+    """Returns a normalized 384-dim embedding."""
+    return get_embedding_model().encode(text, normalize_embeddings=True).tolist()
 
-def cosine_similarity(a, b):
-    a = np.array(a); b = np.array(b)
-    if np.linalg.norm(a) == 0 or np.linalg.norm(b) == 0: return 0.0
-    return float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b)))
+def cosine_similarity(a, b) -> float:
+    a, b = np.array(a), np.array(b)
+    na, nb = np.linalg.norm(a), np.linalg.norm(b)
+    if na == 0 or nb == 0:
+        return 0.0
+    return float(np.dot(a, b) / (na * nb))
 
-def call_extraction_llm(system_prompt: str, user_prompt: str, max_tokens: int = 1024) -> str:
-    hf_token = os.environ.get("HF_TOKEN")
-    if not hf_token:
+# ── LLM Helper ───────────────────────────────────────────────────
+
+def call_llm(system_prompt: str, user_prompt: str, max_tokens: int = 1024) -> str:
+    token = os.getenv("HF_TOKEN")
+    if not token:
+        logger.warning("No HF_TOKEN found.")
         return ""
-    # FIX 10: Replace Llama-3 with Qwen2.5
-    model_id = "Qwen/Qwen2.5-7B-Instruct"
-    client = InferenceClient(model=model_id, token=hf_token)
+    client = InferenceClient(model=MODEL_ID, token=token)
     try:
-        response = client.chat_completion(
+        resp = client.chat_completion(
             messages=[
                 {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
+                {"role": "user", "content": user_prompt},
             ],
+            temperature=0.1,
             max_tokens=max_tokens,
-            temperature=0.1
         )
-        content = response.choices[0].message.content.strip()
+        content = resp.choices[0].message.content.strip()
         if content.startswith("```json"):
             content = content[7:-3].strip()
         elif content.startswith("```"):
             content = content[3:-3].strip()
         return content
     except Exception as e:
-        logger.error(f"Extraction LLM call failed: {e}")
+        logger.error(f"LLM call failed: {e}")
         return ""
 
+# ── Claim Extraction ─────────────────────────────────────────────
+
+def extract_claims(article_text: str) -> List[Dict[str, Any]]:
+    """
+    Extracts atomic, verifiable claims from article text.
+    Returns list of {text, confidence, evidence_sentence}.
+    """
+    system_prompt = (
+        "You are a strict factual extraction engine.\n"
+        "RULES:\n"
+        "1. Extract ONLY factual, verifiable assertions.\n"
+        "2. DO NOT extract opinions, sentiment, speculation, or editorial framing.\n"
+        "3. Claims must be self-contained and atomic. Replace all pronouns with named entities.\n"
+        "4. Assign a confidence score (0.0–1.0).\n"
+        "5. Provide the exact 'evidence_sentence' — the verbatim sentence from the article that supports this claim.\n"
+        "6. Return ONLY valid JSON.\n"
+        "Format:\n"
+        '{"claims":[{"text":"...","confidence":0.95,"evidence_sentence":"..."}]}'
+    )
+    user_prompt = f"Extract claims from this article (max 5000 chars):\n\n{article_text[:5000]}"
+
+    raw = call_llm(system_prompt, user_prompt)
+    if raw:
+        try:
+            return json.loads(raw).get("claims", [])
+        except json.JSONDecodeError:
+            logger.exception("Claim parse failed")
+    return []
+
+# ── Relevance Filter ─────────────────────────────────────────────
+
 def claim_relevance(query: str, claim_embedding: List[float]) -> float:
-    if not query: return 1.0
+    """Cosine similarity between query embedding and claim embedding."""
+    if not query:
+        return 1.0
     query_embedding = embed_text(query)
     return cosine_similarity(query_embedding, claim_embedding)
 
-def extract_claims(article_text: str) -> List[Dict[str, Any]]:
-    # FIX 2: Store real evidence in "evidence_sentence"
-    system_prompt = (
-        "You are a strict factual extraction engine. Your ONLY purpose is to extract objective, verifiable events and actions from the text.\n"
-        "RULES:\n"
-        "1. Extract ONLY factual assertions (e.g., 'SpaceX signed a compute agreement with Anthropic.').\n"
-        "2. DO NOT extract opinions, sentiment, speculation, or editorial framing.\n"
-        "3. Claims must be self-contained and highly specific. Do not use pronouns like 'He' or 'They' if the entity is known.\n"
-        "4. Assign a confidence score (0.0 to 1.0) indicating how explicitly the article states this fact.\n"
-        "5. Provide the exact 'evidence_sentence' from the text that proves this claim.\n"
-        "6. Respond ONLY with valid JSON.\n"
-        "Format:\n"
-        "{\"claims\": [{\"text\": \"...\", \"confidence\": 0.95, \"evidence_sentence\": \"...\"}]}"
-    )
-    user_prompt = f"Extract the claims from the following article text (limited to 4000 chars for context):\n\n{article_text[:4000]}"
-    
-    resp = call_extraction_llm(system_prompt, user_prompt)
-    if resp:
-        try:
-            return json.loads(resp).get("claims", [])
-        except json.JSONDecodeError:
-            pass
-    return []
+# ── Evidence Deduplication ────────────────────────────────────────
 
-def generate_canonical_claim(existing_claims: List[str], new_claim: str) -> str:
-    # FIX 4: LLM Canonicalization
-    system_prompt = (
-        "You are an AI tasked with canonicalizing related claims. "
-        "Review the existing claims and the new claim. "
-        "Combine them into a single, comprehensive canonical claim that captures the complete fact accurately without redundancy. "
-        "Return ONLY valid JSON matching this schema: "
-        '{"canonical_claim": "..."}'
-    )
-    payload = {
-        "existing_claims": existing_claims,
-        "new_claim": new_claim
-    }
-    user_prompt = json.dumps(payload)
-    resp = call_extraction_llm(system_prompt, user_prompt, max_tokens=256)
-    if resp:
-        try:
-            return json.loads(resp).get("canonical_claim", new_claim)
-        except json.JSONDecodeError:
-            pass
-    return new_claim
+def evidence_hash(claim_id: str, article_id: str, sentence: str) -> str:
+    """Deterministic hash for evidence deduplication."""
+    raw = f"{claim_id}|{article_id}|{sentence.strip().lower()}"
+    return hashlib.sha256(raw.encode()).hexdigest()
 
-async def process_and_canonicalize_claims(prisma, article_id: str, article_text: str, source: str, url: str, published_at, query: str = "", title: str = ""):
-    raw_claims = extract_claims(article_text)
-    if not raw_claims:
+# ── Main Pipeline: Extract + Store ────────────────────────────────
+
+async def process_and_store_claims(
+    prisma,
+    article_id: str,
+    article_text: str,
+    source: str,
+    url: str,
+    published_at,
+    query: str = "",
+):
+    """
+    DUMB extraction pipeline:
+      1. Extract claims from article text
+      2. For each claim, compute embedding
+      3. Filter by relevance to search query
+      4. Store claim + evidence (with deduplication)
+
+    NO canonicalization. NO clustering. Those happen later.
+    """
+    claims = extract_claims(article_text)
+    if not claims:
         return []
-        
-    processed_claims = []
-    
-    for c in raw_claims:
-        text = c.get("text", "").strip()
-        confidence = c.get("confidence", 0.8)
-        evidence_sentence = c.get("evidence_sentence", text).strip()
 
-        if not text or len(text) < 15:
+    inserted = []
+
+    for claim in claims:
+        text = claim.get("text", "").strip()
+        evidence_sentence = claim.get("evidence_sentence", "").strip()
+        confidence = float(claim.get("confidence", 0.8))
+
+        if len(text) < 15:
             continue
-            
-        embedding_list = embed_text(text)
-            
-        relevance = claim_relevance(query, embedding_list)
+
+        # Generate embedding
+        embedding = embed_text(text)
+
+        # Relevance filter (claim-level, not article-level)
+        relevance = claim_relevance(query, embedding)
         if query and relevance < 0.45:
-            continue # FIX 1: Discard only low relevance claims
-            
-        vector_str = "[" + ",".join(map(str, embedding_list)) + "]"
-        
-        # FIX 5: Lower similarity threshold to 0.82
-        similarity_threshold = 0.82
-        distance_threshold = 1.0 - similarity_threshold
-        
-        matched_claims = await prisma.query_raw(
-            f'''
-            SELECT id, "canonicalClaim", "confidence", (embedding <=> '{vector_str}'::vector) as distance 
-            FROM "claim" 
-            WHERE (embedding <=> '{vector_str}'::vector) < {distance_threshold}
-            ORDER BY distance ASC 
-            LIMIT 1
-            '''
+            logger.debug(f"Claim rejected (relevance={relevance:.2f}): {text[:60]}")
+            continue
+
+        vector_string = "[" + ",".join(map(str, embedding)) + "]"
+
+        # Insert claim (always new — canonicalization happens in clustering)
+        created = await prisma.query_raw(
+            """
+            INSERT INTO "claim"
+            ("id","canonicalClaim","confidence","embedding","createdAt")
+            VALUES
+            (gen_random_uuid()::text, $1, $2, $3::vector, NOW())
+            RETURNING id
+            """,
+            text,
+            confidence,
+            vector_string,
         )
-        
-        canonical_claim_id = None
-        
-        if matched_claims and len(matched_claims) > 0:
-            match = matched_claims[0]
-            canonical_claim_id = match["id"]
-            
-            # FIX 4: Real Canonicalization
-            old_canonical = match["canonicalClaim"]
-            new_canonical = generate_canonical_claim([old_canonical], text)
-            
-            old_conf = float(match["confidence"])
-            new_conf = (old_conf + float(confidence)) / 2.0
-            
-            # FIX 3: Parameterized queries where possible (using ORM here)
-            await prisma.claim.update(
-                where={"id": canonical_claim_id},
-                data={
-                    "canonicalClaim": new_canonical,
-                    "confidence": new_conf
-                }
-            )
-        else:
-            # FIX 3: Removed raw SQL interpolation for text/confidence
-            new_claim = await prisma.query_raw(
-                f'''
-                INSERT INTO "claim" ("id", "canonicalClaim", "confidence", "embedding", "createdAt") 
-                VALUES (gen_random_uuid()::text, $1, $2, '{vector_str}'::vector, NOW())
-                RETURNING id;
-                ''',
-                text, float(confidence)
-            )
-            if new_claim:
-                canonical_claim_id = new_claim[0]["id"]
-            else:
-                continue
-        
-        if canonical_claim_id:
+
+        if not created:
+            continue
+
+        claim_id = created[0]["id"]
+
+        # Evidence deduplication
+        ev_hash = evidence_hash(claim_id, article_id, evidence_sentence or text)
+        existing = await prisma.query_raw(
+            """
+            SELECT id FROM "evidence"
+            WHERE "claimId" = $1 AND "articleId" = $2
+            LIMIT 1
+            """,
+            claim_id,
+            article_id,
+        )
+
+        if not existing:
             await prisma.evidence.create(
                 data={
-                    "claimId": canonical_claim_id,
+                    "claimId": claim_id,
                     "articleId": article_id,
-                    "sentence": evidence_sentence, # FIX 2: Store real evidence sentence
+                    "sentence": evidence_sentence or text,
                     "source": source,
                     "url": url,
                     "publishedAt": published_at or datetime.now(),
-                    "stance": "MENTION"
+                    "stance": "MENTION",
                 }
             )
-            processed_claims.append(canonical_claim_id)
-            
-    return processed_claims
+
+        inserted.append(claim_id)
+
+    logger.info(f"Extracted {len(inserted)} claims from article {article_id}")
+    return inserted
