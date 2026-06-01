@@ -16,9 +16,16 @@ def get_embedding_model():
         _embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
     return _embedding_model
 
+import numpy as np
+
 def embed_text(text: str) -> List[float]:
     model = get_embedding_model()
-    return model.encode(text).tolist()
+    return model.encode(text, normalize_embeddings=True).tolist()
+
+def cosine_similarity(a, b):
+    a = np.array(a); b = np.array(b)
+    if np.linalg.norm(a) == 0 or np.linalg.norm(b) == 0: return 0.0
+    return float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b)))
 
 def call_extraction_llm(system_prompt: str, user_prompt: str, max_tokens: int = 1024) -> str:
     hf_token = os.environ.get("HF_TOKEN")
@@ -46,28 +53,10 @@ def call_extraction_llm(system_prompt: str, user_prompt: str, max_tokens: int = 
         logger.error(f"Extraction LLM call failed: {e}")
         return ""
 
-def get_topic_relevance(query: str, article_text: str, title: str) -> float:
+def claim_relevance(query: str, claim_embedding: List[float]) -> float:
     if not query: return 1.0
-    query_lower = query.lower()
-    text_lower = article_text.lower()
-    title_lower = (title or "").lower()
-    score = 0.0
-    if query_lower in title_lower: score += 0.5
-    if query_lower in text_lower[:500]: score += 0.3
-    freq = text_lower.count(query_lower)
-    if freq >= 3: score += 0.2
-    elif freq > 0: score += 0.1
-    return min(score, 1.0)
-
-def get_claim_relevance(query: str, claim_text: str, article_relevance: float) -> float:
-    # FIX 1: Claim-level relevance
-    if not query: return 1.0
-    query_lower = query.lower()
-    claim_lower = claim_text.lower()
-    score = article_relevance * 0.5
-    if query_lower in claim_lower:
-        score += 0.5
-    return min(score, 1.0)
+    query_embedding = embed_text(query)
+    return cosine_similarity(query_embedding, claim_embedding)
 
 def extract_claims(article_text: str) -> List[Dict[str, Any]]:
     # FIX 2: Store real evidence in "evidence_sentence"
@@ -116,9 +105,6 @@ def generate_canonical_claim(existing_claims: List[str], new_claim: str) -> str:
     return new_claim
 
 async def process_and_canonicalize_claims(prisma, article_id: str, article_text: str, source: str, url: str, published_at, query: str = "", title: str = ""):
-    article_relevance = get_topic_relevance(query, article_text, title)
-    
-    # FIX 1: Don't discard entire article, extract first
     raw_claims = extract_claims(article_text)
     if not raw_claims:
         return []
@@ -129,15 +115,16 @@ async def process_and_canonicalize_claims(prisma, article_id: str, article_text:
         text = c.get("text", "").strip()
         confidence = c.get("confidence", 0.8)
         evidence_sentence = c.get("evidence_sentence", text).strip()
-        
+
         if not text or len(text) < 15:
             continue
             
-        claim_relevance = get_claim_relevance(query, text, article_relevance)
-        if claim_relevance < 0.6:
+        embedding_list = embed_text(text)
+            
+        relevance = claim_relevance(query, embedding_list)
+        if query and relevance < 0.45:
             continue # FIX 1: Discard only low relevance claims
             
-        embedding_list = embed_text(text)
         vector_str = "[" + ",".join(map(str, embedding_list)) + "]"
         
         # FIX 5: Lower similarity threshold to 0.82

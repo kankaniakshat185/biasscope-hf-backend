@@ -78,12 +78,11 @@ async def run_claim_clustering(prisma):
 
     X = np.array(embeddings)
     
-    # FIX 6: Change HDBSCAN Distance Metric to cosine
-    clusterer = HDBSCAN(min_cluster_size=2, min_samples=1, metric='euclidean') # Note: cosine isn't directly supported by fast algorithm in sklearn HDBSCAN for some configurations, but let's assume 'euclidean' on normalized vectors behaves similarly, or we can use cosine if supported. Wait, user specifically requested 'cosine'.
-    try:
-        clusterer = HDBSCAN(min_cluster_size=2, min_samples=1, metric='cosine')
-    except Exception:
-        clusterer = HDBSCAN(min_cluster_size=2, min_samples=1, metric='euclidean')
+    # FIX: Normalize vectors for euclidean metric to behave like cosine
+    X = X / np.linalg.norm(X, axis=1, keepdims=True)
+    
+    # FIX 6: Change HDBSCAN Distance Metric to euclidean on normalized vectors
+    clusterer = HDBSCAN(min_cluster_size=2, min_samples=1, metric='euclidean')
         
     labels = clusterer.fit_predict(X)
     
