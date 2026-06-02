@@ -920,5 +920,69 @@ async def debug_status():
         "events": events[0]["cnt"] if events else 0,
     }
 
+@app.get("/debug/cluster-quality")
+async def debug_cluster_quality():
+    """Part 7: Per-cluster quality diagnostics."""
+    clusters = await prisma.claimcluster.find_many(
+        include={"claims": {"include": {"evidence": True}}},
+        order={"id": "asc"},
+    )
+
+    diagnostics = []
+    for cluster in clusters:
+        claim_count = len(cluster.claims) if cluster.claims else 0
+        all_evidence = []
+        for c in (cluster.claims or []):
+            all_evidence.extend(c.evidence)
+
+        evidence_count = len(all_evidence)
+        sources = set(e.source for e in all_evidence)
+        source_count = len(sources)
+        consensus = cluster.consensusScore or 0.0
+
+        # Noise detection: single-source, low-evidence clusters
+        noise_score = 0.0
+        if source_count <= 1 and evidence_count <= 2:
+            noise_score += 0.5
+        if claim_count <= 1:
+            noise_score += 0.3
+        if consensus < 0.2:
+            noise_score += 0.2
+        noise_score = min(noise_score, 1.0)
+
+        # Event eligibility check (mirrors clustering.py logic)
+        is_multi_source = source_count >= 2
+        is_substantial_single = claim_count >= 3 and evidence_count >= 4
+        has_minimum_claims = claim_count >= 2
+        has_minimum_evidence = evidence_count >= 2
+        event_eligible = has_minimum_claims and has_minimum_evidence and (is_multi_source or is_substantial_single)
+
+        diagnostics.append({
+            "cluster_id": cluster.id,
+            "title": cluster.title,
+            "canonical_claim": cluster.canonicalClaim,
+            "claim_count": claim_count,
+            "evidence_count": evidence_count,
+            "source_count": source_count,
+            "sources": list(sources),
+            "consensus_score": round(consensus, 3),
+            "noise_score": round(noise_score, 3),
+            "event_eligible": event_eligible,
+            "event_id": cluster.eventId,
+        })
+
+    # Sort by noise_score ascending (best clusters first)
+    diagnostics.sort(key=lambda d: (-d["source_count"], d["noise_score"]))
+
+    total_eligible = sum(1 for d in diagnostics if d["event_eligible"])
+    total_noisy = sum(1 for d in diagnostics if d["noise_score"] >= 0.5)
+
+    return {
+        "total_clusters": len(diagnostics),
+        "event_eligible": total_eligible,
+        "noisy_clusters": total_noisy,
+        "clusters": diagnostics,
+    }
+
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

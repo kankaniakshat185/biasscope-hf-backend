@@ -1,0 +1,730 @@
+{
+  "query": "Elon Musk",
+  "timestamp": "2026-06-02T13:58 IST",
+  "hdbscan_config": {
+    "min_cluster_size": 2,
+    "min_samples": 2,
+    "metric": "precomputed (cosine distance)",
+    "cluster_selection_method": "leaf"
+  },
+  "pipeline_stats": {
+    "claims": 289,
+    "unclustered_claims": 96,
+    "clusters": 73,
+    "events": 72
+  },
+  "llm_usage": {
+    "total_calls": 116,
+    "total_cached": 36,
+    "cache_hit_rate": "31.0%",
+    "stages": {
+      "event_summary": {
+        "calls": 14,
+        "cached": 0,
+        "prompt_tokens": 1086,
+        "completion_tokens": 318
+      },
+      "canonicalization": {
+        "calls": 74,
+        "cached": 36,
+        "prompt_tokens": 3345,
+        "completion_tokens": 784
+      },
+      "merge": {
+        "calls": 8,
+        "cached": 0,
+        "prompt_tokens": 21406,
+        "completion_tokens": 393
+      },
+      "extraction": {
+        "calls": 20,
+        "cached": 0,
+        "prompt_tokens": 10158,
+        "completion_tokens": 10792
+      }
+    }
+  },
+  "events_summary": {
+    "total": 72,
+    "multi_source": 9,
+    "single_source": 63,
+    "top_events": [
+      {
+        "title": "The commission will review the city's charter and formulate",
+        "importance_score": 4.13,
+        "source_count": 1,
+        "claim_count": 6,
+        "evidence_count": 18,
+        "sources": [
+          "nymag.com"
+        ],
+        "canonical_claim": "The commission will review the city's charter and formulate proposals to help modernize sclerotic government.",
+        "description": ""
+      },
+      {
+        "title": "Elon Musk Talulah Riley Talulah",
+        "importance_score": 3.83,
+        "source_count": 1,
+        "claim_count": 6,
+        "evidence_count": 16,
+        "sources": [
+          "dailymail.com"
+        ],
+        "canonical_claim": "Talulah Riley married Elon Musk twice.",
+        "description": ""
+      },
+      {
+        "title": "SpaceX is expected to make the biggest initial public offeri",
+        "importance_score": 3.2,
+        "source_count": 3,
+        "claim_count": 3,
+        "evidence_count": 7,
+        "sources": [
+          "commondreams.org",
+          "barchart.com",
+          "wnd.com"
+        ],
+        "canonical_claim": "SpaceX is expected to make the biggest initial public offering in history.",
+        "description": ""
+      },
+      {
+        "title": "The Makerfield\u2013June Election",
+        "importance_score": 3.2,
+        "source_count": 2,
+        "claim_count": 4,
+        "evidence_count": 10,
+        "sources": [
+          "thejournal.ie",
+          "nymag.com"
+        ],
+        "canonical_claim": "The Makerfield byelection is due to be held on 18 June.",
+        "description": ""
+      },
+      {
+        "title": "Blue Origin\u2013Amazon Launch",
+        "importance_score": 2.65,
+        "source_count": 1,
+        "claim_count": 4,
+        "evidence_count": 10,
+        "sources": [
+          "indianexpress.com"
+        ],
+        "canonical_claim": "Blue Origin's test was in preparation for the launch of a batch of satellites for Amazon.",
+        "description": ""
+      },
+      {
+        "title": "Paloma Faith Andrea St Trinian",
+        "importance_score": 2.64,
+        "source_count": 1,
+        "claim_count": 5,
+        "evidence_count": 9,
+        "sources": [
+          "dailymail.com"
+        ],
+        "canonical_claim": "Paloma Faith played the role of Andrea in St Trinian's.",
+        "description": ""
+      },
+      {
+        "title": "Musk IPO",
+        "importance_score": 2.5,
+        "source_count": 1,
+        "claim_count": 4,
+        "evidence_count": 9,
+        "sources": [
+          "wnd.com"
+        ],
+        "canonical_claim": "Musk will retain 42% of SpaceX after the IPO.",
+        "description": ""
+      },
+      {
+        "title": "SpaceX reported an operational loss of $2.6 billion for 2025",
+        "importance_score": 2.4,
+        "source_count": 2,
+        "claim_count": 2,
+        "evidence_count": 6,
+        "sources": [
+          "barchart.com",
+          "wnd.com"
+        ],
+        "canonical_claim": "SpaceX reported an operational loss of $2.6 billion for 2025.",
+        "description": ""
+      },
+      {
+        "title": "Elon Musk Colossus",
+        "importance_score": 2.4,
+        "source_count": 2,
+        "claim_count": 2,
+        "evidence_count": 6,
+        "sources": [
+          "gizmodo.com",
+          "businessinsider.com"
+        ],
+        "canonical_claim": "Elon Musk wrote on X that SpaceX has not committed to leasing Colossus for years",
+        "description": ""
+      },
+      {
+        "title": "The panel's other members include several veterans of city g",
+        "importance_score": 2.4,
+        "source_count": 2,
+        "claim_count": 2,
+        "evidence_count": 6,
+        "sources": [
+          "indianexpress.com",
+          "nymag.com"
+        ],
+        "canonical_claim": "The panel's other members include several veterans of city government.",
+        "description": ""
+      },
+      {
+        "title": "Juno Temple Rising Star Award",
+        "importance_score": 2.37,
+        "source_count": 1,
+        "claim_count": 3,
+        "evidence_count": 9,
+        "sources": [
+          "dailymail.com"
+        ],
+        "canonical_claim": "Juno Temple won the EE Rising Star Award in 2013.",
+        "description": ""
+      },
+      {
+        "title": "Saudi\u2013Saudi Aramco IPO",
+        "importance_score": 2.33,
+        "source_count": 2,
+        "claim_count": 3,
+        "evidence_count": 5,
+        "sources": [
+          "commondreams.org",
+          "wnd.com"
+        ],
+        "canonical_claim": "SpaceX estimated in its filing that the IPO could value the company at $1.75 trillion, far surpassing the $25.6 billion record set by Saudi oil giant Saudi Aramco.",
+        "description": ""
+      },
+      {
+        "title": "Anthropic",
+        "importance_score": 2.25,
+        "source_count": 2,
+        "claim_count": 2,
+        "evidence_count": 5,
+        "sources": [
+          "gizmodo.com",
+          "businessinsider.com"
+        ],
+        "canonical_claim": "The deal with Anthropic is a 180-day lease with 90-day notice mutual cancellation thereafter",
+        "description": ""
+      },
+      {
+        "title": "SpaceX is seeking to raise $75 billion in its initial public",
+        "importance_score": 2.25,
+        "source_count": 2,
+        "claim_count": 2,
+        "evidence_count": 5,
+        "sources": [
+          "barchart.com",
+          "247wallst.com"
+        ],
+        "canonical_claim": "SpaceX is seeking to raise $75 billion in its initial public offering.",
+        "description": ""
+      },
+      {
+        "title": "Starlink",
+        "importance_score": 2.2,
+        "source_count": 1,
+        "claim_count": 4,
+        "evidence_count": 7,
+        "sources": [
+          "gizmodo.com"
+        ],
+        "canonical_claim": "The LUCAS drones used the Starlink connection for minutes or hours, so the higher aviation-tier pricing should not apply.",
+        "description": ""
+      },
+      {
+        "title": "The expected market cap of SpaceX is $1.75 trillion.",
+        "importance_score": 2.1,
+        "source_count": 2,
+        "claim_count": 2,
+        "evidence_count": 4,
+        "sources": [
+          "fortune.com",
+          "coindesk.com"
+        ],
+        "canonical_claim": "The expected market cap of SpaceX is $1.75 trillion.",
+        "description": ""
+      },
+      {
+        "title": "The poll had a sample size of just 504 respondents, of whom",
+        "importance_score": 2.07,
+        "source_count": 1,
+        "claim_count": 3,
+        "evidence_count": 7,
+        "sources": [
+          "thejournal.ie"
+        ],
+        "canonical_claim": "The poll had a sample size of just 504 respondents, of whom 369 said they were likely to vote.",
+        "description": ""
+      },
+      {
+        "title": "Musk",
+        "importance_score": 2.05,
+        "source_count": 1,
+        "claim_count": 4,
+        "evidence_count": 6,
+        "sources": [
+          "247wallst.com"
+        ],
+        "canonical_claim": "Musk does not devote his full time and attention to SpaceX and devotes time and attention to other significant roles.",
+        "description": ""
+      },
+      {
+        "title": "Tesla Terafab Austin",
+        "importance_score": 1.92,
+        "source_count": 1,
+        "claim_count": 3,
+        "evidence_count": 6,
+        "sources": [
+          "cryptobriefing.com"
+        ],
+        "canonical_claim": "Tesla announced its 'Terafab' project in Austin, Texas, around March 2026.",
+        "description": ""
+      },
+      {
+        "title": "TSMC produces 100% of advanced AI chips currently.",
+        "importance_score": 1.92,
+        "source_count": 1,
+        "claim_count": 3,
+        "evidence_count": 6,
+        "sources": [
+          "cryptobriefing.com"
+        ],
+        "canonical_claim": "TSMC produces 100% of advanced AI chips currently.",
+        "description": "TSMC currently produces all advanced AI chips, highlighting its significant role and potential national security implications."
+      },
+      {
+        "title": "The government rejected a recommendation to pass new legisla",
+        "importance_score": 1.92,
+        "source_count": 1,
+        "claim_count": 3,
+        "evidence_count": 6,
+        "sources": [
+          "politico.eu"
+        ],
+        "canonical_claim": "The government rejected a recommendation to pass new legislation explicitly covering generative AI services.",
+        "description": ""
+      },
+      {
+        "title": "The government had no plans to implement a ban on social med",
+        "importance_score": 1.92,
+        "source_count": 1,
+        "claim_count": 3,
+        "evidence_count": 6,
+        "sources": [
+          "politico.eu"
+        ],
+        "canonical_claim": "The government had no plans to implement a ban on social media for children and emphasized the importance of protecting them while allowing safe digital engagement.",
+        "description": ""
+      },
+      {
+        "title": "Elon Musk",
+        "importance_score": 1.92,
+        "source_count": 1,
+        "claim_count": 3,
+        "evidence_count": 6,
+        "sources": [
+          "247wallst.com"
+        ],
+        "canonical_claim": "SpaceX does not maintain key-person life insurance on Elon Musk.",
+        "description": ""
+      },
+      {
+        "title": "Mr Musk",
+        "importance_score": 1.92,
+        "source_count": 1,
+        "claim_count": 3,
+        "evidence_count": 6,
+        "sources": [
+          "nrc.nl"
+        ],
+        "canonical_claim": "Mr Musk described white people as having a shared transnational identity and political interest.",
+        "description": "Elon Musk has described white people as possessing a shared transnational identity and political interest that is under threat from non-white groups and white liberals, according to reports."
+      },
+      {
+        "title": "New Glenn Blue Origin Florida",
+        "importance_score": 1.92,
+        "source_count": 1,
+        "claim_count": 3,
+        "evidence_count": 6,
+        "sources": [
+          "indianexpress.com"
+        ],
+        "canonical_claim": "A New Glenn rocket developed by Blue Origin exploded during a test in Florida.",
+        "description": "A New Glenn rocket developed by Blue Origin exploded during a test in Florida."
+      },
+      {
+        "title": "Elon Musk",
+        "importance_score": 1.92,
+        "source_count": 1,
+        "claim_count": 3,
+        "evidence_count": 6,
+        "sources": [
+          "nrc.nl"
+        ],
+        "canonical_claim": "Elon Musk did not choose the path of revolutionary entrepreneurship in politics.",
+        "description": ""
+      },
+      {
+        "title": "The explosion was captured on a livestream by an aerospace n",
+        "importance_score": 1.92,
+        "source_count": 1,
+        "claim_count": 3,
+        "evidence_count": 6,
+        "sources": [
+          "indianexpress.com"
+        ],
+        "canonical_claim": "The explosion was captured on a livestream by an aerospace news outlet, NSF, but the FAA did not immediately comment on a potential investigation, and no satellite was onboard the launch vehicle at the time of the explosion.",
+        "description": "An aerospace news outlet, NSF, captured an explosion on livestream, though the FAA has not commented on a potential investigation and no satellite was on the launch vehicle at the time."
+      },
+      {
+        "title": "Tesla",
+        "importance_score": 1.8,
+        "source_count": 1,
+        "claim_count": 2,
+        "evidence_count": 6,
+        "sources": [
+          "fortune.com"
+        ],
+        "canonical_claim": "The combined valuation of SpaceX and Tesla would be $3.4 trillion.",
+        "description": ""
+      },
+      {
+        "title": "Elon Musk Restore Britain Farage",
+        "importance_score": 1.8,
+        "source_count": 1,
+        "claim_count": 2,
+        "evidence_count": 6,
+        "sources": [
+          "thejournal.ie"
+        ],
+        "canonical_claim": "Elon Musk has repeatedly posted 'Restore Britain' on X, aligning with his previous support for Farage and Reform UK.",
+        "description": ""
+      },
+      {
+        "title": "Lance Wallnau Donald Trump Elon Musk",
+        "importance_score": 1.77,
+        "source_count": 1,
+        "claim_count": 3,
+        "evidence_count": 5,
+        "sources": [
+          "peoplefor.org"
+        ],
+        "canonical_claim": "Lance Wallnau prays over cardboard cutouts of Donald Trump and Elon Musk.",
+        "description": ""
+      }
+    ]
+  },
+  "clusters_summary": {
+    "total": 73,
+    "sample_clusters": [
+      {
+        "title": "Anthropic",
+        "canonical_claim": "The deal with Anthropic is a 180-day lease with 90-day notice mutual cancellation thereafter",
+        "claim_count": 2,
+        "evidence_count": 5,
+        "source_count": 2,
+        "sources": [
+          "gizmodo.com",
+          "businessinsider.com"
+        ],
+        "claims": [
+          "The deal with Anthropic is a 180-day lease with 90-day notice mutual cancellation thereafter",
+          "The deal with Anthropic is a 180-day lease with 90-day notice mutual cancellation thereafter"
+        ]
+      },
+      {
+        "title": "The government had no plans to implement a ban on social med",
+        "canonical_claim": "The government had no plans to implement a ban on social media for children and emphasized the importance of protecting them while allowing safe digital engagement.",
+        "claim_count": 3,
+        "evidence_count": 6,
+        "source_count": 1,
+        "sources": [
+          "politico.eu"
+        ],
+        "claims": [
+          "The government had no plans to implement a ban on social media for children and emphasized the importance of protecting them while allowing safe digital engagement.",
+          "The government had no plans to implement a ban on social media for children and emphasized the importance of protecting them while allowing safe digital engagement.",
+          "The government had no plans to implement a ban on social media for children and emphasized the importance of protecting them while allowing safe digital engagement."
+        ]
+      },
+      {
+        "title": "The panel's other members include several veterans of city g",
+        "canonical_claim": "The panel's other members include several veterans of city government.",
+        "claim_count": 2,
+        "evidence_count": 6,
+        "source_count": 2,
+        "sources": [
+          "indianexpress.com",
+          "nymag.com"
+        ],
+        "claims": [
+          "The panel's other members include several veterans of city government.",
+          "The panel's other members include several veterans of city government."
+        ]
+      },
+      {
+        "title": "Kiran Kaur Vickrum Digwa",
+        "canonical_claim": "Kiran Kaur, 53, was convicted of assisting an offender by stashing the murder weapon, which was related to her son Vickrum Digwa's case.",
+        "claim_count": 2,
+        "evidence_count": 2,
+        "source_count": 1,
+        "sources": [
+          "dailymail.com"
+        ],
+        "claims": [
+          "Kiran Kaur, 53, was convicted of assisting an offender by stashing the murder weapon, which was related to her son Vickrum Digwa's case.",
+          "Kiran Kaur, 53, was convicted of assisting an offender by stashing the murder weapon, which was related to her son Vickrum Digwa's case."
+        ]
+      },
+      {
+        "title": "Musk",
+        "canonical_claim": "Musk does not devote his full time and attention to SpaceX and devotes time and attention to other significant roles.",
+        "claim_count": 4,
+        "evidence_count": 6,
+        "source_count": 1,
+        "sources": [
+          "247wallst.com"
+        ],
+        "claims": [
+          "Musk does not devote his full time and attention to SpaceX and devotes time and attention to other significant roles.",
+          "Musk does not devote his full time and attention to SpaceX and devotes time and attention to other significant roles.",
+          "Musk does not devote his full time and attention to SpaceX and devotes time and attention to other significant roles.",
+          "Musk does not devote his full time and attention to SpaceX and devotes time and attention to other significant roles."
+        ]
+      },
+      {
+        "title": "Elon Musk",
+        "canonical_claim": "Elon Musk specialises in division.",
+        "claim_count": 3,
+        "evidence_count": 4,
+        "source_count": 1,
+        "sources": [
+          "nrc.nl"
+        ],
+        "claims": [
+          "Elon Musk specialises in division.",
+          "Elon Musk specialises in division.",
+          "Elon Musk specialises in division."
+        ]
+      },
+      {
+        "title": "Elon Musk Germany",
+        "canonical_claim": "Elon Musk has applied to Germany the same approach he uses in the US.",
+        "claim_count": 2,
+        "evidence_count": 3,
+        "source_count": 1,
+        "sources": [
+          "nrc.nl"
+        ],
+        "claims": [
+          "Elon Musk has applied to Germany the same approach he uses in the US.",
+          "Elon Musk has applied to Germany the same approach he uses in the US."
+        ]
+      },
+      {
+        "title": "Vickrum Digwa Mr Nowak",
+        "canonical_claim": "Vickrum Digwa used racism as his 'trump card', by accusing Mr Nowak of racial abuse when police officers arrived.",
+        "claim_count": 3,
+        "evidence_count": 3,
+        "source_count": 1,
+        "sources": [
+          "dailymail.com"
+        ],
+        "claims": [
+          "Vickrum Digwa used racism as his 'trump card', by accusing Mr Nowak of racial abuse when police officers arrived.",
+          "Vickrum Digwa used racism as his 'trump card', by accusing Mr Nowak of racial abuse when police officers arrived.",
+          "Vickrum Digwa used racism as his 'trump card', by accusing Mr Nowak of racial abuse when police officers arrived."
+        ]
+      },
+      {
+        "title": "Musk Explosion",
+        "canonical_claim": "Musk reacted quickly to the explosion on X, the social media platform he owns.",
+        "claim_count": 2,
+        "evidence_count": 4,
+        "source_count": 1,
+        "sources": [
+          "indianexpress.com"
+        ],
+        "claims": [
+          "Musk reacted quickly to the explosion on X, the social media platform he owns.",
+          "Musk reacted quickly to the explosion on X, the social media platform he owns."
+        ]
+      },
+      {
+        "title": "Anthropic May",
+        "canonical_claim": "Anthropic has agreed to pay SpaceX $1.25 billion per month through May 2029.",
+        "claim_count": 2,
+        "evidence_count": 3,
+        "source_count": 1,
+        "sources": [
+          "gizmodo.com"
+        ],
+        "claims": [
+          "Anthropic has agreed to pay SpaceX $1.25 billion per month through May 2029.",
+          "Anthropic has agreed to pay SpaceX $1.25 billion per month through May 2029."
+        ]
+      },
+      {
+        "title": "Prototype",
+        "canonical_claim": "Prototype satellite launches are scheduled for early 2027, marking the first real test of the timeline's feasibility.",
+        "claim_count": 2,
+        "evidence_count": 2,
+        "source_count": 1,
+        "sources": [
+          "cryptobriefing.com"
+        ],
+        "claims": [
+          "Prototype satellite launches are scheduled for early 2027, marking the first real test of the timeline's feasibility.",
+          "Prototype satellite launches are scheduled for early 2027, marking the first real test of the timeline's feasibility."
+        ]
+      },
+      {
+        "title": "The Makerfield\u2013June Election",
+        "canonical_claim": "The Makerfield byelection is due to be held on 18 June.",
+        "claim_count": 4,
+        "evidence_count": 10,
+        "source_count": 2,
+        "sources": [
+          "thejournal.ie",
+          "nymag.com"
+        ],
+        "claims": [
+          "The Makerfield byelection is due to be held on 18 June.",
+          "The Makerfield byelection is due to be held on 18 June.",
+          "The Makerfield byelection is due to be held on 18 June.",
+          "The Makerfield byelection is due to be held on 18 June."
+        ]
+      },
+      {
+        "title": "Colossus Elon Musk Anthropic Elon Musk",
+        "canonical_claim": "Elon Musk announced that he would be leasing the available computing power at SpaceX/xAI\u2019s massive Colossus data center to Anthropic",
+        "claim_count": 2,
+        "evidence_count": 2,
+        "source_count": 1,
+        "sources": [
+          "gizmodo.com"
+        ],
+        "claims": [
+          "Elon Musk announced that he would be leasing the available computing power at SpaceX/xAI\u2019s massive Colossus data center to Anthropic",
+          "Elon Musk announced that he would be leasing the available computing power at SpaceX/xAI\u2019s massive Colossus data center to Anthropic"
+        ]
+      },
+      {
+        "title": "The poll had a sample size of just 504 respondents, of whom",
+        "canonical_claim": "The poll had a sample size of just 504 respondents, of whom 369 said they were likely to vote.",
+        "claim_count": 3,
+        "evidence_count": 7,
+        "source_count": 1,
+        "sources": [
+          "thejournal.ie"
+        ],
+        "claims": [
+          "The poll had a sample size of just 504 respondents, of whom 369 said they were likely to vote.",
+          "The poll had a sample size of just 504 respondents, of whom 369 said they were likely to vote.",
+          "The poll had a sample size of just 504 respondents, of whom 369 said they were likely to vote."
+        ]
+      },
+      {
+        "title": "Paloma Faith Andrea St Trinian",
+        "canonical_claim": "Paloma Faith played the role of Andrea in St Trinian's.",
+        "claim_count": 5,
+        "evidence_count": 9,
+        "source_count": 1,
+        "sources": [
+          "dailymail.com"
+        ],
+        "claims": [
+          "Paloma Faith played Andrea in St Trinian's.",
+          "Paloma Faith played Andrea in St Trinian's.",
+          "Paloma Faith played Andrea in St Trinian's.",
+          "Paloma Faith played Andrea in St Trinian's.",
+          "Paloma Faith played Andrea in St Trinian's."
+        ]
+      },
+      {
+        "title": "SpaceX is building infrastructure for its own AI workloads.",
+        "canonical_claim": "SpaceX is building infrastructure for its own AI workloads.",
+        "claim_count": 3,
+        "evidence_count": 3,
+        "source_count": 1,
+        "sources": [
+          "cryptobriefing.com"
+        ],
+        "claims": [
+          "SpaceX is building infrastructure for its own AI workloads.",
+          "SpaceX is building infrastructure for its own AI workloads.",
+          "SpaceX is building infrastructure for its own AI workloads."
+        ]
+      },
+      {
+        "title": "SpaceX is expected to make the biggest initial public offeri",
+        "canonical_claim": "SpaceX is expected to make the biggest initial public offering in history.",
+        "claim_count": 3,
+        "evidence_count": 7,
+        "source_count": 3,
+        "sources": [
+          "commondreams.org",
+          "barchart.com",
+          "wnd.com"
+        ],
+        "claims": [
+          "SpaceX is expected to make the biggest initial public offering in history.",
+          "SpaceX is expected to make the biggest initial public offering in history.",
+          "SpaceX is expected to make the biggest initial public offering in history."
+        ]
+      },
+      {
+        "title": "Mr Musk",
+        "canonical_claim": "Mr Musk described white people as having a shared transnational identity and political interest.",
+        "claim_count": 3,
+        "evidence_count": 6,
+        "source_count": 1,
+        "sources": [
+          "nrc.nl"
+        ],
+        "claims": [
+          "Mr Musk described white people as having a shared transnational identity and political interest.",
+          "Mr Musk described white people as having a shared transnational identity and political interest.",
+          "Mr Musk described white people as having a shared transnational identity and political interest."
+        ]
+      },
+      {
+        "title": "SpaceX reported an operational loss of $2.6 billion for 2025",
+        "canonical_claim": "SpaceX reported an operational loss of $2.6 billion for 2025.",
+        "claim_count": 2,
+        "evidence_count": 6,
+        "source_count": 2,
+        "sources": [
+          "barchart.com",
+          "wnd.com"
+        ],
+        "claims": [
+          "SpaceX reported an operational loss of $2.6 billion for 2025.",
+          "SpaceX reported an operational loss of $2.6 billion for 2025."
+        ]
+      },
+      {
+        "title": "Juno Temple Rising Star Award",
+        "canonical_claim": "Juno Temple won the EE Rising Star Award in 2013.",
+        "claim_count": 3,
+        "evidence_count": 9,
+        "source_count": 1,
+        "sources": [
+          "dailymail.com"
+        ],
+        "claims": [
+          "Juno Temple won the EE Rising Star Award in 2013.",
+          "Juno Temple won the EE Rising Star Award in 2013.",
+          "Juno Temple won the EE Rising Star Award in 2013."
+        ]
+      }
+    ]
+  }
+}
