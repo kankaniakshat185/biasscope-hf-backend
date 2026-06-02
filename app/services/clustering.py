@@ -128,8 +128,19 @@ async def run_claim_clustering(prisma):
     norms[norms == 0] = 1
     X = X / norms
 
-    clusterer = HDBSCAN(min_cluster_size=2, min_samples=1, metric="euclidean")
-    labels = clusterer.fit_predict(X)
+    # Use cosine distance (1 - cosine_similarity) to separate topically similar claims
+    # euclidean on normalized vectors ≈ cosine distance, but we convert explicitly
+    from sklearn.metrics.pairwise import cosine_similarity as cos_sim
+    cos_dist = 1 - cos_sim(X)
+    np.fill_diagonal(cos_dist, 0)  # self-distance = 0
+
+    clusterer = HDBSCAN(
+        min_cluster_size=2,
+        min_samples=2,
+        metric="precomputed",
+        cluster_selection_epsilon=0.15,  # prevent mega-clusters
+    )
+    labels = clusterer.fit_predict(cos_dist)
 
     groups: Dict[int, List[Dict]] = {}
     for idx, label in enumerate(labels):
