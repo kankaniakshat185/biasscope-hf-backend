@@ -104,12 +104,18 @@ async def extract_claims(prisma, article_text: str) -> List[Dict[str, Any]]:
     raw = await cached_llm_call(prisma, "extraction", system_prompt, user_prompt, max_tokens=2048)
     if raw:
         try:
-            return json.loads(raw).get("claims", [])
+            parsed = json.loads(raw)
+            if isinstance(parsed, list):
+                return parsed
+            return parsed.get("claims", [])
         except json.JSONDecodeError:
             repaired = repair_truncated_json(raw)
             if repaired:
                 try:
-                    return json.loads(repaired).get("claims", [])
+                    parsed = json.loads(repaired)
+                    if isinstance(parsed, list):
+                        return parsed
+                    return parsed.get("claims", [])
                 except json.JSONDecodeError:
                     pass
             logger.warning(f"Claim parse failed after repair. Raw length: {len(raw)}")
