@@ -184,3 +184,23 @@ class BaseClaimCluster(_PrismaModel):
         return actions.ClaimClusterActions[_PrismaModelT](client or get_client(), cls)
 
 
+class BaseLLMCache(_PrismaModel):
+    __prisma_model__: ClassVar[Literal['LLMCache']] = 'LLMCache'  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @classmethod
+    def prisma(cls: Type[_PrismaModelT], client: Optional['Prisma'] = None) -> 'actions.LLMCacheActions[_PrismaModelT]':
+        from .client import get_client
+
+        return actions.LLMCacheActions[_PrismaModelT](client or get_client(), cls)
+
+
+class BaseLLMUsage(_PrismaModel):
+    __prisma_model__: ClassVar[Literal['LLMUsage']] = 'LLMUsage'  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @classmethod
+    def prisma(cls: Type[_PrismaModelT], client: Optional['Prisma'] = None) -> 'actions.LLMUsageActions[_PrismaModelT]':
+        from .client import get_client
+
+        return actions.LLMUsageActions[_PrismaModelT](client or get_client(), cls)
+
+

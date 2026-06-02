@@ -951,6 +951,23 @@ async def debug_rerun_full(background_tasks: BackgroundTasks):
     background_tasks.add_task(_run)
     return {"message": f"Full rerun started for query='{query}', {search_id}. Check /debug/status."}
 
+@app.get("/debug/run-one")
+async def debug_run_one():
+    """Test extraction on a single article synchronously to catch errors."""
+    import traceback
+    try:
+        article = await prisma.article.find_first(where={"content": {"not": None}})
+        if not article:
+            return {"error": "No article found"}
+        
+        claims = await process_and_store_claims(
+            prisma, article.id, article.content, article.source, article.url,
+            article.publishedAt, "elon musk", article.title
+        )
+        return {"success": True, "claims": claims}
+    except Exception as e:
+        return {"success": False, "error": str(e), "trace": traceback.format_exc()}
+
 @app.get("/debug/status")
 async def debug_status():
     """Quick status check — how many clusters/events exist right now."""

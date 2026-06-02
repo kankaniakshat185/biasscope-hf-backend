@@ -1006,6 +1006,8 @@ class Claim(bases.BaseClaim):
 
     id: _str
     canonicalClaim: _str
+    claimType: Optional[_str] = None
+    qualityScore: Optional[_float] = None
     confidence: _float
     consensusScore: Optional[_float] = None
     contradictionScore: Optional[_float] = None
@@ -1279,6 +1281,7 @@ class Event(bases.BaseEvent):
     id: _str
     title: _str
     description: Optional[_str] = None
+    importanceScore: Optional[_float] = None
     createdAt: datetime.datetime
     claimClusters: Optional[List['models.ClaimCluster']] = None
 
@@ -1410,6 +1413,8 @@ class ClaimCluster(bases.BaseClaimCluster):
 
     id: _str
     title: _str
+    canonicalClaim: Optional[_str] = None
+    consensusScore: Optional[_float] = None
     eventId: Optional[_str] = None
     event: Optional['models.Event'] = None
     claims: Optional[List['models.Claim']] = None
@@ -1532,6 +1537,225 @@ class ClaimCluster(bases.BaseClaimCluster):
                 'name': name,
                 'fields': cast(Mapping[str, PartialModelField], fields),
                 'from_model': 'ClaimCluster',
+            }
+        )
+        _created_partial_types.add(name)
+
+
+class LLMCache(bases.BaseLLMCache):
+    """Represents a LLMCache record"""
+
+    id: _str
+    promptHash: _str
+    model: _str
+    stage: _str
+    response: _str
+    createdAt: datetime.datetime
+
+    # take *args and **kwargs so that other metaclasses can define arguments
+    def __init_subclass__(
+        cls,
+        *args: Any,
+        warn_subclass: Optional[bool] = None,
+        **kwargs: Any,
+    ) -> None:
+        super().__init_subclass__()
+        if warn_subclass is not None:
+            warnings.warn(
+                'The `warn_subclass` argument is deprecated as it is no longer necessary and will be removed in the next release',
+                DeprecationWarning,
+                stacklevel=3,
+            )
+
+
+    @staticmethod
+    def create_partial(
+        name: str,
+        include: Optional[Iterable['types.LLMCacheKeys']] = None,
+        exclude: Optional[Iterable['types.LLMCacheKeys']] = None,
+        required: Optional[Iterable['types.LLMCacheKeys']] = None,
+        optional: Optional[Iterable['types.LLMCacheKeys']] = None,
+        relations: Optional[Mapping['types.LLMCacheRelationalFieldKeys', str]] = None,
+        exclude_relational_fields: bool = False,
+    ) -> None:
+        if not os.environ.get('PRISMA_GENERATOR_INVOCATION'):
+            raise RuntimeError(
+                'Attempted to create a partial type outside of client generation.'
+            )
+
+        if name in _created_partial_types:
+            raise ValueError(f'Partial type "{name}" has already been created.')
+
+        if include is not None:
+            if exclude is not None:
+                raise TypeError('Exclude and include are mutually exclusive.')
+            if exclude_relational_fields is True:
+                raise TypeError('Include and exclude_relational_fields=True are mutually exclusive.')
+
+        if required and optional:
+            shared = set(required) & set(optional)
+            if shared:
+                raise ValueError(f'Cannot make the same field(s) required and optional {shared}')
+
+        if exclude_relational_fields and relations:
+            raise ValueError(
+                'exclude_relational_fields and relations are mutually exclusive'
+            )
+
+        fields: Dict['types.LLMCacheKeys', PartialModelField] = OrderedDict()
+
+        try:
+            if include:
+                for field in include:
+                    fields[field] = _LLMCache_fields[field].copy()
+            elif exclude:
+                for field in exclude:
+                    if field not in _LLMCache_fields:
+                        raise KeyError(field)
+
+                fields = {
+                    key: data.copy()
+                    for key, data in _LLMCache_fields.items()
+                    if key not in exclude
+                }
+            else:
+                fields = {
+                    key: data.copy()
+                    for key, data in _LLMCache_fields.items()
+                }
+
+            if required:
+                for field in required:
+                    fields[field]['optional'] = False
+
+            if optional:
+                for field in optional:
+                    fields[field]['optional'] = True
+
+
+            if relations:
+                raise ValueError('Model: "LLMCache" has no relational fields.')
+        except KeyError as exc:
+            raise ValueError(
+                f'{exc.args[0]} is not a valid LLMCache / {name} field.'
+            ) from None
+
+        models = partial_models_ctx.get()
+        models.append(
+            {
+                'name': name,
+                'fields': cast(Mapping[str, PartialModelField], fields),
+                'from_model': 'LLMCache',
+            }
+        )
+        _created_partial_types.add(name)
+
+
+class LLMUsage(bases.BaseLLMUsage):
+    """Represents a LLMUsage record"""
+
+    id: _str
+    stage: _str
+    model: _str
+    cached: _bool
+    promptTokens: Optional[_int] = None
+    completionTokens: Optional[_int] = None
+    createdAt: datetime.datetime
+
+    # take *args and **kwargs so that other metaclasses can define arguments
+    def __init_subclass__(
+        cls,
+        *args: Any,
+        warn_subclass: Optional[bool] = None,
+        **kwargs: Any,
+    ) -> None:
+        super().__init_subclass__()
+        if warn_subclass is not None:
+            warnings.warn(
+                'The `warn_subclass` argument is deprecated as it is no longer necessary and will be removed in the next release',
+                DeprecationWarning,
+                stacklevel=3,
+            )
+
+
+    @staticmethod
+    def create_partial(
+        name: str,
+        include: Optional[Iterable['types.LLMUsageKeys']] = None,
+        exclude: Optional[Iterable['types.LLMUsageKeys']] = None,
+        required: Optional[Iterable['types.LLMUsageKeys']] = None,
+        optional: Optional[Iterable['types.LLMUsageKeys']] = None,
+        relations: Optional[Mapping['types.LLMUsageRelationalFieldKeys', str]] = None,
+        exclude_relational_fields: bool = False,
+    ) -> None:
+        if not os.environ.get('PRISMA_GENERATOR_INVOCATION'):
+            raise RuntimeError(
+                'Attempted to create a partial type outside of client generation.'
+            )
+
+        if name in _created_partial_types:
+            raise ValueError(f'Partial type "{name}" has already been created.')
+
+        if include is not None:
+            if exclude is not None:
+                raise TypeError('Exclude and include are mutually exclusive.')
+            if exclude_relational_fields is True:
+                raise TypeError('Include and exclude_relational_fields=True are mutually exclusive.')
+
+        if required and optional:
+            shared = set(required) & set(optional)
+            if shared:
+                raise ValueError(f'Cannot make the same field(s) required and optional {shared}')
+
+        if exclude_relational_fields and relations:
+            raise ValueError(
+                'exclude_relational_fields and relations are mutually exclusive'
+            )
+
+        fields: Dict['types.LLMUsageKeys', PartialModelField] = OrderedDict()
+
+        try:
+            if include:
+                for field in include:
+                    fields[field] = _LLMUsage_fields[field].copy()
+            elif exclude:
+                for field in exclude:
+                    if field not in _LLMUsage_fields:
+                        raise KeyError(field)
+
+                fields = {
+                    key: data.copy()
+                    for key, data in _LLMUsage_fields.items()
+                    if key not in exclude
+                }
+            else:
+                fields = {
+                    key: data.copy()
+                    for key, data in _LLMUsage_fields.items()
+                }
+
+            if required:
+                for field in required:
+                    fields[field]['optional'] = False
+
+            if optional:
+                for field in optional:
+                    fields[field]['optional'] = True
+
+
+            if relations:
+                raise ValueError('Model: "LLMUsage" has no relational fields.')
+        except KeyError as exc:
+            raise ValueError(
+                f'{exc.args[0]} is not a valid LLMUsage / {name} field.'
+            ) from None
+
+        models = partial_models_ctx.get()
+        models.append(
+            {
+                'name': name,
+                'fields': cast(Mapping[str, PartialModelField], fields),
+                'from_model': 'LLMUsage',
             }
         )
         _created_partial_types.add(name)
@@ -2258,6 +2482,22 @@ _Claim_fields: Dict['types.ClaimKeys', PartialModelField] = OrderedDict(
             'is_relational': False,
             'documentation': None,
         }),
+        ('claimType', {
+            'name': 'claimType',
+            'is_list': False,
+            'optional': True,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('qualityScore', {
+            'name': 'qualityScore',
+            'is_list': False,
+            'optional': True,
+            'type': '_float',
+            'is_relational': False,
+            'documentation': None,
+        }),
         ('confidence', {
             'name': 'confidence',
             'is_list': False,
@@ -2426,6 +2666,14 @@ _Event_fields: Dict['types.EventKeys', PartialModelField] = OrderedDict(
             'is_relational': False,
             'documentation': None,
         }),
+        ('importanceScore', {
+            'name': 'importanceScore',
+            'is_list': False,
+            'optional': True,
+            'type': '_float',
+            'is_relational': False,
+            'documentation': None,
+        }),
         ('createdAt', {
             'name': 'createdAt',
             'is_list': False,
@@ -2467,6 +2715,22 @@ _ClaimCluster_fields: Dict['types.ClaimClusterKeys', PartialModelField] = Ordere
             'is_relational': False,
             'documentation': None,
         }),
+        ('canonicalClaim', {
+            'name': 'canonicalClaim',
+            'is_list': False,
+            'optional': True,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('consensusScore', {
+            'name': 'consensusScore',
+            'is_list': False,
+            'optional': True,
+            'type': '_float',
+            'is_relational': False,
+            'documentation': None,
+        }),
         ('eventId', {
             'name': 'eventId',
             'is_list': False,
@@ -2494,6 +2758,122 @@ _ClaimCluster_fields: Dict['types.ClaimClusterKeys', PartialModelField] = Ordere
     ],
 )
 
+_LLMCache_relational_fields: Set[str] = set()  # pyright: ignore[reportUnusedVariable]
+_LLMCache_fields: Dict['types.LLMCacheKeys', PartialModelField] = OrderedDict(
+    [
+        ('id', {
+            'name': 'id',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('promptHash', {
+            'name': 'promptHash',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('model', {
+            'name': 'model',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('stage', {
+            'name': 'stage',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('response', {
+            'name': 'response',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('createdAt', {
+            'name': 'createdAt',
+            'is_list': False,
+            'optional': False,
+            'type': 'datetime.datetime',
+            'is_relational': False,
+            'documentation': None,
+        }),
+    ],
+)
+
+_LLMUsage_relational_fields: Set[str] = set()  # pyright: ignore[reportUnusedVariable]
+_LLMUsage_fields: Dict['types.LLMUsageKeys', PartialModelField] = OrderedDict(
+    [
+        ('id', {
+            'name': 'id',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('stage', {
+            'name': 'stage',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('model', {
+            'name': 'model',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('cached', {
+            'name': 'cached',
+            'is_list': False,
+            'optional': False,
+            'type': '_bool',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('promptTokens', {
+            'name': 'promptTokens',
+            'is_list': False,
+            'optional': True,
+            'type': '_int',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('completionTokens', {
+            'name': 'completionTokens',
+            'is_list': False,
+            'optional': True,
+            'type': '_int',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('createdAt', {
+            'name': 'createdAt',
+            'is_list': False,
+            'optional': False,
+            'type': 'datetime.datetime',
+            'is_relational': False,
+            'documentation': None,
+        }),
+    ],
+)
+
 
 
 # we have to import ourselves as relation types are namespaced to models
@@ -2512,3 +2892,5 @@ model_rebuild(Claim)
 model_rebuild(Evidence)
 model_rebuild(Event)
 model_rebuild(ClaimCluster)
+model_rebuild(LLMCache)
+model_rebuild(LLMUsage)

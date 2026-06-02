@@ -105,6 +105,8 @@ class Prisma(AsyncBasePrisma):
     evidence: 'actions.EvidenceActions[models.Evidence]'
     event: 'actions.EventActions[models.Event]'
     claimcluster: 'actions.ClaimClusterActions[models.ClaimCluster]'
+    llmcache: 'actions.LLMCacheActions[models.LLMCache]'
+    llmusage: 'actions.LLMUsageActions[models.LLMUsage]'
 
     __slots__ = (
         'user',
@@ -118,6 +120,8 @@ class Prisma(AsyncBasePrisma):
         'evidence',
         'event',
         'claimcluster',
+        'llmcache',
+        'llmusage',
     )
 
     def __init__(
@@ -159,6 +163,8 @@ class Prisma(AsyncBasePrisma):
         self.evidence = actions.EvidenceActions[models.Evidence](self, models.Evidence)
         self.event = actions.EventActions[models.Event](self, models.Event)
         self.claimcluster = actions.ClaimClusterActions[models.ClaimCluster](self, models.ClaimCluster)
+        self.llmcache = actions.LLMCacheActions[models.LLMCache](self, models.LLMCache)
+        self.llmusage = actions.LLMUsageActions[models.LLMUsage](self, models.LLMUsage)
 
         if auto_register:
             register(self)
@@ -320,6 +326,8 @@ class Batch:
     evidence: 'EvidenceBatchActions'
     event: 'EventBatchActions'
     claimcluster: 'ClaimClusterBatchActions'
+    llmcache: 'LLMCacheBatchActions'
+    llmusage: 'LLMUsageBatchActions'
 
     def __init__(self, client: Prisma) -> None:
         self.__client = client
@@ -336,6 +344,8 @@ class Batch:
         self.evidence = EvidenceBatchActions(self)
         self.event = EventBatchActions(self)
         self.claimcluster = ClaimClusterBatchActions(self)
+        self.llmcache = LLMCacheBatchActions(self)
+        self.llmusage = LLMUsageBatchActions(self)
 
     def _add(self, **kwargs: Any) -> None:
         builder = QueryBuilder(
@@ -1603,6 +1613,228 @@ class ClaimClusterBatchActions:
         self._batcher._add(
             method='delete_many',
             model=models.ClaimCluster,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+
+
+
+# NOTE: some arguments are meaningless in this context but are included
+# for completeness sake
+class LLMCacheBatchActions:
+    def __init__(self, batcher: Batch) -> None:
+        self._batcher = batcher
+
+    def create(
+        self,
+        data: types.LLMCacheCreateInput,
+        include: Optional[types.LLMCacheInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='create',
+            model=models.LLMCache,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+
+    def create_many(
+        self,
+        data: List[types.LLMCacheCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> None:
+        if skip_duplicates and self._batcher._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._batcher._active_provider, 'create_many_skip_duplicates')
+
+        self._batcher._add(
+            method='create_many',
+            model=models.LLMCache,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+
+    def delete(
+        self,
+        where: types.LLMCacheWhereUniqueInput,
+        include: Optional[types.LLMCacheInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete',
+            model=models.LLMCache,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def update(
+        self,
+        data: types.LLMCacheUpdateInput,
+        where: types.LLMCacheWhereUniqueInput,
+        include: Optional[types.LLMCacheInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='update',
+            model=models.LLMCache,
+            arguments={
+                'data': data,
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def upsert(
+        self,
+        where: types.LLMCacheWhereUniqueInput,
+        data: types.LLMCacheUpsertInput,
+        include: Optional[types.LLMCacheInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='upsert',
+            model=models.LLMCache,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+
+    def update_many(
+        self,
+        data: types.LLMCacheUpdateManyMutationInput,
+        where: types.LLMCacheWhereInput,
+    ) -> None:
+        self._batcher._add(
+            method='update_many',
+            model=models.LLMCache,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+
+    def delete_many(
+        self,
+        where: Optional[types.LLMCacheWhereInput] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete_many',
+            model=models.LLMCache,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+
+
+
+# NOTE: some arguments are meaningless in this context but are included
+# for completeness sake
+class LLMUsageBatchActions:
+    def __init__(self, batcher: Batch) -> None:
+        self._batcher = batcher
+
+    def create(
+        self,
+        data: types.LLMUsageCreateInput,
+        include: Optional[types.LLMUsageInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='create',
+            model=models.LLMUsage,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+
+    def create_many(
+        self,
+        data: List[types.LLMUsageCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> None:
+        if skip_duplicates and self._batcher._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._batcher._active_provider, 'create_many_skip_duplicates')
+
+        self._batcher._add(
+            method='create_many',
+            model=models.LLMUsage,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+
+    def delete(
+        self,
+        where: types.LLMUsageWhereUniqueInput,
+        include: Optional[types.LLMUsageInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete',
+            model=models.LLMUsage,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def update(
+        self,
+        data: types.LLMUsageUpdateInput,
+        where: types.LLMUsageWhereUniqueInput,
+        include: Optional[types.LLMUsageInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='update',
+            model=models.LLMUsage,
+            arguments={
+                'data': data,
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def upsert(
+        self,
+        where: types.LLMUsageWhereUniqueInput,
+        data: types.LLMUsageUpsertInput,
+        include: Optional[types.LLMUsageInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='upsert',
+            model=models.LLMUsage,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+
+    def update_many(
+        self,
+        data: types.LLMUsageUpdateManyMutationInput,
+        where: types.LLMUsageWhereInput,
+    ) -> None:
+        self._batcher._add(
+            method='update_many',
+            model=models.LLMUsage,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+
+    def delete_many(
+        self,
+        where: Optional[types.LLMUsageWhereInput] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete_many',
+            model=models.LLMUsage,
             arguments={'where': where},
             root_selection=['count'],
         )

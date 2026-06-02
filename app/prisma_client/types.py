@@ -2564,6 +2564,208 @@ class FindManyClaimClusterArgsFromUserRecursive4(TypedDict, total=False):
     cursor: 'ClaimClusterWhereUniqueInput'
     distinct: List['ClaimClusterScalarFieldKeys']
     
+    
+
+class LLMCacheIncludeFromUser(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class LLMCacheIncludeFromUserRecursive1(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class LLMCacheIncludeFromUserRecursive2(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class LLMCacheIncludeFromUserRecursive3(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class LLMCacheIncludeFromUserRecursive4(TypedDict, total=False):
+    """Relational arguments for User"""
+
+    
+
+class LLMCacheArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    
+    
+
+class FindManyLLMCacheArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromUser(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class LLMUsageIncludeFromUserRecursive1(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class LLMUsageIncludeFromUserRecursive2(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class LLMUsageIncludeFromUserRecursive3(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class LLMUsageIncludeFromUserRecursive4(TypedDict, total=False):
+    """Relational arguments for User"""
+
+    
+
+class LLMUsageArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    
+    
+
+class FindManyLLMUsageArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
 
 
 FindManyUserArgs = FindManyUserArgsFromUser
@@ -4300,6 +4502,208 @@ class FindManyClaimClusterArgsFromSessionRecursive4(TypedDict, total=False):
     where: 'ClaimClusterWhereInput'
     cursor: 'ClaimClusterWhereUniqueInput'
     distinct: List['ClaimClusterScalarFieldKeys']
+    
+    
+
+class LLMCacheIncludeFromSession(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class LLMCacheIncludeFromSessionRecursive1(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class LLMCacheIncludeFromSessionRecursive2(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class LLMCacheIncludeFromSessionRecursive3(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class LLMCacheIncludeFromSessionRecursive4(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+    
+
+class LLMCacheArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    
+    
+
+class FindManyLLMCacheArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromSession(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class LLMUsageIncludeFromSessionRecursive1(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class LLMUsageIncludeFromSessionRecursive2(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class LLMUsageIncludeFromSessionRecursive3(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class LLMUsageIncludeFromSessionRecursive4(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+    
+
+class LLMUsageArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    
+    
+
+class FindManyLLMUsageArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
     
 
 
@@ -6096,6 +6500,208 @@ class FindManyClaimClusterArgsFromAccountRecursive4(TypedDict, total=False):
     cursor: 'ClaimClusterWhereUniqueInput'
     distinct: List['ClaimClusterScalarFieldKeys']
     
+    
+
+class LLMCacheIncludeFromAccount(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class LLMCacheIncludeFromAccountRecursive1(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class LLMCacheIncludeFromAccountRecursive2(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class LLMCacheIncludeFromAccountRecursive3(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class LLMCacheIncludeFromAccountRecursive4(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+    
+
+class LLMCacheArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    
+    
+
+class FindManyLLMCacheArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromAccount(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class LLMUsageIncludeFromAccountRecursive1(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class LLMUsageIncludeFromAccountRecursive2(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class LLMUsageIncludeFromAccountRecursive3(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class LLMUsageIncludeFromAccountRecursive4(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+    
+
+class LLMUsageArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    
+    
+
+class FindManyLLMUsageArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
 
 
 FindManyAccountArgs = FindManyAccountArgsFromAccount
@@ -7889,6 +8495,208 @@ class FindManyClaimClusterArgsFromVerificationRecursive4(TypedDict, total=False)
     cursor: 'ClaimClusterWhereUniqueInput'
     distinct: List['ClaimClusterScalarFieldKeys']
     
+    
+
+class LLMCacheIncludeFromVerification(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class LLMCacheIncludeFromVerificationRecursive1(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class LLMCacheIncludeFromVerificationRecursive2(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class LLMCacheIncludeFromVerificationRecursive3(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class LLMCacheIncludeFromVerificationRecursive4(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+    
+
+class LLMCacheArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    
+    
+
+class FindManyLLMCacheArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromVerification(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class LLMUsageIncludeFromVerificationRecursive1(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class LLMUsageIncludeFromVerificationRecursive2(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class LLMUsageIncludeFromVerificationRecursive3(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class LLMUsageIncludeFromVerificationRecursive4(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+    
+
+class LLMUsageArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    
+    
+
+class FindManyLLMUsageArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
 
 
 FindManyVerificationArgs = FindManyVerificationArgsFromVerification
@@ -9541,6 +10349,208 @@ class FindManyClaimClusterArgsFromSearchRecursive4(TypedDict, total=False):
     where: 'ClaimClusterWhereInput'
     cursor: 'ClaimClusterWhereUniqueInput'
     distinct: List['ClaimClusterScalarFieldKeys']
+    
+    
+
+class LLMCacheIncludeFromSearch(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class LLMCacheIncludeFromSearchRecursive1(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class LLMCacheIncludeFromSearchRecursive2(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class LLMCacheIncludeFromSearchRecursive3(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class LLMCacheIncludeFromSearchRecursive4(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+    
+
+class LLMCacheArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    
+    
+
+class FindManyLLMCacheArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromSearch(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class LLMUsageIncludeFromSearchRecursive1(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class LLMUsageIncludeFromSearchRecursive2(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class LLMUsageIncludeFromSearchRecursive3(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class LLMUsageIncludeFromSearchRecursive4(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+    
+
+class LLMUsageArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    
+    
+
+class FindManyLLMUsageArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
     
 
 
@@ -11309,6 +12319,208 @@ class FindManyClaimClusterArgsFromArticleRecursive4(TypedDict, total=False):
     where: 'ClaimClusterWhereInput'
     cursor: 'ClaimClusterWhereUniqueInput'
     distinct: List['ClaimClusterScalarFieldKeys']
+    
+    
+
+class LLMCacheIncludeFromArticle(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class LLMCacheIncludeFromArticleRecursive1(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class LLMCacheIncludeFromArticleRecursive2(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class LLMCacheIncludeFromArticleRecursive3(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class LLMCacheIncludeFromArticleRecursive4(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+    
+
+class LLMCacheArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    
+    
+
+class FindManyLLMCacheArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromArticle(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class LLMUsageIncludeFromArticleRecursive1(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class LLMUsageIncludeFromArticleRecursive2(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class LLMUsageIncludeFromArticleRecursive3(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class LLMUsageIncludeFromArticleRecursive4(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+    
+
+class LLMUsageArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    
+    
+
+class FindManyLLMUsageArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
     
 
 
@@ -13271,6 +14483,208 @@ class FindManyClaimClusterArgsFromInsightRecursive4(TypedDict, total=False):
     cursor: 'ClaimClusterWhereUniqueInput'
     distinct: List['ClaimClusterScalarFieldKeys']
     
+    
+
+class LLMCacheIncludeFromInsight(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class LLMCacheIncludeFromInsightRecursive1(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class LLMCacheIncludeFromInsightRecursive2(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class LLMCacheIncludeFromInsightRecursive3(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class LLMCacheIncludeFromInsightRecursive4(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+    
+
+class LLMCacheArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    
+    
+
+class FindManyLLMCacheArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromInsight(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class LLMUsageIncludeFromInsightRecursive1(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class LLMUsageIncludeFromInsightRecursive2(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class LLMUsageIncludeFromInsightRecursive3(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class LLMUsageIncludeFromInsightRecursive4(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+    
+
+class LLMUsageArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    
+    
+
+class FindManyLLMUsageArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
 
 
 FindManyInsightArgs = FindManyInsightArgsFromInsight
@@ -13768,6 +15182,8 @@ InsightRelationalFieldKeys = Literal[
 class ClaimOptionalCreateInput(TypedDict, total=False):
     """Optional arguments to the Claim create method"""
     id: _str
+    claimType: Optional[_str]
+    qualityScore: Optional[_float]
     consensusScore: Optional[_float]
     contradictionScore: Optional[_float]
     createdAt: datetime.datetime
@@ -13788,6 +15204,8 @@ class ClaimCreateInput(ClaimOptionalCreateInput):
 class ClaimOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     """Optional arguments to the Claim create method, without relations"""
     id: _str
+    claimType: Optional[_str]
+    qualityScore: Optional[_float]
     consensusScore: Optional[_float]
     contradictionScore: Optional[_float]
     createdAt: datetime.datetime
@@ -13829,6 +15247,8 @@ class ClaimUpdateInput(TypedDict, total=False):
     """Optional arguments for updating a record"""
     id: _str
     canonicalClaim: _str
+    claimType: Optional[_str]
+    qualityScore: Optional[Union[AtomicFloatInput, _float]]
     confidence: Union[AtomicFloatInput, _float]
     consensusScore: Optional[Union[AtomicFloatInput, _float]]
     contradictionScore: Optional[Union[AtomicFloatInput, _float]]
@@ -13841,6 +15261,8 @@ class ClaimUpdateManyMutationInput(TypedDict, total=False):
     """Arguments for updating many records"""
     id: _str
     canonicalClaim: _str
+    claimType: Optional[_str]
+    qualityScore: Optional[Union[AtomicFloatInput, _float]]
     confidence: Union[AtomicFloatInput, _float]
     consensusScore: Optional[Union[AtomicFloatInput, _float]]
     contradictionScore: Optional[Union[AtomicFloatInput, _float]]
@@ -13891,6 +15313,22 @@ _Claim_canonicalClaim_OrderByInput = TypedDict(
     '_Claim_canonicalClaim_OrderByInput',
     {
         'canonicalClaim': 'SortOrder',
+    },
+    total=True
+)
+
+_Claim_claimType_OrderByInput = TypedDict(
+    '_Claim_claimType_OrderByInput',
+    {
+        'claimType': 'SortOrder',
+    },
+    total=True
+)
+
+_Claim_qualityScore_OrderByInput = TypedDict(
+    '_Claim_qualityScore_OrderByInput',
+    {
+        'qualityScore': 'SortOrder',
     },
     total=True
 )
@@ -13956,6 +15394,8 @@ _Claim_RelevanceOrderByInput = TypedDict(
 ClaimOrderByInput = Union[
     '_Claim_id_OrderByInput',
     '_Claim_canonicalClaim_OrderByInput',
+    '_Claim_claimType_OrderByInput',
+    '_Claim_qualityScore_OrderByInput',
     '_Claim_confidence_OrderByInput',
     '_Claim_consensusScore_OrderByInput',
     '_Claim_contradictionScore_OrderByInput',
@@ -15171,6 +16611,208 @@ class FindManyClaimClusterArgsFromClaimRecursive4(TypedDict, total=False):
     cursor: 'ClaimClusterWhereUniqueInput'
     distinct: List['ClaimClusterScalarFieldKeys']
     
+    
+
+class LLMCacheIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class LLMCacheIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class LLMCacheIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class LLMCacheIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class LLMCacheIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class LLMCacheArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyLLMCacheArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class LLMUsageIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class LLMUsageIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class LLMUsageIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class LLMUsageIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class LLMUsageArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyLLMUsageArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
 
 
 FindManyClaimArgs = FindManyClaimArgsFromClaim
@@ -15183,6 +16825,8 @@ class ClaimWhereInput(TypedDict, total=False):
     """Claim arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     canonicalClaim: Union[_str, 'types.StringFilter']
+    claimType: Union[None, _str, 'types.StringFilter']
+    qualityScore: Union[None, _float, 'types.FloatFilter']
     confidence: Union[_float, 'types.FloatFilter']
     consensusScore: Union[None, _float, 'types.FloatFilter']
     contradictionScore: Union[None, _float, 'types.FloatFilter']
@@ -15202,6 +16846,8 @@ class ClaimWhereInputRecursive1(TypedDict, total=False):
     """Claim arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     canonicalClaim: Union[_str, 'types.StringFilter']
+    claimType: Union[None, _str, 'types.StringFilter']
+    qualityScore: Union[None, _float, 'types.FloatFilter']
     confidence: Union[_float, 'types.FloatFilter']
     consensusScore: Union[None, _float, 'types.FloatFilter']
     contradictionScore: Union[None, _float, 'types.FloatFilter']
@@ -15221,6 +16867,8 @@ class ClaimWhereInputRecursive2(TypedDict, total=False):
     """Claim arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     canonicalClaim: Union[_str, 'types.StringFilter']
+    claimType: Union[None, _str, 'types.StringFilter']
+    qualityScore: Union[None, _float, 'types.FloatFilter']
     confidence: Union[_float, 'types.FloatFilter']
     consensusScore: Union[None, _float, 'types.FloatFilter']
     contradictionScore: Union[None, _float, 'types.FloatFilter']
@@ -15240,6 +16888,8 @@ class ClaimWhereInputRecursive3(TypedDict, total=False):
     """Claim arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     canonicalClaim: Union[_str, 'types.StringFilter']
+    claimType: Union[None, _str, 'types.StringFilter']
+    qualityScore: Union[None, _float, 'types.FloatFilter']
     confidence: Union[_float, 'types.FloatFilter']
     consensusScore: Union[None, _float, 'types.FloatFilter']
     contradictionScore: Union[None, _float, 'types.FloatFilter']
@@ -15259,6 +16909,8 @@ class ClaimWhereInputRecursive4(TypedDict, total=False):
     """Claim arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     canonicalClaim: Union[_str, 'types.StringFilter']
+    claimType: Union[None, _str, 'types.StringFilter']
+    qualityScore: Union[None, _float, 'types.FloatFilter']
     confidence: Union[_float, 'types.FloatFilter']
     consensusScore: Union[None, _float, 'types.FloatFilter']
     contradictionScore: Union[None, _float, 'types.FloatFilter']
@@ -15278,6 +16930,8 @@ class ClaimScalarWhereWithAggregatesInput(TypedDict, total=False):
     """Claim arguments for searching"""
     id: Union[_str, 'types.StringWithAggregatesFilter']
     canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    claimType: Union[_str, 'types.StringWithAggregatesFilter']
+    qualityScore: Union[_float, 'types.FloatWithAggregatesFilter']
     confidence: Union[_float, 'types.FloatWithAggregatesFilter']
     consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
     contradictionScore: Union[_float, 'types.FloatWithAggregatesFilter']
@@ -15293,6 +16947,8 @@ class ClaimScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
     """Claim arguments for searching"""
     id: Union[_str, 'types.StringWithAggregatesFilter']
     canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    claimType: Union[_str, 'types.StringWithAggregatesFilter']
+    qualityScore: Union[_float, 'types.FloatWithAggregatesFilter']
     confidence: Union[_float, 'types.FloatWithAggregatesFilter']
     consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
     contradictionScore: Union[_float, 'types.FloatWithAggregatesFilter']
@@ -15308,6 +16964,8 @@ class ClaimScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
     """Claim arguments for searching"""
     id: Union[_str, 'types.StringWithAggregatesFilter']
     canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    claimType: Union[_str, 'types.StringWithAggregatesFilter']
+    qualityScore: Union[_float, 'types.FloatWithAggregatesFilter']
     confidence: Union[_float, 'types.FloatWithAggregatesFilter']
     consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
     contradictionScore: Union[_float, 'types.FloatWithAggregatesFilter']
@@ -15323,6 +16981,8 @@ class ClaimScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
     """Claim arguments for searching"""
     id: Union[_str, 'types.StringWithAggregatesFilter']
     canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    claimType: Union[_str, 'types.StringWithAggregatesFilter']
+    qualityScore: Union[_float, 'types.FloatWithAggregatesFilter']
     confidence: Union[_float, 'types.FloatWithAggregatesFilter']
     consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
     contradictionScore: Union[_float, 'types.FloatWithAggregatesFilter']
@@ -15338,6 +16998,8 @@ class ClaimScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
     """Claim arguments for searching"""
     id: Union[_str, 'types.StringWithAggregatesFilter']
     canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    claimType: Union[_str, 'types.StringWithAggregatesFilter']
+    qualityScore: Union[_float, 'types.FloatWithAggregatesFilter']
     confidence: Union[_float, 'types.FloatWithAggregatesFilter']
     consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
     contradictionScore: Union[_float, 'types.FloatWithAggregatesFilter']
@@ -15349,6 +17011,8 @@ class ClaimScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
 class ClaimGroupByOutput(TypedDict, total=False):
     id: _str
     canonicalClaim: _str
+    claimType: _str
+    qualityScore: _float
     confidence: _float
     consensusScore: _float
     contradictionScore: _float
@@ -15363,6 +17027,7 @@ class ClaimGroupByOutput(TypedDict, total=False):
 
 class ClaimAvgAggregateOutput(TypedDict, total=False):
     """Claim output for aggregating averages"""
+    qualityScore: float
     confidence: float
     consensusScore: float
     contradictionScore: float
@@ -15370,6 +17035,7 @@ class ClaimAvgAggregateOutput(TypedDict, total=False):
 
 class ClaimSumAggregateOutput(TypedDict, total=False):
     """Claim output for aggregating sums"""
+    qualityScore: _float
     confidence: _float
     consensusScore: _float
     contradictionScore: _float
@@ -15379,6 +17045,8 @@ class ClaimScalarAggregateOutput(TypedDict, total=False):
     """Claim output including scalar fields"""
     id: _str
     canonicalClaim: _str
+    claimType: _str
+    qualityScore: _float
     confidence: _float
     consensusScore: _float
     contradictionScore: _float
@@ -15394,6 +17062,8 @@ class ClaimMaxAggregateInput(TypedDict, total=False):
     """Claim input for aggregating by max"""
     id: bool
     canonicalClaim: bool
+    claimType: bool
+    qualityScore: bool
     confidence: bool
     consensusScore: bool
     contradictionScore: bool
@@ -15405,6 +17075,8 @@ class ClaimMinAggregateInput(TypedDict, total=False):
     """Claim input for aggregating by min"""
     id: bool
     canonicalClaim: bool
+    claimType: bool
+    qualityScore: bool
     confidence: bool
     consensusScore: bool
     contradictionScore: bool
@@ -15414,6 +17086,7 @@ class ClaimMinAggregateInput(TypedDict, total=False):
 
 class ClaimNumberAggregateInput(TypedDict, total=False):
     """Claim input for aggregating numbers"""
+    qualityScore: bool
     confidence: bool
     consensusScore: bool
     contradictionScore: bool
@@ -15428,6 +17101,8 @@ ClaimCountAggregateInput = TypedDict(
     {
         'id': bool,
         'canonicalClaim': bool,
+        'claimType': bool,
+        'qualityScore': bool,
         'confidence': bool,
         'consensusScore': bool,
         'contradictionScore': bool,
@@ -15443,6 +17118,8 @@ ClaimCountAggregateOutput = TypedDict(
     {
         'id': int,
         'canonicalClaim': int,
+        'claimType': int,
+        'qualityScore': int,
         'confidence': int,
         'consensusScore': int,
         'contradictionScore': int,
@@ -15457,6 +17134,8 @@ ClaimCountAggregateOutput = TypedDict(
 ClaimKeys = Literal[
     'id',
     'canonicalClaim',
+    'claimType',
+    'qualityScore',
     'confidence',
     'consensusScore',
     'contradictionScore',
@@ -15468,6 +17147,8 @@ ClaimKeys = Literal[
 ClaimScalarFieldKeys = Literal[
     'id',
     'canonicalClaim',
+    'claimType',
+    'qualityScore',
     'confidence',
     'consensusScore',
     'contradictionScore',
@@ -16899,6 +18580,208 @@ class FindManyClaimClusterArgsFromEvidenceRecursive4(TypedDict, total=False):
     cursor: 'ClaimClusterWhereUniqueInput'
     distinct: List['ClaimClusterScalarFieldKeys']
     
+    
+
+class LLMCacheIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class LLMCacheIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class LLMCacheIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class LLMCacheIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class LLMCacheIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class LLMCacheArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyLLMCacheArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class LLMUsageIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class LLMUsageIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class LLMUsageIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class LLMUsageIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class LLMUsageArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyLLMUsageArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
 
 
 FindManyEvidenceArgs = FindManyEvidenceArgsFromEvidence
@@ -17217,6 +19100,7 @@ class EventOptionalCreateInput(TypedDict, total=False):
     """Optional arguments to the Event create method"""
     id: _str
     description: Optional[_str]
+    importanceScore: Optional[_float]
     createdAt: datetime.datetime
     claimClusters: 'ClaimClusterCreateManyNestedWithoutRelationsInput'
 
@@ -17233,6 +19117,7 @@ class EventOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     """Optional arguments to the Event create method, without relations"""
     id: _str
     description: Optional[_str]
+    importanceScore: Optional[_float]
     createdAt: datetime.datetime
 
 
@@ -17271,6 +19156,7 @@ class EventUpdateInput(TypedDict, total=False):
     id: _str
     title: _str
     description: Optional[_str]
+    importanceScore: Optional[Union[AtomicFloatInput, _float]]
     createdAt: datetime.datetime
     claimClusters: 'ClaimClusterUpdateManyWithoutRelationsInput'
 
@@ -17280,6 +19166,7 @@ class EventUpdateManyMutationInput(TypedDict, total=False):
     id: _str
     title: _str
     description: Optional[_str]
+    importanceScore: Optional[Union[AtomicFloatInput, _float]]
     createdAt: datetime.datetime
 
 
@@ -17339,6 +19226,14 @@ _Event_description_OrderByInput = TypedDict(
     total=True
 )
 
+_Event_importanceScore_OrderByInput = TypedDict(
+    '_Event_importanceScore_OrderByInput',
+    {
+        'importanceScore': 'SortOrder',
+    },
+    total=True
+)
+
 _Event_createdAt_OrderByInput = TypedDict(
     '_Event_createdAt_OrderByInput',
     {
@@ -17369,6 +19264,7 @@ EventOrderByInput = Union[
     '_Event_id_OrderByInput',
     '_Event_title_OrderByInput',
     '_Event_description_OrderByInput',
+    '_Event_importanceScore_OrderByInput',
     '_Event_createdAt_OrderByInput',
     '_Event_RelevanceOrderByInput',
 ]
@@ -18579,6 +20475,208 @@ class FindManyClaimClusterArgsFromEventRecursive4(TypedDict, total=False):
     cursor: 'ClaimClusterWhereUniqueInput'
     distinct: List['ClaimClusterScalarFieldKeys']
     
+    
+
+class LLMCacheIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class LLMCacheIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class LLMCacheIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class LLMCacheIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class LLMCacheIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class LLMCacheArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyLLMCacheArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class LLMUsageIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class LLMUsageIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class LLMUsageIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class LLMUsageIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class LLMUsageArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyLLMUsageArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
 
 
 FindManyEventArgs = FindManyEventArgsFromEvent
@@ -18592,6 +20690,7 @@ class EventWhereInput(TypedDict, total=False):
     id: Union[_str, 'types.StringFilter']
     title: Union[_str, 'types.StringFilter']
     description: Union[None, _str, 'types.StringFilter']
+    importanceScore: Union[None, _float, 'types.FloatFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
     claimClusters: 'ClaimClusterListRelationFilter'
 
@@ -18607,6 +20706,7 @@ class EventWhereInputRecursive1(TypedDict, total=False):
     id: Union[_str, 'types.StringFilter']
     title: Union[_str, 'types.StringFilter']
     description: Union[None, _str, 'types.StringFilter']
+    importanceScore: Union[None, _float, 'types.FloatFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
     claimClusters: 'ClaimClusterListRelationFilter'
 
@@ -18622,6 +20722,7 @@ class EventWhereInputRecursive2(TypedDict, total=False):
     id: Union[_str, 'types.StringFilter']
     title: Union[_str, 'types.StringFilter']
     description: Union[None, _str, 'types.StringFilter']
+    importanceScore: Union[None, _float, 'types.FloatFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
     claimClusters: 'ClaimClusterListRelationFilter'
 
@@ -18637,6 +20738,7 @@ class EventWhereInputRecursive3(TypedDict, total=False):
     id: Union[_str, 'types.StringFilter']
     title: Union[_str, 'types.StringFilter']
     description: Union[None, _str, 'types.StringFilter']
+    importanceScore: Union[None, _float, 'types.FloatFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
     claimClusters: 'ClaimClusterListRelationFilter'
 
@@ -18652,6 +20754,7 @@ class EventWhereInputRecursive4(TypedDict, total=False):
     id: Union[_str, 'types.StringFilter']
     title: Union[_str, 'types.StringFilter']
     description: Union[None, _str, 'types.StringFilter']
+    importanceScore: Union[None, _float, 'types.FloatFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
     claimClusters: 'ClaimClusterListRelationFilter'
 
@@ -18667,6 +20770,7 @@ class EventScalarWhereWithAggregatesInput(TypedDict, total=False):
     id: Union[_str, 'types.StringWithAggregatesFilter']
     title: Union[_str, 'types.StringWithAggregatesFilter']
     description: Union[_str, 'types.StringWithAggregatesFilter']
+    importanceScore: Union[_float, 'types.FloatWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
     AND: List['EventScalarWhereWithAggregatesInputRecursive1']
@@ -18679,6 +20783,7 @@ class EventScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
     id: Union[_str, 'types.StringWithAggregatesFilter']
     title: Union[_str, 'types.StringWithAggregatesFilter']
     description: Union[_str, 'types.StringWithAggregatesFilter']
+    importanceScore: Union[_float, 'types.FloatWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
     AND: List['EventScalarWhereWithAggregatesInputRecursive2']
@@ -18691,6 +20796,7 @@ class EventScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
     id: Union[_str, 'types.StringWithAggregatesFilter']
     title: Union[_str, 'types.StringWithAggregatesFilter']
     description: Union[_str, 'types.StringWithAggregatesFilter']
+    importanceScore: Union[_float, 'types.FloatWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
     AND: List['EventScalarWhereWithAggregatesInputRecursive3']
@@ -18703,6 +20809,7 @@ class EventScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
     id: Union[_str, 'types.StringWithAggregatesFilter']
     title: Union[_str, 'types.StringWithAggregatesFilter']
     description: Union[_str, 'types.StringWithAggregatesFilter']
+    importanceScore: Union[_float, 'types.FloatWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
     AND: List['EventScalarWhereWithAggregatesInputRecursive4']
@@ -18715,6 +20822,7 @@ class EventScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
     id: Union[_str, 'types.StringWithAggregatesFilter']
     title: Union[_str, 'types.StringWithAggregatesFilter']
     description: Union[_str, 'types.StringWithAggregatesFilter']
+    importanceScore: Union[_float, 'types.FloatWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
 
@@ -18723,6 +20831,7 @@ class EventGroupByOutput(TypedDict, total=False):
     id: _str
     title: _str
     description: _str
+    importanceScore: _float
     createdAt: datetime.datetime
     _sum: 'EventSumAggregateOutput'
     _avg: 'EventAvgAggregateOutput'
@@ -18733,10 +20842,12 @@ class EventGroupByOutput(TypedDict, total=False):
 
 class EventAvgAggregateOutput(TypedDict, total=False):
     """Event output for aggregating averages"""
+    importanceScore: float
 
 
 class EventSumAggregateOutput(TypedDict, total=False):
     """Event output for aggregating sums"""
+    importanceScore: _float
 
 
 class EventScalarAggregateOutput(TypedDict, total=False):
@@ -18744,6 +20855,7 @@ class EventScalarAggregateOutput(TypedDict, total=False):
     id: _str
     title: _str
     description: _str
+    importanceScore: _float
     createdAt: datetime.datetime
 
 
@@ -18756,6 +20868,7 @@ class EventMaxAggregateInput(TypedDict, total=False):
     id: bool
     title: bool
     description: bool
+    importanceScore: bool
     createdAt: bool
 
 
@@ -18764,11 +20877,13 @@ class EventMinAggregateInput(TypedDict, total=False):
     id: bool
     title: bool
     description: bool
+    importanceScore: bool
     createdAt: bool
 
 
 class EventNumberAggregateInput(TypedDict, total=False):
     """Event input for aggregating numbers"""
+    importanceScore: bool
 
 
 EventAvgAggregateInput = EventNumberAggregateInput
@@ -18781,6 +20896,7 @@ EventCountAggregateInput = TypedDict(
         'id': bool,
         'title': bool,
         'description': bool,
+        'importanceScore': bool,
         'createdAt': bool,
         '_all': bool,
     },
@@ -18793,6 +20909,7 @@ EventCountAggregateOutput = TypedDict(
         'id': int,
         'title': int,
         'description': int,
+        'importanceScore': int,
         'createdAt': int,
         '_all': int,
     },
@@ -18804,6 +20921,7 @@ EventKeys = Literal[
     'id',
     'title',
     'description',
+    'importanceScore',
     'createdAt',
     'claimClusters',
 ]
@@ -18811,6 +20929,7 @@ EventScalarFieldKeys = Literal[
     'id',
     'title',
     'description',
+    'importanceScore',
     'createdAt',
 ]
 EventScalarFieldKeysT = TypeVar('EventScalarFieldKeysT', bound=EventScalarFieldKeys)
@@ -18824,6 +20943,8 @@ EventRelationalFieldKeys = Literal[
 class ClaimClusterOptionalCreateInput(TypedDict, total=False):
     """Optional arguments to the ClaimCluster create method"""
     id: _str
+    canonicalClaim: Optional[_str]
+    consensusScore: Optional[_float]
     eventId: Optional[_str]
     event: 'EventCreateNestedWithoutRelationsInput'
     claims: 'ClaimCreateManyNestedWithoutRelationsInput'
@@ -18840,6 +20961,8 @@ class ClaimClusterCreateInput(ClaimClusterOptionalCreateInput):
 class ClaimClusterOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     """Optional arguments to the ClaimCluster create method, without relations"""
     id: _str
+    canonicalClaim: Optional[_str]
+    consensusScore: Optional[_float]
     eventId: Optional[_str]
 
 
@@ -18877,6 +21000,8 @@ class ClaimClusterUpdateInput(TypedDict, total=False):
     """Optional arguments for updating a record"""
     id: _str
     title: _str
+    canonicalClaim: Optional[_str]
+    consensusScore: Optional[Union[AtomicFloatInput, _float]]
     event: 'EventUpdateOneWithoutRelationsInput'
     claims: 'ClaimUpdateManyWithoutRelationsInput'
 
@@ -18885,6 +21010,8 @@ class ClaimClusterUpdateManyMutationInput(TypedDict, total=False):
     """Arguments for updating many records"""
     id: _str
     title: _str
+    canonicalClaim: Optional[_str]
+    consensusScore: Optional[Union[AtomicFloatInput, _float]]
 
 
 class ClaimClusterUpdateManyWithoutRelationsInput(TypedDict, total=False):
@@ -18935,6 +21062,22 @@ _ClaimCluster_title_OrderByInput = TypedDict(
     total=True
 )
 
+_ClaimCluster_canonicalClaim_OrderByInput = TypedDict(
+    '_ClaimCluster_canonicalClaim_OrderByInput',
+    {
+        'canonicalClaim': 'SortOrder',
+    },
+    total=True
+)
+
+_ClaimCluster_consensusScore_OrderByInput = TypedDict(
+    '_ClaimCluster_consensusScore_OrderByInput',
+    {
+        'consensusScore': 'SortOrder',
+    },
+    total=True
+)
+
 _ClaimCluster_eventId_OrderByInput = TypedDict(
     '_ClaimCluster_eventId_OrderByInput',
     {
@@ -18964,6 +21107,8 @@ _ClaimCluster_RelevanceOrderByInput = TypedDict(
 ClaimClusterOrderByInput = Union[
     '_ClaimCluster_id_OrderByInput',
     '_ClaimCluster_title_OrderByInput',
+    '_ClaimCluster_canonicalClaim_OrderByInput',
+    '_ClaimCluster_consensusScore_OrderByInput',
     '_ClaimCluster_eventId_OrderByInput',
     '_ClaimCluster_RelevanceOrderByInput',
 ]
@@ -20175,6 +22320,208 @@ class FindManyClaimClusterArgsFromClaimClusterRecursive4(TypedDict, total=False)
     cursor: 'ClaimClusterWhereUniqueInput'
     distinct: List['ClaimClusterScalarFieldKeys']
     
+    
+
+class LLMCacheIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class LLMCacheIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class LLMCacheIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class LLMCacheIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class LLMCacheIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class LLMCacheArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyLLMCacheArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class LLMUsageIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class LLMUsageIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class LLMUsageIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class LLMUsageIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class LLMUsageArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyLLMUsageArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
 
 
 FindManyClaimClusterArgs = FindManyClaimClusterArgsFromClaimCluster
@@ -20187,6 +22534,8 @@ class ClaimClusterWhereInput(TypedDict, total=False):
     """ClaimCluster arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     title: Union[_str, 'types.StringFilter']
+    canonicalClaim: Union[None, _str, 'types.StringFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
     eventId: Union[None, _str, 'types.StringFilter']
     event: 'EventRelationFilter'
     claims: 'ClaimListRelationFilter'
@@ -20202,6 +22551,8 @@ class ClaimClusterWhereInputRecursive1(TypedDict, total=False):
     """ClaimCluster arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     title: Union[_str, 'types.StringFilter']
+    canonicalClaim: Union[None, _str, 'types.StringFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
     eventId: Union[None, _str, 'types.StringFilter']
     event: 'EventRelationFilter'
     claims: 'ClaimListRelationFilter'
@@ -20217,6 +22568,8 @@ class ClaimClusterWhereInputRecursive2(TypedDict, total=False):
     """ClaimCluster arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     title: Union[_str, 'types.StringFilter']
+    canonicalClaim: Union[None, _str, 'types.StringFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
     eventId: Union[None, _str, 'types.StringFilter']
     event: 'EventRelationFilter'
     claims: 'ClaimListRelationFilter'
@@ -20232,6 +22585,8 @@ class ClaimClusterWhereInputRecursive3(TypedDict, total=False):
     """ClaimCluster arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     title: Union[_str, 'types.StringFilter']
+    canonicalClaim: Union[None, _str, 'types.StringFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
     eventId: Union[None, _str, 'types.StringFilter']
     event: 'EventRelationFilter'
     claims: 'ClaimListRelationFilter'
@@ -20247,6 +22602,8 @@ class ClaimClusterWhereInputRecursive4(TypedDict, total=False):
     """ClaimCluster arguments for searching"""
     id: Union[_str, 'types.StringFilter']
     title: Union[_str, 'types.StringFilter']
+    canonicalClaim: Union[None, _str, 'types.StringFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
     eventId: Union[None, _str, 'types.StringFilter']
     event: 'EventRelationFilter'
     claims: 'ClaimListRelationFilter'
@@ -20262,6 +22619,8 @@ class ClaimClusterScalarWhereWithAggregatesInput(TypedDict, total=False):
     """ClaimCluster arguments for searching"""
     id: Union[_str, 'types.StringWithAggregatesFilter']
     title: Union[_str, 'types.StringWithAggregatesFilter']
+    canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
     eventId: Union[_str, 'types.StringWithAggregatesFilter']
 
     AND: List['ClaimClusterScalarWhereWithAggregatesInputRecursive1']
@@ -20273,6 +22632,8 @@ class ClaimClusterScalarWhereWithAggregatesInputRecursive1(TypedDict, total=Fals
     """ClaimCluster arguments for searching"""
     id: Union[_str, 'types.StringWithAggregatesFilter']
     title: Union[_str, 'types.StringWithAggregatesFilter']
+    canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
     eventId: Union[_str, 'types.StringWithAggregatesFilter']
 
     AND: List['ClaimClusterScalarWhereWithAggregatesInputRecursive2']
@@ -20284,6 +22645,8 @@ class ClaimClusterScalarWhereWithAggregatesInputRecursive2(TypedDict, total=Fals
     """ClaimCluster arguments for searching"""
     id: Union[_str, 'types.StringWithAggregatesFilter']
     title: Union[_str, 'types.StringWithAggregatesFilter']
+    canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
     eventId: Union[_str, 'types.StringWithAggregatesFilter']
 
     AND: List['ClaimClusterScalarWhereWithAggregatesInputRecursive3']
@@ -20295,6 +22658,8 @@ class ClaimClusterScalarWhereWithAggregatesInputRecursive3(TypedDict, total=Fals
     """ClaimCluster arguments for searching"""
     id: Union[_str, 'types.StringWithAggregatesFilter']
     title: Union[_str, 'types.StringWithAggregatesFilter']
+    canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
     eventId: Union[_str, 'types.StringWithAggregatesFilter']
 
     AND: List['ClaimClusterScalarWhereWithAggregatesInputRecursive4']
@@ -20306,6 +22671,8 @@ class ClaimClusterScalarWhereWithAggregatesInputRecursive4(TypedDict, total=Fals
     """ClaimCluster arguments for searching"""
     id: Union[_str, 'types.StringWithAggregatesFilter']
     title: Union[_str, 'types.StringWithAggregatesFilter']
+    canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
     eventId: Union[_str, 'types.StringWithAggregatesFilter']
 
 
@@ -20313,6 +22680,8 @@ class ClaimClusterScalarWhereWithAggregatesInputRecursive4(TypedDict, total=Fals
 class ClaimClusterGroupByOutput(TypedDict, total=False):
     id: _str
     title: _str
+    canonicalClaim: _str
+    consensusScore: _float
     eventId: _str
     _sum: 'ClaimClusterSumAggregateOutput'
     _avg: 'ClaimClusterAvgAggregateOutput'
@@ -20323,16 +22692,20 @@ class ClaimClusterGroupByOutput(TypedDict, total=False):
 
 class ClaimClusterAvgAggregateOutput(TypedDict, total=False):
     """ClaimCluster output for aggregating averages"""
+    consensusScore: float
 
 
 class ClaimClusterSumAggregateOutput(TypedDict, total=False):
     """ClaimCluster output for aggregating sums"""
+    consensusScore: _float
 
 
 class ClaimClusterScalarAggregateOutput(TypedDict, total=False):
     """ClaimCluster output including scalar fields"""
     id: _str
     title: _str
+    canonicalClaim: _str
+    consensusScore: _float
     eventId: _str
 
 
@@ -20344,6 +22717,8 @@ class ClaimClusterMaxAggregateInput(TypedDict, total=False):
     """ClaimCluster input for aggregating by max"""
     id: bool
     title: bool
+    canonicalClaim: bool
+    consensusScore: bool
     eventId: bool
 
 
@@ -20351,11 +22726,14 @@ class ClaimClusterMinAggregateInput(TypedDict, total=False):
     """ClaimCluster input for aggregating by min"""
     id: bool
     title: bool
+    canonicalClaim: bool
+    consensusScore: bool
     eventId: bool
 
 
 class ClaimClusterNumberAggregateInput(TypedDict, total=False):
     """ClaimCluster input for aggregating numbers"""
+    consensusScore: bool
 
 
 ClaimClusterAvgAggregateInput = ClaimClusterNumberAggregateInput
@@ -20367,6 +22745,8 @@ ClaimClusterCountAggregateInput = TypedDict(
     {
         'id': bool,
         'title': bool,
+        'canonicalClaim': bool,
+        'consensusScore': bool,
         'eventId': bool,
         '_all': bool,
     },
@@ -20378,6 +22758,8 @@ ClaimClusterCountAggregateOutput = TypedDict(
     {
         'id': int,
         'title': int,
+        'canonicalClaim': int,
+        'consensusScore': int,
         'eventId': int,
         '_all': int,
     },
@@ -20388,6 +22770,8 @@ ClaimClusterCountAggregateOutput = TypedDict(
 ClaimClusterKeys = Literal[
     'id',
     'title',
+    'canonicalClaim',
+    'consensusScore',
     'eventId',
     'event',
     'claims',
@@ -20395,6 +22779,8 @@ ClaimClusterKeys = Literal[
 ClaimClusterScalarFieldKeys = Literal[
     'id',
     'title',
+    'canonicalClaim',
+    'consensusScore',
     'eventId',
 ]
 ClaimClusterScalarFieldKeysT = TypeVar('ClaimClusterScalarFieldKeysT', bound=ClaimClusterScalarFieldKeys)
@@ -20403,6 +22789,3776 @@ ClaimClusterRelationalFieldKeys = Literal[
         'event',
         'claims',
     ]
+
+# LLMCache types
+
+class LLMCacheOptionalCreateInput(TypedDict, total=False):
+    """Optional arguments to the LLMCache create method"""
+    id: _str
+    stage: _str
+    createdAt: datetime.datetime
+
+
+class LLMCacheCreateInput(LLMCacheOptionalCreateInput):
+    """Required arguments to the LLMCache create method"""
+    promptHash: _str
+    model: _str
+    response: _str
+
+
+# TODO: remove this in favour of without explicit relations
+# e.g. PostCreateWithoutAuthorInput
+
+class LLMCacheOptionalCreateWithoutRelationsInput(TypedDict, total=False):
+    """Optional arguments to the LLMCache create method, without relations"""
+    id: _str
+    stage: _str
+    createdAt: datetime.datetime
+
+
+class LLMCacheCreateWithoutRelationsInput(LLMCacheOptionalCreateWithoutRelationsInput):
+    """Required arguments to the LLMCache create method, without relations"""
+    promptHash: _str
+    model: _str
+    response: _str
+
+class LLMCacheConnectOrCreateWithoutRelationsInput(TypedDict):
+    create: 'LLMCacheCreateWithoutRelationsInput'
+    where: 'LLMCacheWhereUniqueInput'
+
+class LLMCacheCreateNestedWithoutRelationsInput(TypedDict, total=False):
+    create: 'LLMCacheCreateWithoutRelationsInput'
+    connect: 'LLMCacheWhereUniqueInput'
+    connect_or_create: 'LLMCacheConnectOrCreateWithoutRelationsInput'
+
+
+class LLMCacheCreateManyNestedWithoutRelationsInput(TypedDict, total=False):
+    create: Union['LLMCacheCreateWithoutRelationsInput', List['LLMCacheCreateWithoutRelationsInput']]
+    connect: Union['LLMCacheWhereUniqueInput', List['LLMCacheWhereUniqueInput']]
+    connect_or_create: Union['LLMCacheConnectOrCreateWithoutRelationsInput', List['LLMCacheConnectOrCreateWithoutRelationsInput']]
+
+_LLMCacheWhereUnique_id_Input = TypedDict(
+    '_LLMCacheWhereUnique_id_Input',
+    {
+        'id': '_str',
+    },
+    total=True
+)
+
+_LLMCacheWhereUnique_promptHash_Input = TypedDict(
+    '_LLMCacheWhereUnique_promptHash_Input',
+    {
+        'promptHash': '_str',
+    },
+    total=True
+)
+
+LLMCacheWhereUniqueInput = Union[
+    '_LLMCacheWhereUnique_id_Input',
+    '_LLMCacheWhereUnique_promptHash_Input',
+]
+
+
+class LLMCacheUpdateInput(TypedDict, total=False):
+    """Optional arguments for updating a record"""
+    id: _str
+    promptHash: _str
+    model: _str
+    stage: _str
+    response: _str
+    createdAt: datetime.datetime
+
+
+class LLMCacheUpdateManyMutationInput(TypedDict, total=False):
+    """Arguments for updating many records"""
+    id: _str
+    promptHash: _str
+    model: _str
+    stage: _str
+    response: _str
+    createdAt: datetime.datetime
+
+
+class LLMCacheUpdateManyWithoutRelationsInput(TypedDict, total=False):
+    create: List['LLMCacheCreateWithoutRelationsInput']
+    connect: List['LLMCacheWhereUniqueInput']
+    connect_or_create: List['LLMCacheConnectOrCreateWithoutRelationsInput']
+    set: List['LLMCacheWhereUniqueInput']
+    disconnect: List['LLMCacheWhereUniqueInput']
+    delete: List['LLMCacheWhereUniqueInput']
+
+    # TODO
+    # update: List['LLMCacheUpdateWithWhereUniqueWithoutRelationsInput']
+    # updateMany: List['LLMCacheUpdateManyWithWhereUniqueWithoutRelationsInput']
+    # deleteMany: List['LLMCacheScalarWhereInput']
+    # upsert: List['LLMCacheUpserteWithWhereUniqueWithoutRelationsInput']
+
+
+class LLMCacheUpdateOneWithoutRelationsInput(TypedDict, total=False):
+    create: 'LLMCacheCreateWithoutRelationsInput'
+    connect: 'LLMCacheWhereUniqueInput'
+    connect_or_create: 'LLMCacheConnectOrCreateWithoutRelationsInput'
+    disconnect: bool
+    delete: bool
+
+    # TODO
+    # update: 'LLMCacheUpdateInput'
+    # upsert: 'LLMCacheUpsertWithoutRelationsInput'
+
+
+class LLMCacheUpsertInput(TypedDict):
+    create: 'LLMCacheCreateInput'
+    update: 'LLMCacheUpdateInput'  # pyright: ignore[reportIncompatibleMethodOverride]
+
+
+_LLMCache_id_OrderByInput = TypedDict(
+    '_LLMCache_id_OrderByInput',
+    {
+        'id': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMCache_promptHash_OrderByInput = TypedDict(
+    '_LLMCache_promptHash_OrderByInput',
+    {
+        'promptHash': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMCache_model_OrderByInput = TypedDict(
+    '_LLMCache_model_OrderByInput',
+    {
+        'model': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMCache_stage_OrderByInput = TypedDict(
+    '_LLMCache_stage_OrderByInput',
+    {
+        'stage': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMCache_response_OrderByInput = TypedDict(
+    '_LLMCache_response_OrderByInput',
+    {
+        'response': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMCache_createdAt_OrderByInput = TypedDict(
+    '_LLMCache_createdAt_OrderByInput',
+    {
+        'createdAt': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMCache_RelevanceInner = TypedDict(
+    '_LLMCache_RelevanceInner',
+    {
+        'fields': 'List[LLMCacheScalarFieldKeys]',
+        'search': 'str',
+        'sort': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMCache_RelevanceOrderByInput = TypedDict(
+    '_LLMCache_RelevanceOrderByInput',
+    {
+        '_relevance': '_LLMCache_RelevanceInner',
+    },
+    total=True
+)
+
+LLMCacheOrderByInput = Union[
+    '_LLMCache_id_OrderByInput',
+    '_LLMCache_promptHash_OrderByInput',
+    '_LLMCache_model_OrderByInput',
+    '_LLMCache_stage_OrderByInput',
+    '_LLMCache_response_OrderByInput',
+    '_LLMCache_createdAt_OrderByInput',
+    '_LLMCache_RelevanceOrderByInput',
+]
+
+
+
+# recursive LLMCache types
+# TODO: cleanup these types
+
+
+# Dict[str, Any] is a mypy limitation
+# see https://github.com/RobertCraigie/prisma-client-py/issues/45
+# switch to pyright for improved types, see https://prisma-client-py.readthedocs.io/en/stable/reference/limitations/
+
+LLMCacheRelationFilter = TypedDict(
+    'LLMCacheRelationFilter',
+    {
+        'is': 'Dict[str, Any]',
+        'is_not': 'Dict[str, Any]',
+    },
+    total=False,
+)
+
+
+class LLMCacheListRelationFilter(TypedDict, total=False):
+    some: 'Dict[str, Any]'
+    none: 'Dict[str, Any]'
+    every: 'Dict[str, Any]'
+
+
+class LLMCacheInclude(TypedDict, total=False):
+    """LLMCache relational arguments"""
+
+
+    
+
+class UserIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    sessions: Union[bool, 'FindManySessionArgsFromLLMCacheRecursive1']
+    accounts: Union[bool, 'FindManyAccountArgsFromLLMCacheRecursive1']
+    searches: Union[bool, 'FindManySearchArgsFromLLMCacheRecursive1']
+
+
+class UserIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    sessions: Union[bool, 'FindManySessionArgsFromLLMCacheRecursive2']
+    accounts: Union[bool, 'FindManyAccountArgsFromLLMCacheRecursive2']
+    searches: Union[bool, 'FindManySearchArgsFromLLMCacheRecursive2']
+
+
+class UserIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    sessions: Union[bool, 'FindManySessionArgsFromLLMCacheRecursive3']
+    accounts: Union[bool, 'FindManyAccountArgsFromLLMCacheRecursive3']
+    searches: Union[bool, 'FindManySearchArgsFromLLMCacheRecursive3']
+
+
+class UserIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    sessions: Union[bool, 'FindManySessionArgsFromLLMCacheRecursive4']
+    accounts: Union[bool, 'FindManyAccountArgsFromLLMCacheRecursive4']
+    searches: Union[bool, 'FindManySearchArgsFromLLMCacheRecursive4']
+
+
+class UserIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class UserArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class UserArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class UserArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class UserArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class UserArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyUserArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class FindManyUserArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class FindManyUserArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class FindManyUserArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class FindManyUserArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    
+    
+
+class SessionIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive1']
+
+
+class SessionIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive2']
+
+
+class SessionIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive3']
+
+
+class SessionIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive4']
+
+
+class SessionIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class SessionArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class SessionArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class SessionArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class SessionArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class SessionArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManySessionArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class FindManySessionArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class FindManySessionArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class FindManySessionArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class FindManySessionArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    
+    
+
+class AccountIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive1']
+
+
+class AccountIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive2']
+
+
+class AccountIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive3']
+
+
+class AccountIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive4']
+
+
+class AccountIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class AccountArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class AccountArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class AccountArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class AccountArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class AccountArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyAccountArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class FindManyAccountArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class FindManyAccountArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class FindManyAccountArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class FindManyAccountArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    
+    
+
+class VerificationIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class VerificationIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class VerificationIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class VerificationIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class VerificationIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class VerificationArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class VerificationArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class VerificationArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class VerificationArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class VerificationArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyVerificationArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class FindManyVerificationArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class FindManyVerificationArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class FindManyVerificationArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class FindManyVerificationArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    
+    
+
+class SearchIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive1']
+    articles: Union[bool, 'FindManyArticleArgsFromLLMCacheRecursive1']
+    insights: Union[bool, 'FindManyInsightArgsFromLLMCacheRecursive1']
+
+
+class SearchIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive2']
+    articles: Union[bool, 'FindManyArticleArgsFromLLMCacheRecursive2']
+    insights: Union[bool, 'FindManyInsightArgsFromLLMCacheRecursive2']
+
+
+class SearchIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive3']
+    articles: Union[bool, 'FindManyArticleArgsFromLLMCacheRecursive3']
+    insights: Union[bool, 'FindManyInsightArgsFromLLMCacheRecursive3']
+
+
+class SearchIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive4']
+    articles: Union[bool, 'FindManyArticleArgsFromLLMCacheRecursive4']
+    insights: Union[bool, 'FindManyInsightArgsFromLLMCacheRecursive4']
+
+
+class SearchIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class SearchArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class SearchArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class SearchArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class SearchArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class SearchArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManySearchArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class FindManySearchArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class FindManySearchArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class FindManySearchArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class FindManySearchArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    
+    
+
+class ArticleIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    search: Union[bool, 'SearchArgsFromLLMCacheRecursive1']
+
+
+class ArticleIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    search: Union[bool, 'SearchArgsFromLLMCacheRecursive2']
+
+
+class ArticleIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    search: Union[bool, 'SearchArgsFromLLMCacheRecursive3']
+
+
+class ArticleIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    search: Union[bool, 'SearchArgsFromLLMCacheRecursive4']
+
+
+class ArticleIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class ArticleArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class ArticleArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class ArticleArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class ArticleArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class ArticleArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyArticleArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class FindManyArticleArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class FindManyArticleArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class FindManyArticleArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class FindManyArticleArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    
+    
+
+class InsightIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    search: Union[bool, 'SearchArgsFromLLMCacheRecursive1']
+
+
+class InsightIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    search: Union[bool, 'SearchArgsFromLLMCacheRecursive2']
+
+
+class InsightIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    search: Union[bool, 'SearchArgsFromLLMCacheRecursive3']
+
+
+class InsightIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    search: Union[bool, 'SearchArgsFromLLMCacheRecursive4']
+
+
+class InsightIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class InsightArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class InsightArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class InsightArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class InsightArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class InsightArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyInsightArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class FindManyInsightArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class FindManyInsightArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class FindManyInsightArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class FindManyInsightArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    cluster: Union[bool, 'ClaimClusterArgsFromLLMCacheRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromLLMCacheRecursive1']
+
+
+class ClaimIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    cluster: Union[bool, 'ClaimClusterArgsFromLLMCacheRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromLLMCacheRecursive2']
+
+
+class ClaimIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    cluster: Union[bool, 'ClaimClusterArgsFromLLMCacheRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromLLMCacheRecursive3']
+
+
+class ClaimIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    cluster: Union[bool, 'ClaimClusterArgsFromLLMCacheRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromLLMCacheRecursive4']
+
+
+class ClaimIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class ClaimArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyClaimArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    claim: Union[bool, 'ClaimArgsFromLLMCacheRecursive1']
+
+
+class EvidenceIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    claim: Union[bool, 'ClaimArgsFromLLMCacheRecursive2']
+
+
+class EvidenceIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    claim: Union[bool, 'ClaimArgsFromLLMCacheRecursive3']
+
+
+class EvidenceIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    claim: Union[bool, 'ClaimArgsFromLLMCacheRecursive4']
+
+
+class EvidenceIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class EvidenceArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyEvidenceArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMCacheRecursive1']
+
+
+class EventIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMCacheRecursive2']
+
+
+class EventIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMCacheRecursive3']
+
+
+class EventIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMCacheRecursive4']
+
+
+class EventIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class EventArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyEventArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    event: Union[bool, 'EventArgsFromLLMCacheRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromLLMCacheRecursive1']
+
+
+class ClaimClusterIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    event: Union[bool, 'EventArgsFromLLMCacheRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromLLMCacheRecursive2']
+
+
+class ClaimClusterIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    event: Union[bool, 'EventArgsFromLLMCacheRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromLLMCacheRecursive3']
+
+
+class ClaimClusterIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    event: Union[bool, 'EventArgsFromLLMCacheRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromLLMCacheRecursive4']
+
+
+class ClaimClusterIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class ClaimClusterArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyClaimClusterArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
+    
+
+class LLMCacheIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class LLMCacheIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class LLMCacheIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class LLMCacheIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class LLMCacheIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class LLMCacheArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyLLMCacheArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class LLMUsageIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class LLMUsageIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class LLMUsageIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class LLMUsageIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class LLMUsageArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyLLMUsageArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
+
+
+FindManyLLMCacheArgs = FindManyLLMCacheArgsFromLLMCache
+FindFirstLLMCacheArgs = FindManyLLMCacheArgsFromLLMCache
+
+
+    
+
+class LLMCacheWhereInput(TypedDict, total=False):
+    """LLMCache arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    promptHash: Union[_str, 'types.StringFilter']
+    model: Union[_str, 'types.StringFilter']
+    stage: Union[_str, 'types.StringFilter']
+    response: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['LLMCacheWhereInputRecursive1', List['LLMCacheWhereInputRecursive1']]
+    # but this causes mypy to hang :/
+    AND: List['LLMCacheWhereInputRecursive1']
+    OR: List['LLMCacheWhereInputRecursive1']
+    NOT: List['LLMCacheWhereInputRecursive1']
+
+
+class LLMCacheWhereInputRecursive1(TypedDict, total=False):
+    """LLMCache arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    promptHash: Union[_str, 'types.StringFilter']
+    model: Union[_str, 'types.StringFilter']
+    stage: Union[_str, 'types.StringFilter']
+    response: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['LLMCacheWhereInputRecursive2', List['LLMCacheWhereInputRecursive2']]
+    # but this causes mypy to hang :/
+    AND: List['LLMCacheWhereInputRecursive2']
+    OR: List['LLMCacheWhereInputRecursive2']
+    NOT: List['LLMCacheWhereInputRecursive2']
+
+
+class LLMCacheWhereInputRecursive2(TypedDict, total=False):
+    """LLMCache arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    promptHash: Union[_str, 'types.StringFilter']
+    model: Union[_str, 'types.StringFilter']
+    stage: Union[_str, 'types.StringFilter']
+    response: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['LLMCacheWhereInputRecursive3', List['LLMCacheWhereInputRecursive3']]
+    # but this causes mypy to hang :/
+    AND: List['LLMCacheWhereInputRecursive3']
+    OR: List['LLMCacheWhereInputRecursive3']
+    NOT: List['LLMCacheWhereInputRecursive3']
+
+
+class LLMCacheWhereInputRecursive3(TypedDict, total=False):
+    """LLMCache arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    promptHash: Union[_str, 'types.StringFilter']
+    model: Union[_str, 'types.StringFilter']
+    stage: Union[_str, 'types.StringFilter']
+    response: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['LLMCacheWhereInputRecursive4', List['LLMCacheWhereInputRecursive4']]
+    # but this causes mypy to hang :/
+    AND: List['LLMCacheWhereInputRecursive4']
+    OR: List['LLMCacheWhereInputRecursive4']
+    NOT: List['LLMCacheWhereInputRecursive4']
+
+
+class LLMCacheWhereInputRecursive4(TypedDict, total=False):
+    """LLMCache arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    promptHash: Union[_str, 'types.StringFilter']
+    model: Union[_str, 'types.StringFilter']
+    stage: Union[_str, 'types.StringFilter']
+    response: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+
+
+# aggregate LLMCache types
+
+
+    
+
+class LLMCacheScalarWhereWithAggregatesInput(TypedDict, total=False):
+    """LLMCache arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    promptHash: Union[_str, 'types.StringWithAggregatesFilter']
+    model: Union[_str, 'types.StringWithAggregatesFilter']
+    stage: Union[_str, 'types.StringWithAggregatesFilter']
+    response: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['LLMCacheScalarWhereWithAggregatesInputRecursive1']
+    OR: List['LLMCacheScalarWhereWithAggregatesInputRecursive1']
+    NOT: List['LLMCacheScalarWhereWithAggregatesInputRecursive1']
+
+
+class LLMCacheScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
+    """LLMCache arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    promptHash: Union[_str, 'types.StringWithAggregatesFilter']
+    model: Union[_str, 'types.StringWithAggregatesFilter']
+    stage: Union[_str, 'types.StringWithAggregatesFilter']
+    response: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['LLMCacheScalarWhereWithAggregatesInputRecursive2']
+    OR: List['LLMCacheScalarWhereWithAggregatesInputRecursive2']
+    NOT: List['LLMCacheScalarWhereWithAggregatesInputRecursive2']
+
+
+class LLMCacheScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
+    """LLMCache arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    promptHash: Union[_str, 'types.StringWithAggregatesFilter']
+    model: Union[_str, 'types.StringWithAggregatesFilter']
+    stage: Union[_str, 'types.StringWithAggregatesFilter']
+    response: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['LLMCacheScalarWhereWithAggregatesInputRecursive3']
+    OR: List['LLMCacheScalarWhereWithAggregatesInputRecursive3']
+    NOT: List['LLMCacheScalarWhereWithAggregatesInputRecursive3']
+
+
+class LLMCacheScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
+    """LLMCache arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    promptHash: Union[_str, 'types.StringWithAggregatesFilter']
+    model: Union[_str, 'types.StringWithAggregatesFilter']
+    stage: Union[_str, 'types.StringWithAggregatesFilter']
+    response: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['LLMCacheScalarWhereWithAggregatesInputRecursive4']
+    OR: List['LLMCacheScalarWhereWithAggregatesInputRecursive4']
+    NOT: List['LLMCacheScalarWhereWithAggregatesInputRecursive4']
+
+
+class LLMCacheScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
+    """LLMCache arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    promptHash: Union[_str, 'types.StringWithAggregatesFilter']
+    model: Union[_str, 'types.StringWithAggregatesFilter']
+    stage: Union[_str, 'types.StringWithAggregatesFilter']
+    response: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+
+
+class LLMCacheGroupByOutput(TypedDict, total=False):
+    id: _str
+    promptHash: _str
+    model: _str
+    stage: _str
+    response: _str
+    createdAt: datetime.datetime
+    _sum: 'LLMCacheSumAggregateOutput'
+    _avg: 'LLMCacheAvgAggregateOutput'
+    _min: 'LLMCacheMinAggregateOutput'
+    _max: 'LLMCacheMaxAggregateOutput'
+    _count: 'LLMCacheCountAggregateOutput'
+
+
+class LLMCacheAvgAggregateOutput(TypedDict, total=False):
+    """LLMCache output for aggregating averages"""
+
+
+class LLMCacheSumAggregateOutput(TypedDict, total=False):
+    """LLMCache output for aggregating sums"""
+
+
+class LLMCacheScalarAggregateOutput(TypedDict, total=False):
+    """LLMCache output including scalar fields"""
+    id: _str
+    promptHash: _str
+    model: _str
+    stage: _str
+    response: _str
+    createdAt: datetime.datetime
+
+
+LLMCacheMinAggregateOutput = LLMCacheScalarAggregateOutput
+LLMCacheMaxAggregateOutput = LLMCacheScalarAggregateOutput
+
+
+class LLMCacheMaxAggregateInput(TypedDict, total=False):
+    """LLMCache input for aggregating by max"""
+    id: bool
+    promptHash: bool
+    model: bool
+    stage: bool
+    response: bool
+    createdAt: bool
+
+
+class LLMCacheMinAggregateInput(TypedDict, total=False):
+    """LLMCache input for aggregating by min"""
+    id: bool
+    promptHash: bool
+    model: bool
+    stage: bool
+    response: bool
+    createdAt: bool
+
+
+class LLMCacheNumberAggregateInput(TypedDict, total=False):
+    """LLMCache input for aggregating numbers"""
+
+
+LLMCacheAvgAggregateInput = LLMCacheNumberAggregateInput
+LLMCacheSumAggregateInput = LLMCacheNumberAggregateInput
+
+
+LLMCacheCountAggregateInput = TypedDict(
+    'LLMCacheCountAggregateInput',
+    {
+        'id': bool,
+        'promptHash': bool,
+        'model': bool,
+        'stage': bool,
+        'response': bool,
+        'createdAt': bool,
+        '_all': bool,
+    },
+    total=False,
+)
+
+LLMCacheCountAggregateOutput = TypedDict(
+    'LLMCacheCountAggregateOutput',
+    {
+        'id': int,
+        'promptHash': int,
+        'model': int,
+        'stage': int,
+        'response': int,
+        'createdAt': int,
+        '_all': int,
+    },
+    total=False,
+)
+
+
+LLMCacheKeys = Literal[
+    'id',
+    'promptHash',
+    'model',
+    'stage',
+    'response',
+    'createdAt',
+]
+LLMCacheScalarFieldKeys = Literal[
+    'id',
+    'promptHash',
+    'model',
+    'stage',
+    'response',
+    'createdAt',
+]
+LLMCacheScalarFieldKeysT = TypeVar('LLMCacheScalarFieldKeysT', bound=LLMCacheScalarFieldKeys)
+
+LLMCacheRelationalFieldKeys = _NoneType
+
+# LLMUsage types
+
+class LLMUsageOptionalCreateInput(TypedDict, total=False):
+    """Optional arguments to the LLMUsage create method"""
+    id: _str
+    cached: _bool
+    promptTokens: Optional[_int]
+    completionTokens: Optional[_int]
+    createdAt: datetime.datetime
+
+
+class LLMUsageCreateInput(LLMUsageOptionalCreateInput):
+    """Required arguments to the LLMUsage create method"""
+    stage: _str
+    model: _str
+
+
+# TODO: remove this in favour of without explicit relations
+# e.g. PostCreateWithoutAuthorInput
+
+class LLMUsageOptionalCreateWithoutRelationsInput(TypedDict, total=False):
+    """Optional arguments to the LLMUsage create method, without relations"""
+    id: _str
+    cached: _bool
+    promptTokens: Optional[_int]
+    completionTokens: Optional[_int]
+    createdAt: datetime.datetime
+
+
+class LLMUsageCreateWithoutRelationsInput(LLMUsageOptionalCreateWithoutRelationsInput):
+    """Required arguments to the LLMUsage create method, without relations"""
+    stage: _str
+    model: _str
+
+class LLMUsageConnectOrCreateWithoutRelationsInput(TypedDict):
+    create: 'LLMUsageCreateWithoutRelationsInput'
+    where: 'LLMUsageWhereUniqueInput'
+
+class LLMUsageCreateNestedWithoutRelationsInput(TypedDict, total=False):
+    create: 'LLMUsageCreateWithoutRelationsInput'
+    connect: 'LLMUsageWhereUniqueInput'
+    connect_or_create: 'LLMUsageConnectOrCreateWithoutRelationsInput'
+
+
+class LLMUsageCreateManyNestedWithoutRelationsInput(TypedDict, total=False):
+    create: Union['LLMUsageCreateWithoutRelationsInput', List['LLMUsageCreateWithoutRelationsInput']]
+    connect: Union['LLMUsageWhereUniqueInput', List['LLMUsageWhereUniqueInput']]
+    connect_or_create: Union['LLMUsageConnectOrCreateWithoutRelationsInput', List['LLMUsageConnectOrCreateWithoutRelationsInput']]
+
+_LLMUsageWhereUnique_id_Input = TypedDict(
+    '_LLMUsageWhereUnique_id_Input',
+    {
+        'id': '_str',
+    },
+    total=True
+)
+
+LLMUsageWhereUniqueInput = _LLMUsageWhereUnique_id_Input
+
+
+class LLMUsageUpdateInput(TypedDict, total=False):
+    """Optional arguments for updating a record"""
+    id: _str
+    stage: _str
+    model: _str
+    cached: _bool
+    promptTokens: Optional[Union[AtomicIntInput, _int]]
+    completionTokens: Optional[Union[AtomicIntInput, _int]]
+    createdAt: datetime.datetime
+
+
+class LLMUsageUpdateManyMutationInput(TypedDict, total=False):
+    """Arguments for updating many records"""
+    id: _str
+    stage: _str
+    model: _str
+    cached: _bool
+    promptTokens: Optional[Union[AtomicIntInput, _int]]
+    completionTokens: Optional[Union[AtomicIntInput, _int]]
+    createdAt: datetime.datetime
+
+
+class LLMUsageUpdateManyWithoutRelationsInput(TypedDict, total=False):
+    create: List['LLMUsageCreateWithoutRelationsInput']
+    connect: List['LLMUsageWhereUniqueInput']
+    connect_or_create: List['LLMUsageConnectOrCreateWithoutRelationsInput']
+    set: List['LLMUsageWhereUniqueInput']
+    disconnect: List['LLMUsageWhereUniqueInput']
+    delete: List['LLMUsageWhereUniqueInput']
+
+    # TODO
+    # update: List['LLMUsageUpdateWithWhereUniqueWithoutRelationsInput']
+    # updateMany: List['LLMUsageUpdateManyWithWhereUniqueWithoutRelationsInput']
+    # deleteMany: List['LLMUsageScalarWhereInput']
+    # upsert: List['LLMUsageUpserteWithWhereUniqueWithoutRelationsInput']
+
+
+class LLMUsageUpdateOneWithoutRelationsInput(TypedDict, total=False):
+    create: 'LLMUsageCreateWithoutRelationsInput'
+    connect: 'LLMUsageWhereUniqueInput'
+    connect_or_create: 'LLMUsageConnectOrCreateWithoutRelationsInput'
+    disconnect: bool
+    delete: bool
+
+    # TODO
+    # update: 'LLMUsageUpdateInput'
+    # upsert: 'LLMUsageUpsertWithoutRelationsInput'
+
+
+class LLMUsageUpsertInput(TypedDict):
+    create: 'LLMUsageCreateInput'
+    update: 'LLMUsageUpdateInput'  # pyright: ignore[reportIncompatibleMethodOverride]
+
+
+_LLMUsage_id_OrderByInput = TypedDict(
+    '_LLMUsage_id_OrderByInput',
+    {
+        'id': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMUsage_stage_OrderByInput = TypedDict(
+    '_LLMUsage_stage_OrderByInput',
+    {
+        'stage': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMUsage_model_OrderByInput = TypedDict(
+    '_LLMUsage_model_OrderByInput',
+    {
+        'model': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMUsage_cached_OrderByInput = TypedDict(
+    '_LLMUsage_cached_OrderByInput',
+    {
+        'cached': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMUsage_promptTokens_OrderByInput = TypedDict(
+    '_LLMUsage_promptTokens_OrderByInput',
+    {
+        'promptTokens': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMUsage_completionTokens_OrderByInput = TypedDict(
+    '_LLMUsage_completionTokens_OrderByInput',
+    {
+        'completionTokens': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMUsage_createdAt_OrderByInput = TypedDict(
+    '_LLMUsage_createdAt_OrderByInput',
+    {
+        'createdAt': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMUsage_RelevanceInner = TypedDict(
+    '_LLMUsage_RelevanceInner',
+    {
+        'fields': 'List[LLMUsageScalarFieldKeys]',
+        'search': 'str',
+        'sort': 'SortOrder',
+    },
+    total=True
+)
+
+_LLMUsage_RelevanceOrderByInput = TypedDict(
+    '_LLMUsage_RelevanceOrderByInput',
+    {
+        '_relevance': '_LLMUsage_RelevanceInner',
+    },
+    total=True
+)
+
+LLMUsageOrderByInput = Union[
+    '_LLMUsage_id_OrderByInput',
+    '_LLMUsage_stage_OrderByInput',
+    '_LLMUsage_model_OrderByInput',
+    '_LLMUsage_cached_OrderByInput',
+    '_LLMUsage_promptTokens_OrderByInput',
+    '_LLMUsage_completionTokens_OrderByInput',
+    '_LLMUsage_createdAt_OrderByInput',
+    '_LLMUsage_RelevanceOrderByInput',
+]
+
+
+
+# recursive LLMUsage types
+# TODO: cleanup these types
+
+
+# Dict[str, Any] is a mypy limitation
+# see https://github.com/RobertCraigie/prisma-client-py/issues/45
+# switch to pyright for improved types, see https://prisma-client-py.readthedocs.io/en/stable/reference/limitations/
+
+LLMUsageRelationFilter = TypedDict(
+    'LLMUsageRelationFilter',
+    {
+        'is': 'Dict[str, Any]',
+        'is_not': 'Dict[str, Any]',
+    },
+    total=False,
+)
+
+
+class LLMUsageListRelationFilter(TypedDict, total=False):
+    some: 'Dict[str, Any]'
+    none: 'Dict[str, Any]'
+    every: 'Dict[str, Any]'
+
+
+class LLMUsageInclude(TypedDict, total=False):
+    """LLMUsage relational arguments"""
+
+
+    
+
+class UserIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    sessions: Union[bool, 'FindManySessionArgsFromLLMUsageRecursive1']
+    accounts: Union[bool, 'FindManyAccountArgsFromLLMUsageRecursive1']
+    searches: Union[bool, 'FindManySearchArgsFromLLMUsageRecursive1']
+
+
+class UserIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    sessions: Union[bool, 'FindManySessionArgsFromLLMUsageRecursive2']
+    accounts: Union[bool, 'FindManyAccountArgsFromLLMUsageRecursive2']
+    searches: Union[bool, 'FindManySearchArgsFromLLMUsageRecursive2']
+
+
+class UserIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    sessions: Union[bool, 'FindManySessionArgsFromLLMUsageRecursive3']
+    accounts: Union[bool, 'FindManyAccountArgsFromLLMUsageRecursive3']
+    searches: Union[bool, 'FindManySearchArgsFromLLMUsageRecursive3']
+
+
+class UserIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    sessions: Union[bool, 'FindManySessionArgsFromLLMUsageRecursive4']
+    accounts: Union[bool, 'FindManyAccountArgsFromLLMUsageRecursive4']
+    searches: Union[bool, 'FindManySearchArgsFromLLMUsageRecursive4']
+
+
+class UserIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class UserArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class UserArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class UserArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class UserArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class UserArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyUserArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class FindManyUserArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class FindManyUserArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class FindManyUserArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class FindManyUserArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    
+    
+
+class SessionIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive1']
+
+
+class SessionIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive2']
+
+
+class SessionIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive3']
+
+
+class SessionIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive4']
+
+
+class SessionIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class SessionArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class SessionArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class SessionArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class SessionArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class SessionArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManySessionArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class FindManySessionArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class FindManySessionArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class FindManySessionArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class FindManySessionArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    
+    
+
+class AccountIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive1']
+
+
+class AccountIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive2']
+
+
+class AccountIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive3']
+
+
+class AccountIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive4']
+
+
+class AccountIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class AccountArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class AccountArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class AccountArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class AccountArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class AccountArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyAccountArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class FindManyAccountArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class FindManyAccountArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class FindManyAccountArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class FindManyAccountArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    
+    
+
+class VerificationIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class VerificationIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class VerificationIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class VerificationIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class VerificationIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class VerificationArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class VerificationArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class VerificationArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class VerificationArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class VerificationArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyVerificationArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class FindManyVerificationArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class FindManyVerificationArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class FindManyVerificationArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class FindManyVerificationArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    
+    
+
+class SearchIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive1']
+    articles: Union[bool, 'FindManyArticleArgsFromLLMUsageRecursive1']
+    insights: Union[bool, 'FindManyInsightArgsFromLLMUsageRecursive1']
+
+
+class SearchIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive2']
+    articles: Union[bool, 'FindManyArticleArgsFromLLMUsageRecursive2']
+    insights: Union[bool, 'FindManyInsightArgsFromLLMUsageRecursive2']
+
+
+class SearchIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive3']
+    articles: Union[bool, 'FindManyArticleArgsFromLLMUsageRecursive3']
+    insights: Union[bool, 'FindManyInsightArgsFromLLMUsageRecursive3']
+
+
+class SearchIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive4']
+    articles: Union[bool, 'FindManyArticleArgsFromLLMUsageRecursive4']
+    insights: Union[bool, 'FindManyInsightArgsFromLLMUsageRecursive4']
+
+
+class SearchIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class SearchArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class SearchArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class SearchArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class SearchArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class SearchArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManySearchArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class FindManySearchArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class FindManySearchArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class FindManySearchArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class FindManySearchArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    
+    
+
+class ArticleIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    search: Union[bool, 'SearchArgsFromLLMUsageRecursive1']
+
+
+class ArticleIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    search: Union[bool, 'SearchArgsFromLLMUsageRecursive2']
+
+
+class ArticleIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    search: Union[bool, 'SearchArgsFromLLMUsageRecursive3']
+
+
+class ArticleIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    search: Union[bool, 'SearchArgsFromLLMUsageRecursive4']
+
+
+class ArticleIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class ArticleArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class ArticleArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class ArticleArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class ArticleArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class ArticleArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyArticleArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class FindManyArticleArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class FindManyArticleArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class FindManyArticleArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class FindManyArticleArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    
+    
+
+class InsightIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    search: Union[bool, 'SearchArgsFromLLMUsageRecursive1']
+
+
+class InsightIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    search: Union[bool, 'SearchArgsFromLLMUsageRecursive2']
+
+
+class InsightIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    search: Union[bool, 'SearchArgsFromLLMUsageRecursive3']
+
+
+class InsightIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    search: Union[bool, 'SearchArgsFromLLMUsageRecursive4']
+
+
+class InsightIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class InsightArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class InsightArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class InsightArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class InsightArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class InsightArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyInsightArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class FindManyInsightArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class FindManyInsightArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class FindManyInsightArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class FindManyInsightArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    cluster: Union[bool, 'ClaimClusterArgsFromLLMUsageRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromLLMUsageRecursive1']
+
+
+class ClaimIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    cluster: Union[bool, 'ClaimClusterArgsFromLLMUsageRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromLLMUsageRecursive2']
+
+
+class ClaimIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    cluster: Union[bool, 'ClaimClusterArgsFromLLMUsageRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromLLMUsageRecursive3']
+
+
+class ClaimIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    cluster: Union[bool, 'ClaimClusterArgsFromLLMUsageRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromLLMUsageRecursive4']
+
+
+class ClaimIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class ClaimArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyClaimArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    claim: Union[bool, 'ClaimArgsFromLLMUsageRecursive1']
+
+
+class EvidenceIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    claim: Union[bool, 'ClaimArgsFromLLMUsageRecursive2']
+
+
+class EvidenceIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    claim: Union[bool, 'ClaimArgsFromLLMUsageRecursive3']
+
+
+class EvidenceIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    claim: Union[bool, 'ClaimArgsFromLLMUsageRecursive4']
+
+
+class EvidenceIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class EvidenceArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyEvidenceArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMUsageRecursive1']
+
+
+class EventIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMUsageRecursive2']
+
+
+class EventIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMUsageRecursive3']
+
+
+class EventIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMUsageRecursive4']
+
+
+class EventIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class EventArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyEventArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    event: Union[bool, 'EventArgsFromLLMUsageRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromLLMUsageRecursive1']
+
+
+class ClaimClusterIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    event: Union[bool, 'EventArgsFromLLMUsageRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromLLMUsageRecursive2']
+
+
+class ClaimClusterIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    event: Union[bool, 'EventArgsFromLLMUsageRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromLLMUsageRecursive3']
+
+
+class ClaimClusterIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    event: Union[bool, 'EventArgsFromLLMUsageRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromLLMUsageRecursive4']
+
+
+class ClaimClusterIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class ClaimClusterArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyClaimClusterArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
+    
+
+class LLMCacheIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class LLMCacheIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class LLMCacheIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class LLMCacheIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class LLMCacheIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class LLMCacheArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyLLMCacheArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class LLMUsageIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class LLMUsageIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class LLMUsageIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class LLMUsageIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class LLMUsageArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyLLMUsageArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
+
+
+FindManyLLMUsageArgs = FindManyLLMUsageArgsFromLLMUsage
+FindFirstLLMUsageArgs = FindManyLLMUsageArgsFromLLMUsage
+
+
+    
+
+class LLMUsageWhereInput(TypedDict, total=False):
+    """LLMUsage arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    stage: Union[_str, 'types.StringFilter']
+    model: Union[_str, 'types.StringFilter']
+    cached: Union[_bool, 'types.BooleanFilter']
+    promptTokens: Union[None, _int, 'types.IntFilter']
+    completionTokens: Union[None, _int, 'types.IntFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['LLMUsageWhereInputRecursive1', List['LLMUsageWhereInputRecursive1']]
+    # but this causes mypy to hang :/
+    AND: List['LLMUsageWhereInputRecursive1']
+    OR: List['LLMUsageWhereInputRecursive1']
+    NOT: List['LLMUsageWhereInputRecursive1']
+
+
+class LLMUsageWhereInputRecursive1(TypedDict, total=False):
+    """LLMUsage arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    stage: Union[_str, 'types.StringFilter']
+    model: Union[_str, 'types.StringFilter']
+    cached: Union[_bool, 'types.BooleanFilter']
+    promptTokens: Union[None, _int, 'types.IntFilter']
+    completionTokens: Union[None, _int, 'types.IntFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['LLMUsageWhereInputRecursive2', List['LLMUsageWhereInputRecursive2']]
+    # but this causes mypy to hang :/
+    AND: List['LLMUsageWhereInputRecursive2']
+    OR: List['LLMUsageWhereInputRecursive2']
+    NOT: List['LLMUsageWhereInputRecursive2']
+
+
+class LLMUsageWhereInputRecursive2(TypedDict, total=False):
+    """LLMUsage arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    stage: Union[_str, 'types.StringFilter']
+    model: Union[_str, 'types.StringFilter']
+    cached: Union[_bool, 'types.BooleanFilter']
+    promptTokens: Union[None, _int, 'types.IntFilter']
+    completionTokens: Union[None, _int, 'types.IntFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['LLMUsageWhereInputRecursive3', List['LLMUsageWhereInputRecursive3']]
+    # but this causes mypy to hang :/
+    AND: List['LLMUsageWhereInputRecursive3']
+    OR: List['LLMUsageWhereInputRecursive3']
+    NOT: List['LLMUsageWhereInputRecursive3']
+
+
+class LLMUsageWhereInputRecursive3(TypedDict, total=False):
+    """LLMUsage arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    stage: Union[_str, 'types.StringFilter']
+    model: Union[_str, 'types.StringFilter']
+    cached: Union[_bool, 'types.BooleanFilter']
+    promptTokens: Union[None, _int, 'types.IntFilter']
+    completionTokens: Union[None, _int, 'types.IntFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['LLMUsageWhereInputRecursive4', List['LLMUsageWhereInputRecursive4']]
+    # but this causes mypy to hang :/
+    AND: List['LLMUsageWhereInputRecursive4']
+    OR: List['LLMUsageWhereInputRecursive4']
+    NOT: List['LLMUsageWhereInputRecursive4']
+
+
+class LLMUsageWhereInputRecursive4(TypedDict, total=False):
+    """LLMUsage arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    stage: Union[_str, 'types.StringFilter']
+    model: Union[_str, 'types.StringFilter']
+    cached: Union[_bool, 'types.BooleanFilter']
+    promptTokens: Union[None, _int, 'types.IntFilter']
+    completionTokens: Union[None, _int, 'types.IntFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+
+
+# aggregate LLMUsage types
+
+
+    
+
+class LLMUsageScalarWhereWithAggregatesInput(TypedDict, total=False):
+    """LLMUsage arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    stage: Union[_str, 'types.StringWithAggregatesFilter']
+    model: Union[_str, 'types.StringWithAggregatesFilter']
+    cached: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    promptTokens: Union[_int, 'types.IntWithAggregatesFilter']
+    completionTokens: Union[_int, 'types.IntWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['LLMUsageScalarWhereWithAggregatesInputRecursive1']
+    OR: List['LLMUsageScalarWhereWithAggregatesInputRecursive1']
+    NOT: List['LLMUsageScalarWhereWithAggregatesInputRecursive1']
+
+
+class LLMUsageScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
+    """LLMUsage arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    stage: Union[_str, 'types.StringWithAggregatesFilter']
+    model: Union[_str, 'types.StringWithAggregatesFilter']
+    cached: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    promptTokens: Union[_int, 'types.IntWithAggregatesFilter']
+    completionTokens: Union[_int, 'types.IntWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['LLMUsageScalarWhereWithAggregatesInputRecursive2']
+    OR: List['LLMUsageScalarWhereWithAggregatesInputRecursive2']
+    NOT: List['LLMUsageScalarWhereWithAggregatesInputRecursive2']
+
+
+class LLMUsageScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
+    """LLMUsage arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    stage: Union[_str, 'types.StringWithAggregatesFilter']
+    model: Union[_str, 'types.StringWithAggregatesFilter']
+    cached: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    promptTokens: Union[_int, 'types.IntWithAggregatesFilter']
+    completionTokens: Union[_int, 'types.IntWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['LLMUsageScalarWhereWithAggregatesInputRecursive3']
+    OR: List['LLMUsageScalarWhereWithAggregatesInputRecursive3']
+    NOT: List['LLMUsageScalarWhereWithAggregatesInputRecursive3']
+
+
+class LLMUsageScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
+    """LLMUsage arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    stage: Union[_str, 'types.StringWithAggregatesFilter']
+    model: Union[_str, 'types.StringWithAggregatesFilter']
+    cached: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    promptTokens: Union[_int, 'types.IntWithAggregatesFilter']
+    completionTokens: Union[_int, 'types.IntWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['LLMUsageScalarWhereWithAggregatesInputRecursive4']
+    OR: List['LLMUsageScalarWhereWithAggregatesInputRecursive4']
+    NOT: List['LLMUsageScalarWhereWithAggregatesInputRecursive4']
+
+
+class LLMUsageScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
+    """LLMUsage arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    stage: Union[_str, 'types.StringWithAggregatesFilter']
+    model: Union[_str, 'types.StringWithAggregatesFilter']
+    cached: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    promptTokens: Union[_int, 'types.IntWithAggregatesFilter']
+    completionTokens: Union[_int, 'types.IntWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+
+
+class LLMUsageGroupByOutput(TypedDict, total=False):
+    id: _str
+    stage: _str
+    model: _str
+    cached: _bool
+    promptTokens: _int
+    completionTokens: _int
+    createdAt: datetime.datetime
+    _sum: 'LLMUsageSumAggregateOutput'
+    _avg: 'LLMUsageAvgAggregateOutput'
+    _min: 'LLMUsageMinAggregateOutput'
+    _max: 'LLMUsageMaxAggregateOutput'
+    _count: 'LLMUsageCountAggregateOutput'
+
+
+class LLMUsageAvgAggregateOutput(TypedDict, total=False):
+    """LLMUsage output for aggregating averages"""
+    promptTokens: float
+    completionTokens: float
+
+
+class LLMUsageSumAggregateOutput(TypedDict, total=False):
+    """LLMUsage output for aggregating sums"""
+    promptTokens: _int
+    completionTokens: _int
+
+
+class LLMUsageScalarAggregateOutput(TypedDict, total=False):
+    """LLMUsage output including scalar fields"""
+    id: _str
+    stage: _str
+    model: _str
+    cached: _bool
+    promptTokens: _int
+    completionTokens: _int
+    createdAt: datetime.datetime
+
+
+LLMUsageMinAggregateOutput = LLMUsageScalarAggregateOutput
+LLMUsageMaxAggregateOutput = LLMUsageScalarAggregateOutput
+
+
+class LLMUsageMaxAggregateInput(TypedDict, total=False):
+    """LLMUsage input for aggregating by max"""
+    id: bool
+    stage: bool
+    model: bool
+    cached: bool
+    promptTokens: bool
+    completionTokens: bool
+    createdAt: bool
+
+
+class LLMUsageMinAggregateInput(TypedDict, total=False):
+    """LLMUsage input for aggregating by min"""
+    id: bool
+    stage: bool
+    model: bool
+    cached: bool
+    promptTokens: bool
+    completionTokens: bool
+    createdAt: bool
+
+
+class LLMUsageNumberAggregateInput(TypedDict, total=False):
+    """LLMUsage input for aggregating numbers"""
+    promptTokens: bool
+    completionTokens: bool
+
+
+LLMUsageAvgAggregateInput = LLMUsageNumberAggregateInput
+LLMUsageSumAggregateInput = LLMUsageNumberAggregateInput
+
+
+LLMUsageCountAggregateInput = TypedDict(
+    'LLMUsageCountAggregateInput',
+    {
+        'id': bool,
+        'stage': bool,
+        'model': bool,
+        'cached': bool,
+        'promptTokens': bool,
+        'completionTokens': bool,
+        'createdAt': bool,
+        '_all': bool,
+    },
+    total=False,
+)
+
+LLMUsageCountAggregateOutput = TypedDict(
+    'LLMUsageCountAggregateOutput',
+    {
+        'id': int,
+        'stage': int,
+        'model': int,
+        'cached': int,
+        'promptTokens': int,
+        'completionTokens': int,
+        'createdAt': int,
+        '_all': int,
+    },
+    total=False,
+)
+
+
+LLMUsageKeys = Literal[
+    'id',
+    'stage',
+    'model',
+    'cached',
+    'promptTokens',
+    'completionTokens',
+    'createdAt',
+]
+LLMUsageScalarFieldKeys = Literal[
+    'id',
+    'stage',
+    'model',
+    'cached',
+    'promptTokens',
+    'completionTokens',
+    'createdAt',
+]
+LLMUsageScalarFieldKeysT = TypeVar('LLMUsageScalarFieldKeysT', bound=LLMUsageScalarFieldKeys)
+
+LLMUsageRelationalFieldKeys = _NoneType
 
 
 

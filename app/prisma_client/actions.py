@@ -7739,11 +7739,11 @@ class ClaimActions(Generic[_PrismaModelT]):
         # find the first 10 Claim records
         claims = await Claim.prisma().find_many(take=10)
 
-        # find the first 5 Claim records ordered by the confidence field
+        # find the first 5 Claim records ordered by the claimType field
         claims = await Claim.prisma().find_many(
             take=5,
             order={
-                'confidence': 'desc',
+                'claimType': 'desc',
             },
         )
         ```
@@ -7804,11 +7804,11 @@ class ClaimActions(Generic[_PrismaModelT]):
         Example
         -------
         ```py
-        # find the second Claim record ordered by the consensusScore field
+        # find the second Claim record ordered by the qualityScore field
         claim = await Claim.prisma().find_first(
             skip=1,
             order={
-                'consensusScore': 'desc',
+                'qualityScore': 'desc',
             },
         )
         ```
@@ -7872,11 +7872,11 @@ class ClaimActions(Generic[_PrismaModelT]):
         Example
         -------
         ```py
-        # find the second Claim record ordered by the contradictionScore field
+        # find the second Claim record ordered by the confidence field
         claim = await Claim.prisma().find_first_or_raise(
             skip=1,
             order={
-                'contradictionScore': 'desc',
+                'confidence': 'desc',
             },
         )
         ```
@@ -8044,7 +8044,7 @@ class ClaimActions(Generic[_PrismaModelT]):
         # update all Claim records
         total = await Claim.prisma().update_many(
             data={
-                'createdAt': datetime.datetime.utcnow()
+                'consensusScore': 629039005.121416
             },
             where={}
         )
@@ -8108,7 +8108,7 @@ class ClaimActions(Generic[_PrismaModelT]):
         results = await Claim.prisma().count(
             select={
                 '_all': True,
-                'clusterId': True,
+                'contradictionScore': True,
             },
         )
         ```
@@ -8175,7 +8175,7 @@ class ClaimActions(Generic[_PrismaModelT]):
         results = await Claim.prisma().count(
             select={
                 '_all': True,
-                'id': True,
+                'createdAt': True,
             },
         )
         ```
@@ -8315,10 +8315,10 @@ class ClaimActions(Generic[_PrismaModelT]):
         Example
         -------
         ```py
-        # group Claim records by canonicalClaim values
+        # group Claim records by clusterId values
         # and count how many records are in each group
         results = await Claim.prisma().group_by(
-            ['canonicalClaim'],
+            ['clusterId'],
             count=True,
         )
         ```
@@ -8407,7 +8407,7 @@ class EvidenceActions(Generic[_PrismaModelT]):
         ```py
         users = await Evidence.prisma().query_raw(
             'SELECT * FROM Evidence WHERE id = $1',
-            'gcjadjaaf',
+            'ijigbdcbj',
         )
         ```
         """
@@ -8447,7 +8447,7 @@ class EvidenceActions(Generic[_PrismaModelT]):
         ```py
         user = await Evidence.prisma().query_first(
             'SELECT * FROM Evidence WHERE claimId = $1',
-            'bcbebgiaic',
+            'gfidhicai',
         )
         ```
         """
@@ -8486,13 +8486,13 @@ class EvidenceActions(Generic[_PrismaModelT]):
         evidence = await Evidence.prisma().create(
             data={
                 # data to create a Evidence record
-                'claimId': 'ijigbdcbj',
-                'articleId': 'gfidhicai',
-                'sentence': 'jfegcaafh',
-                'source': 'bcbeiajjfa',
-                'url': 'baehicaajf',
+                'claimId': 'jfegcaafh',
+                'articleId': 'bcbeiajjfa',
+                'sentence': 'baehicaajf',
+                'source': 'bdachdeiga',
+                'url': 'ijdafccef',
                 'publishedAt': datetime.datetime.utcnow(),
-                'stance': 'bdachdeiga',
+                'stance': 'ciaaiddag',
             },
         )
         ```
@@ -8547,23 +8547,23 @@ class EvidenceActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a Evidence record
-                    'claimId': 'ijdafccef',
-                    'articleId': 'ciaaiddag',
-                    'sentence': 'fejggijff',
-                    'source': 'hghjaaai',
-                    'url': 'cajicjjdef',
+                    'claimId': 'fejggijff',
+                    'articleId': 'hghjaaai',
+                    'sentence': 'cajicjjdef',
+                    'source': 'cefjaadec',
+                    'url': 'ibbigdigd',
                     'publishedAt': datetime.datetime.utcnow(),
-                    'stance': 'cefjaadec',
+                    'stance': 'bdiiiabbii',
                 },
                 {
                     # data to create a Evidence record
-                    'claimId': 'ibbigdigd',
-                    'articleId': 'bdiiiabbii',
-                    'sentence': 'hfcfhhadh',
-                    'source': 'bbihggdcji',
-                    'url': 'hgjgibdgd',
+                    'claimId': 'hfcfhhadh',
+                    'articleId': 'bbihggdcji',
+                    'sentence': 'hgjgibdgd',
+                    'source': 'bcbecjfice',
+                    'url': 'bacbebhjjd',
                     'publishedAt': datetime.datetime.utcnow(),
-                    'stance': 'bcbecjfice',
+                    'stance': 'dfbfaddhe',
                 },
             ],
             skip_duplicates=True,
@@ -8617,7 +8617,7 @@ class EvidenceActions(Generic[_PrismaModelT]):
         ```py
         evidence = await Evidence.prisma().delete(
             where={
-                'id': 'bacbebhjjd',
+                'id': 'bdcbbieibf',
             },
         )
         ```
@@ -8669,7 +8669,7 @@ class EvidenceActions(Generic[_PrismaModelT]):
         ```py
         evidence = await Evidence.prisma().find_unique(
             where={
-                'id': 'dfbfaddhe',
+                'id': 'dgjhdcggi',
             },
         )
         ```
@@ -8720,7 +8720,7 @@ class EvidenceActions(Generic[_PrismaModelT]):
         ```py
         evidence = await Evidence.prisma().find_unique_or_raise(
             where={
-                'id': 'bdcbbieibf',
+                'id': 'bbjbcdfabd',
             },
         )
         ```
@@ -8972,7 +8972,7 @@ class EvidenceActions(Generic[_PrismaModelT]):
         ```py
         evidence = await Evidence.prisma().update(
             where={
-                'id': 'dgjhdcggi',
+                'id': 'gchfgbcec',
             },
             data={
                 # data to update the Evidence record to
@@ -9029,27 +9029,27 @@ class EvidenceActions(Generic[_PrismaModelT]):
         ```py
         evidence = await Evidence.prisma().upsert(
             where={
-                'id': 'bbjbcdfabd',
+                'id': 'bihcjfcjah',
             },
             data={
                 'create': {
-                    'id': 'bbjbcdfabd',
-                    'claimId': 'ibbigdigd',
-                    'articleId': 'bdiiiabbii',
-                    'sentence': 'hfcfhhadh',
-                    'source': 'bbihggdcji',
-                    'url': 'hgjgibdgd',
+                    'id': 'bihcjfcjah',
+                    'claimId': 'hfcfhhadh',
+                    'articleId': 'bbihggdcji',
+                    'sentence': 'hgjgibdgd',
+                    'source': 'bcbecjfice',
+                    'url': 'bacbebhjjd',
                     'publishedAt': datetime.datetime.utcnow(),
-                    'stance': 'bcbecjfice',
+                    'stance': 'dfbfaddhe',
                 },
                 'update': {
-                    'claimId': 'ibbigdigd',
-                    'articleId': 'bdiiiabbii',
-                    'sentence': 'hfcfhhadh',
-                    'source': 'bbihggdcji',
-                    'url': 'hgjgibdgd',
+                    'claimId': 'hfcfhhadh',
+                    'articleId': 'bbihggdcji',
+                    'sentence': 'hgjgibdgd',
+                    'source': 'bcbecjfice',
+                    'url': 'bacbebhjjd',
                     'publishedAt': datetime.datetime.utcnow(),
-                    'stance': 'bcbecjfice',
+                    'stance': 'dfbfaddhe',
                 },
             },
         )
@@ -9097,7 +9097,7 @@ class EvidenceActions(Generic[_PrismaModelT]):
         # update all Evidence records
         total = await Evidence.prisma().update_many(
             data={
-                'url': 'gchfgbcec'
+                'url': 'bhjdcicaii'
             },
             where={}
         )
@@ -9460,7 +9460,7 @@ class EventActions(Generic[_PrismaModelT]):
         ```py
         users = await Event.prisma().query_raw(
             'SELECT * FROM Event WHERE id = $1',
-            'bihcjfcjah',
+            'bibedjhcej',
         )
         ```
         """
@@ -9500,7 +9500,7 @@ class EventActions(Generic[_PrismaModelT]):
         ```py
         user = await Event.prisma().query_first(
             'SELECT * FROM Event WHERE title = $1',
-            'bhjdcicaii',
+            'bjcdajabfa',
         )
         ```
         """
@@ -9539,7 +9539,7 @@ class EventActions(Generic[_PrismaModelT]):
         event = await Event.prisma().create(
             data={
                 # data to create a Event record
-                'title': 'bibedjhcej',
+                'title': 'bchhceeeff',
             },
         )
         ```
@@ -9594,11 +9594,11 @@ class EventActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a Event record
-                    'title': 'bjcdajabfa',
+                    'title': 'bbgaifhdaa',
                 },
                 {
                     # data to create a Event record
-                    'title': 'bchhceeeff',
+                    'title': 'dgbcdaegb',
                 },
             ],
             skip_duplicates=True,
@@ -9652,7 +9652,7 @@ class EventActions(Generic[_PrismaModelT]):
         ```py
         event = await Event.prisma().delete(
             where={
-                'id': 'bbgaifhdaa',
+                'id': 'beagfbbjig',
             },
         )
         ```
@@ -9704,7 +9704,7 @@ class EventActions(Generic[_PrismaModelT]):
         ```py
         event = await Event.prisma().find_unique(
             where={
-                'id': 'dgbcdaegb',
+                'id': 'beicihhijb',
             },
         )
         ```
@@ -9755,7 +9755,7 @@ class EventActions(Generic[_PrismaModelT]):
         ```py
         event = await Event.prisma().find_unique_or_raise(
             where={
-                'id': 'beagfbbjig',
+                'id': 'fgggcdcjg',
             },
         )
         ```
@@ -9882,11 +9882,11 @@ class EventActions(Generic[_PrismaModelT]):
         Example
         -------
         ```py
-        # find the second Event record ordered by the createdAt field
+        # find the second Event record ordered by the importanceScore field
         event = await Event.prisma().find_first(
             skip=1,
             order={
-                'createdAt': 'desc',
+                'importanceScore': 'desc',
             },
         )
         ```
@@ -9950,11 +9950,11 @@ class EventActions(Generic[_PrismaModelT]):
         Example
         -------
         ```py
-        # find the second Event record ordered by the id field
+        # find the second Event record ordered by the createdAt field
         event = await Event.prisma().find_first_or_raise(
             skip=1,
             order={
-                'id': 'desc',
+                'createdAt': 'desc',
             },
         )
         ```
@@ -10007,7 +10007,7 @@ class EventActions(Generic[_PrismaModelT]):
         ```py
         event = await Event.prisma().update(
             where={
-                'id': 'beicihhijb',
+                'id': 'ccjbbjigf',
             },
             data={
                 # data to update the Event record to
@@ -10064,15 +10064,15 @@ class EventActions(Generic[_PrismaModelT]):
         ```py
         event = await Event.prisma().upsert(
             where={
-                'id': 'fgggcdcjg',
+                'id': 'bhfaabbaha',
             },
             data={
                 'create': {
-                    'id': 'fgggcdcjg',
-                    'title': 'bchhceeeff',
+                    'id': 'bhfaabbaha',
+                    'title': 'dgbcdaegb',
                 },
                 'update': {
-                    'title': 'bchhceeeff',
+                    'title': 'dgbcdaegb',
                 },
             },
         )
@@ -10120,7 +10120,7 @@ class EventActions(Generic[_PrismaModelT]):
         # update all Event records
         total = await Event.prisma().update_many(
             data={
-                'title': 'ccjbbjigf'
+                'id': 'ebajedhhf'
             },
             where={}
         )
@@ -10184,7 +10184,7 @@ class EventActions(Generic[_PrismaModelT]):
         results = await Event.prisma().count(
             select={
                 '_all': True,
-                'description': True,
+                'title': True,
             },
         )
         ```
@@ -10251,7 +10251,7 @@ class EventActions(Generic[_PrismaModelT]):
         results = await Event.prisma().count(
             select={
                 '_all': True,
-                'createdAt': True,
+                'description': True,
             },
         )
         ```
@@ -10391,10 +10391,10 @@ class EventActions(Generic[_PrismaModelT]):
         Example
         -------
         ```py
-        # group Event records by id values
+        # group Event records by importanceScore values
         # and count how many records are in each group
         results = await Event.prisma().group_by(
-            ['id'],
+            ['importanceScore'],
             count=True,
         )
         ```
@@ -10483,7 +10483,7 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         ```py
         users = await ClaimCluster.prisma().query_raw(
             'SELECT * FROM ClaimCluster WHERE id = $1',
-            'bhfaabbaha',
+            'jajacedge',
         )
         ```
         """
@@ -10523,7 +10523,7 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         ```py
         user = await ClaimCluster.prisma().query_first(
             'SELECT * FROM ClaimCluster WHERE title = $1',
-            'ebajedhhf',
+            'hffgbabgf',
         )
         ```
         """
@@ -10562,7 +10562,7 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         claimcluster = await ClaimCluster.prisma().create(
             data={
                 # data to create a ClaimCluster record
-                'title': 'jajacedge',
+                'title': 'biacbiieja',
             },
         )
         ```
@@ -10617,11 +10617,11 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a ClaimCluster record
-                    'title': 'hffgbabgf',
+                    'title': 'cjejbgbff',
                 },
                 {
                     # data to create a ClaimCluster record
-                    'title': 'biacbiieja',
+                    'title': 'fgeahddae',
                 },
             ],
             skip_duplicates=True,
@@ -10675,7 +10675,7 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         ```py
         claimcluster = await ClaimCluster.prisma().delete(
             where={
-                'id': 'cjejbgbff',
+                'id': 'diageigcf',
             },
         )
         ```
@@ -10727,7 +10727,7 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         ```py
         claimcluster = await ClaimCluster.prisma().find_unique(
             where={
-                'id': 'fgeahddae',
+                'id': 'badagbgeha',
             },
         )
         ```
@@ -10778,7 +10778,7 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         ```py
         claimcluster = await ClaimCluster.prisma().find_unique_or_raise(
             where={
-                'id': 'diageigcf',
+                'id': 'ibgebbjch',
             },
         )
         ```
@@ -10840,11 +10840,11 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         # find the first 10 ClaimCluster records
         claimclusters = await ClaimCluster.prisma().find_many(take=10)
 
-        # find the first 5 ClaimCluster records ordered by the eventId field
+        # find the first 5 ClaimCluster records ordered by the canonicalClaim field
         claimclusters = await ClaimCluster.prisma().find_many(
             take=5,
             order={
-                'eventId': 'desc',
+                'canonicalClaim': 'desc',
             },
         )
         ```
@@ -10905,11 +10905,11 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         Example
         -------
         ```py
-        # find the second ClaimCluster record ordered by the id field
+        # find the second ClaimCluster record ordered by the consensusScore field
         claimcluster = await ClaimCluster.prisma().find_first(
             skip=1,
             order={
-                'id': 'desc',
+                'consensusScore': 'desc',
             },
         )
         ```
@@ -10973,11 +10973,11 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         Example
         -------
         ```py
-        # find the second ClaimCluster record ordered by the title field
+        # find the second ClaimCluster record ordered by the eventId field
         claimcluster = await ClaimCluster.prisma().find_first_or_raise(
             skip=1,
             order={
-                'title': 'desc',
+                'eventId': 'desc',
             },
         )
         ```
@@ -11030,7 +11030,7 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         ```py
         claimcluster = await ClaimCluster.prisma().update(
             where={
-                'id': 'badagbgeha',
+                'id': 'baieajjiee',
             },
             data={
                 # data to update the ClaimCluster record to
@@ -11087,15 +11087,15 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         ```py
         claimcluster = await ClaimCluster.prisma().upsert(
             where={
-                'id': 'ibgebbjch',
+                'id': 'bahjhaccfd',
             },
             data={
                 'create': {
-                    'id': 'ibgebbjch',
-                    'title': 'biacbiieja',
+                    'id': 'bahjhaccfd',
+                    'title': 'fgeahddae',
                 },
                 'update': {
-                    'title': 'biacbiieja',
+                    'title': 'fgeahddae',
                 },
             },
         )
@@ -11143,7 +11143,7 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         # update all ClaimCluster records
         total = await ClaimCluster.prisma().update_many(
             data={
-                'eventId': 'baieajjiee'
+                'id': 'hffhfabhi'
             },
             where={}
         )
@@ -11207,7 +11207,7 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         results = await ClaimCluster.prisma().count(
             select={
                 '_all': True,
-                'id': True,
+                'title': True,
             },
         )
         ```
@@ -11274,7 +11274,7 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         results = await ClaimCluster.prisma().count(
             select={
                 '_all': True,
-                'title': True,
+                'canonicalClaim': True,
             },
         )
         ```
@@ -11414,10 +11414,2071 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         Example
         -------
         ```py
-        # group ClaimCluster records by eventId values
+        # group ClaimCluster records by consensusScore values
         # and count how many records are in each group
         results = await ClaimCluster.prisma().group_by(
-            ['eventId'],
+            ['consensusScore'],
+            count=True,
+        )
+        ```
+        """
+        if order is None:
+            if take is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'take\' is present')
+
+            if skip is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'skip\' is present')
+
+        root_selection: List[str] = [*by]
+        if avg is not None:
+            root_selection.append(_select_fields('_avg', avg))
+
+        if min is not None:
+            root_selection.append(_select_fields('_min', min))
+
+        if sum is not None:
+            root_selection.append(_select_fields('_sum', sum))
+
+        if max is not None:
+            root_selection.append(_select_fields('_max', max))
+
+        if count is not None:
+            if count is True:
+                root_selection.append('_count { _all }')
+            elif isinstance(count, dict):
+                root_selection.append(_select_fields('_count', count))
+
+        resp = await self._client._execute(
+            method='group_by',
+            model=self._model,
+            arguments={
+                'by': by,
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'having': having,
+                'orderBy': order,
+            },
+            root_selection=root_selection,
+        )
+        return resp['data']['result']  # type: ignore[no-any-return]
+
+
+class LLMCacheActions(Generic[_PrismaModelT]):
+    __slots__ = (
+        '_client',
+        '_model',
+    )
+
+    def __init__(self, client: Prisma, model: Type[_PrismaModelT]) -> None:
+        self._client = client
+        self._model = model
+
+    async def query_raw(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> List[_PrismaModelT]:
+        """Execute a raw SQL query
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        List[prisma.models.LLMCache]
+            The records returned by the SQL query
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        users = await LLMCache.prisma().query_raw(
+            'SELECT * FROM LLMCache WHERE id = $1',
+            'bbcigiadhb',
+        )
+        ```
+        """
+        return await self._client.query_raw(query, *args, model=self._model)
+
+    async def query_first(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> Optional[_PrismaModelT]:
+        """Execute a raw SQL query, returning the first result
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        prisma.models.LLMCache
+            The first record returned by the SQL query
+        None
+            The raw SQL query did not return any records
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        user = await LLMCache.prisma().query_first(
+            'SELECT * FROM LLMCache WHERE promptHash = $1',
+            'cfjagbbae',
+        )
+        ```
+        """
+        return await self._client.query_first(query, *args, model=self._model)
+
+    async def create(
+        self,
+        data: types.LLMCacheCreateInput,
+        include: Optional[types.LLMCacheInclude] = None
+    ) -> _PrismaModelT:
+        """Create a new LLMCache record.
+
+        Parameters
+        ----------
+        data
+            LLMCache record data
+        include
+            Specifies which relations should be loaded on the returned LLMCache model
+
+        Returns
+        -------
+        prisma.models.LLMCache
+            The created LLMCache record
+
+        Raises
+        ------
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # create a LLMCache record from just the required fields
+        llmcache = await LLMCache.prisma().create(
+            data={
+                # data to create a LLMCache record
+                'promptHash': 'bbbfhdidef',
+                'model': 'bdadhibhec',
+                'response': 'bfhdjaiejf',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='create',
+            model=self._model,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def create_many(
+        self,
+        data: List[types.LLMCacheCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> int:
+        """Create multiple LLMCache records at once.
+
+        This function is *not* available when using SQLite.
+
+        Parameters
+        ----------
+        data
+            List of LLMCache record data
+        skip_duplicates
+            Boolean flag for ignoring unique constraint errors
+
+        Returns
+        -------
+        int
+            The total number of records created
+
+        Raises
+        ------
+        prisma.errors.UnsupportedDatabaseError
+            Attempting to query when using SQLite
+        prisma.errors.UniqueViolationError
+            A unique constraint check has failed, these can be ignored with the `skip_duplicates` argument
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        total = await LLMCache.prisma().create_many(
+            data=[
+                {
+                    # data to create a LLMCache record
+                    'promptHash': 'bbjfijjadg',
+                    'model': 'hdjacbehh',
+                    'response': 'bhcccbeaba',
+                },
+                {
+                    # data to create a LLMCache record
+                    'promptHash': 'bcgjbdgjdj',
+                    'model': 'fhdbhifae',
+                    'response': 'beeacgfcej',
+                },
+            ],
+            skip_duplicates=True,
+        )
+        ```
+        """
+        if skip_duplicates and self._client._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._client._active_provider, 'create_many_skip_duplicates')
+
+        resp = await self._client._execute(
+            method='create_many',
+            model=self._model,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    async def delete(
+        self,
+        where: types.LLMCacheWhereUniqueInput,
+        include: Optional[types.LLMCacheInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Delete a single LLMCache record.
+
+        Parameters
+        ----------
+        where
+            LLMCache filter to select the record to be deleted, must be unique
+        include
+            Specifies which relations should be loaded on the returned LLMCache model
+
+        Returns
+        -------
+        prisma.models.LLMCache
+            The deleted LLMCache record
+        None
+            Could not find a record to delete
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        llmcache = await LLMCache.prisma().delete(
+            where={
+                'id': 'bbifhdiicc',
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='delete',
+                model=self._model,
+                arguments={
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_unique(
+        self,
+        where: types.LLMCacheWhereUniqueInput,
+        include: Optional[types.LLMCacheInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Find a unique LLMCache record.
+
+        Parameters
+        ----------
+        where
+            LLMCache filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned LLMCache model
+
+        Returns
+        -------
+        prisma.models.LLMCache
+            The found LLMCache record
+        None
+            No record matching the given input could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        llmcache = await LLMCache.prisma().find_unique(
+            where={
+                'id': 'bgjeccejad',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+        return model_parse(self._model, result)
+
+    async def find_unique_or_raise(
+        self,
+        where: types.LLMCacheWhereUniqueInput,
+        include: Optional[types.LLMCacheInclude] = None
+    ) -> _PrismaModelT:
+        """Find a unique LLMCache record. Raises `RecordNotFoundError` if no record is found.
+
+        Parameters
+        ----------
+        where
+            LLMCache filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned LLMCache model
+
+        Returns
+        -------
+        prisma.models.LLMCache
+            The found LLMCache record
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        llmcache = await LLMCache.prisma().find_unique_or_raise(
+            where={
+                'id': 'bjagdgabbg',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique_or_raise',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_many(
+        self,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.LLMCacheWhereInput] = None,
+        cursor: Optional[types.LLMCacheWhereUniqueInput] = None,
+        include: Optional[types.LLMCacheInclude] = None,
+        order: Optional[Union[types.LLMCacheOrderByInput, List[types.LLMCacheOrderByInput]]] = None,
+        distinct: Optional[List[types.LLMCacheScalarFieldKeys]] = None,
+    ) -> List[_PrismaModelT]:
+        """Find multiple LLMCache records.
+
+        An empty list is returned if no records could be found.
+
+        Parameters
+        ----------
+        take
+            Limit the maximum number of LLMCache records returned
+        skip
+            Ignore the first N results
+        where
+            LLMCache filter to select records
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned LLMCache model
+        order
+            Order the returned LLMCache records by any field
+        distinct
+            Filter LLMCache records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        List[prisma.models.LLMCache]
+            The list of all LLMCache records that could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the first 10 LLMCache records
+        llmcaches = await LLMCache.prisma().find_many(take=10)
+
+        # find the first 5 LLMCache records ordered by the model field
+        llmcaches = await LLMCache.prisma().find_many(
+            take=5,
+            order={
+                'model': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_many',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return [model_parse(self._model, r) for r in resp['data']['result']]
+
+    async def find_first(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.LLMCacheWhereInput] = None,
+        cursor: Optional[types.LLMCacheWhereUniqueInput] = None,
+        include: Optional[types.LLMCacheInclude] = None,
+        order: Optional[Union[types.LLMCacheOrderByInput, List[types.LLMCacheOrderByInput]]] = None,
+        distinct: Optional[List[types.LLMCacheScalarFieldKeys]] = None,
+    ) -> Optional[_PrismaModelT]:
+        """Find a single LLMCache record.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            LLMCache filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned LLMCache model
+        order
+            Order the returned LLMCache records by any field
+        distinct
+            Filter LLMCache records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.LLMCache
+            The first LLMCache record found, matching the given arguments
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second LLMCache record ordered by the stage field
+        llmcache = await LLMCache.prisma().find_first(
+            skip=1,
+            order={
+                'stage': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+
+        return model_parse(self._model, result)
+
+    async def find_first_or_raise(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.LLMCacheWhereInput] = None,
+        cursor: Optional[types.LLMCacheWhereUniqueInput] = None,
+        include: Optional[types.LLMCacheInclude] = None,
+        order: Optional[Union[types.LLMCacheOrderByInput, List[types.LLMCacheOrderByInput]]] = None,
+        distinct: Optional[List[types.LLMCacheScalarFieldKeys]] = None,
+    ) -> _PrismaModelT:
+        """Find a single LLMCache record. Raises `RecordNotFoundError` if no record was found.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            LLMCache filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned LLMCache model
+        order
+            Order the returned LLMCache records by any field
+        distinct
+            Filter LLMCache records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.LLMCache
+            The first LLMCache record found, matching the given arguments
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second LLMCache record ordered by the response field
+        llmcache = await LLMCache.prisma().find_first_or_raise(
+            skip=1,
+            order={
+                'response': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first_or_raise',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update(
+        self,
+        data: types.LLMCacheUpdateInput,
+        where: types.LLMCacheWhereUniqueInput,
+        include: Optional[types.LLMCacheInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Update a single LLMCache record.
+
+        Parameters
+        ----------
+        data
+            LLMCache record data specifying what to update
+        where
+            LLMCache filter to select the unique record to create / update
+        include
+            Specifies which relations should be loaded on the returned LLMCache model
+
+        Returns
+        -------
+        prisma.models.LLMCache
+            The updated LLMCache record
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        llmcache = await LLMCache.prisma().update(
+            where={
+                'id': 'bjbbcffdij',
+            },
+            data={
+                # data to update the LLMCache record to
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='update',
+                model=self._model,
+                arguments={
+                    'data': data,
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def upsert(
+        self,
+        where: types.LLMCacheWhereUniqueInput,
+        data: types.LLMCacheUpsertInput,
+        include: Optional[types.LLMCacheInclude] = None,
+    ) -> _PrismaModelT:
+        """Updates an existing record or create a new one
+
+        Parameters
+        ----------
+        where
+            LLMCache filter to select the unique record to create / update
+        data
+            Data specifying what fields to set on create and update
+        include
+            Specifies which relations should be loaded on the returned LLMCache model
+
+        Returns
+        -------
+        prisma.models.LLMCache
+            The created or updated LLMCache record
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        llmcache = await LLMCache.prisma().upsert(
+            where={
+                'id': 'begcgchdi',
+            },
+            data={
+                'create': {
+                    'id': 'begcgchdi',
+                    'promptHash': 'bcgjbdgjdj',
+                    'model': 'fhdbhifae',
+                    'response': 'beeacgfcej',
+                },
+                'update': {
+                    'promptHash': 'bcgjbdgjdj',
+                    'model': 'fhdbhifae',
+                    'response': 'beeacgfcej',
+                },
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='upsert',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update_many(
+        self,
+        data: types.LLMCacheUpdateManyMutationInput,
+        where: types.LLMCacheWhereInput,
+    ) -> int:
+        """Update multiple LLMCache records
+
+        Parameters
+        ----------
+        data
+            LLMCache data to update the selected LLMCache records to
+        where
+            Filter to select the LLMCache records to update
+
+        Returns
+        -------
+        int
+            The total number of LLMCache records that were updated
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # update all LLMCache records
+        total = await LLMCache.prisma().update_many(
+            data={
+                'createdAt': datetime.datetime.utcnow()
+            },
+            where={}
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='update_many',
+            model=self._model,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    @overload
+    async def count(
+        self,
+        select: None = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.LLMCacheWhereInput] = None,
+        cursor: Optional[types.LLMCacheWhereUniqueInput] = None,
+    ) -> int:
+        """Count the number of LLMCache records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the LLMCache fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            LLMCache filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.LLMCacheCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await LLMCache.prisma().count()
+
+        # results: prisma.types.LLMCacheCountAggregateOutput
+        results = await LLMCache.prisma().count(
+            select={
+                '_all': True,
+                'id': True,
+            },
+        )
+        ```
+        """
+
+
+    @overload
+    async def count(
+        self,
+        select: types.LLMCacheCountAggregateInput,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.LLMCacheWhereInput] = None,
+        cursor: Optional[types.LLMCacheWhereUniqueInput] = None,
+    ) -> types.LLMCacheCountAggregateOutput:
+        ...
+
+    async def count(
+        self,
+        select: Optional[types.LLMCacheCountAggregateInput] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.LLMCacheWhereInput] = None,
+        cursor: Optional[types.LLMCacheWhereUniqueInput] = None,
+    ) -> Union[int, types.LLMCacheCountAggregateOutput]:
+        """Count the number of LLMCache records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the LLMCache fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            LLMCache filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.LLMCacheCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await LLMCache.prisma().count()
+
+        # results: prisma.types.LLMCacheCountAggregateOutput
+        results = await LLMCache.prisma().count(
+            select={
+                '_all': True,
+                'promptHash': True,
+            },
+        )
+        ```
+        """
+
+        # TODO: this selection building should be moved to the QueryBuilder
+        #
+        # note the distinction between checking for `not select` here and `select is None`
+        # later is to handle the case that the given select dictionary is empty, this
+        # is a limitation of our types.
+        if not select:
+            root_selection = ['_count { _all }']
+        else:
+
+            root_selection = [
+                '_count {{ {0} }}'.format(' '.join(k for k, v in select.items() if v is True))
+            ]
+
+        resp = await self._client._execute(
+            method='count',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'cursor': cursor,
+            },
+            root_selection=root_selection,
+        )
+
+        if select is None:
+            return cast(int, resp['data']['result']['_count']['_all'])
+        else:
+            return cast(types.LLMCacheCountAggregateOutput, resp['data']['result']['_count'])
+
+    async def delete_many(
+        self,
+        where: Optional[types.LLMCacheWhereInput] = None
+    ) -> int:
+        """Delete multiple LLMCache records.
+
+        Parameters
+        ----------
+        where
+            Optional LLMCache filter to find the records to be deleted
+
+        Returns
+        -------
+        int
+            The total number of LLMCache records that were deleted
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # delete all LLMCache records
+        total = await LLMCache.prisma().delete_many()
+        ```
+        """
+        resp = await self._client._execute(
+            method='delete_many',
+            model=self._model,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    # TODO: make this easier to work with safely, currently output fields are typed as
+    #       not required, we should refactor the return type
+    # TODO: consider returning a Dict where the keys are a Tuple of the `by` selection
+    # TODO: statically type that the order argument is required when take or skip are present
+    async def group_by(
+        self,
+        by: List['types.LLMCacheScalarFieldKeys'],
+        *,
+        where: Optional['types.LLMCacheWhereInput'] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        avg: Optional['types.LLMCacheAvgAggregateInput'] = None,
+        sum: Optional['types.LLMCacheSumAggregateInput'] = None,
+        min: Optional['types.LLMCacheMinAggregateInput'] = None,
+        max: Optional['types.LLMCacheMaxAggregateInput'] = None,
+        having: Optional['types.LLMCacheScalarWhereWithAggregatesInput'] = None,
+        count: Optional[Union[bool, 'types.LLMCacheCountAggregateInput']] = None,
+        order: Optional[Union[Mapping['types.LLMCacheScalarFieldKeys', 'types.SortOrder'], List[Mapping['types.LLMCacheScalarFieldKeys', 'types.SortOrder']]]] = None,
+    ) -> List['types.LLMCacheGroupByOutput']:
+        """Group LLMCache records by one or more field values and perform aggregations
+        each group such as finding the average.
+
+        Parameters
+        ----------
+        by
+            List of scalar LLMCache fields to group records by
+        where
+            LLMCache filter to select records
+        take
+            Limit the maximum number of LLMCache records returned
+        skip
+            Ignore the first N records
+        avg
+            Adds the average of all values of the specified fields to the `_avg` field
+            in the returned data.
+        sum
+            Adds the sum of all values of the specified fields to the `_sum` field
+            in the returned data.
+        min
+            Adds the smallest available value for the specified fields to the `_min` field
+            in the returned data.
+        max
+            Adds the largest available value for the specified fields to the `_max` field
+            in the returned data.
+        count
+            Adds a count of non-fields to the `_count` field in the returned data.
+        having
+            Allows you to filter groups by an aggregate value - for example only return
+            groups having an average age less than 50.
+        order
+            Lets you order the returned list by any property that is also present in `by`.
+            Only **one** field is allowed at a time.
+
+        Returns
+        -------
+        List[prisma.types.LLMCacheGroupByOutput]
+            A list of dictionaries representing the LLMCache record,
+            this will also have additional fields present if aggregation arguments
+            are used (see the above parameters)
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # group LLMCache records by model values
+        # and count how many records are in each group
+        results = await LLMCache.prisma().group_by(
+            ['model'],
+            count=True,
+        )
+        ```
+        """
+        if order is None:
+            if take is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'take\' is present')
+
+            if skip is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'skip\' is present')
+
+        root_selection: List[str] = [*by]
+        if avg is not None:
+            root_selection.append(_select_fields('_avg', avg))
+
+        if min is not None:
+            root_selection.append(_select_fields('_min', min))
+
+        if sum is not None:
+            root_selection.append(_select_fields('_sum', sum))
+
+        if max is not None:
+            root_selection.append(_select_fields('_max', max))
+
+        if count is not None:
+            if count is True:
+                root_selection.append('_count { _all }')
+            elif isinstance(count, dict):
+                root_selection.append(_select_fields('_count', count))
+
+        resp = await self._client._execute(
+            method='group_by',
+            model=self._model,
+            arguments={
+                'by': by,
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'having': having,
+                'orderBy': order,
+            },
+            root_selection=root_selection,
+        )
+        return resp['data']['result']  # type: ignore[no-any-return]
+
+
+class LLMUsageActions(Generic[_PrismaModelT]):
+    __slots__ = (
+        '_client',
+        '_model',
+    )
+
+    def __init__(self, client: Prisma, model: Type[_PrismaModelT]) -> None:
+        self._client = client
+        self._model = model
+
+    async def query_raw(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> List[_PrismaModelT]:
+        """Execute a raw SQL query
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        List[prisma.models.LLMUsage]
+            The records returned by the SQL query
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        users = await LLMUsage.prisma().query_raw(
+            'SELECT * FROM LLMUsage WHERE id = $1',
+            'bhbjceagbb',
+        )
+        ```
+        """
+        return await self._client.query_raw(query, *args, model=self._model)
+
+    async def query_first(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> Optional[_PrismaModelT]:
+        """Execute a raw SQL query, returning the first result
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        prisma.models.LLMUsage
+            The first record returned by the SQL query
+        None
+            The raw SQL query did not return any records
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        user = await LLMUsage.prisma().query_first(
+            'SELECT * FROM LLMUsage WHERE stage = $1',
+            'bjeifffjdg',
+        )
+        ```
+        """
+        return await self._client.query_first(query, *args, model=self._model)
+
+    async def create(
+        self,
+        data: types.LLMUsageCreateInput,
+        include: Optional[types.LLMUsageInclude] = None
+    ) -> _PrismaModelT:
+        """Create a new LLMUsage record.
+
+        Parameters
+        ----------
+        data
+            LLMUsage record data
+        include
+            Specifies which relations should be loaded on the returned LLMUsage model
+
+        Returns
+        -------
+        prisma.models.LLMUsage
+            The created LLMUsage record
+
+        Raises
+        ------
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # create a LLMUsage record from just the required fields
+        llmusage = await LLMUsage.prisma().create(
+            data={
+                # data to create a LLMUsage record
+                'stage': 'bdidcfdfjd',
+                'model': 'dfeggejja',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='create',
+            model=self._model,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def create_many(
+        self,
+        data: List[types.LLMUsageCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> int:
+        """Create multiple LLMUsage records at once.
+
+        This function is *not* available when using SQLite.
+
+        Parameters
+        ----------
+        data
+            List of LLMUsage record data
+        skip_duplicates
+            Boolean flag for ignoring unique constraint errors
+
+        Returns
+        -------
+        int
+            The total number of records created
+
+        Raises
+        ------
+        prisma.errors.UnsupportedDatabaseError
+            Attempting to query when using SQLite
+        prisma.errors.UniqueViolationError
+            A unique constraint check has failed, these can be ignored with the `skip_duplicates` argument
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        total = await LLMUsage.prisma().create_many(
+            data=[
+                {
+                    # data to create a LLMUsage record
+                    'stage': 'gehbgghbj',
+                    'model': 'dfhaijeie',
+                },
+                {
+                    # data to create a LLMUsage record
+                    'stage': 'gbcdjgicb',
+                    'model': 'biaibdagac',
+                },
+            ],
+            skip_duplicates=True,
+        )
+        ```
+        """
+        if skip_duplicates and self._client._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._client._active_provider, 'create_many_skip_duplicates')
+
+        resp = await self._client._execute(
+            method='create_many',
+            model=self._model,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    async def delete(
+        self,
+        where: types.LLMUsageWhereUniqueInput,
+        include: Optional[types.LLMUsageInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Delete a single LLMUsage record.
+
+        Parameters
+        ----------
+        where
+            LLMUsage filter to select the record to be deleted, must be unique
+        include
+            Specifies which relations should be loaded on the returned LLMUsage model
+
+        Returns
+        -------
+        prisma.models.LLMUsage
+            The deleted LLMUsage record
+        None
+            Could not find a record to delete
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        llmusage = await LLMUsage.prisma().delete(
+            where={
+                'id': 'bbfbheibcd',
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='delete',
+                model=self._model,
+                arguments={
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_unique(
+        self,
+        where: types.LLMUsageWhereUniqueInput,
+        include: Optional[types.LLMUsageInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Find a unique LLMUsage record.
+
+        Parameters
+        ----------
+        where
+            LLMUsage filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned LLMUsage model
+
+        Returns
+        -------
+        prisma.models.LLMUsage
+            The found LLMUsage record
+        None
+            No record matching the given input could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        llmusage = await LLMUsage.prisma().find_unique(
+            where={
+                'id': 'hiagajie',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+        return model_parse(self._model, result)
+
+    async def find_unique_or_raise(
+        self,
+        where: types.LLMUsageWhereUniqueInput,
+        include: Optional[types.LLMUsageInclude] = None
+    ) -> _PrismaModelT:
+        """Find a unique LLMUsage record. Raises `RecordNotFoundError` if no record is found.
+
+        Parameters
+        ----------
+        where
+            LLMUsage filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned LLMUsage model
+
+        Returns
+        -------
+        prisma.models.LLMUsage
+            The found LLMUsage record
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        llmusage = await LLMUsage.prisma().find_unique_or_raise(
+            where={
+                'id': 'eeejidbif',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique_or_raise',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_many(
+        self,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.LLMUsageWhereInput] = None,
+        cursor: Optional[types.LLMUsageWhereUniqueInput] = None,
+        include: Optional[types.LLMUsageInclude] = None,
+        order: Optional[Union[types.LLMUsageOrderByInput, List[types.LLMUsageOrderByInput]]] = None,
+        distinct: Optional[List[types.LLMUsageScalarFieldKeys]] = None,
+    ) -> List[_PrismaModelT]:
+        """Find multiple LLMUsage records.
+
+        An empty list is returned if no records could be found.
+
+        Parameters
+        ----------
+        take
+            Limit the maximum number of LLMUsage records returned
+        skip
+            Ignore the first N results
+        where
+            LLMUsage filter to select records
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned LLMUsage model
+        order
+            Order the returned LLMUsage records by any field
+        distinct
+            Filter LLMUsage records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        List[prisma.models.LLMUsage]
+            The list of all LLMUsage records that could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the first 10 LLMUsage records
+        llmusages = await LLMUsage.prisma().find_many(take=10)
+
+        # find the first 5 LLMUsage records ordered by the model field
+        llmusages = await LLMUsage.prisma().find_many(
+            take=5,
+            order={
+                'model': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_many',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return [model_parse(self._model, r) for r in resp['data']['result']]
+
+    async def find_first(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.LLMUsageWhereInput] = None,
+        cursor: Optional[types.LLMUsageWhereUniqueInput] = None,
+        include: Optional[types.LLMUsageInclude] = None,
+        order: Optional[Union[types.LLMUsageOrderByInput, List[types.LLMUsageOrderByInput]]] = None,
+        distinct: Optional[List[types.LLMUsageScalarFieldKeys]] = None,
+    ) -> Optional[_PrismaModelT]:
+        """Find a single LLMUsage record.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            LLMUsage filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned LLMUsage model
+        order
+            Order the returned LLMUsage records by any field
+        distinct
+            Filter LLMUsage records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.LLMUsage
+            The first LLMUsage record found, matching the given arguments
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second LLMUsage record ordered by the cached field
+        llmusage = await LLMUsage.prisma().find_first(
+            skip=1,
+            order={
+                'cached': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+
+        return model_parse(self._model, result)
+
+    async def find_first_or_raise(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.LLMUsageWhereInput] = None,
+        cursor: Optional[types.LLMUsageWhereUniqueInput] = None,
+        include: Optional[types.LLMUsageInclude] = None,
+        order: Optional[Union[types.LLMUsageOrderByInput, List[types.LLMUsageOrderByInput]]] = None,
+        distinct: Optional[List[types.LLMUsageScalarFieldKeys]] = None,
+    ) -> _PrismaModelT:
+        """Find a single LLMUsage record. Raises `RecordNotFoundError` if no record was found.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            LLMUsage filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned LLMUsage model
+        order
+            Order the returned LLMUsage records by any field
+        distinct
+            Filter LLMUsage records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.LLMUsage
+            The first LLMUsage record found, matching the given arguments
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second LLMUsage record ordered by the promptTokens field
+        llmusage = await LLMUsage.prisma().find_first_or_raise(
+            skip=1,
+            order={
+                'promptTokens': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first_or_raise',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update(
+        self,
+        data: types.LLMUsageUpdateInput,
+        where: types.LLMUsageWhereUniqueInput,
+        include: Optional[types.LLMUsageInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Update a single LLMUsage record.
+
+        Parameters
+        ----------
+        data
+            LLMUsage record data specifying what to update
+        where
+            LLMUsage filter to select the unique record to create / update
+        include
+            Specifies which relations should be loaded on the returned LLMUsage model
+
+        Returns
+        -------
+        prisma.models.LLMUsage
+            The updated LLMUsage record
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        llmusage = await LLMUsage.prisma().update(
+            where={
+                'id': 'efgbahec',
+            },
+            data={
+                # data to update the LLMUsage record to
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='update',
+                model=self._model,
+                arguments={
+                    'data': data,
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def upsert(
+        self,
+        where: types.LLMUsageWhereUniqueInput,
+        data: types.LLMUsageUpsertInput,
+        include: Optional[types.LLMUsageInclude] = None,
+    ) -> _PrismaModelT:
+        """Updates an existing record or create a new one
+
+        Parameters
+        ----------
+        where
+            LLMUsage filter to select the unique record to create / update
+        data
+            Data specifying what fields to set on create and update
+        include
+            Specifies which relations should be loaded on the returned LLMUsage model
+
+        Returns
+        -------
+        prisma.models.LLMUsage
+            The created or updated LLMUsage record
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        llmusage = await LLMUsage.prisma().upsert(
+            where={
+                'id': 'hgjaiebfb',
+            },
+            data={
+                'create': {
+                    'id': 'hgjaiebfb',
+                    'stage': 'gbcdjgicb',
+                    'model': 'biaibdagac',
+                },
+                'update': {
+                    'stage': 'gbcdjgicb',
+                    'model': 'biaibdagac',
+                },
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='upsert',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update_many(
+        self,
+        data: types.LLMUsageUpdateManyMutationInput,
+        where: types.LLMUsageWhereInput,
+    ) -> int:
+        """Update multiple LLMUsage records
+
+        Parameters
+        ----------
+        data
+            LLMUsage data to update the selected LLMUsage records to
+        where
+            Filter to select the LLMUsage records to update
+
+        Returns
+        -------
+        int
+            The total number of LLMUsage records that were updated
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # update all LLMUsage records
+        total = await LLMUsage.prisma().update_many(
+            data={
+                'completionTokens': 1334599012
+            },
+            where={}
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='update_many',
+            model=self._model,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    @overload
+    async def count(
+        self,
+        select: None = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.LLMUsageWhereInput] = None,
+        cursor: Optional[types.LLMUsageWhereUniqueInput] = None,
+    ) -> int:
+        """Count the number of LLMUsage records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the LLMUsage fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            LLMUsage filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.LLMUsageCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await LLMUsage.prisma().count()
+
+        # results: prisma.types.LLMUsageCountAggregateOutput
+        results = await LLMUsage.prisma().count(
+            select={
+                '_all': True,
+                'createdAt': True,
+            },
+        )
+        ```
+        """
+
+
+    @overload
+    async def count(
+        self,
+        select: types.LLMUsageCountAggregateInput,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.LLMUsageWhereInput] = None,
+        cursor: Optional[types.LLMUsageWhereUniqueInput] = None,
+    ) -> types.LLMUsageCountAggregateOutput:
+        ...
+
+    async def count(
+        self,
+        select: Optional[types.LLMUsageCountAggregateInput] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.LLMUsageWhereInput] = None,
+        cursor: Optional[types.LLMUsageWhereUniqueInput] = None,
+    ) -> Union[int, types.LLMUsageCountAggregateOutput]:
+        """Count the number of LLMUsage records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the LLMUsage fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            LLMUsage filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.LLMUsageCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await LLMUsage.prisma().count()
+
+        # results: prisma.types.LLMUsageCountAggregateOutput
+        results = await LLMUsage.prisma().count(
+            select={
+                '_all': True,
+                'id': True,
+            },
+        )
+        ```
+        """
+
+        # TODO: this selection building should be moved to the QueryBuilder
+        #
+        # note the distinction between checking for `not select` here and `select is None`
+        # later is to handle the case that the given select dictionary is empty, this
+        # is a limitation of our types.
+        if not select:
+            root_selection = ['_count { _all }']
+        else:
+
+            root_selection = [
+                '_count {{ {0} }}'.format(' '.join(k for k, v in select.items() if v is True))
+            ]
+
+        resp = await self._client._execute(
+            method='count',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'cursor': cursor,
+            },
+            root_selection=root_selection,
+        )
+
+        if select is None:
+            return cast(int, resp['data']['result']['_count']['_all'])
+        else:
+            return cast(types.LLMUsageCountAggregateOutput, resp['data']['result']['_count'])
+
+    async def delete_many(
+        self,
+        where: Optional[types.LLMUsageWhereInput] = None
+    ) -> int:
+        """Delete multiple LLMUsage records.
+
+        Parameters
+        ----------
+        where
+            Optional LLMUsage filter to find the records to be deleted
+
+        Returns
+        -------
+        int
+            The total number of LLMUsage records that were deleted
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # delete all LLMUsage records
+        total = await LLMUsage.prisma().delete_many()
+        ```
+        """
+        resp = await self._client._execute(
+            method='delete_many',
+            model=self._model,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    # TODO: make this easier to work with safely, currently output fields are typed as
+    #       not required, we should refactor the return type
+    # TODO: consider returning a Dict where the keys are a Tuple of the `by` selection
+    # TODO: statically type that the order argument is required when take or skip are present
+    async def group_by(
+        self,
+        by: List['types.LLMUsageScalarFieldKeys'],
+        *,
+        where: Optional['types.LLMUsageWhereInput'] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        avg: Optional['types.LLMUsageAvgAggregateInput'] = None,
+        sum: Optional['types.LLMUsageSumAggregateInput'] = None,
+        min: Optional['types.LLMUsageMinAggregateInput'] = None,
+        max: Optional['types.LLMUsageMaxAggregateInput'] = None,
+        having: Optional['types.LLMUsageScalarWhereWithAggregatesInput'] = None,
+        count: Optional[Union[bool, 'types.LLMUsageCountAggregateInput']] = None,
+        order: Optional[Union[Mapping['types.LLMUsageScalarFieldKeys', 'types.SortOrder'], List[Mapping['types.LLMUsageScalarFieldKeys', 'types.SortOrder']]]] = None,
+    ) -> List['types.LLMUsageGroupByOutput']:
+        """Group LLMUsage records by one or more field values and perform aggregations
+        each group such as finding the average.
+
+        Parameters
+        ----------
+        by
+            List of scalar LLMUsage fields to group records by
+        where
+            LLMUsage filter to select records
+        take
+            Limit the maximum number of LLMUsage records returned
+        skip
+            Ignore the first N records
+        avg
+            Adds the average of all values of the specified fields to the `_avg` field
+            in the returned data.
+        sum
+            Adds the sum of all values of the specified fields to the `_sum` field
+            in the returned data.
+        min
+            Adds the smallest available value for the specified fields to the `_min` field
+            in the returned data.
+        max
+            Adds the largest available value for the specified fields to the `_max` field
+            in the returned data.
+        count
+            Adds a count of non-fields to the `_count` field in the returned data.
+        having
+            Allows you to filter groups by an aggregate value - for example only return
+            groups having an average age less than 50.
+        order
+            Lets you order the returned list by any property that is also present in `by`.
+            Only **one** field is allowed at a time.
+
+        Returns
+        -------
+        List[prisma.types.LLMUsageGroupByOutput]
+            A list of dictionaries representing the LLMUsage record,
+            this will also have additional fields present if aggregation arguments
+            are used (see the above parameters)
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # group LLMUsage records by stage values
+        # and count how many records are in each group
+        results = await LLMUsage.prisma().group_by(
+            ['stage'],
             count=True,
         )
         ```
