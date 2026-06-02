@@ -147,6 +147,8 @@ model Insight {
 model Claim {
   id                  String   @id @default(uuid())
   canonicalClaim      String
+  claimType           String?  @default("EVENT") // EVENT, NUMERIC, BIOGRAPHICAL, OPINION, ANALYSIS, PREDICTION, QUOTE
+  qualityScore        Float?   @default(0)
   embedding           Unsupported("vector(384)")
   confidence          Float
   consensusScore      Float?   @default(0)
@@ -187,6 +189,8 @@ model Event {
 model ClaimCluster {
   id              String @id @default(uuid())
   title           String
+  canonicalClaim  String?
+  consensusScore  Float? @default(0)
   eventId         String?
   event           Event? @relation(fields: [eventId], references: [id], onDelete: SetNull)
   claims          Claim[]

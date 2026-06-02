@@ -253,6 +253,8 @@ async def get_search_intelligence(search_id: str):
         fc = {
             "id": c.id,
             "canonicalClaim": c.canonicalClaim,
+            "claimType": getattr(c, 'claimType', 'EVENT') or 'EVENT',
+            "qualityScore": getattr(c, 'qualityScore', 0) or 0,
             "confidence": c.confidence,
             "evidenceCount": len(c.evidence),
             "sources": list(set([e.source for e in c.evidence])),
@@ -268,7 +270,8 @@ async def get_search_intelligence(search_id: str):
                 clusters_map[cid] = {
                     "id": cid,
                     "title": c.cluster.title,
-                    "canonicalClaim": c.canonicalClaim,  # first canonical claim found
+                    "canonicalClaim": getattr(c.cluster, 'canonicalClaim', '') or c.canonicalClaim,
+                    "consensusScore": getattr(c.cluster, 'consensusScore', 0) or 0,
                     "eventId": c.cluster.eventId,
                     "claims": [],
                     "evidenceCount": 0,

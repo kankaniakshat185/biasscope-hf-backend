@@ -1,27 +1,33 @@
 """
-Phase 2 — Clustering & Intelligence Layer (SMART)
-
-This is the brain of the intelligence pipeline.
-It runs AFTER all claims have been extracted and stored.
+Phase 2.5 — Clustering & Intelligence Layer
 
 Pipeline:
-  1. Load all claims + embeddings
-  2. Normalize embeddings
-  3. HDBSCAN clustering
-  4. LLM cluster merge pass (merge semantically identical clusters)
-  5. Generate ONE canonical claim per cluster (LLM)
-  6. Generate cluster title (LLM)
-  7. Event eligibility check
-  8. Event title + summary generation (LLM)
-  9. Event importance ranking
-  10. Store everything
+  1. Load claims + embeddings
+  2. Normalize → HDBSCAN clustering
+  3. LLM cluster merge pass (1 call total)
+  4. LLM canonical claim per cluster (1 call per cluster)
+  5. TF-IDF + NER event title generation (0 LLM calls)
+  6. Event eligibility check
+  7. Cross-source consensus scoring
+  8. Event importance ranking
+  9. Store everything
+
+LLM Budget:
+  - 1 merge call
+  - N canonicalization calls (N = number of clusters, typically 5-10)
+  - 0 event naming calls (TF-IDF replaces LLM)
+  - 0 cluster title calls (uses canonical claim)
+  Total: ~6-11 calls (down from ~45+)
 """
 
 import os
+import re
 import json
 import logging
 import numpy as np
+from collections import Counter
 from sklearn.cluster import HDBSCAN
+from sklearn.feature_extraction.text import TfidfVectorizer
 from typing import List, Dict, Any
 from huggingface_hub import InferenceClient
 
@@ -34,7 +40,6 @@ MODEL_ID = "Qwen/Qwen2.5-7B-Instruct"
 def call_llm(system_prompt: str, user_prompt: str, max_tokens: int = 1024) -> str:
     token = os.getenv("HF_TOKEN")
     if not token:
-        logger.warning("No HF_TOKEN found for clustering LLM pass.")
         return ""
     client = InferenceClient(model=MODEL_ID, token=token)
     try:
@@ -57,7 +62,6 @@ def call_llm(system_prompt: str, user_prompt: str, max_tokens: int = 1024) -> st
         return ""
 
 def parse_json_safe(raw: str, fallback: dict = None) -> dict:
-    """Safely parse JSON from LLM output."""
     if not raw:
         return fallback or {}
     try:
@@ -65,36 +69,107 @@ def parse_json_safe(raw: str, fallback: dict = None) -> dict:
     except json.JSONDecodeError:
         return fallback or {}
 
-# ── Step 1: Clustering ───────────────────────────────────────────
+# ── Section 7: TF-IDF Event Title Generation (NO LLM) ────────────
+
+def generate_event_title_tfidf(claim_texts: List[str]) -> str:
+    """
+    Generate event title from top TF-IDF keywords + NER entities.
+    Zero LLM cost.
+    """
+    if not claim_texts:
+        return "Unclassified Event"
+
+    # Extract named entities (capitalized multi-word phrases)
+    all_text = " ".join(claim_texts)
+    entities = re.findall(r'\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\b', all_text)
+    entity_counts = Counter(entities)
+
+    # Remove generic words
+    stopwords = {"The", "This", "That", "These", "Those", "According", "However",
+                 "While", "After", "Before", "During", "Between", "About", "Also"}
+    for sw in stopwords:
+        entity_counts.pop(sw, None)
+
+    # Top entities
+    top_entities = [e for e, _ in entity_counts.most_common(3)]
+
+    # TF-IDF for action keywords
+    try:
+        vectorizer = TfidfVectorizer(
+            max_features=20,
+            stop_words="english",
+            ngram_range=(1, 2),
+        )
+        tfidf_matrix = vectorizer.fit_transform(claim_texts)
+        feature_names = vectorizer.get_feature_names_out()
+        scores = tfidf_matrix.sum(axis=0).A1
+        top_indices = scores.argsort()[-5:][::-1]
+        top_keywords = [feature_names[i] for i in top_indices]
+    except Exception:
+        top_keywords = []
+
+    # Action verbs for context
+    action_map = {
+        "filed": "Filing", "ipo": "IPO", "merger": "Merger", "acquisition": "Acquisition",
+        "lawsuit": "Lawsuit", "sued": "Lawsuit", "launch": "Launch", "launched": "Launch",
+        "agreement": "Agreement", "deal": "Deal", "partnership": "Partnership",
+        "compute": "Compute", "signed": "Agreement", "controversy": "Controversy",
+        "political": "Political", "election": "Election", "resign": "Resignation",
+        "appointed": "Appointment", "invest": "Investment", "raised": "Funding",
+        "acquired": "Acquisition", "bankruptcy": "Bankruptcy", "fraud": "Fraud",
+    }
+
+    action_word = ""
+    for kw in top_keywords:
+        for trigger, label in action_map.items():
+            if trigger in kw.lower():
+                action_word = label
+                break
+        if action_word:
+            break
+
+    # Build title
+    if top_entities and action_word:
+        if len(top_entities) >= 2:
+            title = f"{top_entities[0]}–{top_entities[1]} {action_word}"
+        else:
+            title = f"{top_entities[0]} {action_word}"
+    elif top_entities:
+        title = " ".join(top_entities[:3])
+    else:
+        # Fallback: first claim truncated
+        title = claim_texts[0][:60]
+
+    return title.strip()
+
+# ══════════════════════════════════════════════════════════════════
+# STEP 1: CLAIM CLUSTERING
+# ══════════════════════════════════════════════════════════════════
 
 async def run_claim_clustering(prisma):
     """
-    Full intelligence pipeline:
-      1. Load claims
-      2. HDBSCAN on normalized embeddings
-      3. LLM merge pass
-      4. Canonical claim generation per cluster
-      5. Cluster title generation
-      6. Store clusters
+    1. Load claims
+    2. HDBSCAN on normalized embeddings
+    3. LLM merge pass (1 call)
+    4. Canonical claim generation per cluster (1 call each)
+    5. Store clusters with canonical claims + consensus scores
     """
-    logger.info("=== Starting Claim Clustering Pipeline ===")
+    logger.info("=== Phase 2.5 Clustering Pipeline ===")
 
-    # 1. Load all unclustered claims
     claims = await prisma.query_raw("""
         SELECT id, "canonicalClaim", embedding::text
         FROM "claim"
+        WHERE "clusterId" IS NULL
     """)
 
     if not claims or len(claims) < 3:
-        logger.info(f"Only {len(claims) if claims else 0} claims — skipping clustering.")
+        logger.info(f"Only {len(claims) if claims else 0} unclustered claims — skipping.")
         return
 
-    # Parse embeddings
     ids, texts, vectors = [], [], []
     for c in claims:
-        vec_str = c["embedding"]
         try:
-            vec = [float(x) for x in vec_str[1:-1].split(",")]
+            vec = [float(x) for x in c["embedding"][1:-1].split(",")]
             vectors.append(vec)
             ids.append(c["id"])
             texts.append(c["canonicalClaim"])
@@ -105,91 +180,87 @@ async def run_claim_clustering(prisma):
         return
 
     X = np.array(vectors)
-
-    # 2. Normalize for cosine-equivalent euclidean
     norms = np.linalg.norm(X, axis=1, keepdims=True)
-    norms[norms == 0] = 1  # prevent division by zero
+    norms[norms == 0] = 1
     X = X / norms
 
-    # 3. HDBSCAN
+    # HDBSCAN
     clusterer = HDBSCAN(min_cluster_size=2, min_samples=1, metric="euclidean")
     labels = clusterer.fit_predict(X)
 
-    # Group claims by cluster label
     groups: Dict[int, List[Dict]] = {}
     for idx, label in enumerate(labels):
-        if label == -1:  # noise
+        if label == -1:
             continue
         groups.setdefault(label, [])
         groups[label].append({"id": ids[idx], "text": texts[idx]})
 
     if not groups:
-        logger.info("No clusters formed by HDBSCAN.")
+        logger.info("No clusters formed.")
         return
 
-    logger.info(f"HDBSCAN produced {len(groups)} initial clusters from {len(ids)} claims.")
+    noise_count = sum(1 for l in labels if l == -1)
+    logger.info(f"HDBSCAN: {len(groups)} clusters, {noise_count} noise claims from {len(ids)} total.")
 
-    # 4. LLM Cluster Merge Pass
-    groups = await _llm_merge_pass(groups)
-    logger.info(f"After LLM merge: {len(groups)} clusters.")
+    # LLM Merge Pass (1 call)
+    groups = _llm_merge_pass(groups)
+    logger.info(f"After merge: {len(groups)} clusters.")
 
-    # 5. For each cluster: canonicalize, title, store
+    # Per-cluster: canonicalize + store
     for label, members in groups.items():
         claim_texts = [m["text"] for m in members]
 
-        # Generate canonical claim
-        canonical_claim = _generate_canonical_claim(claim_texts)
+        # Canonical claim (1 LLM call per cluster)
+        canonical = _generate_canonical_claim(claim_texts)
 
-        # Generate cluster title
-        cluster_title = _generate_cluster_title(claim_texts, canonical_claim)
+        # Cluster title = TF-IDF (0 LLM calls)
+        title = generate_event_title_tfidf(claim_texts)
 
-        # Create the ClaimCluster record
+        # Create cluster
         cluster_record = await prisma.claimcluster.create(
-            data={"title": cluster_title}
+            data={
+                "title": title,
+                "canonicalClaim": canonical,
+            }
         )
 
-        # Update all claims: assign to cluster + set canonical text
+        # Assign claims to cluster
         for member in members:
             await prisma.claim.update(
                 where={"id": member["id"]},
                 data={
                     "clusterId": cluster_record.id,
-                    "canonicalClaim": canonical_claim,
+                    "canonicalClaim": canonical,
                 },
             )
 
-    logger.info("=== Clustering Pipeline Complete ===")
+    logger.info("=== Clustering Complete ===")
 
-# ── Step 2: LLM Merge Pass ──────────────────────────────────────
+# ── LLM Merge Pass (1 total call) ────────────────────────────────
 
-async def _llm_merge_pass(groups: Dict[int, List[Dict]]) -> Dict[int, List[Dict]]:
-    """Ask LLM which clusters represent the same real-world event."""
+def _llm_merge_pass(groups: Dict[int, List[Dict]]) -> Dict[int, List[Dict]]:
     if len(groups) <= 1:
         return groups
 
-    cluster_payload = []
-    label_list = list(groups.keys())
-    for lbl in label_list:
-        cluster_payload.append({
+    payload = []
+    for lbl in list(groups.keys()):
+        payload.append({
             "cluster_id": int(lbl),
-            "claims": [m["text"] for m in groups[lbl]][:10],  # cap context
+            "claims": [m["text"] for m in groups[lbl]][:8],
         })
 
     system_prompt = (
-        "You are merging redundant claim clusters. "
-        "Clusters that describe the SAME real-world event or story must be merged. "
-        "Return ONLY valid JSON: "
-        '{"merge_groups": [[id1, id2], [id3, id4, id5]]}'
-        " If no merges are needed, return: "
+        "Merge clusters that describe the SAME real-world event. "
+        "Return JSON: "
+        '{"merge_groups": [[id1, id2], [id3, id4]]} '
+        "If no merges needed: "
         '{"merge_groups": []}'
     )
-    user_prompt = f"Clusters:\n{json.dumps(cluster_payload)}"
 
-    raw = call_llm(system_prompt, user_prompt)
+    raw = call_llm(system_prompt, f"Clusters:\n{json.dumps(payload)}")
     data = parse_json_safe(raw, {"merge_groups": []})
-    merge_groups = data.get("merge_groups", [])
 
-    for group in merge_groups:
+    for group in data.get("merge_groups", []):
         if not group or len(group) < 2:
             continue
         target = group[0]
@@ -200,56 +271,36 @@ async def _llm_merge_pass(groups: Dict[int, List[Dict]]) -> Dict[int, List[Dict]
 
     return groups
 
-# ── Canonical Claim Generation ───────────────────────────────────
+# ── Section 8: Canonical Claim (per-cluster, NOT per-claim) ──────
 
 def _generate_canonical_claim(claim_texts: List[str]) -> str:
-    """Generate ONE canonical claim that summarizes all equivalent claims."""
     if len(claim_texts) == 1:
         return claim_texts[0]
 
     system_prompt = (
-        "You are canonicalizing a cluster of related claims into ONE definitive claim. "
-        "The canonical claim must be factual, complete, and self-contained. "
-        "Return ONLY valid JSON: "
+        "Canonicalize these related claims into ONE definitive, factual claim. "
+        "Return JSON: "
         '{"canonical_claim": "..."}'
     )
-    user_prompt = json.dumps(claim_texts[:15])  # cap context
-
-    raw = call_llm(system_prompt, user_prompt, max_tokens=256)
+    raw = call_llm(system_prompt, json.dumps(claim_texts[:15]), max_tokens=256)
     data = parse_json_safe(raw)
     return data.get("canonical_claim", claim_texts[0])
 
-# ── Cluster Title Generation ────────────────────────────────────
-
-def _generate_cluster_title(claim_texts: List[str], canonical_claim: str) -> str:
-    """Generate a short factual label for the cluster."""
-    system_prompt = (
-        "Generate a short factual label for this claim cluster. "
-        "The label must be 3-10 words describing the real-world fact. "
-        "Return ONLY valid JSON: "
-        '{"title": "..."}'
-    )
-    user_prompt = json.dumps({
-        "canonical_claim": canonical_claim,
-        "supporting_claims": claim_texts[:10],
-    })
-
-    raw = call_llm(system_prompt, user_prompt, max_tokens=128)
-    data = parse_json_safe(raw)
-    return data.get("title", canonical_claim[:80])
-
-# ── Step 3: Event Detection ─────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════
+# STEP 2: EVENT DETECTION
+# ══════════════════════════════════════════════════════════════════
 
 async def run_event_detection(prisma):
     """
-    Event generation pipeline:
-      1. Load all clusters with claims + evidence
-      2. Check eligibility (multi-source, multi-claim, multi-evidence)
-      3. Generate event title + summary via LLM
-      4. Compute importance score
-      5. Store events
+    1. Load clusters with claims + evidence
+    2. Eligibility check
+    3. Compute cross-source consensus
+    4. Generate event title (TF-IDF, 0 LLM)
+    5. Generate event summary (1 LLM call per event)
+    6. Importance ranking
+    7. Store
     """
-    logger.info("=== Starting Event Detection Pipeline ===")
+    logger.info("=== Phase 2.5 Event Detection ===")
 
     clusters = await prisma.claimcluster.find_many(
         where={"eventId": None},
@@ -261,7 +312,6 @@ async def run_event_detection(prisma):
     )
 
     if not clusters:
-        logger.info("No unassigned clusters found.")
         return
 
     events_created = 0
@@ -270,7 +320,7 @@ async def run_event_detection(prisma):
         if not cluster.claims:
             continue
 
-        # Gather stats
+        # Stats
         claim_count = len(cluster.claims)
         all_evidence = []
         for c in cluster.claims:
@@ -280,65 +330,47 @@ async def run_event_detection(prisma):
         sources = set(e.source for e in all_evidence)
         source_count = len(sources)
 
-        # ── Event Eligibility Rules ──
+        # ── Event Eligibility ──
         if source_count < 2 or claim_count < 2 or evidence_count < 3:
-            logger.debug(
-                f"Cluster {cluster.id} ineligible: "
-                f"sources={source_count}, claims={claim_count}, evidence={evidence_count}"
-            )
             continue
 
-        # ── Publisher Diversity ──
-        publisher_diversity = source_count  # unique publisher domains
+        # ── Section 9: Cross-Source Consensus ──
+        consensus_score = source_count / max(evidence_count, 1)
+        consensus_score = min(consensus_score, 1.0)
 
-        # ── Event Title + Summary via LLM ──
-        evidence_sentences = list(set(e.sentence for e in all_evidence))[:10]
-
-        payload = {
-            "canonical_claim": cluster.claims[0].canonicalClaim,
-            "supporting_claims": [c.canonicalClaim for c in cluster.claims][:20],
-            "evidence_sentences": evidence_sentences,
-            "source_names": list(sources),
-            "source_count": source_count,
-            "evidence_count": evidence_count,
-        }
-
-        system_prompt = (
-            "You are an expert news editor. Transform this claim cluster into a concise Event.\n"
-            "RULES:\n"
-            "1. event_title: 3–8 words, like a news headline. NOT a full sentence.\n"
-            "2. event_title MUST NOT begin with 'Event related to'.\n"
-            "3. event_summary: 1 sentence overview.\n"
-            "4. event_category: one of [Politics, Business, Technology, Science, Culture, Legal, Other].\n"
-            "Return ONLY valid JSON:\n"
-            '{"event_title":"...","event_summary":"...","event_category":"..."}'
+        # Update cluster consensus
+        await prisma.claimcluster.update(
+            where={"id": cluster.id},
+            data={"consensusScore": consensus_score},
         )
-        user_prompt = f"Cluster:\n{json.dumps(payload)}"
 
-        raw = call_llm(system_prompt, user_prompt)
-        event_data = parse_json_safe(raw, {
-            "event_title": cluster.title,
-            "event_summary": "",
-            "event_category": "Other",
+        # ── Event Title (TF-IDF, 0 LLM) ──
+        claim_texts = [c.canonicalClaim for c in cluster.claims]
+        event_title = generate_event_title_tfidf(claim_texts)
+
+        # ── Event Summary (1 LLM call) ──
+        evidence_sentences = list(set(e.sentence for e in all_evidence))[:8]
+        summary_prompt = json.dumps({
+            "title": event_title,
+            "canonical_claim": getattr(cluster, 'canonicalClaim', '') or cluster.title,
+            "sources": list(sources),
         })
-
-        event_title = event_data.get("event_title", cluster.title)
-        event_summary = event_data.get("event_summary", "")
-
-        # Reject bad titles
-        if event_title.lower().startswith("event related to"):
-            event_title = cluster.title
+        raw_summary = call_llm(
+            "Write a 1-sentence news summary for this event. Return JSON: "
+            '{"summary": "..."}',
+            summary_prompt,
+            max_tokens=128,
+        )
+        event_summary = parse_json_safe(raw_summary).get("summary", "")
 
         # ── Importance Score ──
-        # importance = source_count*0.30 + publisher_diversity*0.20 + evidence_count*0.15 + claim_count*0.15 + consensus*0.20
-        # consensus is approximated as publisher_diversity / max(source_count, 1) for now
-        consensus_approx = min(publisher_diversity / max(source_count, 1), 1.0)
+        publisher_diversity = source_count
         importance = (
             source_count * 0.30
             + publisher_diversity * 0.20
             + evidence_count * 0.15
             + claim_count * 0.15
-            + consensus_approx * 0.20
+            + consensus_score * 0.20
         )
         if publisher_diversity > 3:
             importance += 2.0
@@ -359,4 +391,4 @@ async def run_event_detection(prisma):
 
         events_created += 1
 
-    logger.info(f"=== Event Detection Complete: {events_created} events created ===")
+    logger.info(f"=== Event Detection Complete: {events_created} events ===")
