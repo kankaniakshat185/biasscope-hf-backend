@@ -863,27 +863,41 @@ async def debug_cache_stats():
     }
 
 @app.post("/debug/rerun-clustering")
-async def debug_rerun_clustering():
-    """Feature 2: Rerun ONLY clustering + events (zero extraction cost)."""
-    # Clear existing clusters and events
+async def debug_rerun_clustering(background_tasks: BackgroundTasks):
+    """Feature 2: Rerun ONLY clustering + events (zero extraction cost). Runs in background."""
+    # Clear existing clusters and events immediately
     await prisma.query_raw('UPDATE "claim" SET "clusterId" = NULL')
     await prisma.query_raw('DELETE FROM "claim_cluster"')
     await prisma.query_raw('DELETE FROM "event"')
     
-    await run_claim_clustering(prisma)
-    await run_event_detection(prisma)
+    async def _run():
+        try:
+            await run_claim_clustering(prisma)
+            await run_event_detection(prisma)
+            print("Background rerun-clustering complete.")
+        except Exception as e:
+            import traceback
+            print(f"Rerun-clustering error: {e}")
+            traceback.print_exc()
     
-    return {"message": "Clustering + event detection re-run complete. Zero extraction LLM calls."}
+    background_tasks.add_task(_run)
+    return {"message": "Clustering rerun started in background. Check /debug/events after ~60s."}
 
 @app.post("/debug/rerun-events")
-async def debug_rerun_events():
+async def debug_rerun_events(background_tasks: BackgroundTasks):
     """Feature 2: Rerun ONLY event detection (zero extraction + clustering cost)."""
     await prisma.query_raw('UPDATE "claim_cluster" SET "eventId" = NULL')
     await prisma.query_raw('DELETE FROM "event"')
     
-    await run_event_detection(prisma)
+    async def _run():
+        try:
+            await run_event_detection(prisma)
+            print("Background rerun-events complete.")
+        except Exception as e:
+            print(f"Rerun-events error: {e}")
     
-    return {"message": "Event detection re-run complete. Zero extraction/clustering LLM calls."}
+    background_tasks.add_task(_run)
+    return {"message": "Event rerun started in background. Check /debug/events after ~30s."}
 
 @app.post("/debug/clear-cache")
 async def debug_clear_cache():
@@ -891,6 +905,20 @@ async def debug_clear_cache():
     await prisma.query_raw('DELETE FROM "llm_cache"')
     await prisma.query_raw('DELETE FROM "llm_usage"')
     return {"message": "LLM cache and usage analytics cleared."}
+
+@app.get("/debug/status")
+async def debug_status():
+    """Quick status check — how many clusters/events exist right now."""
+    clusters = await prisma.query_raw('SELECT COUNT(*) as cnt FROM "claim_cluster"')
+    events = await prisma.query_raw('SELECT COUNT(*) as cnt FROM "event"')
+    claims = await prisma.query_raw('SELECT COUNT(*) as cnt FROM "claim"')
+    unclustered = await prisma.query_raw('SELECT COUNT(*) as cnt FROM "claim" WHERE "clusterId" IS NULL')
+    return {
+        "claims": claims[0]["cnt"] if claims else 0,
+        "unclustered_claims": unclustered[0]["cnt"] if unclustered else 0,
+        "clusters": clusters[0]["cnt"] if clusters else 0,
+        "events": events[0]["cnt"] if events else 0,
+    }
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
