@@ -82,38 +82,63 @@ def call_llm(system_prompt: str, user_prompt: str, max_tokens: int = 1024) -> st
 
 # ── Section 3: Claim Extraction WITH Type Classification ─────────
 
+def repair_truncated_json(raw: str) -> str:
+    """Attempt to fix truncated JSON from LLM by closing open structures."""
+    raw = raw.strip()
+    # Try parsing as-is first
+    try:
+        json.loads(raw)
+        return raw
+    except json.JSONDecodeError:
+        pass
+    
+    # Find last complete claim object by looking for last "},"  or "}"
+    last_complete = raw.rfind('},')
+    if last_complete == -1:
+        last_complete = raw.rfind('}')
+    
+    if last_complete > 0:
+        # Truncate to last complete object, close the array and outer object
+        truncated = raw[:last_complete + 1]
+        # Ensure we close any open structures
+        if not truncated.endswith(']}'):
+            truncated += ']}'
+        try:
+            json.loads(truncated)
+            return truncated
+        except json.JSONDecodeError:
+            pass
+    
+    return ""
+
 def extract_claims(article_text: str) -> List[Dict[str, Any]]:
     """
     Single LLM call that extracts claims AND classifies them.
     Returns: [{text, claim_type, confidence, evidence_sentence}]
     """
     system_prompt = (
-        "You are a strict factual extraction engine.\n"
-        "RULES:\n"
-        "1. Extract assertions from the text.\n"
-        "2. Classify each claim into exactly one type:\n"
-        "   EVENT — something that happened (e.g., 'SpaceX filed for IPO')\n"
-        "   NUMERIC — a specific measurable fact (e.g., 'Musk will retain 42% ownership')\n"
-        "   BIOGRAPHICAL — personal history or trivia (e.g., 'Talulah Riley married Elon Musk')\n"
-        "   OPINION — subjective judgment (e.g., 'Elon Musk is bad at politics')\n"
-        "   ANALYSIS — editorial interpretation (e.g., 'Retail investors love Musk')\n"
-        "   PREDICTION — future speculation (e.g., 'Musk could become a trillionaire')\n"
-        "   QUOTE — direct speech attribution (e.g., 'Musk said humanity depends on it')\n"
-        "3. Claims must be self-contained. Replace all pronouns with named entities.\n"
-        "4. Assign a confidence score (0.0–1.0).\n"
-        "5. Provide the exact evidence_sentence from the article.\n"
-        "6. Return ONLY valid JSON.\n"
-        "Format:\n"
-        '{"claims":[{"text":"...","claim_type":"EVENT","confidence":0.95,"evidence_sentence":"..."}]}'
+        "Extract factual claims from the text. Classify each as: "
+        "EVENT, NUMERIC, BIOGRAPHICAL, OPINION, ANALYSIS, PREDICTION, or QUOTE. "
+        "Replace pronouns with named entities. "
+        "Return ONLY valid JSON:\n"
+        '{"claims":[{"text":"...","claim_type":"EVENT","confidence":0.9,"evidence_sentence":"..."}]}'
     )
-    user_prompt = f"Extract and classify claims:\n\n{article_text[:5000]}"
+    user_prompt = f"Extract claims:\n\n{article_text[:4000]}"
 
-    raw = call_llm(system_prompt, user_prompt)
+    raw = call_llm(system_prompt, user_prompt, max_tokens=2048)
     if raw:
+        # Try direct parse
         try:
             return json.loads(raw).get("claims", [])
         except json.JSONDecodeError:
-            logger.exception("Claim parse failed")
+            # Try repairing truncated JSON
+            repaired = repair_truncated_json(raw)
+            if repaired:
+                try:
+                    return json.loads(repaired).get("claims", [])
+                except json.JSONDecodeError:
+                    pass
+            logger.warning(f"Claim parse failed after repair attempt. Raw length: {len(raw)}")
     return []
 
 # ── Section 4: Claim Quality Gate (heuristic, NO LLM) ────────────
