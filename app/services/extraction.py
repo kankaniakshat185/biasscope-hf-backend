@@ -199,38 +199,50 @@ def compute_entity_salience(
     claim_lower = claim_text.lower()
     title_lower = article_title.lower() if article_title else ""
 
-    # Must mention query entity
-    if query_lower not in claim_lower:
-        return 0.0
+    # Check if query entity parts are mentioned (handles "Elon Musk" → "Musk")
+    query_parts = query_lower.split()
+    any_part_present = any(part in claim_lower for part in query_parts if len(part) > 2)
+    full_match = query_lower in claim_lower
+
+    # If neither the full query nor any part is in the claim,
+    # give a low base score — let embedding relevance (Gate 4) decide
+    if not any_part_present:
+        return 0.25  # soft penalty, not hard reject
 
     score = 0.0
 
     # Headline/title presence (0.4 weight)
     if title_lower and query_lower in title_lower:
         score += 0.40
+    elif title_lower and any(p in title_lower for p in query_parts if len(p) > 2):
+        score += 0.25
     else:
-        score += 0.10  # Small base score for mentioning entity at all
-
-    # Position in claim — earlier = more salient (0.2 weight)
-    pos = claim_lower.find(query_lower)
-    relative_pos = pos / max(len(claim_lower), 1)
-    if relative_pos < 0.25:
-        score += 0.20
-    elif relative_pos < 0.50:
-        score += 0.12
-    else:
-        score += 0.05
-
-    # Mention frequency (0.2 weight)
-    freq = claim_lower.count(query_lower)
-    if freq >= 2:
-        score += 0.20
-    elif freq == 1:
         score += 0.10
 
-    # First 4 words prominence (0.2 weight)
+    if full_match:
+        # Position in claim — earlier = more salient (0.2 weight)
+        pos = claim_lower.find(query_lower)
+        relative_pos = pos / max(len(claim_lower), 1)
+        if relative_pos < 0.25:
+            score += 0.20
+        elif relative_pos < 0.50:
+            score += 0.12
+        else:
+            score += 0.05
+
+        # Mention frequency (0.2 weight)
+        freq = claim_lower.count(query_lower)
+        if freq >= 2:
+            score += 0.20
+        elif freq == 1:
+            score += 0.10
+    else:
+        # Partial match (e.g., "Musk" in claim for "Elon Musk" query)
+        score += 0.10  # Base for partial match
+
+    # First 5 words prominence (0.2 weight)
     first_words = " ".join(claim_lower.split()[:5])
-    if query_lower in first_words:
+    if any(p in first_words for p in query_parts if len(p) > 2):
         score += 0.20
     else:
         score += 0.05
