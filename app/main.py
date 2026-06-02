@@ -66,6 +66,7 @@ async def background_phase2_pipeline(search_id: str):
                         art.url,
                         art.publishedAt,
                         query,
+                        art.title,
                     )
             print(f"Extraction complete for search {search_id}")
         else:
@@ -905,6 +906,50 @@ async def debug_clear_cache():
     await prisma.query_raw('DELETE FROM "llm_cache"')
     await prisma.query_raw('DELETE FROM "llm_usage"')
     return {"message": "LLM cache and usage analytics cleared."}
+
+@app.post("/debug/reset-phase2")
+async def debug_reset_phase2():
+    """Wipe ALL Phase 2 data: claims, evidence, clusters, events. Use before re-extraction."""
+    await prisma.query_raw('UPDATE "claim" SET "clusterId" = NULL')
+    await prisma.query_raw('DELETE FROM "evidence"')
+    await prisma.query_raw('DELETE FROM "claim"')
+    await prisma.query_raw('DELETE FROM "claim_cluster"')
+    await prisma.query_raw('DELETE FROM "event"')
+    return {"message": "All Phase 2 data wiped. Run a search or /debug/rerun-full to re-extract."}
+
+@app.post("/debug/rerun-full")
+async def debug_rerun_full(background_tasks: BackgroundTasks):
+    """Re-extract claims from ALL existing articles, then cluster + detect events."""
+    # Find the most recent search
+    searches = await prisma.search.find_many(order={"createdAt": "desc"}, take=1)
+    if not searches:
+        return {"message": "No searches found."}
+
+    search_id = searches[0].id
+    query = searches[0].query
+
+    async def _run():
+        try:
+            articles = await prisma.article.find_many(where={"searchId": search_id})
+            print(f"Re-extracting from {len(articles)} articles for query='{query}'...")
+            for art in articles:
+                if art.content:
+                    await process_and_store_claims(
+                        prisma, art.id, art.content, art.source, art.url,
+                        art.publishedAt, query, art.title,
+                    )
+            print("Re-extraction complete. Starting clustering...")
+            await run_claim_clustering(prisma)
+            print("Clustering complete. Starting event detection...")
+            await run_event_detection(prisma)
+            print("Full pipeline rerun complete.")
+        except Exception as e:
+            import traceback
+            print(f"Rerun-full error: {e}")
+            traceback.print_exc()
+
+    background_tasks.add_task(_run)
+    return {"message": f"Full rerun started for query='{query}', {search_id}. Check /debug/status."}
 
 @app.get("/debug/status")
 async def debug_status():
