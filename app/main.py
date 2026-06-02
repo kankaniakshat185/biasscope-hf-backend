@@ -243,44 +243,57 @@ async def get_search_intelligence(search_id: str):
         }
     )
     
-    # Process into clean structured output
+    # ── Build structured output ──
+    # Key fix: canonical claim lives on CLUSTER, raw text on CLAIMS
+    # Evidence aggregation happens at cluster level for consistency
+    
     formatted_claims = []
     clusters_map = {}
     events_map = {}
     
     for c in claims:
-        # Build claim
+        # Each claim keeps its ORIGINAL raw text
+        claim_evidence = [
+            {"sentence": e.sentence, "source": e.source, "publishedAt": e.publishedAt, "url": e.url}
+            for e in c.evidence
+        ]
+        claim_sources = list(set(e.source for e in c.evidence))
+        
         fc = {
             "id": c.id,
-            "canonicalClaim": c.canonicalClaim,
+            "canonicalClaim": c.canonicalClaim,  # original raw text
             "claimType": getattr(c, 'claimType', 'EVENT') or 'EVENT',
             "qualityScore": getattr(c, 'qualityScore', 0) or 0,
             "confidence": c.confidence,
             "evidenceCount": len(c.evidence),
-            "sources": list(set([e.source for e in c.evidence])),
-            "evidence": [{"sentence": e.sentence, "source": e.source, "publishedAt": e.publishedAt, "url": e.url} for e in c.evidence],
+            "sources": claim_sources,
+            "evidence": claim_evidence,
             "clusterId": c.clusterId
         }
         formatted_claims.append(fc)
         
-        # Build cluster
+        # Build cluster — canonical claim comes from CLUSTER, not from claim
         if c.cluster:
             cid = c.cluster.id
             if cid not in clusters_map:
                 clusters_map[cid] = {
                     "id": cid,
                     "title": c.cluster.title,
-                    "canonicalClaim": getattr(c.cluster, 'canonicalClaim', '') or c.canonicalClaim,
+                    "canonicalClaim": getattr(c.cluster, 'canonicalClaim', '') or '',
                     "consensusScore": getattr(c.cluster, 'consensusScore', 0) or 0,
                     "eventId": c.cluster.eventId,
-                    "claims": [],
-                    "evidenceCount": 0,
-                    "sources": set()
+                    "rawClaims": [],       # original claim texts (not canonical)
+                    "allEvidence": [],      # all evidence across all claims
+                    "sources": set(),
+                    "claimCount": 0,
                 }
-            if fc["canonicalClaim"] not in clusters_map[cid]["claims"]:
-                clusters_map[cid]["claims"].append(fc["canonicalClaim"])
-            clusters_map[cid]["evidenceCount"] += fc["evidenceCount"]
-            for s in fc["sources"]:
+            # Store the RAW claim text (not canonical) as supporting claim
+            if c.canonicalClaim not in [rc["text"] for rc in clusters_map[cid]["rawClaims"]]:
+                clusters_map[cid]["rawClaims"].append({"text": c.canonicalClaim, "id": c.id})
+            clusters_map[cid]["claimCount"] += 1
+            # Aggregate ALL evidence at cluster level
+            clusters_map[cid]["allEvidence"].extend(claim_evidence)
+            for s in claim_sources:
                 clusters_map[cid]["sources"].add(s)
                 
             # Build event
@@ -292,28 +305,58 @@ async def get_search_intelligence(search_id: str):
                         "title": c.cluster.event.title,
                         "description": getattr(c.cluster.event, 'description', '') or '',
                         "importanceScore": getattr(c.cluster.event, 'importanceScore', 0) or 0,
+                        "canonicalClaim": getattr(c.cluster, 'canonicalClaim', '') or '',
                         "clusters": [],
                         "claimCount": 0,
                         "evidenceCount": 0,
+                        "allEvidence": [],
                         "sources": set()
                     }
                 if c.cluster.title not in events_map[eid]["clusters"]:
                     events_map[eid]["clusters"].append(c.cluster.title)
                 events_map[eid]["claimCount"] += 1
-                events_map[eid]["evidenceCount"] += fc["evidenceCount"]
-                for s in fc["sources"]:
+                events_map[eid]["evidenceCount"] += len(claim_evidence)
+                events_map[eid]["allEvidence"].extend(claim_evidence)
+                for s in claim_sources:
                     events_map[eid]["sources"].add(s)
                     
-    # Format maps to lists
-    formatted_clusters = list(clusters_map.values())
-    for cl in formatted_clusters:
+    # Format clusters
+    formatted_clusters = []
+    for cl in clusters_map.values():
         cl["sources"] = list(cl["sources"])
         cl["sourceCount"] = len(cl["sources"])
+        cl["evidenceCount"] = len(cl["allEvidence"])
+        # Deduplicate evidence by sentence text
+        seen = set()
+        unique_evidence = []
+        for ev in cl["allEvidence"]:
+            key = ev["sentence"][:100]
+            if key not in seen:
+                seen.add(key)
+                unique_evidence.append(ev)
+        cl["evidence"] = unique_evidence
+        cl["claims"] = [rc["text"] for rc in cl["rawClaims"]]
+        del cl["rawClaims"]
+        del cl["allEvidence"]
+        formatted_clusters.append(cl)
         
-    formatted_events = list(events_map.values())
-    for ev in formatted_events:
+    # Format events
+    formatted_events = []
+    for ev in events_map.values():
         ev["sources"] = list(ev["sources"])
         ev["sourceCount"] = len(ev["sources"])
+        # Deduplicate evidence
+        seen = set()
+        unique_evidence = []
+        for e in ev["allEvidence"]:
+            key = e["sentence"][:100]
+            if key not in seen:
+                seen.add(key)
+                unique_evidence.append(e)
+        ev["evidence"] = unique_evidence
+        ev["evidenceCount"] = len(unique_evidence)
+        del ev["allEvidence"]
+        formatted_events.append(ev)
         
     return {
         "metrics": {
