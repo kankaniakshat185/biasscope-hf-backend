@@ -136,9 +136,9 @@ async def run_claim_clustering(prisma):
 
     clusterer = HDBSCAN(
         min_cluster_size=2,
-        min_samples=2,
+        min_samples=3,
         metric="precomputed",
-        cluster_selection_epsilon=0.15,  # prevent mega-clusters
+        cluster_selection_epsilon=0.35,  # force finer clusters on narrow topics
     )
     labels = clusterer.fit_predict(cos_dist)
 
