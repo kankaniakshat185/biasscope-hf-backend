@@ -41,30 +41,55 @@ def read_root():
     return {"status": "ok", "service": "Biascope Backend"}
 
 async def background_phase2_pipeline(search_id: str):
+    """
+    Feature 2: Pipeline Stage Toggles
+    Set env vars to skip stages during development:
+      SKIP_EXTRACTION=1  — reuse existing claims
+      SKIP_CLUSTERING=1  — reuse existing clusters
+      SKIP_EVENTS=1      — reuse existing events
+    """
     print(f"Starting background Phase 2 pipeline for search {search_id}...")
     try:
         search_record = await prisma.search.find_unique(where={"id": search_id})
         query = search_record.query if search_record else ""
         
-        articles = await prisma.article.find_many(where={"searchId": search_id})
-        for art in articles:
-            if art.content:
-                await process_and_store_claims(
-                    prisma,
-                    art.id,
-                    art.content,
-                    art.source,
-                    art.url,
-                    art.publishedAt,
-                    query,
-                )
+        # Stage 1: Extraction (skip if SKIP_EXTRACTION=1)
+        if not os.getenv("SKIP_EXTRACTION"):
+            articles = await prisma.article.find_many(where={"searchId": search_id})
+            for art in articles:
+                if art.content:
+                    await process_and_store_claims(
+                        prisma,
+                        art.id,
+                        art.content,
+                        art.source,
+                        art.url,
+                        art.publishedAt,
+                        query,
+                    )
+            print(f"Extraction complete for search {search_id}")
+        else:
+            print("SKIP_EXTRACTION=1 — reusing existing claims")
         
-        # Run Step 6 & 7 locally
-        await run_claim_clustering(prisma)
-        await run_event_detection(prisma)
+        # Stage 2: Clustering (skip if SKIP_CLUSTERING=1)
+        if not os.getenv("SKIP_CLUSTERING"):
+            await run_claim_clustering(prisma)
+            print("Clustering complete")
+        else:
+            print("SKIP_CLUSTERING=1 — reusing existing clusters")
+        
+        # Stage 3: Events (skip if SKIP_EVENTS=1)
+        if not os.getenv("SKIP_EVENTS"):
+            await run_event_detection(prisma)
+            print("Event detection complete")
+        else:
+            print("SKIP_EVENTS=1 — reusing existing events")
+            
         print("Phase 2 pipeline complete.")
     except Exception as e:
+        import traceback
         print(f"Phase 2 pipeline error: {e}")
+        traceback.print_exc()
 
 @app.post("/search")
 async def create_search(
@@ -722,6 +747,150 @@ async def delete_search(search_id: str):
         
     await prisma.search.delete(where={"id": search_id})
     return {"message": "Search and all associated data permanently deleted."}
+
+# ══════════════════════════════════════════════════════════════════
+# DEVELOPMENT INFRASTRUCTURE — Debug Endpoints
+# ══════════════════════════════════════════════════════════════════
+
+@app.get("/debug/clusters")
+async def debug_clusters():
+    """Feature 5: Inspect all clusters without generating reports."""
+    clusters = await prisma.claimcluster.find_many(
+        include={"claims": {"include": {"evidence": True}}, "event": True},
+        order={"id": "desc"},
+    )
+    result = []
+    for cl in clusters:
+        all_evidence = []
+        for c in cl.claims:
+            all_evidence.extend(c.evidence)
+        sources = list(set(e.source for e in all_evidence))
+        result.append({
+            "cluster_id": cl.id,
+            "title": cl.title,
+            "canonicalClaim": cl.canonicalClaim,
+            "consensusScore": cl.consensusScore,
+            "claim_count": len(cl.claims),
+            "evidence_count": len(all_evidence),
+            "source_count": len(sources),
+            "sources": sources,
+            "claims": [c.canonicalClaim for c in cl.claims],
+            "event_id": cl.eventId,
+            "event_title": cl.event.title if cl.event else None,
+        })
+    return {"total": len(result), "clusters": result}
+
+@app.get("/debug/events")
+async def debug_events():
+    """Feature 6: Inspect all events without generating reports."""
+    events = await prisma.event.find_many(
+        include={"claimClusters": {"include": {"claims": {"include": {"evidence": True}}}}},
+        order={"importanceScore": "desc"},
+    )
+    result = []
+    for ev in events:
+        total_claims = 0
+        total_evidence = 0
+        all_sources = set()
+        for cl in ev.claimClusters:
+            total_claims += len(cl.claims)
+            for c in cl.claims:
+                total_evidence += len(c.evidence)
+                for e in c.evidence:
+                    all_sources.add(e.source)
+        result.append({
+            "event_id": ev.id,
+            "title": ev.title,
+            "description": ev.description,
+            "importance_score": ev.importanceScore,
+            "canonical_claim": ev.claimClusters[0].canonicalClaim if ev.claimClusters else None,
+            "cluster_count": len(ev.claimClusters),
+            "claim_count": total_claims,
+            "evidence_count": total_evidence,
+            "source_count": len(all_sources),
+            "sources": list(all_sources),
+        })
+    return {"total": len(result), "events": result}
+
+@app.get("/debug/llm-usage")
+async def debug_llm_usage():
+    """Feature 7: LLM usage analytics dashboard."""
+    usage = await prisma.llmusage.find_many(order={"createdAt": "desc"})
+    
+    # Aggregate by stage
+    stages = {}
+    total_cached = 0
+    total_calls = 0
+    for u in usage:
+        stage = u.stage
+        if stage not in stages:
+            stages[stage] = {"calls": 0, "cached": 0, "prompt_tokens": 0, "completion_tokens": 0}
+        stages[stage]["calls"] += 1
+        if u.cached:
+            stages[stage]["cached"] += 1
+            total_cached += 1
+        else:
+            stages[stage]["prompt_tokens"] += u.promptTokens or 0
+            stages[stage]["completion_tokens"] += u.completionTokens or 0
+        total_calls += 1
+    
+    cache_hit_rate = (total_cached / max(total_calls, 1)) * 100
+    
+    return {
+        "total_calls": total_calls,
+        "total_cached": total_cached,
+        "cache_hit_rate": f"{cache_hit_rate:.1f}%",
+        "stages": stages,
+    }
+
+@app.get("/debug/cache-stats")
+async def debug_cache_stats():
+    """Feature 1: View cache contents."""
+    caches = await prisma.llmcache.find_many(order={"createdAt": "desc"})
+    return {
+        "total_cached_prompts": len(caches),
+        "by_stage": {},
+        "entries": [
+            {
+                "stage": c.stage,
+                "model": c.model,
+                "hash": c.promptHash[:12] + "...",
+                "response_length": len(c.response),
+                "created": c.createdAt,
+            }
+            for c in caches[:50]
+        ],
+    }
+
+@app.post("/debug/rerun-clustering")
+async def debug_rerun_clustering():
+    """Feature 2: Rerun ONLY clustering + events (zero extraction cost)."""
+    # Clear existing clusters and events
+    await prisma.query_raw('UPDATE "claim" SET "clusterId" = NULL')
+    await prisma.query_raw('DELETE FROM "claim_cluster"')
+    await prisma.query_raw('DELETE FROM "event"')
+    
+    await run_claim_clustering(prisma)
+    await run_event_detection(prisma)
+    
+    return {"message": "Clustering + event detection re-run complete. Zero extraction LLM calls."}
+
+@app.post("/debug/rerun-events")
+async def debug_rerun_events():
+    """Feature 2: Rerun ONLY event detection (zero extraction + clustering cost)."""
+    await prisma.query_raw('UPDATE "claim_cluster" SET "eventId" = NULL')
+    await prisma.query_raw('DELETE FROM "event"')
+    
+    await run_event_detection(prisma)
+    
+    return {"message": "Event detection re-run complete. Zero extraction/clustering LLM calls."}
+
+@app.post("/debug/clear-cache")
+async def debug_clear_cache():
+    """Clear the LLM response cache."""
+    await prisma.query_raw('DELETE FROM "llm_cache"')
+    await prisma.query_raw('DELETE FROM "llm_usage"')
+    return {"message": "LLM cache and usage analytics cleared."}
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

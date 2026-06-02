@@ -1,8 +1,8 @@
 """
-Phase 2.5 — Extraction Layer (Hardened)
+Phase 2 Final — Extraction Layer (Hardened)
 
 Pipeline:
-  1. Extract claims WITH claim_type classification (single LLM call)
+  1. Extract claims WITH claim_type classification (single cached LLM call)
   2. Reject OPINION, ANALYSIS, BIOGRAPHICAL, PREDICTION types
   3. Score claim quality (heuristic — no LLM)
   4. Score entity salience (heuristic — no LLM)
@@ -10,25 +10,20 @@ Pipeline:
   6. Generate embeddings + cosine relevance filter
   7. Store claims + evidence (deduplicated)
 
-This layer is deliberately STRICT.
-The goal is to prevent garbage from entering the clustering pipeline.
+All LLM calls go through llm_client.py for caching + analytics.
 """
 
-import os
 import re
 import json
-import hashlib
 import logging
 from datetime import datetime
 from typing import List, Dict, Any
 
 import numpy as np
-from huggingface_hub import InferenceClient
 from sentence_transformers import SentenceTransformer
+from app.services.llm_client import cached_llm_call
 
 logger = logging.getLogger(__name__)
-
-MODEL_ID = "Qwen/Qwen2.5-7B-Instruct"
 
 # Types that are allowed into the intelligence pipeline
 ALLOWED_CLAIM_TYPES = {"EVENT", "NUMERIC"}
@@ -54,53 +49,20 @@ def cosine_similarity(a, b) -> float:
         return 0.0
     return float(np.dot(a, b) / (na * nb))
 
-# ── LLM Helper ───────────────────────────────────────────────────
-
-def call_llm(system_prompt: str, user_prompt: str, max_tokens: int = 1024) -> str:
-    token = os.getenv("HF_TOKEN")
-    if not token:
-        return ""
-    client = InferenceClient(model=MODEL_ID, token=token)
-    try:
-        resp = client.chat_completion(
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            temperature=0.1,
-            max_tokens=max_tokens,
-        )
-        content = resp.choices[0].message.content.strip()
-        if content.startswith("```json"):
-            content = content[7:-3].strip()
-        elif content.startswith("```"):
-            content = content[3:-3].strip()
-        return content
-    except Exception as e:
-        logger.error(f"LLM call failed: {e}")
-        return ""
-
-# ── Section 3: Claim Extraction WITH Type Classification ─────────
+# ── JSON Repair ──────────────────────────────────────────────────
 
 def repair_truncated_json(raw: str) -> str:
-    """Attempt to fix truncated JSON from LLM by closing open structures."""
     raw = raw.strip()
-    # Try parsing as-is first
     try:
         json.loads(raw)
         return raw
     except json.JSONDecodeError:
         pass
-    
-    # Find last complete claim object by looking for last "},"  or "}"
     last_complete = raw.rfind('},')
     if last_complete == -1:
         last_complete = raw.rfind('}')
-    
     if last_complete > 0:
-        # Truncate to last complete object, close the array and outer object
         truncated = raw[:last_complete + 1]
-        # Ensure we close any open structures
         if not truncated.endswith(']}'):
             truncated += ']}'
         try:
@@ -108,12 +70,13 @@ def repair_truncated_json(raw: str) -> str:
             return truncated
         except json.JSONDecodeError:
             pass
-    
     return ""
 
-def extract_claims(article_text: str) -> List[Dict[str, Any]]:
+# ── Claim Extraction (cached) ────────────────────────────────────
+
+async def extract_claims(prisma, article_text: str) -> List[Dict[str, Any]]:
     """
-    Single LLM call that extracts claims AND classifies them.
+    Single CACHED LLM call that extracts claims AND classifies them.
     Returns: [{text, claim_type, confidence, evidence_sentence}]
     """
     system_prompt = (
@@ -125,48 +88,32 @@ def extract_claims(article_text: str) -> List[Dict[str, Any]]:
     )
     user_prompt = f"Extract claims:\n\n{article_text[:4000]}"
 
-    raw = call_llm(system_prompt, user_prompt, max_tokens=2048)
+    raw = await cached_llm_call(prisma, "extraction", system_prompt, user_prompt, max_tokens=2048)
     if raw:
-        # Try direct parse
         try:
             return json.loads(raw).get("claims", [])
         except json.JSONDecodeError:
-            # Try repairing truncated JSON
             repaired = repair_truncated_json(raw)
             if repaired:
                 try:
                     return json.loads(repaired).get("claims", [])
                 except json.JSONDecodeError:
                     pass
-            logger.warning(f"Claim parse failed after repair attempt. Raw length: {len(raw)}")
+            logger.warning(f"Claim parse failed after repair. Raw length: {len(raw)}")
     return []
 
-# ── Section 4: Claim Quality Gate (heuristic, NO LLM) ────────────
+# ── Claim Quality Gate (heuristic, NO LLM) ───────────────────────
 
 def compute_quality_score(text: str) -> float:
-    """
-    Heuristic quality score based on:
-      - Verifiability: contains named entities / proper nouns?
-      - Specificity: contains numbers, dates, or concrete details?
-      - Newsworthiness: action verbs present?
-      - Length: too short = vague, too long = editorial
-    Returns 0.0–1.0
-    """
     score = 0.0
-
-    # Verifiability: capitalized words (proxy for named entities)
     capitalized = re.findall(r'\b[A-Z][a-z]+(?:\s[A-Z][a-z]+)*\b', text)
     if len(capitalized) >= 2:
         score += 0.30
     elif len(capitalized) >= 1:
         score += 0.15
-
-    # Specificity: numbers, dates, percentages
     has_numbers = bool(re.search(r'\d+', text))
     if has_numbers:
         score += 0.20
-
-    # Newsworthiness: action verbs
     action_verbs = ['filed', 'signed', 'announced', 'launched', 'acquired', 'sued',
                     'appointed', 'resigned', 'merged', 'invested', 'raised', 'sold',
                     'denied', 'confirmed', 'reported', 'released', 'purchased', 'agreed',
@@ -174,62 +121,42 @@ def compute_quality_score(text: str) -> float:
     text_lower = text.lower()
     if any(v in text_lower for v in action_verbs):
         score += 0.30
-
-    # Length penalty
     word_count = len(text.split())
     if 8 <= word_count <= 30:
         score += 0.20
     elif word_count < 8:
-        score += 0.05  # too vague
+        score += 0.05
     else:
-        score += 0.10  # too editorial
-
+        score += 0.10
     return min(score, 1.0)
 
-# ── Section 5: Entity Salience Filter (heuristic, NO LLM) ────────
+# ── Entity Salience Filter (heuristic, NO LLM) ──────────────────
 
 def compute_entity_salience(query: str, claim_text: str) -> float:
-    """
-    Measures how central the queried entity is to this claim.
-    High: "SpaceX filed IPO paperwork" (for query "Elon Musk")
-    Low:  "Talulah Riley article mentioning Elon Musk" (peripheral mention)
-    Returns 0.0–1.0
-    """
     if not query:
         return 1.0
-
     query_lower = query.lower()
     claim_lower = claim_text.lower()
     words = claim_lower.split()
-
     score = 0.0
-
-    # Is query entity in the claim at all?
     if query_lower not in claim_lower:
         return 0.0
-
-    # Position: entity appears in first half of claim = more salient
     pos = claim_lower.find(query_lower)
     relative_pos = pos / max(len(claim_lower), 1)
     if relative_pos < 0.3:
-        score += 0.40  # subject position
+        score += 0.40
     elif relative_pos < 0.6:
         score += 0.25
     else:
-        score += 0.10  # mentioned late = peripheral
-
-    # Frequency
+        score += 0.10
     freq = claim_lower.count(query_lower)
     if freq >= 2:
         score += 0.20
     elif freq == 1:
         score += 0.10
-
-    # Is entity the grammatical subject? (rough heuristic: first 3 words)
     first_words = " ".join(words[:4])
     if query_lower in first_words:
         score += 0.30
-
     return min(score, 1.0)
 
 # ── Relevance Filter ─────────────────────────────────────────────
@@ -252,15 +179,9 @@ async def process_and_store_claims(
     query: str = "",
 ):
     """
-    Hardened extraction pipeline:
-      1. Extract + classify claims (single LLM call)
-      2. Type filter — reject OPINION, ANALYSIS, BIOGRAPHICAL, PREDICTION, QUOTE
-      3. Quality gate — reject score < 0.60
-      4. Entity salience — reject < 0.50
-      5. Embedding + cosine relevance — reject < 0.45
-      6. Store claim + evidence (deduplicated)
+    Hardened extraction pipeline with cached LLM calls.
     """
-    claims = extract_claims(article_text)
+    claims = await extract_claims(prisma, article_text)
     if not claims:
         return []
 
@@ -304,7 +225,6 @@ async def process_and_store_claims(
 
         vector_string = "[" + ",".join(map(str, embedding)) + "]"
 
-        # Store claim
         created = await prisma.query_raw(
             """
             INSERT INTO "claim"
@@ -325,7 +245,6 @@ async def process_and_store_claims(
 
         claim_id = created[0]["id"]
 
-        # Evidence deduplication
         existing = await prisma.query_raw(
             """
             SELECT id FROM "evidence"
@@ -353,9 +272,8 @@ async def process_and_store_claims(
         stats["stored"] += 1
 
     logger.info(
-        f"Extraction complete for article {article_id}: "
-        f"{stats['stored']}/{stats['total']} stored | "
-        f"type_rejected={stats['type_rejected']} quality_rejected={stats['quality_rejected']} "
-        f"salience_rejected={stats['salience_rejected']} relevance_rejected={stats['relevance_rejected']}"
+        f"Extraction [{article_id}]: {stats['stored']}/{stats['total']} stored | "
+        f"type={stats['type_rejected']} quality={stats['quality_rejected']} "
+        f"salience={stats['salience_rejected']} relevance={stats['relevance_rejected']}"
     )
     return inserted

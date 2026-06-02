@@ -197,3 +197,30 @@ model ClaimCluster {
 
   @@map("claim_cluster")
 }
+
+// -------------------------------------------------------------
+// Development Infrastructure
+// -------------------------------------------------------------
+
+model LLMCache {
+  id         String   @id @default(uuid())
+  promptHash String   @unique
+  model      String
+  stage      String   @default("unknown")
+  response   String
+  createdAt  DateTime @default(now())
+
+  @@map("llm_cache")
+}
+
+model LLMUsage {
+  id               String   @id @default(uuid())
+  stage            String
+  model            String
+  cached           Boolean  @default(false)
+  promptTokens     Int?     @default(0)
+  completionTokens Int?     @default(0)
+  createdAt        DateTime @default(now())
+
+  @@map("llm_usage")
+}
