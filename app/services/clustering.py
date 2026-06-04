@@ -210,7 +210,7 @@ async def run_claim_clustering(prisma):
 
 # ── LLM Merge Pass (1 cached call) ───────────────────────────────
 
-async def _llm_merge_pass(prisma, groups: Dict[int, List[Dict]]) -> Dict[int, List[Dict]]:
+#async def _llm_merge_pass(prisma, groups: Dict[int, List[Dict]]) -> Dict[int, List[Dict]]:
     if len(groups) <= 1:
         return groups
 
