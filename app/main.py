@@ -125,13 +125,17 @@ async def get_subscriptions(user_id: str):
         include={"snapshots": {"order": {"createdAt": "desc"}, "take": 5}}
     )
 
-@app.delete("/subscriptions/{sub_id}")
-async def unsubscribe_topic(sub_id: str):
-    """Deactivate a topic subscription."""
-    await prisma.topicsubscription.update(
-        where={"id": sub_id},
-        data={"isActive": False}
+@app.delete("/subscriptions")
+async def unsubscribe_topic(userId: str, topic: str):
+    """Deactivate a topic subscription by user and topic."""
+    sub = await prisma.topicsubscription.find_first(
+        where={"userId": userId, "topic": topic.lower()}
     )
+    if sub:
+        await prisma.topicsubscription.update(
+            where={"id": sub.id},
+            data={"isActive": False}
+        )
     return {"status": "success"}
 
 @app.post("/search")

@@ -229,9 +229,13 @@ async def scrape_single_url(url: str):
 
     # Fallback to newspaper3k if trafilatura failed to get enough text
     if not text or len(text) < 100:
-        from newspaper import Article
+        import newspaper
         try:
-            article = Article(url)
+            config = newspaper.Config()
+            config.browser_user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
+            config.request_timeout = 10
+            
+            article = newspaper.Article(url, config=config)
             article.download()
             article.parse()
             if article.text and len(article.text) > 100:
