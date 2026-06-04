@@ -306,18 +306,19 @@ def generate_contrastive_summaries(articles):
             context_str = "\n".join(snippets)
             
             system_prompt = (
-                f"You are analyzing the '{wing}' media echo chamber. "
-                "Write a highly objective 2-sentence summary of how this specific political wing is framing the current topic, "
-                "based strictly on the provided headlines. Do not endorse the views, just summarize their narrative framing."
+                f"You are an expert political media analyst examining the '{wing}' media echo chamber. "
+                "Your task is to write a highly sophisticated, objective 3-4 sentence analysis of how this specific political wing is framing the current topic, "
+                "based strictly on the provided headlines. Do not simply summarize the events; instead, analyze the rhetorical strategies, key arguments, underlying assumptions, and ideological framing present in these headlines. "
+                "Highlight what they are emphasizing and what they might be omitting. Do not endorse the views, just critically analyze their narrative construction."
             )
             
-            user_prompt = f"Sample '{wing}' Articles:\n{context_str}\n\nPlease generate the {wing} narrative summary.\n\nCRITICAL: You MUST explicitly cite the sources using natural phrasing, and you MUST wrap the source name in square brackets for parsing (Example: 'as reported by [foxnews.com]' or 'according to [nypost.com]'). Do not just drop brackets randomly at the end of sentences. Do NOT use numbers like [1]. Do NOT output any preambles."
+            user_prompt = f"Sample '{wing}' Articles:\n{context_str}\n\nPlease generate the {wing} narrative analysis.\n\nCRITICAL: You MUST explicitly cite the sources using natural phrasing, and you MUST wrap the source name in square brackets for parsing (Example: 'as reported by [foxnews.com]' or 'according to [nypost.com]'). Do not just drop brackets randomly at the end of sentences. Do NOT use numbers like [1]. Do NOT output any preambles."
             
             messages = [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
             ]
-            response = client.chat_completion(messages=messages, max_tokens=150, temperature=0.5)
+            response = client.chat_completion(messages=messages, max_tokens=250, temperature=0.6)
             return response.choices[0].message.content.strip()
 
         left_summary = _summarize_echo_chamber(left_articles, "Left-Wing")
