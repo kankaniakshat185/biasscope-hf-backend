@@ -19,6 +19,8 @@ A high-performance, claim-centric natural language processing engine that powers
 
 - **Claim-Centric Ingestion Pipeline** — Distills raw articles into discrete, factual claims rather than relying on noisy article-level sentiment.
 - **Semantic Claim Clustering** — Utilizes `sentence-transformers/all-MiniLM-L6-v2` and `pgvector` to map semantically equivalent claims into unified entities across multiple publications.
+- **Single URL Deep-Dive** — Bypasses macro-topic aggregation to perform isolated claim extraction, source verification, and bias detection on any individual news article URL.
+- **Multimodal Image Analysis** — Leverages Vision LLMs to ingest infographics, charts, and news broadcast screenshots, extracting embedded claims and evaluating visual framing bias.
 - **Cross-Ideological Consensus Engine** — Programmatically evaluates the publisher diversity for individual claims to detect and flag corroborated narratives.
 - **Contrastive Echo Chambers** — Isolates political ecosystems to generate distinct, sophisticated LLM-driven analyses of how identical events are framed by different sides.
 - **Automated Topic Snapshots** — Redis-backed Celery workers incrementally append new evidence to the global database without redundant reprocessing.
@@ -32,11 +34,34 @@ BiasScope operates entirely in the cloud, utilizing a decoupled, edge-ready arch
 
 ## Architecture
 
-The system consists of three layers:
+<details>
+<summary><b>View Detailed Architecture Diagram</b></summary>
+
+```mermaid
+graph TD
+    A[Raw Media Ingestion] --> B{Input Modality}
+    B -->|Topic Search| C[NewsAPI Aggregator]
+    B -->|Single URL| D[Direct HTML Parsing / Trafilatura]
+    B -->|Image/Screenshot| E[Vision LLM Processor]
+    
+    C --> F[Data Cleaning & Deduplication]
+    D --> F
+    E --> F
+    
+    F --> G[Llama-3 Claim Extraction Engine]
+    G --> H[(Global Claim Database w/ pgvector)]
+    H --> I[Claim Clustering via Cosine Similarity]
+    I --> J[Event & Narrative Generation]
+    J --> K[Cross-Ideological Consensus Calculation]
+    K --> L[FastAPI Results Endpoint]
+```
+</details>
+
+The system consists of three primary layers:
 
 | Layer | Components |
 |-------|------------|
-| Ingestion & Extraction | NewsAPI scraper, Llama 3 Instruct 8B claim extraction, Context window normalization |
+| Ingestion & Extraction | NewsAPI scraper, Trafilatura (Single URL), Llama-3-Vision (Images), Llama-3-Instruct 8B |
 | Storage & Clustering | PostgreSQL `pgvector`, SentenceTransformers, Cosine Similarity merging |
 | API & Orchestration | FastAPI asynchronous endpoints, Celery workers, Upstash Redis queues |
 
