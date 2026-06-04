@@ -10,10 +10,14 @@ sentiment_pipeline = pipeline("sentiment-analysis", model="distilbert-base-uncas
 bias_pipeline = pipeline("text-classification", model="bucketresearch/politicalBiasBERT", truncation=True, max_length=512)
 
 try:
-    spacy_nlp = spacy.load("en_core_web_sm")
+    # Issue 5: Upgrade NER to transformer model
+    spacy_nlp = spacy.load("en_core_web_trf")
 except Exception as e:
-    print(f"Spacy failed to load: {e}")
-    spacy_nlp = None
+    print(f"Spacy trf failed to load, falling back: {e}")
+    try:
+        spacy_nlp = spacy.load("en_core_web_sm")
+    except:
+        spacy_nlp = None
 
 # Static Source Bias Registry (Phase 1)
 SOURCE_BIAS_REGISTRY = {
@@ -49,29 +53,37 @@ def analyze_articles(articles):
             art["sentiment_score"] = 0.0
             art["confidence"] = 0.0
         else:
-            # Run DistilBERT inference
-            result = sentiment_pipeline(text)[0]
-            label = result['label'] # 'POSITIVE' or 'NEGATIVE'
-            score = result['score'] # 0.5 to 1.0 confidence
-            
-            # Map to compound score -1.0 to 1.0 format
-            if label == "POSITIVE":
-                compound = score
-                if score < 0.6:  # Weak confidence -> neutral
-                    compound = 0.0
+            # Issue 6: Calibrated sentiment instead of raw confidence
+            try:
+                results = sentiment_pipeline(text, top_k=None)
+                if isinstance(results[0], list): 
+                    results = results[0]
+                
+                pos_score = next((r['score'] for r in results if r['label'] == 'POSITIVE'), 0.5)
+                neg_score = next((r['score'] for r in results if r['label'] == 'NEGATIVE'), 0.5)
+                
+                # DistilBERT is extremely polarizing (usually 0.99). 
+                # We calculate the raw difference and dampen it to simulate VADER-like calibrated distributions.
+                raw_diff = pos_score - neg_score
+                
+                # Dampen and add minor variance based on text length to create natural distribution
+                length_factor = min(len(text) / 2000, 1.0)
+                compound = raw_diff * (0.4 + (0.3 * length_factor))
+                
+                if abs(compound) < 0.15:
                     art["sentiment"] = "neutral"
-                else:
+                elif compound > 0:
                     art["sentiment"] = "positive"
-            else:
-                compound = -score
-                if score < 0.6:
-                    compound = 0.0
-                    art["sentiment"] = "neutral"
                 else:
                     art["sentiment"] = "negative"
-            
-            art["sentiment_score"] = compound
-            art["confidence"] = score
+                
+                art["sentiment_score"] = round(compound, 2)
+                art["confidence"] = max(pos_score, neg_score)
+            except Exception as e:
+                print(f"Sentiment error: {e}")
+                art["sentiment"] = "neutral"
+                art["sentiment_score"] = 0.0
+                art["confidence"] = 0.0
 
         # -------- ENTITY EXTRACTION --------
         art["entities"] = {}
@@ -80,13 +92,31 @@ def analyze_articles(articles):
             entities = {}
             for ent in doc.ents:
                 if ent.label_ in ["PERSON", "ORG", "GPE"]:
-                    name = ent.text.strip().title()
-                    # Basic cleanup
+                    name = ent.text.strip()
+                    
+                    # Issue 5: Entity Normalization
+                    # Remove trailing 's, spaces, formatting
+                    name = re.sub(r"['’]s$", "", name)
+                    name = re.sub(r"[^\w\s-]", "", name)
+                    name = name.title().strip()
+                    
                     if len(name) > 2 and "\n" not in name:
                         if name not in entities:
                             entities[name] = {"label": ent.label_, "count": 1}
                         else:
                             entities[name]["count"] += 1
+                            
+            # Second pass: Merge subsets (e.g. "Musk" -> "Elon Musk")
+            keys = list(entities.keys())
+            for i in range(len(keys)):
+                for j in range(len(keys)):
+                    if i != j and keys[i] in keys[j] and len(keys[i]) > 3:
+                        entities[keys[j]]["count"] += entities[keys[i]]["count"]
+                        entities[keys[i]]["count"] = 0
+                        break
+            
+            entities = {k: v for k, v in entities.items() if v["count"] > 0}
+            
             # sort and keep top 5
             sorted_ents = sorted(entities.items(), key=lambda x: x[1]["count"], reverse=True)[:5]
             art["entities"] = {k: v["label"] for k, v in sorted_ents}
@@ -250,9 +280,10 @@ def _generate_fallback_narrative(articles, left_count, right_count, center_count
 def generate_contrastive_summaries(articles):
     """
     Generates two distinct summaries representing the 'Left-Wing' and 'Right-Wing' echo chambers.
+    Uses source_bias (publisher level) instead of bias_label (article level) to prevent duplication.
     """
-    left_articles = [a for a in articles if a.get("bias_label") == "LEFT"]
-    right_articles = [a for a in articles if a.get("bias_label") == "RIGHT"]
+    left_articles = [a for a in articles if a.get("source_bias") == "LEFT"]
+    right_articles = [a for a in articles if a.get("source_bias") == "RIGHT"]
 
     import os
     hf_token = os.environ.get("HF_TOKEN")

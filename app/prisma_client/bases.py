@@ -204,3 +204,23 @@ class BaseLLMUsage(_PrismaModel):
         return actions.LLMUsageActions[_PrismaModelT](client or get_client(), cls)
 
 
+class BaseConsensusFact(_PrismaModel):
+    __prisma_model__: ClassVar[Literal['ConsensusFact']] = 'ConsensusFact'  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @classmethod
+    def prisma(cls: Type[_PrismaModelT], client: Optional['Prisma'] = None) -> 'actions.ConsensusFactActions[_PrismaModelT]':
+        from .client import get_client
+
+        return actions.ConsensusFactActions[_PrismaModelT](client or get_client(), cls)
+
+
+class BaseContradictionPair(_PrismaModel):
+    __prisma_model__: ClassVar[Literal['ContradictionPair']] = 'ContradictionPair'  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @classmethod
+    def prisma(cls: Type[_PrismaModelT], client: Optional['Prisma'] = None) -> 'actions.ContradictionPairActions[_PrismaModelT]':
+        from .client import get_client
+
+        return actions.ContradictionPairActions[_PrismaModelT](client or get_client(), cls)
+
+

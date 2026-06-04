@@ -13525,6 +13525,2072 @@ class LLMUsageActions(Generic[_PrismaModelT]):
         return resp['data']['result']  # type: ignore[no-any-return]
 
 
+class ConsensusFactActions(Generic[_PrismaModelT]):
+    __slots__ = (
+        '_client',
+        '_model',
+    )
+
+    def __init__(self, client: Prisma, model: Type[_PrismaModelT]) -> None:
+        self._client = client
+        self._model = model
+
+    async def query_raw(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> List[_PrismaModelT]:
+        """Execute a raw SQL query
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        List[prisma.models.ConsensusFact]
+            The records returned by the SQL query
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        users = await ConsensusFact.prisma().query_raw(
+            'SELECT * FROM ConsensusFact WHERE id = $1',
+            'bbbghgbadh',
+        )
+        ```
+        """
+        return await self._client.query_raw(query, *args, model=self._model)
+
+    async def query_first(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> Optional[_PrismaModelT]:
+        """Execute a raw SQL query, returning the first result
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        prisma.models.ConsensusFact
+            The first record returned by the SQL query
+        None
+            The raw SQL query did not return any records
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        user = await ConsensusFact.prisma().query_first(
+            'SELECT * FROM ConsensusFact WHERE factStatement = $1',
+            'bbhcgagaic',
+        )
+        ```
+        """
+        return await self._client.query_first(query, *args, model=self._model)
+
+    async def create(
+        self,
+        data: types.ConsensusFactCreateInput,
+        include: Optional[types.ConsensusFactInclude] = None
+    ) -> _PrismaModelT:
+        """Create a new ConsensusFact record.
+
+        Parameters
+        ----------
+        data
+            ConsensusFact record data
+        include
+            Specifies which relations should be loaded on the returned ConsensusFact model
+
+        Returns
+        -------
+        prisma.models.ConsensusFact
+            The created ConsensusFact record
+
+        Raises
+        ------
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # create a ConsensusFact record from just the required fields
+        consensusfact = await ConsensusFact.prisma().create(
+            data={
+                # data to create a ConsensusFact record
+                'factStatement': 'ddaabegbb',
+                'firstSeenAt': datetime.datetime.utcnow(),
+                'lastSeenAt': datetime.datetime.utcnow(),
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='create',
+            model=self._model,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def create_many(
+        self,
+        data: List[types.ConsensusFactCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> int:
+        """Create multiple ConsensusFact records at once.
+
+        This function is *not* available when using SQLite.
+
+        Parameters
+        ----------
+        data
+            List of ConsensusFact record data
+        skip_duplicates
+            Boolean flag for ignoring unique constraint errors
+
+        Returns
+        -------
+        int
+            The total number of records created
+
+        Raises
+        ------
+        prisma.errors.UnsupportedDatabaseError
+            Attempting to query when using SQLite
+        prisma.errors.UniqueViolationError
+            A unique constraint check has failed, these can be ignored with the `skip_duplicates` argument
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        total = await ConsensusFact.prisma().create_many(
+            data=[
+                {
+                    # data to create a ConsensusFact record
+                    'factStatement': 'bhgibfgbbc',
+                    'firstSeenAt': datetime.datetime.utcnow(),
+                    'lastSeenAt': datetime.datetime.utcnow(),
+                },
+                {
+                    # data to create a ConsensusFact record
+                    'factStatement': 'hbgcihef',
+                    'firstSeenAt': datetime.datetime.utcnow(),
+                    'lastSeenAt': datetime.datetime.utcnow(),
+                },
+            ],
+            skip_duplicates=True,
+        )
+        ```
+        """
+        if skip_duplicates and self._client._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._client._active_provider, 'create_many_skip_duplicates')
+
+        resp = await self._client._execute(
+            method='create_many',
+            model=self._model,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    async def delete(
+        self,
+        where: types.ConsensusFactWhereUniqueInput,
+        include: Optional[types.ConsensusFactInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Delete a single ConsensusFact record.
+
+        Parameters
+        ----------
+        where
+            ConsensusFact filter to select the record to be deleted, must be unique
+        include
+            Specifies which relations should be loaded on the returned ConsensusFact model
+
+        Returns
+        -------
+        prisma.models.ConsensusFact
+            The deleted ConsensusFact record
+        None
+            Could not find a record to delete
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        consensusfact = await ConsensusFact.prisma().delete(
+            where={
+                'id': 'ffhgghde',
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='delete',
+                model=self._model,
+                arguments={
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_unique(
+        self,
+        where: types.ConsensusFactWhereUniqueInput,
+        include: Optional[types.ConsensusFactInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Find a unique ConsensusFact record.
+
+        Parameters
+        ----------
+        where
+            ConsensusFact filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned ConsensusFact model
+
+        Returns
+        -------
+        prisma.models.ConsensusFact
+            The found ConsensusFact record
+        None
+            No record matching the given input could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        consensusfact = await ConsensusFact.prisma().find_unique(
+            where={
+                'id': 'ibcadcejf',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+        return model_parse(self._model, result)
+
+    async def find_unique_or_raise(
+        self,
+        where: types.ConsensusFactWhereUniqueInput,
+        include: Optional[types.ConsensusFactInclude] = None
+    ) -> _PrismaModelT:
+        """Find a unique ConsensusFact record. Raises `RecordNotFoundError` if no record is found.
+
+        Parameters
+        ----------
+        where
+            ConsensusFact filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned ConsensusFact model
+
+        Returns
+        -------
+        prisma.models.ConsensusFact
+            The found ConsensusFact record
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        consensusfact = await ConsensusFact.prisma().find_unique_or_raise(
+            where={
+                'id': 'bdcdfgccdg',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique_or_raise',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_many(
+        self,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.ConsensusFactWhereInput] = None,
+        cursor: Optional[types.ConsensusFactWhereUniqueInput] = None,
+        include: Optional[types.ConsensusFactInclude] = None,
+        order: Optional[Union[types.ConsensusFactOrderByInput, List[types.ConsensusFactOrderByInput]]] = None,
+        distinct: Optional[List[types.ConsensusFactScalarFieldKeys]] = None,
+    ) -> List[_PrismaModelT]:
+        """Find multiple ConsensusFact records.
+
+        An empty list is returned if no records could be found.
+
+        Parameters
+        ----------
+        take
+            Limit the maximum number of ConsensusFact records returned
+        skip
+            Ignore the first N results
+        where
+            ConsensusFact filter to select records
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned ConsensusFact model
+        order
+            Order the returned ConsensusFact records by any field
+        distinct
+            Filter ConsensusFact records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        List[prisma.models.ConsensusFact]
+            The list of all ConsensusFact records that could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the first 10 ConsensusFact records
+        consensusfacts = await ConsensusFact.prisma().find_many(take=10)
+
+        # find the first 5 ConsensusFact records ordered by the confidenceScore field
+        consensusfacts = await ConsensusFact.prisma().find_many(
+            take=5,
+            order={
+                'confidenceScore': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_many',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return [model_parse(self._model, r) for r in resp['data']['result']]
+
+    async def find_first(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.ConsensusFactWhereInput] = None,
+        cursor: Optional[types.ConsensusFactWhereUniqueInput] = None,
+        include: Optional[types.ConsensusFactInclude] = None,
+        order: Optional[Union[types.ConsensusFactOrderByInput, List[types.ConsensusFactOrderByInput]]] = None,
+        distinct: Optional[List[types.ConsensusFactScalarFieldKeys]] = None,
+    ) -> Optional[_PrismaModelT]:
+        """Find a single ConsensusFact record.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            ConsensusFact filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned ConsensusFact model
+        order
+            Order the returned ConsensusFact records by any field
+        distinct
+            Filter ConsensusFact records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.ConsensusFact
+            The first ConsensusFact record found, matching the given arguments
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second ConsensusFact record ordered by the sourceCount field
+        consensusfact = await ConsensusFact.prisma().find_first(
+            skip=1,
+            order={
+                'sourceCount': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+
+        return model_parse(self._model, result)
+
+    async def find_first_or_raise(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.ConsensusFactWhereInput] = None,
+        cursor: Optional[types.ConsensusFactWhereUniqueInput] = None,
+        include: Optional[types.ConsensusFactInclude] = None,
+        order: Optional[Union[types.ConsensusFactOrderByInput, List[types.ConsensusFactOrderByInput]]] = None,
+        distinct: Optional[List[types.ConsensusFactScalarFieldKeys]] = None,
+    ) -> _PrismaModelT:
+        """Find a single ConsensusFact record. Raises `RecordNotFoundError` if no record was found.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            ConsensusFact filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned ConsensusFact model
+        order
+            Order the returned ConsensusFact records by any field
+        distinct
+            Filter ConsensusFact records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.ConsensusFact
+            The first ConsensusFact record found, matching the given arguments
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second ConsensusFact record ordered by the firstSeenAt field
+        consensusfact = await ConsensusFact.prisma().find_first_or_raise(
+            skip=1,
+            order={
+                'firstSeenAt': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first_or_raise',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update(
+        self,
+        data: types.ConsensusFactUpdateInput,
+        where: types.ConsensusFactWhereUniqueInput,
+        include: Optional[types.ConsensusFactInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Update a single ConsensusFact record.
+
+        Parameters
+        ----------
+        data
+            ConsensusFact record data specifying what to update
+        where
+            ConsensusFact filter to select the unique record to create / update
+        include
+            Specifies which relations should be loaded on the returned ConsensusFact model
+
+        Returns
+        -------
+        prisma.models.ConsensusFact
+            The updated ConsensusFact record
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        consensusfact = await ConsensusFact.prisma().update(
+            where={
+                'id': 'edhjgdfh',
+            },
+            data={
+                # data to update the ConsensusFact record to
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='update',
+                model=self._model,
+                arguments={
+                    'data': data,
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def upsert(
+        self,
+        where: types.ConsensusFactWhereUniqueInput,
+        data: types.ConsensusFactUpsertInput,
+        include: Optional[types.ConsensusFactInclude] = None,
+    ) -> _PrismaModelT:
+        """Updates an existing record or create a new one
+
+        Parameters
+        ----------
+        where
+            ConsensusFact filter to select the unique record to create / update
+        data
+            Data specifying what fields to set on create and update
+        include
+            Specifies which relations should be loaded on the returned ConsensusFact model
+
+        Returns
+        -------
+        prisma.models.ConsensusFact
+            The created or updated ConsensusFact record
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        consensusfact = await ConsensusFact.prisma().upsert(
+            where={
+                'id': 'bdeffdadda',
+            },
+            data={
+                'create': {
+                    'id': 'bdeffdadda',
+                    'factStatement': 'hbgcihef',
+                    'firstSeenAt': datetime.datetime.utcnow(),
+                    'lastSeenAt': datetime.datetime.utcnow(),
+                },
+                'update': {
+                    'factStatement': 'hbgcihef',
+                    'firstSeenAt': datetime.datetime.utcnow(),
+                    'lastSeenAt': datetime.datetime.utcnow(),
+                },
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='upsert',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update_many(
+        self,
+        data: types.ConsensusFactUpdateManyMutationInput,
+        where: types.ConsensusFactWhereInput,
+    ) -> int:
+        """Update multiple ConsensusFact records
+
+        Parameters
+        ----------
+        data
+            ConsensusFact data to update the selected ConsensusFact records to
+        where
+            Filter to select the ConsensusFact records to update
+
+        Returns
+        -------
+        int
+            The total number of ConsensusFact records that were updated
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # update all ConsensusFact records
+        total = await ConsensusFact.prisma().update_many(
+            data={
+                'lastSeenAt': datetime.datetime.utcnow()
+            },
+            where={}
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='update_many',
+            model=self._model,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    @overload
+    async def count(
+        self,
+        select: None = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.ConsensusFactWhereInput] = None,
+        cursor: Optional[types.ConsensusFactWhereUniqueInput] = None,
+    ) -> int:
+        """Count the number of ConsensusFact records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the ConsensusFact fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            ConsensusFact filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.ConsensusFactCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await ConsensusFact.prisma().count()
+
+        # results: prisma.types.ConsensusFactCountAggregateOutput
+        results = await ConsensusFact.prisma().count(
+            select={
+                '_all': True,
+                'createdAt': True,
+            },
+        )
+        ```
+        """
+
+
+    @overload
+    async def count(
+        self,
+        select: types.ConsensusFactCountAggregateInput,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.ConsensusFactWhereInput] = None,
+        cursor: Optional[types.ConsensusFactWhereUniqueInput] = None,
+    ) -> types.ConsensusFactCountAggregateOutput:
+        ...
+
+    async def count(
+        self,
+        select: Optional[types.ConsensusFactCountAggregateInput] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.ConsensusFactWhereInput] = None,
+        cursor: Optional[types.ConsensusFactWhereUniqueInput] = None,
+    ) -> Union[int, types.ConsensusFactCountAggregateOutput]:
+        """Count the number of ConsensusFact records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the ConsensusFact fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            ConsensusFact filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.ConsensusFactCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await ConsensusFact.prisma().count()
+
+        # results: prisma.types.ConsensusFactCountAggregateOutput
+        results = await ConsensusFact.prisma().count(
+            select={
+                '_all': True,
+                'id': True,
+            },
+        )
+        ```
+        """
+
+        # TODO: this selection building should be moved to the QueryBuilder
+        #
+        # note the distinction between checking for `not select` here and `select is None`
+        # later is to handle the case that the given select dictionary is empty, this
+        # is a limitation of our types.
+        if not select:
+            root_selection = ['_count { _all }']
+        else:
+
+            root_selection = [
+                '_count {{ {0} }}'.format(' '.join(k for k, v in select.items() if v is True))
+            ]
+
+        resp = await self._client._execute(
+            method='count',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'cursor': cursor,
+            },
+            root_selection=root_selection,
+        )
+
+        if select is None:
+            return cast(int, resp['data']['result']['_count']['_all'])
+        else:
+            return cast(types.ConsensusFactCountAggregateOutput, resp['data']['result']['_count'])
+
+    async def delete_many(
+        self,
+        where: Optional[types.ConsensusFactWhereInput] = None
+    ) -> int:
+        """Delete multiple ConsensusFact records.
+
+        Parameters
+        ----------
+        where
+            Optional ConsensusFact filter to find the records to be deleted
+
+        Returns
+        -------
+        int
+            The total number of ConsensusFact records that were deleted
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # delete all ConsensusFact records
+        total = await ConsensusFact.prisma().delete_many()
+        ```
+        """
+        resp = await self._client._execute(
+            method='delete_many',
+            model=self._model,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    # TODO: make this easier to work with safely, currently output fields are typed as
+    #       not required, we should refactor the return type
+    # TODO: consider returning a Dict where the keys are a Tuple of the `by` selection
+    # TODO: statically type that the order argument is required when take or skip are present
+    async def group_by(
+        self,
+        by: List['types.ConsensusFactScalarFieldKeys'],
+        *,
+        where: Optional['types.ConsensusFactWhereInput'] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        avg: Optional['types.ConsensusFactAvgAggregateInput'] = None,
+        sum: Optional['types.ConsensusFactSumAggregateInput'] = None,
+        min: Optional['types.ConsensusFactMinAggregateInput'] = None,
+        max: Optional['types.ConsensusFactMaxAggregateInput'] = None,
+        having: Optional['types.ConsensusFactScalarWhereWithAggregatesInput'] = None,
+        count: Optional[Union[bool, 'types.ConsensusFactCountAggregateInput']] = None,
+        order: Optional[Union[Mapping['types.ConsensusFactScalarFieldKeys', 'types.SortOrder'], List[Mapping['types.ConsensusFactScalarFieldKeys', 'types.SortOrder']]]] = None,
+    ) -> List['types.ConsensusFactGroupByOutput']:
+        """Group ConsensusFact records by one or more field values and perform aggregations
+        each group such as finding the average.
+
+        Parameters
+        ----------
+        by
+            List of scalar ConsensusFact fields to group records by
+        where
+            ConsensusFact filter to select records
+        take
+            Limit the maximum number of ConsensusFact records returned
+        skip
+            Ignore the first N records
+        avg
+            Adds the average of all values of the specified fields to the `_avg` field
+            in the returned data.
+        sum
+            Adds the sum of all values of the specified fields to the `_sum` field
+            in the returned data.
+        min
+            Adds the smallest available value for the specified fields to the `_min` field
+            in the returned data.
+        max
+            Adds the largest available value for the specified fields to the `_max` field
+            in the returned data.
+        count
+            Adds a count of non-fields to the `_count` field in the returned data.
+        having
+            Allows you to filter groups by an aggregate value - for example only return
+            groups having an average age less than 50.
+        order
+            Lets you order the returned list by any property that is also present in `by`.
+            Only **one** field is allowed at a time.
+
+        Returns
+        -------
+        List[prisma.types.ConsensusFactGroupByOutput]
+            A list of dictionaries representing the ConsensusFact record,
+            this will also have additional fields present if aggregation arguments
+            are used (see the above parameters)
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # group ConsensusFact records by factStatement values
+        # and count how many records are in each group
+        results = await ConsensusFact.prisma().group_by(
+            ['factStatement'],
+            count=True,
+        )
+        ```
+        """
+        if order is None:
+            if take is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'take\' is present')
+
+            if skip is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'skip\' is present')
+
+        root_selection: List[str] = [*by]
+        if avg is not None:
+            root_selection.append(_select_fields('_avg', avg))
+
+        if min is not None:
+            root_selection.append(_select_fields('_min', min))
+
+        if sum is not None:
+            root_selection.append(_select_fields('_sum', sum))
+
+        if max is not None:
+            root_selection.append(_select_fields('_max', max))
+
+        if count is not None:
+            if count is True:
+                root_selection.append('_count { _all }')
+            elif isinstance(count, dict):
+                root_selection.append(_select_fields('_count', count))
+
+        resp = await self._client._execute(
+            method='group_by',
+            model=self._model,
+            arguments={
+                'by': by,
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'having': having,
+                'orderBy': order,
+            },
+            root_selection=root_selection,
+        )
+        return resp['data']['result']  # type: ignore[no-any-return]
+
+
+class ContradictionPairActions(Generic[_PrismaModelT]):
+    __slots__ = (
+        '_client',
+        '_model',
+    )
+
+    def __init__(self, client: Prisma, model: Type[_PrismaModelT]) -> None:
+        self._client = client
+        self._model = model
+
+    async def query_raw(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> List[_PrismaModelT]:
+        """Execute a raw SQL query
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        List[prisma.models.ContradictionPair]
+            The records returned by the SQL query
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        users = await ContradictionPair.prisma().query_raw(
+            'SELECT * FROM ContradictionPair WHERE id = $1',
+            'bjgfdihchf',
+        )
+        ```
+        """
+        return await self._client.query_raw(query, *args, model=self._model)
+
+    async def query_first(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> Optional[_PrismaModelT]:
+        """Execute a raw SQL query, returning the first result
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        prisma.models.ContradictionPair
+            The first record returned by the SQL query
+        None
+            The raw SQL query did not return any records
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        user = await ContradictionPair.prisma().query_first(
+            'SELECT * FROM ContradictionPair WHERE claimAId = $1',
+            'iaeihdeei',
+        )
+        ```
+        """
+        return await self._client.query_first(query, *args, model=self._model)
+
+    async def create(
+        self,
+        data: types.ContradictionPairCreateInput,
+        include: Optional[types.ContradictionPairInclude] = None
+    ) -> _PrismaModelT:
+        """Create a new ContradictionPair record.
+
+        Parameters
+        ----------
+        data
+            ContradictionPair record data
+        include
+            Specifies which relations should be loaded on the returned ContradictionPair model
+
+        Returns
+        -------
+        prisma.models.ContradictionPair
+            The created ContradictionPair record
+
+        Raises
+        ------
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # create a ContradictionPair record from just the required fields
+        contradictionpair = await ContradictionPair.prisma().create(
+            data={
+                # data to create a ContradictionPair record
+                'claimAId': 'bfggejgfbd',
+                'claimBId': 'ifaaaedja',
+                'contradictionType': 'cbajdjjabf',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='create',
+            model=self._model,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def create_many(
+        self,
+        data: List[types.ContradictionPairCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> int:
+        """Create multiple ContradictionPair records at once.
+
+        This function is *not* available when using SQLite.
+
+        Parameters
+        ----------
+        data
+            List of ContradictionPair record data
+        skip_duplicates
+            Boolean flag for ignoring unique constraint errors
+
+        Returns
+        -------
+        int
+            The total number of records created
+
+        Raises
+        ------
+        prisma.errors.UnsupportedDatabaseError
+            Attempting to query when using SQLite
+        prisma.errors.UniqueViolationError
+            A unique constraint check has failed, these can be ignored with the `skip_duplicates` argument
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        total = await ContradictionPair.prisma().create_many(
+            data=[
+                {
+                    # data to create a ContradictionPair record
+                    'claimAId': 'bcicggedea',
+                    'claimBId': 'cebcdadjh',
+                    'contradictionType': 'ehfigdgac',
+                },
+                {
+                    # data to create a ContradictionPair record
+                    'claimAId': 'bhbgccijjf',
+                    'claimBId': 'bigjhdgbjc',
+                    'contradictionType': 'bfifdebhfd',
+                },
+            ],
+            skip_duplicates=True,
+        )
+        ```
+        """
+        if skip_duplicates and self._client._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._client._active_provider, 'create_many_skip_duplicates')
+
+        resp = await self._client._execute(
+            method='create_many',
+            model=self._model,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    async def delete(
+        self,
+        where: types.ContradictionPairWhereUniqueInput,
+        include: Optional[types.ContradictionPairInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Delete a single ContradictionPair record.
+
+        Parameters
+        ----------
+        where
+            ContradictionPair filter to select the record to be deleted, must be unique
+        include
+            Specifies which relations should be loaded on the returned ContradictionPair model
+
+        Returns
+        -------
+        prisma.models.ContradictionPair
+            The deleted ContradictionPair record
+        None
+            Could not find a record to delete
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        contradictionpair = await ContradictionPair.prisma().delete(
+            where={
+                'id': 'cjchbjde',
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='delete',
+                model=self._model,
+                arguments={
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_unique(
+        self,
+        where: types.ContradictionPairWhereUniqueInput,
+        include: Optional[types.ContradictionPairInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Find a unique ContradictionPair record.
+
+        Parameters
+        ----------
+        where
+            ContradictionPair filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned ContradictionPair model
+
+        Returns
+        -------
+        prisma.models.ContradictionPair
+            The found ContradictionPair record
+        None
+            No record matching the given input could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        contradictionpair = await ContradictionPair.prisma().find_unique(
+            where={
+                'id': 'bfiibjcehj',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+        return model_parse(self._model, result)
+
+    async def find_unique_or_raise(
+        self,
+        where: types.ContradictionPairWhereUniqueInput,
+        include: Optional[types.ContradictionPairInclude] = None
+    ) -> _PrismaModelT:
+        """Find a unique ContradictionPair record. Raises `RecordNotFoundError` if no record is found.
+
+        Parameters
+        ----------
+        where
+            ContradictionPair filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned ContradictionPair model
+
+        Returns
+        -------
+        prisma.models.ContradictionPair
+            The found ContradictionPair record
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        contradictionpair = await ContradictionPair.prisma().find_unique_or_raise(
+            where={
+                'id': 'ijieafghg',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique_or_raise',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_many(
+        self,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.ContradictionPairWhereInput] = None,
+        cursor: Optional[types.ContradictionPairWhereUniqueInput] = None,
+        include: Optional[types.ContradictionPairInclude] = None,
+        order: Optional[Union[types.ContradictionPairOrderByInput, List[types.ContradictionPairOrderByInput]]] = None,
+        distinct: Optional[List[types.ContradictionPairScalarFieldKeys]] = None,
+    ) -> List[_PrismaModelT]:
+        """Find multiple ContradictionPair records.
+
+        An empty list is returned if no records could be found.
+
+        Parameters
+        ----------
+        take
+            Limit the maximum number of ContradictionPair records returned
+        skip
+            Ignore the first N results
+        where
+            ContradictionPair filter to select records
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned ContradictionPair model
+        order
+            Order the returned ContradictionPair records by any field
+        distinct
+            Filter ContradictionPair records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        List[prisma.models.ContradictionPair]
+            The list of all ContradictionPair records that could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the first 10 ContradictionPair records
+        contradictionpairs = await ContradictionPair.prisma().find_many(take=10)
+
+        # find the first 5 ContradictionPair records ordered by the claimBId field
+        contradictionpairs = await ContradictionPair.prisma().find_many(
+            take=5,
+            order={
+                'claimBId': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_many',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return [model_parse(self._model, r) for r in resp['data']['result']]
+
+    async def find_first(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.ContradictionPairWhereInput] = None,
+        cursor: Optional[types.ContradictionPairWhereUniqueInput] = None,
+        include: Optional[types.ContradictionPairInclude] = None,
+        order: Optional[Union[types.ContradictionPairOrderByInput, List[types.ContradictionPairOrderByInput]]] = None,
+        distinct: Optional[List[types.ContradictionPairScalarFieldKeys]] = None,
+    ) -> Optional[_PrismaModelT]:
+        """Find a single ContradictionPair record.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            ContradictionPair filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned ContradictionPair model
+        order
+            Order the returned ContradictionPair records by any field
+        distinct
+            Filter ContradictionPair records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.ContradictionPair
+            The first ContradictionPair record found, matching the given arguments
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second ContradictionPair record ordered by the contradictionType field
+        contradictionpair = await ContradictionPair.prisma().find_first(
+            skip=1,
+            order={
+                'contradictionType': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+
+        return model_parse(self._model, result)
+
+    async def find_first_or_raise(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.ContradictionPairWhereInput] = None,
+        cursor: Optional[types.ContradictionPairWhereUniqueInput] = None,
+        include: Optional[types.ContradictionPairInclude] = None,
+        order: Optional[Union[types.ContradictionPairOrderByInput, List[types.ContradictionPairOrderByInput]]] = None,
+        distinct: Optional[List[types.ContradictionPairScalarFieldKeys]] = None,
+    ) -> _PrismaModelT:
+        """Find a single ContradictionPair record. Raises `RecordNotFoundError` if no record was found.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            ContradictionPair filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned ContradictionPair model
+        order
+            Order the returned ContradictionPair records by any field
+        distinct
+            Filter ContradictionPair records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.ContradictionPair
+            The first ContradictionPair record found, matching the given arguments
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second ContradictionPair record ordered by the confidenceScore field
+        contradictionpair = await ContradictionPair.prisma().find_first_or_raise(
+            skip=1,
+            order={
+                'confidenceScore': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first_or_raise',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update(
+        self,
+        data: types.ContradictionPairUpdateInput,
+        where: types.ContradictionPairWhereUniqueInput,
+        include: Optional[types.ContradictionPairInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Update a single ContradictionPair record.
+
+        Parameters
+        ----------
+        data
+            ContradictionPair record data specifying what to update
+        where
+            ContradictionPair filter to select the unique record to create / update
+        include
+            Specifies which relations should be loaded on the returned ContradictionPair model
+
+        Returns
+        -------
+        prisma.models.ContradictionPair
+            The updated ContradictionPair record
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        contradictionpair = await ContradictionPair.prisma().update(
+            where={
+                'id': 'hhhegahcf',
+            },
+            data={
+                # data to update the ContradictionPair record to
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='update',
+                model=self._model,
+                arguments={
+                    'data': data,
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def upsert(
+        self,
+        where: types.ContradictionPairWhereUniqueInput,
+        data: types.ContradictionPairUpsertInput,
+        include: Optional[types.ContradictionPairInclude] = None,
+    ) -> _PrismaModelT:
+        """Updates an existing record or create a new one
+
+        Parameters
+        ----------
+        where
+            ContradictionPair filter to select the unique record to create / update
+        data
+            Data specifying what fields to set on create and update
+        include
+            Specifies which relations should be loaded on the returned ContradictionPair model
+
+        Returns
+        -------
+        prisma.models.ContradictionPair
+            The created or updated ContradictionPair record
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        contradictionpair = await ContradictionPair.prisma().upsert(
+            where={
+                'id': 'edhijefdi',
+            },
+            data={
+                'create': {
+                    'id': 'edhijefdi',
+                    'claimAId': 'bhbgccijjf',
+                    'claimBId': 'bigjhdgbjc',
+                    'contradictionType': 'bfifdebhfd',
+                },
+                'update': {
+                    'claimAId': 'bhbgccijjf',
+                    'claimBId': 'bigjhdgbjc',
+                    'contradictionType': 'bfifdebhfd',
+                },
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='upsert',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update_many(
+        self,
+        data: types.ContradictionPairUpdateManyMutationInput,
+        where: types.ContradictionPairWhereInput,
+    ) -> int:
+        """Update multiple ContradictionPair records
+
+        Parameters
+        ----------
+        data
+            ContradictionPair data to update the selected ContradictionPair records to
+        where
+            Filter to select the ContradictionPair records to update
+
+        Returns
+        -------
+        int
+            The total number of ContradictionPair records that were updated
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # update all ContradictionPair records
+        total = await ContradictionPair.prisma().update_many(
+            data={
+                'resolved': False
+            },
+            where={}
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='update_many',
+            model=self._model,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    @overload
+    async def count(
+        self,
+        select: None = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.ContradictionPairWhereInput] = None,
+        cursor: Optional[types.ContradictionPairWhereUniqueInput] = None,
+    ) -> int:
+        """Count the number of ContradictionPair records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the ContradictionPair fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            ContradictionPair filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.ContradictionPairCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await ContradictionPair.prisma().count()
+
+        # results: prisma.types.ContradictionPairCountAggregateOutput
+        results = await ContradictionPair.prisma().count(
+            select={
+                '_all': True,
+                'createdAt': True,
+            },
+        )
+        ```
+        """
+
+
+    @overload
+    async def count(
+        self,
+        select: types.ContradictionPairCountAggregateInput,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.ContradictionPairWhereInput] = None,
+        cursor: Optional[types.ContradictionPairWhereUniqueInput] = None,
+    ) -> types.ContradictionPairCountAggregateOutput:
+        ...
+
+    async def count(
+        self,
+        select: Optional[types.ContradictionPairCountAggregateInput] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.ContradictionPairWhereInput] = None,
+        cursor: Optional[types.ContradictionPairWhereUniqueInput] = None,
+    ) -> Union[int, types.ContradictionPairCountAggregateOutput]:
+        """Count the number of ContradictionPair records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the ContradictionPair fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            ContradictionPair filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.ContradictionPairCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await ContradictionPair.prisma().count()
+
+        # results: prisma.types.ContradictionPairCountAggregateOutput
+        results = await ContradictionPair.prisma().count(
+            select={
+                '_all': True,
+                'id': True,
+            },
+        )
+        ```
+        """
+
+        # TODO: this selection building should be moved to the QueryBuilder
+        #
+        # note the distinction between checking for `not select` here and `select is None`
+        # later is to handle the case that the given select dictionary is empty, this
+        # is a limitation of our types.
+        if not select:
+            root_selection = ['_count { _all }']
+        else:
+
+            root_selection = [
+                '_count {{ {0} }}'.format(' '.join(k for k, v in select.items() if v is True))
+            ]
+
+        resp = await self._client._execute(
+            method='count',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'cursor': cursor,
+            },
+            root_selection=root_selection,
+        )
+
+        if select is None:
+            return cast(int, resp['data']['result']['_count']['_all'])
+        else:
+            return cast(types.ContradictionPairCountAggregateOutput, resp['data']['result']['_count'])
+
+    async def delete_many(
+        self,
+        where: Optional[types.ContradictionPairWhereInput] = None
+    ) -> int:
+        """Delete multiple ContradictionPair records.
+
+        Parameters
+        ----------
+        where
+            Optional ContradictionPair filter to find the records to be deleted
+
+        Returns
+        -------
+        int
+            The total number of ContradictionPair records that were deleted
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # delete all ContradictionPair records
+        total = await ContradictionPair.prisma().delete_many()
+        ```
+        """
+        resp = await self._client._execute(
+            method='delete_many',
+            model=self._model,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    # TODO: make this easier to work with safely, currently output fields are typed as
+    #       not required, we should refactor the return type
+    # TODO: consider returning a Dict where the keys are a Tuple of the `by` selection
+    # TODO: statically type that the order argument is required when take or skip are present
+    async def group_by(
+        self,
+        by: List['types.ContradictionPairScalarFieldKeys'],
+        *,
+        where: Optional['types.ContradictionPairWhereInput'] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        avg: Optional['types.ContradictionPairAvgAggregateInput'] = None,
+        sum: Optional['types.ContradictionPairSumAggregateInput'] = None,
+        min: Optional['types.ContradictionPairMinAggregateInput'] = None,
+        max: Optional['types.ContradictionPairMaxAggregateInput'] = None,
+        having: Optional['types.ContradictionPairScalarWhereWithAggregatesInput'] = None,
+        count: Optional[Union[bool, 'types.ContradictionPairCountAggregateInput']] = None,
+        order: Optional[Union[Mapping['types.ContradictionPairScalarFieldKeys', 'types.SortOrder'], List[Mapping['types.ContradictionPairScalarFieldKeys', 'types.SortOrder']]]] = None,
+    ) -> List['types.ContradictionPairGroupByOutput']:
+        """Group ContradictionPair records by one or more field values and perform aggregations
+        each group such as finding the average.
+
+        Parameters
+        ----------
+        by
+            List of scalar ContradictionPair fields to group records by
+        where
+            ContradictionPair filter to select records
+        take
+            Limit the maximum number of ContradictionPair records returned
+        skip
+            Ignore the first N records
+        avg
+            Adds the average of all values of the specified fields to the `_avg` field
+            in the returned data.
+        sum
+            Adds the sum of all values of the specified fields to the `_sum` field
+            in the returned data.
+        min
+            Adds the smallest available value for the specified fields to the `_min` field
+            in the returned data.
+        max
+            Adds the largest available value for the specified fields to the `_max` field
+            in the returned data.
+        count
+            Adds a count of non-fields to the `_count` field in the returned data.
+        having
+            Allows you to filter groups by an aggregate value - for example only return
+            groups having an average age less than 50.
+        order
+            Lets you order the returned list by any property that is also present in `by`.
+            Only **one** field is allowed at a time.
+
+        Returns
+        -------
+        List[prisma.types.ContradictionPairGroupByOutput]
+            A list of dictionaries representing the ContradictionPair record,
+            this will also have additional fields present if aggregation arguments
+            are used (see the above parameters)
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # group ContradictionPair records by claimAId values
+        # and count how many records are in each group
+        results = await ContradictionPair.prisma().group_by(
+            ['claimAId'],
+            count=True,
+        )
+        ```
+        """
+        if order is None:
+            if take is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'take\' is present')
+
+            if skip is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'skip\' is present')
+
+        root_selection: List[str] = [*by]
+        if avg is not None:
+            root_selection.append(_select_fields('_avg', avg))
+
+        if min is not None:
+            root_selection.append(_select_fields('_min', min))
+
+        if sum is not None:
+            root_selection.append(_select_fields('_sum', sum))
+
+        if max is not None:
+            root_selection.append(_select_fields('_max', max))
+
+        if count is not None:
+            if count is True:
+                root_selection.append('_count { _all }')
+            elif isinstance(count, dict):
+                root_selection.append(_select_fields('_count', count))
+
+        resp = await self._client._execute(
+            method='group_by',
+            model=self._model,
+            arguments={
+                'by': by,
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'having': having,
+                'orderBy': order,
+            },
+            root_selection=root_selection,
+        )
+        return resp['data']['result']  # type: ignore[no-any-return]
+
+
 
 def _select_fields(root: str, select: Mapping[str, Any]) -> str:
     """Helper to build a GraphQL selection string

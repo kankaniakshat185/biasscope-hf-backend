@@ -307,21 +307,14 @@ async def run_event_detection(prisma):
             data={"consensusScore": consensus_score},
         )
 
-        # ── EVENT ELIGIBILITY GATE ──
-        # An event must satisfy:
-        #   (source_count >= 2) OR (claim_count >= 3 AND evidence_count >= 4)
-        # AND claim_count >= 2
-        # AND evidence_count >= 2
-        is_multi_source = source_count >= 2
-        is_substantial_single = claim_count >= 3 and evidence_count >= 4
+        # ── EVENT ELIGIBILITY GATE (Issue 2) ──
+        # An event must represent cross-source convergence.
+        # Must have sources >= 2 AND claims >= 2 AND evidence >= 2.
         has_minimum_claims = claim_count >= 2
         has_minimum_evidence = evidence_count >= 2
+        is_multi_source = source_count >= 2
 
-        if not has_minimum_claims or not has_minimum_evidence:
-            events_skipped += 1
-            continue
-
-        if not (is_multi_source or is_substantial_single):
+        if not (has_minimum_claims and has_minimum_evidence and is_multi_source):
             events_skipped += 1
             continue
 

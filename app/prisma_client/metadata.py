@@ -19,6 +19,8 @@ PRISMA_MODELS: set[str] = {
     'ClaimCluster',
     'LLMCache',
     'LLMUsage',
+    'ConsensusFact',
+    'ContradictionPair',
 }
 
 RELATIONAL_FIELD_MAPPINGS: dict[str, dict[str, str]] = {
@@ -63,6 +65,10 @@ RELATIONAL_FIELD_MAPPINGS: dict[str, dict[str, str]] = {
     'LLMCache': {
     },
     'LLMUsage': {
+    },
+    'ConsensusFact': {
+    },
+    'ContradictionPair': {
     },
 }
 

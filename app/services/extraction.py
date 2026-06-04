@@ -87,13 +87,14 @@ async def extract_claims(prisma, article_text: str) -> List[Dict[str, Any]]:
         "You are a news intelligence extractor. Extract ONLY verifiable factual claims from the article. "
         "Classify each claim as one of: EVENT, NUMERIC, BIOGRAPHICAL, OPINION, ANALYSIS, PREDICTION, QUOTE.\n\n"
         "STRICT RULES:\n"
-        "- EVENT: A concrete action that happened (filing, launch, deal, announcement, arrest, explosion)\n"
-        "- NUMERIC: A specific measurable fact ($75B, 42%, 18,712 bitcoin)\n"
-        "- BIOGRAPHICAL: Personal history, marriages, filmography, awards — REJECT THESE\n"
-        "- OPINION: Subjective judgment ('is bad at', 'damaged democracy') — REJECT THESE\n"
-        "- ANALYSIS: Market commentary, predictions about reactions — REJECT THESE\n"
-        "- QUOTE: Direct speech from a person — STORE SEPARATELY\n"
-        "- PREDICTION: Future speculation — STORE SEPARATELY\n\n"
+        "1. Can this be proven true or false? If not, REJECT IT.\n"
+        "2. EVENT: A concrete action that happened (filing, launch, deal, announcement, arrest, explosion)\n"
+        "3. NUMERIC: A specific measurable fact ($75B, 42%, 18,712 bitcoin)\n"
+        "4. BIOGRAPHICAL: Personal history, marriages, filmography, awards — REJECT THESE\n"
+        "5. OPINION: Subjective judgment ('is bad at', 'damaged democracy', 'orchestrated for maximum advantage') — REJECT THESE\n"
+        "6. ANALYSIS: Market commentary, predictions about reactions — REJECT THESE\n"
+        "7. QUOTE: Direct speech from a person — STORE SEPARATELY\n"
+        "8. PREDICTION: Future speculation — STORE SEPARATELY\n\n"
         "Replace ALL pronouns with named entities.\n"
         "Each claim must be a SINGLE atomic fact, not a compound sentence.\n"
         "Return ONLY valid JSON:\n"
@@ -141,6 +142,10 @@ def compute_quality_score(text: str) -> float:
     """Score claim quality. Penalize opinion/biographical signals."""
     score = 0.0
     text_lower = text.lower()
+
+    # Issue 9: Reject questions and rhetorical statements
+    if '?' in text:
+        return 0.0  # Hard reject
 
     # Penalty: opinion/biographical language that the LLM type gate might miss
     for signal in OPINION_SIGNALS:

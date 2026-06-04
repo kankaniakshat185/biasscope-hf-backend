@@ -2766,6 +2766,208 @@ class FindManyLLMUsageArgsFromUserRecursive4(TypedDict, total=False):
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
     
+    
+
+class ConsensusFactIncludeFromUser(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class ConsensusFactIncludeFromUserRecursive1(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class ConsensusFactIncludeFromUserRecursive2(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class ConsensusFactIncludeFromUserRecursive3(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class ConsensusFactIncludeFromUserRecursive4(TypedDict, total=False):
+    """Relational arguments for User"""
+
+    
+
+class ConsensusFactArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    
+    
+
+class FindManyConsensusFactArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromUser(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class ContradictionPairIncludeFromUserRecursive1(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class ContradictionPairIncludeFromUserRecursive2(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class ContradictionPairIncludeFromUserRecursive3(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class ContradictionPairIncludeFromUserRecursive4(TypedDict, total=False):
+    """Relational arguments for User"""
+
+    
+
+class ContradictionPairArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    
+    
+
+class FindManyContradictionPairArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
 
 
 FindManyUserArgs = FindManyUserArgsFromUser
@@ -4704,6 +4906,208 @@ class FindManyLLMUsageArgsFromSessionRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class ConsensusFactIncludeFromSession(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class ConsensusFactIncludeFromSessionRecursive1(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class ConsensusFactIncludeFromSessionRecursive2(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class ConsensusFactIncludeFromSessionRecursive3(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class ConsensusFactIncludeFromSessionRecursive4(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+    
+
+class ConsensusFactArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    
+    
+
+class FindManyConsensusFactArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromSession(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class ContradictionPairIncludeFromSessionRecursive1(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class ContradictionPairIncludeFromSessionRecursive2(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class ContradictionPairIncludeFromSessionRecursive3(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class ContradictionPairIncludeFromSessionRecursive4(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+    
+
+class ContradictionPairArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    
+    
+
+class FindManyContradictionPairArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
     
 
 
@@ -6702,6 +7106,208 @@ class FindManyLLMUsageArgsFromAccountRecursive4(TypedDict, total=False):
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
     
+    
+
+class ConsensusFactIncludeFromAccount(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class ConsensusFactIncludeFromAccountRecursive1(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class ConsensusFactIncludeFromAccountRecursive2(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class ConsensusFactIncludeFromAccountRecursive3(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class ConsensusFactIncludeFromAccountRecursive4(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+    
+
+class ConsensusFactArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    
+    
+
+class FindManyConsensusFactArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromAccount(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class ContradictionPairIncludeFromAccountRecursive1(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class ContradictionPairIncludeFromAccountRecursive2(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class ContradictionPairIncludeFromAccountRecursive3(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class ContradictionPairIncludeFromAccountRecursive4(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+    
+
+class ContradictionPairArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    
+    
+
+class FindManyContradictionPairArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
 
 
 FindManyAccountArgs = FindManyAccountArgsFromAccount
@@ -8697,6 +9303,208 @@ class FindManyLLMUsageArgsFromVerificationRecursive4(TypedDict, total=False):
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
     
+    
+
+class ConsensusFactIncludeFromVerification(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class ConsensusFactIncludeFromVerificationRecursive1(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class ConsensusFactIncludeFromVerificationRecursive2(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class ConsensusFactIncludeFromVerificationRecursive3(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class ConsensusFactIncludeFromVerificationRecursive4(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+    
+
+class ConsensusFactArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    
+    
+
+class FindManyConsensusFactArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromVerification(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class ContradictionPairIncludeFromVerificationRecursive1(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class ContradictionPairIncludeFromVerificationRecursive2(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class ContradictionPairIncludeFromVerificationRecursive3(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class ContradictionPairIncludeFromVerificationRecursive4(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+    
+
+class ContradictionPairArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    
+    
+
+class FindManyContradictionPairArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
 
 
 FindManyVerificationArgs = FindManyVerificationArgsFromVerification
@@ -10551,6 +11359,208 @@ class FindManyLLMUsageArgsFromSearchRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class ConsensusFactIncludeFromSearch(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class ConsensusFactIncludeFromSearchRecursive1(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class ConsensusFactIncludeFromSearchRecursive2(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class ConsensusFactIncludeFromSearchRecursive3(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class ConsensusFactIncludeFromSearchRecursive4(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+    
+
+class ConsensusFactArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    
+    
+
+class FindManyConsensusFactArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromSearch(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class ContradictionPairIncludeFromSearchRecursive1(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class ContradictionPairIncludeFromSearchRecursive2(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class ContradictionPairIncludeFromSearchRecursive3(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class ContradictionPairIncludeFromSearchRecursive4(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+    
+
+class ContradictionPairArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    
+    
+
+class FindManyContradictionPairArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
     
 
 
@@ -12521,6 +13531,208 @@ class FindManyLLMUsageArgsFromArticleRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class ConsensusFactIncludeFromArticle(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class ConsensusFactIncludeFromArticleRecursive1(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class ConsensusFactIncludeFromArticleRecursive2(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class ConsensusFactIncludeFromArticleRecursive3(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class ConsensusFactIncludeFromArticleRecursive4(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+    
+
+class ConsensusFactArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    
+    
+
+class FindManyConsensusFactArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromArticle(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class ContradictionPairIncludeFromArticleRecursive1(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class ContradictionPairIncludeFromArticleRecursive2(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class ContradictionPairIncludeFromArticleRecursive3(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class ContradictionPairIncludeFromArticleRecursive4(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+    
+
+class ContradictionPairArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    
+    
+
+class FindManyContradictionPairArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
     
 
 
@@ -14685,6 +15897,208 @@ class FindManyLLMUsageArgsFromInsightRecursive4(TypedDict, total=False):
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
     
+    
+
+class ConsensusFactIncludeFromInsight(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class ConsensusFactIncludeFromInsightRecursive1(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class ConsensusFactIncludeFromInsightRecursive2(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class ConsensusFactIncludeFromInsightRecursive3(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class ConsensusFactIncludeFromInsightRecursive4(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+    
+
+class ConsensusFactArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    
+    
+
+class FindManyConsensusFactArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromInsight(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class ContradictionPairIncludeFromInsightRecursive1(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class ContradictionPairIncludeFromInsightRecursive2(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class ContradictionPairIncludeFromInsightRecursive3(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class ContradictionPairIncludeFromInsightRecursive4(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+    
+
+class ContradictionPairArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    
+    
+
+class FindManyContradictionPairArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
 
 
 FindManyInsightArgs = FindManyInsightArgsFromInsight
@@ -16813,6 +18227,208 @@ class FindManyLLMUsageArgsFromClaimRecursive4(TypedDict, total=False):
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
     
+    
+
+class ConsensusFactIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class ConsensusFactIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class ConsensusFactIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class ConsensusFactIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class ConsensusFactIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class ConsensusFactArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyConsensusFactArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class ContradictionPairIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class ContradictionPairIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class ContradictionPairIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class ContradictionPairIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class ContradictionPairArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyContradictionPairArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
 
 
 FindManyClaimArgs = FindManyClaimArgsFromClaim
@@ -18782,6 +20398,208 @@ class FindManyLLMUsageArgsFromEvidenceRecursive4(TypedDict, total=False):
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
     
+    
+
+class ConsensusFactIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class ConsensusFactIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class ConsensusFactIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class ConsensusFactIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class ConsensusFactIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class ConsensusFactArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyConsensusFactArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class ContradictionPairIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class ContradictionPairIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class ContradictionPairIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class ContradictionPairIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class ContradictionPairArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyContradictionPairArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
 
 
 FindManyEvidenceArgs = FindManyEvidenceArgsFromEvidence
@@ -20677,6 +22495,208 @@ class FindManyLLMUsageArgsFromEventRecursive4(TypedDict, total=False):
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
     
+    
+
+class ConsensusFactIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class ConsensusFactIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class ConsensusFactIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class ConsensusFactIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class ConsensusFactIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class ConsensusFactArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyConsensusFactArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class ContradictionPairIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class ContradictionPairIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class ContradictionPairIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class ContradictionPairIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class ContradictionPairArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyContradictionPairArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
 
 
 FindManyEventArgs = FindManyEventArgsFromEvent
@@ -22521,6 +24541,208 @@ class FindManyLLMUsageArgsFromClaimClusterRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class ConsensusFactIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class ConsensusFactIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class ConsensusFactIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class ConsensusFactIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class ConsensusFactIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class ConsensusFactArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyConsensusFactArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class ContradictionPairIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class ContradictionPairIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class ContradictionPairIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class ContradictionPairIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class ContradictionPairArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyContradictionPairArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
     
 
 
@@ -24393,6 +26615,208 @@ class FindManyLLMUsageArgsFromLLMCacheRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class ConsensusFactIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class ConsensusFactIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class ConsensusFactIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class ConsensusFactIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class ConsensusFactIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class ConsensusFactArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyConsensusFactArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class ContradictionPairIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class ContradictionPairIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class ContradictionPairIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class ContradictionPairIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class ContradictionPairArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyContradictionPairArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
     
 
 
@@ -26268,6 +28692,208 @@ class FindManyLLMUsageArgsFromLLMUsageRecursive4(TypedDict, total=False):
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
     
+    
+
+class ConsensusFactIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class ConsensusFactIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class ConsensusFactIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class ConsensusFactIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class ConsensusFactIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class ConsensusFactArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyConsensusFactArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class ContradictionPairIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class ContradictionPairIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class ContradictionPairIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class ContradictionPairIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class ContradictionPairArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyContradictionPairArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
 
 
 FindManyLLMUsageArgs = FindManyLLMUsageArgsFromLLMUsage
@@ -26559,6 +29185,4203 @@ LLMUsageScalarFieldKeys = Literal[
 LLMUsageScalarFieldKeysT = TypeVar('LLMUsageScalarFieldKeysT', bound=LLMUsageScalarFieldKeys)
 
 LLMUsageRelationalFieldKeys = _NoneType
+
+# ConsensusFact types
+
+class ConsensusFactOptionalCreateInput(TypedDict, total=False):
+    """Optional arguments to the ConsensusFact create method"""
+    id: _str
+    confidenceScore: _float
+    sourceCount: _int
+    createdAt: datetime.datetime
+
+
+class ConsensusFactCreateInput(ConsensusFactOptionalCreateInput):
+    """Required arguments to the ConsensusFact create method"""
+    factStatement: _str
+    firstSeenAt: datetime.datetime
+    lastSeenAt: datetime.datetime
+
+
+# TODO: remove this in favour of without explicit relations
+# e.g. PostCreateWithoutAuthorInput
+
+class ConsensusFactOptionalCreateWithoutRelationsInput(TypedDict, total=False):
+    """Optional arguments to the ConsensusFact create method, without relations"""
+    id: _str
+    confidenceScore: _float
+    sourceCount: _int
+    createdAt: datetime.datetime
+
+
+class ConsensusFactCreateWithoutRelationsInput(ConsensusFactOptionalCreateWithoutRelationsInput):
+    """Required arguments to the ConsensusFact create method, without relations"""
+    factStatement: _str
+    firstSeenAt: datetime.datetime
+    lastSeenAt: datetime.datetime
+
+class ConsensusFactConnectOrCreateWithoutRelationsInput(TypedDict):
+    create: 'ConsensusFactCreateWithoutRelationsInput'
+    where: 'ConsensusFactWhereUniqueInput'
+
+class ConsensusFactCreateNestedWithoutRelationsInput(TypedDict, total=False):
+    create: 'ConsensusFactCreateWithoutRelationsInput'
+    connect: 'ConsensusFactWhereUniqueInput'
+    connect_or_create: 'ConsensusFactConnectOrCreateWithoutRelationsInput'
+
+
+class ConsensusFactCreateManyNestedWithoutRelationsInput(TypedDict, total=False):
+    create: Union['ConsensusFactCreateWithoutRelationsInput', List['ConsensusFactCreateWithoutRelationsInput']]
+    connect: Union['ConsensusFactWhereUniqueInput', List['ConsensusFactWhereUniqueInput']]
+    connect_or_create: Union['ConsensusFactConnectOrCreateWithoutRelationsInput', List['ConsensusFactConnectOrCreateWithoutRelationsInput']]
+
+_ConsensusFactWhereUnique_id_Input = TypedDict(
+    '_ConsensusFactWhereUnique_id_Input',
+    {
+        'id': '_str',
+    },
+    total=True
+)
+
+ConsensusFactWhereUniqueInput = _ConsensusFactWhereUnique_id_Input
+
+
+class ConsensusFactUpdateInput(TypedDict, total=False):
+    """Optional arguments for updating a record"""
+    id: _str
+    factStatement: _str
+    confidenceScore: Union[AtomicFloatInput, _float]
+    sourceCount: Union[AtomicIntInput, _int]
+    firstSeenAt: datetime.datetime
+    lastSeenAt: datetime.datetime
+    createdAt: datetime.datetime
+
+
+class ConsensusFactUpdateManyMutationInput(TypedDict, total=False):
+    """Arguments for updating many records"""
+    id: _str
+    factStatement: _str
+    confidenceScore: Union[AtomicFloatInput, _float]
+    sourceCount: Union[AtomicIntInput, _int]
+    firstSeenAt: datetime.datetime
+    lastSeenAt: datetime.datetime
+    createdAt: datetime.datetime
+
+
+class ConsensusFactUpdateManyWithoutRelationsInput(TypedDict, total=False):
+    create: List['ConsensusFactCreateWithoutRelationsInput']
+    connect: List['ConsensusFactWhereUniqueInput']
+    connect_or_create: List['ConsensusFactConnectOrCreateWithoutRelationsInput']
+    set: List['ConsensusFactWhereUniqueInput']
+    disconnect: List['ConsensusFactWhereUniqueInput']
+    delete: List['ConsensusFactWhereUniqueInput']
+
+    # TODO
+    # update: List['ConsensusFactUpdateWithWhereUniqueWithoutRelationsInput']
+    # updateMany: List['ConsensusFactUpdateManyWithWhereUniqueWithoutRelationsInput']
+    # deleteMany: List['ConsensusFactScalarWhereInput']
+    # upsert: List['ConsensusFactUpserteWithWhereUniqueWithoutRelationsInput']
+
+
+class ConsensusFactUpdateOneWithoutRelationsInput(TypedDict, total=False):
+    create: 'ConsensusFactCreateWithoutRelationsInput'
+    connect: 'ConsensusFactWhereUniqueInput'
+    connect_or_create: 'ConsensusFactConnectOrCreateWithoutRelationsInput'
+    disconnect: bool
+    delete: bool
+
+    # TODO
+    # update: 'ConsensusFactUpdateInput'
+    # upsert: 'ConsensusFactUpsertWithoutRelationsInput'
+
+
+class ConsensusFactUpsertInput(TypedDict):
+    create: 'ConsensusFactCreateInput'
+    update: 'ConsensusFactUpdateInput'  # pyright: ignore[reportIncompatibleMethodOverride]
+
+
+_ConsensusFact_id_OrderByInput = TypedDict(
+    '_ConsensusFact_id_OrderByInput',
+    {
+        'id': 'SortOrder',
+    },
+    total=True
+)
+
+_ConsensusFact_factStatement_OrderByInput = TypedDict(
+    '_ConsensusFact_factStatement_OrderByInput',
+    {
+        'factStatement': 'SortOrder',
+    },
+    total=True
+)
+
+_ConsensusFact_confidenceScore_OrderByInput = TypedDict(
+    '_ConsensusFact_confidenceScore_OrderByInput',
+    {
+        'confidenceScore': 'SortOrder',
+    },
+    total=True
+)
+
+_ConsensusFact_sourceCount_OrderByInput = TypedDict(
+    '_ConsensusFact_sourceCount_OrderByInput',
+    {
+        'sourceCount': 'SortOrder',
+    },
+    total=True
+)
+
+_ConsensusFact_firstSeenAt_OrderByInput = TypedDict(
+    '_ConsensusFact_firstSeenAt_OrderByInput',
+    {
+        'firstSeenAt': 'SortOrder',
+    },
+    total=True
+)
+
+_ConsensusFact_lastSeenAt_OrderByInput = TypedDict(
+    '_ConsensusFact_lastSeenAt_OrderByInput',
+    {
+        'lastSeenAt': 'SortOrder',
+    },
+    total=True
+)
+
+_ConsensusFact_createdAt_OrderByInput = TypedDict(
+    '_ConsensusFact_createdAt_OrderByInput',
+    {
+        'createdAt': 'SortOrder',
+    },
+    total=True
+)
+
+_ConsensusFact_RelevanceInner = TypedDict(
+    '_ConsensusFact_RelevanceInner',
+    {
+        'fields': 'List[ConsensusFactScalarFieldKeys]',
+        'search': 'str',
+        'sort': 'SortOrder',
+    },
+    total=True
+)
+
+_ConsensusFact_RelevanceOrderByInput = TypedDict(
+    '_ConsensusFact_RelevanceOrderByInput',
+    {
+        '_relevance': '_ConsensusFact_RelevanceInner',
+    },
+    total=True
+)
+
+ConsensusFactOrderByInput = Union[
+    '_ConsensusFact_id_OrderByInput',
+    '_ConsensusFact_factStatement_OrderByInput',
+    '_ConsensusFact_confidenceScore_OrderByInput',
+    '_ConsensusFact_sourceCount_OrderByInput',
+    '_ConsensusFact_firstSeenAt_OrderByInput',
+    '_ConsensusFact_lastSeenAt_OrderByInput',
+    '_ConsensusFact_createdAt_OrderByInput',
+    '_ConsensusFact_RelevanceOrderByInput',
+]
+
+
+
+# recursive ConsensusFact types
+# TODO: cleanup these types
+
+
+# Dict[str, Any] is a mypy limitation
+# see https://github.com/RobertCraigie/prisma-client-py/issues/45
+# switch to pyright for improved types, see https://prisma-client-py.readthedocs.io/en/stable/reference/limitations/
+
+ConsensusFactRelationFilter = TypedDict(
+    'ConsensusFactRelationFilter',
+    {
+        'is': 'Dict[str, Any]',
+        'is_not': 'Dict[str, Any]',
+    },
+    total=False,
+)
+
+
+class ConsensusFactListRelationFilter(TypedDict, total=False):
+    some: 'Dict[str, Any]'
+    none: 'Dict[str, Any]'
+    every: 'Dict[str, Any]'
+
+
+class ConsensusFactInclude(TypedDict, total=False):
+    """ConsensusFact relational arguments"""
+
+
+    
+
+class UserIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    sessions: Union[bool, 'FindManySessionArgsFromConsensusFactRecursive1']
+    accounts: Union[bool, 'FindManyAccountArgsFromConsensusFactRecursive1']
+    searches: Union[bool, 'FindManySearchArgsFromConsensusFactRecursive1']
+
+
+class UserIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    sessions: Union[bool, 'FindManySessionArgsFromConsensusFactRecursive2']
+    accounts: Union[bool, 'FindManyAccountArgsFromConsensusFactRecursive2']
+    searches: Union[bool, 'FindManySearchArgsFromConsensusFactRecursive2']
+
+
+class UserIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    sessions: Union[bool, 'FindManySessionArgsFromConsensusFactRecursive3']
+    accounts: Union[bool, 'FindManyAccountArgsFromConsensusFactRecursive3']
+    searches: Union[bool, 'FindManySearchArgsFromConsensusFactRecursive3']
+
+
+class UserIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    sessions: Union[bool, 'FindManySessionArgsFromConsensusFactRecursive4']
+    accounts: Union[bool, 'FindManyAccountArgsFromConsensusFactRecursive4']
+    searches: Union[bool, 'FindManySearchArgsFromConsensusFactRecursive4']
+
+
+class UserIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class UserArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class UserArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class UserArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class UserArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class UserArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyUserArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class FindManyUserArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class FindManyUserArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class FindManyUserArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class FindManyUserArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    
+    
+
+class SessionIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive1']
+
+
+class SessionIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive2']
+
+
+class SessionIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive3']
+
+
+class SessionIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive4']
+
+
+class SessionIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class SessionArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class SessionArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class SessionArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class SessionArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class SessionArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManySessionArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class FindManySessionArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class FindManySessionArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class FindManySessionArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class FindManySessionArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    
+    
+
+class AccountIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive1']
+
+
+class AccountIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive2']
+
+
+class AccountIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive3']
+
+
+class AccountIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive4']
+
+
+class AccountIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class AccountArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class AccountArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class AccountArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class AccountArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class AccountArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyAccountArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class FindManyAccountArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class FindManyAccountArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class FindManyAccountArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class FindManyAccountArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    
+    
+
+class VerificationIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class VerificationIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class VerificationIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class VerificationIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class VerificationIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class VerificationArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class VerificationArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class VerificationArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class VerificationArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class VerificationArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyVerificationArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class FindManyVerificationArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class FindManyVerificationArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class FindManyVerificationArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class FindManyVerificationArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    
+    
+
+class SearchIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive1']
+    articles: Union[bool, 'FindManyArticleArgsFromConsensusFactRecursive1']
+    insights: Union[bool, 'FindManyInsightArgsFromConsensusFactRecursive1']
+
+
+class SearchIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive2']
+    articles: Union[bool, 'FindManyArticleArgsFromConsensusFactRecursive2']
+    insights: Union[bool, 'FindManyInsightArgsFromConsensusFactRecursive2']
+
+
+class SearchIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive3']
+    articles: Union[bool, 'FindManyArticleArgsFromConsensusFactRecursive3']
+    insights: Union[bool, 'FindManyInsightArgsFromConsensusFactRecursive3']
+
+
+class SearchIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive4']
+    articles: Union[bool, 'FindManyArticleArgsFromConsensusFactRecursive4']
+    insights: Union[bool, 'FindManyInsightArgsFromConsensusFactRecursive4']
+
+
+class SearchIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class SearchArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class SearchArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class SearchArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class SearchArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class SearchArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManySearchArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class FindManySearchArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class FindManySearchArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class FindManySearchArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class FindManySearchArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    
+    
+
+class ArticleIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    search: Union[bool, 'SearchArgsFromConsensusFactRecursive1']
+
+
+class ArticleIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    search: Union[bool, 'SearchArgsFromConsensusFactRecursive2']
+
+
+class ArticleIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    search: Union[bool, 'SearchArgsFromConsensusFactRecursive3']
+
+
+class ArticleIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    search: Union[bool, 'SearchArgsFromConsensusFactRecursive4']
+
+
+class ArticleIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class ArticleArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class ArticleArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class ArticleArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class ArticleArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class ArticleArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyArticleArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class FindManyArticleArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class FindManyArticleArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class FindManyArticleArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class FindManyArticleArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    
+    
+
+class InsightIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    search: Union[bool, 'SearchArgsFromConsensusFactRecursive1']
+
+
+class InsightIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    search: Union[bool, 'SearchArgsFromConsensusFactRecursive2']
+
+
+class InsightIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    search: Union[bool, 'SearchArgsFromConsensusFactRecursive3']
+
+
+class InsightIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    search: Union[bool, 'SearchArgsFromConsensusFactRecursive4']
+
+
+class InsightIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class InsightArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class InsightArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class InsightArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class InsightArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class InsightArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyInsightArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class FindManyInsightArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class FindManyInsightArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class FindManyInsightArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class FindManyInsightArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    cluster: Union[bool, 'ClaimClusterArgsFromConsensusFactRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromConsensusFactRecursive1']
+
+
+class ClaimIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    cluster: Union[bool, 'ClaimClusterArgsFromConsensusFactRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromConsensusFactRecursive2']
+
+
+class ClaimIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    cluster: Union[bool, 'ClaimClusterArgsFromConsensusFactRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromConsensusFactRecursive3']
+
+
+class ClaimIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    cluster: Union[bool, 'ClaimClusterArgsFromConsensusFactRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromConsensusFactRecursive4']
+
+
+class ClaimIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class ClaimArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyClaimArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    claim: Union[bool, 'ClaimArgsFromConsensusFactRecursive1']
+
+
+class EvidenceIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    claim: Union[bool, 'ClaimArgsFromConsensusFactRecursive2']
+
+
+class EvidenceIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    claim: Union[bool, 'ClaimArgsFromConsensusFactRecursive3']
+
+
+class EvidenceIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    claim: Union[bool, 'ClaimArgsFromConsensusFactRecursive4']
+
+
+class EvidenceIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class EvidenceArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyEvidenceArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromConsensusFactRecursive1']
+
+
+class EventIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromConsensusFactRecursive2']
+
+
+class EventIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromConsensusFactRecursive3']
+
+
+class EventIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromConsensusFactRecursive4']
+
+
+class EventIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class EventArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyEventArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    event: Union[bool, 'EventArgsFromConsensusFactRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromConsensusFactRecursive1']
+
+
+class ClaimClusterIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    event: Union[bool, 'EventArgsFromConsensusFactRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromConsensusFactRecursive2']
+
+
+class ClaimClusterIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    event: Union[bool, 'EventArgsFromConsensusFactRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromConsensusFactRecursive3']
+
+
+class ClaimClusterIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    event: Union[bool, 'EventArgsFromConsensusFactRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromConsensusFactRecursive4']
+
+
+class ClaimClusterIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class ClaimClusterArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyClaimClusterArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
+    
+
+class LLMCacheIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class LLMCacheIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class LLMCacheIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class LLMCacheIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class LLMCacheIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class LLMCacheArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyLLMCacheArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class LLMUsageIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class LLMUsageIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class LLMUsageIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class LLMUsageIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class LLMUsageArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyLLMUsageArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class ConsensusFactIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class ConsensusFactIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class ConsensusFactIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class ConsensusFactIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class ConsensusFactIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class ConsensusFactArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyConsensusFactArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class ContradictionPairIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class ContradictionPairIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class ContradictionPairIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class ContradictionPairIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class ContradictionPairArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyContradictionPairArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
+
+
+FindManyConsensusFactArgs = FindManyConsensusFactArgsFromConsensusFact
+FindFirstConsensusFactArgs = FindManyConsensusFactArgsFromConsensusFact
+
+
+    
+
+class ConsensusFactWhereInput(TypedDict, total=False):
+    """ConsensusFact arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    factStatement: Union[_str, 'types.StringFilter']
+    confidenceScore: Union[_float, 'types.FloatFilter']
+    sourceCount: Union[_int, 'types.IntFilter']
+    firstSeenAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    lastSeenAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['ConsensusFactWhereInputRecursive1', List['ConsensusFactWhereInputRecursive1']]
+    # but this causes mypy to hang :/
+    AND: List['ConsensusFactWhereInputRecursive1']
+    OR: List['ConsensusFactWhereInputRecursive1']
+    NOT: List['ConsensusFactWhereInputRecursive1']
+
+
+class ConsensusFactWhereInputRecursive1(TypedDict, total=False):
+    """ConsensusFact arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    factStatement: Union[_str, 'types.StringFilter']
+    confidenceScore: Union[_float, 'types.FloatFilter']
+    sourceCount: Union[_int, 'types.IntFilter']
+    firstSeenAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    lastSeenAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['ConsensusFactWhereInputRecursive2', List['ConsensusFactWhereInputRecursive2']]
+    # but this causes mypy to hang :/
+    AND: List['ConsensusFactWhereInputRecursive2']
+    OR: List['ConsensusFactWhereInputRecursive2']
+    NOT: List['ConsensusFactWhereInputRecursive2']
+
+
+class ConsensusFactWhereInputRecursive2(TypedDict, total=False):
+    """ConsensusFact arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    factStatement: Union[_str, 'types.StringFilter']
+    confidenceScore: Union[_float, 'types.FloatFilter']
+    sourceCount: Union[_int, 'types.IntFilter']
+    firstSeenAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    lastSeenAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['ConsensusFactWhereInputRecursive3', List['ConsensusFactWhereInputRecursive3']]
+    # but this causes mypy to hang :/
+    AND: List['ConsensusFactWhereInputRecursive3']
+    OR: List['ConsensusFactWhereInputRecursive3']
+    NOT: List['ConsensusFactWhereInputRecursive3']
+
+
+class ConsensusFactWhereInputRecursive3(TypedDict, total=False):
+    """ConsensusFact arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    factStatement: Union[_str, 'types.StringFilter']
+    confidenceScore: Union[_float, 'types.FloatFilter']
+    sourceCount: Union[_int, 'types.IntFilter']
+    firstSeenAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    lastSeenAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['ConsensusFactWhereInputRecursive4', List['ConsensusFactWhereInputRecursive4']]
+    # but this causes mypy to hang :/
+    AND: List['ConsensusFactWhereInputRecursive4']
+    OR: List['ConsensusFactWhereInputRecursive4']
+    NOT: List['ConsensusFactWhereInputRecursive4']
+
+
+class ConsensusFactWhereInputRecursive4(TypedDict, total=False):
+    """ConsensusFact arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    factStatement: Union[_str, 'types.StringFilter']
+    confidenceScore: Union[_float, 'types.FloatFilter']
+    sourceCount: Union[_int, 'types.IntFilter']
+    firstSeenAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    lastSeenAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+
+
+# aggregate ConsensusFact types
+
+
+    
+
+class ConsensusFactScalarWhereWithAggregatesInput(TypedDict, total=False):
+    """ConsensusFact arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    factStatement: Union[_str, 'types.StringWithAggregatesFilter']
+    confidenceScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    sourceCount: Union[_int, 'types.IntWithAggregatesFilter']
+    firstSeenAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    lastSeenAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['ConsensusFactScalarWhereWithAggregatesInputRecursive1']
+    OR: List['ConsensusFactScalarWhereWithAggregatesInputRecursive1']
+    NOT: List['ConsensusFactScalarWhereWithAggregatesInputRecursive1']
+
+
+class ConsensusFactScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
+    """ConsensusFact arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    factStatement: Union[_str, 'types.StringWithAggregatesFilter']
+    confidenceScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    sourceCount: Union[_int, 'types.IntWithAggregatesFilter']
+    firstSeenAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    lastSeenAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['ConsensusFactScalarWhereWithAggregatesInputRecursive2']
+    OR: List['ConsensusFactScalarWhereWithAggregatesInputRecursive2']
+    NOT: List['ConsensusFactScalarWhereWithAggregatesInputRecursive2']
+
+
+class ConsensusFactScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
+    """ConsensusFact arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    factStatement: Union[_str, 'types.StringWithAggregatesFilter']
+    confidenceScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    sourceCount: Union[_int, 'types.IntWithAggregatesFilter']
+    firstSeenAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    lastSeenAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['ConsensusFactScalarWhereWithAggregatesInputRecursive3']
+    OR: List['ConsensusFactScalarWhereWithAggregatesInputRecursive3']
+    NOT: List['ConsensusFactScalarWhereWithAggregatesInputRecursive3']
+
+
+class ConsensusFactScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
+    """ConsensusFact arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    factStatement: Union[_str, 'types.StringWithAggregatesFilter']
+    confidenceScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    sourceCount: Union[_int, 'types.IntWithAggregatesFilter']
+    firstSeenAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    lastSeenAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['ConsensusFactScalarWhereWithAggregatesInputRecursive4']
+    OR: List['ConsensusFactScalarWhereWithAggregatesInputRecursive4']
+    NOT: List['ConsensusFactScalarWhereWithAggregatesInputRecursive4']
+
+
+class ConsensusFactScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
+    """ConsensusFact arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    factStatement: Union[_str, 'types.StringWithAggregatesFilter']
+    confidenceScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    sourceCount: Union[_int, 'types.IntWithAggregatesFilter']
+    firstSeenAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    lastSeenAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+
+
+class ConsensusFactGroupByOutput(TypedDict, total=False):
+    id: _str
+    factStatement: _str
+    confidenceScore: _float
+    sourceCount: _int
+    firstSeenAt: datetime.datetime
+    lastSeenAt: datetime.datetime
+    createdAt: datetime.datetime
+    _sum: 'ConsensusFactSumAggregateOutput'
+    _avg: 'ConsensusFactAvgAggregateOutput'
+    _min: 'ConsensusFactMinAggregateOutput'
+    _max: 'ConsensusFactMaxAggregateOutput'
+    _count: 'ConsensusFactCountAggregateOutput'
+
+
+class ConsensusFactAvgAggregateOutput(TypedDict, total=False):
+    """ConsensusFact output for aggregating averages"""
+    confidenceScore: float
+    sourceCount: float
+
+
+class ConsensusFactSumAggregateOutput(TypedDict, total=False):
+    """ConsensusFact output for aggregating sums"""
+    confidenceScore: _float
+    sourceCount: _int
+
+
+class ConsensusFactScalarAggregateOutput(TypedDict, total=False):
+    """ConsensusFact output including scalar fields"""
+    id: _str
+    factStatement: _str
+    confidenceScore: _float
+    sourceCount: _int
+    firstSeenAt: datetime.datetime
+    lastSeenAt: datetime.datetime
+    createdAt: datetime.datetime
+
+
+ConsensusFactMinAggregateOutput = ConsensusFactScalarAggregateOutput
+ConsensusFactMaxAggregateOutput = ConsensusFactScalarAggregateOutput
+
+
+class ConsensusFactMaxAggregateInput(TypedDict, total=False):
+    """ConsensusFact input for aggregating by max"""
+    id: bool
+    factStatement: bool
+    confidenceScore: bool
+    sourceCount: bool
+    firstSeenAt: bool
+    lastSeenAt: bool
+    createdAt: bool
+
+
+class ConsensusFactMinAggregateInput(TypedDict, total=False):
+    """ConsensusFact input for aggregating by min"""
+    id: bool
+    factStatement: bool
+    confidenceScore: bool
+    sourceCount: bool
+    firstSeenAt: bool
+    lastSeenAt: bool
+    createdAt: bool
+
+
+class ConsensusFactNumberAggregateInput(TypedDict, total=False):
+    """ConsensusFact input for aggregating numbers"""
+    confidenceScore: bool
+    sourceCount: bool
+
+
+ConsensusFactAvgAggregateInput = ConsensusFactNumberAggregateInput
+ConsensusFactSumAggregateInput = ConsensusFactNumberAggregateInput
+
+
+ConsensusFactCountAggregateInput = TypedDict(
+    'ConsensusFactCountAggregateInput',
+    {
+        'id': bool,
+        'factStatement': bool,
+        'confidenceScore': bool,
+        'sourceCount': bool,
+        'firstSeenAt': bool,
+        'lastSeenAt': bool,
+        'createdAt': bool,
+        '_all': bool,
+    },
+    total=False,
+)
+
+ConsensusFactCountAggregateOutput = TypedDict(
+    'ConsensusFactCountAggregateOutput',
+    {
+        'id': int,
+        'factStatement': int,
+        'confidenceScore': int,
+        'sourceCount': int,
+        'firstSeenAt': int,
+        'lastSeenAt': int,
+        'createdAt': int,
+        '_all': int,
+    },
+    total=False,
+)
+
+
+ConsensusFactKeys = Literal[
+    'id',
+    'factStatement',
+    'confidenceScore',
+    'sourceCount',
+    'firstSeenAt',
+    'lastSeenAt',
+    'createdAt',
+]
+ConsensusFactScalarFieldKeys = Literal[
+    'id',
+    'factStatement',
+    'confidenceScore',
+    'sourceCount',
+    'firstSeenAt',
+    'lastSeenAt',
+    'createdAt',
+]
+ConsensusFactScalarFieldKeysT = TypeVar('ConsensusFactScalarFieldKeysT', bound=ConsensusFactScalarFieldKeys)
+
+ConsensusFactRelationalFieldKeys = _NoneType
+
+# ContradictionPair types
+
+class ContradictionPairOptionalCreateInput(TypedDict, total=False):
+    """Optional arguments to the ContradictionPair create method"""
+    id: _str
+    confidenceScore: _float
+    resolved: _bool
+    createdAt: datetime.datetime
+
+
+class ContradictionPairCreateInput(ContradictionPairOptionalCreateInput):
+    """Required arguments to the ContradictionPair create method"""
+    claimAId: _str
+    claimBId: _str
+    contradictionType: _str
+
+
+# TODO: remove this in favour of without explicit relations
+# e.g. PostCreateWithoutAuthorInput
+
+class ContradictionPairOptionalCreateWithoutRelationsInput(TypedDict, total=False):
+    """Optional arguments to the ContradictionPair create method, without relations"""
+    id: _str
+    confidenceScore: _float
+    resolved: _bool
+    createdAt: datetime.datetime
+
+
+class ContradictionPairCreateWithoutRelationsInput(ContradictionPairOptionalCreateWithoutRelationsInput):
+    """Required arguments to the ContradictionPair create method, without relations"""
+    claimAId: _str
+    claimBId: _str
+    contradictionType: _str
+
+class ContradictionPairConnectOrCreateWithoutRelationsInput(TypedDict):
+    create: 'ContradictionPairCreateWithoutRelationsInput'
+    where: 'ContradictionPairWhereUniqueInput'
+
+class ContradictionPairCreateNestedWithoutRelationsInput(TypedDict, total=False):
+    create: 'ContradictionPairCreateWithoutRelationsInput'
+    connect: 'ContradictionPairWhereUniqueInput'
+    connect_or_create: 'ContradictionPairConnectOrCreateWithoutRelationsInput'
+
+
+class ContradictionPairCreateManyNestedWithoutRelationsInput(TypedDict, total=False):
+    create: Union['ContradictionPairCreateWithoutRelationsInput', List['ContradictionPairCreateWithoutRelationsInput']]
+    connect: Union['ContradictionPairWhereUniqueInput', List['ContradictionPairWhereUniqueInput']]
+    connect_or_create: Union['ContradictionPairConnectOrCreateWithoutRelationsInput', List['ContradictionPairConnectOrCreateWithoutRelationsInput']]
+
+_ContradictionPairWhereUnique_id_Input = TypedDict(
+    '_ContradictionPairWhereUnique_id_Input',
+    {
+        'id': '_str',
+    },
+    total=True
+)
+
+ContradictionPairWhereUniqueInput = _ContradictionPairWhereUnique_id_Input
+
+
+class ContradictionPairUpdateInput(TypedDict, total=False):
+    """Optional arguments for updating a record"""
+    id: _str
+    claimAId: _str
+    claimBId: _str
+    contradictionType: _str
+    confidenceScore: Union[AtomicFloatInput, _float]
+    resolved: _bool
+    createdAt: datetime.datetime
+
+
+class ContradictionPairUpdateManyMutationInput(TypedDict, total=False):
+    """Arguments for updating many records"""
+    id: _str
+    claimAId: _str
+    claimBId: _str
+    contradictionType: _str
+    confidenceScore: Union[AtomicFloatInput, _float]
+    resolved: _bool
+    createdAt: datetime.datetime
+
+
+class ContradictionPairUpdateManyWithoutRelationsInput(TypedDict, total=False):
+    create: List['ContradictionPairCreateWithoutRelationsInput']
+    connect: List['ContradictionPairWhereUniqueInput']
+    connect_or_create: List['ContradictionPairConnectOrCreateWithoutRelationsInput']
+    set: List['ContradictionPairWhereUniqueInput']
+    disconnect: List['ContradictionPairWhereUniqueInput']
+    delete: List['ContradictionPairWhereUniqueInput']
+
+    # TODO
+    # update: List['ContradictionPairUpdateWithWhereUniqueWithoutRelationsInput']
+    # updateMany: List['ContradictionPairUpdateManyWithWhereUniqueWithoutRelationsInput']
+    # deleteMany: List['ContradictionPairScalarWhereInput']
+    # upsert: List['ContradictionPairUpserteWithWhereUniqueWithoutRelationsInput']
+
+
+class ContradictionPairUpdateOneWithoutRelationsInput(TypedDict, total=False):
+    create: 'ContradictionPairCreateWithoutRelationsInput'
+    connect: 'ContradictionPairWhereUniqueInput'
+    connect_or_create: 'ContradictionPairConnectOrCreateWithoutRelationsInput'
+    disconnect: bool
+    delete: bool
+
+    # TODO
+    # update: 'ContradictionPairUpdateInput'
+    # upsert: 'ContradictionPairUpsertWithoutRelationsInput'
+
+
+class ContradictionPairUpsertInput(TypedDict):
+    create: 'ContradictionPairCreateInput'
+    update: 'ContradictionPairUpdateInput'  # pyright: ignore[reportIncompatibleMethodOverride]
+
+
+_ContradictionPair_id_OrderByInput = TypedDict(
+    '_ContradictionPair_id_OrderByInput',
+    {
+        'id': 'SortOrder',
+    },
+    total=True
+)
+
+_ContradictionPair_claimAId_OrderByInput = TypedDict(
+    '_ContradictionPair_claimAId_OrderByInput',
+    {
+        'claimAId': 'SortOrder',
+    },
+    total=True
+)
+
+_ContradictionPair_claimBId_OrderByInput = TypedDict(
+    '_ContradictionPair_claimBId_OrderByInput',
+    {
+        'claimBId': 'SortOrder',
+    },
+    total=True
+)
+
+_ContradictionPair_contradictionType_OrderByInput = TypedDict(
+    '_ContradictionPair_contradictionType_OrderByInput',
+    {
+        'contradictionType': 'SortOrder',
+    },
+    total=True
+)
+
+_ContradictionPair_confidenceScore_OrderByInput = TypedDict(
+    '_ContradictionPair_confidenceScore_OrderByInput',
+    {
+        'confidenceScore': 'SortOrder',
+    },
+    total=True
+)
+
+_ContradictionPair_resolved_OrderByInput = TypedDict(
+    '_ContradictionPair_resolved_OrderByInput',
+    {
+        'resolved': 'SortOrder',
+    },
+    total=True
+)
+
+_ContradictionPair_createdAt_OrderByInput = TypedDict(
+    '_ContradictionPair_createdAt_OrderByInput',
+    {
+        'createdAt': 'SortOrder',
+    },
+    total=True
+)
+
+_ContradictionPair_RelevanceInner = TypedDict(
+    '_ContradictionPair_RelevanceInner',
+    {
+        'fields': 'List[ContradictionPairScalarFieldKeys]',
+        'search': 'str',
+        'sort': 'SortOrder',
+    },
+    total=True
+)
+
+_ContradictionPair_RelevanceOrderByInput = TypedDict(
+    '_ContradictionPair_RelevanceOrderByInput',
+    {
+        '_relevance': '_ContradictionPair_RelevanceInner',
+    },
+    total=True
+)
+
+ContradictionPairOrderByInput = Union[
+    '_ContradictionPair_id_OrderByInput',
+    '_ContradictionPair_claimAId_OrderByInput',
+    '_ContradictionPair_claimBId_OrderByInput',
+    '_ContradictionPair_contradictionType_OrderByInput',
+    '_ContradictionPair_confidenceScore_OrderByInput',
+    '_ContradictionPair_resolved_OrderByInput',
+    '_ContradictionPair_createdAt_OrderByInput',
+    '_ContradictionPair_RelevanceOrderByInput',
+]
+
+
+
+# recursive ContradictionPair types
+# TODO: cleanup these types
+
+
+# Dict[str, Any] is a mypy limitation
+# see https://github.com/RobertCraigie/prisma-client-py/issues/45
+# switch to pyright for improved types, see https://prisma-client-py.readthedocs.io/en/stable/reference/limitations/
+
+ContradictionPairRelationFilter = TypedDict(
+    'ContradictionPairRelationFilter',
+    {
+        'is': 'Dict[str, Any]',
+        'is_not': 'Dict[str, Any]',
+    },
+    total=False,
+)
+
+
+class ContradictionPairListRelationFilter(TypedDict, total=False):
+    some: 'Dict[str, Any]'
+    none: 'Dict[str, Any]'
+    every: 'Dict[str, Any]'
+
+
+class ContradictionPairInclude(TypedDict, total=False):
+    """ContradictionPair relational arguments"""
+
+
+    
+
+class UserIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    sessions: Union[bool, 'FindManySessionArgsFromContradictionPairRecursive1']
+    accounts: Union[bool, 'FindManyAccountArgsFromContradictionPairRecursive1']
+    searches: Union[bool, 'FindManySearchArgsFromContradictionPairRecursive1']
+
+
+class UserIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    sessions: Union[bool, 'FindManySessionArgsFromContradictionPairRecursive2']
+    accounts: Union[bool, 'FindManyAccountArgsFromContradictionPairRecursive2']
+    searches: Union[bool, 'FindManySearchArgsFromContradictionPairRecursive2']
+
+
+class UserIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    sessions: Union[bool, 'FindManySessionArgsFromContradictionPairRecursive3']
+    accounts: Union[bool, 'FindManyAccountArgsFromContradictionPairRecursive3']
+    searches: Union[bool, 'FindManySearchArgsFromContradictionPairRecursive3']
+
+
+class UserIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    sessions: Union[bool, 'FindManySessionArgsFromContradictionPairRecursive4']
+    accounts: Union[bool, 'FindManyAccountArgsFromContradictionPairRecursive4']
+    searches: Union[bool, 'FindManySearchArgsFromContradictionPairRecursive4']
+
+
+class UserIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class UserArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class UserArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class UserArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class UserArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class UserArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyUserArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class FindManyUserArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class FindManyUserArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class FindManyUserArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class FindManyUserArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    
+    
+
+class SessionIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive1']
+
+
+class SessionIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive2']
+
+
+class SessionIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive3']
+
+
+class SessionIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive4']
+
+
+class SessionIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class SessionArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class SessionArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class SessionArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class SessionArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class SessionArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManySessionArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class FindManySessionArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class FindManySessionArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class FindManySessionArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class FindManySessionArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    
+    
+
+class AccountIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive1']
+
+
+class AccountIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive2']
+
+
+class AccountIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive3']
+
+
+class AccountIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive4']
+
+
+class AccountIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class AccountArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class AccountArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class AccountArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class AccountArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class AccountArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyAccountArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class FindManyAccountArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class FindManyAccountArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class FindManyAccountArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class FindManyAccountArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    
+    
+
+class VerificationIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class VerificationIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class VerificationIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class VerificationIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class VerificationIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class VerificationArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class VerificationArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class VerificationArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class VerificationArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class VerificationArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyVerificationArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class FindManyVerificationArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class FindManyVerificationArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class FindManyVerificationArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class FindManyVerificationArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    
+    
+
+class SearchIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive1']
+    articles: Union[bool, 'FindManyArticleArgsFromContradictionPairRecursive1']
+    insights: Union[bool, 'FindManyInsightArgsFromContradictionPairRecursive1']
+
+
+class SearchIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive2']
+    articles: Union[bool, 'FindManyArticleArgsFromContradictionPairRecursive2']
+    insights: Union[bool, 'FindManyInsightArgsFromContradictionPairRecursive2']
+
+
+class SearchIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive3']
+    articles: Union[bool, 'FindManyArticleArgsFromContradictionPairRecursive3']
+    insights: Union[bool, 'FindManyInsightArgsFromContradictionPairRecursive3']
+
+
+class SearchIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive4']
+    articles: Union[bool, 'FindManyArticleArgsFromContradictionPairRecursive4']
+    insights: Union[bool, 'FindManyInsightArgsFromContradictionPairRecursive4']
+
+
+class SearchIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class SearchArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class SearchArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class SearchArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class SearchArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class SearchArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManySearchArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class FindManySearchArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class FindManySearchArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class FindManySearchArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class FindManySearchArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    
+    
+
+class ArticleIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    search: Union[bool, 'SearchArgsFromContradictionPairRecursive1']
+
+
+class ArticleIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    search: Union[bool, 'SearchArgsFromContradictionPairRecursive2']
+
+
+class ArticleIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    search: Union[bool, 'SearchArgsFromContradictionPairRecursive3']
+
+
+class ArticleIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    search: Union[bool, 'SearchArgsFromContradictionPairRecursive4']
+
+
+class ArticleIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class ArticleArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class ArticleArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class ArticleArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class ArticleArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class ArticleArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyArticleArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class FindManyArticleArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class FindManyArticleArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class FindManyArticleArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class FindManyArticleArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    
+    
+
+class InsightIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    search: Union[bool, 'SearchArgsFromContradictionPairRecursive1']
+
+
+class InsightIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    search: Union[bool, 'SearchArgsFromContradictionPairRecursive2']
+
+
+class InsightIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    search: Union[bool, 'SearchArgsFromContradictionPairRecursive3']
+
+
+class InsightIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    search: Union[bool, 'SearchArgsFromContradictionPairRecursive4']
+
+
+class InsightIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class InsightArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class InsightArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class InsightArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class InsightArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class InsightArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyInsightArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class FindManyInsightArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class FindManyInsightArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class FindManyInsightArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class FindManyInsightArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    cluster: Union[bool, 'ClaimClusterArgsFromContradictionPairRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromContradictionPairRecursive1']
+
+
+class ClaimIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    cluster: Union[bool, 'ClaimClusterArgsFromContradictionPairRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromContradictionPairRecursive2']
+
+
+class ClaimIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    cluster: Union[bool, 'ClaimClusterArgsFromContradictionPairRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromContradictionPairRecursive3']
+
+
+class ClaimIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    cluster: Union[bool, 'ClaimClusterArgsFromContradictionPairRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromContradictionPairRecursive4']
+
+
+class ClaimIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class ClaimArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyClaimArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    claim: Union[bool, 'ClaimArgsFromContradictionPairRecursive1']
+
+
+class EvidenceIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    claim: Union[bool, 'ClaimArgsFromContradictionPairRecursive2']
+
+
+class EvidenceIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    claim: Union[bool, 'ClaimArgsFromContradictionPairRecursive3']
+
+
+class EvidenceIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    claim: Union[bool, 'ClaimArgsFromContradictionPairRecursive4']
+
+
+class EvidenceIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class EvidenceArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyEvidenceArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromContradictionPairRecursive1']
+
+
+class EventIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromContradictionPairRecursive2']
+
+
+class EventIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromContradictionPairRecursive3']
+
+
+class EventIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromContradictionPairRecursive4']
+
+
+class EventIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class EventArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyEventArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    event: Union[bool, 'EventArgsFromContradictionPairRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromContradictionPairRecursive1']
+
+
+class ClaimClusterIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    event: Union[bool, 'EventArgsFromContradictionPairRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromContradictionPairRecursive2']
+
+
+class ClaimClusterIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    event: Union[bool, 'EventArgsFromContradictionPairRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromContradictionPairRecursive3']
+
+
+class ClaimClusterIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    event: Union[bool, 'EventArgsFromContradictionPairRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromContradictionPairRecursive4']
+
+
+class ClaimClusterIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class ClaimClusterArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyClaimClusterArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
+    
+
+class LLMCacheIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class LLMCacheIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class LLMCacheIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class LLMCacheIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class LLMCacheIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class LLMCacheArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyLLMCacheArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class LLMUsageIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class LLMUsageIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class LLMUsageIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class LLMUsageIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class LLMUsageArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyLLMUsageArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class ConsensusFactIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class ConsensusFactIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class ConsensusFactIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class ConsensusFactIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class ConsensusFactIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class ConsensusFactArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyConsensusFactArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class ContradictionPairIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class ContradictionPairIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class ContradictionPairIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class ContradictionPairIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class ContradictionPairArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyContradictionPairArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
+
+
+FindManyContradictionPairArgs = FindManyContradictionPairArgsFromContradictionPair
+FindFirstContradictionPairArgs = FindManyContradictionPairArgsFromContradictionPair
+
+
+    
+
+class ContradictionPairWhereInput(TypedDict, total=False):
+    """ContradictionPair arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    claimAId: Union[_str, 'types.StringFilter']
+    claimBId: Union[_str, 'types.StringFilter']
+    contradictionType: Union[_str, 'types.StringFilter']
+    confidenceScore: Union[_float, 'types.FloatFilter']
+    resolved: Union[_bool, 'types.BooleanFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['ContradictionPairWhereInputRecursive1', List['ContradictionPairWhereInputRecursive1']]
+    # but this causes mypy to hang :/
+    AND: List['ContradictionPairWhereInputRecursive1']
+    OR: List['ContradictionPairWhereInputRecursive1']
+    NOT: List['ContradictionPairWhereInputRecursive1']
+
+
+class ContradictionPairWhereInputRecursive1(TypedDict, total=False):
+    """ContradictionPair arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    claimAId: Union[_str, 'types.StringFilter']
+    claimBId: Union[_str, 'types.StringFilter']
+    contradictionType: Union[_str, 'types.StringFilter']
+    confidenceScore: Union[_float, 'types.FloatFilter']
+    resolved: Union[_bool, 'types.BooleanFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['ContradictionPairWhereInputRecursive2', List['ContradictionPairWhereInputRecursive2']]
+    # but this causes mypy to hang :/
+    AND: List['ContradictionPairWhereInputRecursive2']
+    OR: List['ContradictionPairWhereInputRecursive2']
+    NOT: List['ContradictionPairWhereInputRecursive2']
+
+
+class ContradictionPairWhereInputRecursive2(TypedDict, total=False):
+    """ContradictionPair arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    claimAId: Union[_str, 'types.StringFilter']
+    claimBId: Union[_str, 'types.StringFilter']
+    contradictionType: Union[_str, 'types.StringFilter']
+    confidenceScore: Union[_float, 'types.FloatFilter']
+    resolved: Union[_bool, 'types.BooleanFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['ContradictionPairWhereInputRecursive3', List['ContradictionPairWhereInputRecursive3']]
+    # but this causes mypy to hang :/
+    AND: List['ContradictionPairWhereInputRecursive3']
+    OR: List['ContradictionPairWhereInputRecursive3']
+    NOT: List['ContradictionPairWhereInputRecursive3']
+
+
+class ContradictionPairWhereInputRecursive3(TypedDict, total=False):
+    """ContradictionPair arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    claimAId: Union[_str, 'types.StringFilter']
+    claimBId: Union[_str, 'types.StringFilter']
+    contradictionType: Union[_str, 'types.StringFilter']
+    confidenceScore: Union[_float, 'types.FloatFilter']
+    resolved: Union[_bool, 'types.BooleanFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['ContradictionPairWhereInputRecursive4', List['ContradictionPairWhereInputRecursive4']]
+    # but this causes mypy to hang :/
+    AND: List['ContradictionPairWhereInputRecursive4']
+    OR: List['ContradictionPairWhereInputRecursive4']
+    NOT: List['ContradictionPairWhereInputRecursive4']
+
+
+class ContradictionPairWhereInputRecursive4(TypedDict, total=False):
+    """ContradictionPair arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    claimAId: Union[_str, 'types.StringFilter']
+    claimBId: Union[_str, 'types.StringFilter']
+    contradictionType: Union[_str, 'types.StringFilter']
+    confidenceScore: Union[_float, 'types.FloatFilter']
+    resolved: Union[_bool, 'types.BooleanFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+
+
+# aggregate ContradictionPair types
+
+
+    
+
+class ContradictionPairScalarWhereWithAggregatesInput(TypedDict, total=False):
+    """ContradictionPair arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    claimAId: Union[_str, 'types.StringWithAggregatesFilter']
+    claimBId: Union[_str, 'types.StringWithAggregatesFilter']
+    contradictionType: Union[_str, 'types.StringWithAggregatesFilter']
+    confidenceScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    resolved: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['ContradictionPairScalarWhereWithAggregatesInputRecursive1']
+    OR: List['ContradictionPairScalarWhereWithAggregatesInputRecursive1']
+    NOT: List['ContradictionPairScalarWhereWithAggregatesInputRecursive1']
+
+
+class ContradictionPairScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
+    """ContradictionPair arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    claimAId: Union[_str, 'types.StringWithAggregatesFilter']
+    claimBId: Union[_str, 'types.StringWithAggregatesFilter']
+    contradictionType: Union[_str, 'types.StringWithAggregatesFilter']
+    confidenceScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    resolved: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['ContradictionPairScalarWhereWithAggregatesInputRecursive2']
+    OR: List['ContradictionPairScalarWhereWithAggregatesInputRecursive2']
+    NOT: List['ContradictionPairScalarWhereWithAggregatesInputRecursive2']
+
+
+class ContradictionPairScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
+    """ContradictionPair arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    claimAId: Union[_str, 'types.StringWithAggregatesFilter']
+    claimBId: Union[_str, 'types.StringWithAggregatesFilter']
+    contradictionType: Union[_str, 'types.StringWithAggregatesFilter']
+    confidenceScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    resolved: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['ContradictionPairScalarWhereWithAggregatesInputRecursive3']
+    OR: List['ContradictionPairScalarWhereWithAggregatesInputRecursive3']
+    NOT: List['ContradictionPairScalarWhereWithAggregatesInputRecursive3']
+
+
+class ContradictionPairScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
+    """ContradictionPair arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    claimAId: Union[_str, 'types.StringWithAggregatesFilter']
+    claimBId: Union[_str, 'types.StringWithAggregatesFilter']
+    contradictionType: Union[_str, 'types.StringWithAggregatesFilter']
+    confidenceScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    resolved: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['ContradictionPairScalarWhereWithAggregatesInputRecursive4']
+    OR: List['ContradictionPairScalarWhereWithAggregatesInputRecursive4']
+    NOT: List['ContradictionPairScalarWhereWithAggregatesInputRecursive4']
+
+
+class ContradictionPairScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
+    """ContradictionPair arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    claimAId: Union[_str, 'types.StringWithAggregatesFilter']
+    claimBId: Union[_str, 'types.StringWithAggregatesFilter']
+    contradictionType: Union[_str, 'types.StringWithAggregatesFilter']
+    confidenceScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    resolved: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+
+
+class ContradictionPairGroupByOutput(TypedDict, total=False):
+    id: _str
+    claimAId: _str
+    claimBId: _str
+    contradictionType: _str
+    confidenceScore: _float
+    resolved: _bool
+    createdAt: datetime.datetime
+    _sum: 'ContradictionPairSumAggregateOutput'
+    _avg: 'ContradictionPairAvgAggregateOutput'
+    _min: 'ContradictionPairMinAggregateOutput'
+    _max: 'ContradictionPairMaxAggregateOutput'
+    _count: 'ContradictionPairCountAggregateOutput'
+
+
+class ContradictionPairAvgAggregateOutput(TypedDict, total=False):
+    """ContradictionPair output for aggregating averages"""
+    confidenceScore: float
+
+
+class ContradictionPairSumAggregateOutput(TypedDict, total=False):
+    """ContradictionPair output for aggregating sums"""
+    confidenceScore: _float
+
+
+class ContradictionPairScalarAggregateOutput(TypedDict, total=False):
+    """ContradictionPair output including scalar fields"""
+    id: _str
+    claimAId: _str
+    claimBId: _str
+    contradictionType: _str
+    confidenceScore: _float
+    resolved: _bool
+    createdAt: datetime.datetime
+
+
+ContradictionPairMinAggregateOutput = ContradictionPairScalarAggregateOutput
+ContradictionPairMaxAggregateOutput = ContradictionPairScalarAggregateOutput
+
+
+class ContradictionPairMaxAggregateInput(TypedDict, total=False):
+    """ContradictionPair input for aggregating by max"""
+    id: bool
+    claimAId: bool
+    claimBId: bool
+    contradictionType: bool
+    confidenceScore: bool
+    resolved: bool
+    createdAt: bool
+
+
+class ContradictionPairMinAggregateInput(TypedDict, total=False):
+    """ContradictionPair input for aggregating by min"""
+    id: bool
+    claimAId: bool
+    claimBId: bool
+    contradictionType: bool
+    confidenceScore: bool
+    resolved: bool
+    createdAt: bool
+
+
+class ContradictionPairNumberAggregateInput(TypedDict, total=False):
+    """ContradictionPair input for aggregating numbers"""
+    confidenceScore: bool
+
+
+ContradictionPairAvgAggregateInput = ContradictionPairNumberAggregateInput
+ContradictionPairSumAggregateInput = ContradictionPairNumberAggregateInput
+
+
+ContradictionPairCountAggregateInput = TypedDict(
+    'ContradictionPairCountAggregateInput',
+    {
+        'id': bool,
+        'claimAId': bool,
+        'claimBId': bool,
+        'contradictionType': bool,
+        'confidenceScore': bool,
+        'resolved': bool,
+        'createdAt': bool,
+        '_all': bool,
+    },
+    total=False,
+)
+
+ContradictionPairCountAggregateOutput = TypedDict(
+    'ContradictionPairCountAggregateOutput',
+    {
+        'id': int,
+        'claimAId': int,
+        'claimBId': int,
+        'contradictionType': int,
+        'confidenceScore': int,
+        'resolved': int,
+        'createdAt': int,
+        '_all': int,
+    },
+    total=False,
+)
+
+
+ContradictionPairKeys = Literal[
+    'id',
+    'claimAId',
+    'claimBId',
+    'contradictionType',
+    'confidenceScore',
+    'resolved',
+    'createdAt',
+]
+ContradictionPairScalarFieldKeys = Literal[
+    'id',
+    'claimAId',
+    'claimBId',
+    'contradictionType',
+    'confidenceScore',
+    'resolved',
+    'createdAt',
+]
+ContradictionPairScalarFieldKeysT = TypeVar('ContradictionPairScalarFieldKeysT', bound=ContradictionPairScalarFieldKeys)
+
+ContradictionPairRelationalFieldKeys = _NoneType
 
 
 

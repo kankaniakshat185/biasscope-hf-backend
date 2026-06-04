@@ -222,3 +222,31 @@ model LLMUsage {
 
   @@map("llm_usage")
 }
+
+// -------------------------------------------------------------
+// Phase 3: Consensus and Contradiction Engine (Prepared Schema)
+// -------------------------------------------------------------
+
+model ConsensusFact {
+  id              String   @id @default(uuid())
+  factStatement   String
+  confidenceScore Float    @default(0)
+  sourceCount     Int      @default(0)
+  firstSeenAt     DateTime
+  lastSeenAt      DateTime
+  createdAt       DateTime @default(now())
+
+  @@map("consensus_fact")
+}
+
+model ContradictionPair {
+  id                String   @id @default(uuid())
+  claimAId          String
+  claimBId          String
+  contradictionType String // DIRECT, NUMERIC, TIMELINE, CONTEXTUAL
+  confidenceScore   Float    @default(0)
+  resolved          Boolean  @default(false)
+  createdAt         DateTime @default(now())
+
+  @@map("contradiction_pair")
+}

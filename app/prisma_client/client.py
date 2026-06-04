@@ -88,7 +88,7 @@ log: logging.Logger = logging.getLogger(__name__)
 SCHEMA_PATH = Path('/Users/akshatkankani/Desktop/Github/biasscope-hf-backend/prisma/schema.prisma')
 PACKAGED_SCHEMA_PATH = Path(__file__).parent.joinpath('schema.prisma')
 ENGINE_TYPE: EngineType = EngineType.binary
-BINARY_PATHS = model_parse(BinaryPaths, {'queryEngine': {'darwin-arm64': '/Users/akshatkankani/.cache/prisma-python/binaries/5.17.0/393aa359c9ad4a4bb28630fb5613f9c281cde053/node_modules/prisma/query-engine-darwin-arm64', 'debian-openssl-1.1.x': '/Users/akshatkankani/.cache/prisma-python/binaries/5.17.0/393aa359c9ad4a4bb28630fb5613f9c281cde053/node_modules/prisma/query-engine-debian-openssl-1.1.x', 'debian-openssl-3.0.x': '/Users/akshatkankani/.cache/prisma-python/binaries/5.17.0/393aa359c9ad4a4bb28630fb5613f9c281cde053/node_modules/prisma/query-engine-debian-openssl-3.0.x'}, 'introspectionEngine': {}, 'migrationEngine': {}, 'libqueryEngine': {}, 'prismaFmt': {}})
+BINARY_PATHS = model_parse(BinaryPaths, {'queryEngine': {'darwin-arm64': '/Users/akshatkankani/Desktop/Github/biasscope-hf-backend/node_modules/prisma/query-engine-darwin-arm64', 'debian-openssl-1.1.x': '/Users/akshatkankani/Desktop/Github/biasscope-hf-backend/node_modules/prisma/query-engine-debian-openssl-1.1.x', 'debian-openssl-3.0.x': '/Users/akshatkankani/Desktop/Github/biasscope-hf-backend/node_modules/prisma/query-engine-debian-openssl-3.0.x'}, 'introspectionEngine': {}, 'migrationEngine': {}, 'libqueryEngine': {}, 'prismaFmt': {}})
 
 
 class Prisma(AsyncBasePrisma):
@@ -107,6 +107,8 @@ class Prisma(AsyncBasePrisma):
     claimcluster: 'actions.ClaimClusterActions[models.ClaimCluster]'
     llmcache: 'actions.LLMCacheActions[models.LLMCache]'
     llmusage: 'actions.LLMUsageActions[models.LLMUsage]'
+    consensusfact: 'actions.ConsensusFactActions[models.ConsensusFact]'
+    contradictionpair: 'actions.ContradictionPairActions[models.ContradictionPair]'
 
     __slots__ = (
         'user',
@@ -122,6 +124,8 @@ class Prisma(AsyncBasePrisma):
         'claimcluster',
         'llmcache',
         'llmusage',
+        'consensusfact',
+        'contradictionpair',
     )
 
     def __init__(
@@ -165,6 +169,8 @@ class Prisma(AsyncBasePrisma):
         self.claimcluster = actions.ClaimClusterActions[models.ClaimCluster](self, models.ClaimCluster)
         self.llmcache = actions.LLMCacheActions[models.LLMCache](self, models.LLMCache)
         self.llmusage = actions.LLMUsageActions[models.LLMUsage](self, models.LLMUsage)
+        self.consensusfact = actions.ConsensusFactActions[models.ConsensusFact](self, models.ConsensusFact)
+        self.contradictionpair = actions.ContradictionPairActions[models.ContradictionPair](self, models.ContradictionPair)
 
         if auto_register:
             register(self)
@@ -328,6 +334,8 @@ class Batch:
     claimcluster: 'ClaimClusterBatchActions'
     llmcache: 'LLMCacheBatchActions'
     llmusage: 'LLMUsageBatchActions'
+    consensusfact: 'ConsensusFactBatchActions'
+    contradictionpair: 'ContradictionPairBatchActions'
 
     def __init__(self, client: Prisma) -> None:
         self.__client = client
@@ -346,6 +354,8 @@ class Batch:
         self.claimcluster = ClaimClusterBatchActions(self)
         self.llmcache = LLMCacheBatchActions(self)
         self.llmusage = LLMUsageBatchActions(self)
+        self.consensusfact = ConsensusFactBatchActions(self)
+        self.contradictionpair = ContradictionPairBatchActions(self)
 
     def _add(self, **kwargs: Any) -> None:
         builder = QueryBuilder(
@@ -1835,6 +1845,228 @@ class LLMUsageBatchActions:
         self._batcher._add(
             method='delete_many',
             model=models.LLMUsage,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+
+
+
+# NOTE: some arguments are meaningless in this context but are included
+# for completeness sake
+class ConsensusFactBatchActions:
+    def __init__(self, batcher: Batch) -> None:
+        self._batcher = batcher
+
+    def create(
+        self,
+        data: types.ConsensusFactCreateInput,
+        include: Optional[types.ConsensusFactInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='create',
+            model=models.ConsensusFact,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+
+    def create_many(
+        self,
+        data: List[types.ConsensusFactCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> None:
+        if skip_duplicates and self._batcher._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._batcher._active_provider, 'create_many_skip_duplicates')
+
+        self._batcher._add(
+            method='create_many',
+            model=models.ConsensusFact,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+
+    def delete(
+        self,
+        where: types.ConsensusFactWhereUniqueInput,
+        include: Optional[types.ConsensusFactInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete',
+            model=models.ConsensusFact,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def update(
+        self,
+        data: types.ConsensusFactUpdateInput,
+        where: types.ConsensusFactWhereUniqueInput,
+        include: Optional[types.ConsensusFactInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='update',
+            model=models.ConsensusFact,
+            arguments={
+                'data': data,
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def upsert(
+        self,
+        where: types.ConsensusFactWhereUniqueInput,
+        data: types.ConsensusFactUpsertInput,
+        include: Optional[types.ConsensusFactInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='upsert',
+            model=models.ConsensusFact,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+
+    def update_many(
+        self,
+        data: types.ConsensusFactUpdateManyMutationInput,
+        where: types.ConsensusFactWhereInput,
+    ) -> None:
+        self._batcher._add(
+            method='update_many',
+            model=models.ConsensusFact,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+
+    def delete_many(
+        self,
+        where: Optional[types.ConsensusFactWhereInput] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete_many',
+            model=models.ConsensusFact,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+
+
+
+# NOTE: some arguments are meaningless in this context but are included
+# for completeness sake
+class ContradictionPairBatchActions:
+    def __init__(self, batcher: Batch) -> None:
+        self._batcher = batcher
+
+    def create(
+        self,
+        data: types.ContradictionPairCreateInput,
+        include: Optional[types.ContradictionPairInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='create',
+            model=models.ContradictionPair,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+
+    def create_many(
+        self,
+        data: List[types.ContradictionPairCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> None:
+        if skip_duplicates and self._batcher._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._batcher._active_provider, 'create_many_skip_duplicates')
+
+        self._batcher._add(
+            method='create_many',
+            model=models.ContradictionPair,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+
+    def delete(
+        self,
+        where: types.ContradictionPairWhereUniqueInput,
+        include: Optional[types.ContradictionPairInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete',
+            model=models.ContradictionPair,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def update(
+        self,
+        data: types.ContradictionPairUpdateInput,
+        where: types.ContradictionPairWhereUniqueInput,
+        include: Optional[types.ContradictionPairInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='update',
+            model=models.ContradictionPair,
+            arguments={
+                'data': data,
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def upsert(
+        self,
+        where: types.ContradictionPairWhereUniqueInput,
+        data: types.ContradictionPairUpsertInput,
+        include: Optional[types.ContradictionPairInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='upsert',
+            model=models.ContradictionPair,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+
+    def update_many(
+        self,
+        data: types.ContradictionPairUpdateManyMutationInput,
+        where: types.ContradictionPairWhereInput,
+    ) -> None:
+        self._batcher._add(
+            method='update_many',
+            model=models.ContradictionPair,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+
+    def delete_many(
+        self,
+        where: Optional[types.ContradictionPairWhereInput] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete_many',
+            model=models.ContradictionPair,
             arguments={'where': where},
             root_selection=['count'],
         )
