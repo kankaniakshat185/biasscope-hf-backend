@@ -307,7 +307,7 @@ def generate_contrastive_summaries(articles):
             
             system_prompt = (
                 f"You are an expert political media analyst examining the '{wing}' media echo chamber. "
-                "Your task is to write a highly sophisticated, objective 3-4 sentence analysis of how this specific political wing is framing the current topic, "
+                "Your task is to write a highly sophisticated, objective analysis (up to 10 sentences) of how this specific political wing is framing the current topic, "
                 "based strictly on the provided headlines. Do not simply summarize the events; instead, analyze the rhetorical strategies, key arguments, underlying assumptions, and ideological framing present in these headlines. "
                 "Highlight what they are emphasizing and what they might be omitting. Do not endorse the views, just critically analyze their narrative construction."
             )
@@ -318,7 +318,7 @@ def generate_contrastive_summaries(articles):
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
             ]
-            response = client.chat_completion(messages=messages, max_tokens=250, temperature=0.6)
+            response = client.chat_completion(messages=messages, max_tokens=500, temperature=0.6)
             return response.choices[0].message.content.strip()
 
         left_summary = _summarize_echo_chamber(left_articles, "Left-Wing")
