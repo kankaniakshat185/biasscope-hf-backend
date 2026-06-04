@@ -20,7 +20,6 @@ A high-performance, claim-centric natural language processing engine that powers
 - **Claim-Centric Ingestion Pipeline** — Distills raw articles into discrete, factual claims rather than relying on noisy article-level sentiment.
 - **Semantic Claim Clustering** — Utilizes `sentence-transformers/all-MiniLM-L6-v2` and `pgvector` to map semantically equivalent claims into unified entities across multiple publications.
 - **Single URL Deep-Dive** — Bypasses macro-topic aggregation to perform isolated claim extraction, source verification, and bias detection on any individual news article URL.
-- **Multimodal Image Analysis** — Leverages Vision LLMs to ingest infographics, charts, and news broadcast screenshots, extracting embedded claims and evaluating visual framing bias.
 - **Cross-Ideological Consensus Engine** — Programmatically evaluates the publisher diversity for individual claims to detect and flag corroborated narratives.
 - **Contrastive Echo Chambers** — Isolates political ecosystems to generate distinct, sophisticated LLM-driven analyses of how identical events are framed by different sides.
 - **Automated Topic Snapshots** — Redis-backed Celery workers incrementally append new evidence to the global database without redundant reprocessing.
