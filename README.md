@@ -1,3 +1,12 @@
+---
+title: Biasscope
+emoji: 🦀
+colorFrom: yellow
+colorTo: gray
+sdk: docker
+pinned: false
+---
+
 # BiasScope — Intelligence Engine Backend
 
 A multi-source news intelligence platform that extracts verifiable factual claims from news articles, clusters them across publishers, and surfaces cross-source consensus events.
