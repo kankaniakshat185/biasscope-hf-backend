@@ -102,6 +102,38 @@ async def background_phase2_pipeline(search_id: str):
         print(f"Phase 2 pipeline error: {e}")
         traceback.print_exc()
 
+@app.post("/subscriptions")
+async def subscribe_topic(userId: str = Body(...), topic: str = Body(...)):
+    """Subscribe a user to a topic for weekly longitudinal tracking."""
+    existing = await prisma.topicsubscription.find_first(
+        where={"userId": userId, "topic": topic.lower()}
+    )
+    if existing:
+        if not existing.isActive:
+            await prisma.topicsubscription.update(where={"id": existing.id}, data={"isActive": True})
+        return existing
+
+    return await prisma.topicsubscription.create(
+        data={"userId": userId, "topic": topic.lower()}
+    )
+
+@app.get("/subscriptions/{user_id}")
+async def get_subscriptions(user_id: str):
+    """Get all active subscriptions for a user."""
+    return await prisma.topicsubscription.find_many(
+        where={"userId": user_id, "isActive": True},
+        include={"snapshots": {"order": {"createdAt": "desc"}, "take": 5}}
+    )
+
+@app.delete("/subscriptions/{sub_id}")
+async def unsubscribe_topic(sub_id: str):
+    """Deactivate a topic subscription."""
+    await prisma.topicsubscription.update(
+        where={"id": sub_id},
+        data={"isActive": False}
+    )
+    return {"status": "success"}
+
 @app.post("/search")
 async def create_search(
     query: str = Body(...), 
