@@ -153,24 +153,3 @@ async def cached_llm_call(
         return ""
 
 
-def call_llm_sync(system_prompt: str, user_prompt: str, max_tokens: int = 1024) -> str:
-    """
-    Synchronous fallback for non-async contexts (e.g., inside clustering merge).
-    Does NOT use cache. Use cached_llm_call whenever possible.
-    """
-    client = _get_client()
-    if not client:
-        return ""
-    try:
-        resp = client.chat_completion(
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            temperature=0.1,
-            max_tokens=max_tokens,
-        )
-        return _clean_llm_response(resp.choices[0].message.content)
-    except Exception as e:
-        logger.error(f"LLM sync call failed: {e}")
-        return ""

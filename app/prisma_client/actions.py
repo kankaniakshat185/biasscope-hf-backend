@@ -10973,11 +10973,11 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         Example
         -------
         ```py
-        # find the second ClaimCluster record ordered by the eventId field
+        # find the second ClaimCluster record ordered by the cohesionScore field
         claimcluster = await ClaimCluster.prisma().find_first_or_raise(
             skip=1,
             order={
-                'eventId': 'desc',
+                'cohesionScore': 'desc',
             },
         )
         ```
@@ -11143,7 +11143,7 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         # update all ClaimCluster records
         total = await ClaimCluster.prisma().update_many(
             data={
-                'id': 'hffhfabhi'
+                'eventId': 'hffhfabhi'
             },
             where={}
         )
@@ -11207,7 +11207,7 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         results = await ClaimCluster.prisma().count(
             select={
                 '_all': True,
-                'title': True,
+                'id': True,
             },
         )
         ```
@@ -11274,7 +11274,7 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         results = await ClaimCluster.prisma().count(
             select={
                 '_all': True,
-                'canonicalClaim': True,
+                'title': True,
             },
         )
         ```
@@ -11414,10 +11414,10 @@ class ClaimClusterActions(Generic[_PrismaModelT]):
         Example
         -------
         ```py
-        # group ClaimCluster records by consensusScore values
+        # group ClaimCluster records by canonicalClaim values
         # and count how many records are in each group
         results = await ClaimCluster.prisma().group_by(
-            ['consensusScore'],
+            ['canonicalClaim'],
             count=True,
         )
         ```
@@ -13525,6 +13525,5151 @@ class LLMUsageActions(Generic[_PrismaModelT]):
         return resp['data']['result']  # type: ignore[no-any-return]
 
 
+class DemoSnapshotActions(Generic[_PrismaModelT]):
+    __slots__ = (
+        '_client',
+        '_model',
+    )
+
+    def __init__(self, client: Prisma, model: Type[_PrismaModelT]) -> None:
+        self._client = client
+        self._model = model
+
+    async def query_raw(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> List[_PrismaModelT]:
+        """Execute a raw SQL query
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        List[prisma.models.DemoSnapshot]
+            The records returned by the SQL query
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        users = await DemoSnapshot.prisma().query_raw(
+            'SELECT * FROM DemoSnapshot WHERE id = $1',
+            'bbbghgbadh',
+        )
+        ```
+        """
+        return await self._client.query_raw(query, *args, model=self._model)
+
+    async def query_first(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> Optional[_PrismaModelT]:
+        """Execute a raw SQL query, returning the first result
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        prisma.models.DemoSnapshot
+            The first record returned by the SQL query
+        None
+            The raw SQL query did not return any records
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        user = await DemoSnapshot.prisma().query_first(
+            'SELECT * FROM DemoSnapshot WHERE topic = $1',
+            'bbhcgagaic',
+        )
+        ```
+        """
+        return await self._client.query_first(query, *args, model=self._model)
+
+    async def create(
+        self,
+        data: types.DemoSnapshotCreateInput,
+        include: Optional[types.DemoSnapshotInclude] = None
+    ) -> _PrismaModelT:
+        """Create a new DemoSnapshot record.
+
+        Parameters
+        ----------
+        data
+            DemoSnapshot record data
+        include
+            Specifies which relations should be loaded on the returned DemoSnapshot model
+
+        Returns
+        -------
+        prisma.models.DemoSnapshot
+            The created DemoSnapshot record
+
+        Raises
+        ------
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # create a DemoSnapshot record from just the required fields
+        demosnapshot = await DemoSnapshot.prisma().create(
+            data={
+                # data to create a DemoSnapshot record
+                'topic': 'ddaabegbb',
+                'data': Json({'bhgibfgbbc': True}),
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='create',
+            model=self._model,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def create_many(
+        self,
+        data: List[types.DemoSnapshotCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> int:
+        """Create multiple DemoSnapshot records at once.
+
+        This function is *not* available when using SQLite.
+
+        Parameters
+        ----------
+        data
+            List of DemoSnapshot record data
+        skip_duplicates
+            Boolean flag for ignoring unique constraint errors
+
+        Returns
+        -------
+        int
+            The total number of records created
+
+        Raises
+        ------
+        prisma.errors.UnsupportedDatabaseError
+            Attempting to query when using SQLite
+        prisma.errors.UniqueViolationError
+            A unique constraint check has failed, these can be ignored with the `skip_duplicates` argument
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        total = await DemoSnapshot.prisma().create_many(
+            data=[
+                {
+                    # data to create a DemoSnapshot record
+                    'topic': 'hbgcihef',
+                    'data': Json({'ffhgghde': True}),
+                },
+                {
+                    # data to create a DemoSnapshot record
+                    'topic': 'ibcadcejf',
+                    'data': Json({'bdcdfgccdg': True}),
+                },
+            ],
+            skip_duplicates=True,
+        )
+        ```
+        """
+        if skip_duplicates and self._client._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._client._active_provider, 'create_many_skip_duplicates')
+
+        resp = await self._client._execute(
+            method='create_many',
+            model=self._model,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    async def delete(
+        self,
+        where: types.DemoSnapshotWhereUniqueInput,
+        include: Optional[types.DemoSnapshotInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Delete a single DemoSnapshot record.
+
+        Parameters
+        ----------
+        where
+            DemoSnapshot filter to select the record to be deleted, must be unique
+        include
+            Specifies which relations should be loaded on the returned DemoSnapshot model
+
+        Returns
+        -------
+        prisma.models.DemoSnapshot
+            The deleted DemoSnapshot record
+        None
+            Could not find a record to delete
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        demosnapshot = await DemoSnapshot.prisma().delete(
+            where={
+                'id': 'edhjgdfh',
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='delete',
+                model=self._model,
+                arguments={
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_unique(
+        self,
+        where: types.DemoSnapshotWhereUniqueInput,
+        include: Optional[types.DemoSnapshotInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Find a unique DemoSnapshot record.
+
+        Parameters
+        ----------
+        where
+            DemoSnapshot filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned DemoSnapshot model
+
+        Returns
+        -------
+        prisma.models.DemoSnapshot
+            The found DemoSnapshot record
+        None
+            No record matching the given input could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        demosnapshot = await DemoSnapshot.prisma().find_unique(
+            where={
+                'id': 'bdeffdadda',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+        return model_parse(self._model, result)
+
+    async def find_unique_or_raise(
+        self,
+        where: types.DemoSnapshotWhereUniqueInput,
+        include: Optional[types.DemoSnapshotInclude] = None
+    ) -> _PrismaModelT:
+        """Find a unique DemoSnapshot record. Raises `RecordNotFoundError` if no record is found.
+
+        Parameters
+        ----------
+        where
+            DemoSnapshot filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned DemoSnapshot model
+
+        Returns
+        -------
+        prisma.models.DemoSnapshot
+            The found DemoSnapshot record
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        demosnapshot = await DemoSnapshot.prisma().find_unique_or_raise(
+            where={
+                'id': 'bjgfdihchf',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique_or_raise',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_many(
+        self,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.DemoSnapshotWhereInput] = None,
+        cursor: Optional[types.DemoSnapshotWhereUniqueInput] = None,
+        include: Optional[types.DemoSnapshotInclude] = None,
+        order: Optional[Union[types.DemoSnapshotOrderByInput, List[types.DemoSnapshotOrderByInput]]] = None,
+        distinct: Optional[List[types.DemoSnapshotScalarFieldKeys]] = None,
+    ) -> List[_PrismaModelT]:
+        """Find multiple DemoSnapshot records.
+
+        An empty list is returned if no records could be found.
+
+        Parameters
+        ----------
+        take
+            Limit the maximum number of DemoSnapshot records returned
+        skip
+            Ignore the first N results
+        where
+            DemoSnapshot filter to select records
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned DemoSnapshot model
+        order
+            Order the returned DemoSnapshot records by any field
+        distinct
+            Filter DemoSnapshot records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        List[prisma.models.DemoSnapshot]
+            The list of all DemoSnapshot records that could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the first 10 DemoSnapshot records
+        demosnapshots = await DemoSnapshot.prisma().find_many(take=10)
+
+        # find the first 5 DemoSnapshot records ordered by the data field
+        demosnapshots = await DemoSnapshot.prisma().find_many(
+            take=5,
+            order={
+                'data': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_many',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return [model_parse(self._model, r) for r in resp['data']['result']]
+
+    async def find_first(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.DemoSnapshotWhereInput] = None,
+        cursor: Optional[types.DemoSnapshotWhereUniqueInput] = None,
+        include: Optional[types.DemoSnapshotInclude] = None,
+        order: Optional[Union[types.DemoSnapshotOrderByInput, List[types.DemoSnapshotOrderByInput]]] = None,
+        distinct: Optional[List[types.DemoSnapshotScalarFieldKeys]] = None,
+    ) -> Optional[_PrismaModelT]:
+        """Find a single DemoSnapshot record.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            DemoSnapshot filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned DemoSnapshot model
+        order
+            Order the returned DemoSnapshot records by any field
+        distinct
+            Filter DemoSnapshot records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.DemoSnapshot
+            The first DemoSnapshot record found, matching the given arguments
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second DemoSnapshot record ordered by the createdAt field
+        demosnapshot = await DemoSnapshot.prisma().find_first(
+            skip=1,
+            order={
+                'createdAt': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+
+        return model_parse(self._model, result)
+
+    async def find_first_or_raise(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.DemoSnapshotWhereInput] = None,
+        cursor: Optional[types.DemoSnapshotWhereUniqueInput] = None,
+        include: Optional[types.DemoSnapshotInclude] = None,
+        order: Optional[Union[types.DemoSnapshotOrderByInput, List[types.DemoSnapshotOrderByInput]]] = None,
+        distinct: Optional[List[types.DemoSnapshotScalarFieldKeys]] = None,
+    ) -> _PrismaModelT:
+        """Find a single DemoSnapshot record. Raises `RecordNotFoundError` if no record was found.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            DemoSnapshot filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned DemoSnapshot model
+        order
+            Order the returned DemoSnapshot records by any field
+        distinct
+            Filter DemoSnapshot records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.DemoSnapshot
+            The first DemoSnapshot record found, matching the given arguments
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second DemoSnapshot record ordered by the id field
+        demosnapshot = await DemoSnapshot.prisma().find_first_or_raise(
+            skip=1,
+            order={
+                'id': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first_or_raise',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update(
+        self,
+        data: types.DemoSnapshotUpdateInput,
+        where: types.DemoSnapshotWhereUniqueInput,
+        include: Optional[types.DemoSnapshotInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Update a single DemoSnapshot record.
+
+        Parameters
+        ----------
+        data
+            DemoSnapshot record data specifying what to update
+        where
+            DemoSnapshot filter to select the unique record to create / update
+        include
+            Specifies which relations should be loaded on the returned DemoSnapshot model
+
+        Returns
+        -------
+        prisma.models.DemoSnapshot
+            The updated DemoSnapshot record
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        demosnapshot = await DemoSnapshot.prisma().update(
+            where={
+                'id': 'iaeihdeei',
+            },
+            data={
+                # data to update the DemoSnapshot record to
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='update',
+                model=self._model,
+                arguments={
+                    'data': data,
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def upsert(
+        self,
+        where: types.DemoSnapshotWhereUniqueInput,
+        data: types.DemoSnapshotUpsertInput,
+        include: Optional[types.DemoSnapshotInclude] = None,
+    ) -> _PrismaModelT:
+        """Updates an existing record or create a new one
+
+        Parameters
+        ----------
+        where
+            DemoSnapshot filter to select the unique record to create / update
+        data
+            Data specifying what fields to set on create and update
+        include
+            Specifies which relations should be loaded on the returned DemoSnapshot model
+
+        Returns
+        -------
+        prisma.models.DemoSnapshot
+            The created or updated DemoSnapshot record
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        demosnapshot = await DemoSnapshot.prisma().upsert(
+            where={
+                'id': 'bfggejgfbd',
+            },
+            data={
+                'create': {
+                    'id': 'bfggejgfbd',
+                    'topic': 'ibcadcejf',
+                    'data': Json({'bdcdfgccdg': True}),
+                },
+                'update': {
+                    'topic': 'ibcadcejf',
+                    'data': Json({'bdcdfgccdg': True}),
+                },
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='upsert',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update_many(
+        self,
+        data: types.DemoSnapshotUpdateManyMutationInput,
+        where: types.DemoSnapshotWhereInput,
+    ) -> int:
+        """Update multiple DemoSnapshot records
+
+        Parameters
+        ----------
+        data
+            DemoSnapshot data to update the selected DemoSnapshot records to
+        where
+            Filter to select the DemoSnapshot records to update
+
+        Returns
+        -------
+        int
+            The total number of DemoSnapshot records that were updated
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # update all DemoSnapshot records
+        total = await DemoSnapshot.prisma().update_many(
+            data={
+                'topic': 'ifaaaedja'
+            },
+            where={}
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='update_many',
+            model=self._model,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    @overload
+    async def count(
+        self,
+        select: None = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.DemoSnapshotWhereInput] = None,
+        cursor: Optional[types.DemoSnapshotWhereUniqueInput] = None,
+    ) -> int:
+        """Count the number of DemoSnapshot records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the DemoSnapshot fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            DemoSnapshot filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.DemoSnapshotCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await DemoSnapshot.prisma().count()
+
+        # results: prisma.types.DemoSnapshotCountAggregateOutput
+        results = await DemoSnapshot.prisma().count(
+            select={
+                '_all': True,
+                'data': True,
+            },
+        )
+        ```
+        """
+
+
+    @overload
+    async def count(
+        self,
+        select: types.DemoSnapshotCountAggregateInput,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.DemoSnapshotWhereInput] = None,
+        cursor: Optional[types.DemoSnapshotWhereUniqueInput] = None,
+    ) -> types.DemoSnapshotCountAggregateOutput:
+        ...
+
+    async def count(
+        self,
+        select: Optional[types.DemoSnapshotCountAggregateInput] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.DemoSnapshotWhereInput] = None,
+        cursor: Optional[types.DemoSnapshotWhereUniqueInput] = None,
+    ) -> Union[int, types.DemoSnapshotCountAggregateOutput]:
+        """Count the number of DemoSnapshot records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the DemoSnapshot fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            DemoSnapshot filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.DemoSnapshotCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await DemoSnapshot.prisma().count()
+
+        # results: prisma.types.DemoSnapshotCountAggregateOutput
+        results = await DemoSnapshot.prisma().count(
+            select={
+                '_all': True,
+                'createdAt': True,
+            },
+        )
+        ```
+        """
+
+        # TODO: this selection building should be moved to the QueryBuilder
+        #
+        # note the distinction between checking for `not select` here and `select is None`
+        # later is to handle the case that the given select dictionary is empty, this
+        # is a limitation of our types.
+        if not select:
+            root_selection = ['_count { _all }']
+        else:
+
+            root_selection = [
+                '_count {{ {0} }}'.format(' '.join(k for k, v in select.items() if v is True))
+            ]
+
+        resp = await self._client._execute(
+            method='count',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'cursor': cursor,
+            },
+            root_selection=root_selection,
+        )
+
+        if select is None:
+            return cast(int, resp['data']['result']['_count']['_all'])
+        else:
+            return cast(types.DemoSnapshotCountAggregateOutput, resp['data']['result']['_count'])
+
+    async def delete_many(
+        self,
+        where: Optional[types.DemoSnapshotWhereInput] = None
+    ) -> int:
+        """Delete multiple DemoSnapshot records.
+
+        Parameters
+        ----------
+        where
+            Optional DemoSnapshot filter to find the records to be deleted
+
+        Returns
+        -------
+        int
+            The total number of DemoSnapshot records that were deleted
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # delete all DemoSnapshot records
+        total = await DemoSnapshot.prisma().delete_many()
+        ```
+        """
+        resp = await self._client._execute(
+            method='delete_many',
+            model=self._model,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    # TODO: make this easier to work with safely, currently output fields are typed as
+    #       not required, we should refactor the return type
+    # TODO: consider returning a Dict where the keys are a Tuple of the `by` selection
+    # TODO: statically type that the order argument is required when take or skip are present
+    async def group_by(
+        self,
+        by: List['types.DemoSnapshotScalarFieldKeys'],
+        *,
+        where: Optional['types.DemoSnapshotWhereInput'] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        avg: Optional['types.DemoSnapshotAvgAggregateInput'] = None,
+        sum: Optional['types.DemoSnapshotSumAggregateInput'] = None,
+        min: Optional['types.DemoSnapshotMinAggregateInput'] = None,
+        max: Optional['types.DemoSnapshotMaxAggregateInput'] = None,
+        having: Optional['types.DemoSnapshotScalarWhereWithAggregatesInput'] = None,
+        count: Optional[Union[bool, 'types.DemoSnapshotCountAggregateInput']] = None,
+        order: Optional[Union[Mapping['types.DemoSnapshotScalarFieldKeys', 'types.SortOrder'], List[Mapping['types.DemoSnapshotScalarFieldKeys', 'types.SortOrder']]]] = None,
+    ) -> List['types.DemoSnapshotGroupByOutput']:
+        """Group DemoSnapshot records by one or more field values and perform aggregations
+        each group such as finding the average.
+
+        Parameters
+        ----------
+        by
+            List of scalar DemoSnapshot fields to group records by
+        where
+            DemoSnapshot filter to select records
+        take
+            Limit the maximum number of DemoSnapshot records returned
+        skip
+            Ignore the first N records
+        avg
+            Adds the average of all values of the specified fields to the `_avg` field
+            in the returned data.
+        sum
+            Adds the sum of all values of the specified fields to the `_sum` field
+            in the returned data.
+        min
+            Adds the smallest available value for the specified fields to the `_min` field
+            in the returned data.
+        max
+            Adds the largest available value for the specified fields to the `_max` field
+            in the returned data.
+        count
+            Adds a count of non-fields to the `_count` field in the returned data.
+        having
+            Allows you to filter groups by an aggregate value - for example only return
+            groups having an average age less than 50.
+        order
+            Lets you order the returned list by any property that is also present in `by`.
+            Only **one** field is allowed at a time.
+
+        Returns
+        -------
+        List[prisma.types.DemoSnapshotGroupByOutput]
+            A list of dictionaries representing the DemoSnapshot record,
+            this will also have additional fields present if aggregation arguments
+            are used (see the above parameters)
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # group DemoSnapshot records by id values
+        # and count how many records are in each group
+        results = await DemoSnapshot.prisma().group_by(
+            ['id'],
+            count=True,
+        )
+        ```
+        """
+        if order is None:
+            if take is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'take\' is present')
+
+            if skip is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'skip\' is present')
+
+        root_selection: List[str] = [*by]
+        if avg is not None:
+            root_selection.append(_select_fields('_avg', avg))
+
+        if min is not None:
+            root_selection.append(_select_fields('_min', min))
+
+        if sum is not None:
+            root_selection.append(_select_fields('_sum', sum))
+
+        if max is not None:
+            root_selection.append(_select_fields('_max', max))
+
+        if count is not None:
+            if count is True:
+                root_selection.append('_count { _all }')
+            elif isinstance(count, dict):
+                root_selection.append(_select_fields('_count', count))
+
+        resp = await self._client._execute(
+            method='group_by',
+            model=self._model,
+            arguments={
+                'by': by,
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'having': having,
+                'orderBy': order,
+            },
+            root_selection=root_selection,
+        )
+        return resp['data']['result']  # type: ignore[no-any-return]
+
+
+class TopicSubscriptionActions(Generic[_PrismaModelT]):
+    __slots__ = (
+        '_client',
+        '_model',
+    )
+
+    def __init__(self, client: Prisma, model: Type[_PrismaModelT]) -> None:
+        self._client = client
+        self._model = model
+
+    async def query_raw(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> List[_PrismaModelT]:
+        """Execute a raw SQL query
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        List[prisma.models.TopicSubscription]
+            The records returned by the SQL query
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        users = await TopicSubscription.prisma().query_raw(
+            'SELECT * FROM TopicSubscription WHERE id = $1',
+            'cbajdjjabf',
+        )
+        ```
+        """
+        return await self._client.query_raw(query, *args, model=self._model)
+
+    async def query_first(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> Optional[_PrismaModelT]:
+        """Execute a raw SQL query, returning the first result
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        prisma.models.TopicSubscription
+            The first record returned by the SQL query
+        None
+            The raw SQL query did not return any records
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        user = await TopicSubscription.prisma().query_first(
+            'SELECT * FROM TopicSubscription WHERE userId = $1',
+            'bcicggedea',
+        )
+        ```
+        """
+        return await self._client.query_first(query, *args, model=self._model)
+
+    async def create(
+        self,
+        data: types.TopicSubscriptionCreateInput,
+        include: Optional[types.TopicSubscriptionInclude] = None
+    ) -> _PrismaModelT:
+        """Create a new TopicSubscription record.
+
+        Parameters
+        ----------
+        data
+            TopicSubscription record data
+        include
+            Specifies which relations should be loaded on the returned TopicSubscription model
+
+        Returns
+        -------
+        prisma.models.TopicSubscription
+            The created TopicSubscription record
+
+        Raises
+        ------
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # create a TopicSubscription record from just the required fields
+        topicsubscription = await TopicSubscription.prisma().create(
+            data={
+                # data to create a TopicSubscription record
+                'userId': 'cebcdadjh',
+                'topic': 'ehfigdgac',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='create',
+            model=self._model,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def create_many(
+        self,
+        data: List[types.TopicSubscriptionCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> int:
+        """Create multiple TopicSubscription records at once.
+
+        This function is *not* available when using SQLite.
+
+        Parameters
+        ----------
+        data
+            List of TopicSubscription record data
+        skip_duplicates
+            Boolean flag for ignoring unique constraint errors
+
+        Returns
+        -------
+        int
+            The total number of records created
+
+        Raises
+        ------
+        prisma.errors.UnsupportedDatabaseError
+            Attempting to query when using SQLite
+        prisma.errors.UniqueViolationError
+            A unique constraint check has failed, these can be ignored with the `skip_duplicates` argument
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        total = await TopicSubscription.prisma().create_many(
+            data=[
+                {
+                    # data to create a TopicSubscription record
+                    'userId': 'bhbgccijjf',
+                    'topic': 'bigjhdgbjc',
+                },
+                {
+                    # data to create a TopicSubscription record
+                    'userId': 'bfifdebhfd',
+                    'topic': 'cjchbjde',
+                },
+            ],
+            skip_duplicates=True,
+        )
+        ```
+        """
+        if skip_duplicates and self._client._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._client._active_provider, 'create_many_skip_duplicates')
+
+        resp = await self._client._execute(
+            method='create_many',
+            model=self._model,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    async def delete(
+        self,
+        where: types.TopicSubscriptionWhereUniqueInput,
+        include: Optional[types.TopicSubscriptionInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Delete a single TopicSubscription record.
+
+        Parameters
+        ----------
+        where
+            TopicSubscription filter to select the record to be deleted, must be unique
+        include
+            Specifies which relations should be loaded on the returned TopicSubscription model
+
+        Returns
+        -------
+        prisma.models.TopicSubscription
+            The deleted TopicSubscription record
+        None
+            Could not find a record to delete
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        topicsubscription = await TopicSubscription.prisma().delete(
+            where={
+                'id': 'bfiibjcehj',
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='delete',
+                model=self._model,
+                arguments={
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_unique(
+        self,
+        where: types.TopicSubscriptionWhereUniqueInput,
+        include: Optional[types.TopicSubscriptionInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Find a unique TopicSubscription record.
+
+        Parameters
+        ----------
+        where
+            TopicSubscription filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned TopicSubscription model
+
+        Returns
+        -------
+        prisma.models.TopicSubscription
+            The found TopicSubscription record
+        None
+            No record matching the given input could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        topicsubscription = await TopicSubscription.prisma().find_unique(
+            where={
+                'id': 'ijieafghg',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+        return model_parse(self._model, result)
+
+    async def find_unique_or_raise(
+        self,
+        where: types.TopicSubscriptionWhereUniqueInput,
+        include: Optional[types.TopicSubscriptionInclude] = None
+    ) -> _PrismaModelT:
+        """Find a unique TopicSubscription record. Raises `RecordNotFoundError` if no record is found.
+
+        Parameters
+        ----------
+        where
+            TopicSubscription filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned TopicSubscription model
+
+        Returns
+        -------
+        prisma.models.TopicSubscription
+            The found TopicSubscription record
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        topicsubscription = await TopicSubscription.prisma().find_unique_or_raise(
+            where={
+                'id': 'hhhegahcf',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique_or_raise',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_many(
+        self,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.TopicSubscriptionWhereInput] = None,
+        cursor: Optional[types.TopicSubscriptionWhereUniqueInput] = None,
+        include: Optional[types.TopicSubscriptionInclude] = None,
+        order: Optional[Union[types.TopicSubscriptionOrderByInput, List[types.TopicSubscriptionOrderByInput]]] = None,
+        distinct: Optional[List[types.TopicSubscriptionScalarFieldKeys]] = None,
+    ) -> List[_PrismaModelT]:
+        """Find multiple TopicSubscription records.
+
+        An empty list is returned if no records could be found.
+
+        Parameters
+        ----------
+        take
+            Limit the maximum number of TopicSubscription records returned
+        skip
+            Ignore the first N results
+        where
+            TopicSubscription filter to select records
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned TopicSubscription model
+        order
+            Order the returned TopicSubscription records by any field
+        distinct
+            Filter TopicSubscription records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        List[prisma.models.TopicSubscription]
+            The list of all TopicSubscription records that could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the first 10 TopicSubscription records
+        topicsubscriptions = await TopicSubscription.prisma().find_many(take=10)
+
+        # find the first 5 TopicSubscription records ordered by the topic field
+        topicsubscriptions = await TopicSubscription.prisma().find_many(
+            take=5,
+            order={
+                'topic': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_many',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return [model_parse(self._model, r) for r in resp['data']['result']]
+
+    async def find_first(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.TopicSubscriptionWhereInput] = None,
+        cursor: Optional[types.TopicSubscriptionWhereUniqueInput] = None,
+        include: Optional[types.TopicSubscriptionInclude] = None,
+        order: Optional[Union[types.TopicSubscriptionOrderByInput, List[types.TopicSubscriptionOrderByInput]]] = None,
+        distinct: Optional[List[types.TopicSubscriptionScalarFieldKeys]] = None,
+    ) -> Optional[_PrismaModelT]:
+        """Find a single TopicSubscription record.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            TopicSubscription filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned TopicSubscription model
+        order
+            Order the returned TopicSubscription records by any field
+        distinct
+            Filter TopicSubscription records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.TopicSubscription
+            The first TopicSubscription record found, matching the given arguments
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second TopicSubscription record ordered by the createdAt field
+        topicsubscription = await TopicSubscription.prisma().find_first(
+            skip=1,
+            order={
+                'createdAt': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+
+        return model_parse(self._model, result)
+
+    async def find_first_or_raise(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.TopicSubscriptionWhereInput] = None,
+        cursor: Optional[types.TopicSubscriptionWhereUniqueInput] = None,
+        include: Optional[types.TopicSubscriptionInclude] = None,
+        order: Optional[Union[types.TopicSubscriptionOrderByInput, List[types.TopicSubscriptionOrderByInput]]] = None,
+        distinct: Optional[List[types.TopicSubscriptionScalarFieldKeys]] = None,
+    ) -> _PrismaModelT:
+        """Find a single TopicSubscription record. Raises `RecordNotFoundError` if no record was found.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            TopicSubscription filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned TopicSubscription model
+        order
+            Order the returned TopicSubscription records by any field
+        distinct
+            Filter TopicSubscription records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.TopicSubscription
+            The first TopicSubscription record found, matching the given arguments
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second TopicSubscription record ordered by the lastSnapshotAt field
+        topicsubscription = await TopicSubscription.prisma().find_first_or_raise(
+            skip=1,
+            order={
+                'lastSnapshotAt': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first_or_raise',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update(
+        self,
+        data: types.TopicSubscriptionUpdateInput,
+        where: types.TopicSubscriptionWhereUniqueInput,
+        include: Optional[types.TopicSubscriptionInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Update a single TopicSubscription record.
+
+        Parameters
+        ----------
+        data
+            TopicSubscription record data specifying what to update
+        where
+            TopicSubscription filter to select the unique record to create / update
+        include
+            Specifies which relations should be loaded on the returned TopicSubscription model
+
+        Returns
+        -------
+        prisma.models.TopicSubscription
+            The updated TopicSubscription record
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        topicsubscription = await TopicSubscription.prisma().update(
+            where={
+                'id': 'edhijefdi',
+            },
+            data={
+                # data to update the TopicSubscription record to
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='update',
+                model=self._model,
+                arguments={
+                    'data': data,
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def upsert(
+        self,
+        where: types.TopicSubscriptionWhereUniqueInput,
+        data: types.TopicSubscriptionUpsertInput,
+        include: Optional[types.TopicSubscriptionInclude] = None,
+    ) -> _PrismaModelT:
+        """Updates an existing record or create a new one
+
+        Parameters
+        ----------
+        where
+            TopicSubscription filter to select the unique record to create / update
+        data
+            Data specifying what fields to set on create and update
+        include
+            Specifies which relations should be loaded on the returned TopicSubscription model
+
+        Returns
+        -------
+        prisma.models.TopicSubscription
+            The created or updated TopicSubscription record
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        topicsubscription = await TopicSubscription.prisma().upsert(
+            where={
+                'id': 'djddecjhb',
+            },
+            data={
+                'create': {
+                    'id': 'djddecjhb',
+                    'userId': 'bfifdebhfd',
+                    'topic': 'cjchbjde',
+                },
+                'update': {
+                    'userId': 'bfifdebhfd',
+                    'topic': 'cjchbjde',
+                },
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='upsert',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update_many(
+        self,
+        data: types.TopicSubscriptionUpdateManyMutationInput,
+        where: types.TopicSubscriptionWhereInput,
+    ) -> int:
+        """Update multiple TopicSubscription records
+
+        Parameters
+        ----------
+        data
+            TopicSubscription data to update the selected TopicSubscription records to
+        where
+            Filter to select the TopicSubscription records to update
+
+        Returns
+        -------
+        int
+            The total number of TopicSubscription records that were updated
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # update all TopicSubscription records
+        total = await TopicSubscription.prisma().update_many(
+            data={
+                'isActive': True
+            },
+            where={}
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='update_many',
+            model=self._model,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    @overload
+    async def count(
+        self,
+        select: None = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.TopicSubscriptionWhereInput] = None,
+        cursor: Optional[types.TopicSubscriptionWhereUniqueInput] = None,
+    ) -> int:
+        """Count the number of TopicSubscription records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the TopicSubscription fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            TopicSubscription filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.TopicSubscriptionCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await TopicSubscription.prisma().count()
+
+        # results: prisma.types.TopicSubscriptionCountAggregateOutput
+        results = await TopicSubscription.prisma().count(
+            select={
+                '_all': True,
+                'id': True,
+            },
+        )
+        ```
+        """
+
+
+    @overload
+    async def count(
+        self,
+        select: types.TopicSubscriptionCountAggregateInput,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.TopicSubscriptionWhereInput] = None,
+        cursor: Optional[types.TopicSubscriptionWhereUniqueInput] = None,
+    ) -> types.TopicSubscriptionCountAggregateOutput:
+        ...
+
+    async def count(
+        self,
+        select: Optional[types.TopicSubscriptionCountAggregateInput] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.TopicSubscriptionWhereInput] = None,
+        cursor: Optional[types.TopicSubscriptionWhereUniqueInput] = None,
+    ) -> Union[int, types.TopicSubscriptionCountAggregateOutput]:
+        """Count the number of TopicSubscription records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the TopicSubscription fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            TopicSubscription filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.TopicSubscriptionCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await TopicSubscription.prisma().count()
+
+        # results: prisma.types.TopicSubscriptionCountAggregateOutput
+        results = await TopicSubscription.prisma().count(
+            select={
+                '_all': True,
+                'userId': True,
+            },
+        )
+        ```
+        """
+
+        # TODO: this selection building should be moved to the QueryBuilder
+        #
+        # note the distinction between checking for `not select` here and `select is None`
+        # later is to handle the case that the given select dictionary is empty, this
+        # is a limitation of our types.
+        if not select:
+            root_selection = ['_count { _all }']
+        else:
+
+            root_selection = [
+                '_count {{ {0} }}'.format(' '.join(k for k, v in select.items() if v is True))
+            ]
+
+        resp = await self._client._execute(
+            method='count',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'cursor': cursor,
+            },
+            root_selection=root_selection,
+        )
+
+        if select is None:
+            return cast(int, resp['data']['result']['_count']['_all'])
+        else:
+            return cast(types.TopicSubscriptionCountAggregateOutput, resp['data']['result']['_count'])
+
+    async def delete_many(
+        self,
+        where: Optional[types.TopicSubscriptionWhereInput] = None
+    ) -> int:
+        """Delete multiple TopicSubscription records.
+
+        Parameters
+        ----------
+        where
+            Optional TopicSubscription filter to find the records to be deleted
+
+        Returns
+        -------
+        int
+            The total number of TopicSubscription records that were deleted
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # delete all TopicSubscription records
+        total = await TopicSubscription.prisma().delete_many()
+        ```
+        """
+        resp = await self._client._execute(
+            method='delete_many',
+            model=self._model,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    # TODO: make this easier to work with safely, currently output fields are typed as
+    #       not required, we should refactor the return type
+    # TODO: consider returning a Dict where the keys are a Tuple of the `by` selection
+    # TODO: statically type that the order argument is required when take or skip are present
+    async def group_by(
+        self,
+        by: List['types.TopicSubscriptionScalarFieldKeys'],
+        *,
+        where: Optional['types.TopicSubscriptionWhereInput'] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        avg: Optional['types.TopicSubscriptionAvgAggregateInput'] = None,
+        sum: Optional['types.TopicSubscriptionSumAggregateInput'] = None,
+        min: Optional['types.TopicSubscriptionMinAggregateInput'] = None,
+        max: Optional['types.TopicSubscriptionMaxAggregateInput'] = None,
+        having: Optional['types.TopicSubscriptionScalarWhereWithAggregatesInput'] = None,
+        count: Optional[Union[bool, 'types.TopicSubscriptionCountAggregateInput']] = None,
+        order: Optional[Union[Mapping['types.TopicSubscriptionScalarFieldKeys', 'types.SortOrder'], List[Mapping['types.TopicSubscriptionScalarFieldKeys', 'types.SortOrder']]]] = None,
+    ) -> List['types.TopicSubscriptionGroupByOutput']:
+        """Group TopicSubscription records by one or more field values and perform aggregations
+        each group such as finding the average.
+
+        Parameters
+        ----------
+        by
+            List of scalar TopicSubscription fields to group records by
+        where
+            TopicSubscription filter to select records
+        take
+            Limit the maximum number of TopicSubscription records returned
+        skip
+            Ignore the first N records
+        avg
+            Adds the average of all values of the specified fields to the `_avg` field
+            in the returned data.
+        sum
+            Adds the sum of all values of the specified fields to the `_sum` field
+            in the returned data.
+        min
+            Adds the smallest available value for the specified fields to the `_min` field
+            in the returned data.
+        max
+            Adds the largest available value for the specified fields to the `_max` field
+            in the returned data.
+        count
+            Adds a count of non-fields to the `_count` field in the returned data.
+        having
+            Allows you to filter groups by an aggregate value - for example only return
+            groups having an average age less than 50.
+        order
+            Lets you order the returned list by any property that is also present in `by`.
+            Only **one** field is allowed at a time.
+
+        Returns
+        -------
+        List[prisma.types.TopicSubscriptionGroupByOutput]
+            A list of dictionaries representing the TopicSubscription record,
+            this will also have additional fields present if aggregation arguments
+            are used (see the above parameters)
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # group TopicSubscription records by topic values
+        # and count how many records are in each group
+        results = await TopicSubscription.prisma().group_by(
+            ['topic'],
+            count=True,
+        )
+        ```
+        """
+        if order is None:
+            if take is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'take\' is present')
+
+            if skip is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'skip\' is present')
+
+        root_selection: List[str] = [*by]
+        if avg is not None:
+            root_selection.append(_select_fields('_avg', avg))
+
+        if min is not None:
+            root_selection.append(_select_fields('_min', min))
+
+        if sum is not None:
+            root_selection.append(_select_fields('_sum', sum))
+
+        if max is not None:
+            root_selection.append(_select_fields('_max', max))
+
+        if count is not None:
+            if count is True:
+                root_selection.append('_count { _all }')
+            elif isinstance(count, dict):
+                root_selection.append(_select_fields('_count', count))
+
+        resp = await self._client._execute(
+            method='group_by',
+            model=self._model,
+            arguments={
+                'by': by,
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'having': having,
+                'orderBy': order,
+            },
+            root_selection=root_selection,
+        )
+        return resp['data']['result']  # type: ignore[no-any-return]
+
+
+class TopicSnapshotActions(Generic[_PrismaModelT]):
+    __slots__ = (
+        '_client',
+        '_model',
+    )
+
+    def __init__(self, client: Prisma, model: Type[_PrismaModelT]) -> None:
+        self._client = client
+        self._model = model
+
+    async def query_raw(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> List[_PrismaModelT]:
+        """Execute a raw SQL query
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        List[prisma.models.TopicSnapshot]
+            The records returned by the SQL query
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        users = await TopicSnapshot.prisma().query_raw(
+            'SELECT * FROM TopicSnapshot WHERE id = $1',
+            'ceibfcgij',
+        )
+        ```
+        """
+        return await self._client.query_raw(query, *args, model=self._model)
+
+    async def query_first(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> Optional[_PrismaModelT]:
+        """Execute a raw SQL query, returning the first result
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        prisma.models.TopicSnapshot
+            The first record returned by the SQL query
+        None
+            The raw SQL query did not return any records
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        user = await TopicSnapshot.prisma().query_first(
+            'SELECT * FROM TopicSnapshot WHERE subscriptionId = $1',
+            'debhbfada',
+        )
+        ```
+        """
+        return await self._client.query_first(query, *args, model=self._model)
+
+    async def create(
+        self,
+        data: types.TopicSnapshotCreateInput,
+        include: Optional[types.TopicSnapshotInclude] = None
+    ) -> _PrismaModelT:
+        """Create a new TopicSnapshot record.
+
+        Parameters
+        ----------
+        data
+            TopicSnapshot record data
+        include
+            Specifies which relations should be loaded on the returned TopicSnapshot model
+
+        Returns
+        -------
+        prisma.models.TopicSnapshot
+            The created TopicSnapshot record
+
+        Raises
+        ------
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # create a TopicSnapshot record from just the required fields
+        topicsnapshot = await TopicSnapshot.prisma().create(
+            data={
+                # data to create a TopicSnapshot record
+                'subscriptionId': 'bgjchggecd',
+                'topic': 'igggcfjg',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='create',
+            model=self._model,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def create_many(
+        self,
+        data: List[types.TopicSnapshotCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> int:
+        """Create multiple TopicSnapshot records at once.
+
+        This function is *not* available when using SQLite.
+
+        Parameters
+        ----------
+        data
+            List of TopicSnapshot record data
+        skip_duplicates
+            Boolean flag for ignoring unique constraint errors
+
+        Returns
+        -------
+        int
+            The total number of records created
+
+        Raises
+        ------
+        prisma.errors.UnsupportedDatabaseError
+            Attempting to query when using SQLite
+        prisma.errors.UniqueViolationError
+            A unique constraint check has failed, these can be ignored with the `skip_duplicates` argument
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        total = await TopicSnapshot.prisma().create_many(
+            data=[
+                {
+                    # data to create a TopicSnapshot record
+                    'subscriptionId': 'bgjhijffjh',
+                    'topic': 'bcigdhache',
+                },
+                {
+                    # data to create a TopicSnapshot record
+                    'subscriptionId': 'igefhgdhb',
+                    'topic': 'ejbiifbae',
+                },
+            ],
+            skip_duplicates=True,
+        )
+        ```
+        """
+        if skip_duplicates and self._client._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._client._active_provider, 'create_many_skip_duplicates')
+
+        resp = await self._client._execute(
+            method='create_many',
+            model=self._model,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    async def delete(
+        self,
+        where: types.TopicSnapshotWhereUniqueInput,
+        include: Optional[types.TopicSnapshotInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Delete a single TopicSnapshot record.
+
+        Parameters
+        ----------
+        where
+            TopicSnapshot filter to select the record to be deleted, must be unique
+        include
+            Specifies which relations should be loaded on the returned TopicSnapshot model
+
+        Returns
+        -------
+        prisma.models.TopicSnapshot
+            The deleted TopicSnapshot record
+        None
+            Could not find a record to delete
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        topicsnapshot = await TopicSnapshot.prisma().delete(
+            where={
+                'id': 'djcfgedjd',
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='delete',
+                model=self._model,
+                arguments={
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_unique(
+        self,
+        where: types.TopicSnapshotWhereUniqueInput,
+        include: Optional[types.TopicSnapshotInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Find a unique TopicSnapshot record.
+
+        Parameters
+        ----------
+        where
+            TopicSnapshot filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned TopicSnapshot model
+
+        Returns
+        -------
+        prisma.models.TopicSnapshot
+            The found TopicSnapshot record
+        None
+            No record matching the given input could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        topicsnapshot = await TopicSnapshot.prisma().find_unique(
+            where={
+                'id': 'bdbjcdegag',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+        return model_parse(self._model, result)
+
+    async def find_unique_or_raise(
+        self,
+        where: types.TopicSnapshotWhereUniqueInput,
+        include: Optional[types.TopicSnapshotInclude] = None
+    ) -> _PrismaModelT:
+        """Find a unique TopicSnapshot record. Raises `RecordNotFoundError` if no record is found.
+
+        Parameters
+        ----------
+        where
+            TopicSnapshot filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned TopicSnapshot model
+
+        Returns
+        -------
+        prisma.models.TopicSnapshot
+            The found TopicSnapshot record
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        topicsnapshot = await TopicSnapshot.prisma().find_unique_or_raise(
+            where={
+                'id': 'hbchfebch',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique_or_raise',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_many(
+        self,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.TopicSnapshotWhereInput] = None,
+        cursor: Optional[types.TopicSnapshotWhereUniqueInput] = None,
+        include: Optional[types.TopicSnapshotInclude] = None,
+        order: Optional[Union[types.TopicSnapshotOrderByInput, List[types.TopicSnapshotOrderByInput]]] = None,
+        distinct: Optional[List[types.TopicSnapshotScalarFieldKeys]] = None,
+    ) -> List[_PrismaModelT]:
+        """Find multiple TopicSnapshot records.
+
+        An empty list is returned if no records could be found.
+
+        Parameters
+        ----------
+        take
+            Limit the maximum number of TopicSnapshot records returned
+        skip
+            Ignore the first N results
+        where
+            TopicSnapshot filter to select records
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned TopicSnapshot model
+        order
+            Order the returned TopicSnapshot records by any field
+        distinct
+            Filter TopicSnapshot records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        List[prisma.models.TopicSnapshot]
+            The list of all TopicSnapshot records that could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the first 10 TopicSnapshot records
+        topicsnapshots = await TopicSnapshot.prisma().find_many(take=10)
+
+        # find the first 5 TopicSnapshot records ordered by the topic field
+        topicsnapshots = await TopicSnapshot.prisma().find_many(
+            take=5,
+            order={
+                'topic': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_many',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return [model_parse(self._model, r) for r in resp['data']['result']]
+
+    async def find_first(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.TopicSnapshotWhereInput] = None,
+        cursor: Optional[types.TopicSnapshotWhereUniqueInput] = None,
+        include: Optional[types.TopicSnapshotInclude] = None,
+        order: Optional[Union[types.TopicSnapshotOrderByInput, List[types.TopicSnapshotOrderByInput]]] = None,
+        distinct: Optional[List[types.TopicSnapshotScalarFieldKeys]] = None,
+    ) -> Optional[_PrismaModelT]:
+        """Find a single TopicSnapshot record.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            TopicSnapshot filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned TopicSnapshot model
+        order
+            Order the returned TopicSnapshot records by any field
+        distinct
+            Filter TopicSnapshot records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.TopicSnapshot
+            The first TopicSnapshot record found, matching the given arguments
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second TopicSnapshot record ordered by the createdAt field
+        topicsnapshot = await TopicSnapshot.prisma().find_first(
+            skip=1,
+            order={
+                'createdAt': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+
+        return model_parse(self._model, result)
+
+    async def find_first_or_raise(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.TopicSnapshotWhereInput] = None,
+        cursor: Optional[types.TopicSnapshotWhereUniqueInput] = None,
+        include: Optional[types.TopicSnapshotInclude] = None,
+        order: Optional[Union[types.TopicSnapshotOrderByInput, List[types.TopicSnapshotOrderByInput]]] = None,
+        distinct: Optional[List[types.TopicSnapshotScalarFieldKeys]] = None,
+    ) -> _PrismaModelT:
+        """Find a single TopicSnapshot record. Raises `RecordNotFoundError` if no record was found.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            TopicSnapshot filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned TopicSnapshot model
+        order
+            Order the returned TopicSnapshot records by any field
+        distinct
+            Filter TopicSnapshot records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.TopicSnapshot
+            The first TopicSnapshot record found, matching the given arguments
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second TopicSnapshot record ordered by the articleCount field
+        topicsnapshot = await TopicSnapshot.prisma().find_first_or_raise(
+            skip=1,
+            order={
+                'articleCount': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first_or_raise',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update(
+        self,
+        data: types.TopicSnapshotUpdateInput,
+        where: types.TopicSnapshotWhereUniqueInput,
+        include: Optional[types.TopicSnapshotInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Update a single TopicSnapshot record.
+
+        Parameters
+        ----------
+        data
+            TopicSnapshot record data specifying what to update
+        where
+            TopicSnapshot filter to select the unique record to create / update
+        include
+            Specifies which relations should be loaded on the returned TopicSnapshot model
+
+        Returns
+        -------
+        prisma.models.TopicSnapshot
+            The updated TopicSnapshot record
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        topicsnapshot = await TopicSnapshot.prisma().update(
+            where={
+                'id': 'bcjjffegfc',
+            },
+            data={
+                # data to update the TopicSnapshot record to
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='update',
+                model=self._model,
+                arguments={
+                    'data': data,
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def upsert(
+        self,
+        where: types.TopicSnapshotWhereUniqueInput,
+        data: types.TopicSnapshotUpsertInput,
+        include: Optional[types.TopicSnapshotInclude] = None,
+    ) -> _PrismaModelT:
+        """Updates an existing record or create a new one
+
+        Parameters
+        ----------
+        where
+            TopicSnapshot filter to select the unique record to create / update
+        data
+            Data specifying what fields to set on create and update
+        include
+            Specifies which relations should be loaded on the returned TopicSnapshot model
+
+        Returns
+        -------
+        prisma.models.TopicSnapshot
+            The created or updated TopicSnapshot record
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        topicsnapshot = await TopicSnapshot.prisma().upsert(
+            where={
+                'id': 'cahaeaicjd',
+            },
+            data={
+                'create': {
+                    'id': 'cahaeaicjd',
+                    'subscriptionId': 'igefhgdhb',
+                    'topic': 'ejbiifbae',
+                },
+                'update': {
+                    'subscriptionId': 'igefhgdhb',
+                    'topic': 'ejbiifbae',
+                },
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='upsert',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update_many(
+        self,
+        data: types.TopicSnapshotUpdateManyMutationInput,
+        where: types.TopicSnapshotWhereInput,
+    ) -> int:
+        """Update multiple TopicSnapshot records
+
+        Parameters
+        ----------
+        data
+            TopicSnapshot data to update the selected TopicSnapshot records to
+        where
+            Filter to select the TopicSnapshot records to update
+
+        Returns
+        -------
+        int
+            The total number of TopicSnapshot records that were updated
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # update all TopicSnapshot records
+        total = await TopicSnapshot.prisma().update_many(
+            data={
+                'claimCount': 811900218
+            },
+            where={}
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='update_many',
+            model=self._model,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    @overload
+    async def count(
+        self,
+        select: None = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.TopicSnapshotWhereInput] = None,
+        cursor: Optional[types.TopicSnapshotWhereUniqueInput] = None,
+    ) -> int:
+        """Count the number of TopicSnapshot records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the TopicSnapshot fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            TopicSnapshot filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.TopicSnapshotCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await TopicSnapshot.prisma().count()
+
+        # results: prisma.types.TopicSnapshotCountAggregateOutput
+        results = await TopicSnapshot.prisma().count(
+            select={
+                '_all': True,
+                'eventCount': True,
+            },
+        )
+        ```
+        """
+
+
+    @overload
+    async def count(
+        self,
+        select: types.TopicSnapshotCountAggregateInput,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.TopicSnapshotWhereInput] = None,
+        cursor: Optional[types.TopicSnapshotWhereUniqueInput] = None,
+    ) -> types.TopicSnapshotCountAggregateOutput:
+        ...
+
+    async def count(
+        self,
+        select: Optional[types.TopicSnapshotCountAggregateInput] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.TopicSnapshotWhereInput] = None,
+        cursor: Optional[types.TopicSnapshotWhereUniqueInput] = None,
+    ) -> Union[int, types.TopicSnapshotCountAggregateOutput]:
+        """Count the number of TopicSnapshot records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the TopicSnapshot fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            TopicSnapshot filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.TopicSnapshotCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await TopicSnapshot.prisma().count()
+
+        # results: prisma.types.TopicSnapshotCountAggregateOutput
+        results = await TopicSnapshot.prisma().count(
+            select={
+                '_all': True,
+                'consensusScore': True,
+            },
+        )
+        ```
+        """
+
+        # TODO: this selection building should be moved to the QueryBuilder
+        #
+        # note the distinction between checking for `not select` here and `select is None`
+        # later is to handle the case that the given select dictionary is empty, this
+        # is a limitation of our types.
+        if not select:
+            root_selection = ['_count { _all }']
+        else:
+
+            root_selection = [
+                '_count {{ {0} }}'.format(' '.join(k for k, v in select.items() if v is True))
+            ]
+
+        resp = await self._client._execute(
+            method='count',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'cursor': cursor,
+            },
+            root_selection=root_selection,
+        )
+
+        if select is None:
+            return cast(int, resp['data']['result']['_count']['_all'])
+        else:
+            return cast(types.TopicSnapshotCountAggregateOutput, resp['data']['result']['_count'])
+
+    async def delete_many(
+        self,
+        where: Optional[types.TopicSnapshotWhereInput] = None
+    ) -> int:
+        """Delete multiple TopicSnapshot records.
+
+        Parameters
+        ----------
+        where
+            Optional TopicSnapshot filter to find the records to be deleted
+
+        Returns
+        -------
+        int
+            The total number of TopicSnapshot records that were deleted
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # delete all TopicSnapshot records
+        total = await TopicSnapshot.prisma().delete_many()
+        ```
+        """
+        resp = await self._client._execute(
+            method='delete_many',
+            model=self._model,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    # TODO: make this easier to work with safely, currently output fields are typed as
+    #       not required, we should refactor the return type
+    # TODO: consider returning a Dict where the keys are a Tuple of the `by` selection
+    # TODO: statically type that the order argument is required when take or skip are present
+    async def group_by(
+        self,
+        by: List['types.TopicSnapshotScalarFieldKeys'],
+        *,
+        where: Optional['types.TopicSnapshotWhereInput'] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        avg: Optional['types.TopicSnapshotAvgAggregateInput'] = None,
+        sum: Optional['types.TopicSnapshotSumAggregateInput'] = None,
+        min: Optional['types.TopicSnapshotMinAggregateInput'] = None,
+        max: Optional['types.TopicSnapshotMaxAggregateInput'] = None,
+        having: Optional['types.TopicSnapshotScalarWhereWithAggregatesInput'] = None,
+        count: Optional[Union[bool, 'types.TopicSnapshotCountAggregateInput']] = None,
+        order: Optional[Union[Mapping['types.TopicSnapshotScalarFieldKeys', 'types.SortOrder'], List[Mapping['types.TopicSnapshotScalarFieldKeys', 'types.SortOrder']]]] = None,
+    ) -> List['types.TopicSnapshotGroupByOutput']:
+        """Group TopicSnapshot records by one or more field values and perform aggregations
+        each group such as finding the average.
+
+        Parameters
+        ----------
+        by
+            List of scalar TopicSnapshot fields to group records by
+        where
+            TopicSnapshot filter to select records
+        take
+            Limit the maximum number of TopicSnapshot records returned
+        skip
+            Ignore the first N records
+        avg
+            Adds the average of all values of the specified fields to the `_avg` field
+            in the returned data.
+        sum
+            Adds the sum of all values of the specified fields to the `_sum` field
+            in the returned data.
+        min
+            Adds the smallest available value for the specified fields to the `_min` field
+            in the returned data.
+        max
+            Adds the largest available value for the specified fields to the `_max` field
+            in the returned data.
+        count
+            Adds a count of non-fields to the `_count` field in the returned data.
+        having
+            Allows you to filter groups by an aggregate value - for example only return
+            groups having an average age less than 50.
+        order
+            Lets you order the returned list by any property that is also present in `by`.
+            Only **one** field is allowed at a time.
+
+        Returns
+        -------
+        List[prisma.types.TopicSnapshotGroupByOutput]
+            A list of dictionaries representing the TopicSnapshot record,
+            this will also have additional fields present if aggregation arguments
+            are used (see the above parameters)
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # group TopicSnapshot records by polarizationIndex values
+        # and count how many records are in each group
+        results = await TopicSnapshot.prisma().group_by(
+            ['polarizationIndex'],
+            count=True,
+        )
+        ```
+        """
+        if order is None:
+            if take is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'take\' is present')
+
+            if skip is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'skip\' is present')
+
+        root_selection: List[str] = [*by]
+        if avg is not None:
+            root_selection.append(_select_fields('_avg', avg))
+
+        if min is not None:
+            root_selection.append(_select_fields('_min', min))
+
+        if sum is not None:
+            root_selection.append(_select_fields('_sum', sum))
+
+        if max is not None:
+            root_selection.append(_select_fields('_max', max))
+
+        if count is not None:
+            if count is True:
+                root_selection.append('_count { _all }')
+            elif isinstance(count, dict):
+                root_selection.append(_select_fields('_count', count))
+
+        resp = await self._client._execute(
+            method='group_by',
+            model=self._model,
+            arguments={
+                'by': by,
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'having': having,
+                'orderBy': order,
+            },
+            root_selection=root_selection,
+        )
+        return resp['data']['result']  # type: ignore[no-any-return]
+
+
+class SnapshotEventActions(Generic[_PrismaModelT]):
+    __slots__ = (
+        '_client',
+        '_model',
+    )
+
+    def __init__(self, client: Prisma, model: Type[_PrismaModelT]) -> None:
+        self._client = client
+        self._model = model
+
+    async def query_raw(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> List[_PrismaModelT]:
+        """Execute a raw SQL query
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        List[prisma.models.SnapshotEvent]
+            The records returned by the SQL query
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        users = await SnapshotEvent.prisma().query_raw(
+            'SELECT * FROM SnapshotEvent WHERE id = $1',
+            'djgacbcch',
+        )
+        ```
+        """
+        return await self._client.query_raw(query, *args, model=self._model)
+
+    async def query_first(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> Optional[_PrismaModelT]:
+        """Execute a raw SQL query, returning the first result
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        prisma.models.SnapshotEvent
+            The first record returned by the SQL query
+        None
+            The raw SQL query did not return any records
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        user = await SnapshotEvent.prisma().query_first(
+            'SELECT * FROM SnapshotEvent WHERE snapshotId = $1',
+            'geeeegace',
+        )
+        ```
+        """
+        return await self._client.query_first(query, *args, model=self._model)
+
+    async def create(
+        self,
+        data: types.SnapshotEventCreateInput,
+        include: Optional[types.SnapshotEventInclude] = None
+    ) -> _PrismaModelT:
+        """Create a new SnapshotEvent record.
+
+        Parameters
+        ----------
+        data
+            SnapshotEvent record data
+        include
+            Specifies which relations should be loaded on the returned SnapshotEvent model
+
+        Returns
+        -------
+        prisma.models.SnapshotEvent
+            The created SnapshotEvent record
+
+        Raises
+        ------
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # create a SnapshotEvent record from just the required fields
+        snapshotevent = await SnapshotEvent.prisma().create(
+            data={
+                # data to create a SnapshotEvent record
+                'snapshotId': 'bbgdigchd',
+                'eventId': 'dajcifgdi',
+                'eventTitle': 'ccedhdbj',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='create',
+            model=self._model,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def create_many(
+        self,
+        data: List[types.SnapshotEventCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> int:
+        """Create multiple SnapshotEvent records at once.
+
+        This function is *not* available when using SQLite.
+
+        Parameters
+        ----------
+        data
+            List of SnapshotEvent record data
+        skip_duplicates
+            Boolean flag for ignoring unique constraint errors
+
+        Returns
+        -------
+        int
+            The total number of records created
+
+        Raises
+        ------
+        prisma.errors.UnsupportedDatabaseError
+            Attempting to query when using SQLite
+        prisma.errors.UniqueViolationError
+            A unique constraint check has failed, these can be ignored with the `skip_duplicates` argument
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        total = await SnapshotEvent.prisma().create_many(
+            data=[
+                {
+                    # data to create a SnapshotEvent record
+                    'snapshotId': 'bjaabjjjce',
+                    'eventId': 'cafhdcdcjd',
+                    'eventTitle': 'bdeebbhbdi',
+                },
+                {
+                    # data to create a SnapshotEvent record
+                    'snapshotId': 'cafcbdchah',
+                    'eventId': 'bdffbehbae',
+                    'eventTitle': 'ieahjgeb',
+                },
+            ],
+            skip_duplicates=True,
+        )
+        ```
+        """
+        if skip_duplicates and self._client._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._client._active_provider, 'create_many_skip_duplicates')
+
+        resp = await self._client._execute(
+            method='create_many',
+            model=self._model,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    async def delete(
+        self,
+        where: types.SnapshotEventWhereUniqueInput,
+        include: Optional[types.SnapshotEventInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Delete a single SnapshotEvent record.
+
+        Parameters
+        ----------
+        where
+            SnapshotEvent filter to select the record to be deleted, must be unique
+        include
+            Specifies which relations should be loaded on the returned SnapshotEvent model
+
+        Returns
+        -------
+        prisma.models.SnapshotEvent
+            The deleted SnapshotEvent record
+        None
+            Could not find a record to delete
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        snapshotevent = await SnapshotEvent.prisma().delete(
+            where={
+                'id': 'hfeeddceg',
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='delete',
+                model=self._model,
+                arguments={
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_unique(
+        self,
+        where: types.SnapshotEventWhereUniqueInput,
+        include: Optional[types.SnapshotEventInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Find a unique SnapshotEvent record.
+
+        Parameters
+        ----------
+        where
+            SnapshotEvent filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned SnapshotEvent model
+
+        Returns
+        -------
+        prisma.models.SnapshotEvent
+            The found SnapshotEvent record
+        None
+            No record matching the given input could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        snapshotevent = await SnapshotEvent.prisma().find_unique(
+            where={
+                'id': 'dbecgbbid',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+        return model_parse(self._model, result)
+
+    async def find_unique_or_raise(
+        self,
+        where: types.SnapshotEventWhereUniqueInput,
+        include: Optional[types.SnapshotEventInclude] = None
+    ) -> _PrismaModelT:
+        """Find a unique SnapshotEvent record. Raises `RecordNotFoundError` if no record is found.
+
+        Parameters
+        ----------
+        where
+            SnapshotEvent filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned SnapshotEvent model
+
+        Returns
+        -------
+        prisma.models.SnapshotEvent
+            The found SnapshotEvent record
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        snapshotevent = await SnapshotEvent.prisma().find_unique_or_raise(
+            where={
+                'id': 'cchghigae',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique_or_raise',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_many(
+        self,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.SnapshotEventWhereInput] = None,
+        cursor: Optional[types.SnapshotEventWhereUniqueInput] = None,
+        include: Optional[types.SnapshotEventInclude] = None,
+        order: Optional[Union[types.SnapshotEventOrderByInput, List[types.SnapshotEventOrderByInput]]] = None,
+        distinct: Optional[List[types.SnapshotEventScalarFieldKeys]] = None,
+    ) -> List[_PrismaModelT]:
+        """Find multiple SnapshotEvent records.
+
+        An empty list is returned if no records could be found.
+
+        Parameters
+        ----------
+        take
+            Limit the maximum number of SnapshotEvent records returned
+        skip
+            Ignore the first N results
+        where
+            SnapshotEvent filter to select records
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned SnapshotEvent model
+        order
+            Order the returned SnapshotEvent records by any field
+        distinct
+            Filter SnapshotEvent records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        List[prisma.models.SnapshotEvent]
+            The list of all SnapshotEvent records that could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the first 10 SnapshotEvent records
+        snapshotevents = await SnapshotEvent.prisma().find_many(take=10)
+
+        # find the first 5 SnapshotEvent records ordered by the eventId field
+        snapshotevents = await SnapshotEvent.prisma().find_many(
+            take=5,
+            order={
+                'eventId': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_many',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return [model_parse(self._model, r) for r in resp['data']['result']]
+
+    async def find_first(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.SnapshotEventWhereInput] = None,
+        cursor: Optional[types.SnapshotEventWhereUniqueInput] = None,
+        include: Optional[types.SnapshotEventInclude] = None,
+        order: Optional[Union[types.SnapshotEventOrderByInput, List[types.SnapshotEventOrderByInput]]] = None,
+        distinct: Optional[List[types.SnapshotEventScalarFieldKeys]] = None,
+    ) -> Optional[_PrismaModelT]:
+        """Find a single SnapshotEvent record.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            SnapshotEvent filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned SnapshotEvent model
+        order
+            Order the returned SnapshotEvent records by any field
+        distinct
+            Filter SnapshotEvent records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.SnapshotEvent
+            The first SnapshotEvent record found, matching the given arguments
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second SnapshotEvent record ordered by the importance field
+        snapshotevent = await SnapshotEvent.prisma().find_first(
+            skip=1,
+            order={
+                'importance': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+
+        return model_parse(self._model, result)
+
+    async def find_first_or_raise(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.SnapshotEventWhereInput] = None,
+        cursor: Optional[types.SnapshotEventWhereUniqueInput] = None,
+        include: Optional[types.SnapshotEventInclude] = None,
+        order: Optional[Union[types.SnapshotEventOrderByInput, List[types.SnapshotEventOrderByInput]]] = None,
+        distinct: Optional[List[types.SnapshotEventScalarFieldKeys]] = None,
+    ) -> _PrismaModelT:
+        """Find a single SnapshotEvent record. Raises `RecordNotFoundError` if no record was found.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            SnapshotEvent filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned SnapshotEvent model
+        order
+            Order the returned SnapshotEvent records by any field
+        distinct
+            Filter SnapshotEvent records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.SnapshotEvent
+            The first SnapshotEvent record found, matching the given arguments
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second SnapshotEvent record ordered by the eventTitle field
+        snapshotevent = await SnapshotEvent.prisma().find_first_or_raise(
+            skip=1,
+            order={
+                'eventTitle': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first_or_raise',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update(
+        self,
+        data: types.SnapshotEventUpdateInput,
+        where: types.SnapshotEventWhereUniqueInput,
+        include: Optional[types.SnapshotEventInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Update a single SnapshotEvent record.
+
+        Parameters
+        ----------
+        data
+            SnapshotEvent record data specifying what to update
+        where
+            SnapshotEvent filter to select the unique record to create / update
+        include
+            Specifies which relations should be loaded on the returned SnapshotEvent model
+
+        Returns
+        -------
+        prisma.models.SnapshotEvent
+            The updated SnapshotEvent record
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        snapshotevent = await SnapshotEvent.prisma().update(
+            where={
+                'id': 'ecdjjjhab',
+            },
+            data={
+                # data to update the SnapshotEvent record to
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='update',
+                model=self._model,
+                arguments={
+                    'data': data,
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def upsert(
+        self,
+        where: types.SnapshotEventWhereUniqueInput,
+        data: types.SnapshotEventUpsertInput,
+        include: Optional[types.SnapshotEventInclude] = None,
+    ) -> _PrismaModelT:
+        """Updates an existing record or create a new one
+
+        Parameters
+        ----------
+        where
+            SnapshotEvent filter to select the unique record to create / update
+        data
+            Data specifying what fields to set on create and update
+        include
+            Specifies which relations should be loaded on the returned SnapshotEvent model
+
+        Returns
+        -------
+        prisma.models.SnapshotEvent
+            The created or updated SnapshotEvent record
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        snapshotevent = await SnapshotEvent.prisma().upsert(
+            where={
+                'id': 'biachfede',
+            },
+            data={
+                'create': {
+                    'id': 'biachfede',
+                    'snapshotId': 'cafcbdchah',
+                    'eventId': 'bdffbehbae',
+                    'eventTitle': 'ieahjgeb',
+                },
+                'update': {
+                    'snapshotId': 'cafcbdchah',
+                    'eventId': 'bdffbehbae',
+                    'eventTitle': 'ieahjgeb',
+                },
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='upsert',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update_many(
+        self,
+        data: types.SnapshotEventUpdateManyMutationInput,
+        where: types.SnapshotEventWhereInput,
+    ) -> int:
+        """Update multiple SnapshotEvent records
+
+        Parameters
+        ----------
+        data
+            SnapshotEvent data to update the selected SnapshotEvent records to
+        where
+            Filter to select the SnapshotEvent records to update
+
+        Returns
+        -------
+        int
+            The total number of SnapshotEvent records that were updated
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # update all SnapshotEvent records
+        total = await SnapshotEvent.prisma().update_many(
+            data={
+                'id': 'fhgaibff'
+            },
+            where={}
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='update_many',
+            model=self._model,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    @overload
+    async def count(
+        self,
+        select: None = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.SnapshotEventWhereInput] = None,
+        cursor: Optional[types.SnapshotEventWhereUniqueInput] = None,
+    ) -> int:
+        """Count the number of SnapshotEvent records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the SnapshotEvent fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            SnapshotEvent filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.SnapshotEventCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await SnapshotEvent.prisma().count()
+
+        # results: prisma.types.SnapshotEventCountAggregateOutput
+        results = await SnapshotEvent.prisma().count(
+            select={
+                '_all': True,
+                'snapshotId': True,
+            },
+        )
+        ```
+        """
+
+
+    @overload
+    async def count(
+        self,
+        select: types.SnapshotEventCountAggregateInput,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.SnapshotEventWhereInput] = None,
+        cursor: Optional[types.SnapshotEventWhereUniqueInput] = None,
+    ) -> types.SnapshotEventCountAggregateOutput:
+        ...
+
+    async def count(
+        self,
+        select: Optional[types.SnapshotEventCountAggregateInput] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.SnapshotEventWhereInput] = None,
+        cursor: Optional[types.SnapshotEventWhereUniqueInput] = None,
+    ) -> Union[int, types.SnapshotEventCountAggregateOutput]:
+        """Count the number of SnapshotEvent records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the SnapshotEvent fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            SnapshotEvent filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.SnapshotEventCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await SnapshotEvent.prisma().count()
+
+        # results: prisma.types.SnapshotEventCountAggregateOutput
+        results = await SnapshotEvent.prisma().count(
+            select={
+                '_all': True,
+                'eventId': True,
+            },
+        )
+        ```
+        """
+
+        # TODO: this selection building should be moved to the QueryBuilder
+        #
+        # note the distinction between checking for `not select` here and `select is None`
+        # later is to handle the case that the given select dictionary is empty, this
+        # is a limitation of our types.
+        if not select:
+            root_selection = ['_count { _all }']
+        else:
+
+            root_selection = [
+                '_count {{ {0} }}'.format(' '.join(k for k, v in select.items() if v is True))
+            ]
+
+        resp = await self._client._execute(
+            method='count',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'cursor': cursor,
+            },
+            root_selection=root_selection,
+        )
+
+        if select is None:
+            return cast(int, resp['data']['result']['_count']['_all'])
+        else:
+            return cast(types.SnapshotEventCountAggregateOutput, resp['data']['result']['_count'])
+
+    async def delete_many(
+        self,
+        where: Optional[types.SnapshotEventWhereInput] = None
+    ) -> int:
+        """Delete multiple SnapshotEvent records.
+
+        Parameters
+        ----------
+        where
+            Optional SnapshotEvent filter to find the records to be deleted
+
+        Returns
+        -------
+        int
+            The total number of SnapshotEvent records that were deleted
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # delete all SnapshotEvent records
+        total = await SnapshotEvent.prisma().delete_many()
+        ```
+        """
+        resp = await self._client._execute(
+            method='delete_many',
+            model=self._model,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    # TODO: make this easier to work with safely, currently output fields are typed as
+    #       not required, we should refactor the return type
+    # TODO: consider returning a Dict where the keys are a Tuple of the `by` selection
+    # TODO: statically type that the order argument is required when take or skip are present
+    async def group_by(
+        self,
+        by: List['types.SnapshotEventScalarFieldKeys'],
+        *,
+        where: Optional['types.SnapshotEventWhereInput'] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        avg: Optional['types.SnapshotEventAvgAggregateInput'] = None,
+        sum: Optional['types.SnapshotEventSumAggregateInput'] = None,
+        min: Optional['types.SnapshotEventMinAggregateInput'] = None,
+        max: Optional['types.SnapshotEventMaxAggregateInput'] = None,
+        having: Optional['types.SnapshotEventScalarWhereWithAggregatesInput'] = None,
+        count: Optional[Union[bool, 'types.SnapshotEventCountAggregateInput']] = None,
+        order: Optional[Union[Mapping['types.SnapshotEventScalarFieldKeys', 'types.SortOrder'], List[Mapping['types.SnapshotEventScalarFieldKeys', 'types.SortOrder']]]] = None,
+    ) -> List['types.SnapshotEventGroupByOutput']:
+        """Group SnapshotEvent records by one or more field values and perform aggregations
+        each group such as finding the average.
+
+        Parameters
+        ----------
+        by
+            List of scalar SnapshotEvent fields to group records by
+        where
+            SnapshotEvent filter to select records
+        take
+            Limit the maximum number of SnapshotEvent records returned
+        skip
+            Ignore the first N records
+        avg
+            Adds the average of all values of the specified fields to the `_avg` field
+            in the returned data.
+        sum
+            Adds the sum of all values of the specified fields to the `_sum` field
+            in the returned data.
+        min
+            Adds the smallest available value for the specified fields to the `_min` field
+            in the returned data.
+        max
+            Adds the largest available value for the specified fields to the `_max` field
+            in the returned data.
+        count
+            Adds a count of non-fields to the `_count` field in the returned data.
+        having
+            Allows you to filter groups by an aggregate value - for example only return
+            groups having an average age less than 50.
+        order
+            Lets you order the returned list by any property that is also present in `by`.
+            Only **one** field is allowed at a time.
+
+        Returns
+        -------
+        List[prisma.types.SnapshotEventGroupByOutput]
+            A list of dictionaries representing the SnapshotEvent record,
+            this will also have additional fields present if aggregation arguments
+            are used (see the above parameters)
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # group SnapshotEvent records by importance values
+        # and count how many records are in each group
+        results = await SnapshotEvent.prisma().group_by(
+            ['importance'],
+            count=True,
+        )
+        ```
+        """
+        if order is None:
+            if take is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'take\' is present')
+
+            if skip is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'skip\' is present')
+
+        root_selection: List[str] = [*by]
+        if avg is not None:
+            root_selection.append(_select_fields('_avg', avg))
+
+        if min is not None:
+            root_selection.append(_select_fields('_min', min))
+
+        if sum is not None:
+            root_selection.append(_select_fields('_sum', sum))
+
+        if max is not None:
+            root_selection.append(_select_fields('_max', max))
+
+        if count is not None:
+            if count is True:
+                root_selection.append('_count { _all }')
+            elif isinstance(count, dict):
+                root_selection.append(_select_fields('_count', count))
+
+        resp = await self._client._execute(
+            method='group_by',
+            model=self._model,
+            arguments={
+                'by': by,
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'having': having,
+                'orderBy': order,
+            },
+            root_selection=root_selection,
+        )
+        return resp['data']['result']  # type: ignore[no-any-return]
+
+
+class SnapshotClaimActions(Generic[_PrismaModelT]):
+    __slots__ = (
+        '_client',
+        '_model',
+    )
+
+    def __init__(self, client: Prisma, model: Type[_PrismaModelT]) -> None:
+        self._client = client
+        self._model = model
+
+    async def query_raw(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> List[_PrismaModelT]:
+        """Execute a raw SQL query
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        List[prisma.models.SnapshotClaim]
+            The records returned by the SQL query
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        users = await SnapshotClaim.prisma().query_raw(
+            'SELECT * FROM SnapshotClaim WHERE id = $1',
+            'cadajbcbca',
+        )
+        ```
+        """
+        return await self._client.query_raw(query, *args, model=self._model)
+
+    async def query_first(
+        self,
+        query: LiteralString,
+        *args: Any,
+    ) -> Optional[_PrismaModelT]:
+        """Execute a raw SQL query, returning the first result
+
+        Parameters
+        ----------
+        query
+            The raw SQL query string to be executed
+        *args
+            Parameters to be passed to the SQL query, these MUST be used over
+            string formatting to avoid an SQL injection vulnerability
+
+        Returns
+        -------
+        prisma.models.SnapshotClaim
+            The first record returned by the SQL query
+        None
+            The raw SQL query did not return any records
+
+        Raises
+        ------
+        prisma_errors.RawQueryError
+            This could be due to invalid syntax, mismatched number of parameters or any other error
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        user = await SnapshotClaim.prisma().query_first(
+            'SELECT * FROM SnapshotClaim WHERE snapshotId = $1',
+            'bjheigfcdd',
+        )
+        ```
+        """
+        return await self._client.query_first(query, *args, model=self._model)
+
+    async def create(
+        self,
+        data: types.SnapshotClaimCreateInput,
+        include: Optional[types.SnapshotClaimInclude] = None
+    ) -> _PrismaModelT:
+        """Create a new SnapshotClaim record.
+
+        Parameters
+        ----------
+        data
+            SnapshotClaim record data
+        include
+            Specifies which relations should be loaded on the returned SnapshotClaim model
+
+        Returns
+        -------
+        prisma.models.SnapshotClaim
+            The created SnapshotClaim record
+
+        Raises
+        ------
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # create a SnapshotClaim record from just the required fields
+        snapshotclaim = await SnapshotClaim.prisma().create(
+            data={
+                # data to create a SnapshotClaim record
+                'snapshotId': 'bjejigcdcg',
+                'claimId': 'bifiiibcah',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='create',
+            model=self._model,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def create_many(
+        self,
+        data: List[types.SnapshotClaimCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> int:
+        """Create multiple SnapshotClaim records at once.
+
+        This function is *not* available when using SQLite.
+
+        Parameters
+        ----------
+        data
+            List of SnapshotClaim record data
+        skip_duplicates
+            Boolean flag for ignoring unique constraint errors
+
+        Returns
+        -------
+        int
+            The total number of records created
+
+        Raises
+        ------
+        prisma.errors.UnsupportedDatabaseError
+            Attempting to query when using SQLite
+        prisma.errors.UniqueViolationError
+            A unique constraint check has failed, these can be ignored with the `skip_duplicates` argument
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        total = await SnapshotClaim.prisma().create_many(
+            data=[
+                {
+                    # data to create a SnapshotClaim record
+                    'snapshotId': 'dbjibjdaa',
+                    'claimId': 'dgijbdiaf',
+                },
+                {
+                    # data to create a SnapshotClaim record
+                    'snapshotId': 'begfaigba',
+                    'claimId': 'bdjiafcgjb',
+                },
+            ],
+            skip_duplicates=True,
+        )
+        ```
+        """
+        if skip_duplicates and self._client._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._client._active_provider, 'create_many_skip_duplicates')
+
+        resp = await self._client._execute(
+            method='create_many',
+            model=self._model,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    async def delete(
+        self,
+        where: types.SnapshotClaimWhereUniqueInput,
+        include: Optional[types.SnapshotClaimInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Delete a single SnapshotClaim record.
+
+        Parameters
+        ----------
+        where
+            SnapshotClaim filter to select the record to be deleted, must be unique
+        include
+            Specifies which relations should be loaded on the returned SnapshotClaim model
+
+        Returns
+        -------
+        prisma.models.SnapshotClaim
+            The deleted SnapshotClaim record
+        None
+            Could not find a record to delete
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        snapshotclaim = await SnapshotClaim.prisma().delete(
+            where={
+                'id': 'bficecgcfg',
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='delete',
+                model=self._model,
+                arguments={
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_unique(
+        self,
+        where: types.SnapshotClaimWhereUniqueInput,
+        include: Optional[types.SnapshotClaimInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Find a unique SnapshotClaim record.
+
+        Parameters
+        ----------
+        where
+            SnapshotClaim filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned SnapshotClaim model
+
+        Returns
+        -------
+        prisma.models.SnapshotClaim
+            The found SnapshotClaim record
+        None
+            No record matching the given input could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        snapshotclaim = await SnapshotClaim.prisma().find_unique(
+            where={
+                'id': 'cbjjeedcj',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+        return model_parse(self._model, result)
+
+    async def find_unique_or_raise(
+        self,
+        where: types.SnapshotClaimWhereUniqueInput,
+        include: Optional[types.SnapshotClaimInclude] = None
+    ) -> _PrismaModelT:
+        """Find a unique SnapshotClaim record. Raises `RecordNotFoundError` if no record is found.
+
+        Parameters
+        ----------
+        where
+            SnapshotClaim filter to find the record, must be unique
+        include
+            Specifies which relations should be loaded on the returned SnapshotClaim model
+
+        Returns
+        -------
+        prisma.models.SnapshotClaim
+            The found SnapshotClaim record
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        snapshotclaim = await SnapshotClaim.prisma().find_unique_or_raise(
+            where={
+                'id': 'dedgbbhja',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_unique_or_raise',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def find_many(
+        self,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.SnapshotClaimWhereInput] = None,
+        cursor: Optional[types.SnapshotClaimWhereUniqueInput] = None,
+        include: Optional[types.SnapshotClaimInclude] = None,
+        order: Optional[Union[types.SnapshotClaimOrderByInput, List[types.SnapshotClaimOrderByInput]]] = None,
+        distinct: Optional[List[types.SnapshotClaimScalarFieldKeys]] = None,
+    ) -> List[_PrismaModelT]:
+        """Find multiple SnapshotClaim records.
+
+        An empty list is returned if no records could be found.
+
+        Parameters
+        ----------
+        take
+            Limit the maximum number of SnapshotClaim records returned
+        skip
+            Ignore the first N results
+        where
+            SnapshotClaim filter to select records
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned SnapshotClaim model
+        order
+            Order the returned SnapshotClaim records by any field
+        distinct
+            Filter SnapshotClaim records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        List[prisma.models.SnapshotClaim]
+            The list of all SnapshotClaim records that could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the first 10 SnapshotClaim records
+        snapshotclaims = await SnapshotClaim.prisma().find_many(take=10)
+
+        # find the first 5 SnapshotClaim records ordered by the claimId field
+        snapshotclaims = await SnapshotClaim.prisma().find_many(
+            take=5,
+            order={
+                'claimId': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_many',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return [model_parse(self._model, r) for r in resp['data']['result']]
+
+    async def find_first(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.SnapshotClaimWhereInput] = None,
+        cursor: Optional[types.SnapshotClaimWhereUniqueInput] = None,
+        include: Optional[types.SnapshotClaimInclude] = None,
+        order: Optional[Union[types.SnapshotClaimOrderByInput, List[types.SnapshotClaimOrderByInput]]] = None,
+        distinct: Optional[List[types.SnapshotClaimScalarFieldKeys]] = None,
+    ) -> Optional[_PrismaModelT]:
+        """Find a single SnapshotClaim record.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            SnapshotClaim filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned SnapshotClaim model
+        order
+            Order the returned SnapshotClaim records by any field
+        distinct
+            Filter SnapshotClaim records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.SnapshotClaim
+            The first SnapshotClaim record found, matching the given arguments
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second SnapshotClaim record ordered by the id field
+        snapshotclaim = await SnapshotClaim.prisma().find_first(
+            skip=1,
+            order={
+                'id': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        result = resp['data']['result']
+        if result is None:
+            return None
+
+        return model_parse(self._model, result)
+
+    async def find_first_or_raise(
+        self,
+        skip: Optional[int] = None,
+        where: Optional[types.SnapshotClaimWhereInput] = None,
+        cursor: Optional[types.SnapshotClaimWhereUniqueInput] = None,
+        include: Optional[types.SnapshotClaimInclude] = None,
+        order: Optional[Union[types.SnapshotClaimOrderByInput, List[types.SnapshotClaimOrderByInput]]] = None,
+        distinct: Optional[List[types.SnapshotClaimScalarFieldKeys]] = None,
+    ) -> _PrismaModelT:
+        """Find a single SnapshotClaim record. Raises `RecordNotFoundError` if no record was found.
+
+        Parameters
+        ----------
+        skip
+            Ignore the first N records
+        where
+            SnapshotClaim filter to select the record
+        cursor
+            Specifies the position in the list to start returning results from, (typically an ID field)
+        include
+            Specifies which relations should be loaded on the returned SnapshotClaim model
+        order
+            Order the returned SnapshotClaim records by any field
+        distinct
+            Filter SnapshotClaim records by either a single distinct field or distinct combinations of fields
+
+        Returns
+        -------
+        prisma.models.SnapshotClaim
+            The first SnapshotClaim record found, matching the given arguments
+
+        Raises
+        ------
+        prisma.errors.RecordNotFoundError
+            No record was found
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # find the second SnapshotClaim record ordered by the snapshotId field
+        snapshotclaim = await SnapshotClaim.prisma().find_first_or_raise(
+            skip=1,
+            order={
+                'snapshotId': 'desc',
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='find_first_or_raise',
+            model=self._model,
+            arguments={
+                'skip': skip,
+                'where': where,
+                'order_by': order,
+                'cursor': cursor,
+                'include': include,
+                'distinct': distinct,
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update(
+        self,
+        data: types.SnapshotClaimUpdateInput,
+        where: types.SnapshotClaimWhereUniqueInput,
+        include: Optional[types.SnapshotClaimInclude] = None
+    ) -> Optional[_PrismaModelT]:
+        """Update a single SnapshotClaim record.
+
+        Parameters
+        ----------
+        data
+            SnapshotClaim record data specifying what to update
+        where
+            SnapshotClaim filter to select the unique record to create / update
+        include
+            Specifies which relations should be loaded on the returned SnapshotClaim model
+
+        Returns
+        -------
+        prisma.models.SnapshotClaim
+            The updated SnapshotClaim record
+        None
+            No record could be found
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        snapshotclaim = await SnapshotClaim.prisma().update(
+            where={
+                'id': 'cabiahchj',
+            },
+            data={
+                # data to update the SnapshotClaim record to
+            },
+        )
+        ```
+        """
+        try:
+            resp = await self._client._execute(
+                method='update',
+                model=self._model,
+                arguments={
+                    'data': data,
+                    'where': where,
+                    'include': include,
+                },
+            )
+        except errors.RecordNotFoundError:
+            return None
+
+        return model_parse(self._model, resp['data']['result'])
+
+    async def upsert(
+        self,
+        where: types.SnapshotClaimWhereUniqueInput,
+        data: types.SnapshotClaimUpsertInput,
+        include: Optional[types.SnapshotClaimInclude] = None,
+    ) -> _PrismaModelT:
+        """Updates an existing record or create a new one
+
+        Parameters
+        ----------
+        where
+            SnapshotClaim filter to select the unique record to create / update
+        data
+            Data specifying what fields to set on create and update
+        include
+            Specifies which relations should be loaded on the returned SnapshotClaim model
+
+        Returns
+        -------
+        prisma.models.SnapshotClaim
+            The created or updated SnapshotClaim record
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+        prisma.errors.MissingRequiredValueError
+            Value is required but was not found
+
+        Example
+        -------
+        ```py
+        snapshotclaim = await SnapshotClaim.prisma().upsert(
+            where={
+                'id': 'cgbeccfce',
+            },
+            data={
+                'create': {
+                    'id': 'cgbeccfce',
+                    'snapshotId': 'begfaigba',
+                    'claimId': 'bdjiafcgjb',
+                },
+                'update': {
+                    'snapshotId': 'begfaigba',
+                    'claimId': 'bdjiafcgjb',
+                },
+            },
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='upsert',
+            model=self._model,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+        return model_parse(self._model, resp['data']['result'])
+
+    async def update_many(
+        self,
+        data: types.SnapshotClaimUpdateManyMutationInput,
+        where: types.SnapshotClaimWhereInput,
+    ) -> int:
+        """Update multiple SnapshotClaim records
+
+        Parameters
+        ----------
+        data
+            SnapshotClaim data to update the selected SnapshotClaim records to
+        where
+            Filter to select the SnapshotClaim records to update
+
+        Returns
+        -------
+        int
+            The total number of SnapshotClaim records that were updated
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # update all SnapshotClaim records
+        total = await SnapshotClaim.prisma().update_many(
+            data={
+                'claimId': 'fcjcagef'
+            },
+            where={}
+        )
+        ```
+        """
+        resp = await self._client._execute(
+            method='update_many',
+            model=self._model,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    @overload
+    async def count(
+        self,
+        select: None = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.SnapshotClaimWhereInput] = None,
+        cursor: Optional[types.SnapshotClaimWhereUniqueInput] = None,
+    ) -> int:
+        """Count the number of SnapshotClaim records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the SnapshotClaim fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            SnapshotClaim filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.SnapshotClaimCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await SnapshotClaim.prisma().count()
+
+        # results: prisma.types.SnapshotClaimCountAggregateOutput
+        results = await SnapshotClaim.prisma().count(
+            select={
+                '_all': True,
+                'id': True,
+            },
+        )
+        ```
+        """
+
+
+    @overload
+    async def count(
+        self,
+        select: types.SnapshotClaimCountAggregateInput,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.SnapshotClaimWhereInput] = None,
+        cursor: Optional[types.SnapshotClaimWhereUniqueInput] = None,
+    ) -> types.SnapshotClaimCountAggregateOutput:
+        ...
+
+    async def count(
+        self,
+        select: Optional[types.SnapshotClaimCountAggregateInput] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        where: Optional[types.SnapshotClaimWhereInput] = None,
+        cursor: Optional[types.SnapshotClaimWhereUniqueInput] = None,
+    ) -> Union[int, types.SnapshotClaimCountAggregateOutput]:
+        """Count the number of SnapshotClaim records present in the database
+
+        Parameters
+        ----------
+        select
+            Select the SnapshotClaim fields to be counted
+        take
+            Limit the maximum result
+        skip
+            Ignore the first N records
+        where
+            SnapshotClaim filter to find records
+        cursor
+            Specifies the position in the list to start counting results from, (typically an ID field)
+        order
+            This parameter is deprecated and will be removed in a future release
+
+        Returns
+        -------
+        int
+            The total number of records found, returned if `select` is not given
+
+        prisma.types.SnapshotClaimCountAggregateOutput
+            Data returned when `select` is used, the fields present in this dictionary will
+            match the fields passed in the `select` argument
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # total: int
+        total = await SnapshotClaim.prisma().count()
+
+        # results: prisma.types.SnapshotClaimCountAggregateOutput
+        results = await SnapshotClaim.prisma().count(
+            select={
+                '_all': True,
+                'snapshotId': True,
+            },
+        )
+        ```
+        """
+
+        # TODO: this selection building should be moved to the QueryBuilder
+        #
+        # note the distinction between checking for `not select` here and `select is None`
+        # later is to handle the case that the given select dictionary is empty, this
+        # is a limitation of our types.
+        if not select:
+            root_selection = ['_count { _all }']
+        else:
+
+            root_selection = [
+                '_count {{ {0} }}'.format(' '.join(k for k, v in select.items() if v is True))
+            ]
+
+        resp = await self._client._execute(
+            method='count',
+            model=self._model,
+            arguments={
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'cursor': cursor,
+            },
+            root_selection=root_selection,
+        )
+
+        if select is None:
+            return cast(int, resp['data']['result']['_count']['_all'])
+        else:
+            return cast(types.SnapshotClaimCountAggregateOutput, resp['data']['result']['_count'])
+
+    async def delete_many(
+        self,
+        where: Optional[types.SnapshotClaimWhereInput] = None
+    ) -> int:
+        """Delete multiple SnapshotClaim records.
+
+        Parameters
+        ----------
+        where
+            Optional SnapshotClaim filter to find the records to be deleted
+
+        Returns
+        -------
+        int
+            The total number of SnapshotClaim records that were deleted
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # delete all SnapshotClaim records
+        total = await SnapshotClaim.prisma().delete_many()
+        ```
+        """
+        resp = await self._client._execute(
+            method='delete_many',
+            model=self._model,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+        return int(resp['data']['result']['count'])
+
+    # TODO: make this easier to work with safely, currently output fields are typed as
+    #       not required, we should refactor the return type
+    # TODO: consider returning a Dict where the keys are a Tuple of the `by` selection
+    # TODO: statically type that the order argument is required when take or skip are present
+    async def group_by(
+        self,
+        by: List['types.SnapshotClaimScalarFieldKeys'],
+        *,
+        where: Optional['types.SnapshotClaimWhereInput'] = None,
+        take: Optional[int] = None,
+        skip: Optional[int] = None,
+        avg: Optional['types.SnapshotClaimAvgAggregateInput'] = None,
+        sum: Optional['types.SnapshotClaimSumAggregateInput'] = None,
+        min: Optional['types.SnapshotClaimMinAggregateInput'] = None,
+        max: Optional['types.SnapshotClaimMaxAggregateInput'] = None,
+        having: Optional['types.SnapshotClaimScalarWhereWithAggregatesInput'] = None,
+        count: Optional[Union[bool, 'types.SnapshotClaimCountAggregateInput']] = None,
+        order: Optional[Union[Mapping['types.SnapshotClaimScalarFieldKeys', 'types.SortOrder'], List[Mapping['types.SnapshotClaimScalarFieldKeys', 'types.SortOrder']]]] = None,
+    ) -> List['types.SnapshotClaimGroupByOutput']:
+        """Group SnapshotClaim records by one or more field values and perform aggregations
+        each group such as finding the average.
+
+        Parameters
+        ----------
+        by
+            List of scalar SnapshotClaim fields to group records by
+        where
+            SnapshotClaim filter to select records
+        take
+            Limit the maximum number of SnapshotClaim records returned
+        skip
+            Ignore the first N records
+        avg
+            Adds the average of all values of the specified fields to the `_avg` field
+            in the returned data.
+        sum
+            Adds the sum of all values of the specified fields to the `_sum` field
+            in the returned data.
+        min
+            Adds the smallest available value for the specified fields to the `_min` field
+            in the returned data.
+        max
+            Adds the largest available value for the specified fields to the `_max` field
+            in the returned data.
+        count
+            Adds a count of non-fields to the `_count` field in the returned data.
+        having
+            Allows you to filter groups by an aggregate value - for example only return
+            groups having an average age less than 50.
+        order
+            Lets you order the returned list by any property that is also present in `by`.
+            Only **one** field is allowed at a time.
+
+        Returns
+        -------
+        List[prisma.types.SnapshotClaimGroupByOutput]
+            A list of dictionaries representing the SnapshotClaim record,
+            this will also have additional fields present if aggregation arguments
+            are used (see the above parameters)
+
+        Raises
+        ------
+        prisma.errors.PrismaError
+            Catch all for every exception raised by Prisma Client Python
+
+        Example
+        -------
+        ```py
+        # group SnapshotClaim records by claimId values
+        # and count how many records are in each group
+        results = await SnapshotClaim.prisma().group_by(
+            ['claimId'],
+            count=True,
+        )
+        ```
+        """
+        if order is None:
+            if take is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'take\' is present')
+
+            if skip is not None:
+                raise TypeError('Missing argument: \'order\' which is required when \'skip\' is present')
+
+        root_selection: List[str] = [*by]
+        if avg is not None:
+            root_selection.append(_select_fields('_avg', avg))
+
+        if min is not None:
+            root_selection.append(_select_fields('_min', min))
+
+        if sum is not None:
+            root_selection.append(_select_fields('_sum', sum))
+
+        if max is not None:
+            root_selection.append(_select_fields('_max', max))
+
+        if count is not None:
+            if count is True:
+                root_selection.append('_count { _all }')
+            elif isinstance(count, dict):
+                root_selection.append(_select_fields('_count', count))
+
+        resp = await self._client._execute(
+            method='group_by',
+            model=self._model,
+            arguments={
+                'by': by,
+                'take': take,
+                'skip': skip,
+                'where': where,
+                'having': having,
+                'orderBy': order,
+            },
+            root_selection=root_selection,
+        )
+        return resp['data']['result']  # type: ignore[no-any-return]
+
+
 class ConsensusFactActions(Generic[_PrismaModelT]):
     __slots__ = (
         '_client',
@@ -13567,7 +18712,7 @@ class ConsensusFactActions(Generic[_PrismaModelT]):
         ```py
         users = await ConsensusFact.prisma().query_raw(
             'SELECT * FROM ConsensusFact WHERE id = $1',
-            'bbbghgbadh',
+            'bgdhaeacic',
         )
         ```
         """
@@ -13607,7 +18752,7 @@ class ConsensusFactActions(Generic[_PrismaModelT]):
         ```py
         user = await ConsensusFact.prisma().query_first(
             'SELECT * FROM ConsensusFact WHERE factStatement = $1',
-            'bbhcgagaic',
+            'caffafcheh',
         )
         ```
         """
@@ -13646,7 +18791,7 @@ class ConsensusFactActions(Generic[_PrismaModelT]):
         consensusfact = await ConsensusFact.prisma().create(
             data={
                 # data to create a ConsensusFact record
-                'factStatement': 'ddaabegbb',
+                'factStatement': 'fjjbegge',
                 'firstSeenAt': datetime.datetime.utcnow(),
                 'lastSeenAt': datetime.datetime.utcnow(),
             },
@@ -13703,13 +18848,13 @@ class ConsensusFactActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a ConsensusFact record
-                    'factStatement': 'bhgibfgbbc',
+                    'factStatement': 'bdiifhbieb',
                     'firstSeenAt': datetime.datetime.utcnow(),
                     'lastSeenAt': datetime.datetime.utcnow(),
                 },
                 {
                     # data to create a ConsensusFact record
-                    'factStatement': 'hbgcihef',
+                    'factStatement': 'cdcaejhgg',
                     'firstSeenAt': datetime.datetime.utcnow(),
                     'lastSeenAt': datetime.datetime.utcnow(),
                 },
@@ -13765,7 +18910,7 @@ class ConsensusFactActions(Generic[_PrismaModelT]):
         ```py
         consensusfact = await ConsensusFact.prisma().delete(
             where={
-                'id': 'ffhgghde',
+                'id': 'jbijgfbfj',
             },
         )
         ```
@@ -13817,7 +18962,7 @@ class ConsensusFactActions(Generic[_PrismaModelT]):
         ```py
         consensusfact = await ConsensusFact.prisma().find_unique(
             where={
-                'id': 'ibcadcejf',
+                'id': 'ggfbeddia',
             },
         )
         ```
@@ -13868,7 +19013,7 @@ class ConsensusFactActions(Generic[_PrismaModelT]):
         ```py
         consensusfact = await ConsensusFact.prisma().find_unique_or_raise(
             where={
-                'id': 'bdcdfgccdg',
+                'id': 'djjejdaj',
             },
         )
         ```
@@ -14120,7 +19265,7 @@ class ConsensusFactActions(Generic[_PrismaModelT]):
         ```py
         consensusfact = await ConsensusFact.prisma().update(
             where={
-                'id': 'edhjgdfh',
+                'id': 'bjabbfceji',
             },
             data={
                 # data to update the ConsensusFact record to
@@ -14177,17 +19322,17 @@ class ConsensusFactActions(Generic[_PrismaModelT]):
         ```py
         consensusfact = await ConsensusFact.prisma().upsert(
             where={
-                'id': 'bdeffdadda',
+                'id': 'bgchfbjibb',
             },
             data={
                 'create': {
-                    'id': 'bdeffdadda',
-                    'factStatement': 'hbgcihef',
+                    'id': 'bgchfbjibb',
+                    'factStatement': 'cdcaejhgg',
                     'firstSeenAt': datetime.datetime.utcnow(),
                     'lastSeenAt': datetime.datetime.utcnow(),
                 },
                 'update': {
-                    'factStatement': 'hbgcihef',
+                    'factStatement': 'cdcaejhgg',
                     'firstSeenAt': datetime.datetime.utcnow(),
                     'lastSeenAt': datetime.datetime.utcnow(),
                 },
@@ -14600,7 +19745,7 @@ class ContradictionPairActions(Generic[_PrismaModelT]):
         ```py
         users = await ContradictionPair.prisma().query_raw(
             'SELECT * FROM ContradictionPair WHERE id = $1',
-            'bjgfdihchf',
+            'bajecchdjc',
         )
         ```
         """
@@ -14640,7 +19785,7 @@ class ContradictionPairActions(Generic[_PrismaModelT]):
         ```py
         user = await ContradictionPair.prisma().query_first(
             'SELECT * FROM ContradictionPair WHERE claimAId = $1',
-            'iaeihdeei',
+            'dfgacajif',
         )
         ```
         """
@@ -14679,9 +19824,9 @@ class ContradictionPairActions(Generic[_PrismaModelT]):
         contradictionpair = await ContradictionPair.prisma().create(
             data={
                 # data to create a ContradictionPair record
-                'claimAId': 'bfggejgfbd',
-                'claimBId': 'ifaaaedja',
-                'contradictionType': 'cbajdjjabf',
+                'claimAId': 'bgdiddfadi',
+                'claimBId': 'bijbfghhhf',
+                'contradictionType': 'bahchhihdc',
             },
         )
         ```
@@ -14736,15 +19881,15 @@ class ContradictionPairActions(Generic[_PrismaModelT]):
             data=[
                 {
                     # data to create a ContradictionPair record
-                    'claimAId': 'bcicggedea',
-                    'claimBId': 'cebcdadjh',
-                    'contradictionType': 'ehfigdgac',
+                    'claimAId': 'bihjdcibib',
+                    'claimBId': 'bfhhjbbdha',
+                    'contradictionType': 'faehcjfdb',
                 },
                 {
                     # data to create a ContradictionPair record
-                    'claimAId': 'bhbgccijjf',
-                    'claimBId': 'bigjhdgbjc',
-                    'contradictionType': 'bfifdebhfd',
+                    'claimAId': 'bbaiefbee',
+                    'claimBId': 'bdaacgjbaf',
+                    'contradictionType': 'biibaighec',
                 },
             ],
             skip_duplicates=True,
@@ -14798,7 +19943,7 @@ class ContradictionPairActions(Generic[_PrismaModelT]):
         ```py
         contradictionpair = await ContradictionPair.prisma().delete(
             where={
-                'id': 'cjchbjde',
+                'id': 'baicdfeidj',
             },
         )
         ```
@@ -14850,7 +19995,7 @@ class ContradictionPairActions(Generic[_PrismaModelT]):
         ```py
         contradictionpair = await ContradictionPair.prisma().find_unique(
             where={
-                'id': 'bfiibjcehj',
+                'id': 'befgiciadg',
             },
         )
         ```
@@ -14901,7 +20046,7 @@ class ContradictionPairActions(Generic[_PrismaModelT]):
         ```py
         contradictionpair = await ContradictionPair.prisma().find_unique_or_raise(
             where={
-                'id': 'ijieafghg',
+                'id': 'cbcehahedh',
             },
         )
         ```
@@ -15153,7 +20298,7 @@ class ContradictionPairActions(Generic[_PrismaModelT]):
         ```py
         contradictionpair = await ContradictionPair.prisma().update(
             where={
-                'id': 'hhhegahcf',
+                'id': 'bcjihiaide',
             },
             data={
                 # data to update the ContradictionPair record to
@@ -15210,19 +20355,19 @@ class ContradictionPairActions(Generic[_PrismaModelT]):
         ```py
         contradictionpair = await ContradictionPair.prisma().upsert(
             where={
-                'id': 'edhijefdi',
+                'id': 'bagfijcgfj',
             },
             data={
                 'create': {
-                    'id': 'edhijefdi',
-                    'claimAId': 'bhbgccijjf',
-                    'claimBId': 'bigjhdgbjc',
-                    'contradictionType': 'bfifdebhfd',
+                    'id': 'bagfijcgfj',
+                    'claimAId': 'bbaiefbee',
+                    'claimBId': 'bdaacgjbaf',
+                    'contradictionType': 'biibaighec',
                 },
                 'update': {
-                    'claimAId': 'bhbgccijjf',
-                    'claimBId': 'bigjhdgbjc',
-                    'contradictionType': 'bfifdebhfd',
+                    'claimAId': 'bbaiefbee',
+                    'claimBId': 'bdaacgjbaf',
+                    'contradictionType': 'biibaighec',
                 },
             },
         )
@@ -15270,7 +20415,7 @@ class ContradictionPairActions(Generic[_PrismaModelT]):
         # update all ContradictionPair records
         total = await ContradictionPair.prisma().update_many(
             data={
-                'resolved': False
+                'resolved': True
             },
             where={}
         )

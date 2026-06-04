@@ -1,13 +1,13 @@
 """
-Phase 2 Final Quality Gate — Clustering & Event Detection
+Phase 2 Final — Clustering & Event Detection
 
 Pipeline:
   1. Load unclustered claims + embeddings
   2. Cosine distance matrix → HDBSCAN (leaf selection)
-  3. LLM merge pass (1 cached call)
-  4. Canonical claim per cluster (1 cached call each)
+  3. Event cohesion validation (pairwise cosine sim threshold)
+  4. Canonical claim per cluster (1 cached LLM call each)
   5. Deterministic event title (TF-IDF + NER + action mapping)
-  6. Event eligibility gate: source_count>=2 OR (importance>=3 AND claim_count>=2 AND evidence>=3)
+  6. Event eligibility gate: sources >= 2 AND claims >= 2 AND evidence >= 2
   7. Cross-source consensus scoring
   8. Weighted importance ranking
 
@@ -21,10 +21,15 @@ import numpy as np
 from collections import Counter
 from sklearn.cluster import HDBSCAN
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity as cos_sim
 from typing import List, Dict, Any
 from app.services.llm_client import cached_llm_call
 
 logger = logging.getLogger(__name__)
+
+# Minimum mean pairwise cosine similarity for a cluster to be considered
+# a coherent event rather than a loose topic grouping.
+COHESION_THRESHOLD = 0.65
 
 def parse_json_safe(raw: str, fallback: dict = None) -> dict:
     if not raw:
@@ -34,12 +39,12 @@ def parse_json_safe(raw: str, fallback: dict = None) -> dict:
     except json.JSONDecodeError:
         return fallback or {}
 
-# ── TF-IDF Event Title (0 LLM calls) ─────────────────────────────
+# ── Deterministic Event Title (0 LLM calls) ──────────────────────
 
-def generate_event_title_tfidf(claim_texts: List[str]) -> str:
+def generate_event_title(claim_texts: List[str]) -> str:
     """
     Generate a descriptive event title using entity extraction + TF-IDF keywords.
-    Produces titles like "SpaceX IPO Filing" not "Elon Musk" or "Mr Musk".
+    Produces titles like "SpaceX IPO Filing" not "Elon Musk" or generic names.
     """
     if not claim_texts:
         return "Unclassified Event"
@@ -50,11 +55,14 @@ def generate_event_title_tfidf(claim_texts: List[str]) -> str:
     entities = re.findall(r'\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\b', all_text)
     entity_counts = Counter(entities)
 
-    # Remove generic stopword-like entities
+    # Remove generic stopword-like entities and single-word person titles
     stopwords = {"The", "This", "That", "These", "Those", "According", "However",
                  "While", "After", "Before", "During", "Between", "About", "Also",
                  "Mr", "Mrs", "Ms", "Dr", "Inc", "Ltd", "Corp", "It", "He", "She",
-                 "Its", "His", "Her", "They", "Their", "New", "First"}
+                 "Its", "His", "Her", "They", "Their", "New", "First", "Thursday",
+                 "Friday", "Monday", "Tuesday", "Wednesday", "Saturday", "Sunday",
+                 "January", "February", "March", "April", "May", "June", "July",
+                 "August", "September", "October", "November", "December"}
     for sw in stopwords:
         entity_counts.pop(sw, None)
 
@@ -87,6 +95,8 @@ def generate_event_title_tfidf(claim_texts: List[str]) -> str:
         "convicted": "Conviction", "arrested": "Arrest", "murder": "Murder",
         "lease": "Lease Agreement", "data center": "Data Center",
         "satellite": "Satellite", "rocket": "Rocket", "test": "Test",
+        "settlement": "Settlement", "penalty": "Penalty", "sec": "SEC Action",
+        "trillionaire": "Wealth", "net worth": "Valuation",
     }
 
     action_word = ""
@@ -106,24 +116,42 @@ def generate_event_title_tfidf(claim_texts: List[str]) -> str:
                 action_word = label
                 break
 
-    # Build title
+    # Build title — avoid repeating the same entity
     if top_entities and action_word:
-        if len(top_entities) >= 2:
-            title = f"{top_entities[0]}–{top_entities[1]} {action_word}"
-        else:
-            title = f"{top_entities[0]} {action_word}"
+        # Use most prominent entity + action
+        title = f"{top_entities[0]} {action_word}"
     elif top_entities:
         # Use entity + first keyword as a fallback
         kw_text = top_keywords[0].title() if top_keywords else ""
         if kw_text and kw_text not in top_entities[0]:
             title = f"{top_entities[0]}: {kw_text}"
         else:
-            title = " ".join(top_entities[:3])
+            title = " ".join(top_entities[:2])
     else:
         # Last resort: use truncated first claim
         title = claim_texts[0][:80]
 
     return title.strip()
+
+# ── Event Cohesion Validation (no LLM) ───────────────────────────
+
+def compute_cluster_cohesion(vectors: np.ndarray) -> float:
+    """
+    Compute mean pairwise cosine similarity within a cluster.
+    Returns a value between 0 and 1.
+    High cohesion = claims are about the same specific event.
+    Low cohesion = claims are merely about the same topic/person.
+    """
+    if len(vectors) < 2:
+        return 1.0
+    sim_matrix = cos_sim(vectors)
+    # Extract upper triangle (excluding diagonal)
+    n = len(vectors)
+    pair_sims = []
+    for i in range(n):
+        for j in range(i + 1, n):
+            pair_sims.append(sim_matrix[i][j])
+    return float(np.mean(pair_sims)) if pair_sims else 1.0
 
 # ══════════════════════════════════════════════════════════════════
 # STEP 1: CLAIM CLUSTERING
@@ -161,7 +189,6 @@ async def run_claim_clustering(prisma):
     X = X / norms
 
     # Cosine distance matrix for topic-aware clustering
-    from sklearn.metrics.pairwise import cosine_similarity as cos_sim
     cos_dist = 1 - cos_sim(X)
     np.fill_diagonal(cos_dist, 0)
 
@@ -169,7 +196,7 @@ async def run_claim_clustering(prisma):
         min_cluster_size=2,
         min_samples=2,
         metric="precomputed",
-        cluster_selection_method="leaf",  # finest granularity
+        cluster_selection_method="leaf",
     )
     labels = clusterer.fit_predict(cos_dist)
 
@@ -178,7 +205,7 @@ async def run_claim_clustering(prisma):
         if label == -1:
             continue
         groups.setdefault(label, [])
-        groups[label].append({"id": ids[idx], "text": texts[idx]})
+        groups[label].append({"id": ids[idx], "text": texts[idx], "vec_idx": idx})
 
     noise_count = sum(1 for l in labels if l == -1)
     logger.info(f"[DIAG] Claims: {len(ids)} | Clusters: {len(groups)} | Noise: {noise_count}")
@@ -186,15 +213,27 @@ async def run_claim_clustering(prisma):
     if not groups:
         return
 
-    # LLM Merge (1 cached call) - COMMENTED OUT BY REQUEST
-    # groups = await _llm_merge_pass(prisma, groups)
-    # logger.info(f"[DIAG] After merge: {len(groups)} clusters.")
-
-    # Per-cluster
+    # ── Cohesion Validation ──
+    # Reject clusters where claims are topically related but not about the same event.
+    cohesive_groups = {}
+    rejected_cohesion = 0
     for label, members in groups.items():
+        member_vecs = np.array([X[m["vec_idx"]] for m in members])
+        cohesion = compute_cluster_cohesion(member_vecs)
+        if cohesion >= COHESION_THRESHOLD:
+            cohesive_groups[label] = members
+        else:
+            rejected_cohesion += 1
+            logger.info(f"[COHESION] Cluster {label} rejected (cohesion={cohesion:.3f}, threshold={COHESION_THRESHOLD})")
+
+    if rejected_cohesion > 0:
+        logger.info(f"[DIAG] Cohesion gate: {rejected_cohesion} clusters rejected, {len(cohesive_groups)} passed")
+
+    # Per-cluster: generate canonical claim + title, persist to DB
+    for label, members in cohesive_groups.items():
         raw_claim_texts = [m["text"] for m in members]
         canonical = await _generate_canonical_claim(prisma, raw_claim_texts)
-        title = generate_event_title_tfidf(raw_claim_texts)
+        title = generate_event_title(raw_claim_texts)
 
         cluster_record = await prisma.claimcluster.create(
             data={"title": title, "canonicalClaim": canonical}
@@ -207,43 +246,6 @@ async def run_claim_clustering(prisma):
             )
 
     logger.info("=== Clustering Complete ===")
-
-# ── LLM Merge Pass (1 cached call) ───────────────────────────────
-
-# async def _llm_merge_pass(prisma, groups: Dict[int, List[Dict]]) -> Dict[int, List[Dict]]:
-#     if len(groups) <= 1:
-#         return groups
-# 
-#     payload = []
-#     for lbl in list(groups.keys()):
-#         payload.append({
-#             "cluster_id": int(lbl),
-#             "claims": [m["text"] for m in groups[lbl]][:8],
-#         })
-# 
-#     system_prompt = (
-#         "Merge clusters describing the SAME real-world event. "
-#         "Only merge if claims are about the exact same story. "
-#         "Do NOT merge loosely related topics. "
-#         "Return JSON: "
-#         '{"merge_groups": [[id1, id2]]} '
-#         "If no merges: "
-#         '{"merge_groups": []}'
-#     )
-# 
-#     raw = await cached_llm_call(prisma, "merge", system_prompt, f"Clusters:\n{json.dumps(payload)}")
-#     data = parse_json_safe(raw, {"merge_groups": []})
-# 
-#     for group in data.get("merge_groups", []):
-#         if not group or len(group) < 2:
-#             continue
-#         target = group[0]
-#         for src in group[1:]:
-#             if src in groups and target in groups:
-#                 groups[target].extend(groups[src])
-#                 del groups[src]
-# 
-#     return groups
 
 # ── Canonical Claim (1 cached call per cluster) ──────────────────
 
@@ -295,11 +297,9 @@ async def run_event_detection(prisma):
         url_count = len(unique_urls)
 
         # ── Cross-Source Consensus Score ──
-        # Formula: unique_publishers / supporting_claims
-        # Higher = more cross-source agreement
         consensus_score = min(source_count / max(claim_count, 1), 1.0)
 
-        # Publisher diversity: ratio of unique sources to unique URLs
+        # Publisher diversity
         publisher_diversity = min(source_count / max(url_count, 1), 1.0) if url_count > 0 else 0.0
 
         await prisma.claimcluster.update(
@@ -307,9 +307,8 @@ async def run_event_detection(prisma):
             data={"consensusScore": consensus_score},
         )
 
-        # ── EVENT ELIGIBILITY GATE (Issue 2) ──
+        # ── EVENT ELIGIBILITY GATE ──
         # An event must represent cross-source convergence.
-        # Must have sources >= 2 AND claims >= 2 AND evidence >= 2.
         has_minimum_claims = claim_count >= 2
         has_minimum_evidence = evidence_count >= 2
         is_multi_source = source_count >= 2
@@ -320,11 +319,11 @@ async def run_event_detection(prisma):
 
         # ── Importance Score (weighted) ──
         importance = (
-            source_count * 0.30 +              # Cross-source breadth
-            publisher_diversity * 0.20 +         # Publisher diversity (not just source * 0.20 again)
-            evidence_count * 0.15 +              # Evidence volume
-            claim_count * 0.15 +                 # Claim volume
-            consensus_score * 0.20               # Consensus quality
+            source_count * 0.30 +
+            publisher_diversity * 0.20 +
+            evidence_count * 0.15 +
+            claim_count * 0.15 +
+            consensus_score * 0.20
         )
 
         # Bonus for strong cross-source coverage
@@ -335,7 +334,7 @@ async def run_event_detection(prisma):
 
         # ── Event Title ──
         raw_texts = [c.canonicalClaim for c in cluster.claims]
-        event_title = generate_event_title_tfidf(raw_texts)
+        event_title = generate_event_title(raw_texts)
 
         # ── Event Summary (1 cached LLM call) ──
         summary_prompt = json.dumps({

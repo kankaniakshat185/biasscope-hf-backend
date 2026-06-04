@@ -204,6 +204,56 @@ class BaseLLMUsage(_PrismaModel):
         return actions.LLMUsageActions[_PrismaModelT](client or get_client(), cls)
 
 
+class BaseDemoSnapshot(_PrismaModel):
+    __prisma_model__: ClassVar[Literal['DemoSnapshot']] = 'DemoSnapshot'  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @classmethod
+    def prisma(cls: Type[_PrismaModelT], client: Optional['Prisma'] = None) -> 'actions.DemoSnapshotActions[_PrismaModelT]':
+        from .client import get_client
+
+        return actions.DemoSnapshotActions[_PrismaModelT](client or get_client(), cls)
+
+
+class BaseTopicSubscription(_PrismaModel):
+    __prisma_model__: ClassVar[Literal['TopicSubscription']] = 'TopicSubscription'  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @classmethod
+    def prisma(cls: Type[_PrismaModelT], client: Optional['Prisma'] = None) -> 'actions.TopicSubscriptionActions[_PrismaModelT]':
+        from .client import get_client
+
+        return actions.TopicSubscriptionActions[_PrismaModelT](client or get_client(), cls)
+
+
+class BaseTopicSnapshot(_PrismaModel):
+    __prisma_model__: ClassVar[Literal['TopicSnapshot']] = 'TopicSnapshot'  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @classmethod
+    def prisma(cls: Type[_PrismaModelT], client: Optional['Prisma'] = None) -> 'actions.TopicSnapshotActions[_PrismaModelT]':
+        from .client import get_client
+
+        return actions.TopicSnapshotActions[_PrismaModelT](client or get_client(), cls)
+
+
+class BaseSnapshotEvent(_PrismaModel):
+    __prisma_model__: ClassVar[Literal['SnapshotEvent']] = 'SnapshotEvent'  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @classmethod
+    def prisma(cls: Type[_PrismaModelT], client: Optional['Prisma'] = None) -> 'actions.SnapshotEventActions[_PrismaModelT]':
+        from .client import get_client
+
+        return actions.SnapshotEventActions[_PrismaModelT](client or get_client(), cls)
+
+
+class BaseSnapshotClaim(_PrismaModel):
+    __prisma_model__: ClassVar[Literal['SnapshotClaim']] = 'SnapshotClaim'  # pyright: ignore[reportIncompatibleVariableOverride]
+
+    @classmethod
+    def prisma(cls: Type[_PrismaModelT], client: Optional['Prisma'] = None) -> 'actions.SnapshotClaimActions[_PrismaModelT]':
+        from .client import get_client
+
+        return actions.SnapshotClaimActions[_PrismaModelT](client or get_client(), cls)
+
+
 class BaseConsensusFact(_PrismaModel):
     __prisma_model__: ClassVar[Literal['ConsensusFact']] = 'ConsensusFact'  # pyright: ignore[reportIncompatibleVariableOverride]
 

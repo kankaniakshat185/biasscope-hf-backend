@@ -31,6 +31,7 @@ model User {
   sessions      Session[]
   accounts      Account[]
   searches      Search[]
+  subscriptions TopicSubscription[]
 
   @@map("user")
 }
@@ -157,6 +158,7 @@ model Claim {
   clusterId           String?
   cluster             ClaimCluster? @relation(fields: [clusterId], references: [id])
   evidence            Evidence[]
+  snapshotClaims      SnapshotClaim[]
 
   @@map("claim")
 }
@@ -182,6 +184,7 @@ model Event {
   importanceScore Float? @default(0)
   createdAt       DateTime @default(now())
   claimClusters   ClaimCluster[]
+  snapshotEvents  SnapshotEvent[]
 
   @@map("event")
 }
@@ -191,6 +194,7 @@ model ClaimCluster {
   title           String
   canonicalClaim  String?
   consensusScore  Float? @default(0)
+  cohesionScore   Float? @default(0)
   eventId         String?
   event           Event? @relation(fields: [eventId], references: [id], onDelete: SetNull)
   claims          Claim[]
@@ -226,6 +230,87 @@ model LLMUsage {
 }
 
 // -------------------------------------------------------------
+// Demo Mode
+// -------------------------------------------------------------
+
+model DemoSnapshot {
+  id        String   @id @default(uuid())
+  topic     String   @unique
+  data      Json
+  createdAt DateTime @default(now())
+
+  @@map("demo_snapshot")
+}
+
+// -------------------------------------------------------------
+// Phase 3.5: Longitudinal Intelligence
+// -------------------------------------------------------------
+
+model TopicSubscription {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topic          String
+  createdAt      DateTime @default(now())
+  lastSnapshotAt DateTime?
+  isActive       Boolean  @default(true)
+  snapshots      TopicSnapshot[]
+
+  @@unique([userId, topic])
+  @@map("topic_subscription")
+}
+
+model TopicSnapshot {
+  id               String   @id @default(uuid())
+  subscriptionId   String
+  subscription     TopicSubscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  topic            String
+  createdAt        DateTime @default(now())
+
+  articleCount     Int      @default(0)
+  claimCount       Int      @default(0)
+  eventCount       Int      @default(0)
+
+  consensusScore   Float?   @default(0)
+  polarizationIndex Float?  @default(0)
+
+  biasDistribution Json?
+  sourceDistribution Json?
+  topEvents        Json?
+  topClaims        Json?
+  driftMetrics     Json?
+
+  summary          String?
+
+  snapshotEvents   SnapshotEvent[]
+  snapshotClaims   SnapshotClaim[]
+
+  @@map("topic_snapshot")
+}
+
+model SnapshotEvent {
+  id          String   @id @default(uuid())
+  snapshotId  String
+  snapshot    TopicSnapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
+  eventId     String
+  event       Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  importance  Float?   @default(0)
+  eventTitle  String
+
+  @@map("snapshot_event")
+}
+
+model SnapshotClaim {
+  id         String   @id @default(uuid())
+  snapshotId String
+  snapshot   TopicSnapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
+  claimId    String
+  claim      Claim    @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  @@map("snapshot_claim")
+}
+
+// -------------------------------------------------------------
 // Phase 3: Consensus and Contradiction Engine (Prepared Schema)
 // -------------------------------------------------------------
 
@@ -252,3 +337,4 @@ model ContradictionPair {
 
   @@map("contradiction_pair")
 }
+

@@ -1150,6 +1150,7 @@ class UserOptionalCreateInput(TypedDict, total=False):
     sessions: 'SessionCreateManyNestedWithoutRelationsInput'
     accounts: 'AccountCreateManyNestedWithoutRelationsInput'
     searches: 'SearchCreateManyNestedWithoutRelationsInput'
+    subscriptions: 'TopicSubscriptionCreateManyNestedWithoutRelationsInput'
 
 
 class UserCreateInput(UserOptionalCreateInput):
@@ -1226,6 +1227,7 @@ class UserUpdateInput(TypedDict, total=False):
     sessions: 'SessionUpdateManyWithoutRelationsInput'
     accounts: 'AccountUpdateManyWithoutRelationsInput'
     searches: 'SearchUpdateManyWithoutRelationsInput'
+    subscriptions: 'TopicSubscriptionUpdateManyWithoutRelationsInput'
 
 
 class UserUpdateManyMutationInput(TypedDict, total=False):
@@ -1387,6 +1389,7 @@ class UserInclude(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromUser']
     accounts: Union[bool, 'FindManyAccountArgsFromUser']
     searches: Union[bool, 'FindManySearchArgsFromUser']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromUser']
 
 
     
@@ -1396,6 +1399,7 @@ class UserIncludeFromUser(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromUserRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromUserRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromUserRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromUserRecursive1']
 
 
 class UserIncludeFromUserRecursive1(TypedDict, total=False):
@@ -1403,6 +1407,7 @@ class UserIncludeFromUserRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromUserRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromUserRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromUserRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromUserRecursive2']
 
 
 class UserIncludeFromUserRecursive2(TypedDict, total=False):
@@ -1410,6 +1415,7 @@ class UserIncludeFromUserRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromUserRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromUserRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromUserRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromUserRecursive3']
 
 
 class UserIncludeFromUserRecursive3(TypedDict, total=False):
@@ -1417,6 +1423,7 @@ class UserIncludeFromUserRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromUserRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromUserRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromUserRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromUserRecursive4']
 
 
 class UserIncludeFromUserRecursive4(TypedDict, total=False):
@@ -2142,24 +2149,28 @@ class ClaimIncludeFromUser(TypedDict, total=False):
     """Relational arguments for User"""
     cluster: Union[bool, 'ClaimClusterArgsFromUserRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromUserRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromUserRecursive1']
 
 
 class ClaimIncludeFromUserRecursive1(TypedDict, total=False):
     """Relational arguments for User"""
     cluster: Union[bool, 'ClaimClusterArgsFromUserRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromUserRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromUserRecursive2']
 
 
 class ClaimIncludeFromUserRecursive2(TypedDict, total=False):
     """Relational arguments for User"""
     cluster: Union[bool, 'ClaimClusterArgsFromUserRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromUserRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromUserRecursive3']
 
 
 class ClaimIncludeFromUserRecursive3(TypedDict, total=False):
     """Relational arguments for User"""
     cluster: Union[bool, 'ClaimClusterArgsFromUserRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromUserRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromUserRecursive4']
 
 
 class ClaimIncludeFromUserRecursive4(TypedDict, total=False):
@@ -2355,21 +2366,25 @@ class FindManyEvidenceArgsFromUserRecursive4(TypedDict, total=False):
 class EventIncludeFromUser(TypedDict, total=False):
     """Relational arguments for User"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromUserRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromUserRecursive1']
 
 
 class EventIncludeFromUserRecursive1(TypedDict, total=False):
     """Relational arguments for User"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromUserRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromUserRecursive2']
 
 
 class EventIncludeFromUserRecursive2(TypedDict, total=False):
     """Relational arguments for User"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromUserRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromUserRecursive3']
 
 
 class EventIncludeFromUserRecursive3(TypedDict, total=False):
     """Relational arguments for User"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromUserRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromUserRecursive4']
 
 
 class EventIncludeFromUserRecursive4(TypedDict, total=False):
@@ -2768,6 +2783,547 @@ class FindManyLLMUsageArgsFromUserRecursive4(TypedDict, total=False):
     
     
 
+class DemoSnapshotIncludeFromUser(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class DemoSnapshotIncludeFromUserRecursive1(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class DemoSnapshotIncludeFromUserRecursive2(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class DemoSnapshotIncludeFromUserRecursive3(TypedDict, total=False):
+    """Relational arguments for User"""
+
+
+class DemoSnapshotIncludeFromUserRecursive4(TypedDict, total=False):
+    """Relational arguments for User"""
+
+    
+
+class DemoSnapshotArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromUser(TypedDict, total=False):
+    """Relational arguments for User"""
+    user: Union[bool, 'UserArgsFromUserRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromUserRecursive1']
+
+
+class TopicSubscriptionIncludeFromUserRecursive1(TypedDict, total=False):
+    """Relational arguments for User"""
+    user: Union[bool, 'UserArgsFromUserRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromUserRecursive2']
+
+
+class TopicSubscriptionIncludeFromUserRecursive2(TypedDict, total=False):
+    """Relational arguments for User"""
+    user: Union[bool, 'UserArgsFromUserRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromUserRecursive3']
+
+
+class TopicSubscriptionIncludeFromUserRecursive3(TypedDict, total=False):
+    """Relational arguments for User"""
+    user: Union[bool, 'UserArgsFromUserRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromUserRecursive4']
+
+
+class TopicSubscriptionIncludeFromUserRecursive4(TypedDict, total=False):
+    """Relational arguments for User"""
+
+    
+
+class TopicSubscriptionArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromUser(TypedDict, total=False):
+    """Relational arguments for User"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromUserRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromUserRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromUserRecursive1']
+
+
+class TopicSnapshotIncludeFromUserRecursive1(TypedDict, total=False):
+    """Relational arguments for User"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromUserRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromUserRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromUserRecursive2']
+
+
+class TopicSnapshotIncludeFromUserRecursive2(TypedDict, total=False):
+    """Relational arguments for User"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromUserRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromUserRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromUserRecursive3']
+
+
+class TopicSnapshotIncludeFromUserRecursive3(TypedDict, total=False):
+    """Relational arguments for User"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromUserRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromUserRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromUserRecursive4']
+
+
+class TopicSnapshotIncludeFromUserRecursive4(TypedDict, total=False):
+    """Relational arguments for User"""
+
+    
+
+class TopicSnapshotArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromUser(TypedDict, total=False):
+    """Relational arguments for User"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromUserRecursive1']
+    event: Union[bool, 'EventArgsFromUserRecursive1']
+
+
+class SnapshotEventIncludeFromUserRecursive1(TypedDict, total=False):
+    """Relational arguments for User"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromUserRecursive2']
+    event: Union[bool, 'EventArgsFromUserRecursive2']
+
+
+class SnapshotEventIncludeFromUserRecursive2(TypedDict, total=False):
+    """Relational arguments for User"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromUserRecursive3']
+    event: Union[bool, 'EventArgsFromUserRecursive3']
+
+
+class SnapshotEventIncludeFromUserRecursive3(TypedDict, total=False):
+    """Relational arguments for User"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromUserRecursive4']
+    event: Union[bool, 'EventArgsFromUserRecursive4']
+
+
+class SnapshotEventIncludeFromUserRecursive4(TypedDict, total=False):
+    """Relational arguments for User"""
+
+    
+
+class SnapshotEventArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    
+    
+
+class FindManySnapshotEventArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromUser(TypedDict, total=False):
+    """Relational arguments for User"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromUserRecursive1']
+    claim: Union[bool, 'ClaimArgsFromUserRecursive1']
+
+
+class SnapshotClaimIncludeFromUserRecursive1(TypedDict, total=False):
+    """Relational arguments for User"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromUserRecursive2']
+    claim: Union[bool, 'ClaimArgsFromUserRecursive2']
+
+
+class SnapshotClaimIncludeFromUserRecursive2(TypedDict, total=False):
+    """Relational arguments for User"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromUserRecursive3']
+    claim: Union[bool, 'ClaimArgsFromUserRecursive3']
+
+
+class SnapshotClaimIncludeFromUserRecursive3(TypedDict, total=False):
+    """Relational arguments for User"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromUserRecursive4']
+    claim: Union[bool, 'ClaimArgsFromUserRecursive4']
+
+
+class SnapshotClaimIncludeFromUserRecursive4(TypedDict, total=False):
+    """Relational arguments for User"""
+
+    
+
+class SnapshotClaimArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    
+    
+
+class FindManySnapshotClaimArgsFromUser(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromUserRecursive1(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromUserRecursive2(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromUserRecursive3(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromUserRecursive4(TypedDict, total=False):
+    """Arguments for User"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    
+    
+
 class ConsensusFactIncludeFromUser(TypedDict, total=False):
     """Relational arguments for User"""
 
@@ -2988,6 +3544,7 @@ class UserWhereInput(TypedDict, total=False):
     sessions: 'SessionListRelationFilter'
     accounts: 'AccountListRelationFilter'
     searches: 'SearchListRelationFilter'
+    subscriptions: 'TopicSubscriptionListRelationFilter'
 
     # should be noted that AND and NOT should be Union['UserWhereInputRecursive1', List['UserWhereInputRecursive1']]
     # but this causes mypy to hang :/
@@ -3008,6 +3565,7 @@ class UserWhereInputRecursive1(TypedDict, total=False):
     sessions: 'SessionListRelationFilter'
     accounts: 'AccountListRelationFilter'
     searches: 'SearchListRelationFilter'
+    subscriptions: 'TopicSubscriptionListRelationFilter'
 
     # should be noted that AND and NOT should be Union['UserWhereInputRecursive2', List['UserWhereInputRecursive2']]
     # but this causes mypy to hang :/
@@ -3028,6 +3586,7 @@ class UserWhereInputRecursive2(TypedDict, total=False):
     sessions: 'SessionListRelationFilter'
     accounts: 'AccountListRelationFilter'
     searches: 'SearchListRelationFilter'
+    subscriptions: 'TopicSubscriptionListRelationFilter'
 
     # should be noted that AND and NOT should be Union['UserWhereInputRecursive3', List['UserWhereInputRecursive3']]
     # but this causes mypy to hang :/
@@ -3048,6 +3607,7 @@ class UserWhereInputRecursive3(TypedDict, total=False):
     sessions: 'SessionListRelationFilter'
     accounts: 'AccountListRelationFilter'
     searches: 'SearchListRelationFilter'
+    subscriptions: 'TopicSubscriptionListRelationFilter'
 
     # should be noted that AND and NOT should be Union['UserWhereInputRecursive4', List['UserWhereInputRecursive4']]
     # but this causes mypy to hang :/
@@ -3068,6 +3628,7 @@ class UserWhereInputRecursive4(TypedDict, total=False):
     sessions: 'SessionListRelationFilter'
     accounts: 'AccountListRelationFilter'
     searches: 'SearchListRelationFilter'
+    subscriptions: 'TopicSubscriptionListRelationFilter'
 
 
 
@@ -3258,6 +3819,7 @@ UserKeys = Literal[
     'sessions',
     'accounts',
     'searches',
+    'subscriptions',
 ]
 UserScalarFieldKeys = Literal[
     'id',
@@ -3274,6 +3836,7 @@ UserRelationalFieldKeys = Literal[
         'sessions',
         'accounts',
         'searches',
+        'subscriptions',
     ]
 
 # Session types
@@ -3537,6 +4100,7 @@ class UserIncludeFromSession(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromSessionRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromSessionRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromSessionRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSessionRecursive1']
 
 
 class UserIncludeFromSessionRecursive1(TypedDict, total=False):
@@ -3544,6 +4108,7 @@ class UserIncludeFromSessionRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromSessionRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromSessionRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromSessionRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSessionRecursive2']
 
 
 class UserIncludeFromSessionRecursive2(TypedDict, total=False):
@@ -3551,6 +4116,7 @@ class UserIncludeFromSessionRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromSessionRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromSessionRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromSessionRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSessionRecursive3']
 
 
 class UserIncludeFromSessionRecursive3(TypedDict, total=False):
@@ -3558,6 +4124,7 @@ class UserIncludeFromSessionRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromSessionRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromSessionRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromSessionRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSessionRecursive4']
 
 
 class UserIncludeFromSessionRecursive4(TypedDict, total=False):
@@ -4283,24 +4850,28 @@ class ClaimIncludeFromSession(TypedDict, total=False):
     """Relational arguments for Session"""
     cluster: Union[bool, 'ClaimClusterArgsFromSessionRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromSessionRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSessionRecursive1']
 
 
 class ClaimIncludeFromSessionRecursive1(TypedDict, total=False):
     """Relational arguments for Session"""
     cluster: Union[bool, 'ClaimClusterArgsFromSessionRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromSessionRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSessionRecursive2']
 
 
 class ClaimIncludeFromSessionRecursive2(TypedDict, total=False):
     """Relational arguments for Session"""
     cluster: Union[bool, 'ClaimClusterArgsFromSessionRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromSessionRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSessionRecursive3']
 
 
 class ClaimIncludeFromSessionRecursive3(TypedDict, total=False):
     """Relational arguments for Session"""
     cluster: Union[bool, 'ClaimClusterArgsFromSessionRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromSessionRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSessionRecursive4']
 
 
 class ClaimIncludeFromSessionRecursive4(TypedDict, total=False):
@@ -4496,21 +5067,25 @@ class FindManyEvidenceArgsFromSessionRecursive4(TypedDict, total=False):
 class EventIncludeFromSession(TypedDict, total=False):
     """Relational arguments for Session"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSessionRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSessionRecursive1']
 
 
 class EventIncludeFromSessionRecursive1(TypedDict, total=False):
     """Relational arguments for Session"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSessionRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSessionRecursive2']
 
 
 class EventIncludeFromSessionRecursive2(TypedDict, total=False):
     """Relational arguments for Session"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSessionRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSessionRecursive3']
 
 
 class EventIncludeFromSessionRecursive3(TypedDict, total=False):
     """Relational arguments for Session"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSessionRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSessionRecursive4']
 
 
 class EventIncludeFromSessionRecursive4(TypedDict, total=False):
@@ -4906,6 +5481,547 @@ class FindManyLLMUsageArgsFromSessionRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromSession(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class DemoSnapshotIncludeFromSessionRecursive1(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class DemoSnapshotIncludeFromSessionRecursive2(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class DemoSnapshotIncludeFromSessionRecursive3(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+
+class DemoSnapshotIncludeFromSessionRecursive4(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+    
+
+class DemoSnapshotArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromSession(TypedDict, total=False):
+    """Relational arguments for Session"""
+    user: Union[bool, 'UserArgsFromSessionRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSessionRecursive1']
+
+
+class TopicSubscriptionIncludeFromSessionRecursive1(TypedDict, total=False):
+    """Relational arguments for Session"""
+    user: Union[bool, 'UserArgsFromSessionRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSessionRecursive2']
+
+
+class TopicSubscriptionIncludeFromSessionRecursive2(TypedDict, total=False):
+    """Relational arguments for Session"""
+    user: Union[bool, 'UserArgsFromSessionRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSessionRecursive3']
+
+
+class TopicSubscriptionIncludeFromSessionRecursive3(TypedDict, total=False):
+    """Relational arguments for Session"""
+    user: Union[bool, 'UserArgsFromSessionRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSessionRecursive4']
+
+
+class TopicSubscriptionIncludeFromSessionRecursive4(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+    
+
+class TopicSubscriptionArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromSession(TypedDict, total=False):
+    """Relational arguments for Session"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSessionRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSessionRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSessionRecursive1']
+
+
+class TopicSnapshotIncludeFromSessionRecursive1(TypedDict, total=False):
+    """Relational arguments for Session"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSessionRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSessionRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSessionRecursive2']
+
+
+class TopicSnapshotIncludeFromSessionRecursive2(TypedDict, total=False):
+    """Relational arguments for Session"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSessionRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSessionRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSessionRecursive3']
+
+
+class TopicSnapshotIncludeFromSessionRecursive3(TypedDict, total=False):
+    """Relational arguments for Session"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSessionRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSessionRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSessionRecursive4']
+
+
+class TopicSnapshotIncludeFromSessionRecursive4(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+    
+
+class TopicSnapshotArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromSession(TypedDict, total=False):
+    """Relational arguments for Session"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSessionRecursive1']
+    event: Union[bool, 'EventArgsFromSessionRecursive1']
+
+
+class SnapshotEventIncludeFromSessionRecursive1(TypedDict, total=False):
+    """Relational arguments for Session"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSessionRecursive2']
+    event: Union[bool, 'EventArgsFromSessionRecursive2']
+
+
+class SnapshotEventIncludeFromSessionRecursive2(TypedDict, total=False):
+    """Relational arguments for Session"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSessionRecursive3']
+    event: Union[bool, 'EventArgsFromSessionRecursive3']
+
+
+class SnapshotEventIncludeFromSessionRecursive3(TypedDict, total=False):
+    """Relational arguments for Session"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSessionRecursive4']
+    event: Union[bool, 'EventArgsFromSessionRecursive4']
+
+
+class SnapshotEventIncludeFromSessionRecursive4(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+    
+
+class SnapshotEventArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    
+    
+
+class FindManySnapshotEventArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromSession(TypedDict, total=False):
+    """Relational arguments for Session"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSessionRecursive1']
+    claim: Union[bool, 'ClaimArgsFromSessionRecursive1']
+
+
+class SnapshotClaimIncludeFromSessionRecursive1(TypedDict, total=False):
+    """Relational arguments for Session"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSessionRecursive2']
+    claim: Union[bool, 'ClaimArgsFromSessionRecursive2']
+
+
+class SnapshotClaimIncludeFromSessionRecursive2(TypedDict, total=False):
+    """Relational arguments for Session"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSessionRecursive3']
+    claim: Union[bool, 'ClaimArgsFromSessionRecursive3']
+
+
+class SnapshotClaimIncludeFromSessionRecursive3(TypedDict, total=False):
+    """Relational arguments for Session"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSessionRecursive4']
+    claim: Union[bool, 'ClaimArgsFromSessionRecursive4']
+
+
+class SnapshotClaimIncludeFromSessionRecursive4(TypedDict, total=False):
+    """Relational arguments for Session"""
+
+    
+
+class SnapshotClaimArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    
+    
+
+class FindManySnapshotClaimArgsFromSession(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromSessionRecursive1(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromSessionRecursive2(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromSessionRecursive3(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromSessionRecursive4(TypedDict, total=False):
+    """Arguments for Session"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
     
     
 
@@ -5736,6 +6852,7 @@ class UserIncludeFromAccount(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromAccountRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromAccountRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromAccountRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromAccountRecursive1']
 
 
 class UserIncludeFromAccountRecursive1(TypedDict, total=False):
@@ -5743,6 +6860,7 @@ class UserIncludeFromAccountRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromAccountRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromAccountRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromAccountRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromAccountRecursive2']
 
 
 class UserIncludeFromAccountRecursive2(TypedDict, total=False):
@@ -5750,6 +6868,7 @@ class UserIncludeFromAccountRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromAccountRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromAccountRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromAccountRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromAccountRecursive3']
 
 
 class UserIncludeFromAccountRecursive3(TypedDict, total=False):
@@ -5757,6 +6876,7 @@ class UserIncludeFromAccountRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromAccountRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromAccountRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromAccountRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromAccountRecursive4']
 
 
 class UserIncludeFromAccountRecursive4(TypedDict, total=False):
@@ -6482,24 +7602,28 @@ class ClaimIncludeFromAccount(TypedDict, total=False):
     """Relational arguments for Account"""
     cluster: Union[bool, 'ClaimClusterArgsFromAccountRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromAccountRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromAccountRecursive1']
 
 
 class ClaimIncludeFromAccountRecursive1(TypedDict, total=False):
     """Relational arguments for Account"""
     cluster: Union[bool, 'ClaimClusterArgsFromAccountRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromAccountRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromAccountRecursive2']
 
 
 class ClaimIncludeFromAccountRecursive2(TypedDict, total=False):
     """Relational arguments for Account"""
     cluster: Union[bool, 'ClaimClusterArgsFromAccountRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromAccountRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromAccountRecursive3']
 
 
 class ClaimIncludeFromAccountRecursive3(TypedDict, total=False):
     """Relational arguments for Account"""
     cluster: Union[bool, 'ClaimClusterArgsFromAccountRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromAccountRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromAccountRecursive4']
 
 
 class ClaimIncludeFromAccountRecursive4(TypedDict, total=False):
@@ -6695,21 +7819,25 @@ class FindManyEvidenceArgsFromAccountRecursive4(TypedDict, total=False):
 class EventIncludeFromAccount(TypedDict, total=False):
     """Relational arguments for Account"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromAccountRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromAccountRecursive1']
 
 
 class EventIncludeFromAccountRecursive1(TypedDict, total=False):
     """Relational arguments for Account"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromAccountRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromAccountRecursive2']
 
 
 class EventIncludeFromAccountRecursive2(TypedDict, total=False):
     """Relational arguments for Account"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromAccountRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromAccountRecursive3']
 
 
 class EventIncludeFromAccountRecursive3(TypedDict, total=False):
     """Relational arguments for Account"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromAccountRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromAccountRecursive4']
 
 
 class EventIncludeFromAccountRecursive4(TypedDict, total=False):
@@ -7105,6 +8233,547 @@ class FindManyLLMUsageArgsFromAccountRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromAccount(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class DemoSnapshotIncludeFromAccountRecursive1(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class DemoSnapshotIncludeFromAccountRecursive2(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class DemoSnapshotIncludeFromAccountRecursive3(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+
+class DemoSnapshotIncludeFromAccountRecursive4(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+    
+
+class DemoSnapshotArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromAccount(TypedDict, total=False):
+    """Relational arguments for Account"""
+    user: Union[bool, 'UserArgsFromAccountRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromAccountRecursive1']
+
+
+class TopicSubscriptionIncludeFromAccountRecursive1(TypedDict, total=False):
+    """Relational arguments for Account"""
+    user: Union[bool, 'UserArgsFromAccountRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromAccountRecursive2']
+
+
+class TopicSubscriptionIncludeFromAccountRecursive2(TypedDict, total=False):
+    """Relational arguments for Account"""
+    user: Union[bool, 'UserArgsFromAccountRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromAccountRecursive3']
+
+
+class TopicSubscriptionIncludeFromAccountRecursive3(TypedDict, total=False):
+    """Relational arguments for Account"""
+    user: Union[bool, 'UserArgsFromAccountRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromAccountRecursive4']
+
+
+class TopicSubscriptionIncludeFromAccountRecursive4(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+    
+
+class TopicSubscriptionArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromAccount(TypedDict, total=False):
+    """Relational arguments for Account"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromAccountRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromAccountRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromAccountRecursive1']
+
+
+class TopicSnapshotIncludeFromAccountRecursive1(TypedDict, total=False):
+    """Relational arguments for Account"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromAccountRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromAccountRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromAccountRecursive2']
+
+
+class TopicSnapshotIncludeFromAccountRecursive2(TypedDict, total=False):
+    """Relational arguments for Account"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromAccountRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromAccountRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromAccountRecursive3']
+
+
+class TopicSnapshotIncludeFromAccountRecursive3(TypedDict, total=False):
+    """Relational arguments for Account"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromAccountRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromAccountRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromAccountRecursive4']
+
+
+class TopicSnapshotIncludeFromAccountRecursive4(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+    
+
+class TopicSnapshotArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromAccount(TypedDict, total=False):
+    """Relational arguments for Account"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromAccountRecursive1']
+    event: Union[bool, 'EventArgsFromAccountRecursive1']
+
+
+class SnapshotEventIncludeFromAccountRecursive1(TypedDict, total=False):
+    """Relational arguments for Account"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromAccountRecursive2']
+    event: Union[bool, 'EventArgsFromAccountRecursive2']
+
+
+class SnapshotEventIncludeFromAccountRecursive2(TypedDict, total=False):
+    """Relational arguments for Account"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromAccountRecursive3']
+    event: Union[bool, 'EventArgsFromAccountRecursive3']
+
+
+class SnapshotEventIncludeFromAccountRecursive3(TypedDict, total=False):
+    """Relational arguments for Account"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromAccountRecursive4']
+    event: Union[bool, 'EventArgsFromAccountRecursive4']
+
+
+class SnapshotEventIncludeFromAccountRecursive4(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+    
+
+class SnapshotEventArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    
+    
+
+class FindManySnapshotEventArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromAccount(TypedDict, total=False):
+    """Relational arguments for Account"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromAccountRecursive1']
+    claim: Union[bool, 'ClaimArgsFromAccountRecursive1']
+
+
+class SnapshotClaimIncludeFromAccountRecursive1(TypedDict, total=False):
+    """Relational arguments for Account"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromAccountRecursive2']
+    claim: Union[bool, 'ClaimArgsFromAccountRecursive2']
+
+
+class SnapshotClaimIncludeFromAccountRecursive2(TypedDict, total=False):
+    """Relational arguments for Account"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromAccountRecursive3']
+    claim: Union[bool, 'ClaimArgsFromAccountRecursive3']
+
+
+class SnapshotClaimIncludeFromAccountRecursive3(TypedDict, total=False):
+    """Relational arguments for Account"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromAccountRecursive4']
+    claim: Union[bool, 'ClaimArgsFromAccountRecursive4']
+
+
+class SnapshotClaimIncludeFromAccountRecursive4(TypedDict, total=False):
+    """Relational arguments for Account"""
+
+    
+
+class SnapshotClaimArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    
+    
+
+class FindManySnapshotClaimArgsFromAccount(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromAccountRecursive1(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromAccountRecursive2(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromAccountRecursive3(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromAccountRecursive4(TypedDict, total=False):
+    """Arguments for Account"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
     
     
 
@@ -7933,6 +9602,7 @@ class UserIncludeFromVerification(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromVerificationRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromVerificationRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromVerificationRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromVerificationRecursive1']
 
 
 class UserIncludeFromVerificationRecursive1(TypedDict, total=False):
@@ -7940,6 +9610,7 @@ class UserIncludeFromVerificationRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromVerificationRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromVerificationRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromVerificationRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromVerificationRecursive2']
 
 
 class UserIncludeFromVerificationRecursive2(TypedDict, total=False):
@@ -7947,6 +9618,7 @@ class UserIncludeFromVerificationRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromVerificationRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromVerificationRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromVerificationRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromVerificationRecursive3']
 
 
 class UserIncludeFromVerificationRecursive3(TypedDict, total=False):
@@ -7954,6 +9626,7 @@ class UserIncludeFromVerificationRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromVerificationRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromVerificationRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromVerificationRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromVerificationRecursive4']
 
 
 class UserIncludeFromVerificationRecursive4(TypedDict, total=False):
@@ -8679,24 +10352,28 @@ class ClaimIncludeFromVerification(TypedDict, total=False):
     """Relational arguments for Verification"""
     cluster: Union[bool, 'ClaimClusterArgsFromVerificationRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromVerificationRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromVerificationRecursive1']
 
 
 class ClaimIncludeFromVerificationRecursive1(TypedDict, total=False):
     """Relational arguments for Verification"""
     cluster: Union[bool, 'ClaimClusterArgsFromVerificationRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromVerificationRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromVerificationRecursive2']
 
 
 class ClaimIncludeFromVerificationRecursive2(TypedDict, total=False):
     """Relational arguments for Verification"""
     cluster: Union[bool, 'ClaimClusterArgsFromVerificationRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromVerificationRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromVerificationRecursive3']
 
 
 class ClaimIncludeFromVerificationRecursive3(TypedDict, total=False):
     """Relational arguments for Verification"""
     cluster: Union[bool, 'ClaimClusterArgsFromVerificationRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromVerificationRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromVerificationRecursive4']
 
 
 class ClaimIncludeFromVerificationRecursive4(TypedDict, total=False):
@@ -8892,21 +10569,25 @@ class FindManyEvidenceArgsFromVerificationRecursive4(TypedDict, total=False):
 class EventIncludeFromVerification(TypedDict, total=False):
     """Relational arguments for Verification"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromVerificationRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromVerificationRecursive1']
 
 
 class EventIncludeFromVerificationRecursive1(TypedDict, total=False):
     """Relational arguments for Verification"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromVerificationRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromVerificationRecursive2']
 
 
 class EventIncludeFromVerificationRecursive2(TypedDict, total=False):
     """Relational arguments for Verification"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromVerificationRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromVerificationRecursive3']
 
 
 class EventIncludeFromVerificationRecursive3(TypedDict, total=False):
     """Relational arguments for Verification"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromVerificationRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromVerificationRecursive4']
 
 
 class EventIncludeFromVerificationRecursive4(TypedDict, total=False):
@@ -9302,6 +10983,547 @@ class FindManyLLMUsageArgsFromVerificationRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromVerification(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class DemoSnapshotIncludeFromVerificationRecursive1(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class DemoSnapshotIncludeFromVerificationRecursive2(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class DemoSnapshotIncludeFromVerificationRecursive3(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+
+class DemoSnapshotIncludeFromVerificationRecursive4(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+    
+
+class DemoSnapshotArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromVerification(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    user: Union[bool, 'UserArgsFromVerificationRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromVerificationRecursive1']
+
+
+class TopicSubscriptionIncludeFromVerificationRecursive1(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    user: Union[bool, 'UserArgsFromVerificationRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromVerificationRecursive2']
+
+
+class TopicSubscriptionIncludeFromVerificationRecursive2(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    user: Union[bool, 'UserArgsFromVerificationRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromVerificationRecursive3']
+
+
+class TopicSubscriptionIncludeFromVerificationRecursive3(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    user: Union[bool, 'UserArgsFromVerificationRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromVerificationRecursive4']
+
+
+class TopicSubscriptionIncludeFromVerificationRecursive4(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+    
+
+class TopicSubscriptionArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromVerification(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromVerificationRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromVerificationRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromVerificationRecursive1']
+
+
+class TopicSnapshotIncludeFromVerificationRecursive1(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromVerificationRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromVerificationRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromVerificationRecursive2']
+
+
+class TopicSnapshotIncludeFromVerificationRecursive2(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromVerificationRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromVerificationRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromVerificationRecursive3']
+
+
+class TopicSnapshotIncludeFromVerificationRecursive3(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromVerificationRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromVerificationRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromVerificationRecursive4']
+
+
+class TopicSnapshotIncludeFromVerificationRecursive4(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+    
+
+class TopicSnapshotArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromVerification(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromVerificationRecursive1']
+    event: Union[bool, 'EventArgsFromVerificationRecursive1']
+
+
+class SnapshotEventIncludeFromVerificationRecursive1(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromVerificationRecursive2']
+    event: Union[bool, 'EventArgsFromVerificationRecursive2']
+
+
+class SnapshotEventIncludeFromVerificationRecursive2(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromVerificationRecursive3']
+    event: Union[bool, 'EventArgsFromVerificationRecursive3']
+
+
+class SnapshotEventIncludeFromVerificationRecursive3(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromVerificationRecursive4']
+    event: Union[bool, 'EventArgsFromVerificationRecursive4']
+
+
+class SnapshotEventIncludeFromVerificationRecursive4(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+    
+
+class SnapshotEventArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    
+    
+
+class FindManySnapshotEventArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromVerification(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromVerificationRecursive1']
+    claim: Union[bool, 'ClaimArgsFromVerificationRecursive1']
+
+
+class SnapshotClaimIncludeFromVerificationRecursive1(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromVerificationRecursive2']
+    claim: Union[bool, 'ClaimArgsFromVerificationRecursive2']
+
+
+class SnapshotClaimIncludeFromVerificationRecursive2(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromVerificationRecursive3']
+    claim: Union[bool, 'ClaimArgsFromVerificationRecursive3']
+
+
+class SnapshotClaimIncludeFromVerificationRecursive3(TypedDict, total=False):
+    """Relational arguments for Verification"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromVerificationRecursive4']
+    claim: Union[bool, 'ClaimArgsFromVerificationRecursive4']
+
+
+class SnapshotClaimIncludeFromVerificationRecursive4(TypedDict, total=False):
+    """Relational arguments for Verification"""
+
+    
+
+class SnapshotClaimArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    
+    
+
+class FindManySnapshotClaimArgsFromVerification(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromVerificationRecursive1(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromVerificationRecursive2(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromVerificationRecursive3(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromVerificationRecursive4(TypedDict, total=False):
+    """Arguments for Verification"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
     
     
 
@@ -9990,6 +12212,7 @@ class UserIncludeFromSearch(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromSearchRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromSearchRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromSearchRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSearchRecursive1']
 
 
 class UserIncludeFromSearchRecursive1(TypedDict, total=False):
@@ -9997,6 +12220,7 @@ class UserIncludeFromSearchRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromSearchRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromSearchRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromSearchRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSearchRecursive2']
 
 
 class UserIncludeFromSearchRecursive2(TypedDict, total=False):
@@ -10004,6 +12228,7 @@ class UserIncludeFromSearchRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromSearchRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromSearchRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromSearchRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSearchRecursive3']
 
 
 class UserIncludeFromSearchRecursive3(TypedDict, total=False):
@@ -10011,6 +12236,7 @@ class UserIncludeFromSearchRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromSearchRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromSearchRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromSearchRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSearchRecursive4']
 
 
 class UserIncludeFromSearchRecursive4(TypedDict, total=False):
@@ -10736,24 +12962,28 @@ class ClaimIncludeFromSearch(TypedDict, total=False):
     """Relational arguments for Search"""
     cluster: Union[bool, 'ClaimClusterArgsFromSearchRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromSearchRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSearchRecursive1']
 
 
 class ClaimIncludeFromSearchRecursive1(TypedDict, total=False):
     """Relational arguments for Search"""
     cluster: Union[bool, 'ClaimClusterArgsFromSearchRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromSearchRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSearchRecursive2']
 
 
 class ClaimIncludeFromSearchRecursive2(TypedDict, total=False):
     """Relational arguments for Search"""
     cluster: Union[bool, 'ClaimClusterArgsFromSearchRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromSearchRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSearchRecursive3']
 
 
 class ClaimIncludeFromSearchRecursive3(TypedDict, total=False):
     """Relational arguments for Search"""
     cluster: Union[bool, 'ClaimClusterArgsFromSearchRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromSearchRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSearchRecursive4']
 
 
 class ClaimIncludeFromSearchRecursive4(TypedDict, total=False):
@@ -10949,21 +13179,25 @@ class FindManyEvidenceArgsFromSearchRecursive4(TypedDict, total=False):
 class EventIncludeFromSearch(TypedDict, total=False):
     """Relational arguments for Search"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSearchRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSearchRecursive1']
 
 
 class EventIncludeFromSearchRecursive1(TypedDict, total=False):
     """Relational arguments for Search"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSearchRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSearchRecursive2']
 
 
 class EventIncludeFromSearchRecursive2(TypedDict, total=False):
     """Relational arguments for Search"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSearchRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSearchRecursive3']
 
 
 class EventIncludeFromSearchRecursive3(TypedDict, total=False):
     """Relational arguments for Search"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSearchRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSearchRecursive4']
 
 
 class EventIncludeFromSearchRecursive4(TypedDict, total=False):
@@ -11359,6 +13593,547 @@ class FindManyLLMUsageArgsFromSearchRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromSearch(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class DemoSnapshotIncludeFromSearchRecursive1(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class DemoSnapshotIncludeFromSearchRecursive2(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class DemoSnapshotIncludeFromSearchRecursive3(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+
+class DemoSnapshotIncludeFromSearchRecursive4(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+    
+
+class DemoSnapshotArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromSearch(TypedDict, total=False):
+    """Relational arguments for Search"""
+    user: Union[bool, 'UserArgsFromSearchRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSearchRecursive1']
+
+
+class TopicSubscriptionIncludeFromSearchRecursive1(TypedDict, total=False):
+    """Relational arguments for Search"""
+    user: Union[bool, 'UserArgsFromSearchRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSearchRecursive2']
+
+
+class TopicSubscriptionIncludeFromSearchRecursive2(TypedDict, total=False):
+    """Relational arguments for Search"""
+    user: Union[bool, 'UserArgsFromSearchRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSearchRecursive3']
+
+
+class TopicSubscriptionIncludeFromSearchRecursive3(TypedDict, total=False):
+    """Relational arguments for Search"""
+    user: Union[bool, 'UserArgsFromSearchRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSearchRecursive4']
+
+
+class TopicSubscriptionIncludeFromSearchRecursive4(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+    
+
+class TopicSubscriptionArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromSearch(TypedDict, total=False):
+    """Relational arguments for Search"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSearchRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSearchRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSearchRecursive1']
+
+
+class TopicSnapshotIncludeFromSearchRecursive1(TypedDict, total=False):
+    """Relational arguments for Search"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSearchRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSearchRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSearchRecursive2']
+
+
+class TopicSnapshotIncludeFromSearchRecursive2(TypedDict, total=False):
+    """Relational arguments for Search"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSearchRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSearchRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSearchRecursive3']
+
+
+class TopicSnapshotIncludeFromSearchRecursive3(TypedDict, total=False):
+    """Relational arguments for Search"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSearchRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSearchRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSearchRecursive4']
+
+
+class TopicSnapshotIncludeFromSearchRecursive4(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+    
+
+class TopicSnapshotArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromSearch(TypedDict, total=False):
+    """Relational arguments for Search"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSearchRecursive1']
+    event: Union[bool, 'EventArgsFromSearchRecursive1']
+
+
+class SnapshotEventIncludeFromSearchRecursive1(TypedDict, total=False):
+    """Relational arguments for Search"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSearchRecursive2']
+    event: Union[bool, 'EventArgsFromSearchRecursive2']
+
+
+class SnapshotEventIncludeFromSearchRecursive2(TypedDict, total=False):
+    """Relational arguments for Search"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSearchRecursive3']
+    event: Union[bool, 'EventArgsFromSearchRecursive3']
+
+
+class SnapshotEventIncludeFromSearchRecursive3(TypedDict, total=False):
+    """Relational arguments for Search"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSearchRecursive4']
+    event: Union[bool, 'EventArgsFromSearchRecursive4']
+
+
+class SnapshotEventIncludeFromSearchRecursive4(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+    
+
+class SnapshotEventArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    
+    
+
+class FindManySnapshotEventArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromSearch(TypedDict, total=False):
+    """Relational arguments for Search"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSearchRecursive1']
+    claim: Union[bool, 'ClaimArgsFromSearchRecursive1']
+
+
+class SnapshotClaimIncludeFromSearchRecursive1(TypedDict, total=False):
+    """Relational arguments for Search"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSearchRecursive2']
+    claim: Union[bool, 'ClaimArgsFromSearchRecursive2']
+
+
+class SnapshotClaimIncludeFromSearchRecursive2(TypedDict, total=False):
+    """Relational arguments for Search"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSearchRecursive3']
+    claim: Union[bool, 'ClaimArgsFromSearchRecursive3']
+
+
+class SnapshotClaimIncludeFromSearchRecursive3(TypedDict, total=False):
+    """Relational arguments for Search"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSearchRecursive4']
+    claim: Union[bool, 'ClaimArgsFromSearchRecursive4']
+
+
+class SnapshotClaimIncludeFromSearchRecursive4(TypedDict, total=False):
+    """Relational arguments for Search"""
+
+    
+
+class SnapshotClaimArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    
+    
+
+class FindManySnapshotClaimArgsFromSearch(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromSearchRecursive1(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromSearchRecursive2(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromSearchRecursive3(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromSearchRecursive4(TypedDict, total=False):
+    """Arguments for Search"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
     
     
 
@@ -12162,6 +14937,7 @@ class UserIncludeFromArticle(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromArticleRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromArticleRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromArticleRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromArticleRecursive1']
 
 
 class UserIncludeFromArticleRecursive1(TypedDict, total=False):
@@ -12169,6 +14945,7 @@ class UserIncludeFromArticleRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromArticleRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromArticleRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromArticleRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromArticleRecursive2']
 
 
 class UserIncludeFromArticleRecursive2(TypedDict, total=False):
@@ -12176,6 +14953,7 @@ class UserIncludeFromArticleRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromArticleRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromArticleRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromArticleRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromArticleRecursive3']
 
 
 class UserIncludeFromArticleRecursive3(TypedDict, total=False):
@@ -12183,6 +14961,7 @@ class UserIncludeFromArticleRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromArticleRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromArticleRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromArticleRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromArticleRecursive4']
 
 
 class UserIncludeFromArticleRecursive4(TypedDict, total=False):
@@ -12908,24 +15687,28 @@ class ClaimIncludeFromArticle(TypedDict, total=False):
     """Relational arguments for Article"""
     cluster: Union[bool, 'ClaimClusterArgsFromArticleRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromArticleRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromArticleRecursive1']
 
 
 class ClaimIncludeFromArticleRecursive1(TypedDict, total=False):
     """Relational arguments for Article"""
     cluster: Union[bool, 'ClaimClusterArgsFromArticleRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromArticleRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromArticleRecursive2']
 
 
 class ClaimIncludeFromArticleRecursive2(TypedDict, total=False):
     """Relational arguments for Article"""
     cluster: Union[bool, 'ClaimClusterArgsFromArticleRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromArticleRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromArticleRecursive3']
 
 
 class ClaimIncludeFromArticleRecursive3(TypedDict, total=False):
     """Relational arguments for Article"""
     cluster: Union[bool, 'ClaimClusterArgsFromArticleRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromArticleRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromArticleRecursive4']
 
 
 class ClaimIncludeFromArticleRecursive4(TypedDict, total=False):
@@ -13121,21 +15904,25 @@ class FindManyEvidenceArgsFromArticleRecursive4(TypedDict, total=False):
 class EventIncludeFromArticle(TypedDict, total=False):
     """Relational arguments for Article"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromArticleRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromArticleRecursive1']
 
 
 class EventIncludeFromArticleRecursive1(TypedDict, total=False):
     """Relational arguments for Article"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromArticleRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromArticleRecursive2']
 
 
 class EventIncludeFromArticleRecursive2(TypedDict, total=False):
     """Relational arguments for Article"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromArticleRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromArticleRecursive3']
 
 
 class EventIncludeFromArticleRecursive3(TypedDict, total=False):
     """Relational arguments for Article"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromArticleRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromArticleRecursive4']
 
 
 class EventIncludeFromArticleRecursive4(TypedDict, total=False):
@@ -13531,6 +16318,547 @@ class FindManyLLMUsageArgsFromArticleRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromArticle(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class DemoSnapshotIncludeFromArticleRecursive1(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class DemoSnapshotIncludeFromArticleRecursive2(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class DemoSnapshotIncludeFromArticleRecursive3(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+
+class DemoSnapshotIncludeFromArticleRecursive4(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+    
+
+class DemoSnapshotArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromArticle(TypedDict, total=False):
+    """Relational arguments for Article"""
+    user: Union[bool, 'UserArgsFromArticleRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromArticleRecursive1']
+
+
+class TopicSubscriptionIncludeFromArticleRecursive1(TypedDict, total=False):
+    """Relational arguments for Article"""
+    user: Union[bool, 'UserArgsFromArticleRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromArticleRecursive2']
+
+
+class TopicSubscriptionIncludeFromArticleRecursive2(TypedDict, total=False):
+    """Relational arguments for Article"""
+    user: Union[bool, 'UserArgsFromArticleRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromArticleRecursive3']
+
+
+class TopicSubscriptionIncludeFromArticleRecursive3(TypedDict, total=False):
+    """Relational arguments for Article"""
+    user: Union[bool, 'UserArgsFromArticleRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromArticleRecursive4']
+
+
+class TopicSubscriptionIncludeFromArticleRecursive4(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+    
+
+class TopicSubscriptionArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromArticle(TypedDict, total=False):
+    """Relational arguments for Article"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromArticleRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromArticleRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromArticleRecursive1']
+
+
+class TopicSnapshotIncludeFromArticleRecursive1(TypedDict, total=False):
+    """Relational arguments for Article"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromArticleRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromArticleRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromArticleRecursive2']
+
+
+class TopicSnapshotIncludeFromArticleRecursive2(TypedDict, total=False):
+    """Relational arguments for Article"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromArticleRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromArticleRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromArticleRecursive3']
+
+
+class TopicSnapshotIncludeFromArticleRecursive3(TypedDict, total=False):
+    """Relational arguments for Article"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromArticleRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromArticleRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromArticleRecursive4']
+
+
+class TopicSnapshotIncludeFromArticleRecursive4(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+    
+
+class TopicSnapshotArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromArticle(TypedDict, total=False):
+    """Relational arguments for Article"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromArticleRecursive1']
+    event: Union[bool, 'EventArgsFromArticleRecursive1']
+
+
+class SnapshotEventIncludeFromArticleRecursive1(TypedDict, total=False):
+    """Relational arguments for Article"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromArticleRecursive2']
+    event: Union[bool, 'EventArgsFromArticleRecursive2']
+
+
+class SnapshotEventIncludeFromArticleRecursive2(TypedDict, total=False):
+    """Relational arguments for Article"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromArticleRecursive3']
+    event: Union[bool, 'EventArgsFromArticleRecursive3']
+
+
+class SnapshotEventIncludeFromArticleRecursive3(TypedDict, total=False):
+    """Relational arguments for Article"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromArticleRecursive4']
+    event: Union[bool, 'EventArgsFromArticleRecursive4']
+
+
+class SnapshotEventIncludeFromArticleRecursive4(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+    
+
+class SnapshotEventArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    
+    
+
+class FindManySnapshotEventArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromArticle(TypedDict, total=False):
+    """Relational arguments for Article"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromArticleRecursive1']
+    claim: Union[bool, 'ClaimArgsFromArticleRecursive1']
+
+
+class SnapshotClaimIncludeFromArticleRecursive1(TypedDict, total=False):
+    """Relational arguments for Article"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromArticleRecursive2']
+    claim: Union[bool, 'ClaimArgsFromArticleRecursive2']
+
+
+class SnapshotClaimIncludeFromArticleRecursive2(TypedDict, total=False):
+    """Relational arguments for Article"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromArticleRecursive3']
+    claim: Union[bool, 'ClaimArgsFromArticleRecursive3']
+
+
+class SnapshotClaimIncludeFromArticleRecursive3(TypedDict, total=False):
+    """Relational arguments for Article"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromArticleRecursive4']
+    claim: Union[bool, 'ClaimArgsFromArticleRecursive4']
+
+
+class SnapshotClaimIncludeFromArticleRecursive4(TypedDict, total=False):
+    """Relational arguments for Article"""
+
+    
+
+class SnapshotClaimArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    
+    
+
+class FindManySnapshotClaimArgsFromArticle(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromArticleRecursive1(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromArticleRecursive2(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromArticleRecursive3(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromArticleRecursive4(TypedDict, total=False):
+    """Arguments for Article"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
     
     
 
@@ -14527,6 +17855,7 @@ class UserIncludeFromInsight(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromInsightRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromInsightRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromInsightRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromInsightRecursive1']
 
 
 class UserIncludeFromInsightRecursive1(TypedDict, total=False):
@@ -14534,6 +17863,7 @@ class UserIncludeFromInsightRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromInsightRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromInsightRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromInsightRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromInsightRecursive2']
 
 
 class UserIncludeFromInsightRecursive2(TypedDict, total=False):
@@ -14541,6 +17871,7 @@ class UserIncludeFromInsightRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromInsightRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromInsightRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromInsightRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromInsightRecursive3']
 
 
 class UserIncludeFromInsightRecursive3(TypedDict, total=False):
@@ -14548,6 +17879,7 @@ class UserIncludeFromInsightRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromInsightRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromInsightRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromInsightRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromInsightRecursive4']
 
 
 class UserIncludeFromInsightRecursive4(TypedDict, total=False):
@@ -15273,24 +18605,28 @@ class ClaimIncludeFromInsight(TypedDict, total=False):
     """Relational arguments for Insight"""
     cluster: Union[bool, 'ClaimClusterArgsFromInsightRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromInsightRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromInsightRecursive1']
 
 
 class ClaimIncludeFromInsightRecursive1(TypedDict, total=False):
     """Relational arguments for Insight"""
     cluster: Union[bool, 'ClaimClusterArgsFromInsightRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromInsightRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromInsightRecursive2']
 
 
 class ClaimIncludeFromInsightRecursive2(TypedDict, total=False):
     """Relational arguments for Insight"""
     cluster: Union[bool, 'ClaimClusterArgsFromInsightRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromInsightRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromInsightRecursive3']
 
 
 class ClaimIncludeFromInsightRecursive3(TypedDict, total=False):
     """Relational arguments for Insight"""
     cluster: Union[bool, 'ClaimClusterArgsFromInsightRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromInsightRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromInsightRecursive4']
 
 
 class ClaimIncludeFromInsightRecursive4(TypedDict, total=False):
@@ -15486,21 +18822,25 @@ class FindManyEvidenceArgsFromInsightRecursive4(TypedDict, total=False):
 class EventIncludeFromInsight(TypedDict, total=False):
     """Relational arguments for Insight"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromInsightRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromInsightRecursive1']
 
 
 class EventIncludeFromInsightRecursive1(TypedDict, total=False):
     """Relational arguments for Insight"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromInsightRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromInsightRecursive2']
 
 
 class EventIncludeFromInsightRecursive2(TypedDict, total=False):
     """Relational arguments for Insight"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromInsightRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromInsightRecursive3']
 
 
 class EventIncludeFromInsightRecursive3(TypedDict, total=False):
     """Relational arguments for Insight"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromInsightRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromInsightRecursive4']
 
 
 class EventIncludeFromInsightRecursive4(TypedDict, total=False):
@@ -15896,6 +19236,547 @@ class FindManyLLMUsageArgsFromInsightRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromInsight(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class DemoSnapshotIncludeFromInsightRecursive1(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class DemoSnapshotIncludeFromInsightRecursive2(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class DemoSnapshotIncludeFromInsightRecursive3(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+
+class DemoSnapshotIncludeFromInsightRecursive4(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+    
+
+class DemoSnapshotArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromInsight(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    user: Union[bool, 'UserArgsFromInsightRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromInsightRecursive1']
+
+
+class TopicSubscriptionIncludeFromInsightRecursive1(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    user: Union[bool, 'UserArgsFromInsightRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromInsightRecursive2']
+
+
+class TopicSubscriptionIncludeFromInsightRecursive2(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    user: Union[bool, 'UserArgsFromInsightRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromInsightRecursive3']
+
+
+class TopicSubscriptionIncludeFromInsightRecursive3(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    user: Union[bool, 'UserArgsFromInsightRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromInsightRecursive4']
+
+
+class TopicSubscriptionIncludeFromInsightRecursive4(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+    
+
+class TopicSubscriptionArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromInsight(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromInsightRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromInsightRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromInsightRecursive1']
+
+
+class TopicSnapshotIncludeFromInsightRecursive1(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromInsightRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromInsightRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromInsightRecursive2']
+
+
+class TopicSnapshotIncludeFromInsightRecursive2(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromInsightRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromInsightRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromInsightRecursive3']
+
+
+class TopicSnapshotIncludeFromInsightRecursive3(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromInsightRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromInsightRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromInsightRecursive4']
+
+
+class TopicSnapshotIncludeFromInsightRecursive4(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+    
+
+class TopicSnapshotArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromInsight(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromInsightRecursive1']
+    event: Union[bool, 'EventArgsFromInsightRecursive1']
+
+
+class SnapshotEventIncludeFromInsightRecursive1(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromInsightRecursive2']
+    event: Union[bool, 'EventArgsFromInsightRecursive2']
+
+
+class SnapshotEventIncludeFromInsightRecursive2(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromInsightRecursive3']
+    event: Union[bool, 'EventArgsFromInsightRecursive3']
+
+
+class SnapshotEventIncludeFromInsightRecursive3(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromInsightRecursive4']
+    event: Union[bool, 'EventArgsFromInsightRecursive4']
+
+
+class SnapshotEventIncludeFromInsightRecursive4(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+    
+
+class SnapshotEventArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    
+    
+
+class FindManySnapshotEventArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromInsight(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromInsightRecursive1']
+    claim: Union[bool, 'ClaimArgsFromInsightRecursive1']
+
+
+class SnapshotClaimIncludeFromInsightRecursive1(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromInsightRecursive2']
+    claim: Union[bool, 'ClaimArgsFromInsightRecursive2']
+
+
+class SnapshotClaimIncludeFromInsightRecursive2(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromInsightRecursive3']
+    claim: Union[bool, 'ClaimArgsFromInsightRecursive3']
+
+
+class SnapshotClaimIncludeFromInsightRecursive3(TypedDict, total=False):
+    """Relational arguments for Insight"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromInsightRecursive4']
+    claim: Union[bool, 'ClaimArgsFromInsightRecursive4']
+
+
+class SnapshotClaimIncludeFromInsightRecursive4(TypedDict, total=False):
+    """Relational arguments for Insight"""
+
+    
+
+class SnapshotClaimArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    
+    
+
+class FindManySnapshotClaimArgsFromInsight(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromInsightRecursive1(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromInsightRecursive2(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromInsightRecursive3(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromInsightRecursive4(TypedDict, total=False):
+    """Arguments for Insight"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
     
     
 
@@ -16604,6 +20485,7 @@ class ClaimOptionalCreateInput(TypedDict, total=False):
     clusterId: Optional[_str]
     cluster: 'ClaimClusterCreateNestedWithoutRelationsInput'
     evidence: 'EvidenceCreateManyNestedWithoutRelationsInput'
+    snapshotClaims: 'SnapshotClaimCreateManyNestedWithoutRelationsInput'
 
 
 class ClaimCreateInput(ClaimOptionalCreateInput):
@@ -16669,6 +20551,7 @@ class ClaimUpdateInput(TypedDict, total=False):
     createdAt: datetime.datetime
     cluster: 'ClaimClusterUpdateOneWithoutRelationsInput'
     evidence: 'EvidenceUpdateManyWithoutRelationsInput'
+    snapshotClaims: 'SnapshotClaimUpdateManyWithoutRelationsInput'
 
 
 class ClaimUpdateManyMutationInput(TypedDict, total=False):
@@ -16848,6 +20731,7 @@ class ClaimInclude(TypedDict, total=False):
     """Claim relational arguments"""
     cluster: Union[bool, 'ClaimClusterArgsFromClaim']
     evidence: Union[bool, 'FindManyEvidenceArgsFromClaim']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaim']
 
 
     
@@ -16857,6 +20741,7 @@ class UserIncludeFromClaim(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromClaimRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromClaimRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromClaimRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromClaimRecursive1']
 
 
 class UserIncludeFromClaimRecursive1(TypedDict, total=False):
@@ -16864,6 +20749,7 @@ class UserIncludeFromClaimRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromClaimRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromClaimRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromClaimRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromClaimRecursive2']
 
 
 class UserIncludeFromClaimRecursive2(TypedDict, total=False):
@@ -16871,6 +20757,7 @@ class UserIncludeFromClaimRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromClaimRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromClaimRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromClaimRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromClaimRecursive3']
 
 
 class UserIncludeFromClaimRecursive3(TypedDict, total=False):
@@ -16878,6 +20765,7 @@ class UserIncludeFromClaimRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromClaimRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromClaimRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromClaimRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromClaimRecursive4']
 
 
 class UserIncludeFromClaimRecursive4(TypedDict, total=False):
@@ -17603,24 +21491,28 @@ class ClaimIncludeFromClaim(TypedDict, total=False):
     """Relational arguments for Claim"""
     cluster: Union[bool, 'ClaimClusterArgsFromClaimRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromClaimRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimRecursive1']
 
 
 class ClaimIncludeFromClaimRecursive1(TypedDict, total=False):
     """Relational arguments for Claim"""
     cluster: Union[bool, 'ClaimClusterArgsFromClaimRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromClaimRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimRecursive2']
 
 
 class ClaimIncludeFromClaimRecursive2(TypedDict, total=False):
     """Relational arguments for Claim"""
     cluster: Union[bool, 'ClaimClusterArgsFromClaimRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromClaimRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimRecursive3']
 
 
 class ClaimIncludeFromClaimRecursive3(TypedDict, total=False):
     """Relational arguments for Claim"""
     cluster: Union[bool, 'ClaimClusterArgsFromClaimRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromClaimRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimRecursive4']
 
 
 class ClaimIncludeFromClaimRecursive4(TypedDict, total=False):
@@ -17816,21 +21708,25 @@ class FindManyEvidenceArgsFromClaimRecursive4(TypedDict, total=False):
 class EventIncludeFromClaim(TypedDict, total=False):
     """Relational arguments for Claim"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimRecursive1']
 
 
 class EventIncludeFromClaimRecursive1(TypedDict, total=False):
     """Relational arguments for Claim"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimRecursive2']
 
 
 class EventIncludeFromClaimRecursive2(TypedDict, total=False):
     """Relational arguments for Claim"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimRecursive3']
 
 
 class EventIncludeFromClaimRecursive3(TypedDict, total=False):
     """Relational arguments for Claim"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimRecursive4']
 
 
 class EventIncludeFromClaimRecursive4(TypedDict, total=False):
@@ -18229,6 +22125,547 @@ class FindManyLLMUsageArgsFromClaimRecursive4(TypedDict, total=False):
     
     
 
+class DemoSnapshotIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class DemoSnapshotIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class DemoSnapshotIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class DemoSnapshotIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+
+class DemoSnapshotIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class DemoSnapshotArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromClaimRecursive1']
+
+
+class TopicSubscriptionIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromClaimRecursive2']
+
+
+class TopicSubscriptionIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromClaimRecursive3']
+
+
+class TopicSubscriptionIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    user: Union[bool, 'UserArgsFromClaimRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromClaimRecursive4']
+
+
+class TopicSubscriptionIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class TopicSubscriptionArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromClaimRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimRecursive1']
+
+
+class TopicSnapshotIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromClaimRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimRecursive2']
+
+
+class TopicSnapshotIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromClaimRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimRecursive3']
+
+
+class TopicSnapshotIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromClaimRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimRecursive4']
+
+
+class TopicSnapshotIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class TopicSnapshotArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimRecursive1']
+    event: Union[bool, 'EventArgsFromClaimRecursive1']
+
+
+class SnapshotEventIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimRecursive2']
+    event: Union[bool, 'EventArgsFromClaimRecursive2']
+
+
+class SnapshotEventIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimRecursive3']
+    event: Union[bool, 'EventArgsFromClaimRecursive3']
+
+
+class SnapshotEventIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimRecursive4']
+    event: Union[bool, 'EventArgsFromClaimRecursive4']
+
+
+class SnapshotEventIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class SnapshotEventArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManySnapshotEventArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromClaim(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimRecursive1']
+    claim: Union[bool, 'ClaimArgsFromClaimRecursive1']
+
+
+class SnapshotClaimIncludeFromClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimRecursive2']
+    claim: Union[bool, 'ClaimArgsFromClaimRecursive2']
+
+
+class SnapshotClaimIncludeFromClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimRecursive3']
+    claim: Union[bool, 'ClaimArgsFromClaimRecursive3']
+
+
+class SnapshotClaimIncludeFromClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for Claim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimRecursive4']
+    claim: Union[bool, 'ClaimArgsFromClaimRecursive4']
+
+
+class SnapshotClaimIncludeFromClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for Claim"""
+
+    
+
+class SnapshotClaimArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    
+    
+
+class FindManySnapshotClaimArgsFromClaim(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromClaimRecursive1(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromClaimRecursive2(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromClaimRecursive3(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromClaimRecursive4(TypedDict, total=False):
+    """Arguments for Claim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    
+    
+
 class ConsensusFactIncludeFromClaim(TypedDict, total=False):
     """Relational arguments for Claim"""
 
@@ -18450,6 +22887,7 @@ class ClaimWhereInput(TypedDict, total=False):
     clusterId: Union[None, _str, 'types.StringFilter']
     cluster: 'ClaimClusterRelationFilter'
     evidence: 'EvidenceListRelationFilter'
+    snapshotClaims: 'SnapshotClaimListRelationFilter'
 
     # should be noted that AND and NOT should be Union['ClaimWhereInputRecursive1', List['ClaimWhereInputRecursive1']]
     # but this causes mypy to hang :/
@@ -18471,6 +22909,7 @@ class ClaimWhereInputRecursive1(TypedDict, total=False):
     clusterId: Union[None, _str, 'types.StringFilter']
     cluster: 'ClaimClusterRelationFilter'
     evidence: 'EvidenceListRelationFilter'
+    snapshotClaims: 'SnapshotClaimListRelationFilter'
 
     # should be noted that AND and NOT should be Union['ClaimWhereInputRecursive2', List['ClaimWhereInputRecursive2']]
     # but this causes mypy to hang :/
@@ -18492,6 +22931,7 @@ class ClaimWhereInputRecursive2(TypedDict, total=False):
     clusterId: Union[None, _str, 'types.StringFilter']
     cluster: 'ClaimClusterRelationFilter'
     evidence: 'EvidenceListRelationFilter'
+    snapshotClaims: 'SnapshotClaimListRelationFilter'
 
     # should be noted that AND and NOT should be Union['ClaimWhereInputRecursive3', List['ClaimWhereInputRecursive3']]
     # but this causes mypy to hang :/
@@ -18513,6 +22953,7 @@ class ClaimWhereInputRecursive3(TypedDict, total=False):
     clusterId: Union[None, _str, 'types.StringFilter']
     cluster: 'ClaimClusterRelationFilter'
     evidence: 'EvidenceListRelationFilter'
+    snapshotClaims: 'SnapshotClaimListRelationFilter'
 
     # should be noted that AND and NOT should be Union['ClaimWhereInputRecursive4', List['ClaimWhereInputRecursive4']]
     # but this causes mypy to hang :/
@@ -18534,6 +22975,7 @@ class ClaimWhereInputRecursive4(TypedDict, total=False):
     clusterId: Union[None, _str, 'types.StringFilter']
     cluster: 'ClaimClusterRelationFilter'
     evidence: 'EvidenceListRelationFilter'
+    snapshotClaims: 'SnapshotClaimListRelationFilter'
 
 
 
@@ -18759,6 +23201,7 @@ ClaimKeys = Literal[
     'clusterId',
     'cluster',
     'evidence',
+    'snapshotClaims',
 ]
 ClaimScalarFieldKeys = Literal[
     'id',
@@ -18776,6 +23219,7 @@ ClaimScalarFieldKeysT = TypeVar('ClaimScalarFieldKeysT', bound=ClaimScalarFieldK
 ClaimRelationalFieldKeys = Literal[
         'cluster',
         'evidence',
+        'snapshotClaims',
     ]
 
 # Evidence types
@@ -19028,6 +23472,7 @@ class UserIncludeFromEvidence(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromEvidenceRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromEvidenceRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromEvidenceRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromEvidenceRecursive1']
 
 
 class UserIncludeFromEvidenceRecursive1(TypedDict, total=False):
@@ -19035,6 +23480,7 @@ class UserIncludeFromEvidenceRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromEvidenceRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromEvidenceRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromEvidenceRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromEvidenceRecursive2']
 
 
 class UserIncludeFromEvidenceRecursive2(TypedDict, total=False):
@@ -19042,6 +23488,7 @@ class UserIncludeFromEvidenceRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromEvidenceRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromEvidenceRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromEvidenceRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromEvidenceRecursive3']
 
 
 class UserIncludeFromEvidenceRecursive3(TypedDict, total=False):
@@ -19049,6 +23496,7 @@ class UserIncludeFromEvidenceRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromEvidenceRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromEvidenceRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromEvidenceRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromEvidenceRecursive4']
 
 
 class UserIncludeFromEvidenceRecursive4(TypedDict, total=False):
@@ -19774,24 +24222,28 @@ class ClaimIncludeFromEvidence(TypedDict, total=False):
     """Relational arguments for Evidence"""
     cluster: Union[bool, 'ClaimClusterArgsFromEvidenceRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromEvidenceRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEvidenceRecursive1']
 
 
 class ClaimIncludeFromEvidenceRecursive1(TypedDict, total=False):
     """Relational arguments for Evidence"""
     cluster: Union[bool, 'ClaimClusterArgsFromEvidenceRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromEvidenceRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEvidenceRecursive2']
 
 
 class ClaimIncludeFromEvidenceRecursive2(TypedDict, total=False):
     """Relational arguments for Evidence"""
     cluster: Union[bool, 'ClaimClusterArgsFromEvidenceRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromEvidenceRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEvidenceRecursive3']
 
 
 class ClaimIncludeFromEvidenceRecursive3(TypedDict, total=False):
     """Relational arguments for Evidence"""
     cluster: Union[bool, 'ClaimClusterArgsFromEvidenceRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromEvidenceRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEvidenceRecursive4']
 
 
 class ClaimIncludeFromEvidenceRecursive4(TypedDict, total=False):
@@ -19987,21 +24439,25 @@ class FindManyEvidenceArgsFromEvidenceRecursive4(TypedDict, total=False):
 class EventIncludeFromEvidence(TypedDict, total=False):
     """Relational arguments for Evidence"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEvidenceRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEvidenceRecursive1']
 
 
 class EventIncludeFromEvidenceRecursive1(TypedDict, total=False):
     """Relational arguments for Evidence"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEvidenceRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEvidenceRecursive2']
 
 
 class EventIncludeFromEvidenceRecursive2(TypedDict, total=False):
     """Relational arguments for Evidence"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEvidenceRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEvidenceRecursive3']
 
 
 class EventIncludeFromEvidenceRecursive3(TypedDict, total=False):
     """Relational arguments for Evidence"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEvidenceRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEvidenceRecursive4']
 
 
 class EventIncludeFromEvidenceRecursive4(TypedDict, total=False):
@@ -20397,6 +24853,547 @@ class FindManyLLMUsageArgsFromEvidenceRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class DemoSnapshotIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class DemoSnapshotIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class DemoSnapshotIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+
+class DemoSnapshotIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class DemoSnapshotArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromEvidenceRecursive1']
+
+
+class TopicSubscriptionIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromEvidenceRecursive2']
+
+
+class TopicSubscriptionIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromEvidenceRecursive3']
+
+
+class TopicSubscriptionIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    user: Union[bool, 'UserArgsFromEvidenceRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromEvidenceRecursive4']
+
+
+class TopicSubscriptionIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class TopicSubscriptionArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromEvidenceRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEvidenceRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEvidenceRecursive1']
+
+
+class TopicSnapshotIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromEvidenceRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEvidenceRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEvidenceRecursive2']
+
+
+class TopicSnapshotIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromEvidenceRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEvidenceRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEvidenceRecursive3']
+
+
+class TopicSnapshotIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromEvidenceRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEvidenceRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEvidenceRecursive4']
+
+
+class TopicSnapshotIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class TopicSnapshotArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEvidenceRecursive1']
+    event: Union[bool, 'EventArgsFromEvidenceRecursive1']
+
+
+class SnapshotEventIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEvidenceRecursive2']
+    event: Union[bool, 'EventArgsFromEvidenceRecursive2']
+
+
+class SnapshotEventIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEvidenceRecursive3']
+    event: Union[bool, 'EventArgsFromEvidenceRecursive3']
+
+
+class SnapshotEventIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEvidenceRecursive4']
+    event: Union[bool, 'EventArgsFromEvidenceRecursive4']
+
+
+class SnapshotEventIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class SnapshotEventArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManySnapshotEventArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromEvidence(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEvidenceRecursive1']
+    claim: Union[bool, 'ClaimArgsFromEvidenceRecursive1']
+
+
+class SnapshotClaimIncludeFromEvidenceRecursive1(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEvidenceRecursive2']
+    claim: Union[bool, 'ClaimArgsFromEvidenceRecursive2']
+
+
+class SnapshotClaimIncludeFromEvidenceRecursive2(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEvidenceRecursive3']
+    claim: Union[bool, 'ClaimArgsFromEvidenceRecursive3']
+
+
+class SnapshotClaimIncludeFromEvidenceRecursive3(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEvidenceRecursive4']
+    claim: Union[bool, 'ClaimArgsFromEvidenceRecursive4']
+
+
+class SnapshotClaimIncludeFromEvidenceRecursive4(TypedDict, total=False):
+    """Relational arguments for Evidence"""
+
+    
+
+class SnapshotClaimArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    
+    
+
+class FindManySnapshotClaimArgsFromEvidence(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromEvidenceRecursive1(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromEvidenceRecursive2(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromEvidenceRecursive3(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromEvidenceRecursive4(TypedDict, total=False):
+    """Arguments for Evidence"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
     
     
 
@@ -20921,6 +25918,7 @@ class EventOptionalCreateInput(TypedDict, total=False):
     importanceScore: Optional[_float]
     createdAt: datetime.datetime
     claimClusters: 'ClaimClusterCreateManyNestedWithoutRelationsInput'
+    snapshotEvents: 'SnapshotEventCreateManyNestedWithoutRelationsInput'
 
 
 class EventCreateInput(EventOptionalCreateInput):
@@ -20977,6 +25975,7 @@ class EventUpdateInput(TypedDict, total=False):
     importanceScore: Optional[Union[AtomicFloatInput, _float]]
     createdAt: datetime.datetime
     claimClusters: 'ClaimClusterUpdateManyWithoutRelationsInput'
+    snapshotEvents: 'SnapshotEventUpdateManyWithoutRelationsInput'
 
 
 class EventUpdateManyMutationInput(TypedDict, total=False):
@@ -21116,6 +26115,7 @@ class EventListRelationFilter(TypedDict, total=False):
 class EventInclude(TypedDict, total=False):
     """Event relational arguments"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEvent']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEvent']
 
 
     
@@ -21125,6 +26125,7 @@ class UserIncludeFromEvent(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromEventRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromEventRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromEventRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromEventRecursive1']
 
 
 class UserIncludeFromEventRecursive1(TypedDict, total=False):
@@ -21132,6 +26133,7 @@ class UserIncludeFromEventRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromEventRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromEventRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromEventRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromEventRecursive2']
 
 
 class UserIncludeFromEventRecursive2(TypedDict, total=False):
@@ -21139,6 +26141,7 @@ class UserIncludeFromEventRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromEventRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromEventRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromEventRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromEventRecursive3']
 
 
 class UserIncludeFromEventRecursive3(TypedDict, total=False):
@@ -21146,6 +26149,7 @@ class UserIncludeFromEventRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromEventRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromEventRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromEventRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromEventRecursive4']
 
 
 class UserIncludeFromEventRecursive4(TypedDict, total=False):
@@ -21871,24 +26875,28 @@ class ClaimIncludeFromEvent(TypedDict, total=False):
     """Relational arguments for Event"""
     cluster: Union[bool, 'ClaimClusterArgsFromEventRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromEventRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEventRecursive1']
 
 
 class ClaimIncludeFromEventRecursive1(TypedDict, total=False):
     """Relational arguments for Event"""
     cluster: Union[bool, 'ClaimClusterArgsFromEventRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromEventRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEventRecursive2']
 
 
 class ClaimIncludeFromEventRecursive2(TypedDict, total=False):
     """Relational arguments for Event"""
     cluster: Union[bool, 'ClaimClusterArgsFromEventRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromEventRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEventRecursive3']
 
 
 class ClaimIncludeFromEventRecursive3(TypedDict, total=False):
     """Relational arguments for Event"""
     cluster: Union[bool, 'ClaimClusterArgsFromEventRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromEventRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEventRecursive4']
 
 
 class ClaimIncludeFromEventRecursive4(TypedDict, total=False):
@@ -22084,21 +27092,25 @@ class FindManyEvidenceArgsFromEventRecursive4(TypedDict, total=False):
 class EventIncludeFromEvent(TypedDict, total=False):
     """Relational arguments for Event"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEventRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEventRecursive1']
 
 
 class EventIncludeFromEventRecursive1(TypedDict, total=False):
     """Relational arguments for Event"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEventRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEventRecursive2']
 
 
 class EventIncludeFromEventRecursive2(TypedDict, total=False):
     """Relational arguments for Event"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEventRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEventRecursive3']
 
 
 class EventIncludeFromEventRecursive3(TypedDict, total=False):
     """Relational arguments for Event"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromEventRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEventRecursive4']
 
 
 class EventIncludeFromEventRecursive4(TypedDict, total=False):
@@ -22497,6 +27509,547 @@ class FindManyLLMUsageArgsFromEventRecursive4(TypedDict, total=False):
     
     
 
+class DemoSnapshotIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class DemoSnapshotIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class DemoSnapshotIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class DemoSnapshotIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+
+class DemoSnapshotIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class DemoSnapshotArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromEventRecursive1']
+
+
+class TopicSubscriptionIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromEventRecursive2']
+
+
+class TopicSubscriptionIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromEventRecursive3']
+
+
+class TopicSubscriptionIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+    user: Union[bool, 'UserArgsFromEventRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromEventRecursive4']
+
+
+class TopicSubscriptionIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class TopicSubscriptionArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromEventRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEventRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEventRecursive1']
+
+
+class TopicSnapshotIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromEventRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEventRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEventRecursive2']
+
+
+class TopicSnapshotIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromEventRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEventRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEventRecursive3']
+
+
+class TopicSnapshotIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromEventRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromEventRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromEventRecursive4']
+
+
+class TopicSnapshotIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class TopicSnapshotArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEventRecursive1']
+    event: Union[bool, 'EventArgsFromEventRecursive1']
+
+
+class SnapshotEventIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEventRecursive2']
+    event: Union[bool, 'EventArgsFromEventRecursive2']
+
+
+class SnapshotEventIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEventRecursive3']
+    event: Union[bool, 'EventArgsFromEventRecursive3']
+
+
+class SnapshotEventIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEventRecursive4']
+    event: Union[bool, 'EventArgsFromEventRecursive4']
+
+
+class SnapshotEventIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class SnapshotEventArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManySnapshotEventArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromEvent(TypedDict, total=False):
+    """Relational arguments for Event"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEventRecursive1']
+    claim: Union[bool, 'ClaimArgsFromEventRecursive1']
+
+
+class SnapshotClaimIncludeFromEventRecursive1(TypedDict, total=False):
+    """Relational arguments for Event"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEventRecursive2']
+    claim: Union[bool, 'ClaimArgsFromEventRecursive2']
+
+
+class SnapshotClaimIncludeFromEventRecursive2(TypedDict, total=False):
+    """Relational arguments for Event"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEventRecursive3']
+    claim: Union[bool, 'ClaimArgsFromEventRecursive3']
+
+
+class SnapshotClaimIncludeFromEventRecursive3(TypedDict, total=False):
+    """Relational arguments for Event"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromEventRecursive4']
+    claim: Union[bool, 'ClaimArgsFromEventRecursive4']
+
+
+class SnapshotClaimIncludeFromEventRecursive4(TypedDict, total=False):
+    """Relational arguments for Event"""
+
+    
+
+class SnapshotClaimArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    
+    
+
+class FindManySnapshotClaimArgsFromEvent(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromEventRecursive1(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromEventRecursive2(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromEventRecursive3(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromEventRecursive4(TypedDict, total=False):
+    """Arguments for Event"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    
+    
+
 class ConsensusFactIncludeFromEvent(TypedDict, total=False):
     """Relational arguments for Event"""
 
@@ -22713,6 +28266,7 @@ class EventWhereInput(TypedDict, total=False):
     importanceScore: Union[None, _float, 'types.FloatFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
     claimClusters: 'ClaimClusterListRelationFilter'
+    snapshotEvents: 'SnapshotEventListRelationFilter'
 
     # should be noted that AND and NOT should be Union['EventWhereInputRecursive1', List['EventWhereInputRecursive1']]
     # but this causes mypy to hang :/
@@ -22729,6 +28283,7 @@ class EventWhereInputRecursive1(TypedDict, total=False):
     importanceScore: Union[None, _float, 'types.FloatFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
     claimClusters: 'ClaimClusterListRelationFilter'
+    snapshotEvents: 'SnapshotEventListRelationFilter'
 
     # should be noted that AND and NOT should be Union['EventWhereInputRecursive2', List['EventWhereInputRecursive2']]
     # but this causes mypy to hang :/
@@ -22745,6 +28300,7 @@ class EventWhereInputRecursive2(TypedDict, total=False):
     importanceScore: Union[None, _float, 'types.FloatFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
     claimClusters: 'ClaimClusterListRelationFilter'
+    snapshotEvents: 'SnapshotEventListRelationFilter'
 
     # should be noted that AND and NOT should be Union['EventWhereInputRecursive3', List['EventWhereInputRecursive3']]
     # but this causes mypy to hang :/
@@ -22761,6 +28317,7 @@ class EventWhereInputRecursive3(TypedDict, total=False):
     importanceScore: Union[None, _float, 'types.FloatFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
     claimClusters: 'ClaimClusterListRelationFilter'
+    snapshotEvents: 'SnapshotEventListRelationFilter'
 
     # should be noted that AND and NOT should be Union['EventWhereInputRecursive4', List['EventWhereInputRecursive4']]
     # but this causes mypy to hang :/
@@ -22777,6 +28334,7 @@ class EventWhereInputRecursive4(TypedDict, total=False):
     importanceScore: Union[None, _float, 'types.FloatFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
     claimClusters: 'ClaimClusterListRelationFilter'
+    snapshotEvents: 'SnapshotEventListRelationFilter'
 
 
 
@@ -22944,6 +28502,7 @@ EventKeys = Literal[
     'importanceScore',
     'createdAt',
     'claimClusters',
+    'snapshotEvents',
 ]
 EventScalarFieldKeys = Literal[
     'id',
@@ -22956,6 +28515,7 @@ EventScalarFieldKeysT = TypeVar('EventScalarFieldKeysT', bound=EventScalarFieldK
 
 EventRelationalFieldKeys = Literal[
         'claimClusters',
+        'snapshotEvents',
     ]
 
 # ClaimCluster types
@@ -22965,6 +28525,7 @@ class ClaimClusterOptionalCreateInput(TypedDict, total=False):
     id: _str
     canonicalClaim: Optional[_str]
     consensusScore: Optional[_float]
+    cohesionScore: Optional[_float]
     eventId: Optional[_str]
     event: 'EventCreateNestedWithoutRelationsInput'
     claims: 'ClaimCreateManyNestedWithoutRelationsInput'
@@ -22983,6 +28544,7 @@ class ClaimClusterOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     id: _str
     canonicalClaim: Optional[_str]
     consensusScore: Optional[_float]
+    cohesionScore: Optional[_float]
     eventId: Optional[_str]
 
 
@@ -23022,6 +28584,7 @@ class ClaimClusterUpdateInput(TypedDict, total=False):
     title: _str
     canonicalClaim: Optional[_str]
     consensusScore: Optional[Union[AtomicFloatInput, _float]]
+    cohesionScore: Optional[Union[AtomicFloatInput, _float]]
     event: 'EventUpdateOneWithoutRelationsInput'
     claims: 'ClaimUpdateManyWithoutRelationsInput'
 
@@ -23032,6 +28595,7 @@ class ClaimClusterUpdateManyMutationInput(TypedDict, total=False):
     title: _str
     canonicalClaim: Optional[_str]
     consensusScore: Optional[Union[AtomicFloatInput, _float]]
+    cohesionScore: Optional[Union[AtomicFloatInput, _float]]
 
 
 class ClaimClusterUpdateManyWithoutRelationsInput(TypedDict, total=False):
@@ -23098,6 +28662,14 @@ _ClaimCluster_consensusScore_OrderByInput = TypedDict(
     total=True
 )
 
+_ClaimCluster_cohesionScore_OrderByInput = TypedDict(
+    '_ClaimCluster_cohesionScore_OrderByInput',
+    {
+        'cohesionScore': 'SortOrder',
+    },
+    total=True
+)
+
 _ClaimCluster_eventId_OrderByInput = TypedDict(
     '_ClaimCluster_eventId_OrderByInput',
     {
@@ -23129,6 +28701,7 @@ ClaimClusterOrderByInput = Union[
     '_ClaimCluster_title_OrderByInput',
     '_ClaimCluster_canonicalClaim_OrderByInput',
     '_ClaimCluster_consensusScore_OrderByInput',
+    '_ClaimCluster_cohesionScore_OrderByInput',
     '_ClaimCluster_eventId_OrderByInput',
     '_ClaimCluster_RelevanceOrderByInput',
 ]
@@ -23172,6 +28745,7 @@ class UserIncludeFromClaimCluster(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromClaimClusterRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromClaimClusterRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromClaimClusterRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromClaimClusterRecursive1']
 
 
 class UserIncludeFromClaimClusterRecursive1(TypedDict, total=False):
@@ -23179,6 +28753,7 @@ class UserIncludeFromClaimClusterRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromClaimClusterRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromClaimClusterRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromClaimClusterRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromClaimClusterRecursive2']
 
 
 class UserIncludeFromClaimClusterRecursive2(TypedDict, total=False):
@@ -23186,6 +28761,7 @@ class UserIncludeFromClaimClusterRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromClaimClusterRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromClaimClusterRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromClaimClusterRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromClaimClusterRecursive3']
 
 
 class UserIncludeFromClaimClusterRecursive3(TypedDict, total=False):
@@ -23193,6 +28769,7 @@ class UserIncludeFromClaimClusterRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromClaimClusterRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromClaimClusterRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromClaimClusterRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromClaimClusterRecursive4']
 
 
 class UserIncludeFromClaimClusterRecursive4(TypedDict, total=False):
@@ -23918,24 +29495,28 @@ class ClaimIncludeFromClaimCluster(TypedDict, total=False):
     """Relational arguments for ClaimCluster"""
     cluster: Union[bool, 'ClaimClusterArgsFromClaimClusterRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromClaimClusterRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimClusterRecursive1']
 
 
 class ClaimIncludeFromClaimClusterRecursive1(TypedDict, total=False):
     """Relational arguments for ClaimCluster"""
     cluster: Union[bool, 'ClaimClusterArgsFromClaimClusterRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromClaimClusterRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimClusterRecursive2']
 
 
 class ClaimIncludeFromClaimClusterRecursive2(TypedDict, total=False):
     """Relational arguments for ClaimCluster"""
     cluster: Union[bool, 'ClaimClusterArgsFromClaimClusterRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromClaimClusterRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimClusterRecursive3']
 
 
 class ClaimIncludeFromClaimClusterRecursive3(TypedDict, total=False):
     """Relational arguments for ClaimCluster"""
     cluster: Union[bool, 'ClaimClusterArgsFromClaimClusterRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromClaimClusterRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimClusterRecursive4']
 
 
 class ClaimIncludeFromClaimClusterRecursive4(TypedDict, total=False):
@@ -24131,21 +29712,25 @@ class FindManyEvidenceArgsFromClaimClusterRecursive4(TypedDict, total=False):
 class EventIncludeFromClaimCluster(TypedDict, total=False):
     """Relational arguments for ClaimCluster"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimClusterRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimClusterRecursive1']
 
 
 class EventIncludeFromClaimClusterRecursive1(TypedDict, total=False):
     """Relational arguments for ClaimCluster"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimClusterRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimClusterRecursive2']
 
 
 class EventIncludeFromClaimClusterRecursive2(TypedDict, total=False):
     """Relational arguments for ClaimCluster"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimClusterRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimClusterRecursive3']
 
 
 class EventIncludeFromClaimClusterRecursive3(TypedDict, total=False):
     """Relational arguments for ClaimCluster"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromClaimClusterRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimClusterRecursive4']
 
 
 class EventIncludeFromClaimClusterRecursive4(TypedDict, total=False):
@@ -24544,6 +30129,547 @@ class FindManyLLMUsageArgsFromClaimClusterRecursive4(TypedDict, total=False):
     
     
 
+class DemoSnapshotIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class DemoSnapshotIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class DemoSnapshotIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class DemoSnapshotIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+
+class DemoSnapshotIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class DemoSnapshotArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromClaimClusterRecursive1']
+
+
+class TopicSubscriptionIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromClaimClusterRecursive2']
+
+
+class TopicSubscriptionIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromClaimClusterRecursive3']
+
+
+class TopicSubscriptionIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    user: Union[bool, 'UserArgsFromClaimClusterRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromClaimClusterRecursive4']
+
+
+class TopicSubscriptionIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class TopicSubscriptionArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromClaimClusterRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimClusterRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimClusterRecursive1']
+
+
+class TopicSnapshotIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromClaimClusterRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimClusterRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimClusterRecursive2']
+
+
+class TopicSnapshotIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromClaimClusterRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimClusterRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimClusterRecursive3']
+
+
+class TopicSnapshotIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromClaimClusterRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromClaimClusterRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromClaimClusterRecursive4']
+
+
+class TopicSnapshotIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class TopicSnapshotArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimClusterRecursive1']
+    event: Union[bool, 'EventArgsFromClaimClusterRecursive1']
+
+
+class SnapshotEventIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimClusterRecursive2']
+    event: Union[bool, 'EventArgsFromClaimClusterRecursive2']
+
+
+class SnapshotEventIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimClusterRecursive3']
+    event: Union[bool, 'EventArgsFromClaimClusterRecursive3']
+
+
+class SnapshotEventIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimClusterRecursive4']
+    event: Union[bool, 'EventArgsFromClaimClusterRecursive4']
+
+
+class SnapshotEventIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class SnapshotEventArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManySnapshotEventArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromClaimCluster(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimClusterRecursive1']
+    claim: Union[bool, 'ClaimArgsFromClaimClusterRecursive1']
+
+
+class SnapshotClaimIncludeFromClaimClusterRecursive1(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimClusterRecursive2']
+    claim: Union[bool, 'ClaimArgsFromClaimClusterRecursive2']
+
+
+class SnapshotClaimIncludeFromClaimClusterRecursive2(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimClusterRecursive3']
+    claim: Union[bool, 'ClaimArgsFromClaimClusterRecursive3']
+
+
+class SnapshotClaimIncludeFromClaimClusterRecursive3(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromClaimClusterRecursive4']
+    claim: Union[bool, 'ClaimArgsFromClaimClusterRecursive4']
+
+
+class SnapshotClaimIncludeFromClaimClusterRecursive4(TypedDict, total=False):
+    """Relational arguments for ClaimCluster"""
+
+    
+
+class SnapshotClaimArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    
+    
+
+class FindManySnapshotClaimArgsFromClaimCluster(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromClaimClusterRecursive1(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromClaimClusterRecursive2(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromClaimClusterRecursive3(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromClaimClusterRecursive4(TypedDict, total=False):
+    """Arguments for ClaimCluster"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    
+    
+
 class ConsensusFactIncludeFromClaimCluster(TypedDict, total=False):
     """Relational arguments for ClaimCluster"""
 
@@ -24758,6 +30884,7 @@ class ClaimClusterWhereInput(TypedDict, total=False):
     title: Union[_str, 'types.StringFilter']
     canonicalClaim: Union[None, _str, 'types.StringFilter']
     consensusScore: Union[None, _float, 'types.FloatFilter']
+    cohesionScore: Union[None, _float, 'types.FloatFilter']
     eventId: Union[None, _str, 'types.StringFilter']
     event: 'EventRelationFilter'
     claims: 'ClaimListRelationFilter'
@@ -24775,6 +30902,7 @@ class ClaimClusterWhereInputRecursive1(TypedDict, total=False):
     title: Union[_str, 'types.StringFilter']
     canonicalClaim: Union[None, _str, 'types.StringFilter']
     consensusScore: Union[None, _float, 'types.FloatFilter']
+    cohesionScore: Union[None, _float, 'types.FloatFilter']
     eventId: Union[None, _str, 'types.StringFilter']
     event: 'EventRelationFilter'
     claims: 'ClaimListRelationFilter'
@@ -24792,6 +30920,7 @@ class ClaimClusterWhereInputRecursive2(TypedDict, total=False):
     title: Union[_str, 'types.StringFilter']
     canonicalClaim: Union[None, _str, 'types.StringFilter']
     consensusScore: Union[None, _float, 'types.FloatFilter']
+    cohesionScore: Union[None, _float, 'types.FloatFilter']
     eventId: Union[None, _str, 'types.StringFilter']
     event: 'EventRelationFilter'
     claims: 'ClaimListRelationFilter'
@@ -24809,6 +30938,7 @@ class ClaimClusterWhereInputRecursive3(TypedDict, total=False):
     title: Union[_str, 'types.StringFilter']
     canonicalClaim: Union[None, _str, 'types.StringFilter']
     consensusScore: Union[None, _float, 'types.FloatFilter']
+    cohesionScore: Union[None, _float, 'types.FloatFilter']
     eventId: Union[None, _str, 'types.StringFilter']
     event: 'EventRelationFilter'
     claims: 'ClaimListRelationFilter'
@@ -24826,6 +30956,7 @@ class ClaimClusterWhereInputRecursive4(TypedDict, total=False):
     title: Union[_str, 'types.StringFilter']
     canonicalClaim: Union[None, _str, 'types.StringFilter']
     consensusScore: Union[None, _float, 'types.FloatFilter']
+    cohesionScore: Union[None, _float, 'types.FloatFilter']
     eventId: Union[None, _str, 'types.StringFilter']
     event: 'EventRelationFilter'
     claims: 'ClaimListRelationFilter'
@@ -24843,6 +30974,7 @@ class ClaimClusterScalarWhereWithAggregatesInput(TypedDict, total=False):
     title: Union[_str, 'types.StringWithAggregatesFilter']
     canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
     consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    cohesionScore: Union[_float, 'types.FloatWithAggregatesFilter']
     eventId: Union[_str, 'types.StringWithAggregatesFilter']
 
     AND: List['ClaimClusterScalarWhereWithAggregatesInputRecursive1']
@@ -24856,6 +30988,7 @@ class ClaimClusterScalarWhereWithAggregatesInputRecursive1(TypedDict, total=Fals
     title: Union[_str, 'types.StringWithAggregatesFilter']
     canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
     consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    cohesionScore: Union[_float, 'types.FloatWithAggregatesFilter']
     eventId: Union[_str, 'types.StringWithAggregatesFilter']
 
     AND: List['ClaimClusterScalarWhereWithAggregatesInputRecursive2']
@@ -24869,6 +31002,7 @@ class ClaimClusterScalarWhereWithAggregatesInputRecursive2(TypedDict, total=Fals
     title: Union[_str, 'types.StringWithAggregatesFilter']
     canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
     consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    cohesionScore: Union[_float, 'types.FloatWithAggregatesFilter']
     eventId: Union[_str, 'types.StringWithAggregatesFilter']
 
     AND: List['ClaimClusterScalarWhereWithAggregatesInputRecursive3']
@@ -24882,6 +31016,7 @@ class ClaimClusterScalarWhereWithAggregatesInputRecursive3(TypedDict, total=Fals
     title: Union[_str, 'types.StringWithAggregatesFilter']
     canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
     consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    cohesionScore: Union[_float, 'types.FloatWithAggregatesFilter']
     eventId: Union[_str, 'types.StringWithAggregatesFilter']
 
     AND: List['ClaimClusterScalarWhereWithAggregatesInputRecursive4']
@@ -24895,6 +31030,7 @@ class ClaimClusterScalarWhereWithAggregatesInputRecursive4(TypedDict, total=Fals
     title: Union[_str, 'types.StringWithAggregatesFilter']
     canonicalClaim: Union[_str, 'types.StringWithAggregatesFilter']
     consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    cohesionScore: Union[_float, 'types.FloatWithAggregatesFilter']
     eventId: Union[_str, 'types.StringWithAggregatesFilter']
 
 
@@ -24904,6 +31040,7 @@ class ClaimClusterGroupByOutput(TypedDict, total=False):
     title: _str
     canonicalClaim: _str
     consensusScore: _float
+    cohesionScore: _float
     eventId: _str
     _sum: 'ClaimClusterSumAggregateOutput'
     _avg: 'ClaimClusterAvgAggregateOutput'
@@ -24915,11 +31052,13 @@ class ClaimClusterGroupByOutput(TypedDict, total=False):
 class ClaimClusterAvgAggregateOutput(TypedDict, total=False):
     """ClaimCluster output for aggregating averages"""
     consensusScore: float
+    cohesionScore: float
 
 
 class ClaimClusterSumAggregateOutput(TypedDict, total=False):
     """ClaimCluster output for aggregating sums"""
     consensusScore: _float
+    cohesionScore: _float
 
 
 class ClaimClusterScalarAggregateOutput(TypedDict, total=False):
@@ -24928,6 +31067,7 @@ class ClaimClusterScalarAggregateOutput(TypedDict, total=False):
     title: _str
     canonicalClaim: _str
     consensusScore: _float
+    cohesionScore: _float
     eventId: _str
 
 
@@ -24941,6 +31081,7 @@ class ClaimClusterMaxAggregateInput(TypedDict, total=False):
     title: bool
     canonicalClaim: bool
     consensusScore: bool
+    cohesionScore: bool
     eventId: bool
 
 
@@ -24950,12 +31091,14 @@ class ClaimClusterMinAggregateInput(TypedDict, total=False):
     title: bool
     canonicalClaim: bool
     consensusScore: bool
+    cohesionScore: bool
     eventId: bool
 
 
 class ClaimClusterNumberAggregateInput(TypedDict, total=False):
     """ClaimCluster input for aggregating numbers"""
     consensusScore: bool
+    cohesionScore: bool
 
 
 ClaimClusterAvgAggregateInput = ClaimClusterNumberAggregateInput
@@ -24969,6 +31112,7 @@ ClaimClusterCountAggregateInput = TypedDict(
         'title': bool,
         'canonicalClaim': bool,
         'consensusScore': bool,
+        'cohesionScore': bool,
         'eventId': bool,
         '_all': bool,
     },
@@ -24982,6 +31126,7 @@ ClaimClusterCountAggregateOutput = TypedDict(
         'title': int,
         'canonicalClaim': int,
         'consensusScore': int,
+        'cohesionScore': int,
         'eventId': int,
         '_all': int,
     },
@@ -24994,6 +31139,7 @@ ClaimClusterKeys = Literal[
     'title',
     'canonicalClaim',
     'consensusScore',
+    'cohesionScore',
     'eventId',
     'event',
     'claims',
@@ -25003,6 +31149,7 @@ ClaimClusterScalarFieldKeys = Literal[
     'title',
     'canonicalClaim',
     'consensusScore',
+    'cohesionScore',
     'eventId',
 ]
 ClaimClusterScalarFieldKeysT = TypeVar('ClaimClusterScalarFieldKeysT', bound=ClaimClusterScalarFieldKeys)
@@ -25246,6 +31393,7 @@ class UserIncludeFromLLMCache(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromLLMCacheRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromLLMCacheRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromLLMCacheRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromLLMCacheRecursive1']
 
 
 class UserIncludeFromLLMCacheRecursive1(TypedDict, total=False):
@@ -25253,6 +31401,7 @@ class UserIncludeFromLLMCacheRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromLLMCacheRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromLLMCacheRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromLLMCacheRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromLLMCacheRecursive2']
 
 
 class UserIncludeFromLLMCacheRecursive2(TypedDict, total=False):
@@ -25260,6 +31409,7 @@ class UserIncludeFromLLMCacheRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromLLMCacheRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromLLMCacheRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromLLMCacheRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromLLMCacheRecursive3']
 
 
 class UserIncludeFromLLMCacheRecursive3(TypedDict, total=False):
@@ -25267,6 +31417,7 @@ class UserIncludeFromLLMCacheRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromLLMCacheRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromLLMCacheRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromLLMCacheRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromLLMCacheRecursive4']
 
 
 class UserIncludeFromLLMCacheRecursive4(TypedDict, total=False):
@@ -25992,24 +32143,28 @@ class ClaimIncludeFromLLMCache(TypedDict, total=False):
     """Relational arguments for LLMCache"""
     cluster: Union[bool, 'ClaimClusterArgsFromLLMCacheRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromLLMCacheRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMCacheRecursive1']
 
 
 class ClaimIncludeFromLLMCacheRecursive1(TypedDict, total=False):
     """Relational arguments for LLMCache"""
     cluster: Union[bool, 'ClaimClusterArgsFromLLMCacheRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromLLMCacheRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMCacheRecursive2']
 
 
 class ClaimIncludeFromLLMCacheRecursive2(TypedDict, total=False):
     """Relational arguments for LLMCache"""
     cluster: Union[bool, 'ClaimClusterArgsFromLLMCacheRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromLLMCacheRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMCacheRecursive3']
 
 
 class ClaimIncludeFromLLMCacheRecursive3(TypedDict, total=False):
     """Relational arguments for LLMCache"""
     cluster: Union[bool, 'ClaimClusterArgsFromLLMCacheRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromLLMCacheRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMCacheRecursive4']
 
 
 class ClaimIncludeFromLLMCacheRecursive4(TypedDict, total=False):
@@ -26205,21 +32360,25 @@ class FindManyEvidenceArgsFromLLMCacheRecursive4(TypedDict, total=False):
 class EventIncludeFromLLMCache(TypedDict, total=False):
     """Relational arguments for LLMCache"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMCacheRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMCacheRecursive1']
 
 
 class EventIncludeFromLLMCacheRecursive1(TypedDict, total=False):
     """Relational arguments for LLMCache"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMCacheRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMCacheRecursive2']
 
 
 class EventIncludeFromLLMCacheRecursive2(TypedDict, total=False):
     """Relational arguments for LLMCache"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMCacheRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMCacheRecursive3']
 
 
 class EventIncludeFromLLMCacheRecursive3(TypedDict, total=False):
     """Relational arguments for LLMCache"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMCacheRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMCacheRecursive4']
 
 
 class EventIncludeFromLLMCacheRecursive4(TypedDict, total=False):
@@ -26615,6 +32774,547 @@ class FindManyLLMUsageArgsFromLLMCacheRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class DemoSnapshotIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class DemoSnapshotIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class DemoSnapshotIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+
+class DemoSnapshotIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class DemoSnapshotArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromLLMCacheRecursive1']
+
+
+class TopicSubscriptionIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromLLMCacheRecursive2']
+
+
+class TopicSubscriptionIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromLLMCacheRecursive3']
+
+
+class TopicSubscriptionIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    user: Union[bool, 'UserArgsFromLLMCacheRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromLLMCacheRecursive4']
+
+
+class TopicSubscriptionIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class TopicSubscriptionArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromLLMCacheRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMCacheRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMCacheRecursive1']
+
+
+class TopicSnapshotIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromLLMCacheRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMCacheRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMCacheRecursive2']
+
+
+class TopicSnapshotIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromLLMCacheRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMCacheRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMCacheRecursive3']
+
+
+class TopicSnapshotIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromLLMCacheRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMCacheRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMCacheRecursive4']
+
+
+class TopicSnapshotIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class TopicSnapshotArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMCacheRecursive1']
+    event: Union[bool, 'EventArgsFromLLMCacheRecursive1']
+
+
+class SnapshotEventIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMCacheRecursive2']
+    event: Union[bool, 'EventArgsFromLLMCacheRecursive2']
+
+
+class SnapshotEventIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMCacheRecursive3']
+    event: Union[bool, 'EventArgsFromLLMCacheRecursive3']
+
+
+class SnapshotEventIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMCacheRecursive4']
+    event: Union[bool, 'EventArgsFromLLMCacheRecursive4']
+
+
+class SnapshotEventIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class SnapshotEventArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManySnapshotEventArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromLLMCache(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMCacheRecursive1']
+    claim: Union[bool, 'ClaimArgsFromLLMCacheRecursive1']
+
+
+class SnapshotClaimIncludeFromLLMCacheRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMCacheRecursive2']
+    claim: Union[bool, 'ClaimArgsFromLLMCacheRecursive2']
+
+
+class SnapshotClaimIncludeFromLLMCacheRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMCacheRecursive3']
+    claim: Union[bool, 'ClaimArgsFromLLMCacheRecursive3']
+
+
+class SnapshotClaimIncludeFromLLMCacheRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMCacheRecursive4']
+    claim: Union[bool, 'ClaimArgsFromLLMCacheRecursive4']
+
+
+class SnapshotClaimIncludeFromLLMCacheRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMCache"""
+
+    
+
+class SnapshotClaimArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    
+    
+
+class FindManySnapshotClaimArgsFromLLMCache(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromLLMCacheRecursive1(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromLLMCacheRecursive2(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromLLMCacheRecursive3(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromLLMCacheRecursive4(TypedDict, total=False):
+    """Arguments for LLMCache"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
     
     
 
@@ -27322,6 +34022,7 @@ class UserIncludeFromLLMUsage(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromLLMUsageRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromLLMUsageRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromLLMUsageRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromLLMUsageRecursive1']
 
 
 class UserIncludeFromLLMUsageRecursive1(TypedDict, total=False):
@@ -27329,6 +34030,7 @@ class UserIncludeFromLLMUsageRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromLLMUsageRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromLLMUsageRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromLLMUsageRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromLLMUsageRecursive2']
 
 
 class UserIncludeFromLLMUsageRecursive2(TypedDict, total=False):
@@ -27336,6 +34038,7 @@ class UserIncludeFromLLMUsageRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromLLMUsageRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromLLMUsageRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromLLMUsageRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromLLMUsageRecursive3']
 
 
 class UserIncludeFromLLMUsageRecursive3(TypedDict, total=False):
@@ -27343,6 +34046,7 @@ class UserIncludeFromLLMUsageRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromLLMUsageRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromLLMUsageRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromLLMUsageRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromLLMUsageRecursive4']
 
 
 class UserIncludeFromLLMUsageRecursive4(TypedDict, total=False):
@@ -28068,24 +34772,28 @@ class ClaimIncludeFromLLMUsage(TypedDict, total=False):
     """Relational arguments for LLMUsage"""
     cluster: Union[bool, 'ClaimClusterArgsFromLLMUsageRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromLLMUsageRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMUsageRecursive1']
 
 
 class ClaimIncludeFromLLMUsageRecursive1(TypedDict, total=False):
     """Relational arguments for LLMUsage"""
     cluster: Union[bool, 'ClaimClusterArgsFromLLMUsageRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromLLMUsageRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMUsageRecursive2']
 
 
 class ClaimIncludeFromLLMUsageRecursive2(TypedDict, total=False):
     """Relational arguments for LLMUsage"""
     cluster: Union[bool, 'ClaimClusterArgsFromLLMUsageRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromLLMUsageRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMUsageRecursive3']
 
 
 class ClaimIncludeFromLLMUsageRecursive3(TypedDict, total=False):
     """Relational arguments for LLMUsage"""
     cluster: Union[bool, 'ClaimClusterArgsFromLLMUsageRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromLLMUsageRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMUsageRecursive4']
 
 
 class ClaimIncludeFromLLMUsageRecursive4(TypedDict, total=False):
@@ -28281,21 +34989,25 @@ class FindManyEvidenceArgsFromLLMUsageRecursive4(TypedDict, total=False):
 class EventIncludeFromLLMUsage(TypedDict, total=False):
     """Relational arguments for LLMUsage"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMUsageRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMUsageRecursive1']
 
 
 class EventIncludeFromLLMUsageRecursive1(TypedDict, total=False):
     """Relational arguments for LLMUsage"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMUsageRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMUsageRecursive2']
 
 
 class EventIncludeFromLLMUsageRecursive2(TypedDict, total=False):
     """Relational arguments for LLMUsage"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMUsageRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMUsageRecursive3']
 
 
 class EventIncludeFromLLMUsageRecursive3(TypedDict, total=False):
     """Relational arguments for LLMUsage"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromLLMUsageRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMUsageRecursive4']
 
 
 class EventIncludeFromLLMUsageRecursive4(TypedDict, total=False):
@@ -28691,6 +35403,547 @@ class FindManyLLMUsageArgsFromLLMUsageRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class DemoSnapshotIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class DemoSnapshotIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class DemoSnapshotIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+
+class DemoSnapshotIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class DemoSnapshotArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromLLMUsageRecursive1']
+
+
+class TopicSubscriptionIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromLLMUsageRecursive2']
+
+
+class TopicSubscriptionIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromLLMUsageRecursive3']
+
+
+class TopicSubscriptionIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    user: Union[bool, 'UserArgsFromLLMUsageRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromLLMUsageRecursive4']
+
+
+class TopicSubscriptionIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class TopicSubscriptionArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromLLMUsageRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMUsageRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMUsageRecursive1']
+
+
+class TopicSnapshotIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromLLMUsageRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMUsageRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMUsageRecursive2']
+
+
+class TopicSnapshotIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromLLMUsageRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMUsageRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMUsageRecursive3']
+
+
+class TopicSnapshotIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromLLMUsageRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromLLMUsageRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromLLMUsageRecursive4']
+
+
+class TopicSnapshotIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class TopicSnapshotArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMUsageRecursive1']
+    event: Union[bool, 'EventArgsFromLLMUsageRecursive1']
+
+
+class SnapshotEventIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMUsageRecursive2']
+    event: Union[bool, 'EventArgsFromLLMUsageRecursive2']
+
+
+class SnapshotEventIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMUsageRecursive3']
+    event: Union[bool, 'EventArgsFromLLMUsageRecursive3']
+
+
+class SnapshotEventIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMUsageRecursive4']
+    event: Union[bool, 'EventArgsFromLLMUsageRecursive4']
+
+
+class SnapshotEventIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class SnapshotEventArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManySnapshotEventArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromLLMUsage(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMUsageRecursive1']
+    claim: Union[bool, 'ClaimArgsFromLLMUsageRecursive1']
+
+
+class SnapshotClaimIncludeFromLLMUsageRecursive1(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMUsageRecursive2']
+    claim: Union[bool, 'ClaimArgsFromLLMUsageRecursive2']
+
+
+class SnapshotClaimIncludeFromLLMUsageRecursive2(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMUsageRecursive3']
+    claim: Union[bool, 'ClaimArgsFromLLMUsageRecursive3']
+
+
+class SnapshotClaimIncludeFromLLMUsageRecursive3(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromLLMUsageRecursive4']
+    claim: Union[bool, 'ClaimArgsFromLLMUsageRecursive4']
+
+
+class SnapshotClaimIncludeFromLLMUsageRecursive4(TypedDict, total=False):
+    """Relational arguments for LLMUsage"""
+
+    
+
+class SnapshotClaimArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    
+    
+
+class FindManySnapshotClaimArgsFromLLMUsage(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromLLMUsageRecursive1(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromLLMUsageRecursive2(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromLLMUsageRecursive3(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromLLMUsageRecursive4(TypedDict, total=False):
+    """Arguments for LLMUsage"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
     
     
 
@@ -29186,6 +36439,13310 @@ LLMUsageScalarFieldKeysT = TypeVar('LLMUsageScalarFieldKeysT', bound=LLMUsageSca
 
 LLMUsageRelationalFieldKeys = _NoneType
 
+# DemoSnapshot types
+
+class DemoSnapshotOptionalCreateInput(TypedDict, total=False):
+    """Optional arguments to the DemoSnapshot create method"""
+    id: _str
+    createdAt: datetime.datetime
+
+
+class DemoSnapshotCreateInput(DemoSnapshotOptionalCreateInput):
+    """Required arguments to the DemoSnapshot create method"""
+    topic: _str
+    data: 'fields.Json'
+
+
+# TODO: remove this in favour of without explicit relations
+# e.g. PostCreateWithoutAuthorInput
+
+class DemoSnapshotOptionalCreateWithoutRelationsInput(TypedDict, total=False):
+    """Optional arguments to the DemoSnapshot create method, without relations"""
+    id: _str
+    createdAt: datetime.datetime
+
+
+class DemoSnapshotCreateWithoutRelationsInput(DemoSnapshotOptionalCreateWithoutRelationsInput):
+    """Required arguments to the DemoSnapshot create method, without relations"""
+    topic: _str
+    data: 'fields.Json'
+
+class DemoSnapshotConnectOrCreateWithoutRelationsInput(TypedDict):
+    create: 'DemoSnapshotCreateWithoutRelationsInput'
+    where: 'DemoSnapshotWhereUniqueInput'
+
+class DemoSnapshotCreateNestedWithoutRelationsInput(TypedDict, total=False):
+    create: 'DemoSnapshotCreateWithoutRelationsInput'
+    connect: 'DemoSnapshotWhereUniqueInput'
+    connect_or_create: 'DemoSnapshotConnectOrCreateWithoutRelationsInput'
+
+
+class DemoSnapshotCreateManyNestedWithoutRelationsInput(TypedDict, total=False):
+    create: Union['DemoSnapshotCreateWithoutRelationsInput', List['DemoSnapshotCreateWithoutRelationsInput']]
+    connect: Union['DemoSnapshotWhereUniqueInput', List['DemoSnapshotWhereUniqueInput']]
+    connect_or_create: Union['DemoSnapshotConnectOrCreateWithoutRelationsInput', List['DemoSnapshotConnectOrCreateWithoutRelationsInput']]
+
+_DemoSnapshotWhereUnique_id_Input = TypedDict(
+    '_DemoSnapshotWhereUnique_id_Input',
+    {
+        'id': '_str',
+    },
+    total=True
+)
+
+_DemoSnapshotWhereUnique_topic_Input = TypedDict(
+    '_DemoSnapshotWhereUnique_topic_Input',
+    {
+        'topic': '_str',
+    },
+    total=True
+)
+
+DemoSnapshotWhereUniqueInput = Union[
+    '_DemoSnapshotWhereUnique_id_Input',
+    '_DemoSnapshotWhereUnique_topic_Input',
+]
+
+
+class DemoSnapshotUpdateInput(TypedDict, total=False):
+    """Optional arguments for updating a record"""
+    id: _str
+    topic: _str
+    data: 'fields.Json'
+    createdAt: datetime.datetime
+
+
+class DemoSnapshotUpdateManyMutationInput(TypedDict, total=False):
+    """Arguments for updating many records"""
+    id: _str
+    topic: _str
+    data: 'fields.Json'
+    createdAt: datetime.datetime
+
+
+class DemoSnapshotUpdateManyWithoutRelationsInput(TypedDict, total=False):
+    create: List['DemoSnapshotCreateWithoutRelationsInput']
+    connect: List['DemoSnapshotWhereUniqueInput']
+    connect_or_create: List['DemoSnapshotConnectOrCreateWithoutRelationsInput']
+    set: List['DemoSnapshotWhereUniqueInput']
+    disconnect: List['DemoSnapshotWhereUniqueInput']
+    delete: List['DemoSnapshotWhereUniqueInput']
+
+    # TODO
+    # update: List['DemoSnapshotUpdateWithWhereUniqueWithoutRelationsInput']
+    # updateMany: List['DemoSnapshotUpdateManyWithWhereUniqueWithoutRelationsInput']
+    # deleteMany: List['DemoSnapshotScalarWhereInput']
+    # upsert: List['DemoSnapshotUpserteWithWhereUniqueWithoutRelationsInput']
+
+
+class DemoSnapshotUpdateOneWithoutRelationsInput(TypedDict, total=False):
+    create: 'DemoSnapshotCreateWithoutRelationsInput'
+    connect: 'DemoSnapshotWhereUniqueInput'
+    connect_or_create: 'DemoSnapshotConnectOrCreateWithoutRelationsInput'
+    disconnect: bool
+    delete: bool
+
+    # TODO
+    # update: 'DemoSnapshotUpdateInput'
+    # upsert: 'DemoSnapshotUpsertWithoutRelationsInput'
+
+
+class DemoSnapshotUpsertInput(TypedDict):
+    create: 'DemoSnapshotCreateInput'
+    update: 'DemoSnapshotUpdateInput'  # pyright: ignore[reportIncompatibleMethodOverride]
+
+
+_DemoSnapshot_id_OrderByInput = TypedDict(
+    '_DemoSnapshot_id_OrderByInput',
+    {
+        'id': 'SortOrder',
+    },
+    total=True
+)
+
+_DemoSnapshot_topic_OrderByInput = TypedDict(
+    '_DemoSnapshot_topic_OrderByInput',
+    {
+        'topic': 'SortOrder',
+    },
+    total=True
+)
+
+_DemoSnapshot_data_OrderByInput = TypedDict(
+    '_DemoSnapshot_data_OrderByInput',
+    {
+        'data': 'SortOrder',
+    },
+    total=True
+)
+
+_DemoSnapshot_createdAt_OrderByInput = TypedDict(
+    '_DemoSnapshot_createdAt_OrderByInput',
+    {
+        'createdAt': 'SortOrder',
+    },
+    total=True
+)
+
+_DemoSnapshot_RelevanceInner = TypedDict(
+    '_DemoSnapshot_RelevanceInner',
+    {
+        'fields': 'List[DemoSnapshotScalarFieldKeys]',
+        'search': 'str',
+        'sort': 'SortOrder',
+    },
+    total=True
+)
+
+_DemoSnapshot_RelevanceOrderByInput = TypedDict(
+    '_DemoSnapshot_RelevanceOrderByInput',
+    {
+        '_relevance': '_DemoSnapshot_RelevanceInner',
+    },
+    total=True
+)
+
+DemoSnapshotOrderByInput = Union[
+    '_DemoSnapshot_id_OrderByInput',
+    '_DemoSnapshot_topic_OrderByInput',
+    '_DemoSnapshot_data_OrderByInput',
+    '_DemoSnapshot_createdAt_OrderByInput',
+    '_DemoSnapshot_RelevanceOrderByInput',
+]
+
+
+
+# recursive DemoSnapshot types
+# TODO: cleanup these types
+
+
+# Dict[str, Any] is a mypy limitation
+# see https://github.com/RobertCraigie/prisma-client-py/issues/45
+# switch to pyright for improved types, see https://prisma-client-py.readthedocs.io/en/stable/reference/limitations/
+
+DemoSnapshotRelationFilter = TypedDict(
+    'DemoSnapshotRelationFilter',
+    {
+        'is': 'Dict[str, Any]',
+        'is_not': 'Dict[str, Any]',
+    },
+    total=False,
+)
+
+
+class DemoSnapshotListRelationFilter(TypedDict, total=False):
+    some: 'Dict[str, Any]'
+    none: 'Dict[str, Any]'
+    every: 'Dict[str, Any]'
+
+
+class DemoSnapshotInclude(TypedDict, total=False):
+    """DemoSnapshot relational arguments"""
+
+
+    
+
+class UserIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    sessions: Union[bool, 'FindManySessionArgsFromDemoSnapshotRecursive1']
+    accounts: Union[bool, 'FindManyAccountArgsFromDemoSnapshotRecursive1']
+    searches: Union[bool, 'FindManySearchArgsFromDemoSnapshotRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromDemoSnapshotRecursive1']
+
+
+class UserIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    sessions: Union[bool, 'FindManySessionArgsFromDemoSnapshotRecursive2']
+    accounts: Union[bool, 'FindManyAccountArgsFromDemoSnapshotRecursive2']
+    searches: Union[bool, 'FindManySearchArgsFromDemoSnapshotRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromDemoSnapshotRecursive2']
+
+
+class UserIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    sessions: Union[bool, 'FindManySessionArgsFromDemoSnapshotRecursive3']
+    accounts: Union[bool, 'FindManyAccountArgsFromDemoSnapshotRecursive3']
+    searches: Union[bool, 'FindManySearchArgsFromDemoSnapshotRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromDemoSnapshotRecursive3']
+
+
+class UserIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    sessions: Union[bool, 'FindManySessionArgsFromDemoSnapshotRecursive4']
+    accounts: Union[bool, 'FindManyAccountArgsFromDemoSnapshotRecursive4']
+    searches: Union[bool, 'FindManySearchArgsFromDemoSnapshotRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromDemoSnapshotRecursive4']
+
+
+class UserIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class UserArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class UserArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class UserArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class UserArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class UserArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyUserArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class FindManyUserArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class FindManyUserArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class FindManyUserArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class FindManyUserArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    
+    
+
+class SessionIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive1']
+
+
+class SessionIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive2']
+
+
+class SessionIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive3']
+
+
+class SessionIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive4']
+
+
+class SessionIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class SessionArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class SessionArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class SessionArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class SessionArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class SessionArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManySessionArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class FindManySessionArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class FindManySessionArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class FindManySessionArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class FindManySessionArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    
+    
+
+class AccountIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive1']
+
+
+class AccountIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive2']
+
+
+class AccountIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive3']
+
+
+class AccountIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive4']
+
+
+class AccountIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class AccountArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class AccountArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class AccountArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class AccountArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class AccountArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyAccountArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class FindManyAccountArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class FindManyAccountArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class FindManyAccountArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class FindManyAccountArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    
+    
+
+class VerificationIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class VerificationIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class VerificationIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class VerificationIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class VerificationIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class VerificationArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class VerificationArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class VerificationArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class VerificationArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class VerificationArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyVerificationArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class FindManyVerificationArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class FindManyVerificationArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class FindManyVerificationArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class FindManyVerificationArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    
+    
+
+class SearchIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive1']
+    articles: Union[bool, 'FindManyArticleArgsFromDemoSnapshotRecursive1']
+    insights: Union[bool, 'FindManyInsightArgsFromDemoSnapshotRecursive1']
+
+
+class SearchIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive2']
+    articles: Union[bool, 'FindManyArticleArgsFromDemoSnapshotRecursive2']
+    insights: Union[bool, 'FindManyInsightArgsFromDemoSnapshotRecursive2']
+
+
+class SearchIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive3']
+    articles: Union[bool, 'FindManyArticleArgsFromDemoSnapshotRecursive3']
+    insights: Union[bool, 'FindManyInsightArgsFromDemoSnapshotRecursive3']
+
+
+class SearchIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive4']
+    articles: Union[bool, 'FindManyArticleArgsFromDemoSnapshotRecursive4']
+    insights: Union[bool, 'FindManyInsightArgsFromDemoSnapshotRecursive4']
+
+
+class SearchIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class SearchArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class SearchArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class SearchArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class SearchArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class SearchArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManySearchArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class FindManySearchArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class FindManySearchArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class FindManySearchArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class FindManySearchArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    
+    
+
+class ArticleIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    search: Union[bool, 'SearchArgsFromDemoSnapshotRecursive1']
+
+
+class ArticleIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    search: Union[bool, 'SearchArgsFromDemoSnapshotRecursive2']
+
+
+class ArticleIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    search: Union[bool, 'SearchArgsFromDemoSnapshotRecursive3']
+
+
+class ArticleIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    search: Union[bool, 'SearchArgsFromDemoSnapshotRecursive4']
+
+
+class ArticleIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class ArticleArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class ArticleArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class ArticleArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class ArticleArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class ArticleArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyArticleArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class FindManyArticleArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class FindManyArticleArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class FindManyArticleArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class FindManyArticleArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    
+    
+
+class InsightIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    search: Union[bool, 'SearchArgsFromDemoSnapshotRecursive1']
+
+
+class InsightIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    search: Union[bool, 'SearchArgsFromDemoSnapshotRecursive2']
+
+
+class InsightIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    search: Union[bool, 'SearchArgsFromDemoSnapshotRecursive3']
+
+
+class InsightIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    search: Union[bool, 'SearchArgsFromDemoSnapshotRecursive4']
+
+
+class InsightIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class InsightArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class InsightArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class InsightArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class InsightArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class InsightArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyInsightArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class FindManyInsightArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class FindManyInsightArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class FindManyInsightArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class FindManyInsightArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    cluster: Union[bool, 'ClaimClusterArgsFromDemoSnapshotRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromDemoSnapshotRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromDemoSnapshotRecursive1']
+
+
+class ClaimIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    cluster: Union[bool, 'ClaimClusterArgsFromDemoSnapshotRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromDemoSnapshotRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromDemoSnapshotRecursive2']
+
+
+class ClaimIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    cluster: Union[bool, 'ClaimClusterArgsFromDemoSnapshotRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromDemoSnapshotRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromDemoSnapshotRecursive3']
+
+
+class ClaimIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    cluster: Union[bool, 'ClaimClusterArgsFromDemoSnapshotRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromDemoSnapshotRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromDemoSnapshotRecursive4']
+
+
+class ClaimIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class ClaimArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyClaimArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    claim: Union[bool, 'ClaimArgsFromDemoSnapshotRecursive1']
+
+
+class EvidenceIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    claim: Union[bool, 'ClaimArgsFromDemoSnapshotRecursive2']
+
+
+class EvidenceIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    claim: Union[bool, 'ClaimArgsFromDemoSnapshotRecursive3']
+
+
+class EvidenceIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    claim: Union[bool, 'ClaimArgsFromDemoSnapshotRecursive4']
+
+
+class EvidenceIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class EvidenceArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyEvidenceArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromDemoSnapshotRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromDemoSnapshotRecursive1']
+
+
+class EventIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromDemoSnapshotRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromDemoSnapshotRecursive2']
+
+
+class EventIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromDemoSnapshotRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromDemoSnapshotRecursive3']
+
+
+class EventIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromDemoSnapshotRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromDemoSnapshotRecursive4']
+
+
+class EventIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class EventArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyEventArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    event: Union[bool, 'EventArgsFromDemoSnapshotRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromDemoSnapshotRecursive1']
+
+
+class ClaimClusterIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    event: Union[bool, 'EventArgsFromDemoSnapshotRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromDemoSnapshotRecursive2']
+
+
+class ClaimClusterIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    event: Union[bool, 'EventArgsFromDemoSnapshotRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromDemoSnapshotRecursive3']
+
+
+class ClaimClusterIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    event: Union[bool, 'EventArgsFromDemoSnapshotRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromDemoSnapshotRecursive4']
+
+
+class ClaimClusterIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class ClaimClusterArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyClaimClusterArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
+    
+
+class LLMCacheIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class LLMCacheIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class LLMCacheIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class LLMCacheIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class LLMCacheIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class LLMCacheArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyLLMCacheArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class LLMUsageIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class LLMUsageIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class LLMUsageIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class LLMUsageIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class LLMUsageArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyLLMUsageArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class DemoSnapshotIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class DemoSnapshotIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class DemoSnapshotIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class DemoSnapshotIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class DemoSnapshotArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromDemoSnapshotRecursive1']
+
+
+class TopicSubscriptionIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromDemoSnapshotRecursive2']
+
+
+class TopicSubscriptionIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromDemoSnapshotRecursive3']
+
+
+class TopicSubscriptionIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    user: Union[bool, 'UserArgsFromDemoSnapshotRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromDemoSnapshotRecursive4']
+
+
+class TopicSubscriptionIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class TopicSubscriptionArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromDemoSnapshotRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromDemoSnapshotRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromDemoSnapshotRecursive1']
+
+
+class TopicSnapshotIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromDemoSnapshotRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromDemoSnapshotRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromDemoSnapshotRecursive2']
+
+
+class TopicSnapshotIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromDemoSnapshotRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromDemoSnapshotRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromDemoSnapshotRecursive3']
+
+
+class TopicSnapshotIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromDemoSnapshotRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromDemoSnapshotRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromDemoSnapshotRecursive4']
+
+
+class TopicSnapshotIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class TopicSnapshotArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromDemoSnapshotRecursive1']
+    event: Union[bool, 'EventArgsFromDemoSnapshotRecursive1']
+
+
+class SnapshotEventIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromDemoSnapshotRecursive2']
+    event: Union[bool, 'EventArgsFromDemoSnapshotRecursive2']
+
+
+class SnapshotEventIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromDemoSnapshotRecursive3']
+    event: Union[bool, 'EventArgsFromDemoSnapshotRecursive3']
+
+
+class SnapshotEventIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromDemoSnapshotRecursive4']
+    event: Union[bool, 'EventArgsFromDemoSnapshotRecursive4']
+
+
+class SnapshotEventIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class SnapshotEventArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManySnapshotEventArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromDemoSnapshotRecursive1']
+    claim: Union[bool, 'ClaimArgsFromDemoSnapshotRecursive1']
+
+
+class SnapshotClaimIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromDemoSnapshotRecursive2']
+    claim: Union[bool, 'ClaimArgsFromDemoSnapshotRecursive2']
+
+
+class SnapshotClaimIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromDemoSnapshotRecursive3']
+    claim: Union[bool, 'ClaimArgsFromDemoSnapshotRecursive3']
+
+
+class SnapshotClaimIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromDemoSnapshotRecursive4']
+    claim: Union[bool, 'ClaimArgsFromDemoSnapshotRecursive4']
+
+
+class SnapshotClaimIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class SnapshotClaimArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManySnapshotClaimArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    
+    
+
+class ConsensusFactIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class ConsensusFactIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class ConsensusFactIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class ConsensusFactIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class ConsensusFactIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class ConsensusFactArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyConsensusFactArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromDemoSnapshot(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class ContradictionPairIncludeFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class ContradictionPairIncludeFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class ContradictionPairIncludeFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+
+class ContradictionPairIncludeFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for DemoSnapshot"""
+
+    
+
+class ContradictionPairArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    
+    
+
+class FindManyContradictionPairArgsFromDemoSnapshot(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromDemoSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromDemoSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromDemoSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromDemoSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for DemoSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
+
+
+FindManyDemoSnapshotArgs = FindManyDemoSnapshotArgsFromDemoSnapshot
+FindFirstDemoSnapshotArgs = FindManyDemoSnapshotArgsFromDemoSnapshot
+
+
+    
+
+class DemoSnapshotWhereInput(TypedDict, total=False):
+    """DemoSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    topic: Union[_str, 'types.StringFilter']
+    data: Union['fields.Json', 'types.JsonFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['DemoSnapshotWhereInputRecursive1', List['DemoSnapshotWhereInputRecursive1']]
+    # but this causes mypy to hang :/
+    AND: List['DemoSnapshotWhereInputRecursive1']
+    OR: List['DemoSnapshotWhereInputRecursive1']
+    NOT: List['DemoSnapshotWhereInputRecursive1']
+
+
+class DemoSnapshotWhereInputRecursive1(TypedDict, total=False):
+    """DemoSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    topic: Union[_str, 'types.StringFilter']
+    data: Union['fields.Json', 'types.JsonFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['DemoSnapshotWhereInputRecursive2', List['DemoSnapshotWhereInputRecursive2']]
+    # but this causes mypy to hang :/
+    AND: List['DemoSnapshotWhereInputRecursive2']
+    OR: List['DemoSnapshotWhereInputRecursive2']
+    NOT: List['DemoSnapshotWhereInputRecursive2']
+
+
+class DemoSnapshotWhereInputRecursive2(TypedDict, total=False):
+    """DemoSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    topic: Union[_str, 'types.StringFilter']
+    data: Union['fields.Json', 'types.JsonFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['DemoSnapshotWhereInputRecursive3', List['DemoSnapshotWhereInputRecursive3']]
+    # but this causes mypy to hang :/
+    AND: List['DemoSnapshotWhereInputRecursive3']
+    OR: List['DemoSnapshotWhereInputRecursive3']
+    NOT: List['DemoSnapshotWhereInputRecursive3']
+
+
+class DemoSnapshotWhereInputRecursive3(TypedDict, total=False):
+    """DemoSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    topic: Union[_str, 'types.StringFilter']
+    data: Union['fields.Json', 'types.JsonFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+    # should be noted that AND and NOT should be Union['DemoSnapshotWhereInputRecursive4', List['DemoSnapshotWhereInputRecursive4']]
+    # but this causes mypy to hang :/
+    AND: List['DemoSnapshotWhereInputRecursive4']
+    OR: List['DemoSnapshotWhereInputRecursive4']
+    NOT: List['DemoSnapshotWhereInputRecursive4']
+
+
+class DemoSnapshotWhereInputRecursive4(TypedDict, total=False):
+    """DemoSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    topic: Union[_str, 'types.StringFilter']
+    data: Union['fields.Json', 'types.JsonFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+
+
+
+# aggregate DemoSnapshot types
+
+
+    
+
+class DemoSnapshotScalarWhereWithAggregatesInput(TypedDict, total=False):
+    """DemoSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    data: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['DemoSnapshotScalarWhereWithAggregatesInputRecursive1']
+    OR: List['DemoSnapshotScalarWhereWithAggregatesInputRecursive1']
+    NOT: List['DemoSnapshotScalarWhereWithAggregatesInputRecursive1']
+
+
+class DemoSnapshotScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
+    """DemoSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    data: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['DemoSnapshotScalarWhereWithAggregatesInputRecursive2']
+    OR: List['DemoSnapshotScalarWhereWithAggregatesInputRecursive2']
+    NOT: List['DemoSnapshotScalarWhereWithAggregatesInputRecursive2']
+
+
+class DemoSnapshotScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
+    """DemoSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    data: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['DemoSnapshotScalarWhereWithAggregatesInputRecursive3']
+    OR: List['DemoSnapshotScalarWhereWithAggregatesInputRecursive3']
+    NOT: List['DemoSnapshotScalarWhereWithAggregatesInputRecursive3']
+
+
+class DemoSnapshotScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
+    """DemoSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    data: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+    AND: List['DemoSnapshotScalarWhereWithAggregatesInputRecursive4']
+    OR: List['DemoSnapshotScalarWhereWithAggregatesInputRecursive4']
+    NOT: List['DemoSnapshotScalarWhereWithAggregatesInputRecursive4']
+
+
+class DemoSnapshotScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
+    """DemoSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    data: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+
+
+
+class DemoSnapshotGroupByOutput(TypedDict, total=False):
+    id: _str
+    topic: _str
+    data: 'fields.Json'
+    createdAt: datetime.datetime
+    _sum: 'DemoSnapshotSumAggregateOutput'
+    _avg: 'DemoSnapshotAvgAggregateOutput'
+    _min: 'DemoSnapshotMinAggregateOutput'
+    _max: 'DemoSnapshotMaxAggregateOutput'
+    _count: 'DemoSnapshotCountAggregateOutput'
+
+
+class DemoSnapshotAvgAggregateOutput(TypedDict, total=False):
+    """DemoSnapshot output for aggregating averages"""
+
+
+class DemoSnapshotSumAggregateOutput(TypedDict, total=False):
+    """DemoSnapshot output for aggregating sums"""
+
+
+class DemoSnapshotScalarAggregateOutput(TypedDict, total=False):
+    """DemoSnapshot output including scalar fields"""
+    id: _str
+    topic: _str
+    data: 'fields.Json'
+    createdAt: datetime.datetime
+
+
+DemoSnapshotMinAggregateOutput = DemoSnapshotScalarAggregateOutput
+DemoSnapshotMaxAggregateOutput = DemoSnapshotScalarAggregateOutput
+
+
+class DemoSnapshotMaxAggregateInput(TypedDict, total=False):
+    """DemoSnapshot input for aggregating by max"""
+    id: bool
+    topic: bool
+    data: bool
+    createdAt: bool
+
+
+class DemoSnapshotMinAggregateInput(TypedDict, total=False):
+    """DemoSnapshot input for aggregating by min"""
+    id: bool
+    topic: bool
+    data: bool
+    createdAt: bool
+
+
+class DemoSnapshotNumberAggregateInput(TypedDict, total=False):
+    """DemoSnapshot input for aggregating numbers"""
+
+
+DemoSnapshotAvgAggregateInput = DemoSnapshotNumberAggregateInput
+DemoSnapshotSumAggregateInput = DemoSnapshotNumberAggregateInput
+
+
+DemoSnapshotCountAggregateInput = TypedDict(
+    'DemoSnapshotCountAggregateInput',
+    {
+        'id': bool,
+        'topic': bool,
+        'data': bool,
+        'createdAt': bool,
+        '_all': bool,
+    },
+    total=False,
+)
+
+DemoSnapshotCountAggregateOutput = TypedDict(
+    'DemoSnapshotCountAggregateOutput',
+    {
+        'id': int,
+        'topic': int,
+        'data': int,
+        'createdAt': int,
+        '_all': int,
+    },
+    total=False,
+)
+
+
+DemoSnapshotKeys = Literal[
+    'id',
+    'topic',
+    'data',
+    'createdAt',
+]
+DemoSnapshotScalarFieldKeys = Literal[
+    'id',
+    'topic',
+    'data',
+    'createdAt',
+]
+DemoSnapshotScalarFieldKeysT = TypeVar('DemoSnapshotScalarFieldKeysT', bound=DemoSnapshotScalarFieldKeys)
+
+DemoSnapshotRelationalFieldKeys = _NoneType
+
+# TopicSubscription types
+
+class TopicSubscriptionOptionalCreateInput(TypedDict, total=False):
+    """Optional arguments to the TopicSubscription create method"""
+    id: _str
+    userId: _str
+    user: 'UserCreateNestedWithoutRelationsInput'
+    createdAt: datetime.datetime
+    lastSnapshotAt: Optional[datetime.datetime]
+    isActive: _bool
+    snapshots: 'TopicSnapshotCreateManyNestedWithoutRelationsInput'
+
+
+class TopicSubscriptionCreateInput(TopicSubscriptionOptionalCreateInput):
+    """Required arguments to the TopicSubscription create method"""
+    topic: _str
+
+
+# TODO: remove this in favour of without explicit relations
+# e.g. PostCreateWithoutAuthorInput
+
+class TopicSubscriptionOptionalCreateWithoutRelationsInput(TypedDict, total=False):
+    """Optional arguments to the TopicSubscription create method, without relations"""
+    id: _str
+    userId: _str
+    createdAt: datetime.datetime
+    lastSnapshotAt: Optional[datetime.datetime]
+    isActive: _bool
+
+
+class TopicSubscriptionCreateWithoutRelationsInput(TopicSubscriptionOptionalCreateWithoutRelationsInput):
+    """Required arguments to the TopicSubscription create method, without relations"""
+    topic: _str
+
+class TopicSubscriptionConnectOrCreateWithoutRelationsInput(TypedDict):
+    create: 'TopicSubscriptionCreateWithoutRelationsInput'
+    where: 'TopicSubscriptionWhereUniqueInput'
+
+class TopicSubscriptionCreateNestedWithoutRelationsInput(TypedDict, total=False):
+    create: 'TopicSubscriptionCreateWithoutRelationsInput'
+    connect: 'TopicSubscriptionWhereUniqueInput'
+    connect_or_create: 'TopicSubscriptionConnectOrCreateWithoutRelationsInput'
+
+
+class TopicSubscriptionCreateManyNestedWithoutRelationsInput(TypedDict, total=False):
+    create: Union['TopicSubscriptionCreateWithoutRelationsInput', List['TopicSubscriptionCreateWithoutRelationsInput']]
+    connect: Union['TopicSubscriptionWhereUniqueInput', List['TopicSubscriptionWhereUniqueInput']]
+    connect_or_create: Union['TopicSubscriptionConnectOrCreateWithoutRelationsInput', List['TopicSubscriptionConnectOrCreateWithoutRelationsInput']]
+
+_TopicSubscriptionWhereUnique_id_Input = TypedDict(
+    '_TopicSubscriptionWhereUnique_id_Input',
+    {
+        'id': '_str',
+    },
+    total=True
+)
+
+_TopicSubscriptionCompounduserId_topicKeyInner = TypedDict(
+    '_TopicSubscriptionCompounduserId_topicKeyInner',
+    {
+        'userId': '_str',
+        'topic': '_str',
+    },
+    total=True
+)
+
+_TopicSubscriptionCompounduserId_topicKey = TypedDict(
+    '_TopicSubscriptionCompounduserId_topicKey',
+    {
+        'userId_topic': '_TopicSubscriptionCompounduserId_topicKeyInner',
+    },
+    total=True
+)
+
+TopicSubscriptionWhereUniqueInput = Union[
+    '_TopicSubscriptionWhereUnique_id_Input',
+    '_TopicSubscriptionCompounduserId_topicKey',
+]
+
+
+class TopicSubscriptionUpdateInput(TypedDict, total=False):
+    """Optional arguments for updating a record"""
+    id: _str
+    user: 'UserUpdateOneWithoutRelationsInput'
+    topic: _str
+    createdAt: datetime.datetime
+    lastSnapshotAt: Optional[datetime.datetime]
+    isActive: _bool
+    snapshots: 'TopicSnapshotUpdateManyWithoutRelationsInput'
+
+
+class TopicSubscriptionUpdateManyMutationInput(TypedDict, total=False):
+    """Arguments for updating many records"""
+    id: _str
+    topic: _str
+    createdAt: datetime.datetime
+    lastSnapshotAt: Optional[datetime.datetime]
+    isActive: _bool
+
+
+class TopicSubscriptionUpdateManyWithoutRelationsInput(TypedDict, total=False):
+    create: List['TopicSubscriptionCreateWithoutRelationsInput']
+    connect: List['TopicSubscriptionWhereUniqueInput']
+    connect_or_create: List['TopicSubscriptionConnectOrCreateWithoutRelationsInput']
+    set: List['TopicSubscriptionWhereUniqueInput']
+    disconnect: List['TopicSubscriptionWhereUniqueInput']
+    delete: List['TopicSubscriptionWhereUniqueInput']
+
+    # TODO
+    # update: List['TopicSubscriptionUpdateWithWhereUniqueWithoutRelationsInput']
+    # updateMany: List['TopicSubscriptionUpdateManyWithWhereUniqueWithoutRelationsInput']
+    # deleteMany: List['TopicSubscriptionScalarWhereInput']
+    # upsert: List['TopicSubscriptionUpserteWithWhereUniqueWithoutRelationsInput']
+
+
+class TopicSubscriptionUpdateOneWithoutRelationsInput(TypedDict, total=False):
+    create: 'TopicSubscriptionCreateWithoutRelationsInput'
+    connect: 'TopicSubscriptionWhereUniqueInput'
+    connect_or_create: 'TopicSubscriptionConnectOrCreateWithoutRelationsInput'
+    disconnect: bool
+    delete: bool
+
+    # TODO
+    # update: 'TopicSubscriptionUpdateInput'
+    # upsert: 'TopicSubscriptionUpsertWithoutRelationsInput'
+
+
+class TopicSubscriptionUpsertInput(TypedDict):
+    create: 'TopicSubscriptionCreateInput'
+    update: 'TopicSubscriptionUpdateInput'  # pyright: ignore[reportIncompatibleMethodOverride]
+
+
+_TopicSubscription_id_OrderByInput = TypedDict(
+    '_TopicSubscription_id_OrderByInput',
+    {
+        'id': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSubscription_userId_OrderByInput = TypedDict(
+    '_TopicSubscription_userId_OrderByInput',
+    {
+        'userId': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSubscription_topic_OrderByInput = TypedDict(
+    '_TopicSubscription_topic_OrderByInput',
+    {
+        'topic': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSubscription_createdAt_OrderByInput = TypedDict(
+    '_TopicSubscription_createdAt_OrderByInput',
+    {
+        'createdAt': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSubscription_lastSnapshotAt_OrderByInput = TypedDict(
+    '_TopicSubscription_lastSnapshotAt_OrderByInput',
+    {
+        'lastSnapshotAt': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSubscription_isActive_OrderByInput = TypedDict(
+    '_TopicSubscription_isActive_OrderByInput',
+    {
+        'isActive': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSubscription_RelevanceInner = TypedDict(
+    '_TopicSubscription_RelevanceInner',
+    {
+        'fields': 'List[TopicSubscriptionScalarFieldKeys]',
+        'search': 'str',
+        'sort': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSubscription_RelevanceOrderByInput = TypedDict(
+    '_TopicSubscription_RelevanceOrderByInput',
+    {
+        '_relevance': '_TopicSubscription_RelevanceInner',
+    },
+    total=True
+)
+
+TopicSubscriptionOrderByInput = Union[
+    '_TopicSubscription_id_OrderByInput',
+    '_TopicSubscription_userId_OrderByInput',
+    '_TopicSubscription_topic_OrderByInput',
+    '_TopicSubscription_createdAt_OrderByInput',
+    '_TopicSubscription_lastSnapshotAt_OrderByInput',
+    '_TopicSubscription_isActive_OrderByInput',
+    '_TopicSubscription_RelevanceOrderByInput',
+]
+
+
+
+# recursive TopicSubscription types
+# TODO: cleanup these types
+
+
+# Dict[str, Any] is a mypy limitation
+# see https://github.com/RobertCraigie/prisma-client-py/issues/45
+# switch to pyright for improved types, see https://prisma-client-py.readthedocs.io/en/stable/reference/limitations/
+
+TopicSubscriptionRelationFilter = TypedDict(
+    'TopicSubscriptionRelationFilter',
+    {
+        'is': 'Dict[str, Any]',
+        'is_not': 'Dict[str, Any]',
+    },
+    total=False,
+)
+
+
+class TopicSubscriptionListRelationFilter(TypedDict, total=False):
+    some: 'Dict[str, Any]'
+    none: 'Dict[str, Any]'
+    every: 'Dict[str, Any]'
+
+
+class TopicSubscriptionInclude(TypedDict, total=False):
+    """TopicSubscription relational arguments"""
+    user: Union[bool, 'UserArgsFromTopicSubscription']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromTopicSubscription']
+
+
+    
+
+class UserIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    sessions: Union[bool, 'FindManySessionArgsFromTopicSubscriptionRecursive1']
+    accounts: Union[bool, 'FindManyAccountArgsFromTopicSubscriptionRecursive1']
+    searches: Union[bool, 'FindManySearchArgsFromTopicSubscriptionRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromTopicSubscriptionRecursive1']
+
+
+class UserIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    sessions: Union[bool, 'FindManySessionArgsFromTopicSubscriptionRecursive2']
+    accounts: Union[bool, 'FindManyAccountArgsFromTopicSubscriptionRecursive2']
+    searches: Union[bool, 'FindManySearchArgsFromTopicSubscriptionRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromTopicSubscriptionRecursive2']
+
+
+class UserIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    sessions: Union[bool, 'FindManySessionArgsFromTopicSubscriptionRecursive3']
+    accounts: Union[bool, 'FindManyAccountArgsFromTopicSubscriptionRecursive3']
+    searches: Union[bool, 'FindManySearchArgsFromTopicSubscriptionRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromTopicSubscriptionRecursive3']
+
+
+class UserIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    sessions: Union[bool, 'FindManySessionArgsFromTopicSubscriptionRecursive4']
+    accounts: Union[bool, 'FindManyAccountArgsFromTopicSubscriptionRecursive4']
+    searches: Union[bool, 'FindManySearchArgsFromTopicSubscriptionRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromTopicSubscriptionRecursive4']
+
+
+class UserIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class UserArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class UserArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class UserArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class UserArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class UserArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyUserArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class FindManyUserArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class FindManyUserArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class FindManyUserArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class FindManyUserArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    
+    
+
+class SessionIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive1']
+
+
+class SessionIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive2']
+
+
+class SessionIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive3']
+
+
+class SessionIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive4']
+
+
+class SessionIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class SessionArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class SessionArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class SessionArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class SessionArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class SessionArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManySessionArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class FindManySessionArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class FindManySessionArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class FindManySessionArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class FindManySessionArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    
+    
+
+class AccountIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive1']
+
+
+class AccountIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive2']
+
+
+class AccountIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive3']
+
+
+class AccountIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive4']
+
+
+class AccountIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class AccountArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class AccountArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class AccountArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class AccountArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class AccountArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyAccountArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class FindManyAccountArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class FindManyAccountArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class FindManyAccountArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class FindManyAccountArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    
+    
+
+class VerificationIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class VerificationIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class VerificationIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class VerificationIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class VerificationIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class VerificationArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class VerificationArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class VerificationArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class VerificationArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class VerificationArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyVerificationArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class FindManyVerificationArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class FindManyVerificationArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class FindManyVerificationArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class FindManyVerificationArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    
+    
+
+class SearchIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive1']
+    articles: Union[bool, 'FindManyArticleArgsFromTopicSubscriptionRecursive1']
+    insights: Union[bool, 'FindManyInsightArgsFromTopicSubscriptionRecursive1']
+
+
+class SearchIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive2']
+    articles: Union[bool, 'FindManyArticleArgsFromTopicSubscriptionRecursive2']
+    insights: Union[bool, 'FindManyInsightArgsFromTopicSubscriptionRecursive2']
+
+
+class SearchIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive3']
+    articles: Union[bool, 'FindManyArticleArgsFromTopicSubscriptionRecursive3']
+    insights: Union[bool, 'FindManyInsightArgsFromTopicSubscriptionRecursive3']
+
+
+class SearchIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive4']
+    articles: Union[bool, 'FindManyArticleArgsFromTopicSubscriptionRecursive4']
+    insights: Union[bool, 'FindManyInsightArgsFromTopicSubscriptionRecursive4']
+
+
+class SearchIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class SearchArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class SearchArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class SearchArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class SearchArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class SearchArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManySearchArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class FindManySearchArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class FindManySearchArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class FindManySearchArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class FindManySearchArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    
+    
+
+class ArticleIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    search: Union[bool, 'SearchArgsFromTopicSubscriptionRecursive1']
+
+
+class ArticleIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    search: Union[bool, 'SearchArgsFromTopicSubscriptionRecursive2']
+
+
+class ArticleIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    search: Union[bool, 'SearchArgsFromTopicSubscriptionRecursive3']
+
+
+class ArticleIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    search: Union[bool, 'SearchArgsFromTopicSubscriptionRecursive4']
+
+
+class ArticleIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class ArticleArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class ArticleArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class ArticleArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class ArticleArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class ArticleArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyArticleArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class FindManyArticleArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class FindManyArticleArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class FindManyArticleArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class FindManyArticleArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    
+    
+
+class InsightIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    search: Union[bool, 'SearchArgsFromTopicSubscriptionRecursive1']
+
+
+class InsightIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    search: Union[bool, 'SearchArgsFromTopicSubscriptionRecursive2']
+
+
+class InsightIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    search: Union[bool, 'SearchArgsFromTopicSubscriptionRecursive3']
+
+
+class InsightIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    search: Union[bool, 'SearchArgsFromTopicSubscriptionRecursive4']
+
+
+class InsightIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class InsightArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class InsightArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class InsightArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class InsightArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class InsightArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyInsightArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class FindManyInsightArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class FindManyInsightArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class FindManyInsightArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class FindManyInsightArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    cluster: Union[bool, 'ClaimClusterArgsFromTopicSubscriptionRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromTopicSubscriptionRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSubscriptionRecursive1']
+
+
+class ClaimIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    cluster: Union[bool, 'ClaimClusterArgsFromTopicSubscriptionRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromTopicSubscriptionRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSubscriptionRecursive2']
+
+
+class ClaimIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    cluster: Union[bool, 'ClaimClusterArgsFromTopicSubscriptionRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromTopicSubscriptionRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSubscriptionRecursive3']
+
+
+class ClaimIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    cluster: Union[bool, 'ClaimClusterArgsFromTopicSubscriptionRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromTopicSubscriptionRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSubscriptionRecursive4']
+
+
+class ClaimIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class ClaimArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyClaimArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    claim: Union[bool, 'ClaimArgsFromTopicSubscriptionRecursive1']
+
+
+class EvidenceIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    claim: Union[bool, 'ClaimArgsFromTopicSubscriptionRecursive2']
+
+
+class EvidenceIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    claim: Union[bool, 'ClaimArgsFromTopicSubscriptionRecursive3']
+
+
+class EvidenceIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    claim: Union[bool, 'ClaimArgsFromTopicSubscriptionRecursive4']
+
+
+class EvidenceIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class EvidenceArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyEvidenceArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromTopicSubscriptionRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSubscriptionRecursive1']
+
+
+class EventIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromTopicSubscriptionRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSubscriptionRecursive2']
+
+
+class EventIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromTopicSubscriptionRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSubscriptionRecursive3']
+
+
+class EventIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromTopicSubscriptionRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSubscriptionRecursive4']
+
+
+class EventIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class EventArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyEventArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    event: Union[bool, 'EventArgsFromTopicSubscriptionRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromTopicSubscriptionRecursive1']
+
+
+class ClaimClusterIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    event: Union[bool, 'EventArgsFromTopicSubscriptionRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromTopicSubscriptionRecursive2']
+
+
+class ClaimClusterIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    event: Union[bool, 'EventArgsFromTopicSubscriptionRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromTopicSubscriptionRecursive3']
+
+
+class ClaimClusterIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    event: Union[bool, 'EventArgsFromTopicSubscriptionRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromTopicSubscriptionRecursive4']
+
+
+class ClaimClusterIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class ClaimClusterArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyClaimClusterArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
+    
+
+class LLMCacheIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class LLMCacheIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class LLMCacheIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class LLMCacheIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class LLMCacheIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class LLMCacheArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyLLMCacheArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class LLMUsageIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class LLMUsageIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class LLMUsageIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class LLMUsageIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class LLMUsageArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyLLMUsageArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class DemoSnapshotIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class DemoSnapshotIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class DemoSnapshotIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class DemoSnapshotIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class DemoSnapshotArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromTopicSubscriptionRecursive1']
+
+
+class TopicSubscriptionIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromTopicSubscriptionRecursive2']
+
+
+class TopicSubscriptionIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromTopicSubscriptionRecursive3']
+
+
+class TopicSubscriptionIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    user: Union[bool, 'UserArgsFromTopicSubscriptionRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromTopicSubscriptionRecursive4']
+
+
+class TopicSubscriptionIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class TopicSubscriptionArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromTopicSubscriptionRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSubscriptionRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSubscriptionRecursive1']
+
+
+class TopicSnapshotIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromTopicSubscriptionRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSubscriptionRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSubscriptionRecursive2']
+
+
+class TopicSnapshotIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromTopicSubscriptionRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSubscriptionRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSubscriptionRecursive3']
+
+
+class TopicSnapshotIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromTopicSubscriptionRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSubscriptionRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSubscriptionRecursive4']
+
+
+class TopicSnapshotIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class TopicSnapshotArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSubscriptionRecursive1']
+    event: Union[bool, 'EventArgsFromTopicSubscriptionRecursive1']
+
+
+class SnapshotEventIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSubscriptionRecursive2']
+    event: Union[bool, 'EventArgsFromTopicSubscriptionRecursive2']
+
+
+class SnapshotEventIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSubscriptionRecursive3']
+    event: Union[bool, 'EventArgsFromTopicSubscriptionRecursive3']
+
+
+class SnapshotEventIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSubscriptionRecursive4']
+    event: Union[bool, 'EventArgsFromTopicSubscriptionRecursive4']
+
+
+class SnapshotEventIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class SnapshotEventArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManySnapshotEventArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSubscriptionRecursive1']
+    claim: Union[bool, 'ClaimArgsFromTopicSubscriptionRecursive1']
+
+
+class SnapshotClaimIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSubscriptionRecursive2']
+    claim: Union[bool, 'ClaimArgsFromTopicSubscriptionRecursive2']
+
+
+class SnapshotClaimIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSubscriptionRecursive3']
+    claim: Union[bool, 'ClaimArgsFromTopicSubscriptionRecursive3']
+
+
+class SnapshotClaimIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSubscriptionRecursive4']
+    claim: Union[bool, 'ClaimArgsFromTopicSubscriptionRecursive4']
+
+
+class SnapshotClaimIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class SnapshotClaimArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManySnapshotClaimArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    
+    
+
+class ConsensusFactIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class ConsensusFactIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class ConsensusFactIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class ConsensusFactIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class ConsensusFactIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class ConsensusFactArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyConsensusFactArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromTopicSubscription(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class ContradictionPairIncludeFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class ContradictionPairIncludeFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class ContradictionPairIncludeFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+
+class ContradictionPairIncludeFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSubscription"""
+
+    
+
+class ContradictionPairArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    
+    
+
+class FindManyContradictionPairArgsFromTopicSubscription(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromTopicSubscriptionRecursive1(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromTopicSubscriptionRecursive2(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromTopicSubscriptionRecursive3(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromTopicSubscriptionRecursive4(TypedDict, total=False):
+    """Arguments for TopicSubscription"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
+
+
+FindManyTopicSubscriptionArgs = FindManyTopicSubscriptionArgsFromTopicSubscription
+FindFirstTopicSubscriptionArgs = FindManyTopicSubscriptionArgsFromTopicSubscription
+
+
+    
+
+class TopicSubscriptionWhereInput(TypedDict, total=False):
+    """TopicSubscription arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    userId: Union[_str, 'types.StringFilter']
+    user: 'UserRelationFilter'
+    topic: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    lastSnapshotAt: Union[None, datetime.datetime, 'types.DateTimeFilter']
+    isActive: Union[_bool, 'types.BooleanFilter']
+    snapshots: 'TopicSnapshotListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['TopicSubscriptionWhereInputRecursive1', List['TopicSubscriptionWhereInputRecursive1']]
+    # but this causes mypy to hang :/
+    AND: List['TopicSubscriptionWhereInputRecursive1']
+    OR: List['TopicSubscriptionWhereInputRecursive1']
+    NOT: List['TopicSubscriptionWhereInputRecursive1']
+
+
+class TopicSubscriptionWhereInputRecursive1(TypedDict, total=False):
+    """TopicSubscription arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    userId: Union[_str, 'types.StringFilter']
+    user: 'UserRelationFilter'
+    topic: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    lastSnapshotAt: Union[None, datetime.datetime, 'types.DateTimeFilter']
+    isActive: Union[_bool, 'types.BooleanFilter']
+    snapshots: 'TopicSnapshotListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['TopicSubscriptionWhereInputRecursive2', List['TopicSubscriptionWhereInputRecursive2']]
+    # but this causes mypy to hang :/
+    AND: List['TopicSubscriptionWhereInputRecursive2']
+    OR: List['TopicSubscriptionWhereInputRecursive2']
+    NOT: List['TopicSubscriptionWhereInputRecursive2']
+
+
+class TopicSubscriptionWhereInputRecursive2(TypedDict, total=False):
+    """TopicSubscription arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    userId: Union[_str, 'types.StringFilter']
+    user: 'UserRelationFilter'
+    topic: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    lastSnapshotAt: Union[None, datetime.datetime, 'types.DateTimeFilter']
+    isActive: Union[_bool, 'types.BooleanFilter']
+    snapshots: 'TopicSnapshotListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['TopicSubscriptionWhereInputRecursive3', List['TopicSubscriptionWhereInputRecursive3']]
+    # but this causes mypy to hang :/
+    AND: List['TopicSubscriptionWhereInputRecursive3']
+    OR: List['TopicSubscriptionWhereInputRecursive3']
+    NOT: List['TopicSubscriptionWhereInputRecursive3']
+
+
+class TopicSubscriptionWhereInputRecursive3(TypedDict, total=False):
+    """TopicSubscription arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    userId: Union[_str, 'types.StringFilter']
+    user: 'UserRelationFilter'
+    topic: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    lastSnapshotAt: Union[None, datetime.datetime, 'types.DateTimeFilter']
+    isActive: Union[_bool, 'types.BooleanFilter']
+    snapshots: 'TopicSnapshotListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['TopicSubscriptionWhereInputRecursive4', List['TopicSubscriptionWhereInputRecursive4']]
+    # but this causes mypy to hang :/
+    AND: List['TopicSubscriptionWhereInputRecursive4']
+    OR: List['TopicSubscriptionWhereInputRecursive4']
+    NOT: List['TopicSubscriptionWhereInputRecursive4']
+
+
+class TopicSubscriptionWhereInputRecursive4(TypedDict, total=False):
+    """TopicSubscription arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    userId: Union[_str, 'types.StringFilter']
+    user: 'UserRelationFilter'
+    topic: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    lastSnapshotAt: Union[None, datetime.datetime, 'types.DateTimeFilter']
+    isActive: Union[_bool, 'types.BooleanFilter']
+    snapshots: 'TopicSnapshotListRelationFilter'
+
+
+
+# aggregate TopicSubscription types
+
+
+    
+
+class TopicSubscriptionScalarWhereWithAggregatesInput(TypedDict, total=False):
+    """TopicSubscription arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    userId: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    lastSnapshotAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    isActive: Union[_bool, 'types.BooleanWithAggregatesFilter']
+
+    AND: List['TopicSubscriptionScalarWhereWithAggregatesInputRecursive1']
+    OR: List['TopicSubscriptionScalarWhereWithAggregatesInputRecursive1']
+    NOT: List['TopicSubscriptionScalarWhereWithAggregatesInputRecursive1']
+
+
+class TopicSubscriptionScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
+    """TopicSubscription arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    userId: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    lastSnapshotAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    isActive: Union[_bool, 'types.BooleanWithAggregatesFilter']
+
+    AND: List['TopicSubscriptionScalarWhereWithAggregatesInputRecursive2']
+    OR: List['TopicSubscriptionScalarWhereWithAggregatesInputRecursive2']
+    NOT: List['TopicSubscriptionScalarWhereWithAggregatesInputRecursive2']
+
+
+class TopicSubscriptionScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
+    """TopicSubscription arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    userId: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    lastSnapshotAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    isActive: Union[_bool, 'types.BooleanWithAggregatesFilter']
+
+    AND: List['TopicSubscriptionScalarWhereWithAggregatesInputRecursive3']
+    OR: List['TopicSubscriptionScalarWhereWithAggregatesInputRecursive3']
+    NOT: List['TopicSubscriptionScalarWhereWithAggregatesInputRecursive3']
+
+
+class TopicSubscriptionScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
+    """TopicSubscription arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    userId: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    lastSnapshotAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    isActive: Union[_bool, 'types.BooleanWithAggregatesFilter']
+
+    AND: List['TopicSubscriptionScalarWhereWithAggregatesInputRecursive4']
+    OR: List['TopicSubscriptionScalarWhereWithAggregatesInputRecursive4']
+    NOT: List['TopicSubscriptionScalarWhereWithAggregatesInputRecursive4']
+
+
+class TopicSubscriptionScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
+    """TopicSubscription arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    userId: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    lastSnapshotAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    isActive: Union[_bool, 'types.BooleanWithAggregatesFilter']
+
+
+
+class TopicSubscriptionGroupByOutput(TypedDict, total=False):
+    id: _str
+    userId: _str
+    topic: _str
+    createdAt: datetime.datetime
+    lastSnapshotAt: datetime.datetime
+    isActive: _bool
+    _sum: 'TopicSubscriptionSumAggregateOutput'
+    _avg: 'TopicSubscriptionAvgAggregateOutput'
+    _min: 'TopicSubscriptionMinAggregateOutput'
+    _max: 'TopicSubscriptionMaxAggregateOutput'
+    _count: 'TopicSubscriptionCountAggregateOutput'
+
+
+class TopicSubscriptionAvgAggregateOutput(TypedDict, total=False):
+    """TopicSubscription output for aggregating averages"""
+
+
+class TopicSubscriptionSumAggregateOutput(TypedDict, total=False):
+    """TopicSubscription output for aggregating sums"""
+
+
+class TopicSubscriptionScalarAggregateOutput(TypedDict, total=False):
+    """TopicSubscription output including scalar fields"""
+    id: _str
+    userId: _str
+    topic: _str
+    createdAt: datetime.datetime
+    lastSnapshotAt: datetime.datetime
+    isActive: _bool
+
+
+TopicSubscriptionMinAggregateOutput = TopicSubscriptionScalarAggregateOutput
+TopicSubscriptionMaxAggregateOutput = TopicSubscriptionScalarAggregateOutput
+
+
+class TopicSubscriptionMaxAggregateInput(TypedDict, total=False):
+    """TopicSubscription input for aggregating by max"""
+    id: bool
+    userId: bool
+    topic: bool
+    createdAt: bool
+    lastSnapshotAt: bool
+    isActive: bool
+
+
+class TopicSubscriptionMinAggregateInput(TypedDict, total=False):
+    """TopicSubscription input for aggregating by min"""
+    id: bool
+    userId: bool
+    topic: bool
+    createdAt: bool
+    lastSnapshotAt: bool
+    isActive: bool
+
+
+class TopicSubscriptionNumberAggregateInput(TypedDict, total=False):
+    """TopicSubscription input for aggregating numbers"""
+
+
+TopicSubscriptionAvgAggregateInput = TopicSubscriptionNumberAggregateInput
+TopicSubscriptionSumAggregateInput = TopicSubscriptionNumberAggregateInput
+
+
+TopicSubscriptionCountAggregateInput = TypedDict(
+    'TopicSubscriptionCountAggregateInput',
+    {
+        'id': bool,
+        'userId': bool,
+        'topic': bool,
+        'createdAt': bool,
+        'lastSnapshotAt': bool,
+        'isActive': bool,
+        '_all': bool,
+    },
+    total=False,
+)
+
+TopicSubscriptionCountAggregateOutput = TypedDict(
+    'TopicSubscriptionCountAggregateOutput',
+    {
+        'id': int,
+        'userId': int,
+        'topic': int,
+        'createdAt': int,
+        'lastSnapshotAt': int,
+        'isActive': int,
+        '_all': int,
+    },
+    total=False,
+)
+
+
+TopicSubscriptionKeys = Literal[
+    'id',
+    'userId',
+    'user',
+    'topic',
+    'createdAt',
+    'lastSnapshotAt',
+    'isActive',
+    'snapshots',
+]
+TopicSubscriptionScalarFieldKeys = Literal[
+    'id',
+    'userId',
+    'topic',
+    'createdAt',
+    'lastSnapshotAt',
+    'isActive',
+]
+TopicSubscriptionScalarFieldKeysT = TypeVar('TopicSubscriptionScalarFieldKeysT', bound=TopicSubscriptionScalarFieldKeys)
+
+TopicSubscriptionRelationalFieldKeys = Literal[
+        'user',
+        'snapshots',
+    ]
+
+# TopicSnapshot types
+
+class TopicSnapshotOptionalCreateInput(TypedDict, total=False):
+    """Optional arguments to the TopicSnapshot create method"""
+    id: _str
+    subscriptionId: _str
+    subscription: 'TopicSubscriptionCreateNestedWithoutRelationsInput'
+    createdAt: datetime.datetime
+    articleCount: _int
+    claimCount: _int
+    eventCount: _int
+    consensusScore: Optional[_float]
+    polarizationIndex: Optional[_float]
+    biasDistribution: Optional['fields.Json']
+    sourceDistribution: Optional['fields.Json']
+    topEvents: Optional['fields.Json']
+    topClaims: Optional['fields.Json']
+    driftMetrics: Optional['fields.Json']
+    summary: Optional[_str]
+    snapshotEvents: 'SnapshotEventCreateManyNestedWithoutRelationsInput'
+    snapshotClaims: 'SnapshotClaimCreateManyNestedWithoutRelationsInput'
+
+
+class TopicSnapshotCreateInput(TopicSnapshotOptionalCreateInput):
+    """Required arguments to the TopicSnapshot create method"""
+    topic: _str
+
+
+# TODO: remove this in favour of without explicit relations
+# e.g. PostCreateWithoutAuthorInput
+
+class TopicSnapshotOptionalCreateWithoutRelationsInput(TypedDict, total=False):
+    """Optional arguments to the TopicSnapshot create method, without relations"""
+    id: _str
+    subscriptionId: _str
+    createdAt: datetime.datetime
+    articleCount: _int
+    claimCount: _int
+    eventCount: _int
+    consensusScore: Optional[_float]
+    polarizationIndex: Optional[_float]
+    biasDistribution: Optional['fields.Json']
+    sourceDistribution: Optional['fields.Json']
+    topEvents: Optional['fields.Json']
+    topClaims: Optional['fields.Json']
+    driftMetrics: Optional['fields.Json']
+    summary: Optional[_str]
+
+
+class TopicSnapshotCreateWithoutRelationsInput(TopicSnapshotOptionalCreateWithoutRelationsInput):
+    """Required arguments to the TopicSnapshot create method, without relations"""
+    topic: _str
+
+class TopicSnapshotConnectOrCreateWithoutRelationsInput(TypedDict):
+    create: 'TopicSnapshotCreateWithoutRelationsInput'
+    where: 'TopicSnapshotWhereUniqueInput'
+
+class TopicSnapshotCreateNestedWithoutRelationsInput(TypedDict, total=False):
+    create: 'TopicSnapshotCreateWithoutRelationsInput'
+    connect: 'TopicSnapshotWhereUniqueInput'
+    connect_or_create: 'TopicSnapshotConnectOrCreateWithoutRelationsInput'
+
+
+class TopicSnapshotCreateManyNestedWithoutRelationsInput(TypedDict, total=False):
+    create: Union['TopicSnapshotCreateWithoutRelationsInput', List['TopicSnapshotCreateWithoutRelationsInput']]
+    connect: Union['TopicSnapshotWhereUniqueInput', List['TopicSnapshotWhereUniqueInput']]
+    connect_or_create: Union['TopicSnapshotConnectOrCreateWithoutRelationsInput', List['TopicSnapshotConnectOrCreateWithoutRelationsInput']]
+
+_TopicSnapshotWhereUnique_id_Input = TypedDict(
+    '_TopicSnapshotWhereUnique_id_Input',
+    {
+        'id': '_str',
+    },
+    total=True
+)
+
+TopicSnapshotWhereUniqueInput = _TopicSnapshotWhereUnique_id_Input
+
+
+class TopicSnapshotUpdateInput(TypedDict, total=False):
+    """Optional arguments for updating a record"""
+    id: _str
+    subscription: 'TopicSubscriptionUpdateOneWithoutRelationsInput'
+    topic: _str
+    createdAt: datetime.datetime
+    articleCount: Union[AtomicIntInput, _int]
+    claimCount: Union[AtomicIntInput, _int]
+    eventCount: Union[AtomicIntInput, _int]
+    consensusScore: Optional[Union[AtomicFloatInput, _float]]
+    polarizationIndex: Optional[Union[AtomicFloatInput, _float]]
+    biasDistribution: Optional['fields.Json']
+    sourceDistribution: Optional['fields.Json']
+    topEvents: Optional['fields.Json']
+    topClaims: Optional['fields.Json']
+    driftMetrics: Optional['fields.Json']
+    summary: Optional[_str]
+    snapshotEvents: 'SnapshotEventUpdateManyWithoutRelationsInput'
+    snapshotClaims: 'SnapshotClaimUpdateManyWithoutRelationsInput'
+
+
+class TopicSnapshotUpdateManyMutationInput(TypedDict, total=False):
+    """Arguments for updating many records"""
+    id: _str
+    topic: _str
+    createdAt: datetime.datetime
+    articleCount: Union[AtomicIntInput, _int]
+    claimCount: Union[AtomicIntInput, _int]
+    eventCount: Union[AtomicIntInput, _int]
+    consensusScore: Optional[Union[AtomicFloatInput, _float]]
+    polarizationIndex: Optional[Union[AtomicFloatInput, _float]]
+    biasDistribution: Optional['fields.Json']
+    sourceDistribution: Optional['fields.Json']
+    topEvents: Optional['fields.Json']
+    topClaims: Optional['fields.Json']
+    driftMetrics: Optional['fields.Json']
+    summary: Optional[_str]
+
+
+class TopicSnapshotUpdateManyWithoutRelationsInput(TypedDict, total=False):
+    create: List['TopicSnapshotCreateWithoutRelationsInput']
+    connect: List['TopicSnapshotWhereUniqueInput']
+    connect_or_create: List['TopicSnapshotConnectOrCreateWithoutRelationsInput']
+    set: List['TopicSnapshotWhereUniqueInput']
+    disconnect: List['TopicSnapshotWhereUniqueInput']
+    delete: List['TopicSnapshotWhereUniqueInput']
+
+    # TODO
+    # update: List['TopicSnapshotUpdateWithWhereUniqueWithoutRelationsInput']
+    # updateMany: List['TopicSnapshotUpdateManyWithWhereUniqueWithoutRelationsInput']
+    # deleteMany: List['TopicSnapshotScalarWhereInput']
+    # upsert: List['TopicSnapshotUpserteWithWhereUniqueWithoutRelationsInput']
+
+
+class TopicSnapshotUpdateOneWithoutRelationsInput(TypedDict, total=False):
+    create: 'TopicSnapshotCreateWithoutRelationsInput'
+    connect: 'TopicSnapshotWhereUniqueInput'
+    connect_or_create: 'TopicSnapshotConnectOrCreateWithoutRelationsInput'
+    disconnect: bool
+    delete: bool
+
+    # TODO
+    # update: 'TopicSnapshotUpdateInput'
+    # upsert: 'TopicSnapshotUpsertWithoutRelationsInput'
+
+
+class TopicSnapshotUpsertInput(TypedDict):
+    create: 'TopicSnapshotCreateInput'
+    update: 'TopicSnapshotUpdateInput'  # pyright: ignore[reportIncompatibleMethodOverride]
+
+
+_TopicSnapshot_id_OrderByInput = TypedDict(
+    '_TopicSnapshot_id_OrderByInput',
+    {
+        'id': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_subscriptionId_OrderByInput = TypedDict(
+    '_TopicSnapshot_subscriptionId_OrderByInput',
+    {
+        'subscriptionId': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_topic_OrderByInput = TypedDict(
+    '_TopicSnapshot_topic_OrderByInput',
+    {
+        'topic': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_createdAt_OrderByInput = TypedDict(
+    '_TopicSnapshot_createdAt_OrderByInput',
+    {
+        'createdAt': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_articleCount_OrderByInput = TypedDict(
+    '_TopicSnapshot_articleCount_OrderByInput',
+    {
+        'articleCount': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_claimCount_OrderByInput = TypedDict(
+    '_TopicSnapshot_claimCount_OrderByInput',
+    {
+        'claimCount': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_eventCount_OrderByInput = TypedDict(
+    '_TopicSnapshot_eventCount_OrderByInput',
+    {
+        'eventCount': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_consensusScore_OrderByInput = TypedDict(
+    '_TopicSnapshot_consensusScore_OrderByInput',
+    {
+        'consensusScore': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_polarizationIndex_OrderByInput = TypedDict(
+    '_TopicSnapshot_polarizationIndex_OrderByInput',
+    {
+        'polarizationIndex': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_biasDistribution_OrderByInput = TypedDict(
+    '_TopicSnapshot_biasDistribution_OrderByInput',
+    {
+        'biasDistribution': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_sourceDistribution_OrderByInput = TypedDict(
+    '_TopicSnapshot_sourceDistribution_OrderByInput',
+    {
+        'sourceDistribution': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_topEvents_OrderByInput = TypedDict(
+    '_TopicSnapshot_topEvents_OrderByInput',
+    {
+        'topEvents': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_topClaims_OrderByInput = TypedDict(
+    '_TopicSnapshot_topClaims_OrderByInput',
+    {
+        'topClaims': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_driftMetrics_OrderByInput = TypedDict(
+    '_TopicSnapshot_driftMetrics_OrderByInput',
+    {
+        'driftMetrics': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_summary_OrderByInput = TypedDict(
+    '_TopicSnapshot_summary_OrderByInput',
+    {
+        'summary': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_RelevanceInner = TypedDict(
+    '_TopicSnapshot_RelevanceInner',
+    {
+        'fields': 'List[TopicSnapshotScalarFieldKeys]',
+        'search': 'str',
+        'sort': 'SortOrder',
+    },
+    total=True
+)
+
+_TopicSnapshot_RelevanceOrderByInput = TypedDict(
+    '_TopicSnapshot_RelevanceOrderByInput',
+    {
+        '_relevance': '_TopicSnapshot_RelevanceInner',
+    },
+    total=True
+)
+
+TopicSnapshotOrderByInput = Union[
+    '_TopicSnapshot_id_OrderByInput',
+    '_TopicSnapshot_subscriptionId_OrderByInput',
+    '_TopicSnapshot_topic_OrderByInput',
+    '_TopicSnapshot_createdAt_OrderByInput',
+    '_TopicSnapshot_articleCount_OrderByInput',
+    '_TopicSnapshot_claimCount_OrderByInput',
+    '_TopicSnapshot_eventCount_OrderByInput',
+    '_TopicSnapshot_consensusScore_OrderByInput',
+    '_TopicSnapshot_polarizationIndex_OrderByInput',
+    '_TopicSnapshot_biasDistribution_OrderByInput',
+    '_TopicSnapshot_sourceDistribution_OrderByInput',
+    '_TopicSnapshot_topEvents_OrderByInput',
+    '_TopicSnapshot_topClaims_OrderByInput',
+    '_TopicSnapshot_driftMetrics_OrderByInput',
+    '_TopicSnapshot_summary_OrderByInput',
+    '_TopicSnapshot_RelevanceOrderByInput',
+]
+
+
+
+# recursive TopicSnapshot types
+# TODO: cleanup these types
+
+
+# Dict[str, Any] is a mypy limitation
+# see https://github.com/RobertCraigie/prisma-client-py/issues/45
+# switch to pyright for improved types, see https://prisma-client-py.readthedocs.io/en/stable/reference/limitations/
+
+TopicSnapshotRelationFilter = TypedDict(
+    'TopicSnapshotRelationFilter',
+    {
+        'is': 'Dict[str, Any]',
+        'is_not': 'Dict[str, Any]',
+    },
+    total=False,
+)
+
+
+class TopicSnapshotListRelationFilter(TypedDict, total=False):
+    some: 'Dict[str, Any]'
+    none: 'Dict[str, Any]'
+    every: 'Dict[str, Any]'
+
+
+class TopicSnapshotInclude(TypedDict, total=False):
+    """TopicSnapshot relational arguments"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromTopicSnapshot']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSnapshot']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSnapshot']
+
+
+    
+
+class UserIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    sessions: Union[bool, 'FindManySessionArgsFromTopicSnapshotRecursive1']
+    accounts: Union[bool, 'FindManyAccountArgsFromTopicSnapshotRecursive1']
+    searches: Union[bool, 'FindManySearchArgsFromTopicSnapshotRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromTopicSnapshotRecursive1']
+
+
+class UserIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    sessions: Union[bool, 'FindManySessionArgsFromTopicSnapshotRecursive2']
+    accounts: Union[bool, 'FindManyAccountArgsFromTopicSnapshotRecursive2']
+    searches: Union[bool, 'FindManySearchArgsFromTopicSnapshotRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromTopicSnapshotRecursive2']
+
+
+class UserIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    sessions: Union[bool, 'FindManySessionArgsFromTopicSnapshotRecursive3']
+    accounts: Union[bool, 'FindManyAccountArgsFromTopicSnapshotRecursive3']
+    searches: Union[bool, 'FindManySearchArgsFromTopicSnapshotRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromTopicSnapshotRecursive3']
+
+
+class UserIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    sessions: Union[bool, 'FindManySessionArgsFromTopicSnapshotRecursive4']
+    accounts: Union[bool, 'FindManyAccountArgsFromTopicSnapshotRecursive4']
+    searches: Union[bool, 'FindManySearchArgsFromTopicSnapshotRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromTopicSnapshotRecursive4']
+
+
+class UserIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class UserArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class UserArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class UserArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class UserArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class UserArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyUserArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class FindManyUserArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class FindManyUserArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class FindManyUserArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class FindManyUserArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    
+    
+
+class SessionIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive1']
+
+
+class SessionIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive2']
+
+
+class SessionIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive3']
+
+
+class SessionIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive4']
+
+
+class SessionIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class SessionArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class SessionArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class SessionArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class SessionArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class SessionArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManySessionArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class FindManySessionArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class FindManySessionArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class FindManySessionArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class FindManySessionArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    
+    
+
+class AccountIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive1']
+
+
+class AccountIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive2']
+
+
+class AccountIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive3']
+
+
+class AccountIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive4']
+
+
+class AccountIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class AccountArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class AccountArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class AccountArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class AccountArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class AccountArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyAccountArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class FindManyAccountArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class FindManyAccountArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class FindManyAccountArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class FindManyAccountArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    
+    
+
+class VerificationIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class VerificationIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class VerificationIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class VerificationIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class VerificationIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class VerificationArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class VerificationArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class VerificationArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class VerificationArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class VerificationArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyVerificationArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class FindManyVerificationArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class FindManyVerificationArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class FindManyVerificationArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class FindManyVerificationArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    
+    
+
+class SearchIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive1']
+    articles: Union[bool, 'FindManyArticleArgsFromTopicSnapshotRecursive1']
+    insights: Union[bool, 'FindManyInsightArgsFromTopicSnapshotRecursive1']
+
+
+class SearchIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive2']
+    articles: Union[bool, 'FindManyArticleArgsFromTopicSnapshotRecursive2']
+    insights: Union[bool, 'FindManyInsightArgsFromTopicSnapshotRecursive2']
+
+
+class SearchIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive3']
+    articles: Union[bool, 'FindManyArticleArgsFromTopicSnapshotRecursive3']
+    insights: Union[bool, 'FindManyInsightArgsFromTopicSnapshotRecursive3']
+
+
+class SearchIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive4']
+    articles: Union[bool, 'FindManyArticleArgsFromTopicSnapshotRecursive4']
+    insights: Union[bool, 'FindManyInsightArgsFromTopicSnapshotRecursive4']
+
+
+class SearchIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class SearchArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class SearchArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class SearchArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class SearchArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class SearchArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManySearchArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class FindManySearchArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class FindManySearchArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class FindManySearchArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class FindManySearchArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    
+    
+
+class ArticleIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    search: Union[bool, 'SearchArgsFromTopicSnapshotRecursive1']
+
+
+class ArticleIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    search: Union[bool, 'SearchArgsFromTopicSnapshotRecursive2']
+
+
+class ArticleIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    search: Union[bool, 'SearchArgsFromTopicSnapshotRecursive3']
+
+
+class ArticleIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    search: Union[bool, 'SearchArgsFromTopicSnapshotRecursive4']
+
+
+class ArticleIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class ArticleArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class ArticleArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class ArticleArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class ArticleArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class ArticleArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyArticleArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class FindManyArticleArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class FindManyArticleArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class FindManyArticleArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class FindManyArticleArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    
+    
+
+class InsightIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    search: Union[bool, 'SearchArgsFromTopicSnapshotRecursive1']
+
+
+class InsightIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    search: Union[bool, 'SearchArgsFromTopicSnapshotRecursive2']
+
+
+class InsightIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    search: Union[bool, 'SearchArgsFromTopicSnapshotRecursive3']
+
+
+class InsightIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    search: Union[bool, 'SearchArgsFromTopicSnapshotRecursive4']
+
+
+class InsightIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class InsightArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class InsightArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class InsightArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class InsightArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class InsightArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyInsightArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class FindManyInsightArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class FindManyInsightArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class FindManyInsightArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class FindManyInsightArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    cluster: Union[bool, 'ClaimClusterArgsFromTopicSnapshotRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromTopicSnapshotRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSnapshotRecursive1']
+
+
+class ClaimIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    cluster: Union[bool, 'ClaimClusterArgsFromTopicSnapshotRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromTopicSnapshotRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSnapshotRecursive2']
+
+
+class ClaimIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    cluster: Union[bool, 'ClaimClusterArgsFromTopicSnapshotRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromTopicSnapshotRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSnapshotRecursive3']
+
+
+class ClaimIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    cluster: Union[bool, 'ClaimClusterArgsFromTopicSnapshotRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromTopicSnapshotRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSnapshotRecursive4']
+
+
+class ClaimIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class ClaimArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyClaimArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    claim: Union[bool, 'ClaimArgsFromTopicSnapshotRecursive1']
+
+
+class EvidenceIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    claim: Union[bool, 'ClaimArgsFromTopicSnapshotRecursive2']
+
+
+class EvidenceIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    claim: Union[bool, 'ClaimArgsFromTopicSnapshotRecursive3']
+
+
+class EvidenceIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    claim: Union[bool, 'ClaimArgsFromTopicSnapshotRecursive4']
+
+
+class EvidenceIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class EvidenceArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyEvidenceArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromTopicSnapshotRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSnapshotRecursive1']
+
+
+class EventIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromTopicSnapshotRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSnapshotRecursive2']
+
+
+class EventIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromTopicSnapshotRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSnapshotRecursive3']
+
+
+class EventIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromTopicSnapshotRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSnapshotRecursive4']
+
+
+class EventIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class EventArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyEventArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    event: Union[bool, 'EventArgsFromTopicSnapshotRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromTopicSnapshotRecursive1']
+
+
+class ClaimClusterIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    event: Union[bool, 'EventArgsFromTopicSnapshotRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromTopicSnapshotRecursive2']
+
+
+class ClaimClusterIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    event: Union[bool, 'EventArgsFromTopicSnapshotRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromTopicSnapshotRecursive3']
+
+
+class ClaimClusterIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    event: Union[bool, 'EventArgsFromTopicSnapshotRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromTopicSnapshotRecursive4']
+
+
+class ClaimClusterIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class ClaimClusterArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyClaimClusterArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
+    
+
+class LLMCacheIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class LLMCacheIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class LLMCacheIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class LLMCacheIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class LLMCacheIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class LLMCacheArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyLLMCacheArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class LLMUsageIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class LLMUsageIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class LLMUsageIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class LLMUsageIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class LLMUsageArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyLLMUsageArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class DemoSnapshotIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class DemoSnapshotIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class DemoSnapshotIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class DemoSnapshotIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class DemoSnapshotArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromTopicSnapshotRecursive1']
+
+
+class TopicSubscriptionIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromTopicSnapshotRecursive2']
+
+
+class TopicSubscriptionIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromTopicSnapshotRecursive3']
+
+
+class TopicSubscriptionIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    user: Union[bool, 'UserArgsFromTopicSnapshotRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromTopicSnapshotRecursive4']
+
+
+class TopicSubscriptionIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class TopicSubscriptionArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromTopicSnapshotRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSnapshotRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSnapshotRecursive1']
+
+
+class TopicSnapshotIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromTopicSnapshotRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSnapshotRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSnapshotRecursive2']
+
+
+class TopicSnapshotIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromTopicSnapshotRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSnapshotRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSnapshotRecursive3']
+
+
+class TopicSnapshotIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromTopicSnapshotRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromTopicSnapshotRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromTopicSnapshotRecursive4']
+
+
+class TopicSnapshotIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class TopicSnapshotArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSnapshotRecursive1']
+    event: Union[bool, 'EventArgsFromTopicSnapshotRecursive1']
+
+
+class SnapshotEventIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSnapshotRecursive2']
+    event: Union[bool, 'EventArgsFromTopicSnapshotRecursive2']
+
+
+class SnapshotEventIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSnapshotRecursive3']
+    event: Union[bool, 'EventArgsFromTopicSnapshotRecursive3']
+
+
+class SnapshotEventIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSnapshotRecursive4']
+    event: Union[bool, 'EventArgsFromTopicSnapshotRecursive4']
+
+
+class SnapshotEventIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class SnapshotEventArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManySnapshotEventArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSnapshotRecursive1']
+    claim: Union[bool, 'ClaimArgsFromTopicSnapshotRecursive1']
+
+
+class SnapshotClaimIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSnapshotRecursive2']
+    claim: Union[bool, 'ClaimArgsFromTopicSnapshotRecursive2']
+
+
+class SnapshotClaimIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSnapshotRecursive3']
+    claim: Union[bool, 'ClaimArgsFromTopicSnapshotRecursive3']
+
+
+class SnapshotClaimIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromTopicSnapshotRecursive4']
+    claim: Union[bool, 'ClaimArgsFromTopicSnapshotRecursive4']
+
+
+class SnapshotClaimIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class SnapshotClaimArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManySnapshotClaimArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    
+    
+
+class ConsensusFactIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class ConsensusFactIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class ConsensusFactIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class ConsensusFactIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class ConsensusFactIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class ConsensusFactArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyConsensusFactArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromTopicSnapshot(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class ContradictionPairIncludeFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class ContradictionPairIncludeFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class ContradictionPairIncludeFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+
+class ContradictionPairIncludeFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Relational arguments for TopicSnapshot"""
+
+    
+
+class ContradictionPairArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    
+    
+
+class FindManyContradictionPairArgsFromTopicSnapshot(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromTopicSnapshotRecursive1(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromTopicSnapshotRecursive2(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromTopicSnapshotRecursive3(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromTopicSnapshotRecursive4(TypedDict, total=False):
+    """Arguments for TopicSnapshot"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
+
+
+FindManyTopicSnapshotArgs = FindManyTopicSnapshotArgsFromTopicSnapshot
+FindFirstTopicSnapshotArgs = FindManyTopicSnapshotArgsFromTopicSnapshot
+
+
+    
+
+class TopicSnapshotWhereInput(TypedDict, total=False):
+    """TopicSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    subscriptionId: Union[_str, 'types.StringFilter']
+    subscription: 'TopicSubscriptionRelationFilter'
+    topic: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    articleCount: Union[_int, 'types.IntFilter']
+    claimCount: Union[_int, 'types.IntFilter']
+    eventCount: Union[_int, 'types.IntFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
+    polarizationIndex: Union[None, _float, 'types.FloatFilter']
+    biasDistribution: Union[None, 'fields.Json', 'types.JsonFilter']
+    sourceDistribution: Union[None, 'fields.Json', 'types.JsonFilter']
+    topEvents: Union[None, 'fields.Json', 'types.JsonFilter']
+    topClaims: Union[None, 'fields.Json', 'types.JsonFilter']
+    driftMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
+    summary: Union[None, _str, 'types.StringFilter']
+    snapshotEvents: 'SnapshotEventListRelationFilter'
+    snapshotClaims: 'SnapshotClaimListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['TopicSnapshotWhereInputRecursive1', List['TopicSnapshotWhereInputRecursive1']]
+    # but this causes mypy to hang :/
+    AND: List['TopicSnapshotWhereInputRecursive1']
+    OR: List['TopicSnapshotWhereInputRecursive1']
+    NOT: List['TopicSnapshotWhereInputRecursive1']
+
+
+class TopicSnapshotWhereInputRecursive1(TypedDict, total=False):
+    """TopicSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    subscriptionId: Union[_str, 'types.StringFilter']
+    subscription: 'TopicSubscriptionRelationFilter'
+    topic: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    articleCount: Union[_int, 'types.IntFilter']
+    claimCount: Union[_int, 'types.IntFilter']
+    eventCount: Union[_int, 'types.IntFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
+    polarizationIndex: Union[None, _float, 'types.FloatFilter']
+    biasDistribution: Union[None, 'fields.Json', 'types.JsonFilter']
+    sourceDistribution: Union[None, 'fields.Json', 'types.JsonFilter']
+    topEvents: Union[None, 'fields.Json', 'types.JsonFilter']
+    topClaims: Union[None, 'fields.Json', 'types.JsonFilter']
+    driftMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
+    summary: Union[None, _str, 'types.StringFilter']
+    snapshotEvents: 'SnapshotEventListRelationFilter'
+    snapshotClaims: 'SnapshotClaimListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['TopicSnapshotWhereInputRecursive2', List['TopicSnapshotWhereInputRecursive2']]
+    # but this causes mypy to hang :/
+    AND: List['TopicSnapshotWhereInputRecursive2']
+    OR: List['TopicSnapshotWhereInputRecursive2']
+    NOT: List['TopicSnapshotWhereInputRecursive2']
+
+
+class TopicSnapshotWhereInputRecursive2(TypedDict, total=False):
+    """TopicSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    subscriptionId: Union[_str, 'types.StringFilter']
+    subscription: 'TopicSubscriptionRelationFilter'
+    topic: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    articleCount: Union[_int, 'types.IntFilter']
+    claimCount: Union[_int, 'types.IntFilter']
+    eventCount: Union[_int, 'types.IntFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
+    polarizationIndex: Union[None, _float, 'types.FloatFilter']
+    biasDistribution: Union[None, 'fields.Json', 'types.JsonFilter']
+    sourceDistribution: Union[None, 'fields.Json', 'types.JsonFilter']
+    topEvents: Union[None, 'fields.Json', 'types.JsonFilter']
+    topClaims: Union[None, 'fields.Json', 'types.JsonFilter']
+    driftMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
+    summary: Union[None, _str, 'types.StringFilter']
+    snapshotEvents: 'SnapshotEventListRelationFilter'
+    snapshotClaims: 'SnapshotClaimListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['TopicSnapshotWhereInputRecursive3', List['TopicSnapshotWhereInputRecursive3']]
+    # but this causes mypy to hang :/
+    AND: List['TopicSnapshotWhereInputRecursive3']
+    OR: List['TopicSnapshotWhereInputRecursive3']
+    NOT: List['TopicSnapshotWhereInputRecursive3']
+
+
+class TopicSnapshotWhereInputRecursive3(TypedDict, total=False):
+    """TopicSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    subscriptionId: Union[_str, 'types.StringFilter']
+    subscription: 'TopicSubscriptionRelationFilter'
+    topic: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    articleCount: Union[_int, 'types.IntFilter']
+    claimCount: Union[_int, 'types.IntFilter']
+    eventCount: Union[_int, 'types.IntFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
+    polarizationIndex: Union[None, _float, 'types.FloatFilter']
+    biasDistribution: Union[None, 'fields.Json', 'types.JsonFilter']
+    sourceDistribution: Union[None, 'fields.Json', 'types.JsonFilter']
+    topEvents: Union[None, 'fields.Json', 'types.JsonFilter']
+    topClaims: Union[None, 'fields.Json', 'types.JsonFilter']
+    driftMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
+    summary: Union[None, _str, 'types.StringFilter']
+    snapshotEvents: 'SnapshotEventListRelationFilter'
+    snapshotClaims: 'SnapshotClaimListRelationFilter'
+
+    # should be noted that AND and NOT should be Union['TopicSnapshotWhereInputRecursive4', List['TopicSnapshotWhereInputRecursive4']]
+    # but this causes mypy to hang :/
+    AND: List['TopicSnapshotWhereInputRecursive4']
+    OR: List['TopicSnapshotWhereInputRecursive4']
+    NOT: List['TopicSnapshotWhereInputRecursive4']
+
+
+class TopicSnapshotWhereInputRecursive4(TypedDict, total=False):
+    """TopicSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    subscriptionId: Union[_str, 'types.StringFilter']
+    subscription: 'TopicSubscriptionRelationFilter'
+    topic: Union[_str, 'types.StringFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    articleCount: Union[_int, 'types.IntFilter']
+    claimCount: Union[_int, 'types.IntFilter']
+    eventCount: Union[_int, 'types.IntFilter']
+    consensusScore: Union[None, _float, 'types.FloatFilter']
+    polarizationIndex: Union[None, _float, 'types.FloatFilter']
+    biasDistribution: Union[None, 'fields.Json', 'types.JsonFilter']
+    sourceDistribution: Union[None, 'fields.Json', 'types.JsonFilter']
+    topEvents: Union[None, 'fields.Json', 'types.JsonFilter']
+    topClaims: Union[None, 'fields.Json', 'types.JsonFilter']
+    driftMetrics: Union[None, 'fields.Json', 'types.JsonFilter']
+    summary: Union[None, _str, 'types.StringFilter']
+    snapshotEvents: 'SnapshotEventListRelationFilter'
+    snapshotClaims: 'SnapshotClaimListRelationFilter'
+
+
+
+# aggregate TopicSnapshot types
+
+
+    
+
+class TopicSnapshotScalarWhereWithAggregatesInput(TypedDict, total=False):
+    """TopicSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    subscriptionId: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    articleCount: Union[_int, 'types.IntWithAggregatesFilter']
+    claimCount: Union[_int, 'types.IntWithAggregatesFilter']
+    eventCount: Union[_int, 'types.IntWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    polarizationIndex: Union[_float, 'types.FloatWithAggregatesFilter']
+    biasDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    sourceDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    topEvents: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    topClaims: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    driftMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    summary: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['TopicSnapshotScalarWhereWithAggregatesInputRecursive1']
+    OR: List['TopicSnapshotScalarWhereWithAggregatesInputRecursive1']
+    NOT: List['TopicSnapshotScalarWhereWithAggregatesInputRecursive1']
+
+
+class TopicSnapshotScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
+    """TopicSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    subscriptionId: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    articleCount: Union[_int, 'types.IntWithAggregatesFilter']
+    claimCount: Union[_int, 'types.IntWithAggregatesFilter']
+    eventCount: Union[_int, 'types.IntWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    polarizationIndex: Union[_float, 'types.FloatWithAggregatesFilter']
+    biasDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    sourceDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    topEvents: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    topClaims: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    driftMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    summary: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['TopicSnapshotScalarWhereWithAggregatesInputRecursive2']
+    OR: List['TopicSnapshotScalarWhereWithAggregatesInputRecursive2']
+    NOT: List['TopicSnapshotScalarWhereWithAggregatesInputRecursive2']
+
+
+class TopicSnapshotScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
+    """TopicSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    subscriptionId: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    articleCount: Union[_int, 'types.IntWithAggregatesFilter']
+    claimCount: Union[_int, 'types.IntWithAggregatesFilter']
+    eventCount: Union[_int, 'types.IntWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    polarizationIndex: Union[_float, 'types.FloatWithAggregatesFilter']
+    biasDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    sourceDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    topEvents: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    topClaims: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    driftMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    summary: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['TopicSnapshotScalarWhereWithAggregatesInputRecursive3']
+    OR: List['TopicSnapshotScalarWhereWithAggregatesInputRecursive3']
+    NOT: List['TopicSnapshotScalarWhereWithAggregatesInputRecursive3']
+
+
+class TopicSnapshotScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
+    """TopicSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    subscriptionId: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    articleCount: Union[_int, 'types.IntWithAggregatesFilter']
+    claimCount: Union[_int, 'types.IntWithAggregatesFilter']
+    eventCount: Union[_int, 'types.IntWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    polarizationIndex: Union[_float, 'types.FloatWithAggregatesFilter']
+    biasDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    sourceDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    topEvents: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    topClaims: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    driftMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    summary: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['TopicSnapshotScalarWhereWithAggregatesInputRecursive4']
+    OR: List['TopicSnapshotScalarWhereWithAggregatesInputRecursive4']
+    NOT: List['TopicSnapshotScalarWhereWithAggregatesInputRecursive4']
+
+
+class TopicSnapshotScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
+    """TopicSnapshot arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    subscriptionId: Union[_str, 'types.StringWithAggregatesFilter']
+    topic: Union[_str, 'types.StringWithAggregatesFilter']
+    createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    articleCount: Union[_int, 'types.IntWithAggregatesFilter']
+    claimCount: Union[_int, 'types.IntWithAggregatesFilter']
+    eventCount: Union[_int, 'types.IntWithAggregatesFilter']
+    consensusScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    polarizationIndex: Union[_float, 'types.FloatWithAggregatesFilter']
+    biasDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    sourceDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    topEvents: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    topClaims: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    driftMetrics: Union['fields.Json', 'types.JsonWithAggregatesFilter']
+    summary: Union[_str, 'types.StringWithAggregatesFilter']
+
+
+
+class TopicSnapshotGroupByOutput(TypedDict, total=False):
+    id: _str
+    subscriptionId: _str
+    topic: _str
+    createdAt: datetime.datetime
+    articleCount: _int
+    claimCount: _int
+    eventCount: _int
+    consensusScore: _float
+    polarizationIndex: _float
+    biasDistribution: 'fields.Json'
+    sourceDistribution: 'fields.Json'
+    topEvents: 'fields.Json'
+    topClaims: 'fields.Json'
+    driftMetrics: 'fields.Json'
+    summary: _str
+    _sum: 'TopicSnapshotSumAggregateOutput'
+    _avg: 'TopicSnapshotAvgAggregateOutput'
+    _min: 'TopicSnapshotMinAggregateOutput'
+    _max: 'TopicSnapshotMaxAggregateOutput'
+    _count: 'TopicSnapshotCountAggregateOutput'
+
+
+class TopicSnapshotAvgAggregateOutput(TypedDict, total=False):
+    """TopicSnapshot output for aggregating averages"""
+    articleCount: float
+    claimCount: float
+    eventCount: float
+    consensusScore: float
+    polarizationIndex: float
+
+
+class TopicSnapshotSumAggregateOutput(TypedDict, total=False):
+    """TopicSnapshot output for aggregating sums"""
+    articleCount: _int
+    claimCount: _int
+    eventCount: _int
+    consensusScore: _float
+    polarizationIndex: _float
+
+
+class TopicSnapshotScalarAggregateOutput(TypedDict, total=False):
+    """TopicSnapshot output including scalar fields"""
+    id: _str
+    subscriptionId: _str
+    topic: _str
+    createdAt: datetime.datetime
+    articleCount: _int
+    claimCount: _int
+    eventCount: _int
+    consensusScore: _float
+    polarizationIndex: _float
+    biasDistribution: 'fields.Json'
+    sourceDistribution: 'fields.Json'
+    topEvents: 'fields.Json'
+    topClaims: 'fields.Json'
+    driftMetrics: 'fields.Json'
+    summary: _str
+
+
+TopicSnapshotMinAggregateOutput = TopicSnapshotScalarAggregateOutput
+TopicSnapshotMaxAggregateOutput = TopicSnapshotScalarAggregateOutput
+
+
+class TopicSnapshotMaxAggregateInput(TypedDict, total=False):
+    """TopicSnapshot input for aggregating by max"""
+    id: bool
+    subscriptionId: bool
+    topic: bool
+    createdAt: bool
+    articleCount: bool
+    claimCount: bool
+    eventCount: bool
+    consensusScore: bool
+    polarizationIndex: bool
+    biasDistribution: bool
+    sourceDistribution: bool
+    topEvents: bool
+    topClaims: bool
+    driftMetrics: bool
+    summary: bool
+
+
+class TopicSnapshotMinAggregateInput(TypedDict, total=False):
+    """TopicSnapshot input for aggregating by min"""
+    id: bool
+    subscriptionId: bool
+    topic: bool
+    createdAt: bool
+    articleCount: bool
+    claimCount: bool
+    eventCount: bool
+    consensusScore: bool
+    polarizationIndex: bool
+    biasDistribution: bool
+    sourceDistribution: bool
+    topEvents: bool
+    topClaims: bool
+    driftMetrics: bool
+    summary: bool
+
+
+class TopicSnapshotNumberAggregateInput(TypedDict, total=False):
+    """TopicSnapshot input for aggregating numbers"""
+    articleCount: bool
+    claimCount: bool
+    eventCount: bool
+    consensusScore: bool
+    polarizationIndex: bool
+
+
+TopicSnapshotAvgAggregateInput = TopicSnapshotNumberAggregateInput
+TopicSnapshotSumAggregateInput = TopicSnapshotNumberAggregateInput
+
+
+TopicSnapshotCountAggregateInput = TypedDict(
+    'TopicSnapshotCountAggregateInput',
+    {
+        'id': bool,
+        'subscriptionId': bool,
+        'topic': bool,
+        'createdAt': bool,
+        'articleCount': bool,
+        'claimCount': bool,
+        'eventCount': bool,
+        'consensusScore': bool,
+        'polarizationIndex': bool,
+        'biasDistribution': bool,
+        'sourceDistribution': bool,
+        'topEvents': bool,
+        'topClaims': bool,
+        'driftMetrics': bool,
+        'summary': bool,
+        '_all': bool,
+    },
+    total=False,
+)
+
+TopicSnapshotCountAggregateOutput = TypedDict(
+    'TopicSnapshotCountAggregateOutput',
+    {
+        'id': int,
+        'subscriptionId': int,
+        'topic': int,
+        'createdAt': int,
+        'articleCount': int,
+        'claimCount': int,
+        'eventCount': int,
+        'consensusScore': int,
+        'polarizationIndex': int,
+        'biasDistribution': int,
+        'sourceDistribution': int,
+        'topEvents': int,
+        'topClaims': int,
+        'driftMetrics': int,
+        'summary': int,
+        '_all': int,
+    },
+    total=False,
+)
+
+
+TopicSnapshotKeys = Literal[
+    'id',
+    'subscriptionId',
+    'subscription',
+    'topic',
+    'createdAt',
+    'articleCount',
+    'claimCount',
+    'eventCount',
+    'consensusScore',
+    'polarizationIndex',
+    'biasDistribution',
+    'sourceDistribution',
+    'topEvents',
+    'topClaims',
+    'driftMetrics',
+    'summary',
+    'snapshotEvents',
+    'snapshotClaims',
+]
+TopicSnapshotScalarFieldKeys = Literal[
+    'id',
+    'subscriptionId',
+    'topic',
+    'createdAt',
+    'articleCount',
+    'claimCount',
+    'eventCount',
+    'consensusScore',
+    'polarizationIndex',
+    'biasDistribution',
+    'sourceDistribution',
+    'topEvents',
+    'topClaims',
+    'driftMetrics',
+    'summary',
+]
+TopicSnapshotScalarFieldKeysT = TypeVar('TopicSnapshotScalarFieldKeysT', bound=TopicSnapshotScalarFieldKeys)
+
+TopicSnapshotRelationalFieldKeys = Literal[
+        'subscription',
+        'snapshotEvents',
+        'snapshotClaims',
+    ]
+
+# SnapshotEvent types
+
+class SnapshotEventOptionalCreateInput(TypedDict, total=False):
+    """Optional arguments to the SnapshotEvent create method"""
+    id: _str
+    snapshotId: _str
+    snapshot: 'TopicSnapshotCreateNestedWithoutRelationsInput'
+    eventId: _str
+    event: 'EventCreateNestedWithoutRelationsInput'
+    importance: Optional[_float]
+
+
+class SnapshotEventCreateInput(SnapshotEventOptionalCreateInput):
+    """Required arguments to the SnapshotEvent create method"""
+    eventTitle: _str
+
+
+# TODO: remove this in favour of without explicit relations
+# e.g. PostCreateWithoutAuthorInput
+
+class SnapshotEventOptionalCreateWithoutRelationsInput(TypedDict, total=False):
+    """Optional arguments to the SnapshotEvent create method, without relations"""
+    id: _str
+    snapshotId: _str
+    eventId: _str
+    importance: Optional[_float]
+
+
+class SnapshotEventCreateWithoutRelationsInput(SnapshotEventOptionalCreateWithoutRelationsInput):
+    """Required arguments to the SnapshotEvent create method, without relations"""
+    eventTitle: _str
+
+class SnapshotEventConnectOrCreateWithoutRelationsInput(TypedDict):
+    create: 'SnapshotEventCreateWithoutRelationsInput'
+    where: 'SnapshotEventWhereUniqueInput'
+
+class SnapshotEventCreateNestedWithoutRelationsInput(TypedDict, total=False):
+    create: 'SnapshotEventCreateWithoutRelationsInput'
+    connect: 'SnapshotEventWhereUniqueInput'
+    connect_or_create: 'SnapshotEventConnectOrCreateWithoutRelationsInput'
+
+
+class SnapshotEventCreateManyNestedWithoutRelationsInput(TypedDict, total=False):
+    create: Union['SnapshotEventCreateWithoutRelationsInput', List['SnapshotEventCreateWithoutRelationsInput']]
+    connect: Union['SnapshotEventWhereUniqueInput', List['SnapshotEventWhereUniqueInput']]
+    connect_or_create: Union['SnapshotEventConnectOrCreateWithoutRelationsInput', List['SnapshotEventConnectOrCreateWithoutRelationsInput']]
+
+_SnapshotEventWhereUnique_id_Input = TypedDict(
+    '_SnapshotEventWhereUnique_id_Input',
+    {
+        'id': '_str',
+    },
+    total=True
+)
+
+SnapshotEventWhereUniqueInput = _SnapshotEventWhereUnique_id_Input
+
+
+class SnapshotEventUpdateInput(TypedDict, total=False):
+    """Optional arguments for updating a record"""
+    id: _str
+    snapshot: 'TopicSnapshotUpdateOneWithoutRelationsInput'
+    event: 'EventUpdateOneWithoutRelationsInput'
+    importance: Optional[Union[AtomicFloatInput, _float]]
+    eventTitle: _str
+
+
+class SnapshotEventUpdateManyMutationInput(TypedDict, total=False):
+    """Arguments for updating many records"""
+    id: _str
+    importance: Optional[Union[AtomicFloatInput, _float]]
+    eventTitle: _str
+
+
+class SnapshotEventUpdateManyWithoutRelationsInput(TypedDict, total=False):
+    create: List['SnapshotEventCreateWithoutRelationsInput']
+    connect: List['SnapshotEventWhereUniqueInput']
+    connect_or_create: List['SnapshotEventConnectOrCreateWithoutRelationsInput']
+    set: List['SnapshotEventWhereUniqueInput']
+    disconnect: List['SnapshotEventWhereUniqueInput']
+    delete: List['SnapshotEventWhereUniqueInput']
+
+    # TODO
+    # update: List['SnapshotEventUpdateWithWhereUniqueWithoutRelationsInput']
+    # updateMany: List['SnapshotEventUpdateManyWithWhereUniqueWithoutRelationsInput']
+    # deleteMany: List['SnapshotEventScalarWhereInput']
+    # upsert: List['SnapshotEventUpserteWithWhereUniqueWithoutRelationsInput']
+
+
+class SnapshotEventUpdateOneWithoutRelationsInput(TypedDict, total=False):
+    create: 'SnapshotEventCreateWithoutRelationsInput'
+    connect: 'SnapshotEventWhereUniqueInput'
+    connect_or_create: 'SnapshotEventConnectOrCreateWithoutRelationsInput'
+    disconnect: bool
+    delete: bool
+
+    # TODO
+    # update: 'SnapshotEventUpdateInput'
+    # upsert: 'SnapshotEventUpsertWithoutRelationsInput'
+
+
+class SnapshotEventUpsertInput(TypedDict):
+    create: 'SnapshotEventCreateInput'
+    update: 'SnapshotEventUpdateInput'  # pyright: ignore[reportIncompatibleMethodOverride]
+
+
+_SnapshotEvent_id_OrderByInput = TypedDict(
+    '_SnapshotEvent_id_OrderByInput',
+    {
+        'id': 'SortOrder',
+    },
+    total=True
+)
+
+_SnapshotEvent_snapshotId_OrderByInput = TypedDict(
+    '_SnapshotEvent_snapshotId_OrderByInput',
+    {
+        'snapshotId': 'SortOrder',
+    },
+    total=True
+)
+
+_SnapshotEvent_eventId_OrderByInput = TypedDict(
+    '_SnapshotEvent_eventId_OrderByInput',
+    {
+        'eventId': 'SortOrder',
+    },
+    total=True
+)
+
+_SnapshotEvent_importance_OrderByInput = TypedDict(
+    '_SnapshotEvent_importance_OrderByInput',
+    {
+        'importance': 'SortOrder',
+    },
+    total=True
+)
+
+_SnapshotEvent_eventTitle_OrderByInput = TypedDict(
+    '_SnapshotEvent_eventTitle_OrderByInput',
+    {
+        'eventTitle': 'SortOrder',
+    },
+    total=True
+)
+
+_SnapshotEvent_RelevanceInner = TypedDict(
+    '_SnapshotEvent_RelevanceInner',
+    {
+        'fields': 'List[SnapshotEventScalarFieldKeys]',
+        'search': 'str',
+        'sort': 'SortOrder',
+    },
+    total=True
+)
+
+_SnapshotEvent_RelevanceOrderByInput = TypedDict(
+    '_SnapshotEvent_RelevanceOrderByInput',
+    {
+        '_relevance': '_SnapshotEvent_RelevanceInner',
+    },
+    total=True
+)
+
+SnapshotEventOrderByInput = Union[
+    '_SnapshotEvent_id_OrderByInput',
+    '_SnapshotEvent_snapshotId_OrderByInput',
+    '_SnapshotEvent_eventId_OrderByInput',
+    '_SnapshotEvent_importance_OrderByInput',
+    '_SnapshotEvent_eventTitle_OrderByInput',
+    '_SnapshotEvent_RelevanceOrderByInput',
+]
+
+
+
+# recursive SnapshotEvent types
+# TODO: cleanup these types
+
+
+# Dict[str, Any] is a mypy limitation
+# see https://github.com/RobertCraigie/prisma-client-py/issues/45
+# switch to pyright for improved types, see https://prisma-client-py.readthedocs.io/en/stable/reference/limitations/
+
+SnapshotEventRelationFilter = TypedDict(
+    'SnapshotEventRelationFilter',
+    {
+        'is': 'Dict[str, Any]',
+        'is_not': 'Dict[str, Any]',
+    },
+    total=False,
+)
+
+
+class SnapshotEventListRelationFilter(TypedDict, total=False):
+    some: 'Dict[str, Any]'
+    none: 'Dict[str, Any]'
+    every: 'Dict[str, Any]'
+
+
+class SnapshotEventInclude(TypedDict, total=False):
+    """SnapshotEvent relational arguments"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotEvent']
+    event: Union[bool, 'EventArgsFromSnapshotEvent']
+
+
+    
+
+class UserIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    sessions: Union[bool, 'FindManySessionArgsFromSnapshotEventRecursive1']
+    accounts: Union[bool, 'FindManyAccountArgsFromSnapshotEventRecursive1']
+    searches: Union[bool, 'FindManySearchArgsFromSnapshotEventRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSnapshotEventRecursive1']
+
+
+class UserIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    sessions: Union[bool, 'FindManySessionArgsFromSnapshotEventRecursive2']
+    accounts: Union[bool, 'FindManyAccountArgsFromSnapshotEventRecursive2']
+    searches: Union[bool, 'FindManySearchArgsFromSnapshotEventRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSnapshotEventRecursive2']
+
+
+class UserIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    sessions: Union[bool, 'FindManySessionArgsFromSnapshotEventRecursive3']
+    accounts: Union[bool, 'FindManyAccountArgsFromSnapshotEventRecursive3']
+    searches: Union[bool, 'FindManySearchArgsFromSnapshotEventRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSnapshotEventRecursive3']
+
+
+class UserIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    sessions: Union[bool, 'FindManySessionArgsFromSnapshotEventRecursive4']
+    accounts: Union[bool, 'FindManyAccountArgsFromSnapshotEventRecursive4']
+    searches: Union[bool, 'FindManySearchArgsFromSnapshotEventRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSnapshotEventRecursive4']
+
+
+class UserIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class UserArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class UserArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class UserArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class UserArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class UserArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyUserArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class FindManyUserArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class FindManyUserArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class FindManyUserArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class FindManyUserArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    
+    
+
+class SessionIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive1']
+
+
+class SessionIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive2']
+
+
+class SessionIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive3']
+
+
+class SessionIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive4']
+
+
+class SessionIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class SessionArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class SessionArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class SessionArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class SessionArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class SessionArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManySessionArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class FindManySessionArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class FindManySessionArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class FindManySessionArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class FindManySessionArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    
+    
+
+class AccountIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive1']
+
+
+class AccountIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive2']
+
+
+class AccountIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive3']
+
+
+class AccountIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive4']
+
+
+class AccountIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class AccountArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class AccountArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class AccountArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class AccountArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class AccountArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyAccountArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class FindManyAccountArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class FindManyAccountArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class FindManyAccountArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class FindManyAccountArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    
+    
+
+class VerificationIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class VerificationIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class VerificationIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class VerificationIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class VerificationIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class VerificationArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class VerificationArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class VerificationArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class VerificationArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class VerificationArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyVerificationArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class FindManyVerificationArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class FindManyVerificationArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class FindManyVerificationArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class FindManyVerificationArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    
+    
+
+class SearchIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive1']
+    articles: Union[bool, 'FindManyArticleArgsFromSnapshotEventRecursive1']
+    insights: Union[bool, 'FindManyInsightArgsFromSnapshotEventRecursive1']
+
+
+class SearchIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive2']
+    articles: Union[bool, 'FindManyArticleArgsFromSnapshotEventRecursive2']
+    insights: Union[bool, 'FindManyInsightArgsFromSnapshotEventRecursive2']
+
+
+class SearchIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive3']
+    articles: Union[bool, 'FindManyArticleArgsFromSnapshotEventRecursive3']
+    insights: Union[bool, 'FindManyInsightArgsFromSnapshotEventRecursive3']
+
+
+class SearchIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive4']
+    articles: Union[bool, 'FindManyArticleArgsFromSnapshotEventRecursive4']
+    insights: Union[bool, 'FindManyInsightArgsFromSnapshotEventRecursive4']
+
+
+class SearchIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class SearchArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class SearchArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class SearchArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class SearchArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class SearchArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManySearchArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class FindManySearchArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class FindManySearchArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class FindManySearchArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class FindManySearchArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    
+    
+
+class ArticleIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    search: Union[bool, 'SearchArgsFromSnapshotEventRecursive1']
+
+
+class ArticleIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    search: Union[bool, 'SearchArgsFromSnapshotEventRecursive2']
+
+
+class ArticleIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    search: Union[bool, 'SearchArgsFromSnapshotEventRecursive3']
+
+
+class ArticleIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    search: Union[bool, 'SearchArgsFromSnapshotEventRecursive4']
+
+
+class ArticleIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class ArticleArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class ArticleArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class ArticleArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class ArticleArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class ArticleArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyArticleArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class FindManyArticleArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class FindManyArticleArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class FindManyArticleArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class FindManyArticleArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    
+    
+
+class InsightIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    search: Union[bool, 'SearchArgsFromSnapshotEventRecursive1']
+
+
+class InsightIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    search: Union[bool, 'SearchArgsFromSnapshotEventRecursive2']
+
+
+class InsightIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    search: Union[bool, 'SearchArgsFromSnapshotEventRecursive3']
+
+
+class InsightIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    search: Union[bool, 'SearchArgsFromSnapshotEventRecursive4']
+
+
+class InsightIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class InsightArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class InsightArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class InsightArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class InsightArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class InsightArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyInsightArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class FindManyInsightArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class FindManyInsightArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class FindManyInsightArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class FindManyInsightArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSnapshotEventRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSnapshotEventRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotEventRecursive1']
+
+
+class ClaimIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSnapshotEventRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSnapshotEventRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotEventRecursive2']
+
+
+class ClaimIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSnapshotEventRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSnapshotEventRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotEventRecursive3']
+
+
+class ClaimIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSnapshotEventRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSnapshotEventRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotEventRecursive4']
+
+
+class ClaimIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class ClaimArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyClaimArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    claim: Union[bool, 'ClaimArgsFromSnapshotEventRecursive1']
+
+
+class EvidenceIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    claim: Union[bool, 'ClaimArgsFromSnapshotEventRecursive2']
+
+
+class EvidenceIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    claim: Union[bool, 'ClaimArgsFromSnapshotEventRecursive3']
+
+
+class EvidenceIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    claim: Union[bool, 'ClaimArgsFromSnapshotEventRecursive4']
+
+
+class EvidenceIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class EvidenceArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyEvidenceArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSnapshotEventRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotEventRecursive1']
+
+
+class EventIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSnapshotEventRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotEventRecursive2']
+
+
+class EventIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSnapshotEventRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotEventRecursive3']
+
+
+class EventIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSnapshotEventRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotEventRecursive4']
+
+
+class EventIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class EventArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyEventArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    event: Union[bool, 'EventArgsFromSnapshotEventRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromSnapshotEventRecursive1']
+
+
+class ClaimClusterIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    event: Union[bool, 'EventArgsFromSnapshotEventRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromSnapshotEventRecursive2']
+
+
+class ClaimClusterIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    event: Union[bool, 'EventArgsFromSnapshotEventRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromSnapshotEventRecursive3']
+
+
+class ClaimClusterIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    event: Union[bool, 'EventArgsFromSnapshotEventRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromSnapshotEventRecursive4']
+
+
+class ClaimClusterIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class ClaimClusterArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyClaimClusterArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
+    
+
+class LLMCacheIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class LLMCacheIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class LLMCacheIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class LLMCacheIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class LLMCacheIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class LLMCacheArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyLLMCacheArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class LLMUsageIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class LLMUsageIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class LLMUsageIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class LLMUsageIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class LLMUsageArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyLLMUsageArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class DemoSnapshotIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class DemoSnapshotIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class DemoSnapshotIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class DemoSnapshotIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class DemoSnapshotArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSnapshotEventRecursive1']
+
+
+class TopicSubscriptionIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSnapshotEventRecursive2']
+
+
+class TopicSubscriptionIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSnapshotEventRecursive3']
+
+
+class TopicSubscriptionIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    user: Union[bool, 'UserArgsFromSnapshotEventRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSnapshotEventRecursive4']
+
+
+class TopicSubscriptionIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class TopicSubscriptionArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSnapshotEventRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotEventRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotEventRecursive1']
+
+
+class TopicSnapshotIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSnapshotEventRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotEventRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotEventRecursive2']
+
+
+class TopicSnapshotIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSnapshotEventRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotEventRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotEventRecursive3']
+
+
+class TopicSnapshotIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSnapshotEventRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotEventRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotEventRecursive4']
+
+
+class TopicSnapshotIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class TopicSnapshotArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotEventRecursive1']
+    event: Union[bool, 'EventArgsFromSnapshotEventRecursive1']
+
+
+class SnapshotEventIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotEventRecursive2']
+    event: Union[bool, 'EventArgsFromSnapshotEventRecursive2']
+
+
+class SnapshotEventIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotEventRecursive3']
+    event: Union[bool, 'EventArgsFromSnapshotEventRecursive3']
+
+
+class SnapshotEventIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotEventRecursive4']
+    event: Union[bool, 'EventArgsFromSnapshotEventRecursive4']
+
+
+class SnapshotEventIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class SnapshotEventArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManySnapshotEventArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotEventRecursive1']
+    claim: Union[bool, 'ClaimArgsFromSnapshotEventRecursive1']
+
+
+class SnapshotClaimIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotEventRecursive2']
+    claim: Union[bool, 'ClaimArgsFromSnapshotEventRecursive2']
+
+
+class SnapshotClaimIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotEventRecursive3']
+    claim: Union[bool, 'ClaimArgsFromSnapshotEventRecursive3']
+
+
+class SnapshotClaimIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotEventRecursive4']
+    claim: Union[bool, 'ClaimArgsFromSnapshotEventRecursive4']
+
+
+class SnapshotClaimIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class SnapshotClaimArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManySnapshotClaimArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    
+    
+
+class ConsensusFactIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class ConsensusFactIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class ConsensusFactIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class ConsensusFactIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class ConsensusFactIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class ConsensusFactArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyConsensusFactArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromSnapshotEvent(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class ContradictionPairIncludeFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class ContradictionPairIncludeFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class ContradictionPairIncludeFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+
+class ContradictionPairIncludeFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotEvent"""
+
+    
+
+class ContradictionPairArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    
+    
+
+class FindManyContradictionPairArgsFromSnapshotEvent(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromSnapshotEventRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromSnapshotEventRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromSnapshotEventRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromSnapshotEventRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotEvent"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
+
+
+FindManySnapshotEventArgs = FindManySnapshotEventArgsFromSnapshotEvent
+FindFirstSnapshotEventArgs = FindManySnapshotEventArgsFromSnapshotEvent
+
+
+    
+
+class SnapshotEventWhereInput(TypedDict, total=False):
+    """SnapshotEvent arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    snapshotId: Union[_str, 'types.StringFilter']
+    snapshot: 'TopicSnapshotRelationFilter'
+    eventId: Union[_str, 'types.StringFilter']
+    event: 'EventRelationFilter'
+    importance: Union[None, _float, 'types.FloatFilter']
+    eventTitle: Union[_str, 'types.StringFilter']
+
+    # should be noted that AND and NOT should be Union['SnapshotEventWhereInputRecursive1', List['SnapshotEventWhereInputRecursive1']]
+    # but this causes mypy to hang :/
+    AND: List['SnapshotEventWhereInputRecursive1']
+    OR: List['SnapshotEventWhereInputRecursive1']
+    NOT: List['SnapshotEventWhereInputRecursive1']
+
+
+class SnapshotEventWhereInputRecursive1(TypedDict, total=False):
+    """SnapshotEvent arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    snapshotId: Union[_str, 'types.StringFilter']
+    snapshot: 'TopicSnapshotRelationFilter'
+    eventId: Union[_str, 'types.StringFilter']
+    event: 'EventRelationFilter'
+    importance: Union[None, _float, 'types.FloatFilter']
+    eventTitle: Union[_str, 'types.StringFilter']
+
+    # should be noted that AND and NOT should be Union['SnapshotEventWhereInputRecursive2', List['SnapshotEventWhereInputRecursive2']]
+    # but this causes mypy to hang :/
+    AND: List['SnapshotEventWhereInputRecursive2']
+    OR: List['SnapshotEventWhereInputRecursive2']
+    NOT: List['SnapshotEventWhereInputRecursive2']
+
+
+class SnapshotEventWhereInputRecursive2(TypedDict, total=False):
+    """SnapshotEvent arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    snapshotId: Union[_str, 'types.StringFilter']
+    snapshot: 'TopicSnapshotRelationFilter'
+    eventId: Union[_str, 'types.StringFilter']
+    event: 'EventRelationFilter'
+    importance: Union[None, _float, 'types.FloatFilter']
+    eventTitle: Union[_str, 'types.StringFilter']
+
+    # should be noted that AND and NOT should be Union['SnapshotEventWhereInputRecursive3', List['SnapshotEventWhereInputRecursive3']]
+    # but this causes mypy to hang :/
+    AND: List['SnapshotEventWhereInputRecursive3']
+    OR: List['SnapshotEventWhereInputRecursive3']
+    NOT: List['SnapshotEventWhereInputRecursive3']
+
+
+class SnapshotEventWhereInputRecursive3(TypedDict, total=False):
+    """SnapshotEvent arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    snapshotId: Union[_str, 'types.StringFilter']
+    snapshot: 'TopicSnapshotRelationFilter'
+    eventId: Union[_str, 'types.StringFilter']
+    event: 'EventRelationFilter'
+    importance: Union[None, _float, 'types.FloatFilter']
+    eventTitle: Union[_str, 'types.StringFilter']
+
+    # should be noted that AND and NOT should be Union['SnapshotEventWhereInputRecursive4', List['SnapshotEventWhereInputRecursive4']]
+    # but this causes mypy to hang :/
+    AND: List['SnapshotEventWhereInputRecursive4']
+    OR: List['SnapshotEventWhereInputRecursive4']
+    NOT: List['SnapshotEventWhereInputRecursive4']
+
+
+class SnapshotEventWhereInputRecursive4(TypedDict, total=False):
+    """SnapshotEvent arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    snapshotId: Union[_str, 'types.StringFilter']
+    snapshot: 'TopicSnapshotRelationFilter'
+    eventId: Union[_str, 'types.StringFilter']
+    event: 'EventRelationFilter'
+    importance: Union[None, _float, 'types.FloatFilter']
+    eventTitle: Union[_str, 'types.StringFilter']
+
+
+
+# aggregate SnapshotEvent types
+
+
+    
+
+class SnapshotEventScalarWhereWithAggregatesInput(TypedDict, total=False):
+    """SnapshotEvent arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    snapshotId: Union[_str, 'types.StringWithAggregatesFilter']
+    eventId: Union[_str, 'types.StringWithAggregatesFilter']
+    importance: Union[_float, 'types.FloatWithAggregatesFilter']
+    eventTitle: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['SnapshotEventScalarWhereWithAggregatesInputRecursive1']
+    OR: List['SnapshotEventScalarWhereWithAggregatesInputRecursive1']
+    NOT: List['SnapshotEventScalarWhereWithAggregatesInputRecursive1']
+
+
+class SnapshotEventScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
+    """SnapshotEvent arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    snapshotId: Union[_str, 'types.StringWithAggregatesFilter']
+    eventId: Union[_str, 'types.StringWithAggregatesFilter']
+    importance: Union[_float, 'types.FloatWithAggregatesFilter']
+    eventTitle: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['SnapshotEventScalarWhereWithAggregatesInputRecursive2']
+    OR: List['SnapshotEventScalarWhereWithAggregatesInputRecursive2']
+    NOT: List['SnapshotEventScalarWhereWithAggregatesInputRecursive2']
+
+
+class SnapshotEventScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
+    """SnapshotEvent arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    snapshotId: Union[_str, 'types.StringWithAggregatesFilter']
+    eventId: Union[_str, 'types.StringWithAggregatesFilter']
+    importance: Union[_float, 'types.FloatWithAggregatesFilter']
+    eventTitle: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['SnapshotEventScalarWhereWithAggregatesInputRecursive3']
+    OR: List['SnapshotEventScalarWhereWithAggregatesInputRecursive3']
+    NOT: List['SnapshotEventScalarWhereWithAggregatesInputRecursive3']
+
+
+class SnapshotEventScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
+    """SnapshotEvent arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    snapshotId: Union[_str, 'types.StringWithAggregatesFilter']
+    eventId: Union[_str, 'types.StringWithAggregatesFilter']
+    importance: Union[_float, 'types.FloatWithAggregatesFilter']
+    eventTitle: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['SnapshotEventScalarWhereWithAggregatesInputRecursive4']
+    OR: List['SnapshotEventScalarWhereWithAggregatesInputRecursive4']
+    NOT: List['SnapshotEventScalarWhereWithAggregatesInputRecursive4']
+
+
+class SnapshotEventScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
+    """SnapshotEvent arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    snapshotId: Union[_str, 'types.StringWithAggregatesFilter']
+    eventId: Union[_str, 'types.StringWithAggregatesFilter']
+    importance: Union[_float, 'types.FloatWithAggregatesFilter']
+    eventTitle: Union[_str, 'types.StringWithAggregatesFilter']
+
+
+
+class SnapshotEventGroupByOutput(TypedDict, total=False):
+    id: _str
+    snapshotId: _str
+    eventId: _str
+    importance: _float
+    eventTitle: _str
+    _sum: 'SnapshotEventSumAggregateOutput'
+    _avg: 'SnapshotEventAvgAggregateOutput'
+    _min: 'SnapshotEventMinAggregateOutput'
+    _max: 'SnapshotEventMaxAggregateOutput'
+    _count: 'SnapshotEventCountAggregateOutput'
+
+
+class SnapshotEventAvgAggregateOutput(TypedDict, total=False):
+    """SnapshotEvent output for aggregating averages"""
+    importance: float
+
+
+class SnapshotEventSumAggregateOutput(TypedDict, total=False):
+    """SnapshotEvent output for aggregating sums"""
+    importance: _float
+
+
+class SnapshotEventScalarAggregateOutput(TypedDict, total=False):
+    """SnapshotEvent output including scalar fields"""
+    id: _str
+    snapshotId: _str
+    eventId: _str
+    importance: _float
+    eventTitle: _str
+
+
+SnapshotEventMinAggregateOutput = SnapshotEventScalarAggregateOutput
+SnapshotEventMaxAggregateOutput = SnapshotEventScalarAggregateOutput
+
+
+class SnapshotEventMaxAggregateInput(TypedDict, total=False):
+    """SnapshotEvent input for aggregating by max"""
+    id: bool
+    snapshotId: bool
+    eventId: bool
+    importance: bool
+    eventTitle: bool
+
+
+class SnapshotEventMinAggregateInput(TypedDict, total=False):
+    """SnapshotEvent input for aggregating by min"""
+    id: bool
+    snapshotId: bool
+    eventId: bool
+    importance: bool
+    eventTitle: bool
+
+
+class SnapshotEventNumberAggregateInput(TypedDict, total=False):
+    """SnapshotEvent input for aggregating numbers"""
+    importance: bool
+
+
+SnapshotEventAvgAggregateInput = SnapshotEventNumberAggregateInput
+SnapshotEventSumAggregateInput = SnapshotEventNumberAggregateInput
+
+
+SnapshotEventCountAggregateInput = TypedDict(
+    'SnapshotEventCountAggregateInput',
+    {
+        'id': bool,
+        'snapshotId': bool,
+        'eventId': bool,
+        'importance': bool,
+        'eventTitle': bool,
+        '_all': bool,
+    },
+    total=False,
+)
+
+SnapshotEventCountAggregateOutput = TypedDict(
+    'SnapshotEventCountAggregateOutput',
+    {
+        'id': int,
+        'snapshotId': int,
+        'eventId': int,
+        'importance': int,
+        'eventTitle': int,
+        '_all': int,
+    },
+    total=False,
+)
+
+
+SnapshotEventKeys = Literal[
+    'id',
+    'snapshotId',
+    'snapshot',
+    'eventId',
+    'event',
+    'importance',
+    'eventTitle',
+]
+SnapshotEventScalarFieldKeys = Literal[
+    'id',
+    'snapshotId',
+    'eventId',
+    'importance',
+    'eventTitle',
+]
+SnapshotEventScalarFieldKeysT = TypeVar('SnapshotEventScalarFieldKeysT', bound=SnapshotEventScalarFieldKeys)
+
+SnapshotEventRelationalFieldKeys = Literal[
+        'snapshot',
+        'event',
+    ]
+
+# SnapshotClaim types
+
+class SnapshotClaimOptionalCreateInput(TypedDict, total=False):
+    """Optional arguments to the SnapshotClaim create method"""
+    id: _str
+    snapshotId: _str
+    snapshot: 'TopicSnapshotCreateNestedWithoutRelationsInput'
+    claimId: _str
+    claim: 'ClaimCreateNestedWithoutRelationsInput'
+
+
+class SnapshotClaimCreateInput(SnapshotClaimOptionalCreateInput):
+    """Required arguments to the SnapshotClaim create method"""
+
+
+# TODO: remove this in favour of without explicit relations
+# e.g. PostCreateWithoutAuthorInput
+
+class SnapshotClaimOptionalCreateWithoutRelationsInput(TypedDict, total=False):
+    """Optional arguments to the SnapshotClaim create method, without relations"""
+    id: _str
+    snapshotId: _str
+    claimId: _str
+
+
+class SnapshotClaimCreateWithoutRelationsInput(SnapshotClaimOptionalCreateWithoutRelationsInput):
+    """Required arguments to the SnapshotClaim create method, without relations"""
+
+class SnapshotClaimConnectOrCreateWithoutRelationsInput(TypedDict):
+    create: 'SnapshotClaimCreateWithoutRelationsInput'
+    where: 'SnapshotClaimWhereUniqueInput'
+
+class SnapshotClaimCreateNestedWithoutRelationsInput(TypedDict, total=False):
+    create: 'SnapshotClaimCreateWithoutRelationsInput'
+    connect: 'SnapshotClaimWhereUniqueInput'
+    connect_or_create: 'SnapshotClaimConnectOrCreateWithoutRelationsInput'
+
+
+class SnapshotClaimCreateManyNestedWithoutRelationsInput(TypedDict, total=False):
+    create: Union['SnapshotClaimCreateWithoutRelationsInput', List['SnapshotClaimCreateWithoutRelationsInput']]
+    connect: Union['SnapshotClaimWhereUniqueInput', List['SnapshotClaimWhereUniqueInput']]
+    connect_or_create: Union['SnapshotClaimConnectOrCreateWithoutRelationsInput', List['SnapshotClaimConnectOrCreateWithoutRelationsInput']]
+
+_SnapshotClaimWhereUnique_id_Input = TypedDict(
+    '_SnapshotClaimWhereUnique_id_Input',
+    {
+        'id': '_str',
+    },
+    total=True
+)
+
+SnapshotClaimWhereUniqueInput = _SnapshotClaimWhereUnique_id_Input
+
+
+class SnapshotClaimUpdateInput(TypedDict, total=False):
+    """Optional arguments for updating a record"""
+    id: _str
+    snapshot: 'TopicSnapshotUpdateOneWithoutRelationsInput'
+    claim: 'ClaimUpdateOneWithoutRelationsInput'
+
+
+class SnapshotClaimUpdateManyMutationInput(TypedDict, total=False):
+    """Arguments for updating many records"""
+    id: _str
+
+
+class SnapshotClaimUpdateManyWithoutRelationsInput(TypedDict, total=False):
+    create: List['SnapshotClaimCreateWithoutRelationsInput']
+    connect: List['SnapshotClaimWhereUniqueInput']
+    connect_or_create: List['SnapshotClaimConnectOrCreateWithoutRelationsInput']
+    set: List['SnapshotClaimWhereUniqueInput']
+    disconnect: List['SnapshotClaimWhereUniqueInput']
+    delete: List['SnapshotClaimWhereUniqueInput']
+
+    # TODO
+    # update: List['SnapshotClaimUpdateWithWhereUniqueWithoutRelationsInput']
+    # updateMany: List['SnapshotClaimUpdateManyWithWhereUniqueWithoutRelationsInput']
+    # deleteMany: List['SnapshotClaimScalarWhereInput']
+    # upsert: List['SnapshotClaimUpserteWithWhereUniqueWithoutRelationsInput']
+
+
+class SnapshotClaimUpdateOneWithoutRelationsInput(TypedDict, total=False):
+    create: 'SnapshotClaimCreateWithoutRelationsInput'
+    connect: 'SnapshotClaimWhereUniqueInput'
+    connect_or_create: 'SnapshotClaimConnectOrCreateWithoutRelationsInput'
+    disconnect: bool
+    delete: bool
+
+    # TODO
+    # update: 'SnapshotClaimUpdateInput'
+    # upsert: 'SnapshotClaimUpsertWithoutRelationsInput'
+
+
+class SnapshotClaimUpsertInput(TypedDict):
+    create: 'SnapshotClaimCreateInput'
+    update: 'SnapshotClaimUpdateInput'  # pyright: ignore[reportIncompatibleMethodOverride]
+
+
+_SnapshotClaim_id_OrderByInput = TypedDict(
+    '_SnapshotClaim_id_OrderByInput',
+    {
+        'id': 'SortOrder',
+    },
+    total=True
+)
+
+_SnapshotClaim_snapshotId_OrderByInput = TypedDict(
+    '_SnapshotClaim_snapshotId_OrderByInput',
+    {
+        'snapshotId': 'SortOrder',
+    },
+    total=True
+)
+
+_SnapshotClaim_claimId_OrderByInput = TypedDict(
+    '_SnapshotClaim_claimId_OrderByInput',
+    {
+        'claimId': 'SortOrder',
+    },
+    total=True
+)
+
+_SnapshotClaim_RelevanceInner = TypedDict(
+    '_SnapshotClaim_RelevanceInner',
+    {
+        'fields': 'List[SnapshotClaimScalarFieldKeys]',
+        'search': 'str',
+        'sort': 'SortOrder',
+    },
+    total=True
+)
+
+_SnapshotClaim_RelevanceOrderByInput = TypedDict(
+    '_SnapshotClaim_RelevanceOrderByInput',
+    {
+        '_relevance': '_SnapshotClaim_RelevanceInner',
+    },
+    total=True
+)
+
+SnapshotClaimOrderByInput = Union[
+    '_SnapshotClaim_id_OrderByInput',
+    '_SnapshotClaim_snapshotId_OrderByInput',
+    '_SnapshotClaim_claimId_OrderByInput',
+    '_SnapshotClaim_RelevanceOrderByInput',
+]
+
+
+
+# recursive SnapshotClaim types
+# TODO: cleanup these types
+
+
+# Dict[str, Any] is a mypy limitation
+# see https://github.com/RobertCraigie/prisma-client-py/issues/45
+# switch to pyright for improved types, see https://prisma-client-py.readthedocs.io/en/stable/reference/limitations/
+
+SnapshotClaimRelationFilter = TypedDict(
+    'SnapshotClaimRelationFilter',
+    {
+        'is': 'Dict[str, Any]',
+        'is_not': 'Dict[str, Any]',
+    },
+    total=False,
+)
+
+
+class SnapshotClaimListRelationFilter(TypedDict, total=False):
+    some: 'Dict[str, Any]'
+    none: 'Dict[str, Any]'
+    every: 'Dict[str, Any]'
+
+
+class SnapshotClaimInclude(TypedDict, total=False):
+    """SnapshotClaim relational arguments"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotClaim']
+    claim: Union[bool, 'ClaimArgsFromSnapshotClaim']
+
+
+    
+
+class UserIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    sessions: Union[bool, 'FindManySessionArgsFromSnapshotClaimRecursive1']
+    accounts: Union[bool, 'FindManyAccountArgsFromSnapshotClaimRecursive1']
+    searches: Union[bool, 'FindManySearchArgsFromSnapshotClaimRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSnapshotClaimRecursive1']
+
+
+class UserIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    sessions: Union[bool, 'FindManySessionArgsFromSnapshotClaimRecursive2']
+    accounts: Union[bool, 'FindManyAccountArgsFromSnapshotClaimRecursive2']
+    searches: Union[bool, 'FindManySearchArgsFromSnapshotClaimRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSnapshotClaimRecursive2']
+
+
+class UserIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    sessions: Union[bool, 'FindManySessionArgsFromSnapshotClaimRecursive3']
+    accounts: Union[bool, 'FindManyAccountArgsFromSnapshotClaimRecursive3']
+    searches: Union[bool, 'FindManySearchArgsFromSnapshotClaimRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSnapshotClaimRecursive3']
+
+
+class UserIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    sessions: Union[bool, 'FindManySessionArgsFromSnapshotClaimRecursive4']
+    accounts: Union[bool, 'FindManyAccountArgsFromSnapshotClaimRecursive4']
+    searches: Union[bool, 'FindManySearchArgsFromSnapshotClaimRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromSnapshotClaimRecursive4']
+
+
+class UserIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class UserArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class UserArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class UserArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class UserArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class UserArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyUserArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive1'
+
+
+class FindManyUserArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive2'
+
+
+class FindManyUserArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive3'
+
+
+class FindManyUserArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    include: 'UserIncludeFromUserRecursive4'
+
+
+class FindManyUserArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['UserOrderByInput', List['UserOrderByInput']]
+    where: 'UserWhereInput'
+    cursor: 'UserWhereUniqueInput'
+    distinct: List['UserScalarFieldKeys']
+    
+    
+
+class SessionIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive1']
+
+
+class SessionIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive2']
+
+
+class SessionIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive3']
+
+
+class SessionIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive4']
+
+
+class SessionIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class SessionArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class SessionArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class SessionArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class SessionArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class SessionArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManySessionArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive1'
+
+
+class FindManySessionArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive2'
+
+
+class FindManySessionArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive3'
+
+
+class FindManySessionArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    include: 'SessionIncludeFromSessionRecursive4'
+
+
+class FindManySessionArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SessionOrderByInput', List['SessionOrderByInput']]
+    where: 'SessionWhereInput'
+    cursor: 'SessionWhereUniqueInput'
+    distinct: List['SessionScalarFieldKeys']
+    
+    
+
+class AccountIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive1']
+
+
+class AccountIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive2']
+
+
+class AccountIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive3']
+
+
+class AccountIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive4']
+
+
+class AccountIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class AccountArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class AccountArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class AccountArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class AccountArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class AccountArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyAccountArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive1'
+
+
+class FindManyAccountArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive2'
+
+
+class FindManyAccountArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive3'
+
+
+class FindManyAccountArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    include: 'AccountIncludeFromAccountRecursive4'
+
+
+class FindManyAccountArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['AccountOrderByInput', List['AccountOrderByInput']]
+    where: 'AccountWhereInput'
+    cursor: 'AccountWhereUniqueInput'
+    distinct: List['AccountScalarFieldKeys']
+    
+    
+
+class VerificationIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class VerificationIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class VerificationIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class VerificationIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class VerificationIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class VerificationArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class VerificationArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class VerificationArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class VerificationArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class VerificationArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyVerificationArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive1'
+
+
+class FindManyVerificationArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive2'
+
+
+class FindManyVerificationArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive3'
+
+
+class FindManyVerificationArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    include: 'VerificationIncludeFromVerificationRecursive4'
+
+
+class FindManyVerificationArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['VerificationOrderByInput', List['VerificationOrderByInput']]
+    where: 'VerificationWhereInput'
+    cursor: 'VerificationWhereUniqueInput'
+    distinct: List['VerificationScalarFieldKeys']
+    
+    
+
+class SearchIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive1']
+    articles: Union[bool, 'FindManyArticleArgsFromSnapshotClaimRecursive1']
+    insights: Union[bool, 'FindManyInsightArgsFromSnapshotClaimRecursive1']
+
+
+class SearchIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive2']
+    articles: Union[bool, 'FindManyArticleArgsFromSnapshotClaimRecursive2']
+    insights: Union[bool, 'FindManyInsightArgsFromSnapshotClaimRecursive2']
+
+
+class SearchIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive3']
+    articles: Union[bool, 'FindManyArticleArgsFromSnapshotClaimRecursive3']
+    insights: Union[bool, 'FindManyInsightArgsFromSnapshotClaimRecursive3']
+
+
+class SearchIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive4']
+    articles: Union[bool, 'FindManyArticleArgsFromSnapshotClaimRecursive4']
+    insights: Union[bool, 'FindManyInsightArgsFromSnapshotClaimRecursive4']
+
+
+class SearchIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class SearchArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class SearchArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class SearchArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class SearchArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class SearchArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManySearchArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive1'
+
+
+class FindManySearchArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive2'
+
+
+class FindManySearchArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive3'
+
+
+class FindManySearchArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    include: 'SearchIncludeFromSearchRecursive4'
+
+
+class FindManySearchArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SearchOrderByInput', List['SearchOrderByInput']]
+    where: 'SearchWhereInput'
+    cursor: 'SearchWhereUniqueInput'
+    distinct: List['SearchScalarFieldKeys']
+    
+    
+
+class ArticleIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    search: Union[bool, 'SearchArgsFromSnapshotClaimRecursive1']
+
+
+class ArticleIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    search: Union[bool, 'SearchArgsFromSnapshotClaimRecursive2']
+
+
+class ArticleIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    search: Union[bool, 'SearchArgsFromSnapshotClaimRecursive3']
+
+
+class ArticleIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    search: Union[bool, 'SearchArgsFromSnapshotClaimRecursive4']
+
+
+class ArticleIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class ArticleArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class ArticleArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class ArticleArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class ArticleArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class ArticleArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyArticleArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive1'
+
+
+class FindManyArticleArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive2'
+
+
+class FindManyArticleArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive3'
+
+
+class FindManyArticleArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    include: 'ArticleIncludeFromArticleRecursive4'
+
+
+class FindManyArticleArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ArticleOrderByInput', List['ArticleOrderByInput']]
+    where: 'ArticleWhereInput'
+    cursor: 'ArticleWhereUniqueInput'
+    distinct: List['ArticleScalarFieldKeys']
+    
+    
+
+class InsightIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    search: Union[bool, 'SearchArgsFromSnapshotClaimRecursive1']
+
+
+class InsightIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    search: Union[bool, 'SearchArgsFromSnapshotClaimRecursive2']
+
+
+class InsightIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    search: Union[bool, 'SearchArgsFromSnapshotClaimRecursive3']
+
+
+class InsightIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    search: Union[bool, 'SearchArgsFromSnapshotClaimRecursive4']
+
+
+class InsightIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class InsightArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class InsightArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class InsightArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class InsightArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class InsightArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyInsightArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive1'
+
+
+class FindManyInsightArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive2'
+
+
+class FindManyInsightArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive3'
+
+
+class FindManyInsightArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    include: 'InsightIncludeFromInsightRecursive4'
+
+
+class FindManyInsightArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['InsightOrderByInput', List['InsightOrderByInput']]
+    where: 'InsightWhereInput'
+    cursor: 'InsightWhereUniqueInput'
+    distinct: List['InsightScalarFieldKeys']
+    
+    
+
+class ClaimIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSnapshotClaimRecursive1']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSnapshotClaimRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotClaimRecursive1']
+
+
+class ClaimIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSnapshotClaimRecursive2']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSnapshotClaimRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotClaimRecursive2']
+
+
+class ClaimIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSnapshotClaimRecursive3']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSnapshotClaimRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotClaimRecursive3']
+
+
+class ClaimIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    cluster: Union[bool, 'ClaimClusterArgsFromSnapshotClaimRecursive4']
+    evidence: Union[bool, 'FindManyEvidenceArgsFromSnapshotClaimRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotClaimRecursive4']
+
+
+class ClaimIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class ClaimArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class ClaimArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class ClaimArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class ClaimArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class ClaimArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyClaimArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive1'
+
+
+class FindManyClaimArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive2'
+
+
+class FindManyClaimArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive3'
+
+
+class FindManyClaimArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    include: 'ClaimIncludeFromClaimRecursive4'
+
+
+class FindManyClaimArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimOrderByInput', List['ClaimOrderByInput']]
+    where: 'ClaimWhereInput'
+    cursor: 'ClaimWhereUniqueInput'
+    distinct: List['ClaimScalarFieldKeys']
+    
+    
+
+class EvidenceIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    claim: Union[bool, 'ClaimArgsFromSnapshotClaimRecursive1']
+
+
+class EvidenceIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    claim: Union[bool, 'ClaimArgsFromSnapshotClaimRecursive2']
+
+
+class EvidenceIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    claim: Union[bool, 'ClaimArgsFromSnapshotClaimRecursive3']
+
+
+class EvidenceIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    claim: Union[bool, 'ClaimArgsFromSnapshotClaimRecursive4']
+
+
+class EvidenceIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class EvidenceArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class EvidenceArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class EvidenceArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class EvidenceArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class EvidenceArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyEvidenceArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive1'
+
+
+class FindManyEvidenceArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive2'
+
+
+class FindManyEvidenceArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive3'
+
+
+class FindManyEvidenceArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    include: 'EvidenceIncludeFromEvidenceRecursive4'
+
+
+class FindManyEvidenceArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['EvidenceOrderByInput', List['EvidenceOrderByInput']]
+    where: 'EvidenceWhereInput'
+    cursor: 'EvidenceWhereUniqueInput'
+    distinct: List['EvidenceScalarFieldKeys']
+    
+    
+
+class EventIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSnapshotClaimRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotClaimRecursive1']
+
+
+class EventIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSnapshotClaimRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotClaimRecursive2']
+
+
+class EventIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSnapshotClaimRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotClaimRecursive3']
+
+
+class EventIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    claimClusters: Union[bool, 'FindManyClaimClusterArgsFromSnapshotClaimRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotClaimRecursive4']
+
+
+class EventIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class EventArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class EventArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class EventArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class EventArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class EventArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyEventArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive1'
+
+
+class FindManyEventArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive2'
+
+
+class FindManyEventArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive3'
+
+
+class FindManyEventArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    include: 'EventIncludeFromEventRecursive4'
+
+
+class FindManyEventArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['EventOrderByInput', List['EventOrderByInput']]
+    where: 'EventWhereInput'
+    cursor: 'EventWhereUniqueInput'
+    distinct: List['EventScalarFieldKeys']
+    
+    
+
+class ClaimClusterIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    event: Union[bool, 'EventArgsFromSnapshotClaimRecursive1']
+    claims: Union[bool, 'FindManyClaimArgsFromSnapshotClaimRecursive1']
+
+
+class ClaimClusterIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    event: Union[bool, 'EventArgsFromSnapshotClaimRecursive2']
+    claims: Union[bool, 'FindManyClaimArgsFromSnapshotClaimRecursive2']
+
+
+class ClaimClusterIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    event: Union[bool, 'EventArgsFromSnapshotClaimRecursive3']
+    claims: Union[bool, 'FindManyClaimArgsFromSnapshotClaimRecursive3']
+
+
+class ClaimClusterIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    event: Union[bool, 'EventArgsFromSnapshotClaimRecursive4']
+    claims: Union[bool, 'FindManyClaimArgsFromSnapshotClaimRecursive4']
+
+
+class ClaimClusterIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class ClaimClusterArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class ClaimClusterArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class ClaimClusterArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class ClaimClusterArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class ClaimClusterArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyClaimClusterArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive1'
+
+
+class FindManyClaimClusterArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive2'
+
+
+class FindManyClaimClusterArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive3'
+
+
+class FindManyClaimClusterArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    include: 'ClaimClusterIncludeFromClaimClusterRecursive4'
+
+
+class FindManyClaimClusterArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ClaimClusterOrderByInput', List['ClaimClusterOrderByInput']]
+    where: 'ClaimClusterWhereInput'
+    cursor: 'ClaimClusterWhereUniqueInput'
+    distinct: List['ClaimClusterScalarFieldKeys']
+    
+    
+
+class LLMCacheIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class LLMCacheIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class LLMCacheIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class LLMCacheIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class LLMCacheIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class LLMCacheArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class LLMCacheArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class LLMCacheArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class LLMCacheArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class LLMCacheArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyLLMCacheArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive1'
+
+
+class FindManyLLMCacheArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive2'
+
+
+class FindManyLLMCacheArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive3'
+
+
+class FindManyLLMCacheArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    include: 'LLMCacheIncludeFromLLMCacheRecursive4'
+
+
+class FindManyLLMCacheArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['LLMCacheOrderByInput', List['LLMCacheOrderByInput']]
+    where: 'LLMCacheWhereInput'
+    cursor: 'LLMCacheWhereUniqueInput'
+    distinct: List['LLMCacheScalarFieldKeys']
+    
+    
+
+class LLMUsageIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class LLMUsageIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class LLMUsageIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class LLMUsageIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class LLMUsageIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class LLMUsageArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class LLMUsageArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class LLMUsageArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class LLMUsageArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class LLMUsageArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyLLMUsageArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive1'
+
+
+class FindManyLLMUsageArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive2'
+
+
+class FindManyLLMUsageArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive3'
+
+
+class FindManyLLMUsageArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    include: 'LLMUsageIncludeFromLLMUsageRecursive4'
+
+
+class FindManyLLMUsageArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['LLMUsageOrderByInput', List['LLMUsageOrderByInput']]
+    where: 'LLMUsageWhereInput'
+    cursor: 'LLMUsageWhereUniqueInput'
+    distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class DemoSnapshotIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class DemoSnapshotIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class DemoSnapshotIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class DemoSnapshotIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class DemoSnapshotArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSnapshotClaimRecursive1']
+
+
+class TopicSubscriptionIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSnapshotClaimRecursive2']
+
+
+class TopicSubscriptionIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSnapshotClaimRecursive3']
+
+
+class TopicSubscriptionIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    user: Union[bool, 'UserArgsFromSnapshotClaimRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromSnapshotClaimRecursive4']
+
+
+class TopicSubscriptionIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class TopicSubscriptionArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSnapshotClaimRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotClaimRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotClaimRecursive1']
+
+
+class TopicSnapshotIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSnapshotClaimRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotClaimRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotClaimRecursive2']
+
+
+class TopicSnapshotIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSnapshotClaimRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotClaimRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotClaimRecursive3']
+
+
+class TopicSnapshotIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromSnapshotClaimRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromSnapshotClaimRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromSnapshotClaimRecursive4']
+
+
+class TopicSnapshotIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class TopicSnapshotArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotClaimRecursive1']
+    event: Union[bool, 'EventArgsFromSnapshotClaimRecursive1']
+
+
+class SnapshotEventIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotClaimRecursive2']
+    event: Union[bool, 'EventArgsFromSnapshotClaimRecursive2']
+
+
+class SnapshotEventIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotClaimRecursive3']
+    event: Union[bool, 'EventArgsFromSnapshotClaimRecursive3']
+
+
+class SnapshotEventIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotClaimRecursive4']
+    event: Union[bool, 'EventArgsFromSnapshotClaimRecursive4']
+
+
+class SnapshotEventIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class SnapshotEventArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManySnapshotEventArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotClaimRecursive1']
+    claim: Union[bool, 'ClaimArgsFromSnapshotClaimRecursive1']
+
+
+class SnapshotClaimIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotClaimRecursive2']
+    claim: Union[bool, 'ClaimArgsFromSnapshotClaimRecursive2']
+
+
+class SnapshotClaimIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotClaimRecursive3']
+    claim: Union[bool, 'ClaimArgsFromSnapshotClaimRecursive3']
+
+
+class SnapshotClaimIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromSnapshotClaimRecursive4']
+    claim: Union[bool, 'ClaimArgsFromSnapshotClaimRecursive4']
+
+
+class SnapshotClaimIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class SnapshotClaimArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManySnapshotClaimArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    
+    
+
+class ConsensusFactIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class ConsensusFactIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class ConsensusFactIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class ConsensusFactIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class ConsensusFactIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class ConsensusFactArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class ConsensusFactArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class ConsensusFactArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class ConsensusFactArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class ConsensusFactArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyConsensusFactArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive1'
+
+
+class FindManyConsensusFactArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive2'
+
+
+class FindManyConsensusFactArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive3'
+
+
+class FindManyConsensusFactArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    include: 'ConsensusFactIncludeFromConsensusFactRecursive4'
+
+
+class FindManyConsensusFactArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ConsensusFactOrderByInput', List['ConsensusFactOrderByInput']]
+    where: 'ConsensusFactWhereInput'
+    cursor: 'ConsensusFactWhereUniqueInput'
+    distinct: List['ConsensusFactScalarFieldKeys']
+    
+    
+
+class ContradictionPairIncludeFromSnapshotClaim(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class ContradictionPairIncludeFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class ContradictionPairIncludeFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class ContradictionPairIncludeFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+
+class ContradictionPairIncludeFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Relational arguments for SnapshotClaim"""
+
+    
+
+class ContradictionPairArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class ContradictionPairArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class ContradictionPairArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class ContradictionPairArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class ContradictionPairArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    
+    
+
+class FindManyContradictionPairArgsFromSnapshotClaim(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive1'
+
+
+class FindManyContradictionPairArgsFromSnapshotClaimRecursive1(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive2'
+
+
+class FindManyContradictionPairArgsFromSnapshotClaimRecursive2(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive3'
+
+
+class FindManyContradictionPairArgsFromSnapshotClaimRecursive3(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    include: 'ContradictionPairIncludeFromContradictionPairRecursive4'
+
+
+class FindManyContradictionPairArgsFromSnapshotClaimRecursive4(TypedDict, total=False):
+    """Arguments for SnapshotClaim"""
+    take: int
+    skip: int
+    order_by: Union['ContradictionPairOrderByInput', List['ContradictionPairOrderByInput']]
+    where: 'ContradictionPairWhereInput'
+    cursor: 'ContradictionPairWhereUniqueInput'
+    distinct: List['ContradictionPairScalarFieldKeys']
+    
+
+
+FindManySnapshotClaimArgs = FindManySnapshotClaimArgsFromSnapshotClaim
+FindFirstSnapshotClaimArgs = FindManySnapshotClaimArgsFromSnapshotClaim
+
+
+    
+
+class SnapshotClaimWhereInput(TypedDict, total=False):
+    """SnapshotClaim arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    snapshotId: Union[_str, 'types.StringFilter']
+    snapshot: 'TopicSnapshotRelationFilter'
+    claimId: Union[_str, 'types.StringFilter']
+    claim: 'ClaimRelationFilter'
+
+    # should be noted that AND and NOT should be Union['SnapshotClaimWhereInputRecursive1', List['SnapshotClaimWhereInputRecursive1']]
+    # but this causes mypy to hang :/
+    AND: List['SnapshotClaimWhereInputRecursive1']
+    OR: List['SnapshotClaimWhereInputRecursive1']
+    NOT: List['SnapshotClaimWhereInputRecursive1']
+
+
+class SnapshotClaimWhereInputRecursive1(TypedDict, total=False):
+    """SnapshotClaim arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    snapshotId: Union[_str, 'types.StringFilter']
+    snapshot: 'TopicSnapshotRelationFilter'
+    claimId: Union[_str, 'types.StringFilter']
+    claim: 'ClaimRelationFilter'
+
+    # should be noted that AND and NOT should be Union['SnapshotClaimWhereInputRecursive2', List['SnapshotClaimWhereInputRecursive2']]
+    # but this causes mypy to hang :/
+    AND: List['SnapshotClaimWhereInputRecursive2']
+    OR: List['SnapshotClaimWhereInputRecursive2']
+    NOT: List['SnapshotClaimWhereInputRecursive2']
+
+
+class SnapshotClaimWhereInputRecursive2(TypedDict, total=False):
+    """SnapshotClaim arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    snapshotId: Union[_str, 'types.StringFilter']
+    snapshot: 'TopicSnapshotRelationFilter'
+    claimId: Union[_str, 'types.StringFilter']
+    claim: 'ClaimRelationFilter'
+
+    # should be noted that AND and NOT should be Union['SnapshotClaimWhereInputRecursive3', List['SnapshotClaimWhereInputRecursive3']]
+    # but this causes mypy to hang :/
+    AND: List['SnapshotClaimWhereInputRecursive3']
+    OR: List['SnapshotClaimWhereInputRecursive3']
+    NOT: List['SnapshotClaimWhereInputRecursive3']
+
+
+class SnapshotClaimWhereInputRecursive3(TypedDict, total=False):
+    """SnapshotClaim arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    snapshotId: Union[_str, 'types.StringFilter']
+    snapshot: 'TopicSnapshotRelationFilter'
+    claimId: Union[_str, 'types.StringFilter']
+    claim: 'ClaimRelationFilter'
+
+    # should be noted that AND and NOT should be Union['SnapshotClaimWhereInputRecursive4', List['SnapshotClaimWhereInputRecursive4']]
+    # but this causes mypy to hang :/
+    AND: List['SnapshotClaimWhereInputRecursive4']
+    OR: List['SnapshotClaimWhereInputRecursive4']
+    NOT: List['SnapshotClaimWhereInputRecursive4']
+
+
+class SnapshotClaimWhereInputRecursive4(TypedDict, total=False):
+    """SnapshotClaim arguments for searching"""
+    id: Union[_str, 'types.StringFilter']
+    snapshotId: Union[_str, 'types.StringFilter']
+    snapshot: 'TopicSnapshotRelationFilter'
+    claimId: Union[_str, 'types.StringFilter']
+    claim: 'ClaimRelationFilter'
+
+
+
+# aggregate SnapshotClaim types
+
+
+    
+
+class SnapshotClaimScalarWhereWithAggregatesInput(TypedDict, total=False):
+    """SnapshotClaim arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    snapshotId: Union[_str, 'types.StringWithAggregatesFilter']
+    claimId: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['SnapshotClaimScalarWhereWithAggregatesInputRecursive1']
+    OR: List['SnapshotClaimScalarWhereWithAggregatesInputRecursive1']
+    NOT: List['SnapshotClaimScalarWhereWithAggregatesInputRecursive1']
+
+
+class SnapshotClaimScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
+    """SnapshotClaim arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    snapshotId: Union[_str, 'types.StringWithAggregatesFilter']
+    claimId: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['SnapshotClaimScalarWhereWithAggregatesInputRecursive2']
+    OR: List['SnapshotClaimScalarWhereWithAggregatesInputRecursive2']
+    NOT: List['SnapshotClaimScalarWhereWithAggregatesInputRecursive2']
+
+
+class SnapshotClaimScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
+    """SnapshotClaim arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    snapshotId: Union[_str, 'types.StringWithAggregatesFilter']
+    claimId: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['SnapshotClaimScalarWhereWithAggregatesInputRecursive3']
+    OR: List['SnapshotClaimScalarWhereWithAggregatesInputRecursive3']
+    NOT: List['SnapshotClaimScalarWhereWithAggregatesInputRecursive3']
+
+
+class SnapshotClaimScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
+    """SnapshotClaim arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    snapshotId: Union[_str, 'types.StringWithAggregatesFilter']
+    claimId: Union[_str, 'types.StringWithAggregatesFilter']
+
+    AND: List['SnapshotClaimScalarWhereWithAggregatesInputRecursive4']
+    OR: List['SnapshotClaimScalarWhereWithAggregatesInputRecursive4']
+    NOT: List['SnapshotClaimScalarWhereWithAggregatesInputRecursive4']
+
+
+class SnapshotClaimScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
+    """SnapshotClaim arguments for searching"""
+    id: Union[_str, 'types.StringWithAggregatesFilter']
+    snapshotId: Union[_str, 'types.StringWithAggregatesFilter']
+    claimId: Union[_str, 'types.StringWithAggregatesFilter']
+
+
+
+class SnapshotClaimGroupByOutput(TypedDict, total=False):
+    id: _str
+    snapshotId: _str
+    claimId: _str
+    _sum: 'SnapshotClaimSumAggregateOutput'
+    _avg: 'SnapshotClaimAvgAggregateOutput'
+    _min: 'SnapshotClaimMinAggregateOutput'
+    _max: 'SnapshotClaimMaxAggregateOutput'
+    _count: 'SnapshotClaimCountAggregateOutput'
+
+
+class SnapshotClaimAvgAggregateOutput(TypedDict, total=False):
+    """SnapshotClaim output for aggregating averages"""
+
+
+class SnapshotClaimSumAggregateOutput(TypedDict, total=False):
+    """SnapshotClaim output for aggregating sums"""
+
+
+class SnapshotClaimScalarAggregateOutput(TypedDict, total=False):
+    """SnapshotClaim output including scalar fields"""
+    id: _str
+    snapshotId: _str
+    claimId: _str
+
+
+SnapshotClaimMinAggregateOutput = SnapshotClaimScalarAggregateOutput
+SnapshotClaimMaxAggregateOutput = SnapshotClaimScalarAggregateOutput
+
+
+class SnapshotClaimMaxAggregateInput(TypedDict, total=False):
+    """SnapshotClaim input for aggregating by max"""
+    id: bool
+    snapshotId: bool
+    claimId: bool
+
+
+class SnapshotClaimMinAggregateInput(TypedDict, total=False):
+    """SnapshotClaim input for aggregating by min"""
+    id: bool
+    snapshotId: bool
+    claimId: bool
+
+
+class SnapshotClaimNumberAggregateInput(TypedDict, total=False):
+    """SnapshotClaim input for aggregating numbers"""
+
+
+SnapshotClaimAvgAggregateInput = SnapshotClaimNumberAggregateInput
+SnapshotClaimSumAggregateInput = SnapshotClaimNumberAggregateInput
+
+
+SnapshotClaimCountAggregateInput = TypedDict(
+    'SnapshotClaimCountAggregateInput',
+    {
+        'id': bool,
+        'snapshotId': bool,
+        'claimId': bool,
+        '_all': bool,
+    },
+    total=False,
+)
+
+SnapshotClaimCountAggregateOutput = TypedDict(
+    'SnapshotClaimCountAggregateOutput',
+    {
+        'id': int,
+        'snapshotId': int,
+        'claimId': int,
+        '_all': int,
+    },
+    total=False,
+)
+
+
+SnapshotClaimKeys = Literal[
+    'id',
+    'snapshotId',
+    'snapshot',
+    'claimId',
+    'claim',
+]
+SnapshotClaimScalarFieldKeys = Literal[
+    'id',
+    'snapshotId',
+    'claimId',
+]
+SnapshotClaimScalarFieldKeysT = TypeVar('SnapshotClaimScalarFieldKeysT', bound=SnapshotClaimScalarFieldKeys)
+
+SnapshotClaimRelationalFieldKeys = Literal[
+        'snapshot',
+        'claim',
+    ]
+
 # ConsensusFact types
 
 class ConsensusFactOptionalCreateInput(TypedDict, total=False):
@@ -29422,6 +49979,7 @@ class UserIncludeFromConsensusFact(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromConsensusFactRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromConsensusFactRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromConsensusFactRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromConsensusFactRecursive1']
 
 
 class UserIncludeFromConsensusFactRecursive1(TypedDict, total=False):
@@ -29429,6 +49987,7 @@ class UserIncludeFromConsensusFactRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromConsensusFactRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromConsensusFactRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromConsensusFactRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromConsensusFactRecursive2']
 
 
 class UserIncludeFromConsensusFactRecursive2(TypedDict, total=False):
@@ -29436,6 +49995,7 @@ class UserIncludeFromConsensusFactRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromConsensusFactRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromConsensusFactRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromConsensusFactRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromConsensusFactRecursive3']
 
 
 class UserIncludeFromConsensusFactRecursive3(TypedDict, total=False):
@@ -29443,6 +50003,7 @@ class UserIncludeFromConsensusFactRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromConsensusFactRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromConsensusFactRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromConsensusFactRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromConsensusFactRecursive4']
 
 
 class UserIncludeFromConsensusFactRecursive4(TypedDict, total=False):
@@ -30168,24 +50729,28 @@ class ClaimIncludeFromConsensusFact(TypedDict, total=False):
     """Relational arguments for ConsensusFact"""
     cluster: Union[bool, 'ClaimClusterArgsFromConsensusFactRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromConsensusFactRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromConsensusFactRecursive1']
 
 
 class ClaimIncludeFromConsensusFactRecursive1(TypedDict, total=False):
     """Relational arguments for ConsensusFact"""
     cluster: Union[bool, 'ClaimClusterArgsFromConsensusFactRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromConsensusFactRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromConsensusFactRecursive2']
 
 
 class ClaimIncludeFromConsensusFactRecursive2(TypedDict, total=False):
     """Relational arguments for ConsensusFact"""
     cluster: Union[bool, 'ClaimClusterArgsFromConsensusFactRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromConsensusFactRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromConsensusFactRecursive3']
 
 
 class ClaimIncludeFromConsensusFactRecursive3(TypedDict, total=False):
     """Relational arguments for ConsensusFact"""
     cluster: Union[bool, 'ClaimClusterArgsFromConsensusFactRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromConsensusFactRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromConsensusFactRecursive4']
 
 
 class ClaimIncludeFromConsensusFactRecursive4(TypedDict, total=False):
@@ -30381,21 +50946,25 @@ class FindManyEvidenceArgsFromConsensusFactRecursive4(TypedDict, total=False):
 class EventIncludeFromConsensusFact(TypedDict, total=False):
     """Relational arguments for ConsensusFact"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromConsensusFactRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromConsensusFactRecursive1']
 
 
 class EventIncludeFromConsensusFactRecursive1(TypedDict, total=False):
     """Relational arguments for ConsensusFact"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromConsensusFactRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromConsensusFactRecursive2']
 
 
 class EventIncludeFromConsensusFactRecursive2(TypedDict, total=False):
     """Relational arguments for ConsensusFact"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromConsensusFactRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromConsensusFactRecursive3']
 
 
 class EventIncludeFromConsensusFactRecursive3(TypedDict, total=False):
     """Relational arguments for ConsensusFact"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromConsensusFactRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromConsensusFactRecursive4']
 
 
 class EventIncludeFromConsensusFactRecursive4(TypedDict, total=False):
@@ -30791,6 +51360,547 @@ class FindManyLLMUsageArgsFromConsensusFactRecursive4(TypedDict, total=False):
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class DemoSnapshotIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class DemoSnapshotIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class DemoSnapshotIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+
+class DemoSnapshotIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class DemoSnapshotArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromConsensusFactRecursive1']
+
+
+class TopicSubscriptionIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromConsensusFactRecursive2']
+
+
+class TopicSubscriptionIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromConsensusFactRecursive3']
+
+
+class TopicSubscriptionIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    user: Union[bool, 'UserArgsFromConsensusFactRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromConsensusFactRecursive4']
+
+
+class TopicSubscriptionIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class TopicSubscriptionArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromConsensusFactRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromConsensusFactRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromConsensusFactRecursive1']
+
+
+class TopicSnapshotIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromConsensusFactRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromConsensusFactRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromConsensusFactRecursive2']
+
+
+class TopicSnapshotIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromConsensusFactRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromConsensusFactRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromConsensusFactRecursive3']
+
+
+class TopicSnapshotIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromConsensusFactRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromConsensusFactRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromConsensusFactRecursive4']
+
+
+class TopicSnapshotIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class TopicSnapshotArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromConsensusFactRecursive1']
+    event: Union[bool, 'EventArgsFromConsensusFactRecursive1']
+
+
+class SnapshotEventIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromConsensusFactRecursive2']
+    event: Union[bool, 'EventArgsFromConsensusFactRecursive2']
+
+
+class SnapshotEventIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromConsensusFactRecursive3']
+    event: Union[bool, 'EventArgsFromConsensusFactRecursive3']
+
+
+class SnapshotEventIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromConsensusFactRecursive4']
+    event: Union[bool, 'EventArgsFromConsensusFactRecursive4']
+
+
+class SnapshotEventIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class SnapshotEventArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManySnapshotEventArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromConsensusFact(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromConsensusFactRecursive1']
+    claim: Union[bool, 'ClaimArgsFromConsensusFactRecursive1']
+
+
+class SnapshotClaimIncludeFromConsensusFactRecursive1(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromConsensusFactRecursive2']
+    claim: Union[bool, 'ClaimArgsFromConsensusFactRecursive2']
+
+
+class SnapshotClaimIncludeFromConsensusFactRecursive2(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromConsensusFactRecursive3']
+    claim: Union[bool, 'ClaimArgsFromConsensusFactRecursive3']
+
+
+class SnapshotClaimIncludeFromConsensusFactRecursive3(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromConsensusFactRecursive4']
+    claim: Union[bool, 'ClaimArgsFromConsensusFactRecursive4']
+
+
+class SnapshotClaimIncludeFromConsensusFactRecursive4(TypedDict, total=False):
+    """Relational arguments for ConsensusFact"""
+
+    
+
+class SnapshotClaimArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    
+    
+
+class FindManySnapshotClaimArgsFromConsensusFact(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromConsensusFactRecursive1(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromConsensusFactRecursive2(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromConsensusFactRecursive3(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromConsensusFactRecursive4(TypedDict, total=False):
+    """Arguments for ConsensusFact"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
     
     
 
@@ -31522,6 +52632,7 @@ class UserIncludeFromContradictionPair(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromContradictionPairRecursive1']
     accounts: Union[bool, 'FindManyAccountArgsFromContradictionPairRecursive1']
     searches: Union[bool, 'FindManySearchArgsFromContradictionPairRecursive1']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromContradictionPairRecursive1']
 
 
 class UserIncludeFromContradictionPairRecursive1(TypedDict, total=False):
@@ -31529,6 +52640,7 @@ class UserIncludeFromContradictionPairRecursive1(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromContradictionPairRecursive2']
     accounts: Union[bool, 'FindManyAccountArgsFromContradictionPairRecursive2']
     searches: Union[bool, 'FindManySearchArgsFromContradictionPairRecursive2']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromContradictionPairRecursive2']
 
 
 class UserIncludeFromContradictionPairRecursive2(TypedDict, total=False):
@@ -31536,6 +52648,7 @@ class UserIncludeFromContradictionPairRecursive2(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromContradictionPairRecursive3']
     accounts: Union[bool, 'FindManyAccountArgsFromContradictionPairRecursive3']
     searches: Union[bool, 'FindManySearchArgsFromContradictionPairRecursive3']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromContradictionPairRecursive3']
 
 
 class UserIncludeFromContradictionPairRecursive3(TypedDict, total=False):
@@ -31543,6 +52656,7 @@ class UserIncludeFromContradictionPairRecursive3(TypedDict, total=False):
     sessions: Union[bool, 'FindManySessionArgsFromContradictionPairRecursive4']
     accounts: Union[bool, 'FindManyAccountArgsFromContradictionPairRecursive4']
     searches: Union[bool, 'FindManySearchArgsFromContradictionPairRecursive4']
+    subscriptions: Union[bool, 'FindManyTopicSubscriptionArgsFromContradictionPairRecursive4']
 
 
 class UserIncludeFromContradictionPairRecursive4(TypedDict, total=False):
@@ -32268,24 +53382,28 @@ class ClaimIncludeFromContradictionPair(TypedDict, total=False):
     """Relational arguments for ContradictionPair"""
     cluster: Union[bool, 'ClaimClusterArgsFromContradictionPairRecursive1']
     evidence: Union[bool, 'FindManyEvidenceArgsFromContradictionPairRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromContradictionPairRecursive1']
 
 
 class ClaimIncludeFromContradictionPairRecursive1(TypedDict, total=False):
     """Relational arguments for ContradictionPair"""
     cluster: Union[bool, 'ClaimClusterArgsFromContradictionPairRecursive2']
     evidence: Union[bool, 'FindManyEvidenceArgsFromContradictionPairRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromContradictionPairRecursive2']
 
 
 class ClaimIncludeFromContradictionPairRecursive2(TypedDict, total=False):
     """Relational arguments for ContradictionPair"""
     cluster: Union[bool, 'ClaimClusterArgsFromContradictionPairRecursive3']
     evidence: Union[bool, 'FindManyEvidenceArgsFromContradictionPairRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromContradictionPairRecursive3']
 
 
 class ClaimIncludeFromContradictionPairRecursive3(TypedDict, total=False):
     """Relational arguments for ContradictionPair"""
     cluster: Union[bool, 'ClaimClusterArgsFromContradictionPairRecursive4']
     evidence: Union[bool, 'FindManyEvidenceArgsFromContradictionPairRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromContradictionPairRecursive4']
 
 
 class ClaimIncludeFromContradictionPairRecursive4(TypedDict, total=False):
@@ -32481,21 +53599,25 @@ class FindManyEvidenceArgsFromContradictionPairRecursive4(TypedDict, total=False
 class EventIncludeFromContradictionPair(TypedDict, total=False):
     """Relational arguments for ContradictionPair"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromContradictionPairRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromContradictionPairRecursive1']
 
 
 class EventIncludeFromContradictionPairRecursive1(TypedDict, total=False):
     """Relational arguments for ContradictionPair"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromContradictionPairRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromContradictionPairRecursive2']
 
 
 class EventIncludeFromContradictionPairRecursive2(TypedDict, total=False):
     """Relational arguments for ContradictionPair"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromContradictionPairRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromContradictionPairRecursive3']
 
 
 class EventIncludeFromContradictionPairRecursive3(TypedDict, total=False):
     """Relational arguments for ContradictionPair"""
     claimClusters: Union[bool, 'FindManyClaimClusterArgsFromContradictionPairRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromContradictionPairRecursive4']
 
 
 class EventIncludeFromContradictionPairRecursive4(TypedDict, total=False):
@@ -32891,6 +54013,547 @@ class FindManyLLMUsageArgsFromContradictionPairRecursive4(TypedDict, total=False
     where: 'LLMUsageWhereInput'
     cursor: 'LLMUsageWhereUniqueInput'
     distinct: List['LLMUsageScalarFieldKeys']
+    
+    
+
+class DemoSnapshotIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class DemoSnapshotIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class DemoSnapshotIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class DemoSnapshotIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+
+class DemoSnapshotIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class DemoSnapshotArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class DemoSnapshotArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class DemoSnapshotArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class DemoSnapshotArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class DemoSnapshotArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyDemoSnapshotArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive1'
+
+
+class FindManyDemoSnapshotArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive2'
+
+
+class FindManyDemoSnapshotArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive3'
+
+
+class FindManyDemoSnapshotArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    include: 'DemoSnapshotIncludeFromDemoSnapshotRecursive4'
+
+
+class FindManyDemoSnapshotArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['DemoSnapshotOrderByInput', List['DemoSnapshotOrderByInput']]
+    where: 'DemoSnapshotWhereInput'
+    cursor: 'DemoSnapshotWhereUniqueInput'
+    distinct: List['DemoSnapshotScalarFieldKeys']
+    
+    
+
+class TopicSubscriptionIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive1']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromContradictionPairRecursive1']
+
+
+class TopicSubscriptionIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive2']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromContradictionPairRecursive2']
+
+
+class TopicSubscriptionIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive3']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromContradictionPairRecursive3']
+
+
+class TopicSubscriptionIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    user: Union[bool, 'UserArgsFromContradictionPairRecursive4']
+    snapshots: Union[bool, 'FindManyTopicSnapshotArgsFromContradictionPairRecursive4']
+
+
+class TopicSubscriptionIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class TopicSubscriptionArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class TopicSubscriptionArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class TopicSubscriptionArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class TopicSubscriptionArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class TopicSubscriptionArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyTopicSubscriptionArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive1'
+
+
+class FindManyTopicSubscriptionArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive2'
+
+
+class FindManyTopicSubscriptionArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive3'
+
+
+class FindManyTopicSubscriptionArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    include: 'TopicSubscriptionIncludeFromTopicSubscriptionRecursive4'
+
+
+class FindManyTopicSubscriptionArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['TopicSubscriptionOrderByInput', List['TopicSubscriptionOrderByInput']]
+    where: 'TopicSubscriptionWhereInput'
+    cursor: 'TopicSubscriptionWhereUniqueInput'
+    distinct: List['TopicSubscriptionScalarFieldKeys']
+    
+    
+
+class TopicSnapshotIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromContradictionPairRecursive1']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromContradictionPairRecursive1']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromContradictionPairRecursive1']
+
+
+class TopicSnapshotIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromContradictionPairRecursive2']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromContradictionPairRecursive2']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromContradictionPairRecursive2']
+
+
+class TopicSnapshotIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromContradictionPairRecursive3']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromContradictionPairRecursive3']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromContradictionPairRecursive3']
+
+
+class TopicSnapshotIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    subscription: Union[bool, 'TopicSubscriptionArgsFromContradictionPairRecursive4']
+    snapshotEvents: Union[bool, 'FindManySnapshotEventArgsFromContradictionPairRecursive4']
+    snapshotClaims: Union[bool, 'FindManySnapshotClaimArgsFromContradictionPairRecursive4']
+
+
+class TopicSnapshotIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class TopicSnapshotArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class TopicSnapshotArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class TopicSnapshotArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class TopicSnapshotArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class TopicSnapshotArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManyTopicSnapshotArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive1'
+
+
+class FindManyTopicSnapshotArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive2'
+
+
+class FindManyTopicSnapshotArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive3'
+
+
+class FindManyTopicSnapshotArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    include: 'TopicSnapshotIncludeFromTopicSnapshotRecursive4'
+
+
+class FindManyTopicSnapshotArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['TopicSnapshotOrderByInput', List['TopicSnapshotOrderByInput']]
+    where: 'TopicSnapshotWhereInput'
+    cursor: 'TopicSnapshotWhereUniqueInput'
+    distinct: List['TopicSnapshotScalarFieldKeys']
+    
+    
+
+class SnapshotEventIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromContradictionPairRecursive1']
+    event: Union[bool, 'EventArgsFromContradictionPairRecursive1']
+
+
+class SnapshotEventIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromContradictionPairRecursive2']
+    event: Union[bool, 'EventArgsFromContradictionPairRecursive2']
+
+
+class SnapshotEventIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromContradictionPairRecursive3']
+    event: Union[bool, 'EventArgsFromContradictionPairRecursive3']
+
+
+class SnapshotEventIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromContradictionPairRecursive4']
+    event: Union[bool, 'EventArgsFromContradictionPairRecursive4']
+
+
+class SnapshotEventIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class SnapshotEventArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class SnapshotEventArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class SnapshotEventArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class SnapshotEventArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class SnapshotEventArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManySnapshotEventArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive1'
+
+
+class FindManySnapshotEventArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive2'
+
+
+class FindManySnapshotEventArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive3'
+
+
+class FindManySnapshotEventArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    include: 'SnapshotEventIncludeFromSnapshotEventRecursive4'
+
+
+class FindManySnapshotEventArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotEventOrderByInput', List['SnapshotEventOrderByInput']]
+    where: 'SnapshotEventWhereInput'
+    cursor: 'SnapshotEventWhereUniqueInput'
+    distinct: List['SnapshotEventScalarFieldKeys']
+    
+    
+
+class SnapshotClaimIncludeFromContradictionPair(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromContradictionPairRecursive1']
+    claim: Union[bool, 'ClaimArgsFromContradictionPairRecursive1']
+
+
+class SnapshotClaimIncludeFromContradictionPairRecursive1(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromContradictionPairRecursive2']
+    claim: Union[bool, 'ClaimArgsFromContradictionPairRecursive2']
+
+
+class SnapshotClaimIncludeFromContradictionPairRecursive2(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromContradictionPairRecursive3']
+    claim: Union[bool, 'ClaimArgsFromContradictionPairRecursive3']
+
+
+class SnapshotClaimIncludeFromContradictionPairRecursive3(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+    snapshot: Union[bool, 'TopicSnapshotArgsFromContradictionPairRecursive4']
+    claim: Union[bool, 'ClaimArgsFromContradictionPairRecursive4']
+
+
+class SnapshotClaimIncludeFromContradictionPairRecursive4(TypedDict, total=False):
+    """Relational arguments for ContradictionPair"""
+
+    
+
+class SnapshotClaimArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class SnapshotClaimArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class SnapshotClaimArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class SnapshotClaimArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class SnapshotClaimArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    
+    
+
+class FindManySnapshotClaimArgsFromContradictionPair(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive1'
+
+
+class FindManySnapshotClaimArgsFromContradictionPairRecursive1(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive2'
+
+
+class FindManySnapshotClaimArgsFromContradictionPairRecursive2(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive3'
+
+
+class FindManySnapshotClaimArgsFromContradictionPairRecursive3(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
+    include: 'SnapshotClaimIncludeFromSnapshotClaimRecursive4'
+
+
+class FindManySnapshotClaimArgsFromContradictionPairRecursive4(TypedDict, total=False):
+    """Arguments for ContradictionPair"""
+    take: int
+    skip: int
+    order_by: Union['SnapshotClaimOrderByInput', List['SnapshotClaimOrderByInput']]
+    where: 'SnapshotClaimWhereInput'
+    cursor: 'SnapshotClaimWhereUniqueInput'
+    distinct: List['SnapshotClaimScalarFieldKeys']
     
     
 

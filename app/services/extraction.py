@@ -1,14 +1,13 @@
 """
-Phase 2 Final Quality Gate — Extraction Layer
+Phase 2 Final — Extraction Layer
 
 Pipeline:
   1. Extract claims WITH claim_type classification (single cached LLM call)
   2. Reject OPINION, ANALYSIS, BIOGRAPHICAL, PREDICTION, QUOTE types
   3. Score claim quality (heuristic — no LLM)
-  4. Score entity salience (heuristic — no LLM)
-  5. Within-article cosine deduplication (sim > 0.92 → discard)
-  6. Embedding relevance filter
-  7. Store claims + evidence (deduplicated)
+  4. Within-article cosine deduplication (sim > 0.92 → discard)
+  5. Embedding relevance filter (cosine sim to query)
+  6. Store claims + evidence (deduplicated)
 
 All LLM calls go through llm_client.py for caching + analytics.
 """
@@ -138,22 +137,37 @@ BIOGRAPHICAL_SIGNALS = {
     'ex-husband', 'children', 'modelling', 'modeling contracts',
 }
 
+# Journalist commentary phrases that should never be stored as claims
+COMMENTARY_SIGNALS = {
+    'added more color', 'raises questions', 'remains to be seen',
+    'it is unclear', 'could signal', 'observers say', 'critics argue',
+    'some experts believe', 'time will tell', 'it is worth noting',
+    'the bigger picture', 'what this means', 'the takeaway', 'in other words',
+    'the bottom line', 'the question is', 'what remains unclear',
+    'didn\'t immediately respond', 'could not be reached', 'declined to comment',
+}
+
 def compute_quality_score(text: str) -> float:
-    """Score claim quality. Penalize opinion/biographical signals."""
+    """Score claim quality. Penalize opinion/biographical/commentary signals."""
     score = 0.0
     text_lower = text.lower()
 
-    # Issue 9: Reject questions and rhetorical statements
+    # Hard reject: questions and rhetorical statements
     if '?' in text:
-        return 0.0  # Hard reject
+        return 0.0
 
-    # Penalty: opinion/biographical language that the LLM type gate might miss
+    # Hard reject: opinion language
     for signal in OPINION_SIGNALS:
         if signal in text_lower:
-            return 0.0  # Hard reject
+            return 0.0
+    # Hard reject: journalist commentary
+    for signal in COMMENTARY_SIGNALS:
+        if signal in text_lower:
+            return 0.0
+    # Near-certain reject: biographical content
     for signal in BIOGRAPHICAL_SIGNALS:
         if signal in text_lower:
-            return 0.10  # Near-certain reject (below 0.40 threshold)
+            return 0.10
 
     # Named entities (capitalized multi-word phrases)
     capitalized = re.findall(r'\b[A-Z][a-z]+(?:\s[A-Z][a-z]+)*\b', text)
@@ -189,74 +203,6 @@ def compute_quality_score(text: str) -> float:
         score += 0.05
     else:
         score += 0.08
-
-    return min(score, 1.0)
-
-# ── Entity Salience Filter (heuristic, NO LLM) ──────────────────
-
-def compute_entity_salience(
-    query: str,
-    claim_text: str,
-    article_title: str = "",
-) -> float:
-    """
-    Score how salient the query entity is to this claim.
-    Uses: headline presence (0.4), lead position (0.2),
-    mention frequency (0.2), article title match (0.2).
-    """
-    if not query:
-        return 1.0
-    query_lower = query.lower()
-    claim_lower = claim_text.lower()
-    title_lower = article_title.lower() if article_title else ""
-
-    # Check if query entity parts are mentioned (handles "Elon Musk" → "Musk")
-    query_parts = query_lower.split()
-    any_part_present = any(part in claim_lower for part in query_parts if len(part) > 2)
-    full_match = query_lower in claim_lower
-
-    # If neither the full query nor any part is in the claim,
-    # give a low base score — let embedding relevance (Gate 4) decide
-    if not any_part_present:
-        return 0.25  # soft penalty, not hard reject
-
-    score = 0.0
-
-    # Headline/title presence (0.4 weight)
-    if title_lower and query_lower in title_lower:
-        score += 0.40
-    elif title_lower and any(p in title_lower for p in query_parts if len(p) > 2):
-        score += 0.25
-    else:
-        score += 0.10
-
-    if full_match:
-        # Position in claim — earlier = more salient (0.2 weight)
-        pos = claim_lower.find(query_lower)
-        relative_pos = pos / max(len(claim_lower), 1)
-        if relative_pos < 0.25:
-            score += 0.20
-        elif relative_pos < 0.50:
-            score += 0.12
-        else:
-            score += 0.05
-
-        # Mention frequency (0.2 weight)
-        freq = claim_lower.count(query_lower)
-        if freq >= 2:
-            score += 0.20
-        elif freq == 1:
-            score += 0.10
-    else:
-        # Partial match (e.g., "Musk" in claim for "Elon Musk" query)
-        score += 0.10  # Base for partial match
-
-    # First 5 words prominence (0.2 weight)
-    first_words = " ".join(claim_lower.split()[:5])
-    if any(p in first_words for p in query_parts if len(p) > 2):
-        score += 0.20
-    else:
-        score += 0.05
 
     return min(score, 1.0)
 
@@ -320,6 +266,12 @@ async def process_and_store_claims(
 ):
     """
     Final quality gate extraction pipeline with cached LLM calls.
+
+    Gates:
+      0. Within-article deduplication (cosine sim > 0.92)
+      1. Claim type filter (EVENT, NUMERIC only)
+      2. Quality score (opinion/biographical/commentary rejection)
+      3. Embedding relevance (cosine sim to query > 0.40)
     """
     claims = await extract_claims(prisma, article_text)
     if not claims:
@@ -330,7 +282,7 @@ async def process_and_store_claims(
 
     inserted = []
     stats = {"total": len(claims), "type_rejected": 0, "quality_rejected": 0,
-             "salience_rejected": 0, "relevance_rejected": 0, "stored": 0}
+             "relevance_rejected": 0, "stored": 0}
 
     for claim in claims:
         text = claim.get("text", "").strip()
@@ -346,20 +298,13 @@ async def process_and_store_claims(
             stats["type_rejected"] += 1
             continue
 
-        # ── Gate 2: Quality Score (with opinion/biographical penalty) ──
+        # ── Gate 2: Quality Score (opinion/biographical/commentary penalty) ──
         quality = compute_quality_score(text)
         if quality < 0.40:
             stats["quality_rejected"] += 1
             continue
 
-        # ── Gate 3: Entity Salience ──
-        if query:
-            salience = compute_entity_salience(query, text, article_title)
-            if salience < 0.40:
-                stats["salience_rejected"] += 1
-                continue
-
-        # ── Gate 4: Embedding Relevance ──
+        # ── Gate 3: Embedding Relevance ──
         embedding = embed_text(text)
         relevance = claim_relevance(query, embedding)
         if query and relevance < 0.40:
@@ -417,6 +362,6 @@ async def process_and_store_claims(
     logger.info(
         f"Extraction [{source}]: {stats['stored']}/{stats['total']} stored | "
         f"type={stats['type_rejected']} quality={stats['quality_rejected']} "
-        f"salience={stats['salience_rejected']} relevance={stats['relevance_rejected']}"
+        f"relevance={stats['relevance_rejected']}"
     )
     return inserted

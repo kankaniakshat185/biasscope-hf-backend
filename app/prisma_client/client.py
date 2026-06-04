@@ -88,7 +88,7 @@ log: logging.Logger = logging.getLogger(__name__)
 SCHEMA_PATH = Path('/Users/akshatkankani/Desktop/Github/biasscope-hf-backend/prisma/schema.prisma')
 PACKAGED_SCHEMA_PATH = Path(__file__).parent.joinpath('schema.prisma')
 ENGINE_TYPE: EngineType = EngineType.binary
-BINARY_PATHS = model_parse(BinaryPaths, {'queryEngine': {'darwin-arm64': '/Users/akshatkankani/Desktop/Github/biasscope-hf-backend/node_modules/prisma/query-engine-darwin-arm64', 'debian-openssl-1.1.x': '/Users/akshatkankani/Desktop/Github/biasscope-hf-backend/node_modules/prisma/query-engine-debian-openssl-1.1.x', 'debian-openssl-3.0.x': '/Users/akshatkankani/Desktop/Github/biasscope-hf-backend/node_modules/prisma/query-engine-debian-openssl-3.0.x'}, 'introspectionEngine': {}, 'migrationEngine': {}, 'libqueryEngine': {}, 'prismaFmt': {}})
+BINARY_PATHS = model_parse(BinaryPaths, {'queryEngine': {'darwin-arm64': '/Users/akshatkankani/.cache/prisma-python/binaries/5.17.0/393aa359c9ad4a4bb28630fb5613f9c281cde053/node_modules/prisma/query-engine-darwin-arm64', 'debian-openssl-1.1.x': '/Users/akshatkankani/.cache/prisma-python/binaries/5.17.0/393aa359c9ad4a4bb28630fb5613f9c281cde053/node_modules/prisma/query-engine-debian-openssl-1.1.x', 'debian-openssl-3.0.x': '/Users/akshatkankani/.cache/prisma-python/binaries/5.17.0/393aa359c9ad4a4bb28630fb5613f9c281cde053/node_modules/prisma/query-engine-debian-openssl-3.0.x'}, 'introspectionEngine': {}, 'migrationEngine': {}, 'libqueryEngine': {}, 'prismaFmt': {}})
 
 
 class Prisma(AsyncBasePrisma):
@@ -107,6 +107,11 @@ class Prisma(AsyncBasePrisma):
     claimcluster: 'actions.ClaimClusterActions[models.ClaimCluster]'
     llmcache: 'actions.LLMCacheActions[models.LLMCache]'
     llmusage: 'actions.LLMUsageActions[models.LLMUsage]'
+    demosnapshot: 'actions.DemoSnapshotActions[models.DemoSnapshot]'
+    topicsubscription: 'actions.TopicSubscriptionActions[models.TopicSubscription]'
+    topicsnapshot: 'actions.TopicSnapshotActions[models.TopicSnapshot]'
+    snapshotevent: 'actions.SnapshotEventActions[models.SnapshotEvent]'
+    snapshotclaim: 'actions.SnapshotClaimActions[models.SnapshotClaim]'
     consensusfact: 'actions.ConsensusFactActions[models.ConsensusFact]'
     contradictionpair: 'actions.ContradictionPairActions[models.ContradictionPair]'
 
@@ -124,6 +129,11 @@ class Prisma(AsyncBasePrisma):
         'claimcluster',
         'llmcache',
         'llmusage',
+        'demosnapshot',
+        'topicsubscription',
+        'topicsnapshot',
+        'snapshotevent',
+        'snapshotclaim',
         'consensusfact',
         'contradictionpair',
     )
@@ -169,6 +179,11 @@ class Prisma(AsyncBasePrisma):
         self.claimcluster = actions.ClaimClusterActions[models.ClaimCluster](self, models.ClaimCluster)
         self.llmcache = actions.LLMCacheActions[models.LLMCache](self, models.LLMCache)
         self.llmusage = actions.LLMUsageActions[models.LLMUsage](self, models.LLMUsage)
+        self.demosnapshot = actions.DemoSnapshotActions[models.DemoSnapshot](self, models.DemoSnapshot)
+        self.topicsubscription = actions.TopicSubscriptionActions[models.TopicSubscription](self, models.TopicSubscription)
+        self.topicsnapshot = actions.TopicSnapshotActions[models.TopicSnapshot](self, models.TopicSnapshot)
+        self.snapshotevent = actions.SnapshotEventActions[models.SnapshotEvent](self, models.SnapshotEvent)
+        self.snapshotclaim = actions.SnapshotClaimActions[models.SnapshotClaim](self, models.SnapshotClaim)
         self.consensusfact = actions.ConsensusFactActions[models.ConsensusFact](self, models.ConsensusFact)
         self.contradictionpair = actions.ContradictionPairActions[models.ContradictionPair](self, models.ContradictionPair)
 
@@ -334,6 +349,11 @@ class Batch:
     claimcluster: 'ClaimClusterBatchActions'
     llmcache: 'LLMCacheBatchActions'
     llmusage: 'LLMUsageBatchActions'
+    demosnapshot: 'DemoSnapshotBatchActions'
+    topicsubscription: 'TopicSubscriptionBatchActions'
+    topicsnapshot: 'TopicSnapshotBatchActions'
+    snapshotevent: 'SnapshotEventBatchActions'
+    snapshotclaim: 'SnapshotClaimBatchActions'
     consensusfact: 'ConsensusFactBatchActions'
     contradictionpair: 'ContradictionPairBatchActions'
 
@@ -354,6 +374,11 @@ class Batch:
         self.claimcluster = ClaimClusterBatchActions(self)
         self.llmcache = LLMCacheBatchActions(self)
         self.llmusage = LLMUsageBatchActions(self)
+        self.demosnapshot = DemoSnapshotBatchActions(self)
+        self.topicsubscription = TopicSubscriptionBatchActions(self)
+        self.topicsnapshot = TopicSnapshotBatchActions(self)
+        self.snapshotevent = SnapshotEventBatchActions(self)
+        self.snapshotclaim = SnapshotClaimBatchActions(self)
         self.consensusfact = ConsensusFactBatchActions(self)
         self.contradictionpair = ContradictionPairBatchActions(self)
 
@@ -1845,6 +1870,561 @@ class LLMUsageBatchActions:
         self._batcher._add(
             method='delete_many',
             model=models.LLMUsage,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+
+
+
+# NOTE: some arguments are meaningless in this context but are included
+# for completeness sake
+class DemoSnapshotBatchActions:
+    def __init__(self, batcher: Batch) -> None:
+        self._batcher = batcher
+
+    def create(
+        self,
+        data: types.DemoSnapshotCreateInput,
+        include: Optional[types.DemoSnapshotInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='create',
+            model=models.DemoSnapshot,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+
+    def create_many(
+        self,
+        data: List[types.DemoSnapshotCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> None:
+        if skip_duplicates and self._batcher._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._batcher._active_provider, 'create_many_skip_duplicates')
+
+        self._batcher._add(
+            method='create_many',
+            model=models.DemoSnapshot,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+
+    def delete(
+        self,
+        where: types.DemoSnapshotWhereUniqueInput,
+        include: Optional[types.DemoSnapshotInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete',
+            model=models.DemoSnapshot,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def update(
+        self,
+        data: types.DemoSnapshotUpdateInput,
+        where: types.DemoSnapshotWhereUniqueInput,
+        include: Optional[types.DemoSnapshotInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='update',
+            model=models.DemoSnapshot,
+            arguments={
+                'data': data,
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def upsert(
+        self,
+        where: types.DemoSnapshotWhereUniqueInput,
+        data: types.DemoSnapshotUpsertInput,
+        include: Optional[types.DemoSnapshotInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='upsert',
+            model=models.DemoSnapshot,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+
+    def update_many(
+        self,
+        data: types.DemoSnapshotUpdateManyMutationInput,
+        where: types.DemoSnapshotWhereInput,
+    ) -> None:
+        self._batcher._add(
+            method='update_many',
+            model=models.DemoSnapshot,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+
+    def delete_many(
+        self,
+        where: Optional[types.DemoSnapshotWhereInput] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete_many',
+            model=models.DemoSnapshot,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+
+
+
+# NOTE: some arguments are meaningless in this context but are included
+# for completeness sake
+class TopicSubscriptionBatchActions:
+    def __init__(self, batcher: Batch) -> None:
+        self._batcher = batcher
+
+    def create(
+        self,
+        data: types.TopicSubscriptionCreateInput,
+        include: Optional[types.TopicSubscriptionInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='create',
+            model=models.TopicSubscription,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+
+    def create_many(
+        self,
+        data: List[types.TopicSubscriptionCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> None:
+        if skip_duplicates and self._batcher._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._batcher._active_provider, 'create_many_skip_duplicates')
+
+        self._batcher._add(
+            method='create_many',
+            model=models.TopicSubscription,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+
+    def delete(
+        self,
+        where: types.TopicSubscriptionWhereUniqueInput,
+        include: Optional[types.TopicSubscriptionInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete',
+            model=models.TopicSubscription,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def update(
+        self,
+        data: types.TopicSubscriptionUpdateInput,
+        where: types.TopicSubscriptionWhereUniqueInput,
+        include: Optional[types.TopicSubscriptionInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='update',
+            model=models.TopicSubscription,
+            arguments={
+                'data': data,
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def upsert(
+        self,
+        where: types.TopicSubscriptionWhereUniqueInput,
+        data: types.TopicSubscriptionUpsertInput,
+        include: Optional[types.TopicSubscriptionInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='upsert',
+            model=models.TopicSubscription,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+
+    def update_many(
+        self,
+        data: types.TopicSubscriptionUpdateManyMutationInput,
+        where: types.TopicSubscriptionWhereInput,
+    ) -> None:
+        self._batcher._add(
+            method='update_many',
+            model=models.TopicSubscription,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+
+    def delete_many(
+        self,
+        where: Optional[types.TopicSubscriptionWhereInput] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete_many',
+            model=models.TopicSubscription,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+
+
+
+# NOTE: some arguments are meaningless in this context but are included
+# for completeness sake
+class TopicSnapshotBatchActions:
+    def __init__(self, batcher: Batch) -> None:
+        self._batcher = batcher
+
+    def create(
+        self,
+        data: types.TopicSnapshotCreateInput,
+        include: Optional[types.TopicSnapshotInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='create',
+            model=models.TopicSnapshot,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+
+    def create_many(
+        self,
+        data: List[types.TopicSnapshotCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> None:
+        if skip_duplicates and self._batcher._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._batcher._active_provider, 'create_many_skip_duplicates')
+
+        self._batcher._add(
+            method='create_many',
+            model=models.TopicSnapshot,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+
+    def delete(
+        self,
+        where: types.TopicSnapshotWhereUniqueInput,
+        include: Optional[types.TopicSnapshotInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete',
+            model=models.TopicSnapshot,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def update(
+        self,
+        data: types.TopicSnapshotUpdateInput,
+        where: types.TopicSnapshotWhereUniqueInput,
+        include: Optional[types.TopicSnapshotInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='update',
+            model=models.TopicSnapshot,
+            arguments={
+                'data': data,
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def upsert(
+        self,
+        where: types.TopicSnapshotWhereUniqueInput,
+        data: types.TopicSnapshotUpsertInput,
+        include: Optional[types.TopicSnapshotInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='upsert',
+            model=models.TopicSnapshot,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+
+    def update_many(
+        self,
+        data: types.TopicSnapshotUpdateManyMutationInput,
+        where: types.TopicSnapshotWhereInput,
+    ) -> None:
+        self._batcher._add(
+            method='update_many',
+            model=models.TopicSnapshot,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+
+    def delete_many(
+        self,
+        where: Optional[types.TopicSnapshotWhereInput] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete_many',
+            model=models.TopicSnapshot,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+
+
+
+# NOTE: some arguments are meaningless in this context but are included
+# for completeness sake
+class SnapshotEventBatchActions:
+    def __init__(self, batcher: Batch) -> None:
+        self._batcher = batcher
+
+    def create(
+        self,
+        data: types.SnapshotEventCreateInput,
+        include: Optional[types.SnapshotEventInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='create',
+            model=models.SnapshotEvent,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+
+    def create_many(
+        self,
+        data: List[types.SnapshotEventCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> None:
+        if skip_duplicates and self._batcher._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._batcher._active_provider, 'create_many_skip_duplicates')
+
+        self._batcher._add(
+            method='create_many',
+            model=models.SnapshotEvent,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+
+    def delete(
+        self,
+        where: types.SnapshotEventWhereUniqueInput,
+        include: Optional[types.SnapshotEventInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete',
+            model=models.SnapshotEvent,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def update(
+        self,
+        data: types.SnapshotEventUpdateInput,
+        where: types.SnapshotEventWhereUniqueInput,
+        include: Optional[types.SnapshotEventInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='update',
+            model=models.SnapshotEvent,
+            arguments={
+                'data': data,
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def upsert(
+        self,
+        where: types.SnapshotEventWhereUniqueInput,
+        data: types.SnapshotEventUpsertInput,
+        include: Optional[types.SnapshotEventInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='upsert',
+            model=models.SnapshotEvent,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+
+    def update_many(
+        self,
+        data: types.SnapshotEventUpdateManyMutationInput,
+        where: types.SnapshotEventWhereInput,
+    ) -> None:
+        self._batcher._add(
+            method='update_many',
+            model=models.SnapshotEvent,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+
+    def delete_many(
+        self,
+        where: Optional[types.SnapshotEventWhereInput] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete_many',
+            model=models.SnapshotEvent,
+            arguments={'where': where},
+            root_selection=['count'],
+        )
+
+
+
+# NOTE: some arguments are meaningless in this context but are included
+# for completeness sake
+class SnapshotClaimBatchActions:
+    def __init__(self, batcher: Batch) -> None:
+        self._batcher = batcher
+
+    def create(
+        self,
+        data: types.SnapshotClaimCreateInput,
+        include: Optional[types.SnapshotClaimInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='create',
+            model=models.SnapshotClaim,
+            arguments={
+                'data': data,
+                'include': include,
+            },
+        )
+
+    def create_many(
+        self,
+        data: List[types.SnapshotClaimCreateWithoutRelationsInput],
+        *,
+        skip_duplicates: Optional[bool] = None,
+    ) -> None:
+        if skip_duplicates and self._batcher._active_provider in CREATE_MANY_SKIP_DUPLICATES_UNSUPPORTED:
+            raise errors.UnsupportedDatabaseError(self._batcher._active_provider, 'create_many_skip_duplicates')
+
+        self._batcher._add(
+            method='create_many',
+            model=models.SnapshotClaim,
+            arguments={
+                'data': data,
+                'skipDuplicates': skip_duplicates,
+            },
+            root_selection=['count'],
+        )
+
+    def delete(
+        self,
+        where: types.SnapshotClaimWhereUniqueInput,
+        include: Optional[types.SnapshotClaimInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete',
+            model=models.SnapshotClaim,
+            arguments={
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def update(
+        self,
+        data: types.SnapshotClaimUpdateInput,
+        where: types.SnapshotClaimWhereUniqueInput,
+        include: Optional[types.SnapshotClaimInclude] = None
+    ) -> None:
+        self._batcher._add(
+            method='update',
+            model=models.SnapshotClaim,
+            arguments={
+                'data': data,
+                'where': where,
+                'include': include,
+            },
+        )
+
+    def upsert(
+        self,
+        where: types.SnapshotClaimWhereUniqueInput,
+        data: types.SnapshotClaimUpsertInput,
+        include: Optional[types.SnapshotClaimInclude] = None,
+    ) -> None:
+        self._batcher._add(
+            method='upsert',
+            model=models.SnapshotClaim,
+            arguments={
+                'where': where,
+                'include': include,
+                'create': data.get('create'),
+                'update': data.get('update'),
+            },
+        )
+
+    def update_many(
+        self,
+        data: types.SnapshotClaimUpdateManyMutationInput,
+        where: types.SnapshotClaimWhereInput,
+    ) -> None:
+        self._batcher._add(
+            method='update_many',
+            model=models.SnapshotClaim,
+            arguments={'data': data, 'where': where,},
+            root_selection=['count'],
+        )
+
+    def delete_many(
+        self,
+        where: Optional[types.SnapshotClaimWhereInput] = None,
+    ) -> None:
+        self._batcher._add(
+            method='delete_many',
+            model=models.SnapshotClaim,
             arguments={'where': where},
             root_selection=['count'],
         )

@@ -19,6 +19,11 @@ PRISMA_MODELS: set[str] = {
     'ClaimCluster',
     'LLMCache',
     'LLMUsage',
+    'DemoSnapshot',
+    'TopicSubscription',
+    'TopicSnapshot',
+    'SnapshotEvent',
+    'SnapshotClaim',
     'ConsensusFact',
     'ContradictionPair',
 }
@@ -28,6 +33,7 @@ RELATIONAL_FIELD_MAPPINGS: dict[str, dict[str, str]] = {
         'sessions': 'Session',
         'accounts': 'Account',
         'searches': 'Search',
+        'subscriptions': 'TopicSubscription',
     },
     'Session': {
         'user': 'User',
@@ -51,12 +57,14 @@ RELATIONAL_FIELD_MAPPINGS: dict[str, dict[str, str]] = {
     'Claim': {
         'cluster': 'ClaimCluster',
         'evidence': 'Evidence',
+        'snapshotClaims': 'SnapshotClaim',
     },
     'Evidence': {
         'claim': 'Claim',
     },
     'Event': {
         'claimClusters': 'ClaimCluster',
+        'snapshotEvents': 'SnapshotEvent',
     },
     'ClaimCluster': {
         'event': 'Event',
@@ -65,6 +73,25 @@ RELATIONAL_FIELD_MAPPINGS: dict[str, dict[str, str]] = {
     'LLMCache': {
     },
     'LLMUsage': {
+    },
+    'DemoSnapshot': {
+    },
+    'TopicSubscription': {
+        'user': 'User',
+        'snapshots': 'TopicSnapshot',
+    },
+    'TopicSnapshot': {
+        'subscription': 'TopicSubscription',
+        'snapshotEvents': 'SnapshotEvent',
+        'snapshotClaims': 'SnapshotClaim',
+    },
+    'SnapshotEvent': {
+        'snapshot': 'TopicSnapshot',
+        'event': 'Event',
+    },
+    'SnapshotClaim': {
+        'snapshot': 'TopicSnapshot',
+        'claim': 'Claim',
     },
     'ConsensusFact': {
     },
