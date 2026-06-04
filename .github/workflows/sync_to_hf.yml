@@ -20,4 +20,4 @@ jobs:
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
-          git push -f https://Akshat185:$HF_TOKEN@huggingface.co/spaces/Akshat185/biasscope main
+          git push -f https://kankaniakshat185:$HF_TOKEN@huggingface.co/spaces/kankaniakshat185/biasscope main
