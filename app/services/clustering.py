@@ -186,9 +186,9 @@ async def run_claim_clustering(prisma):
     if not groups:
         return
 
-    # LLM Merge (1 cached call)
-    groups = await _llm_merge_pass(prisma, groups)
-    logger.info(f"[DIAG] After merge: {len(groups)} clusters.")
+    # LLM Merge (1 cached call) - COMMENTED OUT BY REQUEST
+    # groups = await _llm_merge_pass(prisma, groups)
+    # logger.info(f"[DIAG] After merge: {len(groups)} clusters.")
 
     # Per-cluster
     for label, members in groups.items():
@@ -210,40 +210,40 @@ async def run_claim_clustering(prisma):
 
 # ── LLM Merge Pass (1 cached call) ───────────────────────────────
 
-#async def _llm_merge_pass(prisma, groups: Dict[int, List[Dict]]) -> Dict[int, List[Dict]]:
-    if len(groups) <= 1:
-        return groups
-
-    payload = []
-    for lbl in list(groups.keys()):
-        payload.append({
-            "cluster_id": int(lbl),
-            "claims": [m["text"] for m in groups[lbl]][:8],
-        })
-
-    system_prompt = (
-        "Merge clusters describing the SAME real-world event. "
-        "Only merge if claims are about the exact same story. "
-        "Do NOT merge loosely related topics. "
-        "Return JSON: "
-        '{"merge_groups": [[id1, id2]]} '
-        "If no merges: "
-        '{"merge_groups": []}'
-    )
-
-    raw = await cached_llm_call(prisma, "merge", system_prompt, f"Clusters:\n{json.dumps(payload)}")
-    data = parse_json_safe(raw, {"merge_groups": []})
-
-    for group in data.get("merge_groups", []):
-        if not group or len(group) < 2:
-            continue
-        target = group[0]
-        for src in group[1:]:
-            if src in groups and target in groups:
-                groups[target].extend(groups[src])
-                del groups[src]
-
-    return groups
+# async def _llm_merge_pass(prisma, groups: Dict[int, List[Dict]]) -> Dict[int, List[Dict]]:
+#     if len(groups) <= 1:
+#         return groups
+# 
+#     payload = []
+#     for lbl in list(groups.keys()):
+#         payload.append({
+#             "cluster_id": int(lbl),
+#             "claims": [m["text"] for m in groups[lbl]][:8],
+#         })
+# 
+#     system_prompt = (
+#         "Merge clusters describing the SAME real-world event. "
+#         "Only merge if claims are about the exact same story. "
+#         "Do NOT merge loosely related topics. "
+#         "Return JSON: "
+#         '{"merge_groups": [[id1, id2]]} '
+#         "If no merges: "
+#         '{"merge_groups": []}'
+#     )
+# 
+#     raw = await cached_llm_call(prisma, "merge", system_prompt, f"Clusters:\n{json.dumps(payload)}")
+#     data = parse_json_safe(raw, {"merge_groups": []})
+# 
+#     for group in data.get("merge_groups", []):
+#         if not group or len(group) < 2:
+#             continue
+#         target = group[0]
+#         for src in group[1:]:
+#             if src in groups and target in groups:
+#                 groups[target].extend(groups[src])
+#                 del groups[src]
+# 
+#     return groups
 
 # ── Canonical Claim (1 cached call per cluster) ──────────────────
 
