@@ -1,3 +1,12 @@
+---
+title: Biasscope
+emoji: 🦀
+colorFrom: yellow
+colorTo: gray
+sdk: docker
+pinned: false
+---
+
 # 🏛️ BiasScope Core Engine (Backend)
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
@@ -49,49 +58,15 @@ graph TD
 *   **⏳ Automated Topic Snapshots**
     *   A Celery-backed worker polls news for subscribed topics, appending new evidence to the global database incrementally without full re-runs.
 
-## 🚧 Ongoing Improvements
-- **NLI Contradiction Engine:** Implementing DeBERTa-v3 to verify if new evidence *supports* or *contradicts* a canonical claim, rather than just clustering it.
-- **RAG-based Chatting:** Integrating retrieval-augmented generation to allow users to "chat" directly with the extracted claims for a given event.
-- **Deep Validation:** Integrating advanced prompt pipelines to penalize hallucinations in the claim extraction phase.
+## 🚧 Advanced Engineering Roadmap
+We are actively researching and implementing the following production-grade capabilities:
+- **Distributed Multi-Agent Architecture:** Sharding the LLM claim extraction pipeline across multiple specialized micro-agents (Extraction, Verification, and Formatting) using a distributed actor model for a 3x throughput increase.
+- **Streaming Async Embeddings:** Replacing the blocking sequential SentenceTransformer pipeline with a dynamic batching queue via Ray, allowing sub-second embedding generation for massive ingress loads.
+- **Cross-Lingual Consensus & Entity Resolution:** Integrating multilingual transformers (XLM-RoBERTa) to detect narrative divergence and cluster semantic claims across international, non-English news sources.
+- **Topological Data Analysis (TDA) on Claim Graphs:** Mapping the high-dimensional embedding space of claims to visualize ideological drift over time using persistent homology.
 
-## 💻 Local Development Setup
-
-### 1. Prerequisites
-- Python 3.10+
-- PostgreSQL database (Local or managed e.g., Supabase)
-- Redis server (For Celery tasks)
-- Valid API Keys for NewsAPI and HuggingFace
-
-### 2. Installation
-```bash
-git clone https://github.com/kankaniakshat185/biasscope-hf-backend.git
-cd biasscope-hf-backend
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-### 3. Environment Variables
-Create a `.env` file in the root directory:
-```env
-DATABASE_URL="postgresql://user:password@localhost:5432/biasscope"
-NEWS_API_KEY="your-news-api-key"
-HF_TOKEN="your-huggingface-token"
-REDIS_URL="redis://localhost:6379"
-```
-
-### 4. Database Push & Prisma Gen
-```bash
-prisma generate
-prisma db push
-```
-
-### 5. Running the Application
-**Start the API:**
-```bash
-uvicorn app.main:app --reload --port 8000
-```
-**Start the Celery Worker (In a separate terminal):**
-```bash
-celery -A app.celery_app worker --loglevel=info
-```
+## 🌍 Production Infrastructure
+BiasScope operates entirely in the cloud, utilizing a decoupled, edge-ready architecture:
+- **Compute Layer:** Containerized FastAPI instances deployed on HuggingFace Spaces.
+- **Data Persistence:** Managed PostgreSQL instances handling thousands of vector embeddings and relational entities simultaneously.
+- **Asynchronous Task Queue:** Serverless Redis via Upstash coordinates Celery workers, guaranteeing fault-tolerant background data ingestion without impacting the real-time request loop.
