@@ -26,6 +26,19 @@ celery_app.conf.update(
     result_serializer="json",
     timezone="UTC",
     enable_utc=True,
+    worker_redirect_stdouts=False,
+    worker_redirect_stdouts_level="INFO",
+    broker_transport_options={
+        "visibility_timeout": 3600,
+        "socket_keepalive": True,
+        "socket_timeout": 60,
+        "retry_on_timeout": True
+    },
+    redis_backend_transport_options={
+        "socket_keepalive": True,
+        "socket_timeout": 60,
+        "retry_on_timeout": True
+    },
     # Weekly snapshot schedule
     beat_schedule={
         "generate-weekly-snapshots": {
