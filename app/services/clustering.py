@@ -221,22 +221,35 @@ async def run_claim_clustering(prisma):
         member_vecs = np.array([X[m["vec_idx"]] for m in members])
         cohesion = compute_cluster_cohesion(member_vecs)
         if cohesion >= COHESION_THRESHOLD:
-            cohesive_groups[label] = members
+            cohesive_groups[label] = {"members": members, "cohesion": cohesion}
         else:
             rejected_cohesion += 1
             logger.info(f"[COHESION] Cluster {label} rejected (cohesion={cohesion:.3f}, threshold={COHESION_THRESHOLD})")
+            # Still persist rejected clusters for analysis (but they won't get events)
+            raw_claim_texts = [m["text"] for m in members]
+            title = generate_event_title(raw_claim_texts)
+            cluster_record = await prisma.claimcluster.create(
+                data={"title": title, "canonicalClaim": raw_claim_texts[0], "cohesionScore": cohesion}
+            )
+            for member in members:
+                await prisma.claim.update(
+                    where={"id": member["id"]},
+                    data={"clusterId": cluster_record.id},
+                )
 
     if rejected_cohesion > 0:
         logger.info(f"[DIAG] Cohesion gate: {rejected_cohesion} clusters rejected, {len(cohesive_groups)} passed")
 
     # Per-cluster: generate canonical claim + title, persist to DB
-    for label, members in cohesive_groups.items():
+    for label, data in cohesive_groups.items():
+        members = data["members"]
+        cohesion = data["cohesion"]
         raw_claim_texts = [m["text"] for m in members]
         canonical = await _generate_canonical_claim(prisma, raw_claim_texts)
         title = generate_event_title(raw_claim_texts)
 
         cluster_record = await prisma.claimcluster.create(
-            data={"title": title, "canonicalClaim": canonical}
+            data={"title": title, "canonicalClaim": canonical, "cohesionScore": cohesion}
         )
 
         for member in members:

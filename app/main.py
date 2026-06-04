@@ -40,6 +40,16 @@ async def shutdown():
 def read_root():
     return {"status": "ok", "service": "Biascope Backend"}
 
+@app.get("/demo/{topic}")
+async def get_demo_snapshot(topic: str):
+    """
+    Returns a fully precomputed intelligence report instantly for demo purposes.
+    """
+    snapshot = await prisma.demosnapshot.find_unique(where={"topic": topic.lower()})
+    if not snapshot:
+        raise HTTPException(status_code=404, detail=f"No demo snapshot found for topic '{topic}'")
+    return snapshot.data
+
 async def background_phase2_pipeline(search_id: str):
     """
     Feature 2: Pipeline Stage Toggles
