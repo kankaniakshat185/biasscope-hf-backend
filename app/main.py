@@ -122,7 +122,7 @@ async def get_subscriptions(user_id: str):
     """Get all active subscriptions for a user."""
     return await prisma.topicsubscription.find_many(
         where={"userId": user_id, "isActive": True},
-        include={"snapshots": {"order": {"createdAt": "desc"}, "take": 5}}
+        include={"snapshots": {"orderBy": {"createdAt": "desc"}, "take": 5}}
     )
 
 @app.delete("/subscriptions")
