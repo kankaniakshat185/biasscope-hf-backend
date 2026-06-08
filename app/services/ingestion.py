@@ -61,7 +61,6 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
     response = None
     try:
         # Phase 1: Hyper-Precision (Headline Match) + Popularity Sorting
-        # 'popularity' ensures we get major network trending news (BBC, ESPN) instead of obscure bot-blogs
         response = newsapi.get_everything(
             qintitle=strict_query,
             domains=domains,
@@ -70,10 +69,9 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
             to=to_date,
             language='en',
             sort_by='popularity',
-            page_size=20
+            page_size=10
         )
         
-        # If the headline-only search is too strict, fallback to body text
         if response.get('totalResults', 0) < 5:
             print(f"Only {response.get('totalResults')} headline matches found. Intelligently falling back to exact-phrase body search.")
             response = newsapi.get_everything(
@@ -84,17 +82,48 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
                 to=to_date,
                 language='en',
                 sort_by='popularity',
-                page_size=20
+                page_size=10
             )
             
     except Exception as e:
         print(f"NewsAPI error: {e}")
-        return []
+        response = {'articles': []}
 
     articles_data = response.get('articles', [])
     
+    # --- NEW: GDELT Integration ---
+    try:
+        import httpx
+        gdelt_query = strict_query.replace(' ', '+')
+        if gdelt_query:
+            gdelt_url = f"https://api.gdeltproject.org/api/v2/doc/doc?query={gdelt_query}&mode=artlist&maxrecords=10&format=json"
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                gdelt_resp = await client.get(gdelt_url)
+                if gdelt_resp.status_code == 200:
+                    gdelt_json = gdelt_resp.json()
+                    gdelt_articles = gdelt_json.get('articles', [])
+                    for ga in gdelt_articles:
+                        # Convert GDELT format to NewsAPI format for downstream compatibility
+                        articles_data.append({
+                            'title': ga.get('title', ''),
+                            'url': ga.get('url', ''),
+                            'description': ga.get('seendate', ''), # fallback description
+                            'publishedAt': ga.get('seendate', '')
+                        })
+    except Exception as e:
+        print(f"GDELT fetch error: {e}")
+        
+    # Deduplicate by URL
+    seen_urls = set()
+    unique_articles = []
+    for a in articles_data:
+        u = a.get('url')
+        if u and u not in seen_urls:
+            seen_urls.add(u)
+            unique_articles.append(a)
+
     # Run newspaper scraping concurrently to save time
-    results = await asyncio.gather(*[scrape_article(a) for a in articles_data])
+    results = await asyncio.gather(*[scrape_article(a) for a in unique_articles[:20]])
     return [r for r in results if r is not None]
 
 async def scrape_article(article_data):

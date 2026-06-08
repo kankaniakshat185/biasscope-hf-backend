@@ -24,6 +24,25 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity as cos_sim
 from typing import List, Dict, Any
 from app.services.llm_client import cached_llm_call
+import warnings
+
+# --- NLI Pipeline ---
+# Use a fast DeBERTa v3 small model for NLI Contradiction routing
+nli_classifier = None
+def get_nli_classifier():
+    global nli_classifier
+    if nli_classifier is None:
+        from transformers import pipeline
+        import logging
+        logging.getLogger("transformers").setLevel(logging.ERROR)
+        warnings.filterwarnings("ignore", category=UserWarning)
+        try:
+            # cross-encoder/nli-deberta-v3-small is extremely fast and effective
+            nli_classifier = pipeline("text-classification", model="cross-encoder/nli-deberta-v3-small", top_k=None)
+        except Exception as e:
+            logger.error(f"Failed to load NLI model: {e}")
+            nli_classifier = False
+    return nli_classifier
 
 logger = logging.getLogger(__name__)
 
@@ -309,16 +328,48 @@ async def run_event_detection(prisma):
         unique_urls = set(e.url for e in all_evidence)
         url_count = len(unique_urls)
 
-        # ── Cross-Source Consensus Score ──
+        # ── Cross-Source Consensus & Polarization Score (via NLI) ──
         consensus_score = min(source_count / max(claim_count, 1), 1.0)
-
+        
         # Publisher diversity
         publisher_diversity = min(source_count / max(url_count, 1), 1.0) if url_count > 0 else 0.0
+
+        polarization_score = 0.0
+        # If we have multiple unique claims, check for contradictions
+        if claim_count >= 2:
+            clf = get_nli_classifier()
+            if clf:
+                contradiction_count = 0
+                total_pairs = 0
+                # Take up to 5 claims to compare to avoid quadratic explosion
+                claims_to_compare = [c.canonicalClaim for c in cluster.claims[:5]]
+                for i in range(len(claims_to_compare)):
+                    for j in range(i+1, len(claims_to_compare)):
+                        pair_text = f"{claims_to_compare[i]} [SEP] {claims_to_compare[j]}"
+                        try:
+                            # Run zero-shot inference
+                            res = clf(pair_text)
+                            if res:
+                                # the output is a list of dicts: [{'label': 'Contradiction', 'score': 0.99}, ...]
+                                # check if Contradiction is the top label or has high score
+                                top_label = res[0][0]['label'] if isinstance(res[0], list) else res[0]['label']
+                                if top_label.lower() == 'contradiction':
+                                    contradiction_count += 1
+                        except Exception:
+                            pass
+                        total_pairs += 1
+                if total_pairs > 0:
+                    polarization_score = contradiction_count / total_pairs
+
+        # If polarization is high, consensus drops!
+        if polarization_score > 0.3:
+            consensus_score = max(0.0, consensus_score - polarization_score)
 
         await prisma.claimcluster.update(
             where={"id": cluster.id},
             data={"consensusScore": consensus_score},
         )
+
 
         # ── EVENT ELIGIBILITY GATE ──
         # An event must represent cross-source convergence.
