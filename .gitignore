@@ -7,3 +7,4 @@ venv/
 .DS_Store
 node_modules/
 learning_note.md
+learning_notes/
