@@ -61,6 +61,28 @@ def repair_truncated_json(raw: str) -> str:
         return raw
     except json.JSONDecodeError:
         pass
+    # Check for multiple concatenated JSON objects
+    results = []
+    decoder = json.JSONDecoder()
+    raw_decode = raw
+    while raw_decode:
+        try:
+            obj, index = decoder.raw_decode(raw_decode)
+            results.append(obj)
+            raw_decode = raw_decode[index:].strip()
+        except json.JSONDecodeError:
+            break
+    
+    if results:
+        # If we successfully parsed multiple objects, wrap them in a valid JSON structure
+        combined_claims = []
+        for r in results:
+            if isinstance(r, dict) and "claims" in r:
+                combined_claims.extend(r["claims"])
+            elif isinstance(r, list):
+                combined_claims.extend(r)
+        return json.dumps({"claims": combined_claims})
+
     last_complete = raw.rfind('},')
     if last_complete == -1:
         last_complete = raw.rfind('}')
@@ -320,15 +342,13 @@ async def process_and_store_claims(
         CROSS_ARTICLE_DEDUP_THRESHOLD = 0.88
 
         existing_match = await prisma.query_raw(
-            """
+            f'''
             SELECT id, "canonicalClaim"
             FROM "claim"
-            WHERE 1 - (embedding <=> $1::vector) > $2
-            ORDER BY embedding <=> $1::vector
+            WHERE 1 - (embedding <=> '{vector_string}'::vector) > {CROSS_ARTICLE_DEDUP_THRESHOLD}
+            ORDER BY embedding <=> '{vector_string}'::vector
             LIMIT 1
-            """,
-            vector_string,
-            CROSS_ARTICLE_DEDUP_THRESHOLD,
+            '''
         )
 
         if existing_match:
