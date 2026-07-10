@@ -9,9 +9,11 @@ pinned: false
 
 # BiasScope Core Engine
 
-A high-performance, claim-centric natural language processing engine that powers the BiasScope Intelligence Dashboard.
+A high-performance, claim-centric natural language processing engine that powers the BiasScope Intelligence Dashboard. This backend drives macro-level media bias analysis by scraping, cleaning, clustering, and evaluating thousands of news articles in real-time.
 
-![Architecture Diagram](docs/architecture-placeholder.png)
+> **Looking for the Frontend UI?**
+> The frontend application that pairs with this backend can be found here: 
+> [**BiasScope App Frontend**](https://github.com/kankaniakshat185/biasscope-app-frontend)
 
 [Live API Documentation](https://huggingface.co/spaces/kankaniakshat185/biasscope) • [Frontend Dashboard](https://biasscope-app-frontend.vercel.app/)
 
@@ -19,10 +21,10 @@ A high-performance, claim-centric natural language processing engine that powers
 
 - **Claim-Centric Ingestion Pipeline** — Distills raw articles into discrete, factual claims rather than relying on noisy article-level sentiment.
 - **Semantic Claim Clustering** — Utilizes `sentence-transformers/all-MiniLM-L6-v2` and `pgvector` to map semantically equivalent claims into unified entities across multiple publications.
-- **Single URL Deep-Dive** — Bypasses macro-topic aggregation to perform isolated claim extraction, source verification, and bias detection on any individual news article URL.
 - **Cross-Ideological Consensus Engine** — Programmatically evaluates the publisher diversity for individual claims to detect and flag corroborated narratives.
 - **Contrastive Echo Chambers** — Isolates political ecosystems to generate distinct, sophisticated LLM-driven analyses of how identical events are framed by different sides.
 - **Automated Topic Snapshots** — Redis-backed Celery workers incrementally append new evidence to the global database without redundant reprocessing.
+- **Robust Metrics Validation** — Mathematically derives Polarization Scores using Jensen-Shannon Divergence and calculates Data Quality Scores based on completeness, source diversity, and content richness.
 
 ## Production Infrastructure
 
@@ -38,21 +40,17 @@ BiasScope operates entirely in the cloud, utilizing a decoupled, edge-ready arch
 
 ```mermaid
 graph TD
-    A[Raw Media Ingestion] --> B{Input Modality}
-    B -->|Topic Search| C[NewsAPI Aggregator]
-    B -->|Single URL| D[Direct HTML Parsing / Trafilatura]
-    B -->|Image/Screenshot| E[Vision LLM Processor]
+    A[Topic Search Query] --> B[NewsAPI Aggregator]
     
-    C --> F[Data Cleaning & Deduplication]
-    D --> F
-    E --> F
+    B --> C[Data Cleaning & Deduplication]
+    C --> D[Llama-3 Claim Extraction Engine]
     
-    F --> G[Llama-3 Claim Extraction Engine]
-    G --> H[(Global Claim Database w/ pgvector)]
-    H --> I[Claim Clustering via Cosine Similarity]
-    I --> J[Event & Narrative Generation]
-    J --> K[Cross-Ideological Consensus Calculation]
-    K --> L[FastAPI Results Endpoint]
+    D --> E[(Global Claim Database w/ pgvector)]
+    E --> F[Claim Clustering via Cosine Similarity]
+    F --> G[Event & Narrative Generation]
+    
+    G --> H[Cross-Ideological Consensus Calculation]
+    H --> I[FastAPI Results Endpoint]
 ```
 </details>
 
@@ -60,7 +58,7 @@ The system consists of three primary layers:
 
 | Layer | Components |
 |-------|------------|
-| Ingestion & Extraction | NewsAPI scraper, Trafilatura (Single URL), Llama-3-Vision (Images), Llama-3-Instruct 8B |
+| Ingestion & Extraction | NewsAPI scraper, Llama-3-Instruct 8B |
 | Storage & Clustering | PostgreSQL `pgvector`, SentenceTransformers, Cosine Similarity merging |
 | API & Orchestration | FastAPI asynchronous endpoints, Celery workers, Upstash Redis queues |
 
@@ -113,6 +111,7 @@ Built-in logging and metrics for tracking the NLP pipeline:
 │   ├── services/
 │   │   ├── nlp.py        # Claim extraction and echo chamber logic
 │   │   ├── clustering.py # Vector embedding and semantic merging
+│   │   ├── validation.py # Mathematical polarization and DQS formulas
 │   │   └── ingestion.py  # External data fetchers
 │   └── prisma_client/    # ORM generated client
 ├── tests/                # Evaluation framework and unit tests
