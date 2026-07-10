@@ -126,6 +126,7 @@ model Insight {
   topKeywords         Json     // Array of strings or object
   biasDistribution    Json     // Counts for left/center/right
   dataQualityScore    Float
+  polarizationScore   Float?
   totalArticles       Int
   validArticles       Int
   duplicatesRemoved   Int

@@ -7080,7 +7080,7 @@ class InsightActions(Generic[_PrismaModelT]):
         results = await Insight.prisma().count(
             select={
                 '_all': True,
-                'totalArticles': True,
+                'polarizationScore': True,
             },
         )
         ```
@@ -7147,7 +7147,7 @@ class InsightActions(Generic[_PrismaModelT]):
         results = await Insight.prisma().count(
             select={
                 '_all': True,
-                'validArticles': True,
+                'totalArticles': True,
             },
         )
         ```
@@ -7287,10 +7287,10 @@ class InsightActions(Generic[_PrismaModelT]):
         Example
         -------
         ```py
-        # group Insight records by duplicatesRemoved values
+        # group Insight records by validArticles values
         # and count how many records are in each group
         results = await Insight.prisma().group_by(
-            ['duplicatesRemoved'],
+            ['validArticles'],
             count=True,
         )
         ```

@@ -867,6 +867,7 @@ class Insight(bases.BaseInsight):
     topKeywords: 'fields.Json'
     biasDistribution: 'fields.Json'
     dataQualityScore: _float
+    polarizationScore: Optional[_float] = None
     totalArticles: _int
     validArticles: _int
     duplicatesRemoved: _int
@@ -3251,6 +3252,14 @@ _Insight_fields: Dict['types.InsightKeys', PartialModelField] = OrderedDict(
             'name': 'dataQualityScore',
             'is_list': False,
             'optional': False,
+            'type': '_float',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('polarizationScore', {
+            'name': 'polarizationScore',
+            'is_list': False,
+            'optional': True,
             'type': '_float',
             'is_relational': False,
             'documentation': None,

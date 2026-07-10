@@ -17495,6 +17495,7 @@ class InsightOptionalCreateInput(TypedDict, total=False):
     id: _str
     searchId: _str
     search: 'SearchCreateNestedWithoutRelationsInput'
+    polarizationScore: Optional[_float]
     datasetMetrics: Optional['fields.Json']
     narrativeSummary: Optional[_str]
     leftWingSummary: Optional[_str]
@@ -17523,6 +17524,7 @@ class InsightOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     """Optional arguments to the Insight create method, without relations"""
     id: _str
     searchId: _str
+    polarizationScore: Optional[_float]
     datasetMetrics: Optional['fields.Json']
     narrativeSummary: Optional[_str]
     leftWingSummary: Optional[_str]
@@ -17577,6 +17579,7 @@ class InsightUpdateInput(TypedDict, total=False):
     topKeywords: 'fields.Json'
     biasDistribution: 'fields.Json'
     dataQualityScore: Union[AtomicFloatInput, _float]
+    polarizationScore: Optional[Union[AtomicFloatInput, _float]]
     totalArticles: Union[AtomicIntInput, _int]
     validArticles: Union[AtomicIntInput, _int]
     duplicatesRemoved: Union[AtomicIntInput, _int]
@@ -17597,6 +17600,7 @@ class InsightUpdateManyMutationInput(TypedDict, total=False):
     topKeywords: 'fields.Json'
     biasDistribution: 'fields.Json'
     dataQualityScore: Union[AtomicFloatInput, _float]
+    polarizationScore: Optional[Union[AtomicFloatInput, _float]]
     totalArticles: Union[AtomicIntInput, _int]
     validArticles: Union[AtomicIntInput, _int]
     duplicatesRemoved: Union[AtomicIntInput, _int]
@@ -17686,6 +17690,14 @@ _Insight_dataQualityScore_OrderByInput = TypedDict(
     '_Insight_dataQualityScore_OrderByInput',
     {
         'dataQualityScore': 'SortOrder',
+    },
+    total=True
+)
+
+_Insight_polarizationScore_OrderByInput = TypedDict(
+    '_Insight_polarizationScore_OrderByInput',
+    {
+        'polarizationScore': 'SortOrder',
     },
     total=True
 )
@@ -17803,6 +17815,7 @@ InsightOrderByInput = Union[
     '_Insight_topKeywords_OrderByInput',
     '_Insight_biasDistribution_OrderByInput',
     '_Insight_dataQualityScore_OrderByInput',
+    '_Insight_polarizationScore_OrderByInput',
     '_Insight_totalArticles_OrderByInput',
     '_Insight_validArticles_OrderByInput',
     '_Insight_duplicatesRemoved_OrderByInput',
@@ -19997,6 +20010,7 @@ class InsightWhereInput(TypedDict, total=False):
     topKeywords: Union['fields.Json', 'types.JsonFilter']
     biasDistribution: Union['fields.Json', 'types.JsonFilter']
     dataQualityScore: Union[_float, 'types.FloatFilter']
+    polarizationScore: Union[None, _float, 'types.FloatFilter']
     totalArticles: Union[_int, 'types.IntFilter']
     validArticles: Union[_int, 'types.IntFilter']
     duplicatesRemoved: Union[_int, 'types.IntFilter']
@@ -20025,6 +20039,7 @@ class InsightWhereInputRecursive1(TypedDict, total=False):
     topKeywords: Union['fields.Json', 'types.JsonFilter']
     biasDistribution: Union['fields.Json', 'types.JsonFilter']
     dataQualityScore: Union[_float, 'types.FloatFilter']
+    polarizationScore: Union[None, _float, 'types.FloatFilter']
     totalArticles: Union[_int, 'types.IntFilter']
     validArticles: Union[_int, 'types.IntFilter']
     duplicatesRemoved: Union[_int, 'types.IntFilter']
@@ -20053,6 +20068,7 @@ class InsightWhereInputRecursive2(TypedDict, total=False):
     topKeywords: Union['fields.Json', 'types.JsonFilter']
     biasDistribution: Union['fields.Json', 'types.JsonFilter']
     dataQualityScore: Union[_float, 'types.FloatFilter']
+    polarizationScore: Union[None, _float, 'types.FloatFilter']
     totalArticles: Union[_int, 'types.IntFilter']
     validArticles: Union[_int, 'types.IntFilter']
     duplicatesRemoved: Union[_int, 'types.IntFilter']
@@ -20081,6 +20097,7 @@ class InsightWhereInputRecursive3(TypedDict, total=False):
     topKeywords: Union['fields.Json', 'types.JsonFilter']
     biasDistribution: Union['fields.Json', 'types.JsonFilter']
     dataQualityScore: Union[_float, 'types.FloatFilter']
+    polarizationScore: Union[None, _float, 'types.FloatFilter']
     totalArticles: Union[_int, 'types.IntFilter']
     validArticles: Union[_int, 'types.IntFilter']
     duplicatesRemoved: Union[_int, 'types.IntFilter']
@@ -20109,6 +20126,7 @@ class InsightWhereInputRecursive4(TypedDict, total=False):
     topKeywords: Union['fields.Json', 'types.JsonFilter']
     biasDistribution: Union['fields.Json', 'types.JsonFilter']
     dataQualityScore: Union[_float, 'types.FloatFilter']
+    polarizationScore: Union[None, _float, 'types.FloatFilter']
     totalArticles: Union[_int, 'types.IntFilter']
     validArticles: Union[_int, 'types.IntFilter']
     duplicatesRemoved: Union[_int, 'types.IntFilter']
@@ -20136,6 +20154,7 @@ class InsightScalarWhereWithAggregatesInput(TypedDict, total=False):
     topKeywords: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     biasDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     dataQualityScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    polarizationScore: Union[_float, 'types.FloatWithAggregatesFilter']
     totalArticles: Union[_int, 'types.IntWithAggregatesFilter']
     validArticles: Union[_int, 'types.IntWithAggregatesFilter']
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
@@ -20161,6 +20180,7 @@ class InsightScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
     topKeywords: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     biasDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     dataQualityScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    polarizationScore: Union[_float, 'types.FloatWithAggregatesFilter']
     totalArticles: Union[_int, 'types.IntWithAggregatesFilter']
     validArticles: Union[_int, 'types.IntWithAggregatesFilter']
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
@@ -20186,6 +20206,7 @@ class InsightScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
     topKeywords: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     biasDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     dataQualityScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    polarizationScore: Union[_float, 'types.FloatWithAggregatesFilter']
     totalArticles: Union[_int, 'types.IntWithAggregatesFilter']
     validArticles: Union[_int, 'types.IntWithAggregatesFilter']
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
@@ -20211,6 +20232,7 @@ class InsightScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
     topKeywords: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     biasDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     dataQualityScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    polarizationScore: Union[_float, 'types.FloatWithAggregatesFilter']
     totalArticles: Union[_int, 'types.IntWithAggregatesFilter']
     validArticles: Union[_int, 'types.IntWithAggregatesFilter']
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
@@ -20236,6 +20258,7 @@ class InsightScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
     topKeywords: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     biasDistribution: Union['fields.Json', 'types.JsonWithAggregatesFilter']
     dataQualityScore: Union[_float, 'types.FloatWithAggregatesFilter']
+    polarizationScore: Union[_float, 'types.FloatWithAggregatesFilter']
     totalArticles: Union[_int, 'types.IntWithAggregatesFilter']
     validArticles: Union[_int, 'types.IntWithAggregatesFilter']
     duplicatesRemoved: Union[_int, 'types.IntWithAggregatesFilter']
@@ -20257,6 +20280,7 @@ class InsightGroupByOutput(TypedDict, total=False):
     topKeywords: 'fields.Json'
     biasDistribution: 'fields.Json'
     dataQualityScore: _float
+    polarizationScore: _float
     totalArticles: _int
     validArticles: _int
     duplicatesRemoved: _int
@@ -20279,6 +20303,7 @@ class InsightAvgAggregateOutput(TypedDict, total=False):
     """Insight output for aggregating averages"""
     avgSentiment: float
     dataQualityScore: float
+    polarizationScore: float
     totalArticles: float
     validArticles: float
     duplicatesRemoved: float
@@ -20289,6 +20314,7 @@ class InsightSumAggregateOutput(TypedDict, total=False):
     """Insight output for aggregating sums"""
     avgSentiment: _float
     dataQualityScore: _float
+    polarizationScore: _float
     totalArticles: _int
     validArticles: _int
     duplicatesRemoved: _int
@@ -20303,6 +20329,7 @@ class InsightScalarAggregateOutput(TypedDict, total=False):
     topKeywords: 'fields.Json'
     biasDistribution: 'fields.Json'
     dataQualityScore: _float
+    polarizationScore: _float
     totalArticles: _int
     validArticles: _int
     duplicatesRemoved: _int
@@ -20328,6 +20355,7 @@ class InsightMaxAggregateInput(TypedDict, total=False):
     topKeywords: bool
     biasDistribution: bool
     dataQualityScore: bool
+    polarizationScore: bool
     totalArticles: bool
     validArticles: bool
     duplicatesRemoved: bool
@@ -20349,6 +20377,7 @@ class InsightMinAggregateInput(TypedDict, total=False):
     topKeywords: bool
     biasDistribution: bool
     dataQualityScore: bool
+    polarizationScore: bool
     totalArticles: bool
     validArticles: bool
     duplicatesRemoved: bool
@@ -20366,6 +20395,7 @@ class InsightNumberAggregateInput(TypedDict, total=False):
     """Insight input for aggregating numbers"""
     avgSentiment: bool
     dataQualityScore: bool
+    polarizationScore: bool
     totalArticles: bool
     validArticles: bool
     duplicatesRemoved: bool
@@ -20385,6 +20415,7 @@ InsightCountAggregateInput = TypedDict(
         'topKeywords': bool,
         'biasDistribution': bool,
         'dataQualityScore': bool,
+        'polarizationScore': bool,
         'totalArticles': bool,
         'validArticles': bool,
         'duplicatesRemoved': bool,
@@ -20410,6 +20441,7 @@ InsightCountAggregateOutput = TypedDict(
         'topKeywords': int,
         'biasDistribution': int,
         'dataQualityScore': int,
+        'polarizationScore': int,
         'totalArticles': int,
         'validArticles': int,
         'duplicatesRemoved': int,
@@ -20435,6 +20467,7 @@ InsightKeys = Literal[
     'topKeywords',
     'biasDistribution',
     'dataQualityScore',
+    'polarizationScore',
     'totalArticles',
     'validArticles',
     'duplicatesRemoved',
@@ -20454,6 +20487,7 @@ InsightScalarFieldKeys = Literal[
     'topKeywords',
     'biasDistribution',
     'dataQualityScore',
+    'polarizationScore',
     'totalArticles',
     'validArticles',
     'duplicatesRemoved',
