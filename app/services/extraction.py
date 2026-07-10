@@ -313,27 +313,54 @@ async def process_and_store_claims(
 
         vector_string = "[" + ",".join(map(str, embedding)) + "]"
 
-        created = await prisma.query_raw(
+        # ── Cross-Article Deduplication (Issue 1 fix) ──
+        # Before creating a new claim, check if a semantically identical
+        # claim already exists in the database from a different article.
+        # If cosine similarity >= 0.88, merge evidence into the existing claim.
+        CROSS_ARTICLE_DEDUP_THRESHOLD = 0.88
+
+        existing_match = await prisma.query_raw(
             """
-            INSERT INTO "claim"
-            ("id","canonicalClaim","claimType","qualityScore","confidence","embedding","createdAt")
-            VALUES
-            (gen_random_uuid()::text, $1, $2, $3, $4, $5::vector, NOW())
-            RETURNING id
+            SELECT id, "canonicalClaim"
+            FROM "claim"
+            WHERE 1 - (embedding <=> $1::vector) > $2
+            ORDER BY embedding <=> $1::vector
+            LIMIT 1
             """,
-            text,
-            claim_type,
-            quality,
-            confidence,
             vector_string,
+            CROSS_ARTICLE_DEDUP_THRESHOLD,
         )
 
-        if not created:
-            continue
+        if existing_match:
+            # Merge: add evidence to the existing claim instead of creating a new row
+            claim_id = existing_match[0]["id"]
+            stats.setdefault("merged", 0)
+            stats["merged"] += 1
+            logger.info(f"[MERGE] Matched existing claim ({claim_id[:8]}): {existing_match[0]['canonicalClaim'][:60]}...")
+        else:
+            # No match — create new claim
+            created = await prisma.query_raw(
+                """
+                INSERT INTO "claim"
+                ("id","canonicalClaim","claimType","qualityScore","confidence","embedding","createdAt")
+                VALUES
+                (gen_random_uuid()::text, $1, $2, $3, $4, $5::vector, NOW())
+                RETURNING id
+                """,
+                text,
+                claim_type,
+                quality,
+                confidence,
+                vector_string,
+            )
 
-        claim_id = created[0]["id"]
+            if not created:
+                continue
 
-        existing = await prisma.query_raw(
+            claim_id = created[0]["id"]
+
+        # Add evidence (deduplicating by claimId + articleId)
+        existing_evidence = await prisma.query_raw(
             """
             SELECT id FROM "evidence"
             WHERE "claimId" = $1 AND "articleId" = $2
@@ -343,7 +370,7 @@ async def process_and_store_claims(
             article_id,
         )
 
-        if not existing:
+        if not existing_evidence:
             await prisma.evidence.create(
                 data={
                     "claimId": claim_id,
@@ -362,6 +389,6 @@ async def process_and_store_claims(
     logger.info(
         f"Extraction [{source}]: {stats['stored']}/{stats['total']} stored | "
         f"type={stats['type_rejected']} quality={stats['quality_rejected']} "
-        f"relevance={stats['relevance_rejected']}"
+        f"relevance={stats['relevance_rejected']} merged={stats.get('merged', 0)}"
     )
     return inserted

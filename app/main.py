@@ -4,7 +4,7 @@ from .prisma_client import Prisma, Json
 import uvicorn
 from app.services.cleaning import clean_and_deduplicate
 from app.services.ingestion import ingest_articles, scrape_single_url
-from app.services.nlp import analyze_articles, generate_narrative, generate_contrastive_summaries, extract_entity_sentiment
+from app.services.nlp import analyze_articles, generate_narrative, generate_contrastive_summaries, extract_entity_sentiment, get_source_reliability
 from app.services.validation import validate_articles
 from app.services.extraction import process_and_store_claims
 from app.services.clustering import run_claim_clustering, run_event_detection
@@ -187,33 +187,19 @@ async def create_search(
     contrastive_summaries = generate_contrastive_summaries(analyzed_articles)
     entity_sentiment_graph = extract_entity_sentiment(analyzed_articles)
     
-    # Replace softmax average with Source Reliability Confidence
+    # Source Reliability Confidence (using shared function)
     valid_articles = validation_metrics.get("valid_articles_list", [])
     if valid_articles:
         reliability_scores = []
-        high = ["reuters.com", "apnews.com", "bbc.co.uk", "bbc.com", "npr.org", "thehindu.com", "indianexpress.com", "ft.com", "wsj.com", "bloomberg.com", "theguardian.com", "nytimes.com", "washingtonpost.com"]
-        mixed = ["foxnews.com", "cnn.com", "msnbc.com", "dailymail.co.uk", "dailymail.com", "nypost.com", "vice.com", "gizmodo.com"]
-        low = ["breitbart.com", "infowars.com", "dailycaller.com", "wnd.com", "newsmax.com", "oann.com"]
-        
-        cred_counts = {"High": 0, "Medium": 0, "Low": 0, "Unknown": 0}
+        cred_counts = {"High": 0, "Medium": 0, "Low": 0, "Mixed": 0, "Unknown": 0}
         for a in valid_articles:
-            s = a.get("source", "").lower()
-            if any(h in s for h in high):
-                reliability_scores.append(0.95)
-                cred_counts["High"] += 1
-            elif any(m in s for m in mixed):
-                reliability_scores.append(0.60)
-                cred_counts["Medium"] += 1
-            elif any(l in s for l in low):
-                reliability_scores.append(0.20)
-                cred_counts["Low"] += 1
-            else:
-                reliability_scores.append(0.50) # default unknown
-                cred_counts["Unknown"] += 1
+            score, tier = get_source_reliability(a.get("source", ""))
+            reliability_scores.append(score)
+            cred_counts[tier] = cred_counts.get(tier, 0) + 1
         avg_confidence = sum(reliability_scores) / len(reliability_scores)
     else:
         avg_confidence = 0.0
-        cred_counts = {"High": 0, "Medium": 0, "Low": 0, "Unknown": 0}
+        cred_counts = {"High": 0, "Medium": 0, "Low": 0, "Mixed": 0, "Unknown": 0}
         
     drift_metrics = {
         "source_reliability_confidence": avg_confidence,
@@ -551,28 +537,13 @@ async def analyze_url_endpoint(
     summary = generate_narrative(analyzed_articles)
     entity_sentiment_graph = extract_entity_sentiment(analyzed_articles)
     
-    # Calculate model drift metrics
-    s = valid_articles_list[0].get("source", "").lower()
-    high = ["reuters.com", "apnews.com", "bbc.co.uk", "bbc.com", "npr.org", "thehindu.com", "indianexpress.com", "ft.com", "wsj.com", "bloomberg.com", "theguardian.com", "nytimes.com", "washingtonpost.com"]
-    mixed = ["foxnews.com", "cnn.com", "msnbc.com", "dailymail.co.uk", "dailymail.com", "nypost.com", "vice.com", "gizmodo.com"]
-    low = ["breitbart.com", "infowars.com", "dailycaller.com", "wnd.com", "newsmax.com", "oann.com"]
-    
-    if any(h in s for h in high): 
-        conf = 0.95
-        cat = "High"
-    elif any(m in s for m in mixed): 
-        conf = 0.60
-        cat = "Medium"
-    elif any(l in s for l in low): 
-        conf = 0.20
-        cat = "Low"
-    else: 
-        conf = 0.50
-        cat = "Unknown"
+    # Source Reliability (using shared function)
+    s = valid_articles_list[0].get("source", "")
+    conf, cat = get_source_reliability(s)
     
     drift_metrics = {
         "source_reliability_confidence": conf,
-        "credibility_breakdown": {"High": int(cat=="High"), "Medium": int(cat=="Medium"), "Low": int(cat=="Low"), "Unknown": int(cat=="Unknown")}
+        "credibility_breakdown": {"High": int(cat=="High"), "Medium": int(cat=="Medium"), "Mixed": int(cat=="Mixed"), "Low": int(cat=="Low"), "Unknown": int(cat=="Unknown")}
     }
 
     # 5. Store to DB
@@ -693,27 +664,13 @@ async def analyze_upload_endpoint(
     summary = generate_narrative(analyzed_articles)
     entity_sentiment_graph = extract_entity_sentiment(analyzed_articles)
     
-    # Model Drift Metrics (Source Reliability Confidence)
+    # Source Reliability (using shared function)
     reliability_scores = []
-    high = ["reuters.com", "apnews.com", "bbc.co.uk", "bbc.com", "npr.org", "thehindu.com", "indianexpress.com", "ft.com", "wsj.com", "bloomberg.com", "theguardian.com", "nytimes.com", "washingtonpost.com"]
-    mixed = ["foxnews.com", "cnn.com", "msnbc.com", "dailymail.co.uk", "dailymail.com", "nypost.com", "vice.com", "gizmodo.com"]
-    low = ["breitbart.com", "infowars.com", "dailycaller.com", "wnd.com", "newsmax.com", "oann.com"]
-    
-    cred_counts = {"High": 0, "Medium": 0, "Low": 0, "Unknown": 0}
+    cred_counts = {"High": 0, "Medium": 0, "Low": 0, "Mixed": 0, "Unknown": 0}
     for a in analyzed_articles:
-        s = a.get("source", "").lower()
-        if any(h in s for h in high): 
-            reliability_scores.append(0.95)
-            cred_counts["High"] += 1
-        elif any(m in s for m in mixed): 
-            reliability_scores.append(0.60)
-            cred_counts["Medium"] += 1
-        elif any(l in s for l in low): 
-            reliability_scores.append(0.20)
-            cred_counts["Low"] += 1
-        else: 
-            reliability_scores.append(0.50)
-            cred_counts["Unknown"] += 1
+        score, tier = get_source_reliability(a.get("source", ""))
+        reliability_scores.append(score)
+        cred_counts[tier] = cred_counts.get(tier, 0) + 1
         
     avg_conf = sum(reliability_scores) / len(reliability_scores) if reliability_scores else 0.0
     

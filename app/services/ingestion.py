@@ -104,11 +104,26 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
                     gdelt_articles = gdelt_json.get('articles', [])
                     for ga in gdelt_articles:
                         # Convert GDELT format to NewsAPI format for downstream compatibility
+                        gdelt_url = ga.get('url', '')
+                        gdelt_domain = ''
+                        if gdelt_url:
+                            from urllib.parse import urlparse as _urlparse
+                            gdelt_domain = _urlparse(gdelt_url).netloc.replace("www.", "")
+                        
+                        # Parse GDELT date format (YYYYMMDDTHHmmssZ) to ISO
+                        seen_date = ga.get('seendate', '')
+                        try:
+                            from datetime import datetime as _dt
+                            parsed_date = _dt.strptime(seen_date, "%Y%m%dT%H%M%SZ").isoformat() + "Z"
+                        except Exception:
+                            parsed_date = seen_date if seen_date else None
+                        
                         articles_data.append({
                             'title': ga.get('title', ''),
-                            'url': ga.get('url', ''),
-                            'description': ga.get('seendate', ''), # fallback description
-                            'publishedAt': ga.get('seendate', '')
+                            'url': gdelt_url,
+                            'source': {'name': gdelt_domain},
+                            'description': ga.get('title', ''),
+                            'publishedAt': parsed_date,
                         })
     except Exception as e:
         print(f"GDELT fetch error: {e}")

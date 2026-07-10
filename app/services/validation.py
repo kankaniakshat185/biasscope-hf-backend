@@ -48,11 +48,22 @@ def validate_articles(articles):
     m = [(p_i + q_i) / 2 for p_i, q_i in zip(p, q)]
     jsd = 0.5 * kl_div(p, m) + 0.5 * kl_div(q, m)
     
-    # Map JSD to data_quality_score (0.0 to 1.0)
-    # log(2) is max JSD for base e, which is ~0.693.
-    dqs = min(jsd / 0.693, 1.0)
+    # Issue 10: JSD is polarization, NOT data quality
+    polarization_score = min(jsd / 0.693, 1.0)
 
+    # Compute ACTUAL data quality score
     total = len(articles)
+    content_completeness = 1.0 - (missing_content_count / max(total, 1))
+    source_diversity = min(len(unique_sources) / max(total, 1), 1.0)
+    avg_content_length = sum(len(a.get("content", "") or "") for a in valid_articles) / max(len(valid_articles), 1)
+    content_richness = min(avg_content_length / 1000, 1.0)
+
+    dqs = (
+        content_completeness * 0.40 +
+        source_diversity * 0.30 +
+        content_richness * 0.30
+    )
+
     avg_sentiment = sum(sentiment_scores) / total if total > 0 else 0.0
 
     from app.services.nlp import extract_keywords
@@ -109,8 +120,9 @@ def validate_articles(articles):
     return {
         "missing_content": missing_content_count,
         "valid_articles": len(valid_articles),
-        "valid_articles_list": articles, # Return all after validation logic
+        "valid_articles_list": valid_articles, # Return only validated articles
         "data_quality_score": round(dqs, 2),
+        "polarization_score": round(polarization_score, 2),
         "avg_sentiment": round(avg_sentiment, 3),
         "top_keywords": top_keywords,
         "bias_distribution": bias_counts,

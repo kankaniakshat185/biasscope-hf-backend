@@ -48,7 +48,7 @@ logger = logging.getLogger(__name__)
 
 # Minimum mean pairwise cosine similarity for a cluster to be considered
 # a coherent event rather than a loose topic grouping.
-COHESION_THRESHOLD = 0.65
+COHESION_THRESHOLD = 0.72
 
 def parse_json_safe(raw: str, fallback: dict = None) -> dict:
     if not raw:
@@ -63,25 +63,30 @@ def parse_json_safe(raw: str, fallback: dict = None) -> dict:
 def generate_event_title(claim_texts: List[str]) -> str:
     """
     Generate a descriptive event title using entity extraction + TF-IDF keywords.
-    Produces titles like "SpaceX IPO Filing" not "Elon Musk" or generic names.
+    Handles both Western and non-Western entities, acronyms (BJP, GDP, SEC),
+    and international political actions.
     """
     if not claim_texts:
         return "Unclassified Event"
 
     all_text = " ".join(claim_texts)
 
-    # Extract named entities (multi-word capitalized phrases)
+    # Capture CamelCase entities AND all-caps acronyms (BJP, RSS, GDP, IMF, SEC)
     entities = re.findall(r'\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\b', all_text)
-    entity_counts = Counter(entities)
+    acronyms = re.findall(r'\b([A-Z]{2,6})\b', all_text)
+    entity_counts = Counter(entities + acronyms)
 
-    # Remove generic stopword-like entities and single-word person titles
-    stopwords = {"The", "This", "That", "These", "Those", "According", "However",
-                 "While", "After", "Before", "During", "Between", "About", "Also",
-                 "Mr", "Mrs", "Ms", "Dr", "Inc", "Ltd", "Corp", "It", "He", "She",
-                 "Its", "His", "Her", "They", "Their", "New", "First", "Thursday",
-                 "Friday", "Monday", "Tuesday", "Wednesday", "Saturday", "Sunday",
-                 "January", "February", "March", "April", "May", "June", "July",
-                 "August", "September", "October", "November", "December"}
+    # Extended stopwords including common non-discriminating terms
+    stopwords = {
+        "The", "This", "That", "These", "Those", "According", "However",
+        "While", "After", "Before", "During", "Between", "About", "Also",
+        "Mr", "Mrs", "Ms", "Dr", "Inc", "Ltd", "Corp", "It", "He", "She",
+        "Its", "His", "Her", "They", "Their", "New", "First",
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",
+        "January", "February", "March", "April", "May", "June", "July",
+        "August", "September", "October", "November", "December",
+        "PM", "AM", "US", "UK", "IN", "AN", "OR", "AS", "AT", "TO", "OF",
+    }
     for sw in stopwords:
         entity_counts.pop(sw, None)
 
@@ -98,16 +103,16 @@ def generate_event_title(claim_texts: List[str]) -> str:
     except Exception:
         top_keywords = []
 
-    # Map keywords to action labels
+    # Expanded action map (financial + political + international)
     action_map = {
+        # Financial / Legal
         "filed": "Filing", "ipo": "IPO", "merger": "Merger", "acquisition": "Acquisition",
         "lawsuit": "Lawsuit", "sued": "Lawsuit", "launch": "Launch", "launched": "Launch",
         "agreement": "Agreement", "deal": "Deal", "partnership": "Partnership",
         "compute": "Compute Deal", "signed": "Agreement", "controversy": "Controversy",
-        "political": "Political", "election": "Election", "resign": "Resignation",
-        "appointed": "Appointment", "invest": "Investment", "raised": "Funding",
-        "acquired": "Acquisition", "bankruptcy": "Bankruptcy", "fraud": "Fraud",
-        "safety": "Safety", "regulation": "Regulation", "ban": "Ban",
+        "resign": "Resignation", "appointed": "Appointment", "invest": "Investment",
+        "raised": "Funding", "acquired": "Acquisition", "bankruptcy": "Bankruptcy",
+        "fraud": "Fraud", "regulation": "Regulation", "ban": "Ban",
         "explosion": "Explosion", "failure": "Failure", "crash": "Crash",
         "loss": "Financial Loss", "revenue": "Revenue", "valuation": "Valuation",
         "trading": "Trading", "shares": "Share Offering", "billion": "Financial",
@@ -116,6 +121,20 @@ def generate_event_title(claim_texts: List[str]) -> str:
         "satellite": "Satellite", "rocket": "Rocket", "test": "Test",
         "settlement": "Settlement", "penalty": "Penalty", "sec": "SEC Action",
         "trillionaire": "Wealth", "net worth": "Valuation",
+        # Political / International
+        "election": "Election", "vote": "Vote", "campaign": "Campaign",
+        "rally": "Rally", "protest": "Protest", "summit": "Summit",
+        "sanctions": "Sanctions", "tariff": "Tariff", "treaty": "Treaty",
+        "cabinet": "Cabinet Reshuffle", "sworn": "Inauguration", "oath": "Inauguration",
+        "manifesto": "Manifesto", "alliance": "Alliance", "coalition": "Coalition",
+        "ceasefire": "Ceasefire", "war": "Conflict", "attack": "Attack",
+        "speech": "Speech", "address": "Address", "visit": "State Visit",
+        "bilateral": "Bilateral Talks", "trade": "Trade", "policy": "Policy",
+        "reform": "Reform", "budget": "Budget", "infrastructure": "Infrastructure",
+        "defense": "Defense", "defence": "Defence", "military": "Military",
+        "nuclear": "Nuclear", "missile": "Missile", "drone": "Drone Strike",
+        "deportation": "Deportation", "immigration": "Immigration",
+        "climate": "Climate", "pandemic": "Pandemic", "vaccine": "Vaccine",
     }
 
     action_word = ""
@@ -137,18 +156,20 @@ def generate_event_title(claim_texts: List[str]) -> str:
 
     # Build title — avoid repeating the same entity
     if top_entities and action_word:
-        # Use most prominent entity + action
         title = f"{top_entities[0]} {action_word}"
-    elif top_entities:
-        # Use entity + first keyword as a fallback
-        kw_text = top_keywords[0].title() if top_keywords else ""
-        if kw_text and kw_text not in top_entities[0]:
+    elif top_entities and top_keywords:
+        kw_text = top_keywords[0].title()
+        if kw_text.lower() not in top_entities[0].lower():
             title = f"{top_entities[0]}: {kw_text}"
         else:
-            title = " ".join(top_entities[:2])
+            fallback_kw = top_keywords[1].title() if len(top_keywords) > 1 else "Development"
+            title = f"{top_entities[0]} {fallback_kw}"
+    elif top_entities:
+        title = " ".join(top_entities[:2])
     else:
-        # Last resort: use truncated first claim
-        title = claim_texts[0][:80]
+        # Last resort: truncate first claim intelligently
+        first = claim_texts[0]
+        title = first[:70].rsplit(" ", 1)[0] if len(first) > 70 else first
 
     return title.strip()
 
@@ -213,9 +234,10 @@ async def run_claim_clustering(prisma):
 
     clusterer = HDBSCAN(
         min_cluster_size=2,
-        min_samples=2,
+        min_samples=1,
         metric="precomputed",
-        cluster_selection_method="leaf",
+        cluster_selection_method="eom",
+        cluster_selection_epsilon=0.15,
     )
     labels = clusterer.fit_predict(cos_dist)
 
@@ -329,7 +351,19 @@ async def run_event_detection(prisma):
         url_count = len(unique_urls)
 
         # ── Cross-Source Consensus & Polarization Score (via NLI) ──
-        consensus_score = min(source_count / max(claim_count, 1), 1.0)
+        # Consensus = what fraction of claims are corroborated by 2+ distinct sources
+        if claim_count > 0:
+            corroborated_claims = 0
+            for c in cluster.claims:
+                claim_sources = set(e.source for e in c.evidence)
+                if len(claim_sources) >= 2:
+                    corroborated_claims += 1
+            consensus_score = corroborated_claims / claim_count
+        else:
+            consensus_score = 0.0
+        # Bonus for source diversity
+        source_diversity_bonus = min(source_count / 5.0, 0.3)
+        consensus_score = min(consensus_score + source_diversity_bonus, 1.0)
         
         # Publisher diversity
         publisher_diversity = min(source_count / max(url_count, 1), 1.0) if url_count > 0 else 0.0
@@ -381,20 +415,20 @@ async def run_event_detection(prisma):
             events_skipped += 1
             continue
 
-        # ── Importance Score (weighted) ──
+        # ── Importance Score (normalized 0-1) ──
         importance = (
-            source_count * 0.30 +
-            publisher_diversity * 0.20 +
-            evidence_count * 0.15 +
-            claim_count * 0.15 +
+            min(source_count / 10.0, 1.0) * 0.30 +
+            publisher_diversity * 0.15 +
+            min(evidence_count / 15.0, 1.0) * 0.20 +
+            min(claim_count / 8.0, 1.0) * 0.15 +
             consensus_score * 0.20
         )
 
-        # Bonus for strong cross-source coverage
-        if source_count >= 3:
-            importance += 1.5
+        # Bonus for cross-source coverage (normalized)
         if source_count >= 5:
-            importance += 2.0
+            importance = min(importance + 0.15, 1.0)
+        elif source_count >= 3:
+            importance = min(importance + 0.08, 1.0)
 
         # ── Event Title ──
         raw_texts = [c.canonicalClaim for c in cluster.claims]

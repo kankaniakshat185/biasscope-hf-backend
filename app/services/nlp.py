@@ -3,14 +3,19 @@ import re
 from collections import Counter
 from urllib.parse import urlparse
 import spacy
-from transformers import pipeline
 
 # Load HuggingFace pipelines
-sentiment_pipeline = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english", truncation=True, max_length=512)
+# Issue 4: Use a 3-class sentiment model trained on social/news text (not movie reviews)
+sentiment_pipeline = pipeline(
+    "sentiment-analysis",
+    model="cardiffnlp/twitter-roberta-base-sentiment-latest",
+    truncation=True,
+    max_length=512,
+    top_k=None,  # Get all class scores for calibrated output
+)
 bias_pipeline = pipeline("text-classification", model="bucketresearch/politicalBiasBERT", truncation=True, max_length=512)
 
 try:
-    # Issue 5: Upgrade NER to transformer model
     spacy_nlp = spacy.load("en_core_web_trf")
 except Exception as e:
     print(f"Spacy trf failed to load, falling back: {e}")
@@ -19,28 +24,74 @@ except Exception as e:
     except:
         spacy_nlp = None
 
-# Static Source Bias Registry (Phase 1)
+# Static Source Bias Registry — expanded with Indian & international outlets (Issue 5)
 SOURCE_BIAS_REGISTRY = {
     # Left Leaning
-    "nytimes.com": "LEFT", "washingtonpost.com": "LEFT", "cnn.com": "LEFT", 
-    "msnbc.com": "LEFT", "theguardian.com": "LEFT", "gizmodo.com": "LEFT", 
+    "nytimes.com": "LEFT", "washingtonpost.com": "LEFT", "cnn.com": "LEFT",
+    "msnbc.com": "LEFT", "theguardian.com": "LEFT", "gizmodo.com": "LEFT",
     "huffpost.com": "LEFT", "vox.com": "LEFT", "vice.com": "LEFT",
     "commondreams.org": "LEFT", "thewire.in": "LEFT", "ndtv.com": "LEFT",
     "nbcnews.com": "LEFT", "nymag.com": "LEFT", "vanityfair.com": "LEFT",
     "propublica.org": "LEFT", "aljazeera.com": "LEFT", "newrepublic.com": "LEFT",
+    "scroll.in": "LEFT", "newslaundry.com": "LEFT", "thequint.com": "LEFT",
 
     # Center Leaning
     "reuters.com": "CENTER", "apnews.com": "CENTER", "bbc.co.uk": "CENTER",
-    "bbc.com": "CENTER", "npr.org": "CENTER", "wsj.com": "CENTER", 
+    "bbc.com": "CENTER", "npr.org": "CENTER", "wsj.com": "CENTER",
     "ft.com": "CENTER", "bloomberg.com": "CENTER", "thehindu.com": "CENTER",
-    "indianexpress.com": "CENTER",
+    "indianexpress.com": "CENTER", "theprint.in": "CENTER", "livemint.com": "CENTER",
+    "hindustantimes.com": "CENTER", "abc.net.au": "CENTER", "scmp.com": "CENTER",
+    "timesofindia.com": "CENTER", "deccanherald.com": "CENTER",
 
     # Right Leaning
     "foxnews.com": "RIGHT", "nypost.com": "RIGHT", "dailymail.co.uk": "RIGHT",
-    "dailymail.com": "RIGHT", "breitbart.com": "RIGHT", "dailycaller.com": "RIGHT", "theblaze.com": "RIGHT",
-    "wnd.com": "RIGHT", "newsmax.com": "RIGHT", "oann.com": "RIGHT",
-    "republicworld.com": "RIGHT", "opindia.com": "RIGHT"
+    "dailymail.com": "RIGHT", "breitbart.com": "RIGHT", "dailycaller.com": "RIGHT",
+    "theblaze.com": "RIGHT", "wnd.com": "RIGHT", "newsmax.com": "RIGHT",
+    "oann.com": "RIGHT", "republicworld.com": "RIGHT", "opindia.com": "RIGHT",
+    "zeenews.com": "RIGHT", "timesnownews.com": "RIGHT", "swarajyamag.com": "RIGHT",
+    "firstpost.com": "RIGHT", "news18.com": "RIGHT",
 }
+
+# Source Reliability Tiers — shared function (Issue 7)
+SOURCE_RELIABILITY = {
+    # Tier 1: Wire services + papers of record (0.90-0.95)
+    "reuters.com": 0.95, "apnews.com": 0.95, "bbc.co.uk": 0.95, "bbc.com": 0.95,
+    "npr.org": 0.90, "ft.com": 0.90, "wsj.com": 0.90, "bloomberg.com": 0.90,
+    "theguardian.com": 0.90, "nytimes.com": 0.90, "washingtonpost.com": 0.90,
+    "thehindu.com": 0.90, "indianexpress.com": 0.85,
+
+    # Tier 2: Major outlets with editorial standards (0.70-0.85)
+    "ndtv.com": 0.80, "livemint.com": 0.80, "theprint.in": 0.80,
+    "hindustantimes.com": 0.80, "scroll.in": 0.80, "thequint.com": 0.75,
+    "timesofindia.com": 0.75, "news18.com": 0.70, "deccanherald.com": 0.80,
+    "cnn.com": 0.75, "nbcnews.com": 0.75, "abcnews.go.com": 0.80,
+
+    # Tier 3: Outlets with known editorial slant (0.50-0.65)
+    "foxnews.com": 0.60, "msnbc.com": 0.60, "dailymail.co.uk": 0.55,
+    "dailymail.com": 0.55, "nypost.com": 0.55, "vice.com": 0.60,
+    "zeenews.com": 0.60, "republicworld.com": 0.55, "opindia.com": 0.50,
+    "thewire.in": 0.65, "newslaundry.com": 0.65, "firstpost.com": 0.60,
+    "swarajyamag.com": 0.55, "timesnownews.com": 0.55,
+
+    # Tier 4: Low reliability (0.15-0.35)
+    "breitbart.com": 0.30, "infowars.com": 0.15, "dailycaller.com": 0.35,
+    "newsmax.com": 0.35, "oann.com": 0.30, "wnd.com": 0.25,
+}
+
+def get_source_reliability(source: str):
+    """Returns (score, tier_label) for a source domain."""
+    s = source.lower()
+    for domain, score in SOURCE_RELIABILITY.items():
+        if domain in s:
+            if score >= 0.85:
+                return score, "High"
+            elif score >= 0.65:
+                return score, "Medium"
+            elif score >= 0.45:
+                return score, "Mixed"
+            else:
+                return score, "Low"
+    return 0.50, "Unknown"
 
 def analyze_articles(articles):
     analyzed = []
@@ -53,32 +104,30 @@ def analyze_articles(articles):
             art["sentiment_score"] = 0.0
             art["confidence"] = 0.0
         else:
-            # Issue 6: Calibrated sentiment instead of raw confidence
+            # Issue 4: Calibrated 3-class sentiment (negative/neutral/positive)
             try:
-                results = sentiment_pipeline(text, top_k=None)
-                if isinstance(results[0], list): 
+                results = sentiment_pipeline(text[:512])
+                if isinstance(results[0], list):
                     results = results[0]
-                
-                pos_score = next((r['score'] for r in results if r['label'] == 'POSITIVE'), 0.5)
-                neg_score = next((r['score'] for r in results if r['label'] == 'NEGATIVE'), 0.5)
-                
-                # DistilBERT is extremely polarizing (usually 0.99). 
-                # We calculate the raw difference and dampen it to simulate VADER-like calibrated distributions.
-                raw_diff = pos_score - neg_score
-                
-                # Dampen and add minor variance based on text length to create natural distribution
-                length_factor = min(len(text) / 2000, 1.0)
-                compound = raw_diff * (0.4 + (0.3 * length_factor))
-                
-                if abs(compound) < 0.15:
+
+                # Model outputs calibrated scores for negative, neutral, positive
+                score_map = {r['label'].lower(): r['score'] for r in results}
+                pos = score_map.get('positive', 0)
+                neg = score_map.get('negative', 0)
+                neu = score_map.get('neutral', 0)
+
+                # Compound score: naturally calibrated difference
+                compound = pos - neg  # Range: -1 to 1
+
+                if neu > pos and neu > neg:
                     art["sentiment"] = "neutral"
-                elif compound > 0:
+                elif pos > neg:
                     art["sentiment"] = "positive"
                 else:
                     art["sentiment"] = "negative"
-                
-                art["sentiment_score"] = round(compound, 2)
-                art["confidence"] = max(pos_score, neg_score)
+
+                art["sentiment_score"] = round(compound, 3)
+                art["confidence"] = max(pos, neg, neu)
             except Exception as e:
                 print(f"Sentiment error: {e}")
                 art["sentiment"] = "neutral"
@@ -121,18 +170,28 @@ def analyze_articles(articles):
             sorted_ents = sorted(entities.items(), key=lambda x: x[1]["count"], reverse=True)[:5]
             art["entities"] = {k: v["label"] for k, v in sorted_ents}
 
-        # -------- DEEP LEARNING BIAS ANALYSIS --------
+        # -------- SOURCE BIAS (registry-first) --------
+        source_domain = art.get("source", "").lower()
+        art["source_bias"] = "UNKNOWN"
+        for domain, bias in SOURCE_BIAS_REGISTRY.items():
+            if domain in source_domain:
+                art["source_bias"] = bias
+                break
+
+        # -------- BIAS CLASSIFICATION (Issue 5: registry-first, ML-fallback) --------
         if not text:
             art["bias_label"] = "UNKNOWN"
             art["bias_confidence"] = 0.0
+        elif art["source_bias"] != "UNKNOWN":
+            # Trust the curated registry over ML for known sources
+            art["bias_label"] = art["source_bias"]
+            art["bias_confidence"] = 0.90
         else:
+            # Fallback to ML model for unknown sources
             try:
-                # Run PoliticalBiasBERT Inference
                 bias_result = bias_pipeline(text)[0]
-                raw_bias = bias_result['label'].upper() # e.g. "LEFT", "CENTER", "RIGHT"
+                raw_bias = bias_result['label'].upper()
                 art["bias_confidence"] = bias_result['score']
-                
-                # Ensure it maps safely to Prisma enums
                 if raw_bias in ["LEFT", "CENTER", "RIGHT"]:
                     art["bias_label"] = raw_bias
                 else:
@@ -142,22 +201,12 @@ def analyze_articles(articles):
                 art["bias_label"] = "UNKNOWN"
                 art["bias_confidence"] = 0.0
 
-        # -------- HYBRID BIAS ASSIGNMENT & ANOMALY DETECTION --------
-        source_domain = art.get("source", "").lower()
-        art["source_bias"] = "UNKNOWN"
-        for domain, bias in SOURCE_BIAS_REGISTRY.items():
-            if domain in source_domain:
-                art["source_bias"] = bias
-                break
-                
-        # Calculate Deviation Score (Narrative Anomaly Detection)
-        # Distance map: LEFT=0, CENTER=1, RIGHT=2
+        # -------- DEVIATION SCORE (Narrative Anomaly Detection) --------
         bias_map = {"LEFT": 0, "CENTER": 1, "RIGHT": 2, "UNKNOWN": None}
         s_val = bias_map.get(art["source_bias"])
         a_val = bias_map.get(art["bias_label"])
-        
+
         if s_val is not None and a_val is not None:
-            # 0.0 = Complete agreement, 1.0 = Minor shift (Left to Center), 2.0 = Extreme anomaly (Left to Right)
             art["deviation_score"] = float(abs(s_val - a_val))
         else:
             art["deviation_score"] = 0.0
@@ -168,27 +217,61 @@ def analyze_articles(articles):
 
 
 def extract_keywords(articles):
+    """Issue 11: Enhanced keyword discovery using TF-IDF + entity counting."""
+    from sklearn.feature_extraction.text import TfidfVectorizer
+
+    # Entity-based keywords (existing approach)
     entity_counter = Counter()
     for art in articles:
         entities = art.get("entities", {})
         if isinstance(entities, dict):
             for entity in entities.keys():
                 entity_counter[entity] += 1
-    
-    # Fallback if NER found absolutely nothing (e.g., weirdly formatted short text)
+
+    # Fallback if NER found nothing
     if not entity_counter:
-        import re
-        stop_words = {"this", "that", "with", "from", "your", "have", "more", "will", "home", "about", "page", "search", "free", "information", "time", "they", "site"}
+        stop_words = {"this", "that", "with", "from", "your", "have", "more",
+                      "will", "home", "about", "page", "search", "free",
+                      "information", "time", "they", "site"}
         for art in articles:
             text = art.get("title", "") + " " + art.get("content", "")
-            # Find capitalized words > 3 chars as a naive entity fallback
             words = re.findall(r'\b[A-Z][a-z]{3,}\b', text)
             for w in words:
                 if w.lower() not in stop_words:
                     entity_counter[w] += 1
 
-    most_common = entity_counter.most_common(10)
-    return [{"word": word, "count": count} for word, count in most_common]
+    # TF-IDF content keywords for discriminating terms
+    texts = [a.get("content", "") or a.get("title", "") for a in articles]
+    texts = [t for t in texts if len(t) > 50]
+
+    tfidf_keywords = []
+    if len(texts) >= 2:
+        try:
+            vectorizer = TfidfVectorizer(
+                max_features=30, stop_words="english",
+                ngram_range=(1, 2), min_df=2, max_df=0.9
+            )
+            tfidf_matrix = vectorizer.fit_transform(texts)
+            feature_names = vectorizer.get_feature_names_out()
+            scores = tfidf_matrix.sum(axis=0).A1
+            top_indices = scores.argsort()[-15:][::-1]
+            tfidf_keywords = [(feature_names[i], float(scores[i])) for i in top_indices]
+        except Exception:
+            pass
+
+    # Merge: entities get a bonus, TF-IDF provides discovery
+    combined = {}
+    for word, count in entity_counter.most_common(20):
+        combined[word] = count * 2  # Entity bonus
+    for word, score in tfidf_keywords:
+        word_title = word.title()
+        if word_title not in combined:
+            combined[word_title] = score
+        else:
+            combined[word_title] += score
+
+    sorted_keywords = sorted(combined.items(), key=lambda x: x[1], reverse=True)[:10]
+    return [{"word": word, "count": int(count)} for word, count in sorted_keywords]
 
 
 def generate_narrative(articles):
@@ -279,41 +362,74 @@ def _generate_fallback_narrative(articles, left_count, right_count, center_count
 
 def generate_contrastive_summaries(articles):
     """
-    Generates two distinct summaries representing the 'Left-Wing' and 'Right-Wing' echo chambers.
-    Uses source_bias (publisher level) instead of bias_label (article level) to prevent duplication.
+    Generates two distinct summaries representing contrasting media echo chambers.
+    Issue 8: Falls back to sentiment-based grouping when left/right registry data is sparse.
     """
+    # Primary: source_bias registry
     left_articles = [a for a in articles if a.get("source_bias") == "LEFT"]
     right_articles = [a for a in articles if a.get("source_bias") == "RIGHT"]
 
+    # Fallback 1: if registry gives too few, include bias_label (ML-derived) for UNKNOWN sources
+    if len(left_articles) < 2:
+        left_articles += [a for a in articles if a.get("bias_label") == "LEFT" and a.get("source_bias") == "UNKNOWN"]
+    if len(right_articles) < 2:
+        right_articles += [a for a in articles if a.get("bias_label") == "RIGHT" and a.get("source_bias") == "UNKNOWN"]
+
+    # Fallback 2: if STILL too few, split by sentiment polarity
+    use_sentiment_framing = False
+    if len(left_articles) < 2 and len(right_articles) < 2:
+        positive_articles = sorted(
+            [a for a in articles if a.get("sentiment_score", 0) > 0.1],
+            key=lambda a: a.get("sentiment_score", 0), reverse=True
+        )
+        negative_articles = sorted(
+            [a for a in articles if a.get("sentiment_score", 0) < -0.1],
+            key=lambda a: a.get("sentiment_score", 0)
+        )
+        if len(positive_articles) >= 2 and len(negative_articles) >= 2:
+            left_articles = negative_articles  # critical framing
+            right_articles = positive_articles  # supportive framing
+            use_sentiment_framing = True
+
     import os
     hf_token = os.environ.get("HF_TOKEN")
-    
+
     if not hf_token:
         return {"left": "No token available for contrastive summarization.", "right": "No token available for contrastive summarization."}
-        
+
     model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
     try:
         from huggingface_hub import InferenceClient
         client = InferenceClient(model=model_id, token=hf_token)
-        
+
         def _summarize_echo_chamber(subset, wing):
             if not subset:
                 return f"Insufficient data from {wing} sources to generate a narrative."
-            
+
             snippets = []
             for a in subset[:7]:
                 snippets.append(f"- Source: [{a.get('source', 'Unknown')}] | Headline: {a.get('title', '')} (Sentiment: {a.get('sentiment', 'neutral')})")
             context_str = "\n".join(snippets)
-            
-            system_prompt = (
-                f"You are an expert political media analyst examining the '{wing}' media echo chamber. "
-                "Your task is to write a highly sophisticated, objective analysis (up to 10 sentences) of how this specific political wing is framing the current topic, "
-                "based strictly on the provided headlines. Do not simply summarize the events; instead, analyze the rhetorical strategies, key arguments, underlying assumptions, and ideological framing present in these headlines. "
-                "Highlight what they are emphasizing and what they might be omitting. Do not endorse the views, just critically analyze their narrative construction."
-            )
-            
+
+            if use_sentiment_framing:
+                # Adjusted prompt for sentiment-based framing
+                framing_label = "Critical/Negative" if wing == "Left-Wing" else "Supportive/Positive"
+                system_prompt = (
+                    f"You are an expert media analyst examining the '{framing_label}' framing cluster. "
+                    "Your task is to write a sophisticated, objective analysis (up to 10 sentences) of how sources in this cluster are framing the topic, "
+                    "based strictly on the provided headlines. Analyze rhetorical strategies, key arguments, and narrative construction. "
+                    "Do not endorse the views."
+                )
+            else:
+                system_prompt = (
+                    f"You are an expert political media analyst examining the '{wing}' media echo chamber. "
+                    "Your task is to write a highly sophisticated, objective analysis (up to 10 sentences) of how this specific political wing is framing the current topic, "
+                    "based strictly on the provided headlines. Do not simply summarize the events; instead, analyze the rhetorical strategies, key arguments, underlying assumptions, and ideological framing present in these headlines. "
+                    "Highlight what they are emphasizing and what they might be omitting. Do not endorse the views, just critically analyze their narrative construction."
+                )
+
             user_prompt = f"Sample '{wing}' Articles:\n{context_str}\n\nPlease generate the {wing} narrative analysis.\n\nCRITICAL: You MUST explicitly cite the sources using natural phrasing, and you MUST wrap the source name in square brackets for parsing (Example: 'as reported by [foxnews.com]' or 'according to [nypost.com]'). Do not just drop brackets randomly at the end of sentences. Do NOT use numbers like [1]. Do NOT output any preambles."
-            
+
             messages = [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
@@ -323,7 +439,7 @@ def generate_contrastive_summaries(articles):
 
         left_summary = _summarize_echo_chamber(left_articles, "Left-Wing")
         right_summary = _summarize_echo_chamber(right_articles, "Right-Wing")
-        
+
         return {
             "left": left_summary,
             "right": right_summary
