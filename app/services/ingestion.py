@@ -50,7 +50,7 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
     # Therefore, if the user explicitly provided 'domains', we must drop all exclude logic.
     final_exclude = None
     if not domains:
-        final_exclude = exclude_domains or "globenewswire.com,prnewswire.com,businesswire.com,yahoo.com,msn.com"
+        final_exclude = exclude_domains or "globenewswire.com,prnewswire.com,businesswire.com,yahoo.com,msn.com,news.yahoo.com,bizjournals.com"
 
     import datetime
     if not from_date and not to_date:
@@ -68,8 +68,8 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
             from_param=from_date,
             to=to_date,
             language='en',
-            sort_by='popularity',
-            page_size=10
+            sort_by='relevancy',
+            page_size=50
         )
         
         if response.get('totalResults', 0) < 5:
@@ -81,8 +81,8 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
                 from_param=from_date,
                 to=to_date,
                 language='en',
-                sort_by='popularity',
-                page_size=10
+                sort_by='relevancy',
+                page_size=50
             )
             
     except Exception as e:
@@ -138,7 +138,7 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
             unique_articles.append(a)
 
     # Run newspaper scraping concurrently to save time
-    results = await asyncio.gather(*[scrape_article(a) for a in unique_articles[:20]])
+    results = await asyncio.gather(*[scrape_article(a) for a in unique_articles[:50]])
     return [r for r in results if r is not None]
 
 async def scrape_article(article_data):
