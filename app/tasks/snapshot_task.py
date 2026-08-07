@@ -80,7 +80,10 @@ async def generate_snapshots_async():
                     )
 
             # 4. Clustering & Event Detection
-            await run_claim_clustering(prisma)
+            # Scoped to this topic — topic and Search.query are the same
+            # string here (both lowercased), so this only reclusters claims
+            # relevant to the topic this snapshot is for.
+            await run_claim_clustering(prisma, topic)
             await run_event_detection(prisma)
 
             # 5. Build Snapshot Data
@@ -147,9 +150,13 @@ async def generate_snapshots_async():
                 }
             )
             
-            # Save top events to snapshot
-            # ... we would rank and link SnapshotEvent here
-            
+            # Top events/claims for this snapshot still aren't populated.
+            # The SnapshotEvent/SnapshotClaim join tables this comment used
+            # to reference were dropped (unused scaffolding — see
+            # AUDIT_TASKS.md D3); TopicSnapshot.topEvents/topClaims (plain
+            # Json columns, already in the schema) are the lighter-weight
+            # place to fill this in whenever it's actually built.
+
             await prisma.topicsubscription.update(
                 where={"id": sub.id},
                 data={"lastSnapshotAt": datetime.utcnow()}

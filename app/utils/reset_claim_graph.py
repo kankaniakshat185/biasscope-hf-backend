@@ -25,8 +25,8 @@ async def reset_claim_graph():
 
     try:
         await prisma.evidence.delete_many(where={})
-        await prisma.contradictionpair.delete_many(where={})
-        await prisma.consensusfact.delete_many(where={})
+        # ContradictionPair/ConsensusFact deleted from schema.prisma —
+        # unused "Phase 3" scaffolding, see AUDIT_TASKS.md D3.
         await prisma.event.delete_many(where={})
         await prisma.claimcluster.delete_many(where={})
         await prisma.claim.delete_many(where={})
@@ -48,8 +48,6 @@ async def reset_all():
 
     try:
         await prisma.evidence.delete_many(where={})
-        await prisma.contradictionpair.delete_many(where={})
-        await prisma.consensusfact.delete_many(where={})
         await prisma.event.delete_many(where={})
         await prisma.claimcluster.delete_many(where={})
         await prisma.claim.delete_many(where={})

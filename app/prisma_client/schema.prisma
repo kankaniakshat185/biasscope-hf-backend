@@ -113,6 +113,8 @@ model Article {
   entities       Json? // Extracted NER entities
   createdAt      DateTime  @default(now())
 
+  evidence Evidence[]
+
   @@map("article")
 }
 
@@ -157,7 +159,6 @@ model Claim {
   clusterId          String?
   cluster            ClaimCluster?              @relation(fields: [clusterId], references: [id])
   evidence           Evidence[]
-  snapshotClaims     SnapshotClaim[]
 
   @@map("claim")
 }
@@ -172,18 +173,24 @@ model Evidence {
   publishedAt DateTime
   stance      String
   claim       Claim    @relation(fields: [claimId], references: [id], onDelete: Cascade)
+  // Was a bare String with no relation/FK at all — deleting a Search
+  // cascaded to Article, but nothing cascaded onward to the Evidence rows
+  // referencing it, leaving permanently orphaned rows. See
+  // AUDIT_TASKS.md D1. Before this constraint can be applied to the real
+  // database, run app/utils/cleanup_orphaned_evidence.py once to remove
+  // any orphans that already exist — the ADD CONSTRAINT will fail otherwise.
+  article     Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
 
   @@map("evidence")
 }
 
 model Event {
-  id              String          @id @default(uuid())
+  id              String         @id @default(uuid())
   title           String
   description     String?
-  importanceScore Float?          @default(0)
-  createdAt       DateTime        @default(now())
+  importanceScore Float?         @default(0)
+  createdAt       DateTime       @default(now())
   claimClusters   ClaimCluster[]
-  snapshotEvents  SnapshotEvent[]
 
   @@map("event")
 }
@@ -281,58 +288,14 @@ model TopicSnapshot {
 
   summary String?
 
-  snapshotEvents SnapshotEvent[]
-  snapshotClaims SnapshotClaim[]
-
   @@map("topic_snapshot")
 }
 
-model SnapshotEvent {
-  id         String        @id @default(uuid())
-  snapshotId String
-  snapshot   TopicSnapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
-  eventId    String
-  event      Event         @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  importance Float?        @default(0)
-  eventTitle String
-
-  @@map("snapshot_event")
-}
-
-model SnapshotClaim {
-  id         String        @id @default(uuid())
-  snapshotId String
-  snapshot   TopicSnapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
-  claimId    String
-  claim      Claim         @relation(fields: [claimId], references: [id], onDelete: Cascade)
-
-  @@map("snapshot_claim")
-}
-
-// -------------------------------------------------------------
-// Phase 3: Consensus and Contradiction Engine (Prepared Schema)
-// -------------------------------------------------------------
-
-model ConsensusFact {
-  id              String   @id @default(uuid())
-  factStatement   String
-  confidenceScore Float    @default(0)
-  sourceCount     Int      @default(0)
-  firstSeenAt     DateTime
-  lastSeenAt      DateTime
-  createdAt       DateTime @default(now())
-
-  @@map("consensus_fact")
-}
-
-model ContradictionPair {
-  id                String   @id @default(uuid())
-  claimAId          String
-  claimBId          String
-  contradictionType String // DIRECT, NUMERIC, TIMELINE, CONTEXTUAL
-  confidenceScore   Float    @default(0)
-  resolved          Boolean  @default(false)
-  createdAt         DateTime @default(now())
-
-  @@map("contradiction_pair")
-}
+// SnapshotEvent, SnapshotClaim, ConsensusFact, and ContradictionPair were
+// "Phase 3" scaffolding — schema tables with no code ever reading or
+// writing them (snapshot_task.py even has a comment admitting the
+// snapshot-linking logic was never implemented: "we would rank and link
+// SnapshotEvent here"). Dropped per AUDIT_TASKS.md D3 rather than carry
+// unused schema surface indefinitely; re-add them, properly wired up, if
+// this feature gets scheduled for real. Nothing was lost — these tables
+// were always empty in practice.

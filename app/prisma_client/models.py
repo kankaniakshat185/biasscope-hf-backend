@@ -733,6 +733,7 @@ class Article(bases.BaseArticle):
     deviationScore: Optional[_float] = None
     entities: Optional['fields.Json'] = None
     createdAt: datetime.datetime
+    evidence: Optional[List['models.Evidence']] = None
 
     # take *args and **kwargs so that other metaclasses can define arguments
     def __init_subclass__(
@@ -1017,7 +1018,6 @@ class Claim(bases.BaseClaim):
     clusterId: Optional[_str] = None
     cluster: Optional['models.ClaimCluster'] = None
     evidence: Optional[List['models.Evidence']] = None
-    snapshotClaims: Optional[List['models.SnapshotClaim']] = None
 
     # take *args and **kwargs so that other metaclasses can define arguments
     def __init_subclass__(
@@ -1154,6 +1154,7 @@ class Evidence(bases.BaseEvidence):
     publishedAt: datetime.datetime
     stance: _str
     claim: Optional['models.Claim'] = None
+    article: Optional['models.Article'] = None
 
     # take *args and **kwargs so that other metaclasses can define arguments
     def __init_subclass__(
@@ -1287,7 +1288,6 @@ class Event(bases.BaseEvent):
     importanceScore: Optional[_float] = None
     createdAt: datetime.datetime
     claimClusters: Optional[List['models.ClaimCluster']] = None
-    snapshotEvents: Optional[List['models.SnapshotEvent']] = None
 
     # take *args and **kwargs so that other metaclasses can define arguments
     def __init_subclass__(
@@ -2027,8 +2027,6 @@ class TopicSnapshot(bases.BaseTopicSnapshot):
     topClaims: Optional['fields.Json'] = None
     driftMetrics: Optional['fields.Json'] = None
     summary: Optional[_str] = None
-    snapshotEvents: Optional[List['models.SnapshotEvent']] = None
-    snapshotClaims: Optional[List['models.SnapshotClaim']] = None
 
     # take *args and **kwargs so that other metaclasses can define arguments
     def __init_subclass__(
@@ -2148,492 +2146,6 @@ class TopicSnapshot(bases.BaseTopicSnapshot):
                 'name': name,
                 'fields': cast(Mapping[str, PartialModelField], fields),
                 'from_model': 'TopicSnapshot',
-            }
-        )
-        _created_partial_types.add(name)
-
-
-class SnapshotEvent(bases.BaseSnapshotEvent):
-    """Represents a SnapshotEvent record"""
-
-    id: _str
-    snapshotId: _str
-    snapshot: Optional['models.TopicSnapshot'] = None
-    eventId: _str
-    event: Optional['models.Event'] = None
-    importance: Optional[_float] = None
-    eventTitle: _str
-
-    # take *args and **kwargs so that other metaclasses can define arguments
-    def __init_subclass__(
-        cls,
-        *args: Any,
-        warn_subclass: Optional[bool] = None,
-        **kwargs: Any,
-    ) -> None:
-        super().__init_subclass__()
-        if warn_subclass is not None:
-            warnings.warn(
-                'The `warn_subclass` argument is deprecated as it is no longer necessary and will be removed in the next release',
-                DeprecationWarning,
-                stacklevel=3,
-            )
-
-
-    @staticmethod
-    def create_partial(
-        name: str,
-        include: Optional[Iterable['types.SnapshotEventKeys']] = None,
-        exclude: Optional[Iterable['types.SnapshotEventKeys']] = None,
-        required: Optional[Iterable['types.SnapshotEventKeys']] = None,
-        optional: Optional[Iterable['types.SnapshotEventKeys']] = None,
-        relations: Optional[Mapping['types.SnapshotEventRelationalFieldKeys', str]] = None,
-        exclude_relational_fields: bool = False,
-    ) -> None:
-        if not os.environ.get('PRISMA_GENERATOR_INVOCATION'):
-            raise RuntimeError(
-                'Attempted to create a partial type outside of client generation.'
-            )
-
-        if name in _created_partial_types:
-            raise ValueError(f'Partial type "{name}" has already been created.')
-
-        if include is not None:
-            if exclude is not None:
-                raise TypeError('Exclude and include are mutually exclusive.')
-            if exclude_relational_fields is True:
-                raise TypeError('Include and exclude_relational_fields=True are mutually exclusive.')
-
-        if required and optional:
-            shared = set(required) & set(optional)
-            if shared:
-                raise ValueError(f'Cannot make the same field(s) required and optional {shared}')
-
-        if exclude_relational_fields and relations:
-            raise ValueError(
-                'exclude_relational_fields and relations are mutually exclusive'
-            )
-
-        fields: Dict['types.SnapshotEventKeys', PartialModelField] = OrderedDict()
-
-        try:
-            if include:
-                for field in include:
-                    fields[field] = _SnapshotEvent_fields[field].copy()
-            elif exclude:
-                for field in exclude:
-                    if field not in _SnapshotEvent_fields:
-                        raise KeyError(field)
-
-                fields = {
-                    key: data.copy()
-                    for key, data in _SnapshotEvent_fields.items()
-                    if key not in exclude
-                }
-            else:
-                fields = {
-                    key: data.copy()
-                    for key, data in _SnapshotEvent_fields.items()
-                }
-
-            if required:
-                for field in required:
-                    fields[field]['optional'] = False
-
-            if optional:
-                for field in optional:
-                    fields[field]['optional'] = True
-
-            if exclude_relational_fields:
-                fields = {
-                    key: data
-                    for key, data in fields.items()
-                    if key not in _SnapshotEvent_relational_fields
-                }
-
-            if relations:
-                for field, type_ in relations.items():
-                    if field not in _SnapshotEvent_relational_fields:
-                        raise errors.UnknownRelationalFieldError('SnapshotEvent', field)
-
-                    # TODO: this method of validating types is not ideal
-                    # as it means we cannot two create partial types that
-                    # reference each other
-                    if type_ not in _created_partial_types:
-                        raise ValueError(
-                            f'Unknown partial type: "{type_}". '
-                            f'Did you remember to generate the {type_} type before this one?'
-                        )
-
-                    # TODO: support non prisma.partials models
-                    info = fields[field]
-                    if info['is_list']:
-                        info['type'] = f'List[\'partials.{type_}\']'
-                    else:
-                        info['type'] = f'\'partials.{type_}\''
-        except KeyError as exc:
-            raise ValueError(
-                f'{exc.args[0]} is not a valid SnapshotEvent / {name} field.'
-            ) from None
-
-        models = partial_models_ctx.get()
-        models.append(
-            {
-                'name': name,
-                'fields': cast(Mapping[str, PartialModelField], fields),
-                'from_model': 'SnapshotEvent',
-            }
-        )
-        _created_partial_types.add(name)
-
-
-class SnapshotClaim(bases.BaseSnapshotClaim):
-    """Represents a SnapshotClaim record"""
-
-    id: _str
-    snapshotId: _str
-    snapshot: Optional['models.TopicSnapshot'] = None
-    claimId: _str
-    claim: Optional['models.Claim'] = None
-
-    # take *args and **kwargs so that other metaclasses can define arguments
-    def __init_subclass__(
-        cls,
-        *args: Any,
-        warn_subclass: Optional[bool] = None,
-        **kwargs: Any,
-    ) -> None:
-        super().__init_subclass__()
-        if warn_subclass is not None:
-            warnings.warn(
-                'The `warn_subclass` argument is deprecated as it is no longer necessary and will be removed in the next release',
-                DeprecationWarning,
-                stacklevel=3,
-            )
-
-
-    @staticmethod
-    def create_partial(
-        name: str,
-        include: Optional[Iterable['types.SnapshotClaimKeys']] = None,
-        exclude: Optional[Iterable['types.SnapshotClaimKeys']] = None,
-        required: Optional[Iterable['types.SnapshotClaimKeys']] = None,
-        optional: Optional[Iterable['types.SnapshotClaimKeys']] = None,
-        relations: Optional[Mapping['types.SnapshotClaimRelationalFieldKeys', str]] = None,
-        exclude_relational_fields: bool = False,
-    ) -> None:
-        if not os.environ.get('PRISMA_GENERATOR_INVOCATION'):
-            raise RuntimeError(
-                'Attempted to create a partial type outside of client generation.'
-            )
-
-        if name in _created_partial_types:
-            raise ValueError(f'Partial type "{name}" has already been created.')
-
-        if include is not None:
-            if exclude is not None:
-                raise TypeError('Exclude and include are mutually exclusive.')
-            if exclude_relational_fields is True:
-                raise TypeError('Include and exclude_relational_fields=True are mutually exclusive.')
-
-        if required and optional:
-            shared = set(required) & set(optional)
-            if shared:
-                raise ValueError(f'Cannot make the same field(s) required and optional {shared}')
-
-        if exclude_relational_fields and relations:
-            raise ValueError(
-                'exclude_relational_fields and relations are mutually exclusive'
-            )
-
-        fields: Dict['types.SnapshotClaimKeys', PartialModelField] = OrderedDict()
-
-        try:
-            if include:
-                for field in include:
-                    fields[field] = _SnapshotClaim_fields[field].copy()
-            elif exclude:
-                for field in exclude:
-                    if field not in _SnapshotClaim_fields:
-                        raise KeyError(field)
-
-                fields = {
-                    key: data.copy()
-                    for key, data in _SnapshotClaim_fields.items()
-                    if key not in exclude
-                }
-            else:
-                fields = {
-                    key: data.copy()
-                    for key, data in _SnapshotClaim_fields.items()
-                }
-
-            if required:
-                for field in required:
-                    fields[field]['optional'] = False
-
-            if optional:
-                for field in optional:
-                    fields[field]['optional'] = True
-
-            if exclude_relational_fields:
-                fields = {
-                    key: data
-                    for key, data in fields.items()
-                    if key not in _SnapshotClaim_relational_fields
-                }
-
-            if relations:
-                for field, type_ in relations.items():
-                    if field not in _SnapshotClaim_relational_fields:
-                        raise errors.UnknownRelationalFieldError('SnapshotClaim', field)
-
-                    # TODO: this method of validating types is not ideal
-                    # as it means we cannot two create partial types that
-                    # reference each other
-                    if type_ not in _created_partial_types:
-                        raise ValueError(
-                            f'Unknown partial type: "{type_}". '
-                            f'Did you remember to generate the {type_} type before this one?'
-                        )
-
-                    # TODO: support non prisma.partials models
-                    info = fields[field]
-                    if info['is_list']:
-                        info['type'] = f'List[\'partials.{type_}\']'
-                    else:
-                        info['type'] = f'\'partials.{type_}\''
-        except KeyError as exc:
-            raise ValueError(
-                f'{exc.args[0]} is not a valid SnapshotClaim / {name} field.'
-            ) from None
-
-        models = partial_models_ctx.get()
-        models.append(
-            {
-                'name': name,
-                'fields': cast(Mapping[str, PartialModelField], fields),
-                'from_model': 'SnapshotClaim',
-            }
-        )
-        _created_partial_types.add(name)
-
-
-class ConsensusFact(bases.BaseConsensusFact):
-    """Represents a ConsensusFact record"""
-
-    id: _str
-    factStatement: _str
-    confidenceScore: _float
-    sourceCount: _int
-    firstSeenAt: datetime.datetime
-    lastSeenAt: datetime.datetime
-    createdAt: datetime.datetime
-
-    # take *args and **kwargs so that other metaclasses can define arguments
-    def __init_subclass__(
-        cls,
-        *args: Any,
-        warn_subclass: Optional[bool] = None,
-        **kwargs: Any,
-    ) -> None:
-        super().__init_subclass__()
-        if warn_subclass is not None:
-            warnings.warn(
-                'The `warn_subclass` argument is deprecated as it is no longer necessary and will be removed in the next release',
-                DeprecationWarning,
-                stacklevel=3,
-            )
-
-
-    @staticmethod
-    def create_partial(
-        name: str,
-        include: Optional[Iterable['types.ConsensusFactKeys']] = None,
-        exclude: Optional[Iterable['types.ConsensusFactKeys']] = None,
-        required: Optional[Iterable['types.ConsensusFactKeys']] = None,
-        optional: Optional[Iterable['types.ConsensusFactKeys']] = None,
-        relations: Optional[Mapping['types.ConsensusFactRelationalFieldKeys', str]] = None,
-        exclude_relational_fields: bool = False,
-    ) -> None:
-        if not os.environ.get('PRISMA_GENERATOR_INVOCATION'):
-            raise RuntimeError(
-                'Attempted to create a partial type outside of client generation.'
-            )
-
-        if name in _created_partial_types:
-            raise ValueError(f'Partial type "{name}" has already been created.')
-
-        if include is not None:
-            if exclude is not None:
-                raise TypeError('Exclude and include are mutually exclusive.')
-            if exclude_relational_fields is True:
-                raise TypeError('Include and exclude_relational_fields=True are mutually exclusive.')
-
-        if required and optional:
-            shared = set(required) & set(optional)
-            if shared:
-                raise ValueError(f'Cannot make the same field(s) required and optional {shared}')
-
-        if exclude_relational_fields and relations:
-            raise ValueError(
-                'exclude_relational_fields and relations are mutually exclusive'
-            )
-
-        fields: Dict['types.ConsensusFactKeys', PartialModelField] = OrderedDict()
-
-        try:
-            if include:
-                for field in include:
-                    fields[field] = _ConsensusFact_fields[field].copy()
-            elif exclude:
-                for field in exclude:
-                    if field not in _ConsensusFact_fields:
-                        raise KeyError(field)
-
-                fields = {
-                    key: data.copy()
-                    for key, data in _ConsensusFact_fields.items()
-                    if key not in exclude
-                }
-            else:
-                fields = {
-                    key: data.copy()
-                    for key, data in _ConsensusFact_fields.items()
-                }
-
-            if required:
-                for field in required:
-                    fields[field]['optional'] = False
-
-            if optional:
-                for field in optional:
-                    fields[field]['optional'] = True
-
-
-            if relations:
-                raise ValueError('Model: "ConsensusFact" has no relational fields.')
-        except KeyError as exc:
-            raise ValueError(
-                f'{exc.args[0]} is not a valid ConsensusFact / {name} field.'
-            ) from None
-
-        models = partial_models_ctx.get()
-        models.append(
-            {
-                'name': name,
-                'fields': cast(Mapping[str, PartialModelField], fields),
-                'from_model': 'ConsensusFact',
-            }
-        )
-        _created_partial_types.add(name)
-
-
-class ContradictionPair(bases.BaseContradictionPair):
-    """Represents a ContradictionPair record"""
-
-    id: _str
-    claimAId: _str
-    claimBId: _str
-    contradictionType: _str
-    confidenceScore: _float
-    resolved: _bool
-    createdAt: datetime.datetime
-
-    # take *args and **kwargs so that other metaclasses can define arguments
-    def __init_subclass__(
-        cls,
-        *args: Any,
-        warn_subclass: Optional[bool] = None,
-        **kwargs: Any,
-    ) -> None:
-        super().__init_subclass__()
-        if warn_subclass is not None:
-            warnings.warn(
-                'The `warn_subclass` argument is deprecated as it is no longer necessary and will be removed in the next release',
-                DeprecationWarning,
-                stacklevel=3,
-            )
-
-
-    @staticmethod
-    def create_partial(
-        name: str,
-        include: Optional[Iterable['types.ContradictionPairKeys']] = None,
-        exclude: Optional[Iterable['types.ContradictionPairKeys']] = None,
-        required: Optional[Iterable['types.ContradictionPairKeys']] = None,
-        optional: Optional[Iterable['types.ContradictionPairKeys']] = None,
-        relations: Optional[Mapping['types.ContradictionPairRelationalFieldKeys', str]] = None,
-        exclude_relational_fields: bool = False,
-    ) -> None:
-        if not os.environ.get('PRISMA_GENERATOR_INVOCATION'):
-            raise RuntimeError(
-                'Attempted to create a partial type outside of client generation.'
-            )
-
-        if name in _created_partial_types:
-            raise ValueError(f'Partial type "{name}" has already been created.')
-
-        if include is not None:
-            if exclude is not None:
-                raise TypeError('Exclude and include are mutually exclusive.')
-            if exclude_relational_fields is True:
-                raise TypeError('Include and exclude_relational_fields=True are mutually exclusive.')
-
-        if required and optional:
-            shared = set(required) & set(optional)
-            if shared:
-                raise ValueError(f'Cannot make the same field(s) required and optional {shared}')
-
-        if exclude_relational_fields and relations:
-            raise ValueError(
-                'exclude_relational_fields and relations are mutually exclusive'
-            )
-
-        fields: Dict['types.ContradictionPairKeys', PartialModelField] = OrderedDict()
-
-        try:
-            if include:
-                for field in include:
-                    fields[field] = _ContradictionPair_fields[field].copy()
-            elif exclude:
-                for field in exclude:
-                    if field not in _ContradictionPair_fields:
-                        raise KeyError(field)
-
-                fields = {
-                    key: data.copy()
-                    for key, data in _ContradictionPair_fields.items()
-                    if key not in exclude
-                }
-            else:
-                fields = {
-                    key: data.copy()
-                    for key, data in _ContradictionPair_fields.items()
-                }
-
-            if required:
-                for field in required:
-                    fields[field]['optional'] = False
-
-            if optional:
-                for field in optional:
-                    fields[field]['optional'] = True
-
-
-            if relations:
-                raise ValueError('Model: "ContradictionPair" has no relational fields.')
-        except KeyError as exc:
-            raise ValueError(
-                f'{exc.args[0]} is not a valid ContradictionPair / {name} field.'
-            ) from None
-
-        models = partial_models_ctx.get()
-        models.append(
-            {
-                'name': name,
-                'fields': cast(Mapping[str, PartialModelField], fields),
-                'from_model': 'ContradictionPair',
             }
         )
         _created_partial_types.add(name)
@@ -3069,6 +2581,7 @@ _Search_fields: Dict['types.SearchKeys', PartialModelField] = OrderedDict(
 
 _Article_relational_fields: Set[str] = {
         'search',
+        'evidence',
     }
 _Article_fields: Dict['types.ArticleKeys', PartialModelField] = OrderedDict(
     [
@@ -3190,6 +2703,14 @@ _Article_fields: Dict['types.ArticleKeys', PartialModelField] = OrderedDict(
             'optional': False,
             'type': 'datetime.datetime',
             'is_relational': False,
+            'documentation': None,
+        }),
+        ('evidence', {
+            'name': 'evidence',
+            'is_list': True,
+            'optional': True,
+            'type': 'List[\'models.Evidence\']',
+            'is_relational': True,
             'documentation': None,
         }),
     ],
@@ -3358,7 +2879,6 @@ _Insight_fields: Dict['types.InsightKeys', PartialModelField] = OrderedDict(
 _Claim_relational_fields: Set[str] = {
         'cluster',
         'evidence',
-        'snapshotClaims',
     }
 _Claim_fields: Dict['types.ClaimKeys', PartialModelField] = OrderedDict(
     [
@@ -3450,19 +2970,12 @@ _Claim_fields: Dict['types.ClaimKeys', PartialModelField] = OrderedDict(
             'is_relational': True,
             'documentation': None,
         }),
-        ('snapshotClaims', {
-            'name': 'snapshotClaims',
-            'is_list': True,
-            'optional': True,
-            'type': 'List[\'models.SnapshotClaim\']',
-            'is_relational': True,
-            'documentation': None,
-        }),
     ],
 )
 
 _Evidence_relational_fields: Set[str] = {
         'claim',
+        'article',
     }
 _Evidence_fields: Dict['types.EvidenceKeys', PartialModelField] = OrderedDict(
     [
@@ -3538,12 +3051,19 @@ _Evidence_fields: Dict['types.EvidenceKeys', PartialModelField] = OrderedDict(
             'is_relational': True,
             'documentation': None,
         }),
+        ('article', {
+            'name': 'article',
+            'is_list': False,
+            'optional': True,
+            'type': 'models.Article',
+            'is_relational': True,
+            'documentation': None,
+        }),
     ],
 )
 
 _Event_relational_fields: Set[str] = {
         'claimClusters',
-        'snapshotEvents',
     }
 _Event_fields: Dict['types.EventKeys', PartialModelField] = OrderedDict(
     [
@@ -3592,14 +3112,6 @@ _Event_fields: Dict['types.EventKeys', PartialModelField] = OrderedDict(
             'is_list': True,
             'optional': True,
             'type': 'List[\'models.ClaimCluster\']',
-            'is_relational': True,
-            'documentation': None,
-        }),
-        ('snapshotEvents', {
-            'name': 'snapshotEvents',
-            'is_list': True,
-            'optional': True,
-            'type': 'List[\'models.SnapshotEvent\']',
             'is_relational': True,
             'documentation': None,
         }),
@@ -3908,8 +3420,6 @@ _TopicSubscription_fields: Dict['types.TopicSubscriptionKeys', PartialModelField
 
 _TopicSnapshot_relational_fields: Set[str] = {
         'subscription',
-        'snapshotEvents',
-        'snapshotClaims',
     }
 _TopicSnapshot_fields: Dict['types.TopicSnapshotKeys', PartialModelField] = OrderedDict(
     [
@@ -4041,260 +3551,6 @@ _TopicSnapshot_fields: Dict['types.TopicSnapshotKeys', PartialModelField] = Orde
             'is_relational': False,
             'documentation': None,
         }),
-        ('snapshotEvents', {
-            'name': 'snapshotEvents',
-            'is_list': True,
-            'optional': True,
-            'type': 'List[\'models.SnapshotEvent\']',
-            'is_relational': True,
-            'documentation': None,
-        }),
-        ('snapshotClaims', {
-            'name': 'snapshotClaims',
-            'is_list': True,
-            'optional': True,
-            'type': 'List[\'models.SnapshotClaim\']',
-            'is_relational': True,
-            'documentation': None,
-        }),
-    ],
-)
-
-_SnapshotEvent_relational_fields: Set[str] = {
-        'snapshot',
-        'event',
-    }
-_SnapshotEvent_fields: Dict['types.SnapshotEventKeys', PartialModelField] = OrderedDict(
-    [
-        ('id', {
-            'name': 'id',
-            'is_list': False,
-            'optional': False,
-            'type': '_str',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('snapshotId', {
-            'name': 'snapshotId',
-            'is_list': False,
-            'optional': False,
-            'type': '_str',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('snapshot', {
-            'name': 'snapshot',
-            'is_list': False,
-            'optional': True,
-            'type': 'models.TopicSnapshot',
-            'is_relational': True,
-            'documentation': None,
-        }),
-        ('eventId', {
-            'name': 'eventId',
-            'is_list': False,
-            'optional': False,
-            'type': '_str',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('event', {
-            'name': 'event',
-            'is_list': False,
-            'optional': True,
-            'type': 'models.Event',
-            'is_relational': True,
-            'documentation': None,
-        }),
-        ('importance', {
-            'name': 'importance',
-            'is_list': False,
-            'optional': True,
-            'type': '_float',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('eventTitle', {
-            'name': 'eventTitle',
-            'is_list': False,
-            'optional': False,
-            'type': '_str',
-            'is_relational': False,
-            'documentation': None,
-        }),
-    ],
-)
-
-_SnapshotClaim_relational_fields: Set[str] = {
-        'snapshot',
-        'claim',
-    }
-_SnapshotClaim_fields: Dict['types.SnapshotClaimKeys', PartialModelField] = OrderedDict(
-    [
-        ('id', {
-            'name': 'id',
-            'is_list': False,
-            'optional': False,
-            'type': '_str',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('snapshotId', {
-            'name': 'snapshotId',
-            'is_list': False,
-            'optional': False,
-            'type': '_str',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('snapshot', {
-            'name': 'snapshot',
-            'is_list': False,
-            'optional': True,
-            'type': 'models.TopicSnapshot',
-            'is_relational': True,
-            'documentation': None,
-        }),
-        ('claimId', {
-            'name': 'claimId',
-            'is_list': False,
-            'optional': False,
-            'type': '_str',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('claim', {
-            'name': 'claim',
-            'is_list': False,
-            'optional': True,
-            'type': 'models.Claim',
-            'is_relational': True,
-            'documentation': None,
-        }),
-    ],
-)
-
-_ConsensusFact_relational_fields: Set[str] = set()  # pyright: ignore[reportUnusedVariable]
-_ConsensusFact_fields: Dict['types.ConsensusFactKeys', PartialModelField] = OrderedDict(
-    [
-        ('id', {
-            'name': 'id',
-            'is_list': False,
-            'optional': False,
-            'type': '_str',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('factStatement', {
-            'name': 'factStatement',
-            'is_list': False,
-            'optional': False,
-            'type': '_str',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('confidenceScore', {
-            'name': 'confidenceScore',
-            'is_list': False,
-            'optional': False,
-            'type': '_float',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('sourceCount', {
-            'name': 'sourceCount',
-            'is_list': False,
-            'optional': False,
-            'type': '_int',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('firstSeenAt', {
-            'name': 'firstSeenAt',
-            'is_list': False,
-            'optional': False,
-            'type': 'datetime.datetime',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('lastSeenAt', {
-            'name': 'lastSeenAt',
-            'is_list': False,
-            'optional': False,
-            'type': 'datetime.datetime',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('createdAt', {
-            'name': 'createdAt',
-            'is_list': False,
-            'optional': False,
-            'type': 'datetime.datetime',
-            'is_relational': False,
-            'documentation': None,
-        }),
-    ],
-)
-
-_ContradictionPair_relational_fields: Set[str] = set()  # pyright: ignore[reportUnusedVariable]
-_ContradictionPair_fields: Dict['types.ContradictionPairKeys', PartialModelField] = OrderedDict(
-    [
-        ('id', {
-            'name': 'id',
-            'is_list': False,
-            'optional': False,
-            'type': '_str',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('claimAId', {
-            'name': 'claimAId',
-            'is_list': False,
-            'optional': False,
-            'type': '_str',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('claimBId', {
-            'name': 'claimBId',
-            'is_list': False,
-            'optional': False,
-            'type': '_str',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('contradictionType', {
-            'name': 'contradictionType',
-            'is_list': False,
-            'optional': False,
-            'type': '_str',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('confidenceScore', {
-            'name': 'confidenceScore',
-            'is_list': False,
-            'optional': False,
-            'type': '_float',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('resolved', {
-            'name': 'resolved',
-            'is_list': False,
-            'optional': False,
-            'type': '_bool',
-            'is_relational': False,
-            'documentation': None,
-        }),
-        ('createdAt', {
-            'name': 'createdAt',
-            'is_list': False,
-            'optional': False,
-            'type': 'datetime.datetime',
-            'is_relational': False,
-            'documentation': None,
-        }),
     ],
 )
 
@@ -4321,7 +3577,3 @@ model_rebuild(LLMUsage)
 model_rebuild(DemoSnapshot)
 model_rebuild(TopicSubscription)
 model_rebuild(TopicSnapshot)
-model_rebuild(SnapshotEvent)
-model_rebuild(SnapshotClaim)
-model_rebuild(ConsensusFact)
-model_rebuild(ContradictionPair)

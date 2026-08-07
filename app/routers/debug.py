@@ -149,6 +149,9 @@ async def debug_rerun_clustering(background_tasks: BackgroundTasks):
 
     async def _run():
         try:
+            # Intentionally global (query=None) — this endpoint wipes every
+            # cluster/event above and is meant to rebuild all of them, not
+            # just one topic's.
             await run_claim_clustering(prisma)
             await run_event_detection(prisma)
             print("Background rerun-clustering complete.")
@@ -218,7 +221,7 @@ async def debug_rerun_full(background_tasks: BackgroundTasks):
                         art.publishedAt, query, art.title,
                     )
             print("Re-extraction complete. Starting clustering...")
-            await run_claim_clustering(prisma)
+            await run_claim_clustering(prisma, query)
             print("Clustering complete. Starting event detection...")
             await run_event_detection(prisma)
             print("Full pipeline rerun complete.")

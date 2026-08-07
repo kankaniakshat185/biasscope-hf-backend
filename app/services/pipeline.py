@@ -190,7 +190,9 @@ async def run_phase2_pipeline(search_id: str) -> None:
             logger.info("SKIP_EXTRACTION=1 — reusing existing claims")
 
         if not os.getenv("SKIP_CLUSTERING"):
-            await run_claim_clustering(prisma)
+            # Scoped to this search's query — see the comment on
+            # run_claim_clustering for why that's the fix, not a time window.
+            await run_claim_clustering(prisma, query)
             logger.info("Clustering complete")
         else:
             logger.info("SKIP_CLUSTERING=1 — reusing existing clusters")

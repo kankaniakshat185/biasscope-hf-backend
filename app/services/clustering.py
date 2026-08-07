@@ -197,14 +197,44 @@ def compute_cluster_cohesion(vectors: np.ndarray) -> float:
 # STEP 1: CLAIM CLUSTERING
 # ══════════════════════════════════════════════════════════════════
 
-async def run_claim_clustering(prisma):
-    logger.info("=== Clustering Pipeline ===")
 
-    claims = await prisma.query_raw("""
-        SELECT id, "canonicalClaim", embedding::text
-        FROM "claim"
-        WHERE "clusterId" IS NULL
-    """)
+# Every /search used to trigger a full reclustering pass over every
+# unclustered claim in the entire database, regardless of topic — so
+# searching "elon musk" would pay the O(n^2) cohesion-comparison cost of
+# reclustering leftover unclustered claims from someone else's unrelated
+# "monsoon forecast" search too. Scoping to the current query fixes both
+# the cost (bounded by one topic's claim volume, not the whole table) and
+# a correctness issue (claims about unrelated topics were never usefully
+# comparable anyway). Cross-search consensus for the SAME topic is
+# preserved — claims from an earlier search or a weekly snapshot re-run of
+# "elon musk" still join this query's claims, since they share the same
+# search.query all the way through the evidence -> article -> search chain.
+#
+# `query=None` keeps the old table-wide behavior, used only by the
+# /debug/rerun-* admin tools that intentionally rebuild every cluster from
+# scratch after wiping the cluster table.
+async def run_claim_clustering(prisma, query: str = None):
+    logger.info(f"=== Clustering Pipeline (query={query!r}) ===")
+
+    if query:
+        claims = await prisma.query_raw(
+            """
+            SELECT DISTINCT c.id, c."canonicalClaim", c.embedding::text
+            FROM "claim" c
+            JOIN "evidence" e ON e."claimId" = c.id
+            JOIN "article" a ON a.id = e."articleId"
+            JOIN "search" s ON s.id = a."searchId"
+            WHERE c."clusterId" IS NULL
+              AND LOWER(s.query) = LOWER($1)
+            """,
+            query,
+        )
+    else:
+        claims = await prisma.query_raw("""
+            SELECT id, "canonicalClaim", embedding::text
+            FROM "claim"
+            WHERE "clusterId" IS NULL
+        """)
 
     if not claims or len(claims) < 2:
         logger.info(f"Only {len(claims) if claims else 0} unclustered claims — skipping.")

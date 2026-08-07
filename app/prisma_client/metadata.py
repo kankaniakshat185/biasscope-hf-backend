@@ -22,10 +22,6 @@ PRISMA_MODELS: set[str] = {
     'DemoSnapshot',
     'TopicSubscription',
     'TopicSnapshot',
-    'SnapshotEvent',
-    'SnapshotClaim',
-    'ConsensusFact',
-    'ContradictionPair',
 }
 
 RELATIONAL_FIELD_MAPPINGS: dict[str, dict[str, str]] = {
@@ -50,6 +46,7 @@ RELATIONAL_FIELD_MAPPINGS: dict[str, dict[str, str]] = {
     },
     'Article': {
         'search': 'Search',
+        'evidence': 'Evidence',
     },
     'Insight': {
         'search': 'Search',
@@ -57,14 +54,13 @@ RELATIONAL_FIELD_MAPPINGS: dict[str, dict[str, str]] = {
     'Claim': {
         'cluster': 'ClaimCluster',
         'evidence': 'Evidence',
-        'snapshotClaims': 'SnapshotClaim',
     },
     'Evidence': {
         'claim': 'Claim',
+        'article': 'Article',
     },
     'Event': {
         'claimClusters': 'ClaimCluster',
-        'snapshotEvents': 'SnapshotEvent',
     },
     'ClaimCluster': {
         'event': 'Event',
@@ -82,20 +78,6 @@ RELATIONAL_FIELD_MAPPINGS: dict[str, dict[str, str]] = {
     },
     'TopicSnapshot': {
         'subscription': 'TopicSubscription',
-        'snapshotEvents': 'SnapshotEvent',
-        'snapshotClaims': 'SnapshotClaim',
-    },
-    'SnapshotEvent': {
-        'snapshot': 'TopicSnapshot',
-        'event': 'Event',
-    },
-    'SnapshotClaim': {
-        'snapshot': 'TopicSnapshot',
-        'claim': 'Claim',
-    },
-    'ConsensusFact': {
-    },
-    'ContradictionPair': {
     },
 }
 

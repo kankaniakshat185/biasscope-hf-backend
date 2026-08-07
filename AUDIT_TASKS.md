@@ -31,11 +31,16 @@ Check items off as they land. Security & Auth is the current focus — start the
 
 ## 🟠 Data Integrity & Performance
 
-- [ ] **D1** `[BE]` Add FK relation + cascade for `Evidence.articleId`; clean up existing orphans — `prisma/schema.prisma:167-179`
-- [ ] **D2** `[BE]` Add an `ivfflat`/`hnsw` index on `Claim.embedding` — `prisma/schema.prisma:154`
-- [ ] **D3** `[BE]` Finish or drop the unused `ConsensusFact`/`ContradictionPair`/`SnapshotEvent`/`SnapshotClaim` scaffolding — `prisma/schema.prisma:292-340`
-- [ ] **P1** `[BE]` Scope reclustering to the triggering search instead of the whole historical claims table — `app/main.py:83-84`, `app/services/clustering.py:200-302`
-- [ ] **D4** `[BE]` Add pagination (cursor/limit) to `/history`, `/results/{id}`, `/results/{id}/intelligence`
+- [x] **P1** `[BE]` `run_claim_clustering(prisma, query)` now scopes to claims whose evidence traces back to the same `search.query` (case-insensitive) — bounds cost to one topic's claim volume instead of the whole table, while still preserving cross-search consensus *within* a topic. `/debug/rerun-clustering` intentionally keeps the old global behavior (`query=None`) since it wipes and rebuilds every cluster anyway.
+- [x] **D4** `[BE]`/`[FE]` `/history` now takes `limit`/`offset` (default 50, cap 200) and returns `{total, limit, offset, searches}`; frontend updated to match. **Deliberately not done** for `/results/{id}` and `/results/{id}/intelligence` — both are already naturally bounded by the ~50-article ingestion cap per search, so they don't have `/history`'s actual unbounded-growth problem; reshaping their response would touch a lot of frontend surface for little real protection. Revisit if that assumption stops holding (e.g. if repeated re-extraction on one search_id starts meaningfully growing its claim count).
+- [x] **D1** `[BE]` Added `article Article @relation(..., onDelete: Cascade)` to `Evidence` in `schema.prisma`. **Needs a manual step before this is live** — see below.
+- [x] **D2** `[BE]` Wrote `app/utils/create_vector_index.py` (HNSW, cosine ops, matching the `<=>` operator already used everywhere). **Needs a manual step before this is live** — see below.
+- [x] **D3** `[BE]` Dropped `ConsensusFact`/`ContradictionPair`/`SnapshotEvent`/`SnapshotClaim` from `schema.prisma` per your call — removed the now-dead `.contradictionpair`/`.consensusfact` calls in `reset_claim_graph.py` and updated the stale comment in `snapshot_task.py` that referenced the deleted `SnapshotEvent` table.
+
+**Manual steps required (I have no access to your live database from here):**
+1. Run `python -m app.utils.cleanup_orphaned_evidence` (dry run first, then `--delete`) — **must** show 0 orphans before the next step, or it will fail.
+2. Run `python -m app.utils.create_vector_index` once.
+3. Run `prisma db push` (or your normal deploy) to apply the `Evidence.articleId` FK and the dropped Phase 3 models to the real schema. Since step 1 guarantees no orphans, the `ADD CONSTRAINT` should apply cleanly — but do this on a moment you can watch the logs, in case anything about your specific data surprises it.
 
 ## 🟡 Dead Code
 
