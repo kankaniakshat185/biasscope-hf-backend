@@ -15,7 +15,10 @@ async def generate_snapshots_async():
     from app.services.nlp import analyze_articles
     from app.services.extraction import process_and_store_claims
     from app.services.clustering import run_claim_clustering, run_event_detection
-    from app.main import get_search_intelligence
+    # (previously also imported get_search_intelligence from app.main here,
+    # unused — importing the FastAPI app module just for a dead import. See
+    # AUDIT_TASKS.md A2; app.services.intelligence is the module to import
+    # from if this task starts needing it.)
 
     try:
         subscriptions = await prisma.topicsubscription.find_many(where={"isActive": True})

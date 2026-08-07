@@ -341,14 +341,22 @@ async def process_and_store_claims(
         # If cosine similarity >= 0.88, merge evidence into the existing claim.
         CROSS_ARTICLE_DEDUP_THRESHOLD = 0.88
 
+        # Bound parameters throughout — this used to interpolate vector_string
+        # into the query with an f-string. It wasn't attacker-reachable (the
+        # value is model-generated floats, not user text) but it sat next to
+        # a properly parameterized INSERT a few lines below, which is exactly
+        # the kind of inconsistency that gets copy-pasted into a query that
+        # DOES carry user text later.
         existing_match = await prisma.query_raw(
-            f'''
+            '''
             SELECT id, "canonicalClaim"
             FROM "claim"
-            WHERE 1 - (embedding <=> '{vector_string}'::vector) > {CROSS_ARTICLE_DEDUP_THRESHOLD}
-            ORDER BY embedding <=> '{vector_string}'::vector
+            WHERE 1 - (embedding <=> $1::vector) > $2
+            ORDER BY embedding <=> $1::vector
             LIMIT 1
-            '''
+            ''',
+            vector_string,
+            CROSS_ARTICLE_DEDUP_THRESHOLD,
         )
 
         if existing_match:

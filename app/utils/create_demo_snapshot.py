@@ -2,7 +2,6 @@ import asyncio
 import json
 import logging
 from datetime import datetime
-from pydantic import BaseModel
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -10,23 +9,24 @@ logger = logging.getLogger(__name__)
 async def main():
     topic = "elon musk"
     search_id = "0d5391aa-59ac-442a-8876-484d2db95a3e"
-    
-    from app.main import get_results, get_search_intelligence, prisma
+
+    # Import the service functions directly instead of from app.main — this
+    # script used to import app.main just to reuse two functions, which
+    # meant it transitively depended on FastAPI app construction and its
+    # startup side effects. See AUDIT_TASKS.md A2.
+    from app.db import prisma
+    from app.services.intelligence import get_results, get_search_intelligence
 
     await prisma.connect()
 
     logger.info(f"Generating demo snapshot for topic '{topic}' using search ID {search_id}")
 
     try:
-        base_record = await get_results(search_id)
+        # get_results now returns a plain dict (already JSON-serializable)
+        # rather than a Prisma model instance — see app/services/intelligence.py.
+        base_data = await get_results(search_id)
         intel_data = await get_search_intelligence(search_id)
-        
-        # Pydantic serialization
-        if hasattr(base_record, "model_dump"):
-            base_data = base_record.model_dump(mode="json")
-        else:
-            base_data = json.loads(base_record.json())
-            
+
         demo_data = {
             "id": f"demo-{search_id}",
             "topic": topic,

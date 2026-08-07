@@ -25,4 +25,8 @@ RUN prisma py fetch
 # Force regenerate the Prisma python client specifically for Linux (overwriting the macOS version you uploaded)
 RUN prisma generate
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "7860"]
+# Schema sync now runs once here, at container start, instead of inside
+# app/main.py's startup handler. `&&` means a failed sync stops the
+# container from ever serving traffic on a half-synced schema, instead of
+# an os.system() call inside the app silently swallowing the exit code.
+CMD ["sh", "-c", "python3 -m prisma db push --skip-generate && uvicorn app.main:app --host 0.0.0.0 --port 7860"]

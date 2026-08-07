@@ -22,18 +22,26 @@ from huggingface_hub import InferenceClient
 
 logger = logging.getLogger(__name__)
 
+# Default model for pipeline stages that don't specify one (extraction,
+# canonicalization, event summaries).
 MODEL_ID = "Qwen/Qwen2.5-7B-Instruct"
 
-_client = None
+# Narrative/chat-style stages historically called HuggingFace directly with
+# a different model, bypassing this cache entirely. cached_llm_call() now
+# takes a `model` argument instead of hardcoding one, so every call site —
+# including those — can go through here and still show up in
+# /debug/llm-usage and /debug/cache-stats.
+NARRATIVE_MODEL_ID = "meta-llama/Meta-Llama-3-8B-Instruct"
 
-def _get_client():
-    global _client
-    if _client is None:
+_clients: dict = {}
+
+def _get_client(model: str):
+    if model not in _clients:
         token = os.getenv("HF_TOKEN")
         if not token:
             return None
-        _client = InferenceClient(model=MODEL_ID, token=token)
-    return _client
+        _clients[model] = InferenceClient(model=model, token=token)
+    return _clients[model]
 
 def _compute_prompt_hash(model: str, system_prompt: str, user_prompt: str) -> str:
     raw = f"{model}|{system_prompt}|{user_prompt}"
@@ -60,21 +68,28 @@ async def cached_llm_call(
     system_prompt: str,
     user_prompt: str,
     max_tokens: int = 1024,
+    model: str = MODEL_ID,
+    temperature: float = 0.1,
 ) -> str:
     """
     Call the LLM with prompt-level caching.
-    
+
     Args:
         prisma: Prisma client instance
-        stage: Pipeline stage name (extraction, canonicalization, merge, summary)
+        stage: Pipeline stage name (extraction, canonicalization, narrative, ...)
         system_prompt: System message
         user_prompt: User message
         max_tokens: Maximum response tokens
-    
+        model: HuggingFace model id. Defaults to the extraction-pipeline
+            model; narrative/chat call sites pass NARRATIVE_MODEL_ID.
+        temperature: Sampling temperature — narrative/chat call sites tend
+            to want more variation than the low-temperature extraction
+            stages, so this is no longer hardcoded to 0.1 for everyone.
+
     Returns:
         Cleaned LLM response string
     """
-    prompt_hash = _compute_prompt_hash(MODEL_ID, system_prompt, user_prompt)
+    prompt_hash = _compute_prompt_hash(model, system_prompt, user_prompt)
 
     # ── Check cache ──
     try:
@@ -86,19 +101,19 @@ async def cached_llm_call(
             await prisma.llmusage.create(
                 data={
                     "stage": stage,
-                    "model": MODEL_ID,
+                    "model": model,
                     "cached": True,
                     "promptTokens": 0,
                     "completionTokens": 0,
                 }
             )
-            logger.info(f"[CACHE HIT] stage={stage} hash={prompt_hash[:12]}...")
+            logger.info(f"[CACHE HIT] stage={stage} model={model} hash={prompt_hash[:12]}...")
             return cached.response
     except Exception as e:
         logger.warning(f"Cache lookup failed: {e}")
 
     # ── Call LLM ──
-    client = _get_client()
+    client = _get_client(model)
     if not client:
         logger.warning("No HF_TOKEN — cannot call LLM.")
         return ""
@@ -109,7 +124,7 @@ async def cached_llm_call(
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
-            temperature=0.1,
+            temperature=temperature,
             max_tokens=max_tokens,
         )
         content = _clean_llm_response(resp.choices[0].message.content)
@@ -123,7 +138,7 @@ async def cached_llm_call(
             await prisma.llmcache.create(
                 data={
                     "promptHash": prompt_hash,
-                    "model": MODEL_ID,
+                    "model": model,
                     "stage": stage,
                     "response": content,
                 }
@@ -136,7 +151,7 @@ async def cached_llm_call(
             await prisma.llmusage.create(
                 data={
                     "stage": stage,
-                    "model": MODEL_ID,
+                    "model": model,
                     "cached": False,
                     "promptTokens": prompt_tokens,
                     "completionTokens": completion_tokens,
@@ -145,7 +160,7 @@ async def cached_llm_call(
         except Exception:
             pass
 
-        logger.info(f"[LLM CALL] stage={stage} ~{prompt_tokens}+{completion_tokens} tokens")
+        logger.info(f"[LLM CALL] stage={stage} model={model} ~{prompt_tokens}+{completion_tokens} tokens")
         return content
 
     except Exception as e:

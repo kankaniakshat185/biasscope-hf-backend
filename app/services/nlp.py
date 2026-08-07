@@ -3,6 +3,7 @@ import re
 from collections import Counter
 from urllib.parse import urlparse
 import spacy
+from app.services.llm_client import cached_llm_call, NARRATIVE_MODEL_ID
 
 # Load HuggingFace pipelines
 # Issue 4: Use a 3-class sentiment model trained on social/news text (not movie reviews)
@@ -274,7 +275,7 @@ def extract_keywords(articles):
     return [{"word": word, "count": int(count)} for word, count in sorted_keywords]
 
 
-def generate_narrative(articles):
+async def generate_narrative(prisma, articles):
     if not articles:
         return "No narrative available due to lack of articles."
 
@@ -283,7 +284,7 @@ def generate_narrative(articles):
     left_count = sum(1 for a in articles if a.get("bias_label") == "LEFT")
     right_count = sum(1 for a in articles if a.get("bias_label") == "RIGHT")
     center_count = sum(1 for a in articles if a.get("bias_label") == "CENTER")
-    
+
     pos_count = sum(1 for a in articles if a.get("sentiment") == "positive")
     neg_count = sum(1 for a in articles if a.get("sentiment") == "negative")
 
@@ -291,46 +292,39 @@ def generate_narrative(articles):
     snippets = []
     for a in articles[:10]: # take top 10 to avoid hitting token limits
         snippets.append(f"- Source: [{a.get('source', 'Unknown')}] | Headline: {a.get('title', '')} (Bias: {a.get('bias_label', 'UNKNOWN')}, Sentiment: {a.get('sentiment', 'neutral')})")
-    
+
     context_str = "\n".join(snippets)
-    
+
     import os
-    hf_token = os.environ.get("HF_TOKEN")
-    
-    # Check if HF token exists, if not use fallback
-    if not hf_token:
+    if not os.environ.get("HF_TOKEN"):
         return _generate_fallback_narrative(articles, left_count, right_count, center_count, pos_count, neg_count, total)
-        
-    model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
-    
-    try:
-        from huggingface_hub import InferenceClient
-        client = InferenceClient(model=model_id, token=hf_token)
-        
-        system_prompt = (
-            "You are an expert media analyst and political scientist. "
-            "Your task is to write a highly professional, objective, and insightful 3-4 sentence narrative summary "
-            "of the media's current coverage of a topic, based strictly on the provided article headlines, bias labels, and sentiments. "
-            "You MUST explicitly bound all claims. Begin your summary with 'Among the analyzed articles...' or 'Within this sample dataset...' or 'Based on the retrieved sources...'. "
-            "NEVER use phrases like 'The media believes', 'The media agrees', 'Society believes', or make sweeping claims about the broader media ecosystem outside of this sample."
-        )
-        
-        small_sample_warning = ""
-        if total < 20:
-            small_sample_warning = f"\nWARNING: Only {total} articles were available for analysis. Conclusions MUST be explicitly interpreted as reflective of this small dataset rather than the broader media landscape."
-            
-        user_prompt = f"Media Analysis Data:\nTotal Articles: {total}\nBias Breakdown: {left_count} Left, {center_count} Center, {right_count} Right.\nSentiment: {pos_count} Positive, {neg_count} Negative.{small_sample_warning}\n\nSample Articles:\n{context_str}\n\nPlease generate the executive summary narrative. \n\nCRITICAL: You MUST explicitly cite the sources using natural phrasing, and you MUST wrap the source name in square brackets for parsing (Example: 'as reported by [indianexpress.com]' or 'according to [thehindu.com]'). Do not just drop brackets randomly at the end of sentences. Do NOT use numbers like [1]. Do NOT output any preambles."
-        
-        messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
-        ]
-        
-        response = client.chat_completion(messages=messages, max_tokens=250, temperature=0.5)
-        return response.choices[0].message.content.strip()
-    except Exception as e:
-        print(f"Narrative LLM fallback triggered due to: {e}")
-        return _generate_fallback_narrative(articles, left_count, right_count, center_count, pos_count, neg_count, total)
+
+    system_prompt = (
+        "You are an expert media analyst and political scientist. "
+        "Your task is to write a highly professional, objective, and insightful 3-4 sentence narrative summary "
+        "of the media's current coverage of a topic, based strictly on the provided article headlines, bias labels, and sentiments. "
+        "You MUST explicitly bound all claims. Begin your summary with 'Among the analyzed articles...' or 'Within this sample dataset...' or 'Based on the retrieved sources...'. "
+        "NEVER use phrases like 'The media believes', 'The media agrees', 'Society believes', or make sweeping claims about the broader media ecosystem outside of this sample."
+    )
+
+    small_sample_warning = ""
+    if total < 20:
+        small_sample_warning = f"\nWARNING: Only {total} articles were available for analysis. Conclusions MUST be explicitly interpreted as reflective of this small dataset rather than the broader media landscape."
+
+    user_prompt = f"Media Analysis Data:\nTotal Articles: {total}\nBias Breakdown: {left_count} Left, {center_count} Center, {right_count} Right.\nSentiment: {pos_count} Positive, {neg_count} Negative.{small_sample_warning}\n\nSample Articles:\n{context_str}\n\nPlease generate the executive summary narrative. \n\nCRITICAL: You MUST explicitly cite the sources using natural phrasing, and you MUST wrap the source name in square brackets for parsing (Example: 'as reported by [indianexpress.com]' or 'according to [thehindu.com]'). Do not just drop brackets randomly at the end of sentences. Do NOT use numbers like [1]. Do NOT output any preambles."
+
+    # Routed through the shared cached LLM client (previously this
+    # constructed its own InferenceClient, invisible to /debug/llm-usage
+    # and /debug/cache-stats).
+    content = await cached_llm_call(
+        prisma, "narrative", system_prompt, user_prompt,
+        max_tokens=250, model=NARRATIVE_MODEL_ID, temperature=0.5,
+    )
+    if content:
+        return content
+
+    print("Narrative LLM call returned nothing — using fallback narrative.")
+    return _generate_fallback_narrative(articles, left_count, right_count, center_count, pos_count, neg_count, total)
 
 def _generate_fallback_narrative(articles, left_count, right_count, center_count, pos_count, neg_count, total):
     overall_sentiment = "neutral"
@@ -360,7 +354,7 @@ def _generate_fallback_narrative(articles, left_count, right_count, center_count
     return " ".join(lines)
 
 
-def generate_contrastive_summaries(articles):
+async def generate_contrastive_summaries(prisma, articles):
     """
     Generates two distinct summaries representing contrasting media echo chambers.
     Issue 8: Falls back to sentiment-based grouping when left/right registry data is sparse.
@@ -392,61 +386,51 @@ def generate_contrastive_summaries(articles):
             use_sentiment_framing = True
 
     import os
-    hf_token = os.environ.get("HF_TOKEN")
-
-    if not hf_token:
+    if not os.environ.get("HF_TOKEN"):
         return {"left": "No token available for contrastive summarization.", "right": "No token available for contrastive summarization."}
 
-    model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
-    try:
-        from huggingface_hub import InferenceClient
-        client = InferenceClient(model=model_id, token=hf_token)
+    async def _summarize_echo_chamber(subset, wing):
+        if not subset:
+            return f"Insufficient data from {wing} sources to generate a narrative."
 
-        def _summarize_echo_chamber(subset, wing):
-            if not subset:
-                return f"Insufficient data from {wing} sources to generate a narrative."
+        snippets = []
+        for a in subset[:7]:
+            snippets.append(f"- Source: [{a.get('source', 'Unknown')}] | Headline: {a.get('title', '')} (Sentiment: {a.get('sentiment', 'neutral')})")
+        context_str = "\n".join(snippets)
 
-            snippets = []
-            for a in subset[:7]:
-                snippets.append(f"- Source: [{a.get('source', 'Unknown')}] | Headline: {a.get('title', '')} (Sentiment: {a.get('sentiment', 'neutral')})")
-            context_str = "\n".join(snippets)
+        if use_sentiment_framing:
+            # Adjusted prompt for sentiment-based framing
+            framing_label = "Critical/Negative" if wing == "Left-Wing" else "Supportive/Positive"
+            system_prompt = (
+                f"You are an expert media analyst examining the '{framing_label}' framing cluster. "
+                "Your task is to write a sophisticated, objective analysis (up to 10 sentences) of how sources in this cluster are framing the topic, "
+                "based strictly on the provided headlines. Analyze rhetorical strategies, key arguments, and narrative construction. "
+                "Do not endorse the views."
+            )
+        else:
+            system_prompt = (
+                f"You are an expert political media analyst examining the '{wing}' media echo chamber. "
+                "Your task is to write a highly sophisticated, objective analysis (up to 10 sentences) of how this specific political wing is framing the current topic, "
+                "based strictly on the provided headlines. Do not simply summarize the events; instead, analyze the rhetorical strategies, key arguments, underlying assumptions, and ideological framing present in these headlines. "
+                "Highlight what they are emphasizing and what they might be omitting. Do not endorse the views, just critically analyze their narrative construction."
+            )
 
-            if use_sentiment_framing:
-                # Adjusted prompt for sentiment-based framing
-                framing_label = "Critical/Negative" if wing == "Left-Wing" else "Supportive/Positive"
-                system_prompt = (
-                    f"You are an expert media analyst examining the '{framing_label}' framing cluster. "
-                    "Your task is to write a sophisticated, objective analysis (up to 10 sentences) of how sources in this cluster are framing the topic, "
-                    "based strictly on the provided headlines. Analyze rhetorical strategies, key arguments, and narrative construction. "
-                    "Do not endorse the views."
-                )
-            else:
-                system_prompt = (
-                    f"You are an expert political media analyst examining the '{wing}' media echo chamber. "
-                    "Your task is to write a highly sophisticated, objective analysis (up to 10 sentences) of how this specific political wing is framing the current topic, "
-                    "based strictly on the provided headlines. Do not simply summarize the events; instead, analyze the rhetorical strategies, key arguments, underlying assumptions, and ideological framing present in these headlines. "
-                    "Highlight what they are emphasizing and what they might be omitting. Do not endorse the views, just critically analyze their narrative construction."
-                )
+        user_prompt = f"Sample '{wing}' Articles:\n{context_str}\n\nPlease generate the {wing} narrative analysis.\n\nCRITICAL: You MUST explicitly cite the sources using natural phrasing, and you MUST wrap the source name in square brackets for parsing (Example: 'as reported by [foxnews.com]' or 'according to [nypost.com]'). Do not just drop brackets randomly at the end of sentences. Do NOT use numbers like [1]. Do NOT output any preambles."
 
-            user_prompt = f"Sample '{wing}' Articles:\n{context_str}\n\nPlease generate the {wing} narrative analysis.\n\nCRITICAL: You MUST explicitly cite the sources using natural phrasing, and you MUST wrap the source name in square brackets for parsing (Example: 'as reported by [foxnews.com]' or 'according to [nypost.com]'). Do not just drop brackets randomly at the end of sentences. Do NOT use numbers like [1]. Do NOT output any preambles."
+        # Routed through the shared cached LLM client — see generate_narrative.
+        content = await cached_llm_call(
+            prisma, "contrastive_summary", system_prompt, user_prompt,
+            max_tokens=500, model=NARRATIVE_MODEL_ID, temperature=0.6,
+        )
+        return content or "Summary unavailable."
 
-            messages = [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ]
-            response = client.chat_completion(messages=messages, max_tokens=500, temperature=0.6)
-            return response.choices[0].message.content.strip()
+    left_summary = await _summarize_echo_chamber(left_articles, "Left-Wing")
+    right_summary = await _summarize_echo_chamber(right_articles, "Right-Wing")
 
-        left_summary = _summarize_echo_chamber(left_articles, "Left-Wing")
-        right_summary = _summarize_echo_chamber(right_articles, "Right-Wing")
-
-        return {
-            "left": left_summary,
-            "right": right_summary
-        }
-    except Exception as e:
-        print(f"Contrastive LLM fallback triggered due to: {e}")
-        return {"left": "Summary unavailable.", "right": "Summary unavailable."}
+    return {
+        "left": left_summary,
+        "right": right_summary
+    }
 
 def extract_entity_sentiment(articles):
     """
