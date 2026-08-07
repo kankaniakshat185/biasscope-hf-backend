@@ -5,7 +5,9 @@ WORKDIR /code
 COPY ./requirements.txt /code/requirements.txt
 
 # Prisma relies on an internal Node.js runtime which throws libatomic.so.1 errors on Debian 'slim' images
-RUN apt-get update -y && apt-get install -y libatomic1 openssl tesseract-ocr
+# (tesseract-ocr used to be installed here for an OCR fallback path that
+# was removed from the product — see AUDIT_TASKS.md X1)
+RUN apt-get update -y && apt-get install -y libatomic1 openssl
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 RUN python -m spacy download en_core_web_sm

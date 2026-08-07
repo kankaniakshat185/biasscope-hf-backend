@@ -12,9 +12,5 @@ httpx
 pydantic
 lxml_html_clean
 spacy
-trafilatura
-pytesseract
-Pillow
-beautifulsoup4
 python-multipart
 sentence-transformers

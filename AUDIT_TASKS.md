@@ -42,12 +42,12 @@ Check items off as they land. Security & Auth is the current focus — start the
 2. Run `python -m app.utils.create_vector_index` once.
 3. Run `prisma db push` (or your normal deploy) to apply the `Evidence.articleId` FK and the dropped Phase 3 models to the real schema. Since step 1 guarantees no orphans, the `ADD CONSTRAINT` should apply cleanly — but do this on a moment you can watch the logs, in case anything about your specific data surprises it.
 
-## 🟡 Dead Code
+## 🟡 Dead Code — DONE
 
-- [ ] **X1** `[BE]` Delete `scrape_single_url`/`extract_text_from_images` + unused deps (`trafilatura`, `pytesseract`, `Pillow`, `beautifulsoup4`) + `tesseract-ocr` apt package — `app/services/ingestion.py:191-315`, `Dockerfile:8`, `requirements.txt`
-- [ ] **X2** `[FE]` Delete orphaned `lib/auth-client.ts` (root) — unused duplicate of `src/lib/auth-client.ts`
-- [ ] **X3** `[FE]` Delete `README 2.md`
-- [ ] **X4** `[BE]` Rename `test_celery.py` → `scripts/trigger_weekly_snapshot.py` (it's not a test, will break pytest collection)
+- [x] **X1** `[BE]` Deleted `scrape_single_url`/`extract_text_from_images` (~120 lines) from `ingestion.py`; removed `trafilatura`, `pytesseract`, `Pillow`, `beautifulsoup4` from `requirements.txt`; removed `tesseract-ocr` from the `Dockerfile` apt install. Re-verified nothing else in the codebase referenced any of it before deleting.
+- [x] **X2** `[FE]` Deleted the orphaned root `lib/auth-client.ts` — confirmed every real import resolves to `src/lib/auth-client.ts` first. `lib/` now contains only `auth.ts` (server), which was the actual intent all along.
+- [x] **X3** `[FE]` Deleted `README 2.md`.
+- [x] **X4** `[BE]` Moved `test_celery.py` → `scripts/trigger_weekly_snapshot.py`. Checked for other references to the old filename first (none, besides this file).
 
 ## 🟡 Code Quality
 

@@ -188,127 +188,13 @@ async def scrape_article(article_data):
         "published_at": article_data.get('publishedAt', None)
     }
 
-import trafilatura
-from datetime import datetime
-from urllib.parse import urlparse
-import httpx
-from bs4 import BeautifulSoup
-import pytesseract
-from PIL import Image
-import io
 
-async def extract_text_from_images(html_content: str, base_url: str) -> str:
-    try:
-        soup = BeautifulSoup(html_content, 'html.parser')
-        images = soup.find_all('img')
-        extracted_text = []
-        count = 0
-        async with httpx.AsyncClient(timeout=10.0) as client:
-            for img in images:
-                if count >= 3: # limit to top 3 images to save time
-                    break
-                src = img.get('src')
-                if not src:
-                    continue
-                if src.startswith('/'):
-                    domain = "{0.scheme}://{0.netloc}".format(urlparse(base_url))
-                    src = domain + src
-                elif not src.startswith('http'):
-                    continue
-                
-                try:
-                    resp = await client.get(src)
-                    if resp.status_code == 200:
-                        image_data = io.BytesIO(resp.content)
-                        img_obj = Image.open(image_data)
-                        if img_obj.width > 200 and img_obj.height > 200:
-                            text = pytesseract.image_to_string(img_obj)
-                            if text and len(text.strip()) > 20:
-                                extracted_text.append(text.strip())
-                                count += 1
-                except Exception as e:
-                    print(f"OCR failed for image {src}: {e}")
-        return "\n\n".join(extracted_text)
-    except Exception as e:
-        print(f"OCR processing failed: {e}")
-        return ""
-
-async def scrape_single_url(url: str):
-    domain = urlparse(url).netloc.replace("www.", "")
-    
-    # 1. Direct Image URL Handling
-    if url.lower().split('?')[0].endswith(('.png', '.jpg', '.jpeg', '.webp', '.bmp')):
-        try:
-            async with httpx.AsyncClient(timeout=15.0) as client:
-                resp = await client.get(url)
-                if resp.status_code == 200:
-                    image_data = io.BytesIO(resp.content)
-                    img_obj = Image.open(image_data)
-                    text = pytesseract.image_to_string(img_obj)
-                    if not text or len(text.strip()) < 20:
-                        raise Exception("OCR found no meaningful text in the image.")
-                    return {
-                        "title": "Direct Image OCR Upload",
-                        "url": url,
-                        "source": domain,
-                        "content": text.strip(),
-                        "published_at": None
-                    }
-        except Exception as e:
-            raise Exception(f"Failed to process direct image URL: {e}")
-
-    # 2. Standard Web Scraping with Fallbacks
-    downloaded = trafilatura.fetch_url(url)
-    text = None
-    title = None
-    date_str = None
-    
-    if downloaded:
-        metadata = trafilatura.extract_metadata(downloaded)
-        text = trafilatura.extract(downloaded)
-        if metadata:
-            title = metadata.title
-            if metadata.date:
-                date_str = metadata.date
-
-    # Fallback to newspaper3k if trafilatura failed to get enough text
-    if not text or len(text) < 100:
-        import newspaper
-        try:
-            config = newspaper.Config()
-            config.browser_user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
-            config.request_timeout = 10
-            
-            article = newspaper.Article(url, config=config)
-            article.download()
-            article.parse()
-            if article.text and len(article.text) > 100:
-                text = article.text
-                title = title or article.title
-                if article.publish_date:
-                    date_str = date_str or str(article.publish_date)
-                if not downloaded:
-                    downloaded = article.html
-        except Exception as e:
-            print(f"Newspaper3k fallback failed: {e}")
-
-    # 3. OCR Fallback for Image-Heavy News
-    if (not text or len(text) < 100) and downloaded:
-        print("Text extraction insufficient. Attempting OCR on article images...")
-        ocr_text = await extract_text_from_images(downloaded, url)
-        if ocr_text:
-            text = (text or "") + "\n\n" + ocr_text
-            
-    if not text or len(text) < 100:
-        raise Exception("Could not extract enough main article text from the URL, even after OCR fallback.")
-        
-    if not title:
-        title = "Direct URL Upload"
-    
-    return {
-        "title": title,
-        "url": url,
-        "source": domain,
-        "content": text,
-        "published_at": date_str
-    }
+# Note: this file used to also contain scrape_single_url() and
+# extract_text_from_images() — a direct-URL / OCR-fallback scraper for a
+# "Single URL Inspector" feature that was removed from the product (see
+# git history) but left its ~120 lines of backend code, and the
+# trafilatura/pytesseract/Pillow/beautifulsoup4 dependencies + tesseract-ocr
+# apt package that existed only to support it, behind. Nothing called
+# either function (confirmed by a repo-wide search) — see AUDIT_TASKS.md X1.
+# Deleted rather than kept "just in case"; recoverable from git history if
+# the feature comes back.
