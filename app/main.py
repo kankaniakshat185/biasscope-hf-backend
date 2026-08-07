@@ -8,6 +8,7 @@ docstring. (Previously this single 828-line file mixed routing, pipeline
 orchestration, and admin/debug tooling together; see AUDIT_TASKS.md A1.)
 """
 
+import logging
 import os
 
 from fastapi import FastAPI
@@ -16,6 +17,19 @@ from fastapi.middleware.cors import CORSMiddleware
 from .db import prisma
 from .routers import chat, history, results, search, subscriptions
 from .routers.debug import router as debug_router
+
+# Application code logs via `logging.getLogger(__name__)` throughout
+# app/services and app/routers (this used to be a mix of print() and
+# logging with nothing configuring the root logger — see AUDIT_TASKS.md
+# Q2). Without this, logger.info() calls are silently dropped: Python's
+# root logger defaults to WARNING with no handler, and uvicorn configures
+# its OWN loggers (uvicorn.*) but not the application's. HF Spaces/most
+# container platforms just capture stdout, so a plain basicConfig is
+# enough to make these show up in the deployment's logs.
+logging.basicConfig(
+    level=os.environ.get("LOG_LEVEL", "INFO").upper(),
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+)
 
 app = FastAPI(title="Biascope API")
 

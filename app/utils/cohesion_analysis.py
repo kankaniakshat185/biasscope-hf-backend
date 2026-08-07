@@ -1,5 +1,6 @@
 import asyncio
 import logging
+
 from app.prisma_client import Prisma
 
 logging.basicConfig(level=logging.INFO)
@@ -26,17 +27,18 @@ async def analyze_cohesion():
 
     for cluster in clusters:
         title = (cluster.title[:37] + "...") if len(cluster.title) > 37 else cluster.title
-        claim_count = len(cluster.claims)
-        
-        sources = set()
-        for claim in cluster.claims:
-            for ev in claim.evidence:
+        claims = cluster.claims or []
+        claim_count = len(claims)
+
+        sources: set[str] = set()
+        for claim in claims:
+            for ev in (claim.evidence or []):
                 sources.add(ev.source)
         source_count = len(sources)
-        
+
         cohesion = cluster.cohesionScore if cluster.cohesionScore is not None else 0.0
         accepted = "Yes" if cluster.eventId else "No"
-        
+
         print(f"{title:<40} | {claim_count:<6} | {source_count:<7} | {cohesion:<8.3f} | {accepted}")
 
     await prisma.disconnect()

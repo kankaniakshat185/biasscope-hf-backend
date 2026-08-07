@@ -51,10 +51,20 @@ Check items off as they land. Security & Auth is the current focus — start the
 
 ## 🟡 Code Quality
 
-- [ ] **Q1** `[BE]` Word-boundary the opinion/biographical/commentary signal matching (currently bare substring) — `app/services/extraction.py:149-192`
-- [ ] **Q2** `[BE]` Standardize on `logging` everywhere (currently split with `print()`); add a minimal error-reporting sink
-- [ ] **Q3** `[BE]` Dedupe `/chat-with-article` and `/chat-with-summary` into one helper; drop redundant local `import os` — `app/main.py:430-467,469-503`
-- [ ] **Q4** `[BE]` Drop defensive `getattr()` calls once S4 stops schema drift — `app/main.py:321-322,338-339,362-364`
+- [x] **Q1** `[BE]` `extraction.py`'s opinion/biographical/commentary signal lists now match via compiled `\b...\b` word-boundary regex instead of bare substring `in` checks — verified against real false-positive cases (`undamaged`, `uncontroversial`, `validating` no longer wrongly match; `grandchildren` no longer matches `children`).
+- [x] **Q2** `[BE]` Converted every production `print()` (ingestion.py, nlp.py, routers/debug.py) to `logging` — kept `print()` only in `cohesion_analysis.py`/`scripts/trigger_weekly_snapshot.py`, which are CLI tools meant for direct terminal output, not logging. Also added `logging.basicConfig(...)` to `main.py`, without which `logger.info()` calls would have silently gone nowhere (Python's root logger defaults to WARNING with no handler; uvicorn configures its own loggers, not the app's). `logger.exception(...)` replaces the old `print(e); traceback.print_exc()` pattern in the debug router's background tasks, capturing the same info in one structured call. No third-party error-tracking service wired up (would need picking a vendor and credentials neither of us has right now) — that's the "minimal error-reporting sink" left undone, everything else in Q2 is complete.
+- [x] **Q3** `[BE]` Already fixed during the A4 refactor — `/chat-with-article`/`/chat-with-summary` are now one shared `_chat_with_context` helper in `app/routers/chat.py`.
+- [x] **Q4** `[BE]` Removed the no-op `getattr(obj, 'field', default)` wrappers in `app/services/intelligence.py` — simplified to `obj.field or default`, which was already doing the real work.
+
+## 🔧 Tooling — added at your request (not an original audit finding)
+
+- [x] `ruff` (lint) + `mypy` (type checking) configured in `pyproject.toml`; pinned in `requirements-dev.txt` (`pip install -r requirements-dev.txt`).
+- [x] Fixed a real, previously-invisible gap: `app/__init__.py` and `app/services/__init__.py` didn't exist (every other subpackage had one) — this was confusing mypy's module resolution and is a genuine consistency fix, not just a tooling workaround.
+- [x] `ruff check .` — started at 133 pre-existing issues (116 auto-fixed mechanically: whitespace, import order, modern type-hint syntax; 12 fixed by hand: one-line-if statements, an ambiguous variable name `l`, a bare `except:`, an unused variable, an unused loop variable). **Zero issues now.**
+- [x] `mypy app/` — started at 305 pre-existing errors across 22 files once the `__init__.py` gap was fixed (mostly Prisma's nullable list relations needing an `... or []` guard before iterating, plus missing var-annotations). **Zero issues now.** Generated code (`app/prisma_client/`) is excluded from being *checked* but still used for accurate types elsewhere (an `ignore_errors` override, not a blanket `exclude`, which would have also hidden its types from everything that imports it).
+- [x] **Found and fixed a real bug along the way**: `app/utils/create_demo_snapshot.py` was passing a pre-serialized JSON *string* into a field typed `Json`. The generated Prisma client only JSON-encodes values wrapped in `Json(...)` — a bare string falls through to default string serialization, so `DemoSnapshot.data` was being stored as a JSON-encoded string rather than a JSON object, meaning `/demo/{topic}` would have handed the frontend an escaped JSON string instead of a parsed object. Fixed to normalize datetimes via the original `json.dumps(..., default=str)` round-trip and then wrap the result in `Json(...)`.
+- A handful of remaining `# type: ignore[...]` comments are left where the generated Prisma TypedDicts (`ArticleCreateWithoutRelationsInput`, `TopicSubscriptionInclude`, etc.) are stricter than the plain-dict-literal query-building style used everywhere in this codebase — each one has an inline comment explaining why, rather than being silently suppressed.
+- Not done: wiring `ruff`/`mypy` into CI (no workflow currently runs them on push/PR) — straightforward to add to `.github/workflows/` if wanted.
 
 ## 🟡 Frontend
 

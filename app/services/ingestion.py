@@ -1,24 +1,35 @@
+import asyncio
+import logging
+import os
+
 from newsapi import NewsApiClient
 from newspaper import Article as NewspaperArticle
-import os
-import asyncio
+
+logger = logging.getLogger(__name__)
 
 
-async def ingest_articles(query: str, category: str, domains: str = None, exclude_domains: str = None, from_date: str = None, to_date: str = None):
+async def ingest_articles(
+    query: str,
+    category: str,
+    domains: str | None = None,
+    exclude_domains: str | None = None,
+    from_date: str | None = None,
+    to_date: str | None = None,
+):
     # Dynamically inject the key in case HF mounts secrets late, check both naming conventions
     api_key = os.environ.get('NEWS_API_KEY') or os.environ.get('NEWSAPI_KEY')
     newsapi = NewsApiClient(api_key=api_key)
 
     # Automatically stripping the "Category" word from the hard query helps tremendously.
-    # When users search "Trump" and choose "Politics", searching "Trump Politics" explicitly 
-    # yields 0 results on professional sites like WSJ because journalists don't use loose tags 
+    # When users search "Trump" and choose "Politics", searching "Trump Politics" explicitly
+    # yields 0 results on professional sites like WSJ because journalists don't use loose tags
     # in the article content. We should just search the raw query!
     query_clean = query.strip() if query else ""
     cat_clean = category.strip() if category and category.lower() != "all" else ""
-    
+
     strict_query = query_clean
     broad_query = query_clean
-    
+
     if query_clean and cat_clean:
         # If both exist, the broad query includes the category for better semantic matching
         broad_query = f"{query_clean} {cat_clean}"
@@ -28,7 +39,7 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
     elif not query_clean and not cat_clean:
         strict_query = "news"
         broad_query = "news"
-        
+
     if domains:
         from urllib.parse import urlparse
         domains_list = []
@@ -71,9 +82,9 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
             sort_by='relevancy',
             page_size=50
         )
-        
+
         if response.get('totalResults', 0) < 5:
-            print(f"Only {response.get('totalResults')} headline matches found. Intelligently falling back to exact-phrase body search.")
+            logger.info(f"Only {response.get('totalResults')} headline matches found. Intelligently falling back to exact-phrase body search.")
             response = newsapi.get_everything(
                 q=broad_query,
                 domains=domains,
@@ -84,13 +95,13 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
                 sort_by='relevancy',
                 page_size=50
             )
-            
+
     except Exception as e:
-        print(f"NewsAPI error: {e}")
+        logger.warning(f"NewsAPI error: {e}")
         response = {'articles': []}
 
     articles_data = response.get('articles', [])
-    
+
     # --- NEW: GDELT Integration ---
     try:
         import httpx
@@ -109,15 +120,16 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
                         if gdelt_url:
                             from urllib.parse import urlparse as _urlparse
                             gdelt_domain = _urlparse(gdelt_url).netloc.replace("www.", "")
-                        
+
                         # Parse GDELT date format (YYYYMMDDTHHmmssZ) to ISO
                         seen_date = ga.get('seendate', '')
+                        parsed_date: str | None
                         try:
                             from datetime import datetime as _dt
                             parsed_date = _dt.strptime(seen_date, "%Y%m%dT%H%M%SZ").isoformat() + "Z"
                         except Exception:
                             parsed_date = seen_date if seen_date else None
-                        
+
                         articles_data.append({
                             'title': ga.get('title', ''),
                             'url': gdelt_url,
@@ -126,8 +138,8 @@ async def ingest_articles(query: str, category: str, domains: str = None, exclud
                             'publishedAt': parsed_date,
                         })
     except Exception as e:
-        print(f"GDELT fetch error: {e}")
-        
+        logger.warning(f"GDELT fetch error: {e}")
+
     # Deduplicate by URL
     seen_urls = set()
     unique_articles = []
@@ -145,11 +157,11 @@ async def scrape_article(article_data):
     url = article_data.get('url')
     if not url:
         return None
-    
+
     # Strip protocol and www to get domain for source
     from urllib.parse import urlparse
     domain = urlparse(url).netloc.replace("www.", "")
-    
+
     scraped_content = ""
     try:
         url_lower = url.lower()
@@ -163,12 +175,12 @@ async def scrape_article(article_data):
             config.browser_user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
             config.request_timeout = 5
             config.fetch_images = False
-            
+
             paper_art = NewspaperArticle(url, config=config)
             paper_art.download()
             paper_art.parse()
             scraped_content = paper_art.text
-            
+
             # If the web-scraper violently fails and only pulls 2 sentences of UI boilerplate like "Sign in"
             # we instantly revert to the NewsAPI raw description block to ensure NLP has something to read.
             if len(scraped_content) < 150:
@@ -176,7 +188,7 @@ async def scrape_article(article_data):
                 if fallback and len(fallback) > len(scraped_content):
                     scraped_content = fallback
     except Exception as e:
-        print(f"Failed to scrape {url}: {e}")
+        logger.warning(f"Failed to scrape {url}: {e}")
         # Fallback to description
         scraped_content = article_data.get('description', '')
 

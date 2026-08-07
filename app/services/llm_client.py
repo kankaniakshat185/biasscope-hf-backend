@@ -13,11 +13,10 @@ Usage:
     result = await cached_llm_call(prisma, "extraction", system_prompt, user_prompt)
 """
 
-import os
-import json
 import hashlib
 import logging
-from typing import Optional
+import os
+
 from huggingface_hub import InferenceClient
 
 logger = logging.getLogger(__name__)

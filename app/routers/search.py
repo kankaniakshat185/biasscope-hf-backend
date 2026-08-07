@@ -1,7 +1,6 @@
 """The main /search endpoint — kicks off the synchronous analysis pipeline
 and schedules the Phase 2 (claims/clustering/events) background job."""
 
-from typing import Optional
 
 from fastapi import APIRouter, BackgroundTasks, Body, Depends
 
@@ -15,15 +14,15 @@ router = APIRouter(tags=["search"])
 async def create_search(
     query: str = Body(...),
     category: str = Body(...),
-    domains: str = Body(None),
-    exclude_domains: str = Body(None),
-    fromDate: str = Body(None),
-    toDate: str = Body(None),
-    background_tasks: BackgroundTasks = None,
+    domains: str | None = Body(None),
+    exclude_domains: str | None = Body(None),
+    fromDate: str | None = Body(None),
+    toDate: str | None = Body(None),
+    background_tasks: BackgroundTasks | None = None,
     # Anonymous search is allowed (Search.userId is nullable), but if the
     # caller IS logged in, their id comes from the verified session — never
     # from a client-supplied body field.
-    user_id: Optional[str] = Depends(get_optional_user_id),
+    user_id: str | None = Depends(get_optional_user_id),
 ):
     result = await run_search_pipeline(
         query=query,

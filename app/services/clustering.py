@@ -14,26 +14,33 @@ Pipeline:
 All LLM calls go through llm_client.py for caching + analytics.
 """
 
-import re
 import json
 import logging
-import numpy as np
+import re
+import warnings
 from collections import Counter
+from typing import Any
+
+import numpy as np
 from sklearn.cluster import HDBSCAN
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity as cos_sim
-from typing import List, Dict, Any
+
 from app.services.llm_client import cached_llm_call
-import warnings
 
 # --- NLI Pipeline ---
 # Use a fast DeBERTa v3 small model for NLI Contradiction routing
-nli_classifier = None
+# Three states live in this one variable: None ("not attempted yet"),
+# False ("attempted and failed — don't retry"), or a loaded pipeline.
+# Typed Any rather than Optional[Pipeline] so the False sentinel doesn't
+# need its own union member.
+nli_classifier: Any = None
 def get_nli_classifier():
     global nli_classifier
     if nli_classifier is None:
-        from transformers import pipeline
         import logging
+
+        from transformers import pipeline
         logging.getLogger("transformers").setLevel(logging.ERROR)
         warnings.filterwarnings("ignore", category=UserWarning)
         try:
@@ -50,7 +57,7 @@ logger = logging.getLogger(__name__)
 # a coherent event rather than a loose topic grouping.
 COHESION_THRESHOLD = 0.72
 
-def parse_json_safe(raw: str, fallback: dict = None) -> dict:
+def parse_json_safe(raw: str, fallback: dict | None = None) -> dict:
     if not raw:
         return fallback or {}
     try:
@@ -60,7 +67,7 @@ def parse_json_safe(raw: str, fallback: dict = None) -> dict:
 
 # ── Deterministic Event Title (0 LLM calls) ──────────────────────
 
-def generate_event_title(claim_texts: List[str]) -> str:
+def generate_event_title(claim_texts: list[str]) -> str:
     """
     Generate a descriptive event title using entity extraction + TF-IDF keywords.
     Handles both Western and non-Western entities, acronyms (BJP, GDP, SEC),
@@ -213,7 +220,7 @@ def compute_cluster_cohesion(vectors: np.ndarray) -> float:
 # `query=None` keeps the old table-wide behavior, used only by the
 # /debug/rerun-* admin tools that intentionally rebuild every cluster from
 # scratch after wiping the cluster table.
-async def run_claim_clustering(prisma, query: str = None):
+async def run_claim_clustering(prisma, query: str | None = None):
     logger.info(f"=== Clustering Pipeline (query={query!r}) ===")
 
     if query:
@@ -271,14 +278,14 @@ async def run_claim_clustering(prisma, query: str = None):
     )
     labels = clusterer.fit_predict(cos_dist)
 
-    groups: Dict[int, List[Dict]] = {}
+    groups: dict[int, list[dict]] = {}
     for idx, label in enumerate(labels):
         if label == -1:
             continue
         groups.setdefault(label, [])
         groups[label].append({"id": ids[idx], "text": texts[idx], "vec_idx": idx})
 
-    noise_count = sum(1 for l in labels if l == -1)
+    noise_count = sum(1 for lbl in labels if lbl == -1)
     logger.info(f"[DIAG] Claims: {len(ids)} | Clusters: {len(groups)} | Noise: {noise_count}")
 
     if not groups:
@@ -286,7 +293,7 @@ async def run_claim_clustering(prisma, query: str = None):
 
     # ── Cohesion Validation ──
     # Reject clusters where claims are topically related but not about the same event.
-    cohesive_groups = {}
+    cohesive_groups: dict[int, dict[str, Any]] = {}
     rejected_cohesion = 0
     for label, members in groups.items():
         member_vecs = np.array([X[m["vec_idx"]] for m in members])
@@ -312,7 +319,7 @@ async def run_claim_clustering(prisma, query: str = None):
         logger.info(f"[DIAG] Cohesion gate: {rejected_cohesion} clusters rejected, {len(cohesive_groups)} passed")
 
     # Per-cluster: generate canonical claim + title, persist to DB
-    for label, data in cohesive_groups.items():
+    for _label, data in cohesive_groups.items():
         members = data["members"]
         cohesion = data["cohesion"]
         raw_claim_texts = [m["text"] for m in members]
@@ -333,7 +340,7 @@ async def run_claim_clustering(prisma, query: str = None):
 
 # ── Canonical Claim (1 cached call per cluster) ──────────────────
 
-async def _generate_canonical_claim(prisma, claim_texts: List[str]) -> str:
+async def _generate_canonical_claim(prisma, claim_texts: list[str]) -> str:
     if len(claim_texts) == 1:
         return claim_texts[0]
 
@@ -394,7 +401,7 @@ async def run_event_detection(prisma):
         # Bonus for source diversity
         source_diversity_bonus = min(source_count / 5.0, 0.3)
         consensus_score = min(consensus_score + source_diversity_bonus, 1.0)
-        
+
         # Publisher diversity
         publisher_diversity = min(source_count / max(url_count, 1), 1.0) if url_count > 0 else 0.0
 

@@ -8,6 +8,8 @@ used to pull in app construction, CORS middleware, and route registration
 as side effects of wanting one function).
 """
 
+from typing import Any
+
 from fastapi import HTTPException
 
 from ..db import prisma
@@ -64,25 +66,35 @@ async def get_search_intelligence(search_id: str) -> dict:
     # Key fix: canonical claim lives on CLUSTER, raw text on CLAIMS
     # Evidence aggregation happens at cluster level for consistency
 
-    formatted_claims = []
-    clusters_map = {}
-    events_map = {}
+    formatted_claims: list[dict[str, Any]] = []
+    clusters_map: dict[str, dict[str, Any]] = {}
+    events_map: dict[str, dict[str, Any]] = {}
 
     for c in claims:
+        # c.evidence is typed as Optional by the generated Prisma client
+        # even though this query always includes it — guard rather than
+        # assume, since a bare `for e in c.evidence` would blow up on a
+        # genuinely-None case mypy can see but we weren't checking for.
+        evidence = c.evidence or []
         # Each claim keeps its ORIGINAL raw text
         claim_evidence = [
             {"sentence": e.sentence, "source": e.source, "publishedAt": e.publishedAt, "url": e.url}
-            for e in c.evidence
+            for e in evidence
         ]
-        claim_sources = list(set(e.source for e in c.evidence))
+        claim_sources = list({e.source for e in evidence})
 
         fc = {
             "id": c.id,
             "canonicalClaim": c.canonicalClaim,  # original raw text
-            "claimType": getattr(c, 'claimType', 'EVENT') or 'EVENT',
-            "qualityScore": getattr(c, 'qualityScore', 0) or 0,
+            # claimType/qualityScore are always present on a Claim (they're
+            # declared, nullable columns) — getattr()-with-a-default here
+            # was dead defensiveness that never actually fires; `x or
+            # default` already does the real null-coalescing work. See
+            # AUDIT_TASKS.md Q4.
+            "claimType": c.claimType or 'EVENT',
+            "qualityScore": c.qualityScore or 0,
             "confidence": c.confidence,
-            "evidenceCount": len(c.evidence),
+            "evidenceCount": len(evidence),
             "sources": claim_sources,
             "evidence": claim_evidence,
             "clusterId": c.clusterId,
@@ -96,8 +108,8 @@ async def get_search_intelligence(search_id: str) -> dict:
                 clusters_map[cid] = {
                     "id": cid,
                     "title": c.cluster.title,
-                    "canonicalClaim": getattr(c.cluster, 'canonicalClaim', '') or '',
-                    "consensusScore": getattr(c.cluster, 'consensusScore', 0) or 0,
+                    "canonicalClaim": c.cluster.canonicalClaim or '',
+                    "consensusScore": c.cluster.consensusScore or 0,
                     "eventId": c.cluster.eventId,
                     "rawClaims": [],       # original claim texts (not canonical)
                     "allEvidence": [],      # all evidence across all claims
@@ -120,9 +132,9 @@ async def get_search_intelligence(search_id: str) -> dict:
                     events_map[eid] = {
                         "id": eid,
                         "title": c.cluster.event.title,
-                        "description": getattr(c.cluster.event, 'description', '') or '',
-                        "importanceScore": getattr(c.cluster.event, 'importanceScore', 0) or 0,
-                        "canonicalClaim": getattr(c.cluster, 'canonicalClaim', '') or '',
+                        "description": c.cluster.event.description or '',
+                        "importanceScore": c.cluster.event.importanceScore or 0,
+                        "canonicalClaim": c.cluster.canonicalClaim or '',
                         "clusters": [],
                         "claimCount": 0,
                         "evidenceCount": 0,

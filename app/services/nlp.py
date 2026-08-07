@@ -1,13 +1,17 @@
-from transformers import pipeline
+import logging
 import re
 from collections import Counter
-from urllib.parse import urlparse
+
 import spacy
-from app.services.llm_client import cached_llm_call, NARRATIVE_MODEL_ID
+from transformers import pipeline
+
+from app.services.llm_client import NARRATIVE_MODEL_ID, cached_llm_call
+
+logger = logging.getLogger(__name__)
 
 # Load HuggingFace pipelines
 # Issue 4: Use a 3-class sentiment model trained on social/news text (not movie reviews)
-sentiment_pipeline = pipeline(
+sentiment_pipeline = pipeline(  # type: ignore[call-overload]  # "sentiment-analysis" is a valid runtime task alias transformers' stubs don't list as a Literal
     "sentiment-analysis",
     model="cardiffnlp/twitter-roberta-base-sentiment-latest",
     truncation=True,
@@ -19,10 +23,14 @@ bias_pipeline = pipeline("text-classification", model="bucketresearch/politicalB
 try:
     spacy_nlp = spacy.load("en_core_web_trf")
 except Exception as e:
-    print(f"Spacy trf failed to load, falling back: {e}")
+    # Runs at import time, before app/main.py's logging.basicConfig() —
+    # .warning() (not .info()) so it still surfaces via Python's default
+    # last-resort stderr handler regardless of import order.
+    logger.warning(f"Spacy trf failed to load, falling back: {e}")
     try:
         spacy_nlp = spacy.load("en_core_web_sm")
-    except:
+    except Exception as fallback_error:
+        logger.warning(f"Spacy sm fallback also failed, NER disabled: {fallback_error}")
         spacy_nlp = None
 
 # Static Source Bias Registry — expanded with Indian & international outlets (Issue 5)
@@ -99,7 +107,7 @@ def analyze_articles(articles):
     for art in articles:
         # -------- SENTIMENT --------
         text = art.get("content") or art.get("title", "")
-        
+
         if not text:
             art["sentiment"] = "neutral"
             art["sentiment_score"] = 0.0
@@ -130,7 +138,7 @@ def analyze_articles(articles):
                 art["sentiment_score"] = round(compound, 3)
                 art["confidence"] = max(pos, neg, neu)
             except Exception as e:
-                print(f"Sentiment error: {e}")
+                logger.warning(f"Sentiment error: {e}")
                 art["sentiment"] = "neutral"
                 art["sentiment_score"] = 0.0
                 art["confidence"] = 0.0
@@ -143,19 +151,19 @@ def analyze_articles(articles):
             for ent in doc.ents:
                 if ent.label_ in ["PERSON", "ORG", "GPE"]:
                     name = ent.text.strip()
-                    
+
                     # Issue 5: Entity Normalization
                     # Remove trailing 's, spaces, formatting
                     name = re.sub(r"['’]s$", "", name)
                     name = re.sub(r"[^\w\s-]", "", name)
                     name = name.title().strip()
-                    
+
                     if len(name) > 2 and "\n" not in name:
                         if name not in entities:
                             entities[name] = {"label": ent.label_, "count": 1}
                         else:
                             entities[name]["count"] += 1
-                            
+
             # Second pass: Merge subsets (e.g. "Musk" -> "Elon Musk")
             keys = list(entities.keys())
             for i in range(len(keys)):
@@ -164,9 +172,9 @@ def analyze_articles(articles):
                         entities[keys[j]]["count"] += entities[keys[i]]["count"]
                         entities[keys[i]]["count"] = 0
                         break
-            
+
             entities = {k: v for k, v in entities.items() if v["count"] > 0}
-            
+
             # sort and keep top 5
             sorted_ents = sorted(entities.items(), key=lambda x: x[1]["count"], reverse=True)[:5]
             art["entities"] = {k: v["label"] for k, v in sorted_ents}
@@ -198,7 +206,7 @@ def analyze_articles(articles):
                 else:
                     art["bias_label"] = "UNKNOWN"
             except Exception as e:
-                print(f"Bias inference error: {e}")
+                logger.warning(f"Bias inference error: {e}")
                 art["bias_label"] = "UNKNOWN"
                 art["bias_confidence"] = 0.0
 
@@ -222,7 +230,7 @@ def extract_keywords(articles):
     from sklearn.feature_extraction.text import TfidfVectorizer
 
     # Entity-based keywords (existing approach)
-    entity_counter = Counter()
+    entity_counter: Counter[str] = Counter()
     for art in articles:
         entities = art.get("entities", {})
         if isinstance(entities, dict):
@@ -261,7 +269,8 @@ def extract_keywords(articles):
             pass
 
     # Merge: entities get a bonus, TF-IDF provides discovery
-    combined = {}
+    # (float, not int — entity counts get an int bonus but TF-IDF scores are floats)
+    combined: dict[str, float] = {}
     for word, count in entity_counter.most_common(20):
         combined[word] = count * 2  # Entity bonus
     for word, score in tfidf_keywords:
@@ -323,7 +332,7 @@ async def generate_narrative(prisma, articles):
     if content:
         return content
 
-    print("Narrative LLM call returned nothing — using fallback narrative.")
+    logger.warning("Narrative LLM call returned nothing — using fallback narrative.")
     return _generate_fallback_narrative(articles, left_count, right_count, center_count, pos_count, neg_count, total)
 
 def _generate_fallback_narrative(articles, left_count, right_count, center_count, pos_count, neg_count, total):
@@ -332,7 +341,7 @@ def _generate_fallback_narrative(articles, left_count, right_count, center_count
         overall_sentiment = "positive"
     elif neg_count > pos_count and neg_count > 0.3 * total:
         overall_sentiment = "negative"
-        
+
     unknown_count = sum(1 for a in articles if a.get("bias_label") == "UNKNOWN")
     keywords = extract_keywords(articles)
     keyword_str = ", ".join(keywords[:3]) if keywords else "various topics"
@@ -439,12 +448,12 @@ def extract_entity_sentiment(articles):
     """
     # structure: { "EntityName": { "label": "ORG", "left_sentiment": 0.0, "right_sentiment": 0.0, "total_mentions": 0 } }
     entity_graph = {}
-    
+
     for art in articles:
         entities = art.get("entities", {})
         bias = art.get("bias_label", "UNKNOWN")
         sentiment_score = art.get("sentiment_score", 0.0)
-        
+
         for name, label in entities.items():
             if name not in entity_graph:
                 entity_graph[name] = {
@@ -454,7 +463,7 @@ def extract_entity_sentiment(articles):
                     "right_sentiment": [],
                     "center_sentiment": []
                 }
-                
+
             entity_graph[name]["mentions"] += 1
             if bias == "LEFT":
                 entity_graph[name]["left_sentiment"].append(sentiment_score)
@@ -462,16 +471,16 @@ def extract_entity_sentiment(articles):
                 entity_graph[name]["right_sentiment"].append(sentiment_score)
             elif bias == "CENTER":
                 entity_graph[name]["center_sentiment"].append(sentiment_score)
-                
+
     # Average the sentiments
     final_graph = {}
     for name, data in entity_graph.items():
         if data["mentions"] < 2:  # Only keep entities mentioned at least twice
             continue
-            
+
         def avg(lst):
             return sum(lst) / len(lst) if lst else 0.0
-            
+
         final_graph[name] = {
             "label": data["label"],
             "mentions": data["mentions"],
@@ -479,5 +488,5 @@ def extract_entity_sentiment(articles):
             "avg_right_sentiment": avg(data["right_sentiment"]),
             "avg_center_sentiment": avg(data["center_sentiment"])
         }
-        
+
     return final_graph

@@ -1,7 +1,8 @@
 import asyncio
 import logging
+
 from app.celery_app import celery_app
-from app.prisma_client import Prisma, Json
+from app.prisma_client import Json, Prisma
 
 logger = logging.getLogger(__name__)
 
@@ -10,11 +11,12 @@ async def generate_snapshots_async():
     await prisma.connect()
 
     from datetime import datetime, timedelta
-    from app.services.ingestion import ingest_articles
+
     from app.services.cleaning import clean_and_deduplicate
-    from app.services.nlp import analyze_articles
-    from app.services.extraction import process_and_store_claims
     from app.services.clustering import run_claim_clustering, run_event_detection
+    from app.services.extraction import process_and_store_claims
+    from app.services.ingestion import ingest_articles
+    from app.services.nlp import analyze_articles
     # (previously also imported get_search_intelligence from app.main here,
     # unused — importing the FastAPI app module just for a dead import. See
     # AUDIT_TASKS.md A2; app.services.intelligence is the module to import
@@ -26,22 +28,22 @@ async def generate_snapshots_async():
 
         for sub in subscriptions:
             topic = sub.topic
-            
+
             # Default to 7 days ago if no snapshot exists
             last_date = sub.lastSnapshotAt or (datetime.utcnow() - timedelta(days=7))
             from_date_str = last_date.strftime("%Y-%m-%d")
-            
+
             logger.info(f"Generating snapshot for topic: '{topic}' since {from_date_str}")
-            
+
             # 1. Delta Ingestion
             raw_articles = await ingest_articles(query=topic, category="news", from_date=from_date_str)
             if not raw_articles:
                 logger.info(f"No new articles for '{topic}'. Skipping.")
                 continue
-                
+
             cleaned_articles, _ = clean_and_deduplicate(raw_articles)
             analyzed_articles = analyze_articles(cleaned_articles)
-            
+
             if not analyzed_articles:
                 continue
 
@@ -53,7 +55,7 @@ async def generate_snapshots_async():
                     "userId": sub.userId
                 }
             )
-            
+
             article_records = []
             for art in analyzed_articles:
                 record = await prisma.article.create(
@@ -92,10 +94,10 @@ async def generate_snapshots_async():
             # So we find ALL articles for this topic.
             all_searches = await prisma.search.find_many(where={"query": topic})
             search_ids = [s.id for s in all_searches]
-            
+
             all_articles = await prisma.article.find_many(where={"searchId": {"in": search_ids}})
             article_ids = [a.id for a in all_articles]
-            
+
             if not article_ids:
                 continue
 
@@ -111,12 +113,12 @@ async def generate_snapshots_async():
                     "cluster": {"include": {"event": True}}
                 }
             )
-            
+
             # Aggregate stats
             events = set()
             bias_dist = {"LEFT": 0, "CENTER": 0, "RIGHT": 0}
-            source_dist = {}
-            
+            source_dist: dict[str, int] = {}
+
             for art in all_articles:
                 b = art.biasLabel or "CENTER"
                 if b in bias_dist:
@@ -131,13 +133,13 @@ async def generate_snapshots_async():
             total_right = bias_dist["RIGHT"]
             total_center = bias_dist["CENTER"]
             total_bias = total_left + total_right + total_center
-            
+
             polarization = 0.0
             if total_bias > 0:
                 polarization = (total_left + total_right) / total_bias
 
             # Create snapshot
-            snapshot = await prisma.topicsnapshot.create(
+            await prisma.topicsnapshot.create(
                 data={
                     "subscriptionId": sub.id,
                     "topic": topic,
@@ -149,7 +151,7 @@ async def generate_snapshots_async():
                     "sourceDistribution": Json(source_dist),
                 }
             )
-            
+
             # Top events/claims for this snapshot still aren't populated.
             # The SnapshotEvent/SnapshotClaim join tables this comment used
             # to reference were dropped (unused scaffolding — see
@@ -161,7 +163,7 @@ async def generate_snapshots_async():
                 where={"id": sub.id},
                 data={"lastSnapshotAt": datetime.utcnow()}
             )
-            
+
             logger.info(f"Finished delta processing and created snapshot for {topic}")
 
     except Exception as e:

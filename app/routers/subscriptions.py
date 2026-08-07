@@ -31,7 +31,10 @@ async def get_subscriptions(user_id: str = Depends(get_current_user_id)):
     """Get all active subscriptions for the authenticated user."""
     return await prisma.topicsubscription.find_many(
         where={"userId": user_id, "isActive": True},
-        include={"snapshots": {"orderBy": {"createdAt": "desc"}, "take": 5}},
+        # Same generated-TypedDict-vs-dict-literal friction as elsewhere
+        # (see pipeline.py) — the mixed dict/int values here make the
+        # inferred type too loose to match TopicSubscriptionInclude exactly.
+        include={"snapshots": {"orderBy": {"createdAt": "desc"}, "take": 5}},  # type: ignore[arg-type]
     )
 
 

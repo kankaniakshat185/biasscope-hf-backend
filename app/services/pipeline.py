@@ -12,7 +12,6 @@ steps), and read without wading through routing/response-model code.
 
 import logging
 import os
-from typing import Optional
 
 from fastapi import HTTPException
 
@@ -37,11 +36,11 @@ logger = logging.getLogger(__name__)
 async def run_search_pipeline(
     query: str,
     category: str,
-    domains: Optional[str],
-    exclude_domains: Optional[str],
-    from_date: Optional[str],
-    to_date: Optional[str],
-    user_id: Optional[str],
+    domains: str | None,
+    exclude_domains: str | None,
+    from_date: str | None,
+    to_date: str | None,
+    user_id: str | None,
 ) -> dict:
     """Runs the synchronous half of a search: ingest, analyze, validate,
     summarize, and persist the Search/Article/Insight rows. Returns the
@@ -137,7 +136,12 @@ async def run_search_pipeline(
         })
 
     if article_creates:
-        await prisma.article.create_many(data=article_creates)
+        # Every prisma call in this codebase builds its `data=`/`where=`/
+        # `include=` argument as a plain dict literal rather than the
+        # generated per-model TypedDict (ArticleCreateWithoutRelationsInput
+        # here) — consistent throughout, and not worth a one-off exception
+        # just for this call site.
+        await prisma.article.create_many(data=article_creates)  # type: ignore[arg-type]
 
     # Insert Insights
     await prisma.insight.create(

@@ -10,6 +10,7 @@ Usage:
 
 import asyncio
 import logging
+
 from app.prisma_client import Prisma
 
 logging.basicConfig(level=logging.INFO)

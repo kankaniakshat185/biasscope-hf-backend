@@ -13,12 +13,17 @@ only" switch (local dev, or a locked-down staging instance) — it should
 never be set in a public-facing deployment.
 """
 
+import logging
+from typing import Any
+
 from fastapi import APIRouter, BackgroundTasks, Depends
 
 from ..db import prisma
 from ..deps.auth import get_current_user_id, require_debug_enabled
 from ..services.clustering import run_claim_clustering, run_event_detection
 from ..services.extraction import process_and_store_claims
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(
     prefix="/debug",
@@ -34,22 +39,23 @@ async def debug_clusters():
         include={"claims": {"include": {"evidence": True}}, "event": True},
         order={"id": "desc"},
     )
-    result = []
+    result: list[dict[str, Any]] = []
     for cl in clusters:
-        all_evidence = []
-        for c in cl.claims:
-            all_evidence.extend(c.evidence)
-        sources = list(set(e.source for e in all_evidence))
+        claims = cl.claims or []
+        all_evidence: list[Any] = []
+        for c in claims:
+            all_evidence.extend(c.evidence or [])
+        sources = list({e.source for e in all_evidence})
         result.append({
             "cluster_id": cl.id,
             "title": cl.title,
             "canonicalClaim": cl.canonicalClaim,
             "consensusScore": cl.consensusScore,
-            "claim_count": len(cl.claims),
+            "claim_count": len(claims),
             "evidence_count": len(all_evidence),
             "source_count": len(sources),
             "sources": sources,
-            "claims": [c.canonicalClaim for c in cl.claims],
+            "claims": [c.canonicalClaim for c in claims],
             "event_id": cl.eventId,
             "event_title": cl.event.title if cl.event else None,
         })
@@ -63,24 +69,27 @@ async def debug_events():
         include={"claimClusters": {"include": {"claims": {"include": {"evidence": True}}}}},
         order={"importanceScore": "desc"},
     )
-    result = []
+    result: list[dict[str, Any]] = []
     for ev in events:
+        clusters = ev.claimClusters or []
         total_claims = 0
         total_evidence = 0
-        all_sources = set()
-        for cl in ev.claimClusters:
-            total_claims += len(cl.claims)
-            for c in cl.claims:
-                total_evidence += len(c.evidence)
-                for e in c.evidence:
+        all_sources: set[str] = set()
+        for cl in clusters:
+            claims = cl.claims or []
+            total_claims += len(claims)
+            for c in claims:
+                evidence = c.evidence or []
+                total_evidence += len(evidence)
+                for e in evidence:
                     all_sources.add(e.source)
         result.append({
             "event_id": ev.id,
             "title": ev.title,
             "description": ev.description,
             "importance_score": ev.importanceScore,
-            "canonical_claim": ev.claimClusters[0].canonicalClaim if ev.claimClusters else None,
-            "cluster_count": len(ev.claimClusters),
+            "canonical_claim": clusters[0].canonicalClaim if clusters else None,
+            "cluster_count": len(clusters),
             "claim_count": total_claims,
             "evidence_count": total_evidence,
             "source_count": len(all_sources),
@@ -154,11 +163,9 @@ async def debug_rerun_clustering(background_tasks: BackgroundTasks):
             # just one topic's.
             await run_claim_clustering(prisma)
             await run_event_detection(prisma)
-            print("Background rerun-clustering complete.")
-        except Exception as e:
-            import traceback
-            print(f"Rerun-clustering error: {e}")
-            traceback.print_exc()
+            logger.info("Background rerun-clustering complete.")
+        except Exception:
+            logger.exception("Rerun-clustering error")
 
     background_tasks.add_task(_run)
     return {"message": "Clustering rerun started in background. Check /debug/events after ~60s."}
@@ -173,9 +180,9 @@ async def debug_rerun_events(background_tasks: BackgroundTasks):
     async def _run():
         try:
             await run_event_detection(prisma)
-            print("Background rerun-events complete.")
-        except Exception as e:
-            print(f"Rerun-events error: {e}")
+            logger.info("Background rerun-events complete.")
+        except Exception:
+            logger.exception("Rerun-events error")
 
     background_tasks.add_task(_run)
     return {"message": "Event rerun started in background. Check /debug/events after ~30s."}
@@ -213,22 +220,20 @@ async def debug_rerun_full(background_tasks: BackgroundTasks):
     async def _run():
         try:
             articles = await prisma.article.find_many(where={"searchId": search_id})
-            print(f"Re-extracting from {len(articles)} articles for query='{query}'...")
+            logger.info(f"Re-extracting from {len(articles)} articles for query='{query}'...")
             for art in articles:
                 if art.content:
                     await process_and_store_claims(
                         prisma, art.id, art.content, art.source, art.url,
                         art.publishedAt, query, art.title,
                     )
-            print("Re-extraction complete. Starting clustering...")
+            logger.info("Re-extraction complete. Starting clustering...")
             await run_claim_clustering(prisma, query)
-            print("Clustering complete. Starting event detection...")
+            logger.info("Clustering complete. Starting event detection...")
             await run_event_detection(prisma)
-            print("Full pipeline rerun complete.")
-        except Exception as e:
-            import traceback
-            print(f"Rerun-full error: {e}")
-            traceback.print_exc()
+            logger.info("Full pipeline rerun complete.")
+        except Exception:
+            logger.exception("Rerun-full error")
 
     background_tasks.add_task(_run)
     return {"message": f"Full rerun started for query='{query}', {search_id}. Check /debug/status."}
@@ -239,8 +244,8 @@ async def debug_run_one():
     """Test extraction on a single article synchronously to catch errors."""
     import traceback
     try:
-        article = await prisma.article.find_first(where={"content": {"not": None}})
-        if not article:
+        article = await prisma.article.find_first(where={"content": {"not": None}})  # type: ignore[arg-type]
+        if not article or not article.content:
             return {"error": "No article found"}
 
         claims = await process_and_store_claims(
@@ -275,15 +280,15 @@ async def debug_cluster_quality():
         order={"id": "asc"},
     )
 
-    diagnostics = []
+    diagnostics: list[dict[str, Any]] = []
     for cluster in clusters:
         claim_count = len(cluster.claims) if cluster.claims else 0
-        all_evidence = []
+        all_evidence: list[Any] = []
         for c in (cluster.claims or []):
-            all_evidence.extend(c.evidence)
+            all_evidence.extend(c.evidence or [])
 
         evidence_count = len(all_evidence)
-        sources = set(e.source for e in all_evidence)
+        sources = {e.source for e in all_evidence}
         source_count = len(sources)
         consensus = cluster.consensusScore or 0.0
 

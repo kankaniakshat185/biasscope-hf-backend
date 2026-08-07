@@ -22,7 +22,6 @@ SESSION_COOKIE_NAMES below.
 
 import os
 from datetime import datetime, timezone
-from typing import List, Optional
 
 from fastapi import HTTPException, Request, status
 
@@ -34,7 +33,7 @@ SESSION_COOKIE_NAMES = (
 )
 
 
-def _candidate_tokens(request: Request) -> List[str]:
+def _candidate_tokens(request: Request) -> list[str]:
     """Collect every plausible session-token value from the request.
 
     Checks, in order: an `Authorization: Bearer <token>` header (useful for
@@ -42,7 +41,7 @@ def _candidate_tokens(request: Request) -> List[str]:
     value and, if it looks like `<token>.<signature>`, the part before the
     first dot (Better Auth signs cookies by default in some configurations).
     """
-    candidates: List[str] = []
+    candidates: list[str] = []
 
     auth_header = request.headers.get("authorization")
     if auth_header and auth_header.lower().startswith("bearer "):
@@ -65,7 +64,7 @@ def _candidate_tokens(request: Request) -> List[str]:
     return unique
 
 
-def _is_expired(expires_at: Optional[datetime]) -> bool:
+def _is_expired(expires_at: datetime | None) -> bool:
     if expires_at is None:
         return False
     if expires_at.tzinfo is None:
@@ -95,7 +94,7 @@ async def get_current_user_id(request: Request) -> str:
     return session.userId
 
 
-async def get_optional_user_id(request: Request) -> Optional[str]:
+async def get_optional_user_id(request: Request) -> str | None:
     """Resolve the caller's user id if logged in; None if anonymous.
 
     For routes (like /search) that are allowed to run anonymously but must

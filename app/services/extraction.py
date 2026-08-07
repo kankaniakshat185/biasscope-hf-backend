@@ -12,14 +12,15 @@ Pipeline:
 All LLM calls go through llm_client.py for caching + analytics.
 """
 
-import re
 import json
 import logging
+import re
 from datetime import datetime
-from typing import List, Dict, Any, Optional
+from typing import Any
 
 import numpy as np
 from sentence_transformers import SentenceTransformer
+
 from app.services.llm_client import cached_llm_call
 
 logger = logging.getLogger(__name__)
@@ -38,10 +39,10 @@ def get_embedding_model():
         _embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
     return _embedding_model
 
-def embed_text(text: str) -> List[float]:
+def embed_text(text: str) -> list[float]:
     return get_embedding_model().encode(text, normalize_embeddings=True).tolist()
 
-def embed_texts_batch(texts: List[str]) -> np.ndarray:
+def embed_texts_batch(texts: list[str]) -> np.ndarray:
     """Batch embed for efficiency during deduplication."""
     return get_embedding_model().encode(texts, normalize_embeddings=True)
 
@@ -72,7 +73,7 @@ def repair_truncated_json(raw: str) -> str:
             raw_decode = raw_decode[index:].strip()
         except json.JSONDecodeError:
             break
-    
+
     if results:
         # If we successfully parsed multiple objects, wrap them in a valid JSON structure
         combined_claims = []
@@ -99,7 +100,7 @@ def repair_truncated_json(raw: str) -> str:
 
 # ── Claim Extraction (cached) ────────────────────────────────────
 
-async def extract_claims(prisma, article_text: str) -> List[Dict[str, Any]]:
+async def extract_claims(prisma, article_text: str) -> list[dict[str, Any]]:
     """
     Single CACHED LLM call that extracts claims AND classifies them.
     Returns: [{text, claim_type, confidence, evidence_sentence}]
@@ -169,6 +170,22 @@ COMMENTARY_SIGNALS = {
     'didn\'t immediately respond', 'could not be reached', 'declined to comment',
 }
 
+def _signal_pattern(signals) -> re.Pattern:
+    """Compile a set of signal phrases into one word-boundary regex.
+
+    These used to be checked with plain `signal in text_lower`, so e.g.
+    'dating' matched inside 'validating', 'damaged' matched inside
+    'undamaged', and 'controversial' matched inside 'uncontroversial' or
+    'controversially' — false-positive rejections of otherwise-fine claims
+    that happened to contain one of these words as a sub-string of a
+    longer, unrelated word. See AUDIT_TASKS.md Q1.
+    """
+    return re.compile(r'\b(?:' + '|'.join(re.escape(s) for s in signals) + r')\b')
+
+_OPINION_PATTERN = _signal_pattern(OPINION_SIGNALS)
+_BIOGRAPHICAL_PATTERN = _signal_pattern(BIOGRAPHICAL_SIGNALS)
+_COMMENTARY_PATTERN = _signal_pattern(COMMENTARY_SIGNALS)
+
 def compute_quality_score(text: str) -> float:
     """Score claim quality. Penalize opinion/biographical/commentary signals."""
     score = 0.0
@@ -179,17 +196,14 @@ def compute_quality_score(text: str) -> float:
         return 0.0
 
     # Hard reject: opinion language
-    for signal in OPINION_SIGNALS:
-        if signal in text_lower:
-            return 0.0
+    if _OPINION_PATTERN.search(text_lower):
+        return 0.0
     # Hard reject: journalist commentary
-    for signal in COMMENTARY_SIGNALS:
-        if signal in text_lower:
-            return 0.0
+    if _COMMENTARY_PATTERN.search(text_lower):
+        return 0.0
     # Near-certain reject: biographical content
-    for signal in BIOGRAPHICAL_SIGNALS:
-        if signal in text_lower:
-            return 0.10
+    if _BIOGRAPHICAL_PATTERN.search(text_lower):
+        return 0.10
 
     # Named entities (capitalized multi-word phrases)
     capitalized = re.findall(r'\b[A-Z][a-z]+(?:\s[A-Z][a-z]+)*\b', text)
@@ -232,7 +246,7 @@ def compute_quality_score(text: str) -> float:
 
 DEDUP_THRESHOLD = 0.92
 
-def deduplicate_claims(claims: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def deduplicate_claims(claims: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """
     Remove near-duplicate claims from the same article.
     Uses cosine similarity on claim text embeddings.
@@ -261,14 +275,14 @@ def deduplicate_claims(claims: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
                     keep[i] = False
                     break
 
-    deduped = [c for c, k in zip(claims, keep) if k]
+    deduped = [c for c, k in zip(claims, keep, strict=False) if k]
     if len(deduped) < len(claims):
         logger.info(f"[DEDUP] {len(claims)} → {len(deduped)} claims (removed {len(claims) - len(deduped)} duplicates)")
     return deduped
 
 # ── Relevance Filter ─────────────────────────────────────────────
 
-def claim_relevance(query: str, claim_embedding: List[float]) -> float:
+def claim_relevance(query: str, claim_embedding: list[float]) -> float:
     if not query:
         return 1.0
     query_embedding = embed_text(query)
