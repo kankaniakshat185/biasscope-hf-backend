@@ -97,3 +97,22 @@ def test_diversity_label_reflects_source_and_ideology_spread():
 
     assert result["dataset_metrics"]["source_diversity"] == 5
     assert result["dataset_metrics"]["diversity_quality_label"] == "High Diversity"
+
+
+@pytest.mark.model
+def test_unregistered_source_domains_are_geographically_unknown_not_us():
+    # R7 regression: sources outside the ~45 hardcoded regional domain
+    # lists used to silently default to "United States" — a specific,
+    # likely-wrong country assertion, not an honest "no data" — which
+    # collapsed genuinely diverse international sources into a fake
+    # single-country bucket and understated real geographic diversity.
+    articles = [
+        _article("some-german-outlet.de", 1200),
+        _article("some-brazilian-outlet.com.br", 1200),
+    ]
+
+    result = validate_articles(articles)
+
+    countries = result["dataset_metrics"]["geographic_diversity"]["countries"]
+    assert countries == ["Unknown"]
+    assert "United States" not in countries

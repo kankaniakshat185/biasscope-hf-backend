@@ -93,7 +93,14 @@ def validate_articles(articles):
         elif "aljazeera.com" in s_low:
             countries.add("Qatar")
         else:
-            countries.add("United States")  # Default guess for unknown english domains
+            # Was `countries.add("United States")` — asserting a specific,
+            # likely-wrong country for any source outside these ~45
+            # hardcoded domains, which silently collapsed genuinely diverse
+            # international sources into a fake single-country bucket and
+            # understated real geographic diversity. "Unknown" is honest
+            # about what this actually is: no match, not a US match. See
+            # AUDIT_TASKS.md R7.
+            countries.add("Unknown")
 
     countries_list = list(countries)
 
