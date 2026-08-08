@@ -17,6 +17,7 @@ async def generate_snapshots_async():
     from app.services.extraction import process_and_store_claims
     from app.services.ingestion import ingest_articles
     from app.services.nlp import analyze_articles
+    from app.services.pipeline import build_article_create_payload
     # (previously also imported get_search_intelligence from app.main here,
     # unused — importing the FastAPI app module just for a dead import. See
     # AUDIT_TASKS.md A2; app.services.intelligence is the module to import
@@ -58,19 +59,16 @@ async def generate_snapshots_async():
 
             article_records = []
             for art in analyzed_articles:
+                # Was a hand-rolled data={...} dict here that read the WRONG
+                # keys (e.g. "biasLabel" instead of analyze_articles()'s real
+                # "bias_label") — every article this task created had
+                # biasLabel/sentimentScore/sourceBias/publishedAt silently
+                # stored as NULL. See AUDIT_TASKS.md R1. Now shares the same
+                # mapping run_search_pipeline uses, so it can't drift again.
+                # Same plain-dict-literal-vs-generated-TypedDict friction as
+                # every other prisma call in this codebase (see pipeline.py).
                 record = await prisma.article.create(
-                    data={
-                        "searchId": search_record.id,
-                        "title": art["title"],
-                        "content": art.get("content", ""),
-                        "source": art["source"],
-                        "url": art["url"],
-                        "publishedAt": datetime.fromisoformat(art["publishedAt"].replace("Z", "+00:00")) if art.get("publishedAt") else None,
-                        "sentiment": art.get("sentiment"),
-                        "sentimentScore": art.get("sentimentScore"),
-                        "biasLabel": art.get("biasLabel"),
-                        "sourceBias": art.get("sourceBias"),
-                    }
+                    data=build_article_create_payload(search_record.id, art)  # type: ignore[arg-type]
                 )
                 article_records.append(record)
 

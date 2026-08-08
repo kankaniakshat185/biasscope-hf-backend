@@ -33,6 +33,39 @@ from .validation import validate_articles
 logger = logging.getLogger(__name__)
 
 
+def build_article_create_payload(search_id: str, art: dict) -> dict:
+    """Maps one `analyze_articles()`-processed article dict onto the field
+    names `Article.create`/`create_many` expect.
+
+    This used to be reimplemented independently inside
+    app/tasks/snapshot_task.py, which read the WRONG keys — e.g.
+    `art.get("biasLabel")` when `analyze_articles()` actually sets
+    `art["bias_label"]` (snake_case throughout). `dict.get()` on a missing
+    key just silently returns the default instead of raising, so every
+    snapshot-created Article had `biasLabel`/`sentimentScore`/`sourceBias`/
+    `publishedAt` stored as NULL — which made every weekly snapshot's
+    `polarizationIndex` compute to exactly 0.0 and `biasDistribution` show
+    100% CENTER, for every topic, forever. See AUDIT_TASKS.md R1/R3. Both
+    run_search_pipeline (below) and generate_snapshots_async now build
+    their Article.create payload through this one function so the mapping
+    can't drift between them again.
+    """
+    return {
+        "searchId": search_id,
+        "title": art.get("title", "No Title"),
+        "content": art.get("content", ""),
+        "source": art.get("source", "Unknown"),
+        "url": art.get("url", ""),
+        "sentiment": art.get("sentiment", "neutral"),
+        "sentimentScore": float(art.get("sentiment_score", 0.0)),
+        "biasLabel": art.get("bias_label", "UNKNOWN"),
+        "sourceBias": art.get("source_bias", "UNKNOWN"),
+        "deviationScore": float(art.get("deviation_score", 0.0)),
+        "entities": Json(art.get("entities", {})),
+        "publishedAt": art.get("published_at"),
+    }
+
+
 async def run_search_pipeline(
     query: str,
     category: str,
@@ -118,22 +151,7 @@ async def run_search_pipeline(
     )
 
     # Insert articles
-    article_creates = []
-    for art in valid_articles_list:
-        article_creates.append({
-            "searchId": search_record.id,
-            "title": art.get("title", "No Title"),
-            "content": art.get("content", ""),
-            "source": art.get("source", "Unknown"),
-            "url": art.get("url", ""),
-            "sentiment": art.get("sentiment", "neutral"),
-            "sentimentScore": float(art.get("sentiment_score", 0.0)),
-            "biasLabel": art.get("bias_label", "UNKNOWN"),
-            "sourceBias": art.get("source_bias", "UNKNOWN"),
-            "deviationScore": float(art.get("deviation_score", 0.0)),
-            "entities": Json(art.get("entities", {})),
-            "publishedAt": art.get("published_at"),
-        })
+    article_creates = [build_article_create_payload(search_record.id, art) for art in valid_articles_list]
 
     if article_creates:
         # Every prisma call in this codebase builds its `data=`/`where=`/

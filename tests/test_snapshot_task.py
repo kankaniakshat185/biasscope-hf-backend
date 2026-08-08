@@ -72,11 +72,16 @@ async def test_skips_a_topic_with_no_new_articles(fake_prisma, mocked_stages):
 async def test_processes_a_topic_with_new_articles_end_to_end(fake_prisma, mocked_stages, monkeypatch):
     fake_prisma.topicsubscription.find_many.return_value = [_subscription(topic="elon musk")]
     mocked_stages["ingest_articles"].return_value = [
-        {"title": "T", "url": "https://reuters.com/a", "source": "reuters.com", "content": "..."},
+        {"title": "T", "url": "https://reuters.com/a", "source": "reuters.com", "content": "...", "published_at": None},
     ]
+    # R1 regression: analyze_articles()'s REAL output uses snake_case keys
+    # (sentiment_score, bias_label, source_bias) — a previous version of
+    # this test mocked camelCase keys here, which happened to match the
+    # (buggy) camelCase lookups in the old snapshot_task.py code and so
+    # never caught the mismatch. Mocking the real shape is the whole point.
     monkeypatch.setattr(
         "app.services.nlp.analyze_articles",
-        lambda articles: [{**a, "sentiment": "neutral", "sentimentScore": 0.0, "biasLabel": "LEFT", "sourceBias": "LEFT"} for a in articles],
+        lambda articles: [{**a, "sentiment": "neutral", "sentiment_score": 0.1, "bias_label": "LEFT", "source_bias": "LEFT"} for a in articles],
     )
     fake_prisma.search.create.return_value = FakeRecord(id="search-1")
     fake_prisma.article.create.return_value = FakeRecord(id="art-1", title="T", content="...", source="reuters.com", url="https://reuters.com/a", publishedAt=None)
@@ -90,6 +95,14 @@ async def test_processes_a_topic_with_new_articles_end_to_end(fake_prisma, mocke
     create_kwargs = fake_prisma.search.create.call_args.kwargs["data"]
     assert create_kwargs["query"] == "elon musk"
     assert create_kwargs["userId"] == "user-1"
+
+    # The actual R1 regression check: the real analyzed-article data (snake
+    # case) must land correctly on the camelCase Article.create() payload —
+    # not silently become None.
+    article_create_kwargs = fake_prisma.article.create.call_args.kwargs["data"]
+    assert article_create_kwargs["biasLabel"] == "LEFT"
+    assert article_create_kwargs["sourceBias"] == "LEFT"
+    assert article_create_kwargs["sentimentScore"] == 0.1
 
     mocked_stages["process_and_store_claims"].assert_awaited_once()
     # P1 fix applies here too: clustering scoped to this topic's query.

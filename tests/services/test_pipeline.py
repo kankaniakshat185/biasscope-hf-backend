@@ -19,6 +19,53 @@ def fake_prisma(monkeypatch):
     return prisma
 
 
+# ── build_article_create_payload ───────────────────────────────────────
+# R1/R3: this used to be inlined separately in both run_search_pipeline and
+# app/tasks/snapshot_task.py — the snapshot copy read the wrong (camelCase)
+# keys off the analyzed-article dict, so every value it wrote came back
+# NULL. Extracted to one function both call; these tests pin the exact
+# snake_case → camelCase mapping analyze_articles()'s real output requires.
+
+def test_build_article_create_payload_maps_analyzed_snake_case_fields_to_prisma_columns():
+    art = {
+        "title": "Tesla Files for IPO",
+        "content": "Tesla filed for an IPO worth $75 billion.",
+        "source": "reuters.com",
+        "url": "https://reuters.com/a",
+        "sentiment": "positive",
+        "sentiment_score": 0.42,
+        "bias_label": "CENTER",
+        "source_bias": "CENTER",
+        "deviation_score": 0.0,
+        "entities": {"Tesla": "ORG"},
+        "published_at": "2024-01-01T00:00:00Z",
+    }
+
+    payload = pipeline_module.build_article_create_payload("search-1", art)
+
+    assert payload["searchId"] == "search-1"
+    assert payload["title"] == "Tesla Files for IPO"
+    assert payload["sentimentScore"] == 0.42
+    assert payload["biasLabel"] == "CENTER"
+    assert payload["sourceBias"] == "CENTER"
+    assert payload["publishedAt"] == "2024-01-01T00:00:00Z"
+
+
+def test_build_article_create_payload_defaults_missing_fields_instead_of_raising():
+    # A near-empty analyzed dict (e.g. scraping failed and analyze_articles
+    # short-circuited) must still produce a valid create payload, not a
+    # KeyError — this used to be `art["title"]` (raises) in the old
+    # snapshot_task.py implementation.
+    payload = pipeline_module.build_article_create_payload("search-1", {})
+
+    assert payload["title"] == "No Title"
+    assert payload["source"] == "Unknown"
+    assert payload["biasLabel"] == "UNKNOWN"
+    assert payload["sourceBias"] == "UNKNOWN"
+    assert payload["sentimentScore"] == 0.0
+    assert payload["publishedAt"] is None
+
+
 @pytest.fixture
 def mocked_stages(monkeypatch):
     """Everything run_search_pipeline calls besides the DB writes
