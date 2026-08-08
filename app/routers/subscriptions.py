@@ -11,7 +11,16 @@ router = APIRouter(prefix="/subscriptions", tags=["subscriptions"])
 
 
 @router.post("")
-async def subscribe_topic(topic: str = Body(...), user_id: str = Depends(get_current_user_id)):
+async def subscribe_topic(
+    # embed=True: with `userId` removed as a sibling Body(...) field (S2 —
+    # identity now comes from the session, not the client), `topic` became
+    # the ONLY Body param. FastAPI's default for a single scalar Body
+    # param is to expect the raw value as the entire request body, not
+    # `{"topic": "..."}` — which silently broke this endpoint against the
+    # frontend (still sends the wrapped shape) until a test caught it.
+    topic: str = Body(..., embed=True),
+    user_id: str = Depends(get_current_user_id),
+):
     """Subscribe the authenticated user to a topic for weekly longitudinal tracking."""
     existing = await prisma.topicsubscription.find_first(
         where={"userId": user_id, "topic": topic.lower()}

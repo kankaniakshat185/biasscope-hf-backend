@@ -49,3 +49,16 @@ check_untyped_defs = true
 [[tool.mypy.overrides]]
 module = "app.prisma_client.*"
 ignore_errors = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+asyncio_mode = "auto"
+markers = [
+    # Loads real ML models (spacy, sentence-transformers, the NLI
+    # cross-encoder) — correct, not mocked, but a few seconds slower per
+    # session than the pure-logic tests. Run everything with `pytest`;
+    # run just the fast ones with `pytest -m "not model"`.
+    "model: exercises a real (not mocked) ML model",
+]
+

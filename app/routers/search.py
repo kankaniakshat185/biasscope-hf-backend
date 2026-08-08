@@ -18,7 +18,14 @@ async def create_search(
     exclude_domains: str | None = Body(None),
     fromDate: str | None = Body(None),
     toDate: str | None = Body(None),
-    background_tasks: BackgroundTasks | None = None,
+    # Must stay a BARE `BackgroundTasks` annotation, NOT `BackgroundTasks
+    # | None` — FastAPI special-cases the exact bare type to auto-inject
+    # an instance; wrapped in Optional, it instead tries (and fails) to
+    # build a Pydantic field from it, crashing at route-registration time
+    # (i.e. app startup). A prior mypy cleanup pass "fixed" this to satisfy
+    # mypy's implicit-optional check and broke the route entirely — caught
+    # by tests/routers/test_search_router.py, not by mypy or ruff.
+    background_tasks: BackgroundTasks = None,  # type: ignore[assignment]
     # Anonymous search is allowed (Search.userId is nullable), but if the
     # caller IS logged in, their id comes from the verified session — never
     # from a client-supplied body field.

@@ -8,6 +8,28 @@ from app.prisma_client import Json
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
+def build_snapshot_json(demo_data: dict) -> Json:
+    """Normalizes a demo-snapshot dict into something Prisma's `Json`
+    wrapper can actually serialize, then wraps it.
+
+    Extracted for direct testability — see tests/utils/test_create_demo_snapshot.py
+    for the regression test covering the bug this fixed: passing
+    json.dumps(...) (a plain string) here instead of Json(...) made the
+    generated client's default string serializer double-encode the data,
+    so DemoSnapshot.data ended up holding a JSON-encoded STRING rather
+    than a JSON OBJECT — /demo/{topic} would have handed the frontend
+    escaped JSON text instead of a parsed object.
+
+    Still round-trips through json.dumps/loads first (`default=str`) to
+    normalize embedded datetime objects — Prisma's own Json serializer
+    does a plain json.dumps with no `default=`, so it can't handle those
+    directly.
+    """
+    normalized = json.loads(json.dumps(demo_data, default=str))
+    return Json(normalized)
+
+
 async def main():
     topic = "elon musk"
     search_id = "0d5391aa-59ac-442a-8876-484d2db95a3e"
@@ -37,20 +59,7 @@ async def main():
             "intelligence": intel_data
         }
 
-        # BUG (found via mypy, see AUDIT_TASKS.md): this used to pass
-        # json.dumps(demo_data, ...) — a plain string — for a column typed
-        # `Json`. The generated Prisma client only JSON-serializes values
-        # wrapped in Json(...); a bare string instead falls through to
-        # default string serialization, so the column ended up storing a
-        # JSON-encoded STRING rather than a JSON OBJECT. Reading it back
-        # would hand /demo/{topic} an escaped JSON string instead of a
-        # parsed object, breaking the demo feature client-side.
-        #
-        # Still round-trip through json.dumps/loads first (keeping the
-        # original `default=str` behavior) to normalize embedded datetime
-        # objects — Prisma's own Json serializer does a plain json.dumps
-        # with no `default=`, so it can't handle those directly.
-        normalized = json.loads(json.dumps(demo_data, default=str))
+        snapshot_json = build_snapshot_json(demo_data)
 
         # Save to demo snapshot table
         await prisma.demosnapshot.upsert(
@@ -58,10 +67,10 @@ async def main():
             data={
                 "create": {
                     "topic": topic,
-                    "data": Json(normalized)
+                    "data": snapshot_json
                 },
                 "update": {
-                    "data": Json(normalized)
+                    "data": snapshot_json
                 }
             }
         )

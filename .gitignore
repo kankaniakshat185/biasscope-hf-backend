@@ -7,4 +7,7 @@ venv/
 .DS_Store
 node_modules/
 learning_note.md
-learning_notes/
+# NOTE: learning_notes/ used to be listed here too, but the folder is
+# actually tracked in git (someone force-added it after this rule was
+# written) — the rule was dead and would mislead anyone who assumes
+# something they drop in that folder gets ignored. See AUDIT_TASKS.md T2.

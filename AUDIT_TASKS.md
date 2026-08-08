@@ -4,6 +4,14 @@ Condensed from the [full engineering audit](https://claude.ai/code/artifact/1a32
 
 Check items off as they land. Security & Auth is the current focus — start there.
 
+## 🐛 Bugs found while writing the T1 test suite
+
+Not audit findings — these were introduced or exposed by earlier fixes in this same remediation pass, and none were caught by `ruff`/`mypy`. Listed here because they were live in the working tree until the test suite caught them.
+
+1. **`POST /subscriptions` was broken** — removing `userId` as a sibling `Body(...)` field during the S2 fix left `topic` as the only `Body` param, which silently changed FastAPI's expected request shape from `{"topic": "..."}` to a bare string. The frontend still sends the wrapped shape. Fixed with `Body(..., embed=True)`. **If you deployed the S2 change before this fix, subscribing to a topic has been failing with a 422 since then.**
+2. **The app couldn't start** — a mypy cleanup pass changed `background_tasks: BackgroundTasks = None` to `BackgroundTasks | None = None` in `search.py` to satisfy mypy's implicit-optional check. FastAPI special-cases the *exact* bare `BackgroundTasks` type to auto-inject an instance; wrapped in `Optional`, route registration crashes at import time. Reverted to the bare form with a `# type: ignore` and a comment explaining why it must stay that way.
+3. **Cluster `evidenceCount` over-counted** (pre-existing, not introduced this session) — `get_search_intelligence()` computed a cluster's `evidenceCount` *before* deduplicating evidence by sentence, while the equivalent code for events computed it *after* — an inconsistency that made a cluster report a higher evidence count than the number of evidence items actually returned. Fixed to match the (correct) events behavior.
+
 ## 🔴 Security & Auth — DO FIRST
 
 - [x] **S1** `[BE]` Add auth to every route; gate/remove `/debug/*` endpoints in prod — extracted to `app/routers/debug.py`, gated behind `ENABLE_DEBUG_ROUTES=1` + login (no role-based admin check yet — see follow-up note below)
@@ -79,12 +87,14 @@ Check items off as they land. Security & Auth is the current focus — start the
 
 ## 🟡 Testing & Docs
 
-- [ ] **T1** `[BE]`/`[FE]` Build the test suite the backend README already claims exists (`tests/nlp/test_grounding.py`, `tests/clustering/test_similarity.py`) — highest-value gap in the whole audit
-- [ ] **T2** `[BE]` Remove the dead `learning_notes/` rule from `.gitignore` (folder is tracked anyway)
+- [x] **T1** `[BE]` Built a real, passing, exhaustive-scope pytest suite — **177 tests**, both README-named files included with content that matches their descriptions (see README's Testing section for the honest scoping note on `test_grounding.py`). Covers: the session-auth dependency + every route's enforcement of it (security-critical, tests actively assert 401/403/404 behavior), the claim quality gate + its Q1 word-boundary regressions, embedding-based dedup thresholds and cluster cohesion (real sentence-transformers model), the NLI cross-encoder for contradiction/grounding (real model), source-reliability/bias registries, narrative fallbacks, `get_results`/`get_search_intelligence`, the `/search` pipeline orchestration and Phase 2 status transitions, LLM response caching, domain-name parsing, JSON repair, and the Json-encoding regression in `create_demo_snapshot.py`. `ruff`/`mypy` both stay clean throughout.
+  **Found and fixed 3 real, previously-undetected bugs while writing it** — see below.
+  **Update — now closed:** `app/main.py`, `app/celery_app.py`, `app/tasks/snapshot_task.py`, and the remaining `app/utils/` scripts (`cleanup_orphaned_evidence.py`, `create_vector_index.py`, `reset_claim_graph.py`, `cohesion_analysis.py`) all have real tests now too. **213 tests total.** Every hand-written `.py` file in `app/` has at least one test file; only the vendored, generated `app/prisma_client/` is excluded (by design — see `pyproject.toml`'s mypy override). Three more small testability extractions happened along the way (`parse_allowed_origins` in `main.py`, `build_redis_url` in `celery_app.py`), same pattern as `normalize_domains` and `classify_nli_relationship` above.
+- [x] **T2** `[BE]` Removed the dead `.gitignore` rule instead of the folder actually being ignored — `learning_notes/` is tracked in git regardless, so left a comment explaining why rather than re-adding a rule that would just be dead again.
 
-## 🟢 DevOps
+## 🟢 DevOps — DONE
 
-- [ ] **V1** `[BE]` Remove or document which deploy config is canonical — `vercel.json` vs. `Dockerfile`/HF Spaces
+- [x] **V1** `[BE]` Removed `vercel.json` — confirmed nothing else in the repo referenced it (the two "vercel" mentions elsewhere are just the *frontend's* Vercel URL). Dockerfile + HF Spaces + the GitHub Action pushing there are the only real, actively-documented deploy path.
 
 ---
 **Suggested order:** Security & Auth → Data Integrity → Architecture → everything else. See the [full audit](https://claude.ai/code/artifact/1a32c5de-9e38-4d5d-a473-73c56562a652) for rationale, code excerpts, and effort estimates per item.

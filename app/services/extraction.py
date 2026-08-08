@@ -28,6 +28,13 @@ logger = logging.getLogger(__name__)
 # Types that are allowed into the intelligence pipeline
 ALLOWED_CLAIM_TYPES = {"EVENT", "NUMERIC"}
 
+# Minimum cosine similarity for a newly-extracted claim to be merged into
+# an existing claim from a DIFFERENT article rather than stored as a new
+# row. Was a local variable buried inside process_and_store_claims —
+# hoisted to a module constant so it's a single source of truth and
+# actually testable (see tests/clustering/test_similarity.py).
+CROSS_ARTICLE_DEDUP_THRESHOLD = 0.88
+
 # ── Embedding Model (singleton) ──────────────────────────────────
 
 _embedding_model = None
@@ -352,8 +359,8 @@ async def process_and_store_claims(
         # ── Cross-Article Deduplication (Issue 1 fix) ──
         # Before creating a new claim, check if a semantically identical
         # claim already exists in the database from a different article.
-        # If cosine similarity >= 0.88, merge evidence into the existing claim.
-        CROSS_ARTICLE_DEDUP_THRESHOLD = 0.88
+        # If cosine similarity >= CROSS_ARTICLE_DEDUP_THRESHOLD, merge
+        # evidence into the existing claim instead of creating a new row.
 
         # Bound parameters throughout — this used to interpolate vector_string
         # into the query with an f-string. It wasn't attacker-reachable (the

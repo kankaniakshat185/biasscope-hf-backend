@@ -33,18 +33,19 @@ logging.basicConfig(
 
 app = FastAPI(title="Biascope API")
 
-# Comma-separated list of allowed frontend origins. Never pair "*" with
-# allow_credentials=True — browsers reject that combination for
-# credentialed requests, and it signals an unintentionally open policy for
-# an API that now reads session cookies.
-ALLOWED_ORIGINS = [
-    origin.strip()
-    for origin in os.environ.get(
-        "ALLOWED_ORIGINS",
-        "http://localhost:3000,https://biasscope-app-frontend.vercel.app",
-    ).split(",")
-    if origin.strip()
-]
+_DEFAULT_ALLOWED_ORIGINS = "http://localhost:3000,https://biasscope-app-frontend.vercel.app"
+
+
+def parse_allowed_origins(raw: str | None) -> list[str]:
+    """Comma-separated list of allowed frontend origins. Never pair "*"
+    with allow_credentials=True — browsers reject that combination for
+    credentialed requests, and it signals an unintentionally open policy
+    for an API that now reads session cookies. Extracted for direct
+    testability (see tests/test_main.py)."""
+    return [origin.strip() for origin in (raw or _DEFAULT_ALLOWED_ORIGINS).split(",") if origin.strip()]
+
+
+ALLOWED_ORIGINS = parse_allowed_origins(os.environ.get("ALLOWED_ORIGINS"))
 
 app.add_middleware(
     CORSMiddleware,

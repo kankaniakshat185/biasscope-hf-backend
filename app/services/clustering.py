@@ -51,6 +51,26 @@ def get_nli_classifier():
             nli_classifier = False
     return nli_classifier
 
+
+def classify_nli_relationship(clf, premise: str, hypothesis: str) -> str | None:
+    """Runs the NLI cross-encoder on a (premise, hypothesis) pair and
+    returns its top label ("entailment" | "neutral" | "contradiction"),
+    or None if inference failed. Extracted out of run_event_detection's
+    contradiction-counting loop (Q-adjacent DRY cleanup) so the exact same
+    label-parsing logic — the pipeline's top_k=None output shape varies
+    between a flat list and a list-of-lists depending on transformers
+    version — is exercised directly by tests/nlp/test_grounding.py rather
+    than a second, possibly-drifting copy of it.
+    """
+    try:
+        res = clf(f"{premise} [SEP] {hypothesis}")
+        if not res:
+            return None
+        top = res[0][0] if isinstance(res[0], list) else res[0]
+        return top["label"].lower()
+    except Exception:
+        return None
+
 logger = logging.getLogger(__name__)
 
 # Minimum mean pairwise cosine similarity for a cluster to be considered
@@ -416,18 +436,9 @@ async def run_event_detection(prisma):
                 claims_to_compare = [c.canonicalClaim for c in cluster.claims[:5]]
                 for i in range(len(claims_to_compare)):
                     for j in range(i+1, len(claims_to_compare)):
-                        pair_text = f"{claims_to_compare[i]} [SEP] {claims_to_compare[j]}"
-                        try:
-                            # Run zero-shot inference
-                            res = clf(pair_text)
-                            if res:
-                                # the output is a list of dicts: [{'label': 'Contradiction', 'score': 0.99}, ...]
-                                # check if Contradiction is the top label or has high score
-                                top_label = res[0][0]['label'] if isinstance(res[0], list) else res[0]['label']
-                                if top_label.lower() == 'contradiction':
-                                    contradiction_count += 1
-                        except Exception:
-                            pass
+                        top_label = classify_nli_relationship(clf, claims_to_compare[i], claims_to_compare[j])
+                        if top_label == 'contradiction':
+                            contradiction_count += 1
                         total_pairs += 1
                 if total_pairs > 0:
                     polarization_score = contradiction_count / total_pairs

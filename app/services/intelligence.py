@@ -165,7 +165,6 @@ async def get_search_intelligence(search_id: str) -> dict:
     for cl in clusters_map.values():
         cl["sources"] = list(cl["sources"])
         cl["sourceCount"] = len(cl["sources"])
-        cl["evidenceCount"] = len(cl["allEvidence"])
         # Deduplicate evidence by sentence text
         seen = set()
         unique_evidence = []
@@ -175,6 +174,12 @@ async def get_search_intelligence(search_id: str) -> dict:
                 seen.add(key)
                 unique_evidence.append(ev)
         cl["evidence"] = unique_evidence
+        # Bug: this used to be len(cl["allEvidence"]) — the PRE-dedup
+        # count — while the events section below (correctly) counts
+        # post-dedup. A cluster with duplicate evidence sentences would
+        # report a higher evidenceCount than the number of evidence items
+        # actually shown. Caught by tests/services/test_intelligence.py.
+        cl["evidenceCount"] = len(unique_evidence)
         cl["claims"] = [rc["text"] for rc in cl["rawClaims"]]
         del cl["rawClaims"]
         del cl["allEvidence"]

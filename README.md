@@ -173,21 +173,27 @@ biasscope-hf-backend/
 - **Vector Operations:** Embedding generation takes ~45ms per claim, and consensus calculations resolve in ~12ms per event utilizing optimized `pgvector` indexing.
 - **Actor Model Optimization:** The adoption of a distributed actor model for the Llama 3 endpoint reduced LLM timeout rates from 14% to 0%, increasing throughput by 3x during peak news cycles.
 
-## 🧪 Evaluation Framework
+## 🧪 Testing
 
-BiasScope utilizes a rigorous testing pipeline to validate the NLP engine.
-
-**Test 1: Hallucination Penalty**
-Runs extracted claims through a cross-encoder to verify that the LLM output is 100% grounded in the original source sentence.
 ```bash
-pytest tests/nlp/test_grounding.py
+pip install -r requirements-dev.txt
+python -m spacy download en_core_web_sm   # only needed once, for the real-model tests below
+
+pytest                    # full suite (~180 tests, ~25s)
+pytest -m "not model"     # skip the tests that load real ML models (faster, no model download needed)
+pytest --cov=app --cov-report=term-missing   # with coverage
 ```
 
-**Test 2: Clustering Thresholds**
-Validates the cosine similarity threshold (0.85) to ensure distinct claims are not improperly merged into the same canonical claim.
-```bash
-pytest tests/clustering/test_similarity.py
-```
+177 tests across `tests/`, covering (with real, not mocked, ML models where the thing under test genuinely is the model's behavior — sentence-transformers for embedding similarity, the `cross-encoder/nli-deberta-v3-small` cross-encoder for contradiction/grounding checks):
+
+- **Security** (`tests/auth/`, `tests/routers/`): the session-cookie auth dependency and every route's enforcement of it — debug-route gating, history/subscription ownership checks, IDOR protection.
+- **Pipeline logic** (`tests/extraction/`, `tests/clustering/`, `tests/nlp/`): the claim quality gate (including regressions for real false-positive cases), JSON repair, embedding-based dedup thresholds, cluster cohesion, event titling, the source-reliability/bias registries, narrative fallbacks.
+- **Services** (`tests/services/`): `get_results`/`get_search_intelligence`'s data shaping, the `/search` pipeline orchestration, and the Phase 2 background job's status transitions (`pending` → `processing` → `complete`/`failed`).
+- **`tests/nlp/test_grounding.py`** and **`tests/clustering/test_similarity.py`** are the two files this README named before this suite existed — see their module docstrings for exactly what they check and why (the grounding one is honestly scoped: there's no dedicated hallucination-checker in production, so it uses the real NLI cross-encoder that already exists for contradiction detection, repurposed for groundedness).
+
+None of this runs against a real Postgres/pgvector database — there isn't one available in CI. DB-touching code (including the weekly snapshot Celery task and every one-off script in `app/utils/`) is tested against a fake Prisma client (`tests/fakes.py`) with real business logic exercised on top of it, not end-to-end against real data.
+
+213 tests total. Every `.py` file in `app/` now has at least one test file except `app/routers/__init__.py`-style empty `__init__.py`s and the vendored `app/prisma_client/` (generated code — not ours to test).
 
 ## 📜 License
 

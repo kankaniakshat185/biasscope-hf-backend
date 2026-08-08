@@ -1,8 +1,10 @@
 import logging
 import re
 from collections import Counter
+from typing import Any
 
 import spacy
+from spacy.language import Language
 from transformers import pipeline
 
 from app.services.llm_client import NARRATIVE_MODEL_ID, cached_llm_call
@@ -20,6 +22,7 @@ sentiment_pipeline = pipeline(  # type: ignore[call-overload]  # "sentiment-anal
 )
 bias_pipeline = pipeline("text-classification", model="bucketresearch/politicalBiasBERT", truncation=True, max_length=512)
 
+spacy_nlp: Language | None
 try:
     spacy_nlp = spacy.load("en_core_web_trf")
 except Exception as e:
@@ -147,7 +150,7 @@ def analyze_articles(articles):
         art["entities"] = {}
         if spacy_nlp and text:
             doc = spacy_nlp(text[:2000]) # limit length for speed
-            entities = {}
+            entities: dict[str, dict[str, Any]] = {}
             for ent in doc.ents:
                 if ent.label_ in ["PERSON", "ORG", "GPE"]:
                     name = ent.text.strip()

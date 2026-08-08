@@ -1,11 +1,39 @@
 import asyncio
 import logging
 import os
+from urllib.parse import urlparse
 
 from newsapi import NewsApiClient
 from newspaper import Article as NewspaperArticle
 
 logger = logging.getLogger(__name__)
+
+# Registrable-suffix labels that mean "keep 3 labels, not 2" when
+# stripping a domain down to its bare form (co.uk, org.in, etc. — a
+# second-level ccTLD-style suffix, not the organization's actual name).
+_MULTI_PART_TLD_LABELS = {'co', 'com', 'org', 'net', 'edu', 'gov', 'ac'}
+
+
+def normalize_domains(domains: str) -> str:
+    """Turns whatever a user typed into NewsAPI's expected bare-domain
+    comma-separated format — "https://www.wsj.com/, NYTimes.com" becomes
+    "wsj.com,NYTimes.com" (case is preserved, only the scheme/www/path
+    get stripped). Extracted out of ingest_articles for direct
+    testability (see tests/ingestion/test_domain_parsing.py)."""
+    domains_list = []
+    for d in domains.split(','):
+        d = d.strip()
+        if not d.startswith('http'):
+            d = 'http://' + d
+        netloc = urlparse(d).netloc.replace("www.", "")
+        parts = netloc.split('.')
+        if len(parts) > 2:
+            if parts[-2] in _MULTI_PART_TLD_LABELS or len(parts[-2]) <= 2:
+                netloc = '.'.join(parts[-3:])
+            else:
+                netloc = '.'.join(parts[-2:])
+        domains_list.append(netloc)
+    return ','.join(domains_list)
 
 
 async def ingest_articles(
@@ -41,21 +69,7 @@ async def ingest_articles(
         broad_query = "news"
 
     if domains:
-        from urllib.parse import urlparse
-        domains_list = []
-        for d in domains.split(','):
-            d = d.strip()
-            if not d.startswith('http'):
-                d = 'http://' + d
-            netloc = urlparse(d).netloc.replace("www.", "")
-            parts = netloc.split('.')
-            if len(parts) > 2:
-                if parts[-2] in ['co', 'com', 'org', 'net', 'edu', 'gov', 'ac'] or len(parts[-2]) <= 2:
-                    netloc = '.'.join(parts[-3:])
-                else:
-                    netloc = '.'.join(parts[-2:])
-            domains_list.append(netloc)
-        domains = ','.join(domains_list)
+        domains = normalize_domains(domains)
 
     # NewsAPI strictly forbids using BOTH domains and exclude_domains in the same request.
     # Therefore, if the user explicitly provided 'domains', we must drop all exclude logic.
