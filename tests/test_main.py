@@ -14,9 +14,14 @@ from tests.fakes import FakePrisma
 
 
 def test_parse_allowed_origins_defaults_to_localhost_and_the_known_vercel_url():
+    # Regression: this used to assert "biasscope-app-frontend.vercel.app",
+    # which doesn't match the real deployed site at all (confirmed against
+    # the actual production URL's address bar) — every credentialed
+    # request from production was silently CORS-rejected, and this test
+    # was pinning the wrong value the whole time.
     origins = main_module.parse_allowed_origins(None)
     assert "http://localhost:3000" in origins
-    assert "https://biasscope-app-frontend.vercel.app" in origins
+    assert "https://biasscope-app.vercel.app" in origins
 
 
 def test_parse_allowed_origins_splits_and_trims_a_custom_value():

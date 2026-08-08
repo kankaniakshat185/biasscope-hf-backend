@@ -33,7 +33,17 @@ logging.basicConfig(
 
 app = FastAPI(title="Biascope API")
 
-_DEFAULT_ALLOWED_ORIGINS = "http://localhost:3000,https://biasscope-app-frontend.vercel.app"
+# Was "https://biasscope-app-frontend.vercel.app" — that domain doesn't
+# match the real deployed site at all (the actual Vercel project is named
+# "biasscope-app", not "biasscope-app-frontend" — an easy mix-up since the
+# GitHub repo IS named biasscope-app-frontend). Since the real production
+# origin was never in this allow-list, and ALLOWED_ORIGINS apparently isn't
+# set as an env var override on the deployed Space either, every
+# credentialed request from the real production frontend was silently
+# rejected by CORS (no Access-Control-Allow-Credentials header at all) —
+# the browser shows this as "TypeError: Load failed", not as anything that
+# looks like a CORS error. Confirmed against the real site's address bar.
+_DEFAULT_ALLOWED_ORIGINS = "http://localhost:3000,https://biasscope-app.vercel.app"
 
 
 def parse_allowed_origins(raw: str | None) -> list[str]:

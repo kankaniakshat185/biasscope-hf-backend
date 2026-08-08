@@ -20,7 +20,7 @@ A high-performance, claim-centric natural language processing engine that powers
 > The frontend application that pairs with this backend can be found here: 
 > [**BiasScope App Frontend**](https://github.com/kankaniakshat185/biasscope-app-frontend)
 
-[Live API Documentation](https://huggingface.co/spaces/kankaniakshat185/biasscope) • [Frontend Dashboard](https://biasscope-app-frontend.vercel.app/)
+[Live API Documentation](https://huggingface.co/spaces/kankaniakshat185/biasscope) • [Frontend Dashboard](https://biasscope-app.vercel.app/)
 
 ## 🚀 Features
 
