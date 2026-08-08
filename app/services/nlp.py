@@ -108,6 +108,14 @@ def get_source_reliability(source: str):
 def analyze_articles(articles):
     analyzed = []
     for art in articles:
+        # R12: work on a copy, not the caller's own dict object — this
+        # function mutates a dozen keys in place below. Without this,
+        # `articles` (the caller's list) ends up silently mutated too,
+        # which is fine today only because nothing currently reads that
+        # list again afterward. See the matching fix/comment in
+        # cleaning.py's clean_and_deduplicate for the fuller rationale.
+        art = dict(art)
+
         # -------- SENTIMENT --------
         text = art.get("content") or art.get("title", "")
 

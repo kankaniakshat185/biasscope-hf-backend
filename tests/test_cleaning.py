@@ -52,3 +52,16 @@ def test_strips_null_bytes_from_content_and_title():
     cleaned, _ = clean_and_deduplicate(raw)
     assert "\x00" not in cleaned[0]["title"]
     assert "\x00" not in cleaned[0]["content"]
+
+
+def test_does_not_mutate_the_caller_input_dicts():
+    # R12 regression: this used to mutate `article` (a raw_articles element)
+    # in place and return the SAME object reference in `cleaned` — so
+    # raw_articles ended up silently carrying the cleaned/stripped values
+    # too. Nothing currently re-reads raw_articles after this call, but a
+    # future change that did would see mutated data under a "raw" name.
+    raw = [{"url": "https://a.com/1", "title": "Headline\x00", "content": "Body\x00text"}]
+    cleaned, _ = clean_and_deduplicate(raw)
+    assert cleaned[0] is not raw[0]
+    assert raw[0]["title"] == "Headline\x00"
+    assert raw[0]["content"] == "Body\x00text"
