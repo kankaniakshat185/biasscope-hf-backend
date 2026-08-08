@@ -368,17 +368,49 @@ async def process_and_store_claims(
         # a properly parameterized INSERT a few lines below, which is exactly
         # the kind of inconsistency that gets copy-pasted into a query that
         # DOES carry user text later.
-        existing_match = await prisma.query_raw(
-            '''
-            SELECT id, "canonicalClaim"
-            FROM "claim"
-            WHERE 1 - (embedding <=> $1::vector) > $2
-            ORDER BY embedding <=> $1::vector
-            LIMIT 1
-            ''',
-            vector_string,
-            CROSS_ARTICLE_DEDUP_THRESHOLD,
-        )
+        #
+        # Scoped to `query` the same way run_claim_clustering() already is
+        # (clustering.py) — this used to search the ENTIRE claim table with
+        # no topic filter at all, so a claim from a completely unrelated
+        # search could merge into this one purely on embedding similarity,
+        # attaching that unrelated search's evidence (source, URL, sentence)
+        # to what this search's intelligence report believes is its own
+        # claim. See AUDIT_TASKS.md R4. Every claim reachable here already
+        # has at least one Evidence row (this same function always inserts
+        # one immediately after creating/matching a claim), so the join
+        # below never misses a real candidate — it only excludes matches
+        # whose evidence traces back to a different topic. `query` falsy
+        # falls back to the old global search, matching
+        # run_claim_clustering's `query=None` escape hatch.
+        if query:
+            existing_match = await prisma.query_raw(
+                '''
+                SELECT DISTINCT c.id, c."canonicalClaim"
+                FROM "claim" c
+                JOIN "evidence" e ON e."claimId" = c.id
+                JOIN "article" a ON a.id = e."articleId"
+                JOIN "search" s ON s.id = a."searchId"
+                WHERE 1 - (c.embedding <=> $1::vector) > $2
+                  AND LOWER(s.query) = LOWER($3)
+                ORDER BY c.embedding <=> $1::vector
+                LIMIT 1
+                ''',
+                vector_string,
+                CROSS_ARTICLE_DEDUP_THRESHOLD,
+                query,
+            )
+        else:
+            existing_match = await prisma.query_raw(
+                '''
+                SELECT id, "canonicalClaim"
+                FROM "claim"
+                WHERE 1 - (embedding <=> $1::vector) > $2
+                ORDER BY embedding <=> $1::vector
+                LIMIT 1
+                ''',
+                vector_string,
+                CROSS_ARTICLE_DEDUP_THRESHOLD,
+            )
 
         if existing_match:
             # Merge: add evidence to the existing claim instead of creating a new row
