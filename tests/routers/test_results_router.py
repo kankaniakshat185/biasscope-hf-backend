@@ -60,3 +60,19 @@ def test_intelligence_route_delegates_to_get_search_intelligence(client, monkeyp
     assert res.status_code == 200
     assert res.json()["status"] == "complete"
     mock.assert_awaited_once_with("s1")
+
+
+def test_results_routes_require_no_session_by_design(client, monkeypatch):
+    # AUDIT_TASKS.md R2: confirmed product decision is that a search's
+    # report is shareable-by-link (unguessable UUID doubles as the access
+    # control), NOT owner-only. This test exists so a future "security
+    # cleanup" doesn't reflexively bolt a Depends(get_current_user_id) onto
+    # this router thinking the missing auth is a bug — it isn't. `client`
+    # here (see make_client in conftest.py) carries no session cookie at
+    # all, and both routes must still succeed.
+    from unittest.mock import AsyncMock
+    monkeypatch.setattr(results_module, "get_results", AsyncMock(return_value={"id": "s1", "articles": []}))
+    monkeypatch.setattr(results_module, "get_search_intelligence", AsyncMock(return_value={"status": "complete"}))
+
+    assert client.get("/results/s1").status_code == 200
+    assert client.get("/results/s1/intelligence").status_code == 200
