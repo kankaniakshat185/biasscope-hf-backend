@@ -29,6 +29,16 @@ def test_clean_llm_response_strips_json_code_fence():
     assert llm_client._clean_llm_response('```json\n{"a": 1}\n```') == '{"a": 1}'
 
 
+def test_narrative_model_id_points_at_a_provider_that_actually_serves_it():
+    # Regression: NARRATIVE_MODEL_ID used to be a distinct Llama-3 model id
+    # that HF's Inference Router stopped routing to any enabled provider,
+    # so every narrative/chat call failed with a 400 and silently fell back
+    # in production. It's pinned to MODEL_ID now (confirmed working, since
+    # the extraction stage calls it successfully) rather than a second,
+    # independently-rotting model id.
+    assert llm_client.NARRATIVE_MODEL_ID == llm_client.MODEL_ID
+
+
 def test_clean_llm_response_strips_bare_code_fence():
     assert llm_client._clean_llm_response('```\nplain text\n```') == 'plain text'
 

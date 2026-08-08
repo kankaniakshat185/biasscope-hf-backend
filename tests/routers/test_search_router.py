@@ -64,3 +64,16 @@ def test_schedules_the_phase2_background_pipeline(client, mocked_pipeline):
     # Starlette's TestClient runs BackgroundTasks synchronously after the
     # response is built, so by the time we get here it's already fired.
     run_phase2.assert_awaited_once_with("s1")
+
+
+def test_category_is_optional_when_the_client_omits_it_entirely(client, mocked_pipeline):
+    # Regression: the frontend does `category: category || undefined`, which
+    # JSON.stringify drops from the body entirely when no category is
+    # selected. A required Body(...) here 422'd every such request in
+    # production before ingestion.py's own "" == no-filter handling ever ran.
+    run_search, _ = mocked_pipeline
+
+    res = client.post("/search", json={"query": "elon musk"})
+
+    assert res.status_code == 200
+    assert run_search.call_args.kwargs["category"] == ""

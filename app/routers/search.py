@@ -13,7 +13,11 @@ router = APIRouter(tags=["search"])
 @router.post("/search")
 async def create_search(
     query: str = Body(...),
-    category: str = Body(...),
+    # The frontend omits `category` from the JSON body entirely when the
+    # user hasn't picked one (`category || undefined`, dropped by
+    # JSON.stringify) — a required Body(...) here made every such request
+    # fail with 422 before ingestion.py's "" == no-filter handling ever ran.
+    category: str = Body(""),
     domains: str | None = Body(None),
     exclude_domains: str | None = Body(None),
     fromDate: str | None = Body(None),

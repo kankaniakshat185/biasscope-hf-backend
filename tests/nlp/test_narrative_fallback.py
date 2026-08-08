@@ -48,3 +48,24 @@ async def test_contrastive_summaries_without_a_token_says_so_for_both_sides():
     assert "left" in result and "right" in result
     assert "No token available" in result["left"]
     assert "No token available" in result["right"]
+
+
+async def test_narrative_fallback_handles_articles_with_real_extractable_keywords():
+    # Regression: extract_keywords() returns [{"word": ..., "count": ...}, ...]
+    # dicts, not raw strings. The synthetic 2-word titles used by the other
+    # tests in this file never produce any NER/TF-IDF keywords at all (too
+    # short, no capitalized multi-letter words), so they never exercised
+    # this line — in production, real headlines did, and
+    # ", ".join(keywords[:3]) crashed with an unhandled TypeError that took
+    # the whole /search request down whenever this fallback path ran.
+    articles = [
+        {"title": "Congress Passes Sweeping Climate Legislation", "source": "reuters.com",
+         "content": "Congress Passes Sweeping Climate Legislation after months of Senate negotiations over Climate policy.",
+         "bias_label": "LEFT", "sentiment": "positive"},
+        {"title": "Senate Republicans Oppose Climate Legislation", "source": "foxnews.com",
+         "content": "Senate Republicans Oppose Climate Legislation citing economic concerns raised by Republicans in committee.",
+         "bias_label": "RIGHT", "sentiment": "negative"},
+    ]
+    summary = await generate_narrative(prisma=None, articles=articles)
+    assert isinstance(summary, str)
+    assert "Major themes frequently discussed include" in summary

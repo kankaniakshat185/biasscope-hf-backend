@@ -346,8 +346,13 @@ def _generate_fallback_narrative(articles, left_count, right_count, center_count
         overall_sentiment = "negative"
 
     unknown_count = sum(1 for a in articles if a.get("bias_label") == "UNKNOWN")
+    # extract_keywords() returns [{"word": ..., "count": ...}, ...], not raw
+    # strings — joining the dicts directly raised an unhandled TypeError
+    # here, which took down the whole /search request whenever the
+    # narrative LLM call failed (or HF_TOKEN was unset) and this fallback
+    # ran instead of the primary path.
     keywords = extract_keywords(articles)
-    keyword_str = ", ".join(keywords[:3]) if keywords else "various topics"
+    keyword_str = ", ".join(k["word"] for k in keywords[:3]) if keywords else "various topics"
 
     lines = []
     lines.append(f"The general coverage surrounding this topic exhibits an overall {overall_sentiment} sentiment across {total} analyzed articles.")

@@ -30,7 +30,14 @@ MODEL_ID = "Qwen/Qwen2.5-7B-Instruct"
 # takes a `model` argument instead of hardcoding one, so every call site —
 # including those — can go through here and still show up in
 # /debug/llm-usage and /debug/cache-stats.
-NARRATIVE_MODEL_ID = "meta-llama/Meta-Llama-3-8B-Instruct"
+#
+# Was "meta-llama/Meta-Llama-3-8B-Instruct" — as of 2026-08 that model is no
+# longer served by any provider enabled on the HF Inference Router, so every
+# narrative/chat call failed with a 400 ("not supported by any provider you
+# have enabled") and silently fell back. Reusing MODEL_ID keeps narrative/
+# chat on a model confirmed working (it's what the extraction stage already
+# calls successfully).
+NARRATIVE_MODEL_ID = MODEL_ID
 
 _clients: dict = {}
 
