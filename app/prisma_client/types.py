@@ -10291,6 +10291,7 @@ class SearchOptionalCreateInput(TypedDict, total=False):
     userId: Optional[_str]
     user: 'UserCreateNestedWithoutRelationsInput'
     createdAt: datetime.datetime
+    phase2Status: _str
     articles: 'ArticleCreateManyNestedWithoutRelationsInput'
     insights: 'InsightCreateManyNestedWithoutRelationsInput'
 
@@ -10309,6 +10310,7 @@ class SearchOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     id: _str
     userId: Optional[_str]
     createdAt: datetime.datetime
+    phase2Status: _str
 
 
 class SearchCreateWithoutRelationsInput(SearchOptionalCreateWithoutRelationsInput):
@@ -10349,6 +10351,7 @@ class SearchUpdateInput(TypedDict, total=False):
     query: _str
     category: _str
     createdAt: datetime.datetime
+    phase2Status: _str
     articles: 'ArticleUpdateManyWithoutRelationsInput'
     insights: 'InsightUpdateManyWithoutRelationsInput'
 
@@ -10359,6 +10362,7 @@ class SearchUpdateManyMutationInput(TypedDict, total=False):
     query: _str
     category: _str
     createdAt: datetime.datetime
+    phase2Status: _str
 
 
 class SearchUpdateManyWithoutRelationsInput(TypedDict, total=False):
@@ -10433,6 +10437,14 @@ _Search_createdAt_OrderByInput = TypedDict(
     total=True
 )
 
+_Search_phase2Status_OrderByInput = TypedDict(
+    '_Search_phase2Status_OrderByInput',
+    {
+        'phase2Status': 'SortOrder',
+    },
+    total=True
+)
+
 _Search_RelevanceInner = TypedDict(
     '_Search_RelevanceInner',
     {
@@ -10457,6 +10469,7 @@ SearchOrderByInput = Union[
     '_Search_query_OrderByInput',
     '_Search_category_OrderByInput',
     '_Search_createdAt_OrderByInput',
+    '_Search_phase2Status_OrderByInput',
     '_Search_RelevanceOrderByInput',
 ]
 
@@ -12213,6 +12226,7 @@ class SearchWhereInput(TypedDict, total=False):
     query: Union[_str, 'types.StringFilter']
     category: Union[_str, 'types.StringFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    phase2Status: Union[_str, 'types.StringFilter']
     articles: 'ArticleListRelationFilter'
     insights: 'InsightListRelationFilter'
 
@@ -12231,6 +12245,7 @@ class SearchWhereInputRecursive1(TypedDict, total=False):
     query: Union[_str, 'types.StringFilter']
     category: Union[_str, 'types.StringFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    phase2Status: Union[_str, 'types.StringFilter']
     articles: 'ArticleListRelationFilter'
     insights: 'InsightListRelationFilter'
 
@@ -12249,6 +12264,7 @@ class SearchWhereInputRecursive2(TypedDict, total=False):
     query: Union[_str, 'types.StringFilter']
     category: Union[_str, 'types.StringFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    phase2Status: Union[_str, 'types.StringFilter']
     articles: 'ArticleListRelationFilter'
     insights: 'InsightListRelationFilter'
 
@@ -12267,6 +12283,7 @@ class SearchWhereInputRecursive3(TypedDict, total=False):
     query: Union[_str, 'types.StringFilter']
     category: Union[_str, 'types.StringFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    phase2Status: Union[_str, 'types.StringFilter']
     articles: 'ArticleListRelationFilter'
     insights: 'InsightListRelationFilter'
 
@@ -12285,6 +12302,7 @@ class SearchWhereInputRecursive4(TypedDict, total=False):
     query: Union[_str, 'types.StringFilter']
     category: Union[_str, 'types.StringFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeFilter']
+    phase2Status: Union[_str, 'types.StringFilter']
     articles: 'ArticleListRelationFilter'
     insights: 'InsightListRelationFilter'
 
@@ -12302,6 +12320,7 @@ class SearchScalarWhereWithAggregatesInput(TypedDict, total=False):
     query: Union[_str, 'types.StringWithAggregatesFilter']
     category: Union[_str, 'types.StringWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    phase2Status: Union[_str, 'types.StringWithAggregatesFilter']
 
     AND: List['SearchScalarWhereWithAggregatesInputRecursive1']
     OR: List['SearchScalarWhereWithAggregatesInputRecursive1']
@@ -12315,6 +12334,7 @@ class SearchScalarWhereWithAggregatesInputRecursive1(TypedDict, total=False):
     query: Union[_str, 'types.StringWithAggregatesFilter']
     category: Union[_str, 'types.StringWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    phase2Status: Union[_str, 'types.StringWithAggregatesFilter']
 
     AND: List['SearchScalarWhereWithAggregatesInputRecursive2']
     OR: List['SearchScalarWhereWithAggregatesInputRecursive2']
@@ -12328,6 +12348,7 @@ class SearchScalarWhereWithAggregatesInputRecursive2(TypedDict, total=False):
     query: Union[_str, 'types.StringWithAggregatesFilter']
     category: Union[_str, 'types.StringWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    phase2Status: Union[_str, 'types.StringWithAggregatesFilter']
 
     AND: List['SearchScalarWhereWithAggregatesInputRecursive3']
     OR: List['SearchScalarWhereWithAggregatesInputRecursive3']
@@ -12341,6 +12362,7 @@ class SearchScalarWhereWithAggregatesInputRecursive3(TypedDict, total=False):
     query: Union[_str, 'types.StringWithAggregatesFilter']
     category: Union[_str, 'types.StringWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    phase2Status: Union[_str, 'types.StringWithAggregatesFilter']
 
     AND: List['SearchScalarWhereWithAggregatesInputRecursive4']
     OR: List['SearchScalarWhereWithAggregatesInputRecursive4']
@@ -12354,6 +12376,7 @@ class SearchScalarWhereWithAggregatesInputRecursive4(TypedDict, total=False):
     query: Union[_str, 'types.StringWithAggregatesFilter']
     category: Union[_str, 'types.StringWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
+    phase2Status: Union[_str, 'types.StringWithAggregatesFilter']
 
 
 
@@ -12363,6 +12386,7 @@ class SearchGroupByOutput(TypedDict, total=False):
     query: _str
     category: _str
     createdAt: datetime.datetime
+    phase2Status: _str
     _sum: 'SearchSumAggregateOutput'
     _avg: 'SearchAvgAggregateOutput'
     _min: 'SearchMinAggregateOutput'
@@ -12385,6 +12409,7 @@ class SearchScalarAggregateOutput(TypedDict, total=False):
     query: _str
     category: _str
     createdAt: datetime.datetime
+    phase2Status: _str
 
 
 SearchMinAggregateOutput = SearchScalarAggregateOutput
@@ -12398,6 +12423,7 @@ class SearchMaxAggregateInput(TypedDict, total=False):
     query: bool
     category: bool
     createdAt: bool
+    phase2Status: bool
 
 
 class SearchMinAggregateInput(TypedDict, total=False):
@@ -12407,6 +12433,7 @@ class SearchMinAggregateInput(TypedDict, total=False):
     query: bool
     category: bool
     createdAt: bool
+    phase2Status: bool
 
 
 class SearchNumberAggregateInput(TypedDict, total=False):
@@ -12425,6 +12452,7 @@ SearchCountAggregateInput = TypedDict(
         'query': bool,
         'category': bool,
         'createdAt': bool,
+        'phase2Status': bool,
         '_all': bool,
     },
     total=False,
@@ -12438,6 +12466,7 @@ SearchCountAggregateOutput = TypedDict(
         'query': int,
         'category': int,
         'createdAt': int,
+        'phase2Status': int,
         '_all': int,
     },
     total=False,
@@ -12451,6 +12480,7 @@ SearchKeys = Literal[
     'query',
     'category',
     'createdAt',
+    'phase2Status',
     'articles',
     'insights',
 ]
@@ -12460,6 +12490,7 @@ SearchScalarFieldKeys = Literal[
     'query',
     'category',
     'createdAt',
+    'phase2Status',
 ]
 SearchScalarFieldKeysT = TypeVar('SearchScalarFieldKeysT', bound=SearchScalarFieldKeys)
 

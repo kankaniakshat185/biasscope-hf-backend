@@ -66,12 +66,16 @@ Check items off as they land. Security & Auth is the current focus — start the
 - A handful of remaining `# type: ignore[...]` comments are left where the generated Prisma TypedDicts (`ArticleCreateWithoutRelationsInput`, `TopicSubscriptionInclude`, etc.) are stricter than the plain-dict-literal query-building style used everywhere in this codebase — each one has an inline comment explaining why, rather than being silently suppressed.
 - Not done: wiring `ruff`/`mypy` into CI (no workflow currently runs them on push/PR) — straightforward to add to `.github/workflows/` if wanted.
 
-## 🟡 Frontend
+## 🟡 Frontend — DONE
 
-- [ ] **F1** `[FE]` Centralize `NEXT_PUBLIC_BACKEND_URL` fallback into one `lib/api.ts` client instead of ~10 inline copies
-- [ ] **F2** `[FE]` Remove `console.log("Bias data:", data)` — `src/components/Charts.tsx:62`
-- [ ] **F3** `[FE]` Fix README's `vault/` route reference (actual route is `history/`) and missing `docs/dashboard-preview.png`
-- [ ] **F4** `[FE]` Replace unbounded 10s polling with a real pipeline-status flag from the backend — `IntelligenceLayer.tsx:37-40`
+- [x] **F1** `[FE]` New `src/lib/api.ts` (`api.get`/`api.post`/`api.delete`) — one place for the base URL and `credentials: "include"`. Migrated all 13 call sites (turned out to be more than the ~10 estimated) across `page.tsx`, `history/page.tsx`, `subscriptions/page.tsx`, `dashboard/[id]/page.tsx`, `IntelligenceLayer.tsx`. `tsc --noEmit` passes.
+- [x] **F2** `[FE]` Removed the stray `console.log("Bias data:", data)`.
+- [x] **F3** `[FE]` README's Project Structure now lists the real routes (`history/`, `subscriptions/`, `login/` — `vault/` never existed, it's just the UI's label for `history/`) and the broken `docs/dashboard-preview.png` reference is gone (there's no `docs/` folder).
+- [x] **F4** `[BE]`+`[FE]` Added `Search.phase2Status` (`pending`/`processing`/`complete`/`failed`, set by `pipeline.py` at each stage transition) and surfaced it in `get_search_intelligence()`'s response as `status`. `IntelligenceLayer.tsx` now polls only while status is `pending`/`processing` and stops the interval the moment it sees `complete`/`failed`; demo snapshots (static, no live pipeline) fetch once and never poll at all. **Needs one manual step** — see below.
+
+**Manual step required (schema change, no access to your live DB from here):** run `prisma generate` (already done in this repo checkout) then `prisma db push` (or your normal deploy) to add the `phase2Status` column. It's an additive column with a default (`"pending"`) — no data cleanup needed first, unlike D1.
+
+**Noted but not fixed:** `npx eslint` on the frontend surfaces 44 pre-existing issues (mostly `any` types, a few unescaped-JSX-quote and React-effect warnings) — none introduced by this pass, all in code that predates it. Wasn't part of F1–F4 and wasn't asked for; flagging it the same way CI-wiring for ruff/mypy was flagged on the backend, as an available next step rather than doing it unprompted.
 
 ## 🟡 Testing & Docs
 

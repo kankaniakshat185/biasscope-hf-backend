@@ -178,6 +178,9 @@ async def run_phase2_pipeline(search_id: str) -> None:
     """
     logger.info(f"Starting background Phase 2 pipeline for search {search_id}...")
     try:
+        await prisma.search.update(
+            where={"id": search_id}, data={"phase2Status": "processing"}
+        )
         search_record = await prisma.search.find_unique(where={"id": search_id})
         query = search_record.query if search_record else ""
 
@@ -207,6 +210,15 @@ async def run_phase2_pipeline(search_id: str) -> None:
         else:
             logger.info("SKIP_EVENTS=1 — reusing existing events")
 
+        await prisma.search.update(
+            where={"id": search_id}, data={"phase2Status": "complete"}
+        )
         logger.info("Phase 2 pipeline complete.")
     except Exception as e:
         logger.exception(f"Phase 2 pipeline error: {e}")
+        try:
+            await prisma.search.update(
+                where={"id": search_id}, data={"phase2Status": "failed"}
+            )
+        except Exception:
+            logger.exception(f"Failed to record phase2Status=failed for search {search_id}")

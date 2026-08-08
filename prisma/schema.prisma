@@ -92,6 +92,14 @@ model Search {
   category   String
   createdAt  DateTime  @default(now())
 
+  // Tracks the async Phase 2 pipeline (claim extraction -> clustering ->
+  // event detection) that /search kicks off as a background task after
+  // returning. One of: pending | processing | complete | failed.
+  // Added so the frontend can stop polling once the pipeline is actually
+  // done instead of polling every 10s forever with no way to know — see
+  // AUDIT_TASKS.md F4.
+  phase2Status String  @default("pending")
+
   articles   Article[]
   insights   Insight[]
 

@@ -589,6 +589,7 @@ class Search(bases.BaseSearch):
     query: _str
     category: _str
     createdAt: datetime.datetime
+    phase2Status: _str
     articles: Optional[List['models.Article']] = None
     insights: Optional[List['models.Insight']] = None
 
@@ -2557,6 +2558,14 @@ _Search_fields: Dict['types.SearchKeys', PartialModelField] = OrderedDict(
             'is_list': False,
             'optional': False,
             'type': 'datetime.datetime',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('phase2Status', {
+            'name': 'phase2Status',
+            'is_list': False,
+            'optional': False,
+            'type': '_str',
             'is_relational': False,
             'documentation': None,
         }),

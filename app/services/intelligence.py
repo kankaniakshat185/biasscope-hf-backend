@@ -36,12 +36,23 @@ async def get_results(search_id: str) -> dict:
 
 
 async def get_search_intelligence(search_id: str) -> dict:
-    """Build the claim/cluster/event intelligence graph for a search."""
+    """Build the claim/cluster/event intelligence graph for a search.
+
+    Includes the Search's `phase2Status` ("pending" | "processing" |
+    "complete" | "failed") so callers — specifically the frontend's
+    polling loop — can tell when the background pipeline is actually done
+    instead of polling forever with no signal. Demo snapshots are static
+    (baked at generation time) and don't have a live Search row backing
+    them, hence the "complete" fallback default here.
+    """
+    search_record = await prisma.search.find_unique(where={"id": search_id})
+    status = search_record.phase2Status if search_record else "complete"
+
     articles = await prisma.article.find_many(where={"searchId": search_id})
     article_ids = [a.id for a in articles]
 
     if not article_ids:
-        return {"events": [], "clusters": [], "claims": [], "metrics": {}}
+        return {"events": [], "clusters": [], "claims": [], "metrics": {}, "status": status}
 
     evidence_records = await prisma.evidence.find_many(
         where={"articleId": {"in": article_ids}},
@@ -198,4 +209,5 @@ async def get_search_intelligence(search_id: str) -> dict:
         "claims": sorted(formatted_claims, key=lambda x: x["evidenceCount"], reverse=True),
         "clusters": sorted(formatted_clusters, key=lambda x: x["evidenceCount"], reverse=True),
         "events": sorted(formatted_events, key=lambda x: x.get("importanceScore", 0), reverse=True),
+        "status": status,
     }

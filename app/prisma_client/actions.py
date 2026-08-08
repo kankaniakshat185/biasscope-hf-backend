@@ -4915,7 +4915,7 @@ class SearchActions(Generic[_PrismaModelT]):
         # update all Search records
         total = await Search.prisma().update_many(
             data={
-                'id': 'gdjgigfgc'
+                'phase2Status': 'gdjgigfgc'
             },
             where={}
         )
@@ -4979,7 +4979,7 @@ class SearchActions(Generic[_PrismaModelT]):
         results = await Search.prisma().count(
             select={
                 '_all': True,
-                'userId': True,
+                'id': True,
             },
         )
         ```
@@ -5046,7 +5046,7 @@ class SearchActions(Generic[_PrismaModelT]):
         results = await Search.prisma().count(
             select={
                 '_all': True,
-                'query': True,
+                'userId': True,
             },
         )
         ```
@@ -5186,10 +5186,10 @@ class SearchActions(Generic[_PrismaModelT]):
         Example
         -------
         ```py
-        # group Search records by category values
+        # group Search records by query values
         # and count how many records are in each group
         results = await Search.prisma().group_by(
-            ['category'],
+            ['query'],
             count=True,
         )
         ```
