@@ -81,6 +81,22 @@ def test_polarization_is_low_when_left_and_right_sentiment_agree():
 
 
 @pytest.mark.model
+def test_polarization_is_none_when_only_one_side_has_coverage():
+    # R9 regression: with zero RIGHT articles, the old code compared LEFT's
+    # real distribution against an arbitrary uniform [1/3,1/3,1/3] "prior"
+    # and could land near/at 0.0 — indistinguishable from genuinely
+    # balanced coverage. None is honest about "not enough data to compare."
+    articles = [
+        _article("left1.com", 1200, bias_label="LEFT", sentiment_score=-0.9),
+        _article("left2.com", 1200, bias_label="LEFT", sentiment_score=0.9),
+    ]
+
+    result = validate_articles(articles)
+
+    assert result["polarization_score"] is None
+
+
+@pytest.mark.model
 def test_diversity_label_reflects_source_and_ideology_spread():
     # Methodology panel's own example: 6 articles, 3 US publishers (Left) +
     # 2 UK publishers (Center) = 5 unique sources, 2 countries, max

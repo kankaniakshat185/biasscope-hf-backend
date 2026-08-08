@@ -107,6 +107,15 @@ async def test_run_search_pipeline_persists_search_with_the_given_user(fake_pris
     fake_prisma.article.create_many.assert_awaited_once()
     fake_prisma.insight.create.assert_awaited_once()
 
+    # R9 regression: the one mocked article (reuters.com) is CENTER, so
+    # there's no LEFT or RIGHT article to compare — validate_articles()
+    # returns polarization_score=None for exactly this case. `.get(key,
+    # 0.0)` doesn't apply its default when the key is present with value
+    # None, so `float(...)` on it used to raise here. Must store None
+    # cleanly (Insight.polarizationScore is a nullable column).
+    insight_kwargs = fake_prisma.insight.create.call_args.kwargs["data"]
+    assert insight_kwargs["polarizationScore"] is None
+
 
 async def test_run_search_pipeline_allows_anonymous_user(fake_prisma, mocked_stages):
     fake_prisma.search.create.return_value = fake_search(id="new-search-id", userId=None)

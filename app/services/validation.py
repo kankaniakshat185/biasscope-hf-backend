@@ -38,18 +38,31 @@ def validate_articles(articles):
         neu = len(scores) - neg - pos
         return [neg/len(scores), neu/len(scores), pos/len(scores)]
 
-    p = get_dist(left_scores)
-    q = get_dist(right_scores)
+    # R9: with no LEFT (or no RIGHT) articles at all, get_dist() falls back
+    # to a uniform [1/3, 1/3, 1/3] "distribution" for that side — comparing
+    # a real distribution against that arbitrary prior can easily land near
+    # (or round to) 0.0, indistinguishable from "genuinely balanced
+    # coverage" once displayed. Returning None here instead of a
+    # coincidentally-reassuring number is honest about "we don't have
+    # enough data to say" — Insight.polarizationScore is already a nullable
+    # column, so this needs no schema change. The frontend renders "Not
+    # enough data" for this case instead of a percentage (see the
+    # dashboard's Polarization card).
+    if not left_scores or not right_scores:
+        polarization_score = None
+    else:
+        p = get_dist(left_scores)
+        q = get_dist(right_scores)
 
-    import math
-    def kl_div(dist_p, dist_q):
-        return sum(p_i * math.log(p_i / q_i) if p_i > 0 and q_i > 0 else 0 for p_i, q_i in zip(dist_p, dist_q, strict=False))
+        import math
+        def kl_div(dist_p, dist_q):
+            return sum(p_i * math.log(p_i / q_i) if p_i > 0 and q_i > 0 else 0 for p_i, q_i in zip(dist_p, dist_q, strict=False))
 
-    m = [(p_i + q_i) / 2 for p_i, q_i in zip(p, q, strict=False)]
-    jsd = 0.5 * kl_div(p, m) + 0.5 * kl_div(q, m)
+        m = [(p_i + q_i) / 2 for p_i, q_i in zip(p, q, strict=False)]
+        jsd = 0.5 * kl_div(p, m) + 0.5 * kl_div(q, m)
 
-    # Issue 10: JSD is polarization, NOT data quality
-    polarization_score = min(jsd / 0.693, 1.0)
+        # Issue 10: JSD is polarization, NOT data quality
+        polarization_score = min(jsd / 0.693, 1.0)
 
     # Compute ACTUAL data quality score
     total = len(articles)
@@ -137,7 +150,7 @@ def validate_articles(articles):
         "valid_articles": len(valid_articles),
         "valid_articles_list": valid_articles, # Return only validated articles
         "data_quality_score": round(dqs, 2),
-        "polarization_score": round(polarization_score, 2),
+        "polarization_score": round(polarization_score, 2) if polarization_score is not None else None,
         "avg_sentiment": round(avg_sentiment, 3),
         "top_keywords": top_keywords,
         "bias_distribution": bias_counts,

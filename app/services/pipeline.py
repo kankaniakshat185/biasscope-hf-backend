@@ -169,7 +169,17 @@ async def run_search_pipeline(
             "topKeywords": Json(validation_metrics.get("top_keywords", [])),
             "biasDistribution": Json(validation_metrics.get("bias_distribution", {"LEFT": 0, "CENTER": 0, "RIGHT": 0, "UNKNOWN": 0})),
             "dataQualityScore": float(validation_metrics.get("data_quality_score", 0.0)),
-            "polarizationScore": float(validation_metrics.get("polarization_score", 0.0)),
+            # R9: polarization_score is None (not 0.0) when there aren't
+            # both LEFT and RIGHT articles to compare — `.get(key, 0.0)`
+            # only applies its default when the key is MISSING, not when
+            # it's present with value None, so `float(None)` would raise
+            # here without this explicit check. Insight.polarizationScore
+            # is a nullable column precisely so this can be stored as NULL.
+            "polarizationScore": (
+                float(validation_metrics["polarization_score"])
+                if validation_metrics.get("polarization_score") is not None
+                else None
+            ),
             "totalArticles": validation_metrics["total_articles"],
             "validArticles": validation_metrics["valid_articles"],
             "duplicatesRemoved": validation_metrics["duplicates_removed"],
