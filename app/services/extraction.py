@@ -383,9 +383,22 @@ async def process_and_store_claims(
         # falls back to the old global search, matching
         # run_claim_clustering's `query=None` escape hatch.
         if query:
+            # NOT `SELECT DISTINCT` — Postgres rejects DISTINCT combined
+            # with an ORDER BY expression that isn't itself in the SELECT
+            # list ("for SELECT DISTINCT, ORDER BY expressions must appear
+            # in select list"), which is exactly what `ORDER BY c.embedding
+            # <=> $1::vector` is here. This shipped and broke Phase 2
+            # extraction in production before being caught (no real
+            # Postgres/pgvector available to this test suite — see
+            # tests/fakes.py's own docstring on that trade-off). DISTINCT
+            # was never actually needed: the same claim can join against
+            # multiple evidence/article/search rows, but its embedding
+            # distance depends only on c.embedding, so every duplicate row
+            # for that claim sorts identically — ORDER BY + LIMIT 1 already
+            # picks the right single row without it.
             existing_match = await prisma.query_raw(
                 '''
-                SELECT DISTINCT c.id, c."canonicalClaim"
+                SELECT c.id, c."canonicalClaim"
                 FROM "claim" c
                 JOIN "evidence" e ON e."claimId" = c.id
                 JOIN "article" a ON a.id = e."articleId"

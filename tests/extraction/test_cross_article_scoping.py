@@ -52,6 +52,17 @@ async def test_dedup_match_is_scoped_to_the_current_query(fake_prisma):
     sql, vector_string, threshold, query_arg = existing_match_call.args
     assert "JOIN \"evidence\"" in sql
     assert "JOIN \"search\"" in sql
+    # Production regression: `SELECT DISTINCT` combined with an ORDER BY
+    # expression not in the SELECT list is a real Postgres syntax error
+    # ("for SELECT DISTINCT, ORDER BY expressions must appear in select
+    # list") — this shipped and broke every Phase 2 extraction in
+    # production, invisible here because FakePrisma's query_raw never
+    # actually executes SQL against a real database. This assertion can
+    # only catch "someone re-added DISTINCT," not validate real Postgres
+    # semantics — there is no substitute for smoke-testing new/changed
+    # query_raw SQL against a real Postgres+pgvector instance before it
+    # reaches production.
+    assert "DISTINCT" not in sql
     assert "LOWER(s.query) = LOWER($3)" in sql
     assert threshold == extraction_module.CROSS_ARTICLE_DEDUP_THRESHOLD
     assert query_arg == "elon musk tesla"
