@@ -138,3 +138,59 @@ async def test_get_search_intelligence_deduplicates_evidence_by_sentence_prefix(
     result = await intelligence_module.get_search_intelligence("search-1")
 
     assert result["clusters"][0]["evidenceCount"] == 1
+
+
+# ── R4/R14: cross-search claim boundary ────────────────────────────────
+# A claim can legitimately be shared across MULTIPLE searches of the SAME
+# topic by design (see clustering.py's comment on run_claim_clustering —
+# "cross-search consensus for the SAME topic is preserved"). R4 makes the
+# extraction-time merge that creates that sharing scoped to matching
+# `search.query`, so it can no longer happen across UNRELATED topics. What
+# get_search_intelligence itself must still guarantee, and what these tests
+# pin: a claim only surfaces in a search's report at all if that search's
+# OWN articles produced at least one of its evidence rows — the second
+# test documents (not just asserts) that once a claim IS relevant, ALL of
+# its evidence displays, including rows from other same-topic searches,
+# which is the intended behavior R4 protects rather than something to hide.
+
+async def test_a_claim_with_no_evidence_from_this_search_never_appears(fake_prisma):
+    fake_prisma.search.find_unique.return_value = fake_search(id="search-a", query="tesla ipo")
+    # search-a's own article set — deliberately has NO evidence rows below,
+    # simulating: this search's articles never matched "claim-1" at all.
+    fake_prisma.article.find_many.return_value = [fake_article(id="a1")]
+    # evidence.find_many is scoped to `articleId in [a1]` in the real query —
+    # a1 has no evidence of its own, so this correctly returns [].
+    fake_prisma.evidence.find_many.return_value = []
+
+    result = await intelligence_module.get_search_intelligence("search-a")
+
+    # claim_ids is derived solely from search-a's own evidence — an empty
+    # evidence set means claim.find_many is asked about an empty id list,
+    # never "claim-1" or anything else that belongs to a different search.
+    assert fake_prisma.claim.find_many.call_args.kwargs["where"] == {"id": {"in": []}}
+    assert result["claims"] == []
+    assert result["clusters"] == []
+
+
+async def test_a_relevant_claim_shows_all_its_evidence_including_other_same_topic_searches(fake_prisma):
+    # search-a's own evidence (ev1, tied to search-a's article a1) is what
+    # makes "claim-1" relevant to search-a in the first place.
+    fake_prisma.search.find_unique.return_value = fake_search(id="search-a", query="tesla ipo")
+    fake_prisma.article.find_many.return_value = [fake_article(id="a1")]
+    ev1 = fake_evidence(id="ev1", claimId="claim-1", articleId="a1", source="reuters.com")
+    fake_prisma.evidence.find_many.return_value = [ev1]
+
+    # ev2 belongs to article "a2" from a DIFFERENT search (e.g. an earlier
+    # run of the same "tesla ipo" topic, or the weekly snapshot re-running
+    # it) — by design, once a claim is relevant, its full evidence list
+    # (as Prisma's `include={"evidence": True}` would really return) is
+    # shown, since R4 already guarantees this claim can't have picked up
+    # evidence from an UNRELATED topic in the first place.
+    ev2 = fake_evidence(id="ev2", claimId="claim-1", articleId="a2", source="apnews.com")
+    claim = fake_claim(id="claim-1", clusterId=None, cluster=None, evidence=[ev1, ev2])
+    fake_prisma.claim.find_many.return_value = [claim]
+
+    result = await intelligence_module.get_search_intelligence("search-a")
+
+    assert result["claims"][0]["evidenceCount"] == 2
+    assert set(result["claims"][0]["sources"]) == {"reuters.com", "apnews.com"}
