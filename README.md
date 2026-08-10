@@ -1,12 +1,3 @@
----
-title: Biasscope
-emoji: 🦀
-colorFrom: yellow
-colorTo: gray
-sdk: docker
-pinned: false
----
-
 # BiasScope Backend Engine
 
 [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
@@ -40,9 +31,6 @@ A claim-centric news intelligence engine. Instead of scoring an article's overal
 - **Auth:** the frontend's Better Auth session cookie is the source of truth. This backend never issues its own tokens — `app/deps/auth.py` looks the session token up directly in the `session` table Better Auth already writes to, in the same database.
 - **Cross-origin access:** the frontend does not call this API directly from the browser. Hugging Face Spaces' front-door proxy strips `Access-Control-Allow-Credentials` on cross-origin preflight requests (a platform-level policy, not something fixable in this app's CORS config), so the frontend routes every request through its own same-origin Next.js API relay, which forwards to this backend server-to-server instead.
 - **Background jobs:** Celery + Redis (Upstash) for the weekly snapshot task that powers longitudinal topic tracking under Subscriptions.
-
-<details>
-<summary><b>View Detailed Architecture Diagram</b></summary>
 
 ```mermaid
 graph TD
@@ -82,7 +70,20 @@ graph TD
     Snapshot --> SnapshotDB[(TopicSnapshot)]
     Redis[(Upstash Redis)] --- Snapshot
 ```
-</details>
+
+## Tech Stack
+
+| | |
+|---|---|
+| **Language & API** | Python 3.10+, FastAPI, Uvicorn, Pydantic |
+| **Database** | PostgreSQL (Neon) with the `pgvector` extension, Prisma (Python client) |
+| **ML / NLP libraries** | PyTorch, Hugging Face `transformers`, `sentence-transformers`, spaCy |
+| **LLM inference** | Hugging Face Inference Router |
+| **Background jobs** | Celery, Redis (Upstash) |
+| **Ingestion** | NewsAPI, GDELT, `newspaper3k` (article scraping), RapidFuzz (fuzzy dedup) |
+| **Auth** | Better Auth session cookies (validated against the shared Postgres `session` table — no separate auth server) |
+| **Hosting** | Docker container on Hugging Face Spaces |
+| **Testing & quality** | pytest, pytest-cov, pytest-asyncio, ruff, mypy |
 
 ## Local Setup & Installation
 

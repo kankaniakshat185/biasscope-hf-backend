@@ -14,10 +14,21 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
+      - name: Prepend HF Spaces config header to README.md
+        # README.md on GitHub intentionally has no YAML front matter (GitHub renders a leading
+        # --- block as an ugly metadata table). Hugging Face Spaces requires that block to be the
+        # literal first bytes of README.md to read the Space's config (sdk, emoji, etc). This step
+        # stitches them together in a throwaway commit that only ever gets pushed to the `hf` remote
+        # below — it never touches origin/main, so GitHub's README stays clean.
+        run: |
+          cat .github/hf-space-metadata.yml README.md > /tmp/README.hf.md
+          mv /tmp/README.hf.md README.md
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add README.md
+          git commit -m "chore: add HF Spaces config header [ci only, not merged to main]"
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
-          git push -f https://kankaniakshat185:$HF_TOKEN@huggingface.co/spaces/kankaniakshat185/biasscope main
+          git push -f https://kankaniakshat185:$HF_TOKEN@huggingface.co/spaces/kankaniakshat185/biasscope HEAD:main
